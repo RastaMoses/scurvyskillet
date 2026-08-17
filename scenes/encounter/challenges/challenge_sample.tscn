@@ -17,4 +17,12 @@ offset_right = 755.0
 offset_bottom = 276.0
 text = "Reset"
 
+[node name="Button2" type="Button" parent="." unique_id=967192702]
+offset_left = 15.0
+offset_top = 901.0
+offset_right = 770.0
+offset_bottom = 1177.0
+text = "Roll Dish"
+
 [connection signal="pressed" from="Button" to="." method="on_reset_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_roll_dish_pressed"]

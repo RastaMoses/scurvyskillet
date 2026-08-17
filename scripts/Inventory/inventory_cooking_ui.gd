@@ -4,7 +4,7 @@ extends Control
 
 #CACHED COMPS
 @onready var inventory = get_node("/root/root/Player/Inventory")
-@onready var slots: Array = $GridContainer.get_children()
+@onready var slots: Array = $ScrollContainer/GridContainer.get_children()
 
 #STATE
 var data_bk

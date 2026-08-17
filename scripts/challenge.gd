@@ -122,3 +122,7 @@ func hide_dish():
 
 func on_reset_button_pressed() -> void:
 	reset_dish()
+
+
+func _on_roll_dish_pressed() -> void:
+	dish_node.roll_dish()

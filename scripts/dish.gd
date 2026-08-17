@@ -32,26 +32,26 @@ func destroy_all_ingredients():
 	current_ingredients.clear()
 
 func roll_dish():
-	get_node("/root/EventManager").dish_complete(self)
+	get_node("/root/root/EventManager").dish_complete(self)
 	for ingredient in current_ingredients:
-		nutrition += ingredient.ingredient_stats.nutrition
-		var in_sweet = ingredient.ingredient_stats.sweet
+		nutrition += ingredient.nutrition
+		var in_sweet = ingredient.sweet
 		while in_sweet > 0:
 			sweet += random.randi_range(1,6)
 			in_sweet -= 1
-		var in_sour = ingredient.ingredient_stats.sour
+		var in_sour = ingredient.sour
 		while in_sour > 0:
 			sour += random.randi_range(1,6)
 			in_sour -= 1
-		var in_spicy = ingredient.ingredient_stats.spicy
+		var in_spicy = ingredient.spicy
 		while in_spicy > 0:
 			spicy += random.randi_range(1,6)
 			in_spicy -= 1
-		var in_hearty = ingredient.ingredient_stats.hearty
+		var in_hearty = ingredient.hearty
 		while in_hearty > 0:
 			hearty += random.randi_range(1,6)
 			in_hearty -= 1
-		var in_fresh = ingredient.ingredient_stats.fresh
+		var in_fresh = ingredient.fresh
 		while in_fresh > 0:
 			fresh += random.randi_range(1,6)
 			in_fresh -= 1
