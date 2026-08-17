@@ -26,3 +26,8 @@ extends Node
 #CACHED COMPS
 
 #STATE
+var inv_index:int
+
+func get_texture():
+	var texture = $TextureRect.texture
+	return texture

@@ -1,10 +1,24 @@
 [gd_scene format=3 uid="uid://cyfhrcxgc7812"]
 
-[ext_resource type="Script" uid="uid://bkv3gvee74qgl" path="res://scripts/inventory.gd" id="1_k2c4c"]
+[ext_resource type="Script" uid="uid://bkv3gvee74qgl" path="res://scripts/Inventory/inventory.gd" id="1_662u0"]
+[ext_resource type="PackedScene" uid="uid://c2dctdd5q1hip" path="res://scenes/player/inventory_cooking.tscn" id="2_662u0"]
+[ext_resource type="Script" uid="uid://cx3kxlhcjwpki" path="res://scripts/event_manager.gd" id="2_n3lcv"]
+[ext_resource type="PackedScene" uid="uid://hr6aybbol4hn" path="res://scenes/encounter/challenges/challenge_sample.tscn" id="3_jvs31"]
 
 [node name="root" type="Node2D" unique_id=1075341061]
 
 [node name="Player" type="Node" parent="." unique_id=1818132485]
 
-[node name="inventory" type="Node2D" parent="Player" unique_id=5651078]
-script = ExtResource("1_k2c4c")
+[node name="Inventory" type="Node" parent="Player" unique_id=1730696731]
+script = ExtResource("1_662u0")
+
+[node name="Abilities" type="Node" parent="Player/Inventory" unique_id=121107139]
+
+[node name="InventoryCooking" parent="Player/Inventory" unique_id=190865318 instance=ExtResource("2_662u0")]
+
+[node name="EventManager" type="Node" parent="." unique_id=761654411]
+script = ExtResource("2_n3lcv")
+
+[node name="Encounter" type="Node" parent="." unique_id=645414941]
+
+[node name="ChallengeSample" parent="Encounter" unique_id=2118414985 instance=ExtResource("3_jvs31")]

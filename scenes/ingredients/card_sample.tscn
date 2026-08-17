@@ -1,6 +1,13 @@
 [gd_scene format=3 uid="uid://p1ug5ylfd5re"]
 
 [ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/ingredient_stats.gd" id="1_hai3h"]
+[ext_resource type="Texture2D" uid="uid://ch63imf2x3rru" path="res://sprites/placeholder/placeholder_ingredient.png" id="2_8h71a"]
 
 [node name="CardSample" type="Node2D" unique_id=492117254]
 script = ExtResource("1_hai3h")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=747686179]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_8h71a")

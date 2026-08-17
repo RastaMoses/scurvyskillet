@@ -5,6 +5,28 @@
 
 [node name="ChallengeSample" type="Node2D" unique_id=2118414985]
 script = ExtResource("1_f0fus")
+req_nutrition = null
+req_sweet = null
+req_sour = null
+req_spicy = null
+req_hearty = null
+req_fresh = null
+par_nutrition = null
+par_sweet = null
+par_sour = null
+par_spicy = null
+par_hearty = null
+par_fresh = null
+restricted_tags = null
+success_ingredients = null
+success_morale = null
+success_money = null
+partial_ingredients = null
+partial_morale = null
+partial_money = null
+failure_ingredients = null
+failure_morale = null
+failure_money = null
 
 [node name="Dish" parent="." unique_id=497250350 instance=ExtResource("2_ei7qy")]
 offset_left = 1497.0

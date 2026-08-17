@@ -20,46 +20,51 @@ extends Node2D
 @export var restricted_tags: Array[String]
 @export_group("Results")
 @export_subgroup("Success")
-@export var success_ingredients: Array[Node]
+@export var success_ingredients: Array[PackedScene]
 @export var success_morale: int
 @export var success_money: int
 @export_subgroup("Partial")
-@export var partial_ingredients: Array[Node]
+@export var partial_ingredients: Array[PackedScene]
 @export var partial_morale: int
 @export var partial_money: int
 @export_subgroup("Failure")
-@export var failure_ingredients: Array[Node]
+@export var failure_ingredients: Array[PackedScene]
 @export var failure_morale: int
 @export var failure_money: int
 
 #CACHED COMPS
+var event_manager
 var inventory
+var dish_node
 
 #STATE
 
 
 func _ready() -> void:
-	inventory = get_node("/root/Player/inventory")
+	event_manager = get_node("/root/root/EventManager")
+	inventory = get_node("/root/root/Player/Inventory")
+	dish_node = $Dish
+	
 
 func on_success():
 	inventory.current_money += success_money
 	inventory.current_morale += success_morale
 	for i in success_ingredients:
-		inventory.current_ingredients.push_front(i)
+		inventory.instantiate_ingredient(i)
 	print("Succeeded the challenge")
 
 func on_partial():
 	inventory.current_money += partial_money
 	inventory.current_morale += partial_morale
 	for i in partial_ingredients:
-		inventory.current_ingredients.push_front(i)
+		inventory.instantiate_ingredient(i)
 	print("Partialed the challenge")
 
 func on_failure():
 	inventory.current_money += failure_money
 	inventory.current_morale += failure_morale
 	for i in failure_ingredients:
-		inventory.current_ingredients.push_front(i)
+		inventory.instantiate_ingredient(i)
 	print("Failed the challenge")
 
 func is_restricted_tag(tag):
@@ -92,4 +97,28 @@ func compare_dish(completed_dish):
 	else:
 		on_success()
 		#success
-		
+
+func reset_dish():
+	for i in dish_node.current_ingredients:
+		inventory.add_ingredient(i)
+	dish_node.remove_all_ingredients()
+	
+#UI Elements
+func start_challenge():
+	event_manager.encounter_start()
+	display_dish()
+
+func end_challenge():
+	event_manager.encounter_end()
+	queue_free()
+
+func display_dish():
+	#visually show dish node
+	dish_node.show()
+	
+func hide_dish():
+	dish_node.hide()
+
+
+func on_reset_button_pressed() -> void:
+	reset_dish()
