@@ -1,3 +1,10 @@
 [gd_scene format=3 uid="uid://cyfhrcxgc7812"]
 
-[node name="Node2D" type="Node2D" unique_id=1075341061]
+[ext_resource type="Script" uid="uid://bkv3gvee74qgl" path="res://scripts/inventory.gd" id="1_k2c4c"]
+
+[node name="root" type="Node2D" unique_id=1075341061]
+
+[node name="Player" type="Node" parent="." unique_id=1818132485]
+
+[node name="inventory" type="Node2D" parent="Player" unique_id=5651078]
+script = ExtResource("1_k2c4c")
