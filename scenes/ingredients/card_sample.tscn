@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://p1ug5ylfd5re"]
+
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/ingredient_stats.gd" id="1_hai3h"]
+
+[node name="CardSample" type="Node2D" unique_id=492117254]
+script = ExtResource("1_hai3h")

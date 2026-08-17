@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://hr6aybbol4hn"]
+
+[ext_resource type="Script" uid="uid://bbkxauiekl5ry" path="res://scripts/challenge.gd" id="1_f0fus"]
+
+[node name="ChallengeSample" type="Node2D" unique_id=2118414985]
+script = ExtResource("1_f0fus")
