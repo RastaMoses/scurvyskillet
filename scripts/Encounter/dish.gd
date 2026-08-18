@@ -11,6 +11,7 @@ extends Node
 #CACHED COMPS
 var random = RandomNumberGenerator.new()
 @onready var inventory = get_node("/root/root/Player/Inventory")
+signal nutrition_change(new_value)
 #STATE
 var can_drop:bool = true
 var current_ingredients: Array[Node]
@@ -22,12 +23,20 @@ func add_ingredient(ingredient):
 	inventory.remove_ingredient(ingredient)
 	current_ingredients.append(ingredient)
 	ingredient.reparent(self)
+	nutrition += ingredient.nutrition
+	nutrition_change.emit(nutrition)
 	get_node("/root/root/EventManager").add_to_dish(ingredient)
 func remove_ingredient(ingredient):
+	nutrition -= ingredient.nutrition
+	nutrition_change.emit(nutrition)
 	current_ingredients.erase(ingredient)
 func remove_all_ingredients():
+	nutrition = 0
+	nutrition_change.emit(nutrition)
 	current_ingredients.clear()
 func destroy_all_ingredients():
+	nutrition = 0
+	nutrition_change.emit(nutrition)
 	for i in current_ingredients:
 		i.queue_free()
 	current_ingredients.clear()
@@ -35,7 +44,6 @@ func destroy_all_ingredients():
 func roll_dish():
 	get_node("/root/root/EventManager").dish_complete(self)
 	for ingredient in current_ingredients:
-		nutrition += ingredient.nutrition
 		var in_sweet = ingredient.sweet
 		while in_sweet > 0:
 			sweet += random.randi_range(1,6)

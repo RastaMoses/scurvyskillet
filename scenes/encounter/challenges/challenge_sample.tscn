@@ -2,27 +2,243 @@
 
 [ext_resource type="Script" uid="uid://bbkxauiekl5ry" path="res://scripts/Encounter/challenge.gd" id="1_f0fus"]
 [ext_resource type="PackedScene" uid="uid://83c84n5554td" path="res://scenes/encounter/challenges/dish.tscn" id="2_ei7qy"]
+[ext_resource type="Texture2D" uid="uid://5cg18yurfd6x" path="res://sprites/placeholder/Screenshot 2026-08-18 171622.png" id="2_n32of"]
+[ext_resource type="Script" uid="uid://clhhe0hu1tyj0" path="res://scripts/Encounter/UI/challenge_ui.gd" id="4_22fbr"]
 
 [node name="ChallengeSample" type="Node2D" unique_id=2118414985]
 script = ExtResource("1_f0fus")
 
-[node name="Dish" parent="." unique_id=497250350 instance=ExtResource("2_ei7qy")]
-offset_left = 1497.0
-offset_top = 1.0
-offset_right = 1497.0
-offset_bottom = 1.0
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=876383970]
+position = Vector2(1281.3206, 717.50006)
+scale = Vector2(3.582484, 3.593516)
+texture = ExtResource("2_n32of")
 
-[node name="Button" type="Button" parent="." unique_id=7978580]
-offset_right = 755.0
-offset_bottom = 276.0
+[node name="Dish" parent="." unique_id=497250350 instance=ExtResource("2_ei7qy")]
+offset_left = 1269.0
+offset_top = 246.0
+offset_right = 1269.0
+offset_bottom = 246.0
+
+[node name="InventoryLocation" type="Panel" parent="." unique_id=1068085367]
+offset_left = 3.0
+offset_top = 1021.0
+offset_right = 2565.0
+offset_bottom = 1409.0
+
+[node name="UI" type="Control" parent="." unique_id=96621391]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_22fbr")
+
+[node name="description" type="Control" parent="UI" unique_id=1896810604]
+anchors_preset = 0
+offset_left = 82.0
+offset_top = 104.0
+offset_right = 722.0
+offset_bottom = 1021.0
+
+[node name="bg" type="TextureRect" parent="UI/description" unique_id=1963961486]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="text" type="RichTextLabel" parent="UI/description" unique_id=189440853]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -323.0
+offset_top = -643.0
+offset_right = 323.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 30
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+
+[node name="title" type="RichTextLabel" parent="UI/description" unique_id=118090035]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -310.0
+offset_right = 310.0
+offset_bottom = 167.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 40
+text = "TITLE OF THE ENCOUNTER WHICH MIGHT BE SUPER DANGEROUS"
+
+[node name="reset_button" type="Button" parent="UI" unique_id=7978580]
+layout_mode = 0
+offset_left = 800.0
+offset_top = 876.0
+offset_right = 1053.0
+offset_bottom = 992.0
 text = "Reset"
 
-[node name="Button2" type="Button" parent="." unique_id=967192702]
-offset_left = 15.0
-offset_top = 901.0
-offset_right = 770.0
-offset_bottom = 1177.0
+[node name="roll_dish_button" type="Button" parent="UI" unique_id=967192702]
+layout_mode = 0
+offset_left = 1790.0
+offset_top = 755.0
+offset_right = 2545.0
+offset_bottom = 1031.0
 text = "Roll Dish"
 
-[connection signal="pressed" from="Button" to="." method="on_reset_button_pressed"]
-[connection signal="pressed" from="Button2" to="." method="_on_roll_dish_pressed"]
+[node name="nutrition" type="RichTextLabel" parent="UI" unique_id=694717351]
+layout_mode = 0
+offset_left = 822.0
+offset_top = 185.0
+offset_right = 1083.0
+offset_bottom = 456.0
+theme_override_font_sizes/normal_font_size = 200
+text = "12"
+scroll_active = false
+
+[node name="plate1" type="TextureRect" parent="UI/nutrition" unique_id=423693717]
+visible = false
+layout_mode = 0
+offset_left = -53.0
+offset_top = -189.0
+offset_right = 329.0
+offset_bottom = 271.0
+
+[node name="plate2" type="TextureRect" parent="UI/nutrition" unique_id=215157739]
+visible = false
+layout_mode = 0
+offset_left = -53.0
+offset_top = -189.0
+offset_right = 329.0
+offset_bottom = 271.0
+
+[node name="plate3" type="TextureRect" parent="UI/nutrition" unique_id=1873253337]
+visible = false
+layout_mode = 0
+offset_left = -53.0
+offset_top = -189.0
+offset_right = 329.0
+offset_bottom = 271.0
+
+[node name="plate4" type="TextureRect" parent="UI/nutrition" unique_id=451321165]
+visible = false
+layout_mode = 0
+offset_left = -53.0
+offset_top = -189.0
+offset_right = 329.0
+offset_bottom = 271.0
+
+[node name="plate5" type="TextureRect" parent="UI/nutrition" unique_id=1924107776]
+visible = false
+layout_mode = 0
+offset_left = -53.0
+offset_top = -189.0
+offset_right = 329.0
+offset_bottom = 271.0
+
+[node name="plate6" type="TextureRect" parent="UI/nutrition" unique_id=1991415974]
+visible = false
+layout_mode = 0
+offset_left = -53.0
+offset_top = -189.0
+offset_right = 329.0
+offset_bottom = 271.0
+
+[node name="plate7" type="TextureRect" parent="UI/nutrition" unique_id=1422376061]
+visible = false
+layout_mode = 0
+offset_left = -53.0
+offset_top = -189.0
+offset_right = 329.0
+offset_bottom = 271.0
+
+[node name="plate8" type="TextureRect" parent="UI/nutrition" unique_id=1877408060]
+visible = false
+layout_mode = 0
+offset_left = -53.0
+offset_top = -189.0
+offset_right = 329.0
+offset_bottom = 271.0
+
+[node name="plate9" type="TextureRect" parent="UI/nutrition" unique_id=1806369032]
+visible = false
+layout_mode = 0
+offset_left = -53.0
+offset_top = -189.0
+offset_right = 329.0
+offset_bottom = 271.0
+
+[node name="plate10" type="TextureRect" parent="UI/nutrition" unique_id=1314034414]
+visible = false
+layout_mode = 0
+offset_left = -53.0
+offset_top = -189.0
+offset_right = 329.0
+offset_bottom = 271.0
+
+[node name="plate11" type="TextureRect" parent="UI/nutrition" unique_id=124089915]
+visible = false
+layout_mode = 0
+offset_left = -53.0
+offset_top = -189.0
+offset_right = 329.0
+offset_bottom = 271.0
+
+[node name="plate12" type="TextureRect" parent="UI/nutrition" unique_id=14838724]
+visible = false
+layout_mode = 0
+offset_left = -53.0
+offset_top = -189.0
+offset_right = 329.0
+offset_bottom = 271.0
+
+[node name="plate13" type="TextureRect" parent="UI/nutrition" unique_id=1460185354]
+visible = false
+layout_mode = 0
+offset_left = -53.0
+offset_top = -189.0
+offset_right = 329.0
+offset_bottom = 271.0
+
+[node name="plate14" type="TextureRect" parent="UI/nutrition" unique_id=176138920]
+visible = false
+layout_mode = 0
+offset_left = -53.0
+offset_top = -189.0
+offset_right = 329.0
+offset_bottom = 271.0
+
+[node name="plate15" type="TextureRect" parent="UI/nutrition" unique_id=1346444582]
+visible = false
+layout_mode = 0
+offset_left = -53.0
+offset_top = -189.0
+offset_right = 329.0
+offset_bottom = 271.0
+
+[node name="plate16" type="TextureRect" parent="UI/nutrition" unique_id=1201693984]
+visible = false
+layout_mode = 0
+offset_left = -53.0
+offset_top = -189.0
+offset_right = 329.0
+offset_bottom = 271.0
+
+[node name="plate17" type="TextureRect" parent="UI/nutrition" unique_id=459764447]
+visible = false
+layout_mode = 0
+offset_left = -53.0
+offset_top = -189.0
+offset_right = 329.0
+offset_bottom = 271.0
+
+[connection signal="nutrition_change" from="Dish" to="UI" method="_on_dish_nutrition_change"]
+[connection signal="pressed" from="UI/reset_button" to="." method="on_reset_button_pressed"]
+[connection signal="pressed" from="UI/roll_dish_button" to="." method="_on_roll_dish_pressed"]

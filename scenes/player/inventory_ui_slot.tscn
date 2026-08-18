@@ -1,0 +1,129 @@
+[gd_scene format=3 uid="uid://c4hu25tvp3kkd"]
+
+[ext_resource type="Script" uid="uid://dweskuuxdr5ot" path="res://scripts/Inventory/inventory_slot.gd" id="1_fine5"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_omhyo"]
+
+[node name="InventoryUISlot" type="Panel" unique_id=442831638]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(106, 162)
+offset_right = 106.0
+offset_bottom = 162.0
+script = ExtResource("1_fine5")
+
+[node name="EmptySlot" type="Sprite2D" parent="." unique_id=1808103879]
+visible = false
+scale = Vector2(106.00001, 162)
+texture = SubResource("PlaceholderTexture2D_omhyo")
+centered = false
+
+[node name="ItemDisplay" type="TextureRect" parent="." unique_id=1942941591]
+layout_mode = 0
+offset_right = 424.0
+offset_bottom = 648.0
+scale = Vector2(0.25, 0.25)
+
+[node name="Uses" type="Control" parent="ItemDisplay" unique_id=224801474]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="ItemDisplay/Uses" unique_id=2060589483]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect2" type="TextureRect" parent="ItemDisplay/Uses" unique_id=2020242848]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect3" type="TextureRect" parent="ItemDisplay/Uses" unique_id=1826618567]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect4" type="TextureRect" parent="ItemDisplay/Uses" unique_id=1426625872]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Flavours" type="Control" parent="ItemDisplay" unique_id=1894382635]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Hearty" type="TextureRect" parent="ItemDisplay/Flavours" unique_id=53393011]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ItemDisplay/Flavours/Hearty" unique_id=1214678756]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sour" type="TextureRect" parent="ItemDisplay/Flavours" unique_id=1035567416]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ItemDisplay/Flavours/Sour" unique_id=203694255]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Fresh" type="TextureRect" parent="ItemDisplay/Flavours" unique_id=445984249]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ItemDisplay/Flavours/Fresh" unique_id=1500815603]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Spicy" type="TextureRect" parent="ItemDisplay/Flavours" unique_id=1926608436]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ItemDisplay/Flavours/Spicy" unique_id=128846902]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sweet" type="TextureRect" parent="ItemDisplay/Flavours" unique_id=888405094]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ItemDisplay/Flavours/Sweet" unique_id=1809203709]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NutritionText" type="RichTextLabel" parent="ItemDisplay" unique_id=367587180]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Rarity" type="Control" parent="ItemDisplay" unique_id=80472254]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="0" type="TextureRect" parent="ItemDisplay/Rarity" unique_id=2084014227]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="1" type="TextureRect" parent="ItemDisplay/Rarity" unique_id=316271123]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="2" type="TextureRect" parent="ItemDisplay/Rarity" unique_id=452645600]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

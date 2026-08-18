@@ -34,5 +34,7 @@ var inv_index:int
 
 
 func get_texture():
-	texture = $TextureRect.texture
 	return texture
+
+func _ready() -> void:
+	get_child(0).visible = false

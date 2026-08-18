@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://7lxu211xbf4i"]
+
+[ext_resource type="PackedScene" uid="uid://c4hu25tvp3kkd" path="res://scenes/player/inventory_ui_slot.tscn" id="1_ifeqf"]
+
+[node name="InventoryUILarge" unique_id=442831638 instance=ExtResource("1_ifeqf")]
+large_view = true
+
+[node name="Tags" type="RichTextLabel" parent="ItemDisplay" parent_id_path=PackedInt32Array(1942941591) index="4" unique_id=1623048763]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Description" type="RichTextLabel" parent="ItemDisplay" parent_id_path=PackedInt32Array(1942941591) index="5" unique_id=1998604938]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

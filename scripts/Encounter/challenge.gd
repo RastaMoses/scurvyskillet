@@ -35,19 +35,12 @@ extends Node2D
 @export var map_icon:Texture
 
 #CACHED COMPS
-var event_manager
-var inventory
-var dish_node
+@onready var inventory = get_node("/root/root/Player/Inventory")
+@onready var dish_node = $Dish
 @onready var map_node = get_parent()
 
 #STATE
 var encounter_type = "challenge"
-
-
-func _ready() -> void:
-	inventory = get_node("/root/root/Player/Inventory")
-	dish_node = $Dish
-	
 
 func on_success():
 	inventory.current_money += success_money

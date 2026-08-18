@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://benw6bt2l0ot"]
 
-[ext_resource type="Script" uid="uid://dqcweu5fhwb82" path="res://scripts/Encounter/decisions.gd" id="1_7rq7k"]
-[ext_resource type="Script" uid="uid://xk6aj68ft76k" path="res://scripts/Encounter/decision_ui.gd" id="1_no3ar"]
-[ext_resource type="Script" uid="uid://v63vu2iilw13" path="res://scripts/Inventory/drop_area.gd" id="3_gjf7s"]
+[ext_resource type="Script" uid="uid://xk6aj68ft76k" path="res://scripts/Encounter/UI/decision_ui.gd" id="1_no3ar"]
+[ext_resource type="Texture2D" uid="uid://d03pcmk05xsne" path="res://sprites/placeholder/baldursgate3_screenshot_600x338_salami.jpg" id="2_gjf7s"]
+[ext_resource type="PackedScene" uid="uid://b75jl0uammin5" path="res://scenes/encounter/decisions/choice.tscn" id="2_no3ar"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_omhyo"]
 
 [node name="DecisionSample" type="Control" unique_id=856639403]
 layout_mode = 3
@@ -13,44 +15,95 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_no3ar")
 
-[node name="Control" type="Control" parent="." unique_id=1311569514]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("1_7rq7k")
+[node name="bg" type="Sprite2D" parent="." unique_id=103243264]
+position = Vector2(1285.75, 705.75)
+scale = Vector2(2572.5, 1412.5)
+texture = SubResource("PlaceholderTexture2D_omhyo")
 
-[node name="DropArea" type="Panel" parent="Control" unique_id=2059867842]
-visible = false
+[node name="art" type="Sprite2D" parent="." unique_id=607480889]
+position = Vector2(1495.9999, 735)
+scale = Vector2(2.9018543, 3.2470417)
+texture = ExtResource("2_gjf7s")
+
+[node name="choice" parent="." unique_id=704699521 instance=ExtResource("2_no3ar")]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(26.6, 12.4800005)
-script = ExtResource("3_gjf7s")
-
-[node name="Control2" type="Control" parent="." unique_id=1547526879]
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("1_7rq7k")
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_left = 697.0
+offset_top = 321.0
+offset_right = 697.0
+offset_bottom = 321.0
+grow_vertical = 1
 
-[node name="DropArea" type="Panel" parent="Control2" unique_id=1025502105]
-visible = false
+[node name="choice2" parent="." unique_id=668961882 instance=ExtResource("2_no3ar")]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(26.6, 12.4800005)
-script = ExtResource("3_gjf7s")
-
-[node name="Control3" type="Control" parent="." unique_id=2138172871]
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("1_7rq7k")
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_left = 1359.0
+offset_top = 319.0
+offset_right = 1359.0
+offset_bottom = 319.0
+grow_vertical = 1
 
-[node name="DropArea" type="Panel" parent="Control3" unique_id=1512970891]
-visible = false
+[node name="choice3" parent="." unique_id=675611365 instance=ExtResource("2_no3ar")]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(26.6, 12.4800005)
-script = ExtResource("3_gjf7s")
+anchors_preset = 0
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_left = 2027.0
+offset_top = 325.0
+offset_right = 2027.0
+offset_bottom = 325.0
+grow_vertical = 1
+
+[node name="inventory_position" type="Panel" parent="." unique_id=1245198712]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1068.0
+offset_right = 2571.0
+offset_bottom = 1904.0
+
+[node name="description" type="Control" parent="." unique_id=1586441773]
+anchors_preset = 0
+offset_left = 82.0
+offset_top = 104.0
+offset_right = 722.0
+offset_bottom = 1021.0
+
+[node name="bg" type="TextureRect" parent="description" unique_id=2062920821]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="text" type="RichTextLabel" parent="description" unique_id=51697901]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -323.0
+offset_top = -643.0
+offset_right = 323.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 30
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+
+[node name="title" type="RichTextLabel" parent="description" unique_id=1011059252]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -310.0
+offset_right = 310.0
+offset_bottom = 167.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 40
+text = "TITLE OF THE ENCOUNTER WHICH MIGHT BE SUPER DANGEROUS"

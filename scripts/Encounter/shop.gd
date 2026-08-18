@@ -6,6 +6,7 @@ extends Control
 #CACHED COMPS
 @onready var player_inventory = get_node("/root/root/Player/Inventory")
 @onready var map_node = get_parent()
+@onready var buy_container = $BuyContainer
 
 
 #STATE
@@ -55,7 +56,7 @@ func check_buttons_enabled():
 func populate_shop():
 	for i in sell_items:
 		var temp = buy_button_sample.instantiate()
-		$BuyContainer.add_child(temp)
+		buy_container.add_child(temp)
 		temp.sell_item = i
 		buy_buttons.append(temp)
 	check_buttons_enabled()

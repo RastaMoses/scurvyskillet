@@ -3,8 +3,12 @@ extends Control
 #PARAMS
 
 #CACHED COMPS
-@onready var inventory = get_node("/root/root/Player/Inventory")
+@onready var inventory = get_parent()
 @onready var slots: Array = $ScrollContainer/GridContainer.get_children()
+@onready var bg = $bg
+@onready var inventory_container = $ScrollContainer
+@onready var morale_text = $topbar/morale_text
+@onready var money_text = $topbar/money_text
 
 #STATE
 var data_bk
@@ -43,9 +47,15 @@ func _notification(what: int) -> void:
 				data_bk = null
 
 func open():
-	visible = true
+	bg.visible = true
+	inventory_container.visible = true
 	is_open = true
 	
 func close():
-	visible = false
+	bg.visible = false
+	inventory_container.visible = false
 	is_open = false
+
+func update_topbar():
+	money_text.text = inventory.current_money
+	morale_text.text = inventory.current_morale

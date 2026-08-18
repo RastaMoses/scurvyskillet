@@ -29,6 +29,8 @@ extends Control
 
 #CACHED COMPS
 @onready var map_node = get_parent()
+@onready var drop_area = $DropArea
+@onready var button = $Button
 
 #STATE
 var ingredients: Array[Node]
@@ -36,8 +38,8 @@ var encounter_type = "decision"
 
 
 func _ready() -> void:
-	$DropArea.visible = drop_ingredients
-	button_available()
+	button.pressed.connect(on_button_press)
+	
 
 func add_ingredient(ingredient):
 	#necessary for drop area script and to check for rarity or smth
@@ -154,12 +156,16 @@ func complete():
 	end()
 
 func disable_button():
-	pass
+	button.disabled = true
 func enable_button():
-	pass
+	button.disabled = false
+
+func enable_drop_area():
+	drop_area = drop_ingredients
 
 func start():
-	pass
+	button_available()
+	enable_drop_area()
 	
 func end():
 	if new_encounter == null:

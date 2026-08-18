@@ -6,8 +6,9 @@ extends Node
 @export var current_morale:int
 @export var current_ingredients: Array[Node]
 
-#CACHED COMPS
 
+#CACHED COMPS
+@onready var ui = $InventoryUI
 #STATE
 
 func _ready() -> void:
@@ -33,7 +34,7 @@ func remove_ingredient(ingredient_instance):
 func add_ingredient(ingredient_instance):
 	ingredient_instance.reparent(self)
 	current_ingredients.push_front(ingredient_instance)
-	$InventoryCooking.update_slots()
+	ui.update_slots()
 
 func add_ingredient_remove_use(ingredient_instance):
 	ingredient_instance.uses -= 1
@@ -41,6 +42,8 @@ func add_ingredient_remove_use(ingredient_instance):
 
 func change_money(new_value):
 	current_money = new_value
+	ui.update_topbar()
 
 func change_morale(new_value):
 	current_morale = new_value
+	ui.update_topbar()
