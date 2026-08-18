@@ -1,7 +1,10 @@
 [gd_scene format=3 uid="uid://p1ug5ylfd5re"]
 
 [ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/ingredient_stats.gd" id="1_hai3h"]
-[ext_resource type="PackedScene" uid="uid://7lxu211xbf4i" path="res://scenes/encounter/shops/inventory_ui_large_view.tscn" id="2_8h71a"]
+[ext_resource type="Script" uid="uid://dweskuuxdr5ot" path="res://scripts/Inventory/inventory_slot.gd" id="2_8h71a"]
+[ext_resource type="Texture2D" uid="uid://c3hs6m8ax23ln" path="res://sprites/placeholder/placeholder 2.png" id="3_2walx"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_omhyo"]
 
 [node name="CardSample" type="Node2D" unique_id=492117254]
 script = ExtResource("1_hai3h")
@@ -9,5 +12,149 @@ nutrition = 3
 sweet = 1
 spicy = 2
 
-[node name="Preview" parent="." unique_id=442831638 instance=ExtResource("2_8h71a")]
-preview = true
+[node name="Preview" type="Panel" parent="." unique_id=442831638]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(106, 162)
+offset_right = 106.0
+offset_bottom = 162.0
+script = ExtResource("2_8h71a")
+large_view = true
+editor_preview = true
+
+[node name="EmptySlot" type="Sprite2D" parent="Preview" unique_id=1808103879]
+scale = Vector2(106.00001, 162)
+texture = SubResource("PlaceholderTexture2D_omhyo")
+centered = false
+
+[node name="ItemDisplay" type="TextureRect" parent="Preview" unique_id=1942941591]
+layout_mode = 0
+offset_right = 424.0
+offset_bottom = 648.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_2walx")
+
+[node name="Uses" type="Control" parent="Preview/ItemDisplay" unique_id=224801474]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="Preview/ItemDisplay/Uses" unique_id=2060589483]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect2" type="TextureRect" parent="Preview/ItemDisplay/Uses" unique_id=2020242848]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect3" type="TextureRect" parent="Preview/ItemDisplay/Uses" unique_id=1826618567]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect4" type="TextureRect" parent="Preview/ItemDisplay/Uses" unique_id=1426625872]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Flavours" type="Control" parent="Preview/ItemDisplay" unique_id=1894382635]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Hearty" type="TextureRect" parent="Preview/ItemDisplay/Flavours" unique_id=53393011]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Preview/ItemDisplay/Flavours/Hearty" unique_id=1214678756]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sour" type="TextureRect" parent="Preview/ItemDisplay/Flavours" unique_id=1035567416]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Preview/ItemDisplay/Flavours/Sour" unique_id=203694255]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Fresh" type="TextureRect" parent="Preview/ItemDisplay/Flavours" unique_id=445984249]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Preview/ItemDisplay/Flavours/Fresh" unique_id=1500815603]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Spicy" type="TextureRect" parent="Preview/ItemDisplay/Flavours" unique_id=1926608436]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Preview/ItemDisplay/Flavours/Spicy" unique_id=128846902]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sweet" type="TextureRect" parent="Preview/ItemDisplay/Flavours" unique_id=888405094]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Preview/ItemDisplay/Flavours/Sweet" unique_id=1809203709]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NutritionText" type="RichTextLabel" parent="Preview/ItemDisplay" unique_id=367587180]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Rarity" type="Control" parent="Preview/ItemDisplay" unique_id=80472254]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="0" type="TextureRect" parent="Preview/ItemDisplay/Rarity" unique_id=2084014227]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="1" type="TextureRect" parent="Preview/ItemDisplay/Rarity" unique_id=316271123]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="2" type="TextureRect" parent="Preview/ItemDisplay/Rarity" unique_id=452645600]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Tags" type="RichTextLabel" parent="Preview/ItemDisplay" unique_id=1623048763]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Description" type="RichTextLabel" parent="Preview/ItemDisplay" unique_id=1998604938]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="large_view_button" type="Button" parent="Preview" unique_id=1319644790]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+button_mask = 2
+flat = true

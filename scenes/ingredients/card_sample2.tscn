@@ -1,17 +1,9 @@
-[gd_scene format=3 uid="uid://covve03hsm1kv"]
+[gd_scene format=3 uid="uid://cc1vfkie5aw2u"]
 
-[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/ingredient_stats.gd" id="1_71dmh"]
-[ext_resource type="Texture2D" uid="uid://c3hs6m8ax23ln" path="res://sprites/placeholder/placeholder 2.png" id="2_71dmh"]
+[ext_resource type="PackedScene" uid="uid://p1ug5ylfd5re" path="res://scenes/ingredients/card_sample.tscn" id="1_71dmh"]
+[ext_resource type="Texture2D" uid="uid://ch63imf2x3rru" path="res://sprites/placeholder/placeholder_ingredient.png" id="2_6al5x"]
 
-[node name="CardSample" type="Node2D" unique_id=492117254]
-script = ExtResource("1_71dmh")
-nutrition = 4
-sweet = 1
-sour = 2
-hearty = 1
+[node name="CardSample" unique_id=492117254 instance=ExtResource("1_71dmh")]
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=747686179]
-visible = false
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("2_71dmh")
+[node name="ItemDisplay" parent="Preview" parent_id_path=PackedInt32Array(442831638) index="1" unique_id=1942941591]
+texture = ExtResource("2_6al5x")

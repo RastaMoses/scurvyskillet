@@ -12,7 +12,6 @@ offset_bottom = 162.0
 script = ExtResource("1_fine5")
 
 [node name="EmptySlot" type="Sprite2D" parent="." unique_id=1808103879]
-visible = false
 scale = Vector2(106.00001, 162)
 texture = SubResource("PlaceholderTexture2D_omhyo")
 centered = false
@@ -127,3 +126,14 @@ offset_bottom = 40.0
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="large_view_button" type="Button" parent="." unique_id=1319644790]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+button_mask = 2
+flat = true

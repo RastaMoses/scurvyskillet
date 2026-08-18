@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://5ky5q3x7j70d" path="res://scripts/Inventory/inventory_ui.gd" id="1_ftr8b"]
 [ext_resource type="Texture2D" uid="uid://l14aqi882mlh" path="res://sprites/placeholder/Screenshot 2026-08-18 200624.png" id="2_1oul0"]
 [ext_resource type="PackedScene" uid="uid://c4hu25tvp3kkd" path="res://scenes/player/inventory_ui_slot.tscn" id="2_2kgow"]
-[ext_resource type="PackedScene" uid="uid://7lxu211xbf4i" path="res://scenes/encounter/shops/inventory_ui_large_view.tscn" id="4_n5307"]
+[ext_resource type="PackedScene" uid="uid://7lxu211xbf4i" path="res://scenes/player/inventory_ui_large_view.tscn" id="4_n5307"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_2kgow"]
 
@@ -87,123 +87,105 @@ size_flags_vertical = 0
 
 [node name="InventoryUISlot" parent="ScrollContainer/GridContainer" unique_id=442831638 instance=ExtResource("2_2kgow")]
 layout_mode = 2
-large_view = null
 
 [node name="InventoryUISlot2" parent="ScrollContainer/GridContainer" unique_id=1649551522 instance=ExtResource("2_2kgow")]
 layout_mode = 2
-large_view = null
 
 [node name="InventoryUISlot3" parent="ScrollContainer/GridContainer" unique_id=1840363840 instance=ExtResource("2_2kgow")]
 layout_mode = 2
-large_view = null
 
 [node name="InventoryUISlot4" parent="ScrollContainer/GridContainer" unique_id=660806607 instance=ExtResource("2_2kgow")]
 layout_mode = 2
-large_view = null
 
 [node name="InventoryUISlot5" parent="ScrollContainer/GridContainer" unique_id=1790947940 instance=ExtResource("2_2kgow")]
 layout_mode = 2
-large_view = null
 
 [node name="InventoryUISlot6" parent="ScrollContainer/GridContainer" unique_id=358400740 instance=ExtResource("2_2kgow")]
 layout_mode = 2
-large_view = null
 
 [node name="InventoryUISlot7" parent="ScrollContainer/GridContainer" unique_id=843676205 instance=ExtResource("2_2kgow")]
 layout_mode = 2
-large_view = null
 
 [node name="InventoryUISlot8" parent="ScrollContainer/GridContainer" unique_id=634208404 instance=ExtResource("2_2kgow")]
 layout_mode = 2
-large_view = null
 
 [node name="InventoryUISlot9" parent="ScrollContainer/GridContainer" unique_id=1549114808 instance=ExtResource("2_2kgow")]
 layout_mode = 2
-large_view = null
 
 [node name="InventoryUISlot10" parent="ScrollContainer/GridContainer" unique_id=176241182 instance=ExtResource("2_2kgow")]
 layout_mode = 2
-large_view = null
 
 [node name="InventoryUISlot11" parent="ScrollContainer/GridContainer" unique_id=1012424089 instance=ExtResource("2_2kgow")]
 layout_mode = 2
-large_view = null
 
 [node name="InventoryUISlot12" parent="ScrollContainer/GridContainer" unique_id=1171223044 instance=ExtResource("2_2kgow")]
 layout_mode = 2
-large_view = null
 
 [node name="InventoryUISlot13" parent="ScrollContainer/GridContainer" unique_id=1314048889 instance=ExtResource("2_2kgow")]
 layout_mode = 2
-large_view = null
 
 [node name="InventoryUISlot14" parent="ScrollContainer/GridContainer" unique_id=1696419541 instance=ExtResource("2_2kgow")]
 layout_mode = 2
-large_view = null
 
 [node name="InventoryUISlot15" parent="ScrollContainer/GridContainer" unique_id=643171779 instance=ExtResource("2_2kgow")]
 layout_mode = 2
-large_view = null
 
 [node name="InventoryUISlot16" parent="ScrollContainer/GridContainer" unique_id=1533258389 instance=ExtResource("2_2kgow")]
 layout_mode = 2
-large_view = null
 
 [node name="InventoryUISlot17" parent="ScrollContainer/GridContainer" unique_id=864616677 instance=ExtResource("2_2kgow")]
 layout_mode = 2
-large_view = null
 
 [node name="InventoryUISlot18" parent="ScrollContainer/GridContainer" unique_id=167179407 instance=ExtResource("2_2kgow")]
 layout_mode = 2
-large_view = null
 
 [node name="InventoryUISlot19" parent="ScrollContainer/GridContainer" unique_id=1680634406 instance=ExtResource("2_2kgow")]
 layout_mode = 2
-large_view = null
 
 [node name="InventoryUISlot20" parent="ScrollContainer/GridContainer" unique_id=859775971 instance=ExtResource("2_2kgow")]
 layout_mode = 2
-large_view = null
 
 [node name="InventoryUISlot21" parent="ScrollContainer/GridContainer" unique_id=1349392603 instance=ExtResource("2_2kgow")]
 layout_mode = 2
-large_view = null
 
 [node name="InventoryUISlot22" parent="ScrollContainer/GridContainer" unique_id=659619121 instance=ExtResource("2_2kgow")]
 layout_mode = 2
-large_view = null
 
 [node name="InventoryUISlot23" parent="ScrollContainer/GridContainer" unique_id=2083072518 instance=ExtResource("2_2kgow")]
 layout_mode = 2
-large_view = null
 
 [node name="InventoryUISlot24" parent="ScrollContainer/GridContainer" unique_id=247285468 instance=ExtResource("2_2kgow")]
 layout_mode = 2
-large_view = null
 
 [node name="InventoryUISlot25" parent="ScrollContainer/GridContainer" unique_id=1595495198 instance=ExtResource("2_2kgow")]
 layout_mode = 2
-large_view = null
 
 [node name="InventoryUISlot26" parent="ScrollContainer/GridContainer" unique_id=672323684 instance=ExtResource("2_2kgow")]
 layout_mode = 2
-large_view = null
 
 [node name="InventoryUISlot27" parent="ScrollContainer/GridContainer" unique_id=1418449255 instance=ExtResource("2_2kgow")]
 layout_mode = 2
-large_view = null
 
 [node name="InventoryUISlot28" parent="ScrollContainer/GridContainer" unique_id=1900875857 instance=ExtResource("2_2kgow")]
 layout_mode = 2
-large_view = null
 
 [node name="InventoryUISlot29" parent="ScrollContainer/GridContainer" unique_id=1553203694 instance=ExtResource("2_2kgow")]
 layout_mode = 2
-large_view = null
 
 [node name="InventoryUISlot30" parent="ScrollContainer/GridContainer" unique_id=494041656 instance=ExtResource("2_2kgow")]
 layout_mode = 2
-large_view = null
 
-[node name="InventoryUILarge" parent="." unique_id=1295964210 instance=ExtResource("4_n5307")]
+[node name="large_view" type="Button" parent="." unique_id=1508888289]
 layout_mode = 0
+offset_left = -11.0
+offset_top = -16.0
+offset_right = 2565.0
+offset_bottom = 1101.0
+flat = true
+
+[node name="InventoryUILarge" parent="large_view" unique_id=1295964210 instance=ExtResource("4_n5307")]
+layout_mode = 0
+offset_left = 1228.0
+offset_top = 432.0
+offset_right = 1334.0
+offset_bottom = 594.0

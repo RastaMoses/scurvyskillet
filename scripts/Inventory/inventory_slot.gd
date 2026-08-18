@@ -1,10 +1,11 @@
 extends Panel
 #PARAMS
 @export var large_view:bool = false
-@export var preview:bool = false
+@export var editor_preview:bool = false
 
 #CACHED COMPS
 @onready var item_visual: TextureRect = $ItemDisplay
+@onready var texture = $ItemDisplay.texture
 @onready var uses_textures = $ItemDisplay/Uses.get_children()
 @onready var hearty = $ItemDisplay/Flavours/Hearty
 @onready var sour = $ItemDisplay/Flavours/Sour
@@ -16,25 +17,38 @@ extends Panel
 @onready var rarity_textures = $ItemDisplay/Rarity.get_children()
 var tags
 var description
+@onready var large_view_button = $large_view_button
+
+#SIGNALS
+signal large_view_clicked(ingredient_data)
 
 #STATE
 var ingredient
+var showcase = false
 
 func _ready() -> void:
+	if editor_preview:
+		visible = false
 	if large_view:
+		showcase = true
 		tags = $ItemDisplay/Tags
 		description = $ItemDisplay/Description
+	large_view_button.pressed.connect(large_view_pressed)
+
+func large_view_pressed():
+	large_view_clicked.emit(ingredient)
 
 func update(item):
-	
 	if !item:
 		item_visual.visible = false
 		ingredient == null
 		empty_slot.visible = true
+		large_view_button.visible = false
 	else:
+		large_view_button.visible = true
 		empty_slot.visible = false
 		item_visual.visible = true
-		item_visual.texture = item.get_texture()
+		item_visual.texture = item.get_child(0).texture
 		ingredient = item
 		update_flavours()
 
@@ -87,13 +101,13 @@ func update_flavours():
 	
 	#if large view
 	if large_view == true:
-		tags = ingredient.get_child(0).tags
-		description = ingredient.get_child(0).description
+		tags = ingredient.get_preview().tags
+		description = ingredient.get_preview().description
 
 func _get_drag_data(_at_position: Vector2) -> Variant:
 	if not ingredient:
 		return
-	if preview:
+	if showcase:
 		return
 	var preview = duplicate()
 	var c = Control.new()
@@ -106,15 +120,16 @@ func _get_drag_data(_at_position: Vector2) -> Variant:
 	return self
 
 func _can_drop_data(_at_position: Vector2, _data: Variant) -> bool:
-	if preview:
+	if showcase:
 		return false
 	return true
 	
 func _drop_data(at_position: Vector2, data: Variant) -> void:
 	var tmp = ingredient
 	ingredient = data.ingredient
-	data.ingredient = tmp
 	item_visual.show()
-	data.show()
 	update(ingredient)
-	data.update(data.ingredient)
+	if !showcase:
+		data.ingredient = tmp
+		data.show()
+		data.update(data.ingredient)

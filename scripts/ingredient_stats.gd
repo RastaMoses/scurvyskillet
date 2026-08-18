@@ -31,10 +31,5 @@ extends Node
 #STATE
 var inv_index:int
 
-
-
-func get_texture():
-	return texture
-
-func _ready() -> void:
-	get_child(0).visible = false
+func get_preview():
+	return $Preview
