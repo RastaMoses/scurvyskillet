@@ -10,9 +10,12 @@ func _ready() -> void:
 
 
 func encounter_start():
+	#disable map interface
+	#set bg
 	pass
 	
 func encounter_end():
+	#perishables ability
 	pass
 
 func dish_complete(dish):

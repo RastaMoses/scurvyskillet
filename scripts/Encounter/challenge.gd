@@ -38,6 +38,7 @@ var inventory
 var dish_node
 
 #STATE
+var encounter_type = "challenge"
 
 
 func _ready() -> void:
@@ -70,7 +71,9 @@ func on_failure():
 func is_restricted_tag(tag):
 	return restricted_tags.has(tag)
 	
-func compare_ghoulash():
+func use_ghoulash():
+	var ghoulash # get ghoulash as dish
+	compare_dish(ghoulash)
 	pass
 
 func compare_dish(completed_dish):
@@ -104,8 +107,7 @@ func reset_dish():
 	dish_node.remove_all_ingredients()
 	
 #UI Elements
-func start_challenge():
-	event_manager.encounter_start()
+func start():
 	display_dish()
 
 func end_challenge():

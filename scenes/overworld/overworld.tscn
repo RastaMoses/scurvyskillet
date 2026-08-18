@@ -3,9 +3,8 @@
 [ext_resource type="Script" uid="uid://bkv3gvee74qgl" path="res://scripts/Inventory/inventory.gd" id="1_662u0"]
 [ext_resource type="PackedScene" uid="uid://c2dctdd5q1hip" path="res://scenes/player/inventory_cooking.tscn" id="2_662u0"]
 [ext_resource type="Script" uid="uid://cx3kxlhcjwpki" path="res://scripts/event_manager.gd" id="2_n3lcv"]
-[ext_resource type="PackedScene" uid="uid://hr6aybbol4hn" path="res://scenes/encounter/challenges/challenge_sample.tscn" id="3_jvs31"]
 [ext_resource type="Script" uid="uid://cqbk4mjb6vddi" path="res://scripts/Overworld/overworld.gd" id="4_b1b42"]
-[ext_resource type="PackedScene" uid="uid://benw6bt2l0ot" path="res://scenes/encounter/decisions/decision_sample.tscn" id="5_dhsp4"]
+[ext_resource type="Script" uid="uid://ofgnbg5roiqb" path="res://scripts/Overworld/map_encounter.gd" id="5_0wbp6"]
 
 [node name="root" type="Node2D" unique_id=1075341061]
 
@@ -25,9 +24,10 @@ script = ExtResource("2_n3lcv")
 script = ExtResource("4_b1b42")
 
 [node name="Encounter" type="Node" parent="Overworld" unique_id=645414941]
+script = ExtResource("5_0wbp6")
 
-[node name="ChallengeSample" parent="Overworld/Encounter" unique_id=2118414985 instance=ExtResource("3_jvs31")]
-visible = false
+[node name="Button" type="Button" parent="Overworld/Encounter" unique_id=765460911]
+offset_right = 8.0
+offset_bottom = 8.0
 
-[node name="DecisionSample" parent="Overworld/Encounter" unique_id=856639403 instance=ExtResource("5_dhsp4")]
-visible = false
+[connection signal="pressed" from="Overworld/Encounter/Button" to="Overworld/Encounter" method="_on_button_pressed"]

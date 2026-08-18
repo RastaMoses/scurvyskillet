@@ -8,6 +8,7 @@ extends Control
 
 #STATE
 var buy_buttons:Array
+var encounter_type = "shop"
 
 func add_ingredient(ingredient):
 	player_sell_ingredient(ingredient.rarity)
@@ -60,3 +61,6 @@ func populate_shop():
 func leave_shop():
 	get_node("/root/root/EventManager").encounter_end()
 	self.queue_free()
+
+func start():
+	

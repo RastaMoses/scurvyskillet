@@ -28,6 +28,7 @@ extends Control
 
 #STATE
 var ingredients: Array[Node]
+var encounter_type = "decision"
 
 
 func _ready() -> void:
@@ -143,4 +144,7 @@ func on_button_press():
 func disable_button():
 	pass
 func enable_button():
+	pass
+
+func start():
 	pass
