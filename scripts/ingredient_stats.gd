@@ -1,5 +1,6 @@
 extends Node
 #PARAMS
+@export var texture:Texture
 @export_group("Values")
 @export var nutrition:int
 @export_subgroup("Flavour")
@@ -22,12 +23,16 @@ extends Node
 @export var abilities: Array[String]
 @export_group("Tags")
 @export var tags: Array[String]
-
+@export var rarity:int
+@export var ingredient_name:String
+@export var undroppable: bool = false
 #CACHED COMPS
 
 #STATE
 var inv_index:int
 
+
+
 func get_texture():
-	var texture = $TextureRect.texture
+	texture = $TextureRect.texture
 	return texture

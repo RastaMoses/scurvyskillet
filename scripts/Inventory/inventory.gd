@@ -34,3 +34,9 @@ func add_ingredient(ingredient_instance):
 	ingredient_instance.reparent(self)
 	current_ingredients.push_front(ingredient_instance)
 	$InventoryCooking.update_slots()
+	
+func change_money(new_value):
+	current_money = new_value
+
+func change_morale(new_value):
+	current_morale = new_value
