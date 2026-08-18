@@ -25,6 +25,7 @@ func set_encounter(encounter_scene):
 
 func end_encounter():
 	event_manager.encounter_end()
+	map.set_available_encounters()
 	
 func activate_encounter():
 	event_manager.encounter_start()

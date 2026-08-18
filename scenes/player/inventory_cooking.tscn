@@ -14,9 +14,10 @@ mouse_filter = 1
 script = ExtResource("1_ftr8b")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=215623859]
+visible = false
 layout_mode = 0
-offset_right = 2014.0
-offset_bottom = 1176.0
+offset_right = 385.0
+offset_bottom = 357.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=79906176]
 custom_minimum_size = Vector2(330, 660)
