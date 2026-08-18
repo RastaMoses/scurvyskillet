@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c2dctdd5q1hip" path="res://scenes/player/inventory_cooking.tscn" id="2_662u0"]
 [ext_resource type="Script" uid="uid://cx3kxlhcjwpki" path="res://scripts/event_manager.gd" id="2_n3lcv"]
 [ext_resource type="PackedScene" uid="uid://hr6aybbol4hn" path="res://scenes/encounter/challenges/challenge_sample.tscn" id="3_jvs31"]
+[ext_resource type="PackedScene" uid="uid://benw6bt2l0ot" path="res://scenes/encounter/decisions/decision_sample.tscn" id="5_dhsp4"]
 
 [node name="root" type="Node2D" unique_id=1075341061]
 
@@ -22,3 +23,5 @@ script = ExtResource("2_n3lcv")
 [node name="Encounter" type="Node" parent="." unique_id=645414941]
 
 [node name="ChallengeSample" parent="Encounter" unique_id=2118414985 instance=ExtResource("3_jvs31")]
+
+[node name="DecisionSample" parent="Encounter" unique_id=856639403 instance=ExtResource("5_dhsp4")]

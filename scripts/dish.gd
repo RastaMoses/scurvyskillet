@@ -12,20 +12,21 @@ extends Node
 var random = RandomNumberGenerator.new()
 @onready var inventory = get_node("/root/root/Player/Inventory")
 #STATE
+var can_drop:bool = true
 var current_ingredients: Array[Node]
+
+func check_can_drop(ingredient):
+	return can_drop
 
 func add_ingredient(ingredient):
 	inventory.remove_ingredient(ingredient)
 	current_ingredients.append(ingredient)
 	ingredient.reparent(self)
 	get_node("/root/root/EventManager").add_to_dish(ingredient)
-
 func remove_ingredient(ingredient):
 	current_ingredients.erase(ingredient)
 func remove_all_ingredients():
 	current_ingredients.clear()
-	
-
 func destroy_all_ingredients():
 	for i in current_ingredients:
 		i.queue_free()
