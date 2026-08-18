@@ -5,6 +5,8 @@ extends Control
 @export var rarity_prices:Array[int] = [1,3,5,10,20]
 #CACHED COMPS
 @onready var player_inventory = get_node("/root/root/Player/Inventory")
+@onready var map_node = get_parent()
+
 
 #STATE
 var buy_buttons:Array
@@ -58,9 +60,10 @@ func populate_shop():
 		buy_buttons.append(temp)
 	check_buttons_enabled()
 
-func leave_shop():
-	get_node("/root/root/EventManager").encounter_end()
-	self.queue_free()
-
 func start():
-	
+	#display visuals
+	populate_shop()
+
+func end():
+	map_node.end_encounter()
+	queue_free()

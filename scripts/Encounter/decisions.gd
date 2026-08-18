@@ -6,6 +6,7 @@ extends Control
 @export_group("Reward")
 @export var r_money:int
 @export var r_morale:int
+@export var r_random_ingredient:bool = false
 @export var r_ingredients:Array[PackedScene]
 @export_group("Cost")
 @export var c_money:int
@@ -23,8 +24,11 @@ extends Control
 @export var fresh:int
 @export var nutrition:int
 @export var rarity:int = -1
+@export_subgroup("New Encounter")
+@export var new_encounter:PackedScene
 
 #CACHED COMPS
+@onready var map_node = get_parent()
 
 #STATE
 var ingredients: Array[Node]
@@ -88,8 +92,7 @@ func check_completed():
 	if nutrition_sum < nutrition:
 		return
 	
-	give_rewards()
-	#end encounter
+	complete()
 
 func check_can_drop(data):
 	#check for requirements
@@ -127,19 +130,28 @@ func button_available():
 func give_rewards():
 	inventory.change_money(inventory.money + r_money)
 	inventory.change_morale(inventory.morale + r_morale)
-	for i in r_ingredients:
-		inventory.instantiate_ingredient(i)
+	if r_random_ingredient:
+		var rand = random.randi_range(0,r_ingredients.size()-1)
+		inventory.instantiate_ingredient(r_ingredients[rand])
+	else:
+		for i in r_ingredients:
+			inventory.instantiate_ingredient(i)
 
 func take_cost():
 	inventory.change_money(inventory.money - r_money)
 	inventory.change_morale(inventory.morale - r_morale)
 	for i in randomIngredients:
 		remove_random()
+	if new_encounter != null:
+		map_node.load_encounter(new_encounter)
 
 func on_button_press():
-	take_cost()
+	complete()
+	
+func complete():
 	give_rewards()
-	#end encounter
+	take_cost()
+	end()
 
 func disable_button():
 	pass
@@ -148,3 +160,8 @@ func enable_button():
 
 func start():
 	pass
+	
+func end():
+	if new_encounter == null:
+		map_node.end_encounter()
+	queue_free()
