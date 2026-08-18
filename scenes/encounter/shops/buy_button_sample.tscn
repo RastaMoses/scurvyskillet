@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://u2u1v4rgdntw"]
+
+[ext_resource type="Script" uid="uid://bjtjqm0kcr78n" path="res://scripts/Encounter/buy_button.gd" id="1_vhmq1"]
+
+[node name="buy_button_sample" type="Control" unique_id=1120525194]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_vhmq1")
+
+[node name="Button" type="Button" parent="." unique_id=1909689102]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

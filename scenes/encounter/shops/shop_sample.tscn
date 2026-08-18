@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://dppkgemxlgehl"]
+
+[ext_resource type="Script" uid="uid://js1t03dchpx8" path="res://scripts/Encounter/shop.gd" id="1_lt0pe"]
+[ext_resource type="Script" uid="uid://v63vu2iilw13" path="res://scripts/Inventory/drop_area.gd" id="2_ttta2"]
+[ext_resource type="PackedScene" uid="uid://u2u1v4rgdntw" path="res://scenes/encounter/shops/buy_button_sample.tscn" id="3_ttta2"]
+
+[node name="ShopSample" type="Control" unique_id=1111686658]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lt0pe")
+
+[node name="DropArea" type="Panel" parent="." unique_id=1944757335]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(26.6, 12.4800005)
+script = ExtResource("2_ttta2")
+
+[node name="BuyContainer" type="GridContainer" parent="." unique_id=862985388]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="buy_button_sample" parent="BuyContainer" unique_id=1120525194 instance=ExtResource("3_ttta2")]
+layout_mode = 2
+
+[node name="buy_button_sample2" parent="BuyContainer" unique_id=1007482956 instance=ExtResource("3_ttta2")]
+layout_mode = 2
+
+[node name="buy_button_sample3" parent="BuyContainer" unique_id=1560425864 instance=ExtResource("3_ttta2")]
+layout_mode = 2

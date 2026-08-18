@@ -1,6 +1,7 @@
 extends Node
 #PARAMS
 @export var texture:Texture
+@export var ingredient_name:String
 @export_group("Values")
 @export var nutrition:int
 @export_subgroup("Flavour")
@@ -24,7 +25,6 @@ extends Node
 @export_group("Tags")
 @export var tags: Array[String]
 @export var rarity:int
-@export var ingredient_name:String
 @export var undroppable: bool = false
 #CACHED COMPS
 

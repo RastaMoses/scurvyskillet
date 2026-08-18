@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://hr6aybbol4hn"]
 
-[ext_resource type="Script" uid="uid://bbkxauiekl5ry" path="res://scripts/challenge.gd" id="1_f0fus"]
+[ext_resource type="Script" uid="uid://bbkxauiekl5ry" path="res://scripts/Encounter/challenge.gd" id="1_f0fus"]
 [ext_resource type="PackedScene" uid="uid://83c84n5554td" path="res://scenes/encounter/challenges/dish.tscn" id="2_ei7qy"]
 
 [node name="ChallengeSample" type="Node2D" unique_id=2118414985]

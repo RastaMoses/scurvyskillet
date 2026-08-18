@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://benw6bt2l0ot"]
 
-[ext_resource type="Script" uid="uid://dqcweu5fhwb82" path="res://scripts/decisions.gd" id="1_7rq7k"]
-[ext_resource type="Script" uid="uid://xk6aj68ft76k" path="res://scripts/decision_ui.gd" id="1_no3ar"]
+[ext_resource type="Script" uid="uid://dqcweu5fhwb82" path="res://scripts/Encounter/decisions.gd" id="1_7rq7k"]
+[ext_resource type="Script" uid="uid://xk6aj68ft76k" path="res://scripts/Encounter/decision_ui.gd" id="1_no3ar"]
 [ext_resource type="Script" uid="uid://v63vu2iilw13" path="res://scripts/Inventory/drop_area.gd" id="3_gjf7s"]
 
 [node name="DecisionSample" type="Control" unique_id=856639403]

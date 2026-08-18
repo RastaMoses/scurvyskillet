@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://83c84n5554td"]
 
-[ext_resource type="Script" uid="uid://dj0h4ly2gikk" path="res://scripts/dish.gd" id="1_bm6af"]
+[ext_resource type="Script" uid="uid://dj0h4ly2gikk" path="res://scripts/Encounter/dish.gd" id="1_bm6af"]
 [ext_resource type="Script" uid="uid://v63vu2iilw13" path="res://scripts/Inventory/drop_area.gd" id="2_0lb6f"]
 
 [node name="Dish" type="Control" unique_id=497250350]
@@ -13,7 +13,6 @@ grow_vertical = 2
 script = ExtResource("1_bm6af")
 
 [node name="DropArea" type="Panel" parent="." unique_id=2096391922]
-visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
