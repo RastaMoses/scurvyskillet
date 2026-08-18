@@ -31,18 +31,20 @@ extends Node2D
 @export var failure_ingredients: Array[PackedScene]
 @export var failure_morale: int
 @export var failure_money: int
+@export_group("UI Elements")
+@export var map_icon:Texture
 
 #CACHED COMPS
 var event_manager
 var inventory
 var dish_node
+@onready var map_node = get_parent()
 
 #STATE
 var encounter_type = "challenge"
 
 
 func _ready() -> void:
-	event_manager = get_node("/root/root/EventManager")
 	inventory = get_node("/root/root/Player/Inventory")
 	dish_node = $Dish
 	
@@ -53,6 +55,7 @@ func on_success():
 	for i in success_ingredients:
 		inventory.instantiate_ingredient(i)
 	print("Succeeded the challenge")
+	end()
 
 func on_partial():
 	inventory.current_money += partial_money
@@ -60,6 +63,7 @@ func on_partial():
 	for i in partial_ingredients:
 		inventory.instantiate_ingredient(i)
 	print("Partialed the challenge")
+	end()
 
 func on_failure():
 	inventory.current_money += failure_money
@@ -67,6 +71,7 @@ func on_failure():
 	for i in failure_ingredients:
 		inventory.instantiate_ingredient(i)
 	print("Failed the challenge")
+	end()
 
 func is_restricted_tag(tag):
 	return restricted_tags.has(tag)
@@ -110,8 +115,8 @@ func reset_dish():
 func start():
 	display_dish()
 
-func end_challenge():
-	event_manager.encounter_end()
+func end():
+	map_node.end_encounter()
 	queue_free()
 
 func display_dish():
