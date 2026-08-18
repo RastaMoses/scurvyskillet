@@ -28,7 +28,7 @@ extends Control
 @export var new_encounter:PackedScene
 
 #CACHED COMPS
-@onready var map_node = get_parent()
+@onready var decision_encounter = get_parent()
 @onready var drop_area = $DropArea
 @onready var button = $Button
 
@@ -116,6 +116,7 @@ func check_can_drop(data):
 			return true
 		else:
 			return false
+	return true
 
 func button_available():
 	if inventory.current_money < c_money or inventory.current_morale < c_morale:
@@ -130,8 +131,8 @@ func button_available():
 	enable_button()
 
 func give_rewards():
-	inventory.change_money(inventory.money + r_money)
-	inventory.change_morale(inventory.morale + r_morale)
+	inventory.change_money(inventory.current_money + r_money)
+	inventory.change_morale(inventory.current_morale + r_morale)
 	if r_random_ingredient:
 		var rand = random.randi_range(0,r_ingredients.size()-1)
 		inventory.instantiate_ingredient(r_ingredients[rand])
@@ -140,12 +141,12 @@ func give_rewards():
 			inventory.instantiate_ingredient(i)
 
 func take_cost():
-	inventory.change_money(inventory.money - r_money)
-	inventory.change_morale(inventory.morale - r_morale)
+	inventory.change_money(inventory.current_money - c_money)
+	inventory.change_morale(inventory.current_morale - c_morale)
 	for i in randomIngredients:
 		remove_random()
 	if new_encounter != null:
-		map_node.load_encounter(new_encounter)
+		decision_encounter.load_new_encounter(new_encounter)
 
 func on_button_press():
 	complete()
@@ -157,6 +158,7 @@ func complete():
 
 func disable_button():
 	button.disabled = true
+	button.visible = false
 func enable_button():
 	button.disabled = false
 
@@ -169,5 +171,5 @@ func start():
 	
 func end():
 	if new_encounter == null:
-		map_node.end_encounter()
+		decision_encounter.end()
 	queue_free()

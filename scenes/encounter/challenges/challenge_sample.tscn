@@ -20,6 +20,7 @@ offset_right = 1269.0
 offset_bottom = 246.0
 
 [node name="InventoryLocation" type="Panel" parent="." unique_id=1068085367]
+visible = false
 offset_left = 3.0
 offset_top = 1021.0
 offset_right = 2565.0

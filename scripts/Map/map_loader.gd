@@ -1,23 +1,26 @@
 extends Node
 
 #PARAMS
-#@export_group("Map Layouts")
-@export var maps:Array[PackedScene]
+@export_group("Maps Difficulty")
+@export var maps_0:Array[PackedScene]
+@export var maps_1:Array[PackedScene]
+@export var maps_2:Array[PackedScene]
 #CACHED
 @onready var random = RandomNumberGenerator.new()
 
 #STATE
 var current_map
+var map_array
+
+func _ready() -> void:
+	map_array = [maps_0,maps_1,maps_2]
+	start_game()
 
 func pick_random_map(difficulty):
 	var new_map
-	var temp_array:Array
-	temp_array.clear()
-	for i in maps:
-		if i.difficulty == difficulty:
-			temp_array.append(i)
-	var rand = random.randi_range(0,temp_array.size()-1)
-	new_map = temp_array[rand]
+	var maps = map_array[difficulty]
+	var rand = random.randi_range(0,maps.size()-1)
+	new_map = maps[rand]
 	return new_map
 
 func load_map(map):
@@ -26,7 +29,7 @@ func load_map(map):
 			remove_child(i)
 	current_map = map.instantiate()
 	add_child(current_map)
-	current_map.randomize_encounters()
+	current_map.populate_map()
 	current_map.set_available_encounters()
 
 func start_game():

@@ -21,10 +21,12 @@ var is_open = false
 
 func _ready():
 	close()
-	large_view_button.visible = false
+	update_topbar()
 	large_view_button.pressed.connect(large_view_button_pressed)
 	for i in slots:
 		i.large_view_clicked.connect(large_view_button_pressed)
+	
+	large_view_button.visible = false
 
 func add_slot():
 	var temp = inventory_slot_scene.instantiate()
@@ -86,8 +88,8 @@ func close():
 	is_open = false
 
 func update_topbar():
-	money_text.text = inventory.current_money
-	morale_text.text = inventory.current_morale
+	money_text.text = str(inventory.current_money)
+	morale_text.text = str(inventory.current_morale)
 	
 func toggle_large_view(ingredient):
 	if large_view_button.visible:
@@ -102,10 +104,10 @@ func toggle_large_view(ingredient):
 		for i in slots:
 			i.large_view_clicked.disconnect(large_view_button_pressed)
 			i.large_view_clicked.connect(set_new_large_view)
-		
 
-func large_view_button_pressed(ingredients):
-	toggle_large_view(ingredients)
+
+func large_view_button_pressed(ingredient = null):
+	toggle_large_view(ingredient)
 
 func set_new_large_view(ingredient):
 	large_view_button.get_child(0).update(ingredient)

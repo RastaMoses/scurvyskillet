@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b75jl0uammin5"]
 
-[ext_resource type="Script" uid="uid://dqcweu5fhwb82" path="res://scripts/Encounter/decisions.gd" id="1_61j3v"]
+[ext_resource type="Script" uid="uid://dqcweu5fhwb82" path="res://scripts/Encounter/choices.gd" id="1_61j3v"]
 [ext_resource type="Script" uid="uid://v63vu2iilw13" path="res://scripts/Inventory/drop_area.gd" id="2_xd3pp"]
 
 [node name="choice" type="Control" unique_id=704699521]

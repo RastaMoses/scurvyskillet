@@ -9,13 +9,15 @@
 
 [node name="Overworld" type="Node" parent="." unique_id=1021026839]
 script = ExtResource("4_0wbp6")
-maps = Array[PackedScene]([ExtResource("5_dhsp4")])
+maps_0 = Array[PackedScene]([ExtResource("5_dhsp4")])
 
 [node name="Player" type="Node" parent="." unique_id=1818132485]
 
 [node name="Abilities" type="Node" parent="Player" unique_id=121107139]
 
 [node name="Inventory" parent="Player" unique_id=421132193 instance=ExtResource("2_662u0")]
+current_money = 10
+current_morale = 10
 
 [node name="EventManager" type="Node" parent="." unique_id=761654411]
 script = ExtResource("2_n3lcv")
