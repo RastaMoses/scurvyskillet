@@ -20,6 +20,7 @@ offset_bottom = 40.0
 script = ExtResource("1_7rq7k")
 
 [node name="DropArea" type="Panel" parent="Control" unique_id=2059867842]
+visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -33,6 +34,7 @@ offset_bottom = 40.0
 script = ExtResource("1_7rq7k")
 
 [node name="DropArea" type="Panel" parent="Control2" unique_id=1025502105]
+visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -46,6 +48,7 @@ offset_bottom = 40.0
 script = ExtResource("1_7rq7k")
 
 [node name="DropArea" type="Panel" parent="Control3" unique_id=1512970891]
+visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0

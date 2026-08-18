@@ -118,6 +118,9 @@ func button_available():
 	if inventory.current_ingredients.size()<randomIngredients:
 		disable_button()
 		return
+	if drop_ingredients:
+		disable_button()
+		return
 	enable_button()
 
 func give_rewards():
