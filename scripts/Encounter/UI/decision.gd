@@ -4,6 +4,7 @@ extends Control
 @onready var description_title = $description/title
 
 @export var choices: Array[Node]
+var encounter_type = "decision"
 
 func start():
 	for i in choices:
