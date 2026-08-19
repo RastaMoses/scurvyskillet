@@ -1,0 +1,242 @@
+[gd_scene format=3 uid="uid://c4hu25tvp3kkd"]
+
+[ext_resource type="Script" uid="uid://dweskuuxdr5ot" path="res://scripts/Inventory/inventory_slot.gd" id="1_fine5"]
+[ext_resource type="Texture2D" uid="uid://wf1aj4g31of2" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_frame.png" id="2_1my0r"]
+[ext_resource type="Texture2D" uid="uid://bahwac4sb3m0x" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_rarity_1.png" id="3_6f0o8"]
+[ext_resource type="Texture2D" uid="uid://dlajjx3yjgrhr" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_use_1.png" id="3_8r253"]
+[ext_resource type="Texture2D" uid="uid://b5uofqwrp4kst" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_use_2.png" id="4_crwb1"]
+[ext_resource type="Texture2D" uid="uid://cscya508gf0jl" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_rarity_2.png" id="4_gisxy"]
+[ext_resource type="Texture2D" uid="uid://0dehp3itjule" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_use_3.png" id="5_klu36"]
+[ext_resource type="Texture2D" uid="uid://df1rnkyxfllky" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_rarity_3.png" id="5_mckxv"]
+[ext_resource type="Texture2D" uid="uid://cl52w2y0cryx5" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_use_4.png" id="6_twtq6"]
+[ext_resource type="Texture2D" uid="uid://fy7hp0t3msda" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_flavor_hearty.png" id="7_6f0o8"]
+[ext_resource type="Texture2D" uid="uid://b1iapuuqo6wb3" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_flavor_sour.png" id="8_gisxy"]
+[ext_resource type="Theme" uid="uid://dfu5pdupo2wqr" path="res://ui/cards/small/flavour_text.tres" id="9_crwb1"]
+[ext_resource type="Texture2D" uid="uid://dd0nfvp3a70up" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_flavor_fresh.png" id="9_mckxv"]
+[ext_resource type="Texture2D" uid="uid://w450hvq004re" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_flavor_spicy.png" id="10_uxkn8"]
+[ext_resource type="Texture2D" uid="uid://cp51kteu70408" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_flavor_sweet.png" id="11_o7f7k"]
+[ext_resource type="Texture2D" uid="uid://ddcdxtkgp0om3" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_nutrition.png" id="12_3aaao"]
+[ext_resource type="Theme" uid="uid://djqywg2hbepia" path="res://ui/cards/small/nutrition_text.tres" id="13_8r253"]
+
+[sub_resource type="Gradient" id="Gradient_6f0o8"]
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mckxv"]
+gradient = SubResource("Gradient_6f0o8")
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.16, -0.02)
+
+[node name="InventoryUISlot" type="Panel" unique_id=442831638]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(256, 304)
+offset_right = 256.0
+offset_bottom = 304.0
+script = ExtResource("1_fine5")
+
+[node name="EmptySlot" type="TextureRect" parent="." unique_id=961373681]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 304.0
+texture = SubResource("GradientTexture2D_mckxv")
+
+[node name="ItemDisplay" type="TextureRect" parent="." unique_id=1942941591]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 304.0
+
+[node name="bg_icon" type="TextureRect" parent="ItemDisplay" unique_id=1200108444]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 304.0
+texture = ExtResource("2_1my0r")
+
+[node name="item_icon" type="TextureRect" parent="ItemDisplay" unique_id=1095232349]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 304.0
+
+[node name="Rarity" type="Control" parent="ItemDisplay" unique_id=80472254]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="0" type="TextureRect" parent="ItemDisplay/Rarity" unique_id=2084014227]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 304.0
+texture = ExtResource("3_6f0o8")
+
+[node name="1" type="TextureRect" parent="ItemDisplay/Rarity" unique_id=316271123]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 304.0
+texture = ExtResource("4_gisxy")
+
+[node name="2" type="TextureRect" parent="ItemDisplay/Rarity" unique_id=452645600]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 304.0
+texture = ExtResource("5_mckxv")
+
+[node name="Uses" type="Control" parent="ItemDisplay" unique_id=1569271460]
+anchors_preset = 0
+
+[node name="TextureRect" type="TextureRect" parent="ItemDisplay/Uses" unique_id=1139734123]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 304.0
+texture = ExtResource("3_8r253")
+
+[node name="TextureRect2" type="TextureRect" parent="ItemDisplay/Uses" unique_id=1518918530]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 304.0
+texture = ExtResource("4_crwb1")
+
+[node name="TextureRect3" type="TextureRect" parent="ItemDisplay/Uses" unique_id=2045796380]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 304.0
+texture = ExtResource("5_klu36")
+
+[node name="TextureRect4" type="TextureRect" parent="ItemDisplay/Uses" unique_id=367642041]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 304.0
+texture = ExtResource("6_twtq6")
+
+[node name="Flavours" type="Control" parent="ItemDisplay" unique_id=2132717140]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Hearty" type="TextureRect" parent="ItemDisplay/Flavours" unique_id=669791705]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 304.0
+texture = ExtResource("7_6f0o8")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ItemDisplay/Flavours/Hearty" unique_id=1557675878]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 16.0
+offset_right = 96.0
+offset_bottom = 56.0
+theme = ExtResource("9_crwb1")
+theme_override_font_sizes/normal_font_size = 22
+text = "1"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sour" type="TextureRect" parent="ItemDisplay/Flavours" unique_id=2092495922]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 304.0
+texture = ExtResource("8_gisxy")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ItemDisplay/Flavours/Sour" unique_id=1966960468]
+layout_mode = 0
+offset_left = 176.0
+offset_top = 16.0
+offset_right = 216.0
+offset_bottom = 56.0
+theme = ExtResource("9_crwb1")
+bbcode_enabled = true
+text = "[center]1"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Fresh" type="TextureRect" parent="ItemDisplay/Flavours" unique_id=1739747005]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 304.0
+texture = ExtResource("9_mckxv")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ItemDisplay/Flavours/Fresh" unique_id=1723724823]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 56.0
+offset_bottom = 56.0
+theme = ExtResource("9_crwb1")
+theme_override_font_sizes/normal_font_size = 22
+text = "1"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spicy" type="TextureRect" parent="ItemDisplay/Flavours" unique_id=55184171]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 304.0
+texture = ExtResource("10_uxkn8")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ItemDisplay/Flavours/Spicy" unique_id=117018499]
+layout_mode = 0
+offset_left = 96.125
+offset_top = 15.875
+offset_right = 136.125
+offset_bottom = 55.875
+theme = ExtResource("9_crwb1")
+theme_override_font_sizes/normal_font_size = 22
+text = "1"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sweet" type="TextureRect" parent="ItemDisplay/Flavours" unique_id=1468737299]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 304.0
+texture = ExtResource("11_o7f7k")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ItemDisplay/Flavours/Sweet" unique_id=982386927]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 15.875
+offset_right = 176.0
+offset_bottom = 55.875
+theme = ExtResource("9_crwb1")
+theme_override_font_sizes/normal_font_size = 22
+text = "1"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Nutrition" type="TextureRect" parent="ItemDisplay" unique_id=781366672]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 304.0
+texture = ExtResource("12_3aaao")
+
+[node name="NutritionText" type="RichTextLabel" parent="ItemDisplay/Nutrition" unique_id=367587180]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -80.25
+offset_top = 47.75
+offset_right = -16.25
+offset_bottom = 111.75
+grow_horizontal = 0
+theme = ExtResource("13_8r253")
+text = "4"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="large_view_button" type="Button" parent="." unique_id=1319644790]
+z_index = 100
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+button_mask = 2
+flat = true

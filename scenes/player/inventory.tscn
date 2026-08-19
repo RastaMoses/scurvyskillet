@@ -4,8 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://oppt25wlgonj" path="res://scenes/player/inventory_ui.tscn" id="2_acsmj"]
 [ext_resource type="PackedScene" uid="uid://p1ug5ylfd5re" path="res://scenes/ingredients/card_sample.tscn" id="2_inxy6"]
 
-[node name="Inventory" type="Node" unique_id=421132193]
+[node name="Inventory" type="Control" unique_id=2008002230]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_i5bfg")
 starting_ingredients = Array[PackedScene]([ExtResource("2_inxy6")])
 
 [node name="InventoryUI" parent="." unique_id=190865318 instance=ExtResource("2_acsmj")]
+layout_mode = 1

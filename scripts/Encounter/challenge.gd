@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 #PARAMS
 @export_group("Requirements")

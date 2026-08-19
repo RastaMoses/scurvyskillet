@@ -31,17 +31,20 @@ func check_can_drop(data):
 	return can_drop
 
 func add_ingredient(ingredient):
+	
 	current_ingredients.append(ingredient)
 	ingredient.reparent(self)
 	inventory.remove_ingredient(ingredient)
+
 	#add tags to the dish
 	for new_tag in ingredient.tags:
 		if !tags.has(new_tag):
 			tags.append(new_tag)
 	nutrition += ingredient.nutrition
-	nutrition_change.emit(nutrition)
 	event_manager.add_to_dish(ingredient)
 	roll_ingredient(ingredient)
+	ui.update_flavours()
+	ui.update_nutrition(nutrition)
 
 func remove_ingredient(ingredient):
 	nutrition -= ingredient.nutrition
