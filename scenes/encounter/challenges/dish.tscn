@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dj0h4ly2gikk" path="res://scripts/Encounter/dish.gd" id="1_bm6af"]
 [ext_resource type="Script" uid="uid://v63vu2iilw13" path="res://scripts/Inventory/drop_area.gd" id="2_0lb6f"]
+[ext_resource type="Script" uid="uid://b2ck5f4nie52i" path="res://scripts/Encounter/UI/dish_ui.gd" id="2_kkx33"]
 [ext_resource type="Texture2D" uid="uid://d04a0epwuvrll" path="res://sprites/interface/scenes/cooking scene/scene_cooking_pan_fire.png" id="3_k1awt"]
 [ext_resource type="Texture2D" uid="uid://dlg0ek6fn3b75" path="res://sprites/interface/scenes/cooking scene/scene_cooking_pan.png" id="4_ed1d2"]
 [ext_resource type="Texture2D" uid="uid://bbswptox1co8u" path="res://sprites/interface/scenes/cooking scene/scene_cooking_flavor_sweet.png" id="5_ed1d2"]
@@ -41,20 +42,12 @@ offset_bottom = 1080.0
 mouse_filter = 2
 script = ExtResource("1_bm6af")
 
-[node name="DropArea" type="Panel" parent="." unique_id=2096391922]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 0
-offset_left = 926.0
-offset_top = 117.0
-offset_right = 1697.0
-offset_bottom = 613.0
-script = ExtResource("2_0lb6f")
-
 [node name="UI" type="Control" parent="." unique_id=817898650]
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 2
+script = ExtResource("2_kkx33")
 
 [node name="Pan" type="Control" parent="UI" unique_id=1516231476]
 anchors_preset = 0
@@ -370,3 +363,13 @@ offset_bottom = 1080.0
 texture = ExtResource("32_0secw")
 
 [node name="Dice" type="Node2D" parent="." unique_id=1758264431]
+
+[node name="DropArea" type="Panel" parent="." unique_id=2096391922]
+self_modulate = Color(1, 1, 1, 0)
+z_index = 100
+layout_mode = 0
+offset_left = 944.0
+offset_top = 152.0
+offset_right = 1715.0
+offset_bottom = 648.0
+script = ExtResource("2_0lb6f")

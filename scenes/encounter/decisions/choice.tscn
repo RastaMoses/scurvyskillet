@@ -36,7 +36,7 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="DropArea" type="Panel" parent="UI/IngredientDrop" unique_id=242936625]
+[node name="DropArea" type="Panel" parent="." unique_id=242936625]
 layout_mode = 1
 offset_top = -259.0
 offset_right = 397.0

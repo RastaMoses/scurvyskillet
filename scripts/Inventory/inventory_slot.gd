@@ -60,7 +60,7 @@ func update(item):
 		large_view_button.visible = true
 		empty_slot.visible = false
 		item_visual.visible = true
-		icon.texture = item.get_child(0).texture
+		icon.texture = item.get_icon_texture()
 		ingredient = item
 		update_flavours()
 
@@ -97,7 +97,8 @@ func update_flavours():
 		sweet.visible = false
 	
 	#nutrition
-	nutrition_text = str(ingredient.nutrition)
+	nutrition_text.text = str(ingredient.nutrition)
+	print(nutrition_text)
 	
 	#uses
 	for i in uses_textures:
@@ -123,11 +124,10 @@ func _get_drag_data(_at_position: Vector2) -> Variant:
 	if showcase:
 		return
 	var preview = duplicate()
-	print(preview)
 	preview.toggle_only_icon(true)
 	var c = Control.new()
 	c.add_child(preview)
-	preview.position -= Vector2(25,25)
+	preview.position -= Vector2(96,96)
 	preview.z_index = 100
 	preview.self_modulate = Color.TRANSPARENT
 	c.modulate = Color(c.modulate, 0.7)

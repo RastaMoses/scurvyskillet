@@ -36,16 +36,16 @@ func add_ingredient(ingredient_instance):
 	var duplicates:Array[Node]
 	for i in current_ingredients:
 		if i.get_ingredient_name() == ingredient_instance.get_ingredient_name():
-			duplicates.append(ingredient_instance)
+			duplicates.append(i)
 	#find duplicate with less than 4 uses and assign more uses until the added card has no more
 	if duplicates.size() > 0:
 		for i in duplicates:
-			while i.uses < 4 and ingredient_instance.uses > 0:
+			while i.uses < 4 and ingredient_instance.uses != 0:
 				change_ingredient_uses(i, 1)
 				change_ingredient_uses(ingredient_instance, -1)
-		if ingredient_instance.uses == 0 or ingredient_instance == null:
-			ui.update_slots()
-			return
+			if ingredient_instance.uses == 0 or ingredient_instance == null:
+					ui.update_slots()
+					return
 	ingredient_instance.reparent(self)
 	current_ingredients.push_front(ingredient_instance)
 	ui.update_slots()

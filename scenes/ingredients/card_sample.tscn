@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/ingredient_stats.gd" id="1_hai3h"]
 [ext_resource type="PackedScene" uid="uid://7lxu211xbf4i" path="res://scenes/player/inventory_ui_large_view.tscn" id="2_8h71a"]
-[ext_resource type="Texture2D" uid="uid://dndpt4u0pabdo" path="res://sprites/interface/scenes/cooking scene/scene_cooking_dice_sweet.png" id="3_2walx"]
+[ext_resource type="Texture2D" uid="uid://ds0jswtp7xx1r" path="res://sprites/placeholder/kleinb.PNG" id="3_2walx"]
 
 [node name="CardSample" type="Control" unique_id=824626168]
 layout_mode = 3
@@ -14,7 +14,7 @@ sour = 1
 spicy = 2
 hearty = 1
 fresh = 1
-uses = 2
+uses = 1
 
 [node name="Preview" parent="." unique_id=442831638 instance=ExtResource("2_8h71a")]
 layout_mode = 0
@@ -25,5 +25,6 @@ self_modulate = Color(1, 1, 1, 1)
 
 [node name="item_icon" parent="Preview/ItemDisplay" parent_id_path=PackedInt32Array(442831638, 1942941591) index="2" unique_id=1095232349]
 texture = ExtResource("3_2walx")
+expand_mode = 1
 
 [editable path="Preview"]

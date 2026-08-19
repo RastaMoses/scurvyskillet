@@ -14,7 +14,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func on_dice_roll(amount,ingredient):
+func on_dice_roll(ingredient):
 	pass
 
 func on_die_roll(ingredient):

@@ -29,7 +29,7 @@ extends Control
 
 #CACHED COMPS
 @onready var decision_encounter = get_parent()
-@onready var drop_area = $UI/IngredientDrop/DropArea
+@onready var drop_area = $DropArea
 @onready var ingredient_icon = $UI/IngredientDrop/IngredientIcon
 @onready var button = $Button
 

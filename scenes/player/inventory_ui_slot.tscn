@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://wf1aj4g31of2" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_frame.png" id="2_1my0r"]
 [ext_resource type="Texture2D" uid="uid://bahwac4sb3m0x" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_rarity_1.png" id="3_6f0o8"]
 [ext_resource type="Texture2D" uid="uid://dlajjx3yjgrhr" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_use_1.png" id="3_8r253"]
+[ext_resource type="Texture2D" uid="uid://ds0jswtp7xx1r" path="res://sprites/placeholder/kleinb.PNG" id="3_gisxy"]
 [ext_resource type="Texture2D" uid="uid://b5uofqwrp4kst" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_use_2.png" id="4_crwb1"]
 [ext_resource type="Texture2D" uid="uid://cscya508gf0jl" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_rarity_2.png" id="4_gisxy"]
 [ext_resource type="Texture2D" uid="uid://0dehp3itjule" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_use_3.png" id="5_klu36"]
@@ -47,15 +48,21 @@ offset_right = 256.0
 offset_bottom = 304.0
 
 [node name="bg_icon" type="TextureRect" parent="ItemDisplay" unique_id=1200108444]
+z_index = -1
 layout_mode = 0
 offset_right = 256.0
 offset_bottom = 304.0
 texture = ExtResource("2_1my0r")
 
 [node name="item_icon" type="TextureRect" parent="ItemDisplay" unique_id=1095232349]
+z_index = -1
 layout_mode = 0
-offset_right = 256.0
-offset_bottom = 304.0
+offset_left = 16.0
+offset_top = 64.0
+offset_right = 208.0
+offset_bottom = 256.0
+texture = ExtResource("3_gisxy")
+expand_mode = 1
 
 [node name="Rarity" type="Control" parent="ItemDisplay" unique_id=80472254]
 anchors_preset = 0
