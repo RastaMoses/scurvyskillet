@@ -1,7 +1,6 @@
 extends Node
 #PARAMS
 
-@export var ingredient_name:String
 @export_group("Values")
 @export var nutrition:int
 @export_subgroup("Flavour")
@@ -31,6 +30,9 @@ extends Node
 #STATE
 var inv_index:int
 var texture:Texture
+
+func get_ingredient_name():
+	return $Preview/ItemDisplay/Name/RichTextLabel.text
 
 func get_preview():
 	return $Preview

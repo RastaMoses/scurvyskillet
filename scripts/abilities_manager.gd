@@ -13,3 +13,9 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+func on_dice_roll(amount,ingredient):
+	pass
+
+func on_die_roll(ingredient):
+	pass

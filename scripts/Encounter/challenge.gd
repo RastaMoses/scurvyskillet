@@ -111,7 +111,11 @@ func reset_dish():
 func save_inventory():
 	for i in inventory.current_ingredients:
 		inv_save.push_front(i)
-	
+
+func finish_dish():
+	compare_dish(dish_node)
+	pass
+
 #UI Elements
 func start():
 	save_inventory()
@@ -130,10 +134,8 @@ func display_dish():
 func hide_dish():
 	dish_node.hide()
 
-
 func on_reset_button_pressed() -> void:
 	reset_dish()
 
-
 func _on_roll_dish_pressed() -> void:
-	dish_node.roll_dish()
+	finish_dish()
