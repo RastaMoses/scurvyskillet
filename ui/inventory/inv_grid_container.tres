@@ -1,0 +1,4 @@
+[gd_resource type="Theme" format=3 uid="uid://fa4mmtcwb3a5"]
+
+[resource]
+GridContainer/constants/h_separation = -17

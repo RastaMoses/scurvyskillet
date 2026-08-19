@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://fy7hp0t3msda"
-path="res://.godot/imported/ingredient_card_small_flavor_meaty.png-1b2036368084fce7094329b466b0fc6a.ctex"
+path="res://.godot/imported/ingredient_card_small_flavor_hearty.png-008ace42c923c042b82bdb7137fd0fef.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/interface/ingredient cards/small view/ingredient_card_small_flavor_meaty.png"
-dest_files=["res://.godot/imported/ingredient_card_small_flavor_meaty.png-1b2036368084fce7094329b466b0fc6a.ctex"]
+source_file="res://sprites/interface/ingredient cards/small view/ingredient_card_small_flavor_hearty.png"
+dest_files=["res://.godot/imported/ingredient_card_small_flavor_hearty.png-008ace42c923c042b82bdb7137fd0fef.ctex"]
 
 [params]
 

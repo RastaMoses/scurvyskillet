@@ -38,6 +38,7 @@ extends Node2D
 @onready var inventory = get_node("/root/root/Player/Inventory")
 @onready var dish_node = $Dish
 @onready var map_node = get_parent()
+@onready var ui = $UI
 
 #STATE
 var encounter_type = "challenge"
