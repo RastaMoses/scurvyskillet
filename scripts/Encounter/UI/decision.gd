@@ -11,6 +11,7 @@ func start():
 
 func end():
 	get_parent().end_encounter()
+	queue_free()
 
 func load_new_encounter(encounter):
 	get_parent().load_encounter(encounter)

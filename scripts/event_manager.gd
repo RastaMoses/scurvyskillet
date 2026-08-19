@@ -2,6 +2,10 @@ extends Node
 
 #PARAMS
 #CACHED COMPS
+#SIGNALS
+signal on_encounter_end
+signal on_encounter_start
+signal on_inventory_update
 #STATE
 
 # Called when the node enters the scene tree for the first time.
@@ -12,11 +16,11 @@ func _ready() -> void:
 func encounter_start():
 	#disable map interface
 	#set bg
-	pass
+	on_encounter_start.emit()
 	
 func encounter_end():
 	#perishables ability
-	pass
+	on_encounter_end.emit()
 
 func dish_complete(dish):
 	pass
@@ -26,3 +30,6 @@ func add_to_dish(ingredient):
 
 func add_to_ghoulash():
 	pass
+	
+func update_inventory_position():
+	on_inventory_update.emit()

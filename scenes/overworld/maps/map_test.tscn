@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b38kn4cla84ww" path="res://sprites/placeholder/Screenshot 2026-08-18 165601.png" id="2_25v0t"]
 [ext_resource type="Script" uid="uid://ofgnbg5roiqb" path="res://scripts/Map/map_encounter.gd" id="2_55h7r"]
 [ext_resource type="PackedScene" uid="uid://benw6bt2l0ot" path="res://scenes/encounter/decisions/decision_sample.tscn" id="4_25v0t"]
+[ext_resource type="PackedScene" uid="uid://dppkgemxlgehl" path="res://scenes/encounter/shops/shop_sample.tscn" id="5_y74yb"]
 
 [node name="Map" type="Node2D" unique_id=1839841650 node_paths=PackedStringArray("encounter_nodes")]
 script = ExtResource("1_6nm46")
@@ -59,7 +60,7 @@ text = "CHALLENGE"
 [node name="2" type="Node2D" parent="." unique_id=963606167]
 position = Vector2(696, 1096)
 script = ExtResource("2_55h7r")
-possible_encounters = Array[PackedScene]([ExtResource("4_25v0t")])
+possible_encounters = Array[PackedScene]([ExtResource("5_y74yb")])
 destinations = Array[int]([5])
 
 [node name="Button" type="Button" parent="2" unique_id=2089683392]

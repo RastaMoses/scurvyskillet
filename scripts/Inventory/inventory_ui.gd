@@ -4,10 +4,22 @@ extends Control
 @export var inventory_slot_scene:PackedScene
 @export var min_slots: int = 10
 
+@export_group("Bottom Position")
+@export var container_size_bottom:Vector2
+@export var container_pos_bottom:Vector2
+
+@export_group("Side Position")
+@export var container_size_side:Vector2
+@export var container_pos_side:Vector2
+@export var max_rows:int = 3
+
+
 #CACHED COMPS
 @onready var inventory = get_parent()
+@onready var event_manager = get_node("/root/root/EventManager")
 @onready var slots: Array = $ScrollContainer/GridContainer.get_children()
-@onready var bg = $bg
+@onready var bg_bottom = $bg_bottom
+@onready var bg_side = $bg_side
 @onready var inventory_container = $ScrollContainer
 @onready var grid_container = $ScrollContainer/GridContainer
 @onready var morale_text = $topbar/morale_text
@@ -16,17 +28,28 @@ extends Control
 
 #STATE
 var data_bk
+var bottom_position = true
+var current_bg
 
 var is_open = false
 
 func _ready():
+	update_position(bottom_position)
 	close()
 	update_topbar()
 	large_view_button.pressed.connect(large_view_button_pressed)
 	for i in slots:
 		i.large_view_clicked.connect(large_view_button_pressed)
-	
 	large_view_button.visible = false
+	
+	event_manager.on_encounter_end.connect(encounter_end)
+	event_manager.on_encounter_start.connect(encounter_start)
+
+func encounter_end():
+	close()
+
+func encounter_start():
+	open()
 
 func add_slot():
 	var temp = inventory_slot_scene.instantiate()
@@ -54,6 +77,11 @@ func update_slots():
 			else:
 				slots[i].update(null)
 	remove_slots(slots_to_remove)
+	if (bottom_position):
+		grid_container.columns = slots.size()
+	else:
+		var new_columns = ceili(float(slots.size())/float(max_rows))
+		grid_container.columns = new_columns
 
 func _process(delta: float) -> void:
 	if (Input.is_action_just_pressed("Inventory")):
@@ -76,14 +104,28 @@ func _notification(what: int) -> void:
 				data_bk.item_visual.show()
 				data_bk = null
 
+func update_position(bottom):
+	bottom_position = bottom
+	if bottom_position:
+		inventory_container.size = container_size_bottom
+		inventory_container.position = container_pos_bottom
+		current_bg = bg_bottom
+		bg_side.visible = false
+	else:
+		inventory_container.size = container_size_side
+		inventory_container.position = container_pos_side
+		current_bg = bg_side
+		bg_bottom.visible = false
+	open()
+	
 func open():
-	bg.visible = true
+	current_bg.visible = true
 	inventory_container.visible = true
 	is_open = true
 	update_slots()
 	
 func close():
-	bg.visible = false
+	current_bg.visible = false
 	inventory_container.visible = false
 	is_open = false
 
@@ -104,7 +146,6 @@ func toggle_large_view(ingredient):
 		for i in slots:
 			i.large_view_clicked.disconnect(large_view_button_pressed)
 			i.large_view_clicked.connect(set_new_large_view)
-
 
 func large_view_button_pressed(ingredient = null):
 	toggle_large_view(ingredient)

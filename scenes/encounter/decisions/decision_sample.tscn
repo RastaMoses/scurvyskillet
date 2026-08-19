@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://d03pcmk05xsne" path="res://sprites/placeholder/baldursgate3_screenshot_600x338_salami.jpg" id="2_gjf7s"]
 [ext_resource type="PackedScene" uid="uid://b75jl0uammin5" path="res://scenes/encounter/decisions/choice.tscn" id="2_no3ar"]
 [ext_resource type="PackedScene" uid="uid://p1ug5ylfd5re" path="res://scenes/ingredients/card_sample.tscn" id="4_8iabq"]
+[ext_resource type="PackedScene" uid="uid://hr6aybbol4hn" path="res://scenes/encounter/challenges/challenge_sample.tscn" id="5_aqnmp"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_omhyo"]
 
@@ -64,6 +65,7 @@ offset_top = 325.0
 offset_right = 2027.0
 offset_bottom = 325.0
 grow_vertical = 1
+new_encounter = ExtResource("5_aqnmp")
 
 [node name="inventory_position" type="Panel" parent="." unique_id=1245198712]
 layout_mode = 0

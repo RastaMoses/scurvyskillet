@@ -64,7 +64,12 @@ func populate_shop():
 func start():
 	#display visuals
 	populate_shop()
+	player_inventory.ui.update_position(false)
 
 func end():
 	map_node.end_encounter()
 	queue_free()
+
+
+func _on_leave_button_pressed() -> void:
+	end()

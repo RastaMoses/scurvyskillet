@@ -7,12 +7,14 @@ extends Node
 #CACHED COMPS
 @onready var button = $Button
 @onready var event_manager = get_node("/root/root/EventManager")
+@onready var inventory = get_node("/root/root/Player/Inventory")
 @onready var random = RandomNumberGenerator.new()
 @onready var map = get_parent()
 #STATE
 var encounter_index:int
 var encounter
 var encounter_obj
+var encounter_type
 
 func randomize_encounter():
 	var rand = random.randi_range(0,possible_encounters.size()-1)
@@ -20,7 +22,6 @@ func randomize_encounter():
 
 func set_encounter(encounter_scene):
 	encounter = encounter_scene
-	update_ui()
 
 func end_encounter():
 	event_manager.encounter_end()
@@ -39,21 +40,21 @@ func activate_encounter():
 	
 func load_encounter(data):
 	encounter = data
+	if encounter_obj != null:
+		encounter_obj.queue_free()
 	encounter_obj = encounter.instantiate()
 	add_child(encounter_obj)
+	encounter_type = encounter_obj.encounter_type
 	encounter_obj.global_position = Vector2.ZERO
 	encounter_obj.start()
 	show_button(false)
 
 func toggle_button(value):
 	button.disabled = !value
-	update_ui()
 
 func show_button(value):
 	button.visible = value
 
-func update_ui():
-	pass
 
 func _on_button_pressed() -> void:
 	activate_encounter()

@@ -7,6 +7,8 @@
 
 [node name="ChallengeSample" type="Node2D" unique_id=2118414985]
 script = ExtResource("1_f0fus")
+req_nutrition = 4
+par_nutrition = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=876383970]
 position = Vector2(1281.3206, 717.50006)

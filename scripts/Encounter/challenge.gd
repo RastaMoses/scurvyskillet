@@ -75,20 +75,20 @@ func use_ghoulash():
 	pass
 
 func compare_dish(completed_dish):
-	if (completed_dish.dish.nutrition < req_nutrition
-	or completed_dish.dish.sweet < req_sweet
-	or completed_dish.dish.sour < req_sour
-	or completed_dish.dish.spicy < req_spicy
-	or completed_dish.dish.hearty < req_hearty
-	or completed_dish.dish.fresh < req_fresh
-	or completed_dish.dish.tags.any(is_restricted_tag)): #check if restricted tag is used
-		if (completed_dish.dish.nutrition < par_nutrition
-		or completed_dish.dish.sweet < par_sweet
-		or completed_dish.dish.sour < par_sour
-		or completed_dish.dish.spicy < par_spicy
-		or completed_dish.dish.hearty < par_hearty
-		or completed_dish.dish.fresh < par_fresh
-		or completed_dish.dish.tags.any(is_restricted_tag)): #check if restricted tag is used
+	if (completed_dish.nutrition < req_nutrition
+	or completed_dish.sweet < req_sweet
+	or completed_dish.sour < req_sour
+	or completed_dish.spicy < req_spicy
+	or completed_dish.hearty < req_hearty
+	or completed_dish.fresh < req_fresh
+	or completed_dish.tags.any(is_restricted_tag)): #check if restricted tag is used
+		if (completed_dish.nutrition < par_nutrition
+		or completed_dish.sweet < par_sweet
+		or completed_dish.sour < par_sour
+		or completed_dish.spicy < par_spicy
+		or completed_dish.hearty < par_hearty
+		or completed_dish.fresh < par_fresh
+		or completed_dish.tags.any(is_restricted_tag)): #check if restricted tag is used
 			#fail
 			on_failure()
 		else:
@@ -107,6 +107,7 @@ func reset_dish():
 #UI Elements
 func start():
 	display_dish()
+	dish_node.start()
 
 func end():
 	map_node.end_encounter()

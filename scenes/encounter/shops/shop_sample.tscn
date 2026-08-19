@@ -1,8 +1,12 @@
 [gd_scene format=3 uid="uid://dppkgemxlgehl"]
 
 [ext_resource type="Script" uid="uid://js1t03dchpx8" path="res://scripts/Encounter/shop.gd" id="1_lt0pe"]
+[ext_resource type="Resource" uid="uid://c46bhph0d0ckj" path="res://scenes/encounter/shops/sell_items/sell_item.tres" id="2_6sqfp"]
 [ext_resource type="Script" uid="uid://v63vu2iilw13" path="res://scripts/Inventory/drop_area.gd" id="2_ttta2"]
+[ext_resource type="Texture2D" uid="uid://d03pcmk05xsne" path="res://sprites/placeholder/baldursgate3_screenshot_600x338_salami.jpg" id="3_mbvut"]
 [ext_resource type="PackedScene" uid="uid://u2u1v4rgdntw" path="res://scenes/encounter/shops/buy_button_sample.tscn" id="3_ttta2"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_7b41e"]
 
 [node name="ShopSample" type="Control" unique_id=1111686658]
 layout_mode = 3
@@ -12,25 +16,39 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_lt0pe")
+sell_items = Array[Resource]([ExtResource("2_6sqfp"), ExtResource("2_6sqfp"), ExtResource("2_6sqfp")])
+buy_button_sample = ExtResource("3_ttta2")
+rarity_prices = Array[int]([1, 5, 10])
+
+[node name="bg" type="Sprite2D" parent="." unique_id=474275745]
+position = Vector2(1285.75, 705.75)
+scale = Vector2(2572.5, 1412.5)
+texture = SubResource("PlaceholderTexture2D_7b41e")
+
+[node name="art" type="Sprite2D" parent="." unique_id=989523534]
+position = Vector2(1495.9999, 735)
+scale = Vector2(2.9018543, 3.2470417)
+texture = ExtResource("3_mbvut")
 
 [node name="DropArea" type="Panel" parent="." unique_id=1944757335]
-visible = false
 layout_mode = 0
+offset_top = 912.0
 offset_right = 40.0
-offset_bottom = 40.0
+offset_bottom = 952.0
 scale = Vector2(26.6, 12.4800005)
 script = ExtResource("2_ttta2")
 
 [node name="BuyContainer" type="GridContainer" parent="." unique_id=862985388]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 803.0
+offset_bottom = 927.0
 
-[node name="buy_button_sample" parent="BuyContainer" unique_id=1120525194 instance=ExtResource("3_ttta2")]
-layout_mode = 2
+[node name="LeaveButton" type="Button" parent="." unique_id=393052589]
+layout_mode = 0
+offset_left = 1864.0
+offset_top = 1081.0
+offset_right = 2497.0
+offset_bottom = 1358.0
+text = "LEAVE"
 
-[node name="buy_button_sample2" parent="BuyContainer" unique_id=1007482956 instance=ExtResource("3_ttta2")]
-layout_mode = 2
-
-[node name="buy_button_sample3" parent="BuyContainer" unique_id=1560425864 instance=ExtResource("3_ttta2")]
-layout_mode = 2
+[connection signal="pressed" from="LeaveButton" to="." method="_on_leave_button_pressed"]

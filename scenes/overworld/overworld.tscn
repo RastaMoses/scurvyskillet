@@ -3,6 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://ckhln31sq4epk" path="res://scenes/player/inventory.tscn" id="2_662u0"]
 [ext_resource type="Script" uid="uid://cx3kxlhcjwpki" path="res://scripts/event_manager.gd" id="2_n3lcv"]
 [ext_resource type="Script" uid="uid://c6wkwwpm73lha" path="res://scripts/Map/map_loader.gd" id="4_0wbp6"]
+[ext_resource type="PackedScene" uid="uid://p1ug5ylfd5re" path="res://scenes/ingredients/card_sample.tscn" id="4_b1b42"]
+[ext_resource type="PackedScene" uid="uid://cc1vfkie5aw2u" path="res://scenes/ingredients/card_sample2.tscn" id="5_0wbp6"]
 [ext_resource type="PackedScene" uid="uid://b5p50mcr5j4g8" path="res://scenes/overworld/maps/map_test.tscn" id="5_dhsp4"]
 
 [node name="root" type="Node2D" unique_id=1075341061]
@@ -18,6 +20,7 @@ maps_0 = Array[PackedScene]([ExtResource("5_dhsp4")])
 [node name="Inventory" parent="Player" unique_id=421132193 instance=ExtResource("2_662u0")]
 current_money = 10
 current_morale = 10
+starting_ingredients = Array[PackedScene]([ExtResource("4_b1b42"), ExtResource("5_0wbp6"), ExtResource("4_b1b42")])
 
 [node name="EventManager" type="Node" parent="." unique_id=761654411]
 script = ExtResource("2_n3lcv")

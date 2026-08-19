@@ -160,10 +160,12 @@ func disable_button():
 	button.disabled = true
 	button.visible = false
 func enable_button():
+	button.visible = true
 	button.disabled = false
+	
 
 func enable_drop_area():
-	drop_area = drop_ingredients
+	drop_area.visible = drop_ingredients
 
 func start():
 	button_available()
