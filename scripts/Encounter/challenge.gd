@@ -41,6 +41,7 @@ extends Node2D
 
 #STATE
 var encounter_type = "challenge"
+var inv_save:Array[Node]
 
 func on_success():
 	inventory.current_money += success_money
@@ -100,12 +101,19 @@ func compare_dish(completed_dish):
 		#success
 
 func reset_dish():
-	for i in dish_node.current_ingredients:
+	for j in inventory.current_ingredients:
+		inventory.remove(j)
+	for i in inv_save:
 		inventory.add_ingredient(i)
 	dish_node.remove_all_ingredients()
 	
+func save_inventory():
+	for i in inventory.current_ingredients:
+		inv_save.push_front(i)
+	
 #UI Elements
 func start():
+	save_inventory()
 	display_dish()
 	dish_node.start()
 	inventory.ui.update_position(true)
