@@ -461,9 +461,11 @@ hearty_sprite = ExtResource("40_56y5n")
 fresh_sprite = ExtResource("41_omnk6")
 
 [node name="Pan" type="StaticBody2D" parent="Dice_Display" unique_id=1117849328]
+collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Dice_Display/Pan" unique_id=1471934749]
 position = Vector2(1347.7517, 432.40854)
+build_mode = 1
 polygon = PackedVector2Array(-259.75174, -176.40854, -115.75175, -232.40854, 36.248253, -240.40854, 228.24825, -192.40854, 356.24826, -112.40853, 404.24826, 7.5914683, 324.24826, 143.59146, 116.24825, 231.59146, -91.75175, 231.59146, -283.75174, 175.59146, -387.75174, 71.59147, -371.75174, -88.40853)
 
 [node name="center" type="Node2D" parent="Dice_Display/Pan" unique_id=383728228]

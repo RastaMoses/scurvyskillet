@@ -3,10 +3,20 @@
 [ext_resource type="Script" uid="uid://dm4u7nvg5wnbc" path="res://scripts/Encounter/Dish/die_mover.gd" id="1_ecqho"]
 [ext_resource type="Texture2D" uid="uid://o5xyo5mnhwhc" path="res://sprites/interface/scenes/cooking scene/scene_cooking_dice_sour.png" id="2_8ifti"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8ifti"]
+friction = 0.0
+bounce = 0.85
+
 [node name="Die" type="RigidBody2D" unique_id=498793002]
 z_index = 3
-mass = 0.1
+disable_mode = 1
+collision_layer = 2
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_8ifti")
 gravity_scale = 0.0
+can_sleep = false
+lock_rotation = true
+freeze = true
 script = ExtResource("1_ecqho")
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="." unique_id=820687282]

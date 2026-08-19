@@ -6,8 +6,9 @@ extends Node2D
 @export_subgroup("Spawn")
 @export var pulse_power:float = 100
 @export var pulse_range:float = 100
-@export var collision_delay: float = 0.5
-@export var rel_dist_to_center:float = 0.9
+@export var collision_delay: float = 0.2
+@export var rel_dist_to_center:float = 0.2
+@export var min_dist_to_edge:float = 30
 @export_group("Visuals")
 @export_subgroup("Sprites")
 @export var sweet_sprite:Texture
@@ -37,16 +38,18 @@ func spawn_die(flavour):
 		#if point is close to edge of pan, move more inside
 		var point_on_line = closest_point_on_polygon(mouse_pos, get_global_polygon(pan_collider))
 		var dist_to_edge:float = (point_on_line - mouse_pos).length()
-		if (dist_to_edge / (pan_center.position - mouse_pos).length()) > rel_dist_to_center:
+		if dist_to_edge < min_dist_to_edge:
 			spawn_pos = point_on_line.lerp(pan_center.position, rel_dist_to_center)
+			print("lerp")
 		else:
 			spawn_pos = mouse_pos
-	print(spawn_pos)
 	#create circular pulse to clear area of other dice
 	point_explosion(spawn_pos)
 	#instantiate dice in that position without collision
 	var new_die = die_scene.instantiate()
 	add_child(new_die)
+	new_die.freeze_mode = RigidBody2D.FREEZE_MODE_KINEMATIC
+	new_die.freeze = true
 	new_die.global_position = spawn_pos
 	new_die.wait_activate_collision(collision_delay)
 	#set sprite based on flavour

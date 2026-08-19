@@ -8,10 +8,6 @@ extends RigidBody2D
 
 #STATE
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	collision_shape.disabled = true
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -19,7 +15,7 @@ func _process(delta: float) -> void:
 
 func wait_activate_collision(wait_time):
 	await get_tree().create_timer(wait_time).timeout
-	collision_shape.disabled = false
+	freeze = false
 
 func change_sprite(texture):
 	sprite = texture
