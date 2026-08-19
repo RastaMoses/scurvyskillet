@@ -12,12 +12,12 @@
 [ext_resource type="Texture2D" uid="uid://cl52w2y0cryx5" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_use_4.png" id="6_twtq6"]
 [ext_resource type="Texture2D" uid="uid://fy7hp0t3msda" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_flavor_hearty.png" id="7_6f0o8"]
 [ext_resource type="Texture2D" uid="uid://b1iapuuqo6wb3" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_flavor_sour.png" id="8_gisxy"]
-[ext_resource type="Theme" uid="uid://dfu5pdupo2wqr" path="res://ui/cards/small/flavour_text.tres" id="9_crwb1"]
+[ext_resource type="Theme" uid="uid://dfu5pdupo2wqr" path="res://themes/cards/small/flavour_text.tres" id="9_crwb1"]
 [ext_resource type="Texture2D" uid="uid://dd0nfvp3a70up" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_flavor_fresh.png" id="9_mckxv"]
 [ext_resource type="Texture2D" uid="uid://w450hvq004re" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_flavor_spicy.png" id="10_uxkn8"]
 [ext_resource type="Texture2D" uid="uid://cp51kteu70408" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_flavor_sweet.png" id="11_o7f7k"]
 [ext_resource type="Texture2D" uid="uid://ddcdxtkgp0om3" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_nutrition.png" id="12_3aaao"]
-[ext_resource type="Theme" uid="uid://djqywg2hbepia" path="res://ui/cards/small/nutrition_text.tres" id="13_8r253"]
+[ext_resource type="Theme" uid="uid://djqywg2hbepia" path="res://themes/cards/small/nutrition_text.tres" id="13_8r253"]
 
 [sub_resource type="Gradient" id="Gradient_6f0o8"]
 colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
@@ -33,6 +33,7 @@ self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(256, 304)
 offset_right = 256.0
 offset_bottom = 304.0
+mouse_filter = 1
 script = ExtResource("1_fine5")
 
 [node name="EmptySlot" type="TextureRect" parent="." unique_id=961373681]

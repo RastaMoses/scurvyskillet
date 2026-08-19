@@ -20,7 +20,7 @@ extends Node
 @export var unlimited_uses: bool = false
 @export var uses: int
 @export_group("Special Abilities")
-@export var abilities: Array[String]
+@export_enum("leftover_bones", "ability2", "ability3") var abilities: Array[String]
 @export_group("Tags")
 @export var tags: Array[String]
 @export var rarity:int

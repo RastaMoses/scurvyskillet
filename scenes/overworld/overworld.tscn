@@ -23,6 +23,7 @@ script = ExtResource("2_n3lcv")
 script = ExtResource("3_dhsp4")
 
 [node name="Inventory" parent="Player" unique_id=421132193 instance=ExtResource("2_662u0")]
+mouse_filter = 1
 current_money = 10
 current_morale = 10
 starting_ingredients = Array[PackedScene]([ExtResource("6_b1b42"), ExtResource("6_b1b42"), ExtResource("6_b1b42")])

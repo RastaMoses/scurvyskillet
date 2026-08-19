@@ -23,6 +23,7 @@
 custom_minimum_size = Vector2(512, 768)
 offset_right = 267.0
 offset_bottom = 408.05658
+mouse_filter = 1
 large_view = true
 
 [node name="EmptySlot" parent="." index="0" unique_id=961373681]
@@ -55,7 +56,6 @@ offset_bottom = 768.0
 texture = ExtResource("2_u7q7r")
 
 [node name="item_icon" parent="ItemDisplay" index="2" unique_id=1095232349]
-z_index = -1
 offset_left = 56.0
 offset_top = 97.0
 offset_right = 248.0

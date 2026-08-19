@@ -98,7 +98,6 @@ func update_flavours():
 	
 	#nutrition
 	nutrition_text.text = str(ingredient.nutrition)
-	print(nutrition_text)
 	
 	#uses
 	for i in uses_textures:

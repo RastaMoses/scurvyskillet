@@ -12,11 +12,11 @@ extends Control
 @onready var nutrition_shadow = $Nutrition/shadow
 
 func update_flavours():
-	sweet_text = str(dish.sweet)
-	sour_text = str(dish.sour)
-	spicy_text = str(dish.spicy)
-	hearty_text = str(dish.hearty)
-	fresh_text = str(dish.fresh)
+	sweet_text.text = str(dish.sweet)
+	sour_text.text = str(dish.sour)
+	spicy_text.text = str(dish.spicy)
+	hearty_text.text = str(dish.hearty)
+	fresh_text.text = str(dish.fresh)
 
 func update_nutrition(new_value: Variant) -> void:
 	nutrition_text.text = str(new_value)

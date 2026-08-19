@@ -114,7 +114,6 @@ func save_inventory():
 
 func finish_dish():
 	compare_dish(dish_node)
-	pass
 
 #UI Elements
 func start():

@@ -31,11 +31,13 @@ func check_can_drop(data):
 	return can_drop
 
 func add_ingredient(ingredient):
+	#check for abilities on add
 	
+	#add ingredient
 	current_ingredients.append(ingredient)
 	ingredient.reparent(self)
 	inventory.remove_ingredient(ingredient)
-
+	
 	#add tags to the dish
 	for new_tag in ingredient.tags:
 		if !tags.has(new_tag):
@@ -71,11 +73,11 @@ func roll_ingredient(ingredient):
 	var dice_multiplier = 1
 	var result_multiplier = 1
 	abilities.on_dice_roll(ingredient)
-	sweet = roll_dice(dice_multiplier*ingredient.sweet) * result_multiplier
-	sour = roll_dice(dice_multiplier*ingredient.sour) * result_multiplier
-	spicy = roll_dice(dice_multiplier*ingredient.spicy) * result_multiplier
-	hearty = roll_dice(dice_multiplier*ingredient.hearty) * result_multiplier
-	fresh = roll_dice(dice_multiplier*ingredient.fresh) * result_multiplier
+	sweet += roll_dice(dice_multiplier*ingredient.sweet) * result_multiplier
+	sour += roll_dice(dice_multiplier*ingredient.sour) * result_multiplier
+	spicy += roll_dice(dice_multiplier*ingredient.spicy) * result_multiplier
+	hearty += roll_dice(dice_multiplier*ingredient.hearty) * result_multiplier
+	fresh += roll_dice(dice_multiplier*ingredient.fresh) * result_multiplier
 
 func roll_dice(amount):
 	var result = 0

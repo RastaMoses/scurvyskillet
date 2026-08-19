@@ -30,6 +30,7 @@ extends Control
 #CACHED COMPS
 @onready var decision_encounter = get_parent()
 @onready var drop_area = $DropArea
+@onready var drop_ui = $UI/IngredientDrop
 @onready var ingredient_icon = $UI/IngredientDrop/IngredientIcon
 @onready var button = $Button
 
@@ -161,7 +162,8 @@ func complete():
 
 func disable_button():
 	button.disabled = true
-	button.visible = false
+	if (drop_ingredients):
+		button.visible = false
 func enable_button():
 	button.visible = true
 	button.disabled = false
@@ -169,6 +171,8 @@ func enable_button():
 
 func enable_drop_area():
 	drop_area.visible = drop_ingredients
+	drop_ui.visible = drop_ingredients
+	
 
 func start():
 	button_available()
