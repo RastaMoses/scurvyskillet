@@ -1,9 +1,7 @@
 extends Node2D
 #PARAMS
 @export var die_scene:PackedScene
-@export_group("Physics")
-@export var random_power:Vector2
-@export_subgroup("Spawn")
+@export_group("Spawn")
 @export var pulse_power:float = 100
 @export var pulse_range:float = 100
 @export var collision_delay: float = 0.2
@@ -64,8 +62,6 @@ func spawn_die(flavour):
 			new_die.change_sprite(hearty_sprite)
 		"fresh":
 			new_die.change_sprite(fresh_sprite)
-	#set random power and direction 
-
 func point_explosion(point):
 	for die in dice:
 		var dir: Vector2 = die.global_position - point

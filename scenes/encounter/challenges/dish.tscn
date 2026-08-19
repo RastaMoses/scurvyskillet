@@ -454,6 +454,8 @@ script = ExtResource("2_0lb6f")
 [node name="Dice_Display" type="Node2D" parent="." unique_id=2018810667]
 script = ExtResource("35_lk7dj")
 die_scene = ExtResource("36_3j2nc")
+pulse_power = 300.0
+pulse_range = 60.0
 sweet_sprite = ExtResource("37_sojv3")
 sour_sprite = ExtResource("34_yhjpa")
 spicy_sprite = ExtResource("39_xteku")

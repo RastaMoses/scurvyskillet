@@ -119,8 +119,9 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -304.0
-offset_right = 1920.0
+offset_top = 776.0
+offset_right = 1930.0
+offset_bottom = 1080.0
 grow_vertical = 0
 theme = ExtResource("10_no1hy")
 horizontal_scroll_mode = 3
@@ -159,10 +160,13 @@ layout_mode = 2
 
 [node name="large_view" type="Button" parent="InventoryUI" unique_id=1508888289]
 z_index = 200
+custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 grow_horizontal = 2
 grow_vertical = 2
 flat = true
