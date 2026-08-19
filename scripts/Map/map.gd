@@ -4,6 +4,7 @@ extends Node
 @export var map_difficulty:int
 #CACHED COMPS
 @onready var map_bg = $Sprite2D
+@onready var map_loader = get_parent()
 
 #STATE
 var player_location:int = 0
@@ -25,8 +26,8 @@ func set_available_encounters():
 			#activate nodes the player can access
 			encounter_nodes[active_node].toggle_button(true)
 	else:
-		#if this is last or first node on map
-		pass
+		#if this is last node generate new map
+		map_loader.load_map(map_loader.pick_random_map(map_difficulty + 1))
 
 func update_player_location(value):
 	player_location = value

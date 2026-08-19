@@ -12,6 +12,7 @@
 [node name="Overworld" type="Node" parent="." unique_id=1021026839]
 script = ExtResource("4_0wbp6")
 maps_0 = Array[PackedScene]([ExtResource("5_dhsp4")])
+maps_1 = Array[PackedScene]([ExtResource("5_dhsp4")])
 
 [node name="Player" type="Node" parent="." unique_id=1818132485]
 

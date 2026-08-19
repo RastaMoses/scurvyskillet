@@ -1,8 +1,9 @@
 extends Control
 var sell_item:Resource
+signal clicked(buy_button)
 
 func _on_button_pressed() -> void:
-	pass # Replace with function body.
+	clicked.emit(self)
 
 func is_disabled(info):
 	$Button.disabled = info

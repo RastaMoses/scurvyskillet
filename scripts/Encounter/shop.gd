@@ -59,6 +59,7 @@ func populate_shop():
 		buy_container.add_child(temp)
 		temp.sell_item = i
 		buy_buttons.append(temp)
+		temp.clicked.connect(buy)
 	check_buttons_enabled()
 
 func start():
