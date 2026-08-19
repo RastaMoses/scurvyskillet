@@ -27,6 +27,7 @@ func destroy_ingredient(ingredient_instance):
 	ui.update_slots()
 	ingredient_instance.queue_free()
 
+
 func remove_ingredient(ingredient_instance):
 	current_ingredients.erase(ingredient_instance)
 	ui.update_slots()

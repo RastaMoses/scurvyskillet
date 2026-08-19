@@ -17,10 +17,10 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_ftr8b")
 inventory_slot_scene = ExtResource("2_2kgow")
-container_size_bottom = Vector2(2564, 328.00024)
-container_pos_bottom = Vector2(-4, 1103)
-container_size_side = Vector2(442, 504)
-container_pos_side = Vector2(2115, 344)
+container_size_bottom = Vector2(1930, 336)
+container_pos_bottom = Vector2(-3, 733)
+container_size_side = Vector2(591, 699)
+container_pos_side = Vector2(1302, 172)
 
 [node name="topbar" type="Control" parent="." unique_id=1235091762]
 layout_mode = 1
@@ -65,27 +65,27 @@ text = "10"
 [node name="bg_bottom" type="TextureRect" parent="." unique_id=1829550531]
 layout_mode = 0
 offset_left = -3.0
-offset_top = 1092.0
-offset_right = 2579.0
-offset_bottom = 1449.0
+offset_top = 733.0
+offset_right = 1927.0
+offset_bottom = 1069.0
 texture = SubResource("PlaceholderTexture2D_2kgow")
 
 [node name="bg_side" type="TextureRect" parent="." unique_id=578366336]
 layout_mode = 0
-offset_left = 2112.0
-offset_top = 345.0
-offset_right = 2563.0
-offset_bottom = 847.0
+offset_left = 1302.0
+offset_top = 172.0
+offset_right = 1893.0
+offset_bottom = 871.0
 texture = SubResource("PlaceholderTexture2D_2kgow")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=79906176]
 custom_minimum_size = Vector2(442, 504)
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.9476563
-anchor_top = 0.4652778
-anchor_right = 0.9476563
-anchor_bottom = 0.61249995
+anchor_left = 0.91875
+anchor_top = 0.4601852
+anchor_right = 0.91875
+anchor_bottom = 0.8453703
 offset_left = -461.0
 offset_top = -326.0
 offset_right = 131.0
@@ -198,8 +198,9 @@ flat = true
 
 [node name="InventoryUILarge" parent="large_view" unique_id=1295964210 instance=ExtResource("4_n5307")]
 self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(106, 162)
 layout_mode = 0
-offset_left = 1228.0
-offset_top = 432.0
-offset_right = 1334.0
-offset_bottom = 594.0
+offset_left = 924.0
+offset_top = 391.0
+offset_right = 1030.0
+offset_bottom = 553.0

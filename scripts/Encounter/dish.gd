@@ -25,6 +25,7 @@ func add_ingredient(ingredient):
 	inventory.remove_ingredient(ingredient)
 	current_ingredients.append(ingredient)
 	ingredient.reparent(self)
+
 	#add tags to the dish
 	for new_tag in ingredient.tags:
 		if !tags.has(new_tag):
