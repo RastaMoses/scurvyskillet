@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://c6wkwwpm73lha" path="res://scripts/Map/map_loader.gd" id="4_0wbp6"]
 [ext_resource type="PackedScene" uid="uid://b5p50mcr5j4g8" path="res://scenes/overworld/maps/map_test.tscn" id="5_dhsp4"]
 [ext_resource type="PackedScene" uid="uid://p1ug5ylfd5re" path="res://scenes/ingredients/card_sample.tscn" id="6_b1b42"]
+[ext_resource type="PackedScene" uid="uid://bodk7w1csegu4" path="res://scenes/debug/debug_mouse.tscn" id="7_0wbp6"]
 
 [node name="root" type="Node2D" unique_id=1075341061]
 
@@ -27,3 +28,5 @@ mouse_filter = 1
 current_money = 10
 current_morale = 10
 starting_ingredients = Array[PackedScene]([ExtResource("6_b1b42"), ExtResource("6_b1b42"), ExtResource("6_b1b42")])
+
+[node name="debug_mouse" parent="." unique_id=2141378264 instance=ExtResource("7_0wbp6")]

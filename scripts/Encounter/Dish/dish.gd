@@ -17,6 +17,7 @@ var random = RandomNumberGenerator.new()
 @onready var restricted_tags = challenge.restricted_tags
 signal nutrition_change(new_value)
 @onready var ui = $UI
+@onready var dice_disp = $Dice_Display
 #STATE
 var can_drop:bool = true
 var current_ingredients: Array[Node]
@@ -32,7 +33,6 @@ func check_can_drop(data):
 
 func add_ingredient(ingredient):
 	#check for abilities on add
-	
 	#add ingredient
 	current_ingredients.append(ingredient)
 	ingredient.reparent(self)
@@ -47,7 +47,17 @@ func add_ingredient(ingredient):
 	roll_ingredient(ingredient)
 	ui.update_flavours()
 	ui.update_nutrition(nutrition)
-
+	
+	for i in ingredient.sweet:
+		dice_disp.spawn_die("sweet")
+	for i in ingredient.sour:
+		dice_disp.spawn_die("sour")
+	for i in ingredient.spicy:
+		dice_disp.spawn_die("spicy")
+	for i in ingredient.hearty:
+		dice_disp.spawn_die("hearty")
+	for i in ingredient.fresh:
+		dice_disp.spawn_die("fresh")
 func remove_ingredient(ingredient):
 	nutrition -= ingredient.nutrition
 	nutrition_change.emit(nutrition)

@@ -3,6 +3,7 @@ extends Control
 @onready var inventory = get_node("/root/root/Player/Inventory")
 @onready var random = RandomNumberGenerator.new()
 
+@export var text:String
 @export_group("Reward")
 @export var r_money:int
 @export var r_morale:int
@@ -33,6 +34,8 @@ extends Control
 @onready var drop_ui = $UI/IngredientDrop
 @onready var ingredient_icon = $UI/IngredientDrop/IngredientIcon
 @onready var button = $Button
+@onready var button_text = $Button/RichTextLabel
+@onready var drop_area_text = $UI/IngredientDrop/RichTextLabel
 
 #STATE
 var ingredients: Array[Node]
@@ -41,7 +44,8 @@ var encounter_type = "decision"
 
 func _ready() -> void:
 	button.pressed.connect(on_button_press)
-	
+	button_text.text = text
+	drop_area_text.text = text
 
 func add_ingredient(ingredient):
 	#necessary for drop area script and to check for rarity or smth

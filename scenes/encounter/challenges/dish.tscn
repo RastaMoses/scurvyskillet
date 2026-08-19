@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://83c84n5554td"]
 
-[ext_resource type="Script" uid="uid://dj0h4ly2gikk" path="res://scripts/Encounter/dish.gd" id="1_bm6af"]
+[ext_resource type="Script" uid="uid://dj0h4ly2gikk" path="res://scripts/Encounter/Dish/dish.gd" id="1_bm6af"]
 [ext_resource type="Script" uid="uid://v63vu2iilw13" path="res://scripts/Inventory/drop_area.gd" id="2_0lb6f"]
 [ext_resource type="Script" uid="uid://b2ck5f4nie52i" path="res://scripts/Encounter/UI/dish_ui.gd" id="2_kkx33"]
 [ext_resource type="Texture2D" uid="uid://d04a0epwuvrll" path="res://sprites/interface/scenes/cooking scene/scene_cooking_pan_fire.png" id="3_k1awt"]
@@ -34,6 +34,13 @@
 [ext_resource type="Texture2D" uid="uid://64syy6inf2k0" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_20.png" id="30_4jx4j"]
 [ext_resource type="Texture2D" uid="uid://jso4fb173d32" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_21.png" id="31_8hnse"]
 [ext_resource type="Texture2D" uid="uid://br06cxkesxqsc" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_22.png" id="32_0secw"]
+[ext_resource type="Texture2D" uid="uid://o5xyo5mnhwhc" path="res://sprites/interface/scenes/cooking scene/scene_cooking_dice_sour.png" id="34_yhjpa"]
+[ext_resource type="Script" uid="uid://db3ak1ye8g3gv" path="res://scripts/Encounter/Dish/dice_displayer.gd" id="35_lk7dj"]
+[ext_resource type="PackedScene" uid="uid://cbec14v7l54xf" path="res://scenes/encounter/challenges/die.tscn" id="36_3j2nc"]
+[ext_resource type="Texture2D" uid="uid://dndpt4u0pabdo" path="res://sprites/interface/scenes/cooking scene/scene_cooking_dice_sweet.png" id="37_sojv3"]
+[ext_resource type="Texture2D" uid="uid://3ntidflxxyjh" path="res://sprites/interface/scenes/cooking scene/scene_cooking_dice_spicy.png" id="39_xteku"]
+[ext_resource type="Texture2D" uid="uid://bs2uq23jti7pu" path="res://sprites/interface/scenes/cooking scene/scene_cooking_dice_meaty.png" id="40_56y5n"]
+[ext_resource type="Texture2D" uid="uid://c6sve5qqxbut0" path="res://sprites/interface/scenes/cooking scene/scene_cooking_dice_fresh.png" id="41_omnk6"]
 
 [node name="Dish" type="Control" unique_id=497250350]
 layout_mode = 3
@@ -433,8 +440,6 @@ offset_bottom = 1080.0
 mouse_behavior_recursive = 1
 texture = ExtResource("32_0secw")
 
-[node name="Dice" type="Node2D" parent="." unique_id=1758264431]
-
 [node name="DropArea" type="Panel" parent="." unique_id=2096391922]
 self_modulate = Color(1, 1, 1, 0)
 z_index = 100
@@ -443,4 +448,23 @@ offset_left = 976.0
 offset_top = 144.0
 offset_right = 1747.0
 offset_bottom = 640.0
+mouse_behavior_recursive = 2
 script = ExtResource("2_0lb6f")
+
+[node name="Dice_Display" type="Node2D" parent="." unique_id=2018810667]
+script = ExtResource("35_lk7dj")
+die_scene = ExtResource("36_3j2nc")
+sweet_sprite = ExtResource("37_sojv3")
+sour_sprite = ExtResource("34_yhjpa")
+spicy_sprite = ExtResource("39_xteku")
+hearty_sprite = ExtResource("40_56y5n")
+fresh_sprite = ExtResource("41_omnk6")
+
+[node name="Pan" type="StaticBody2D" parent="Dice_Display" unique_id=1117849328]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Dice_Display/Pan" unique_id=1471934749]
+position = Vector2(1347.7517, 432.40854)
+polygon = PackedVector2Array(-259.75174, -176.40854, -115.75175, -232.40854, 36.248253, -240.40854, 228.24825, -192.40854, 356.24826, -112.40853, 404.24826, 7.5914683, 324.24826, 143.59146, 116.24825, 231.59146, -91.75175, 231.59146, -283.75174, 175.59146, -387.75174, 71.59147, -371.75174, -88.40853)
+
+[node name="center" type="Node2D" parent="Dice_Display/Pan" unique_id=383728228]
+position = Vector2(1346, 427)

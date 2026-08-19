@@ -1,8 +1,10 @@
 extends Node
-
+@export var active = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if !active:
+		return
 	var hovered := get_viewport().gui_get_hovered_control()
 	if hovered:
 		print("Hovered control: ", hovered.get_path())

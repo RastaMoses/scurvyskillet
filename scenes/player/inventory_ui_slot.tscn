@@ -69,6 +69,7 @@ expand_mode = 1
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_behavior_recursive = 1
 
 [node name="0" type="TextureRect" parent="ItemDisplay/Rarity" unique_id=2084014227]
 layout_mode = 0

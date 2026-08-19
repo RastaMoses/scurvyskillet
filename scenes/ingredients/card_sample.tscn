@@ -10,10 +10,6 @@ mouse_filter = 2
 script = ExtResource("1_hai3h")
 nutrition = 3
 sweet = 1
-sour = 1
-spicy = 2
-hearty = 1
-fresh = 1
 unlimited_uses = true
 
 [node name="Preview" parent="." unique_id=442831638 instance=ExtResource("2_8h71a")]
@@ -23,5 +19,8 @@ editor_preview = true
 
 [node name="EmptySlot" parent="Preview" index="0" unique_id=961373681]
 self_modulate = Color(1, 1, 1, 1)
+
+[node name="Rarity" parent="Preview/ItemDisplay" parent_id_path=PackedInt32Array(442831638, 1942941591) index="4" unique_id=80472254]
+mouse_behavior_recursive = 0
 
 [editable path="Preview"]
