@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cyaewm2b6dumq"
-path="res://.godot/imported/scene_cooking_button_cook!.png-572cc470b9281751d67c2101c2fccbd5.ctex"
+uid="uid://bbswptox1co8u"
+path="res://.godot/imported/scene_cooking_flavor_sweet.png-f4a65777be885f1c515ad260910b30f3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/interface/scenes/cooking scene/scene_cooking_button_cook!.png"
-dest_files=["res://.godot/imported/scene_cooking_button_cook!.png-572cc470b9281751d67c2101c2fccbd5.ctex"]
+source_file="res://sprites/interface/scenes/cooking scene/scene_cooking_flavor_sweet.png"
+dest_files=["res://.godot/imported/scene_cooking_flavor_sweet.png-f4a65777be885f1c515ad260910b30f3.ctex"]
 
 [params]
 
