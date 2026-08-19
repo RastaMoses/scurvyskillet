@@ -34,3 +34,5 @@ var texture:Texture
 
 func get_preview():
 	return $Preview
+func get_icon_texture():
+	return $Preview/ItemDisplay/item_icon.texture

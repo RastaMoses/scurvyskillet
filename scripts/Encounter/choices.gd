@@ -29,7 +29,8 @@ extends Control
 
 #CACHED COMPS
 @onready var decision_encounter = get_parent()
-@onready var drop_area = $DropArea
+@onready var drop_area = $UI/IngredientDrop/DropArea
+@onready var ingredient_icon = $UI/IngredientDrop/IngredientIcon
 @onready var button = $Button
 
 #STATE
@@ -46,10 +47,12 @@ func add_ingredient(ingredient):
 	inventory.remove_ingredient(ingredient)
 	ingredients.append(ingredient)
 	ingredient.reparent(self)
+	ingredient_icon.texture = ingredient.get_icon_texture()
 	check_completed()
 
 func remove_random():
 	var rand_index = random.randi_range(0,inventory.current_ingredients.size()-1)
+	ingredient_icon.texture = inventory.current_ingredients[rand_index].get_icon_texture()
 	inventory.destroy_ingredient(inventory.current_ingredients[rand_index])
 
 func check_completed():

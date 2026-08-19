@@ -1,10 +1,12 @@
 [gd_scene format=3 uid="uid://oppt25wlgonj"]
 
 [ext_resource type="Script" uid="uid://5ky5q3x7j70d" path="res://scripts/Inventory/inventory_ui.gd" id="1_ftr8b"]
-[ext_resource type="Texture2D" uid="uid://l14aqi882mlh" path="res://sprites/placeholder/Screenshot 2026-08-18 200624.png" id="2_1oul0"]
 [ext_resource type="PackedScene" uid="uid://c4hu25tvp3kkd" path="res://scenes/player/inventory_ui_slot.tscn" id="2_2kgow"]
+[ext_resource type="Texture2D" uid="uid://dcufcw38p0iba" path="res://sprites/interface/general/morale and gold/morale_and_gold_frame.png" id="3_gllbo"]
 [ext_resource type="Texture2D" uid="uid://b0kgy70usnyx" path="res://sprites/interface/scenes/cooking scene/scene_cooking_inventory.png" id="4_emmqn"]
 [ext_resource type="PackedScene" uid="uid://7lxu211xbf4i" path="res://scenes/player/inventory_ui_large_view.tscn" id="4_n5307"]
+[ext_resource type="Texture2D" uid="uid://coxups3dlsrk5" path="res://sprites/interface/general/morale and gold/morale_and_gold_morale.png" id="4_w5eca"]
+[ext_resource type="Texture2D" uid="uid://ciua4pueuxwty" path="res://sprites/interface/general/morale and gold/morale_and_gold_gold.png" id="5_nu8j1"]
 [ext_resource type="Theme" uid="uid://dwjm243i4x47a" path="res://ui/inventory/inv_scroll_container.tres" id="5_qtbir"]
 [ext_resource type="Theme" uid="uid://fa4mmtcwb3a5" path="res://ui/inventory/inv_grid_container.tres" id="5_smskg"]
 
@@ -21,55 +23,83 @@ mouse_filter = 2
 script = ExtResource("1_ftr8b")
 inventory_slot_scene = ExtResource("2_2kgow")
 min_slots = 8
-container_size_bottom = Vector2(1920, 304)
+container_size_bottom = Vector2(1930, 304)
 container_pos_bottom = Vector2(0, 776)
 container_size_side = Vector2(591, 699)
 container_pos_side = Vector2(1302, 172)
 
 [node name="topbar" type="Control" parent="." unique_id=1235091762]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
+anchors_preset = 15
 anchor_right = 1.0
-offset_left = -40.0
-offset_bottom = 40.0
-grow_horizontal = 0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="bg" type="TextureRect" parent="topbar" unique_id=1602098563]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
+anchors_preset = 15
 anchor_right = 1.0
-offset_left = -537.73364
-offset_right = 0.00012207031
-offset_bottom = 165.0
-grow_horizontal = 0
-texture = ExtResource("2_1oul0")
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_gllbo")
+
+[node name="morale_bg" type="TextureRect" parent="topbar" unique_id=407186824]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_w5eca")
+
+[node name="money_bg" type="TextureRect" parent="topbar" unique_id=1941561537]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_nu8j1")
 
 [node name="morale_text" type="RichTextLabel" parent="topbar" unique_id=1231471646]
 layout_mode = 0
-offset_left = -447.0
-offset_top = 28.0
-offset_right = -258.0
-offset_bottom = 154.0
+offset_left = 1592.0
+offset_top = 32.0
+offset_right = 1704.0
+offset_bottom = 136.0
+mouse_filter = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 80
-text = "10"
+text = "00"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="money_text" type="RichTextLabel" parent="topbar" unique_id=573194655]
+[node name="money_text" type="RichTextLabel" parent="topbar" unique_id=1650746631]
 layout_mode = 0
-offset_left = -186.0
-offset_top = 27.0
-offset_right = 35.0
-offset_bottom = 161.0
+offset_left = 1720.0
+offset_top = 24.0
+offset_right = 1832.0
+offset_bottom = 136.0
+mouse_filter = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 80
-text = "10"
+text = "00"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="bg_bottom" type="TextureRect" parent="." unique_id=1829550531]
 layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
+mouse_filter = 2
 texture = ExtResource("4_emmqn")
 
 [node name="bg_side" type="TextureRect" parent="." unique_id=578366336]
@@ -79,19 +109,17 @@ offset_left = 1302.0
 offset_top = 172.0
 offset_right = 1893.0
 offset_bottom = 871.0
+mouse_filter = 2
 texture = SubResource("PlaceholderTexture2D_2kgow")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=79906176]
-custom_minimum_size = Vector2(1932, 304)
+custom_minimum_size = Vector2(1930, 304)
 layout_mode = 1
-anchors_preset = 12
+anchors_preset = 2
 anchor_top = 1.0
-anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -334.0
-offset_right = 12.0
-offset_bottom = -30.0
-grow_horizontal = 2
+offset_top = -304.0
+offset_right = 1920.0
 grow_vertical = 0
 theme = ExtResource("5_qtbir")
 horizontal_scroll_mode = 3
@@ -129,7 +157,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="large_view" type="Button" parent="." unique_id=1508888289]
-z_index = 10
+z_index = 200
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

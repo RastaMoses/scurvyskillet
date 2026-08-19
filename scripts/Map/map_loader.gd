@@ -8,6 +8,8 @@ extends Node
 #CACHED
 @onready var random = RandomNumberGenerator.new()
 
+@onready var inventory = get_node("/root/root/Player/Inventory")
+
 #STATE
 var current_map
 var map_array
@@ -31,6 +33,8 @@ func load_map(map):
 	add_child(current_map)
 	current_map.populate_map()
 	current_map.set_available_encounters()
+	inventory.ui.open()
 
 func start_game():
+	await get_tree().process_frame
 	load_map(pick_random_map(0))

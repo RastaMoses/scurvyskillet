@@ -13,4 +13,7 @@ uses = 2
 [node name="Preview" parent="." unique_id=442831638 instance=ExtResource("2_8h71a")]
 editor_preview = true
 
+[node name="EmptySlot" parent="Preview" index="0" unique_id=961373681]
+self_modulate = Color(1, 1, 1, 1)
+
 [editable path="Preview"]

@@ -6,11 +6,35 @@
 [node name="Dish" type="Control" unique_id=497250350]
 layout_mode = 3
 anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
 script = ExtResource("1_bm6af")
 
 [node name="DropArea" type="Panel" parent="." unique_id=2096391922]
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(26.6, 12.4800005)
+offset_right = 1920.0
+offset_bottom = 1080.0
 script = ExtResource("2_0lb6f")
+
+[node name="UI" type="Control" parent="." unique_id=817898650]
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="Pan" type="Control" parent="UI" unique_id=1516231476]
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="fire" type="TextureRect" parent="UI/Pan" unique_id=1037339575]
+z_index = 1
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="texture" type="TextureRect" parent="UI/Pan" unique_id=1042688915]
+z_index = 2
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
