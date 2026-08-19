@@ -55,7 +55,5 @@ func toggle_button(value):
 func show_button(value):
 	button.visible = value
 
-
 func _on_button_pressed() -> void:
 	activate_encounter()
-	print("encounter activated")

@@ -96,7 +96,6 @@ metadata/_edit_use_anchors_ = true
 
 [node name="GridContainer" type="GridContainer" parent="ScrollContainer" unique_id=1747725328]
 layout_mode = 2
-size_flags_vertical = 0
 columns = 10
 
 [node name="InventoryUISlot" parent="ScrollContainer/GridContainer" unique_id=442831638 instance=ExtResource("2_2kgow")]
@@ -198,6 +197,7 @@ offset_bottom = 1101.0
 flat = true
 
 [node name="InventoryUILarge" parent="large_view" unique_id=1295964210 instance=ExtResource("4_n5307")]
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_left = 1228.0
 offset_top = 432.0

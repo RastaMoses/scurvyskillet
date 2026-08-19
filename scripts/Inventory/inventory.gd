@@ -37,7 +37,8 @@ func add_ingredient(ingredient_instance):
 	ui.update_slots()
 
 func add_ingredient_remove_use(ingredient_instance):
-	ingredient_instance.uses -= 1
+	if !ingredient_instance.unlimited_uses:
+		ingredient_instance.uses -= 1
 	add_ingredient(ingredient_instance)
 	ui.update_slots()
 

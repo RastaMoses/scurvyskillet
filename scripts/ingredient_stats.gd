@@ -1,6 +1,6 @@
 extends Node
 #PARAMS
-@export var texture:Texture
+
 @export var ingredient_name:String
 @export_group("Values")
 @export var nutrition:int
@@ -18,7 +18,7 @@ extends Node
 @export var ig_hearty:int
 @export var ig_fresh:int
 @export_group("Uses")
-@export var unlimited: bool = false
+@export var unlimited_uses: bool = false
 @export var uses: int
 @export_group("Special Abilities")
 @export var abilities: Array[String]
@@ -30,6 +30,7 @@ extends Node
 
 #STATE
 var inv_index:int
+var texture:Texture
 
 func get_preview():
 	return $Preview

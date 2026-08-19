@@ -109,11 +109,15 @@ func update_position(bottom):
 	if bottom_position:
 		inventory_container.size = container_size_bottom
 		inventory_container.position = container_pos_bottom
+		inventory_container.custom_minimum_size = container_size_bottom
+		grid_container.size = container_size_bottom
 		current_bg = bg_bottom
 		bg_side.visible = false
 	else:
 		inventory_container.size = container_size_side
 		inventory_container.position = container_pos_side
+		inventory_container.custom_minimum_size = container_size_side
+		grid_container.size = container_size_side
 		current_bg = bg_side
 		bg_bottom.visible = false
 	open()

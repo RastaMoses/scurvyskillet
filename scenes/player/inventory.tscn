@@ -2,8 +2,10 @@
 
 [ext_resource type="Script" uid="uid://bkv3gvee74qgl" path="res://scripts/Inventory/inventory.gd" id="1_i5bfg"]
 [ext_resource type="PackedScene" uid="uid://oppt25wlgonj" path="res://scenes/player/inventory_ui.tscn" id="2_acsmj"]
+[ext_resource type="PackedScene" uid="uid://p1ug5ylfd5re" path="res://scenes/ingredients/card_sample.tscn" id="2_inxy6"]
 
 [node name="Inventory" type="Node" unique_id=421132193]
 script = ExtResource("1_i5bfg")
+starting_ingredients = Array[PackedScene]([ExtResource("2_inxy6")])
 
 [node name="InventoryUI" parent="." unique_id=190865318 instance=ExtResource("2_acsmj")]

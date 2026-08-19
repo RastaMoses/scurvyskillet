@@ -108,6 +108,7 @@ func reset_dish():
 func start():
 	display_dish()
 	dish_node.start()
+	inventory.ui.update_position(true)
 
 func end():
 	map_node.end_encounter()

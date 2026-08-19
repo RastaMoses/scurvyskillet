@@ -78,7 +78,7 @@ func roll_dish():
 			fresh += random.randi_range(1,6)
 			in_fresh -= 1
 		#Give ingredients with uses back to inventory
-		if ingredient.uses > 1:
+		if ingredient.uses > 1 or ingredient.unlimited_uses:
 			inventory.add_ingredient_remove_use(ingredient)
 	get_parent().compare_dish(self)
 
