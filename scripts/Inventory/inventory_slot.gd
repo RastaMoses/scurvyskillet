@@ -12,11 +12,13 @@ extends Panel
 @onready var fresh = $ItemDisplay/Flavours/Fresh
 @onready var spicy = $ItemDisplay/Flavours/Spicy
 @onready var sweet = $ItemDisplay/Flavours/Sweet
-@onready var nutrition_text = $ItemDisplay/NutritionText
+@onready var nutrition_text = $ItemDisplay/Nutrition/NutritionText
 @onready var empty_slot = $EmptySlot
 @onready var rarity_textures = $ItemDisplay/Rarity.get_children()
+@onready var icon = $ItemDisplay/item_icon
 var tags
 var description
+var ingredient_name
 @onready var large_view_button = $large_view_button
 
 #SIGNALS
@@ -31,8 +33,9 @@ func _ready() -> void:
 		visible = false
 	if large_view:
 		showcase = true
-		tags = $ItemDisplay/Tags
+		tags = $ItemDisplay/Tags/RichTextLabel
 		description = $ItemDisplay/Description
+		ingredient_name = $ItemDisplay/Name/RichTextLabel
 	large_view_button.pressed.connect(large_view_pressed)
 
 func large_view_pressed():
@@ -48,7 +51,7 @@ func update(item):
 		large_view_button.visible = true
 		empty_slot.visible = false
 		item_visual.visible = true
-		item_visual.texture = item.get_child(0).texture
+		icon.texture = item.get_child(0).texture
 		ingredient = item
 		update_flavours()
 
@@ -103,6 +106,7 @@ func update_flavours():
 	if large_view == true:
 		tags = ingredient.get_preview().tags
 		description = ingredient.get_preview().description
+		ingredient_name = ingredient.get_preview().ingredient_name
 
 func _get_drag_data(_at_position: Vector2) -> Variant:
 	if not ingredient:

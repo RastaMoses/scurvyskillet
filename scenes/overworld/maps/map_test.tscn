@@ -11,12 +11,12 @@ script = ExtResource("1_6nm46")
 encounter_nodes = [NodePath("0"), NodePath("1"), NodePath("2"), NodePath("3"), NodePath("4"), NodePath("5"), NodePath("6"), NodePath("7"), NodePath("8"), NodePath("9"), NodePath("10"), NodePath("11"), NodePath("12")]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=496637297]
-position = Vector2(1271, 722)
-scale = Vector2(3.0945628, 3.0945628)
+position = Vector2(965.1, 566.844)
+scale = Vector2(2.3592262, 2.3592262)
 texture = ExtResource("2_25v0t")
 
 [node name="0" type="Node2D" parent="." unique_id=1399256715]
-position = Vector2(195, 733)
+position = Vector2(142, 574)
 script = ExtResource("2_55h7r")
 possible_encounters = Array[PackedScene]([ExtResource("4_25v0t")])
 destinations = Array[int]([1, 2])
@@ -37,7 +37,7 @@ theme_override_font_sizes/font_size = 40
 text = "CHALLENGE"
 
 [node name="1" type="Node2D" parent="." unique_id=407174435]
-position = Vector2(680, 393)
+position = Vector2(532, 298)
 script = ExtResource("2_55h7r")
 possible_encounters = Array[PackedScene]([ExtResource("4_25v0t")])
 destinations = Array[int]([3, 4])
@@ -58,7 +58,7 @@ theme_override_font_sizes/font_size = 40
 text = "CHALLENGE"
 
 [node name="2" type="Node2D" parent="." unique_id=963606167]
-position = Vector2(696, 1096)
+position = Vector2(537, 857)
 script = ExtResource("2_55h7r")
 possible_encounters = Array[PackedScene]([ExtResource("5_y74yb")])
 destinations = Array[int]([5])
@@ -79,7 +79,7 @@ theme_override_font_sizes/font_size = 40
 text = "Decision"
 
 [node name="3" type="Node2D" parent="." unique_id=1462896165]
-position = Vector2(1225, 195)
+position = Vector2(944, 168)
 script = ExtResource("2_55h7r")
 possible_encounters = Array[PackedScene]([ExtResource("4_25v0t")])
 destinations = Array[int]([6])
@@ -100,7 +100,7 @@ theme_override_font_sizes/font_size = 40
 text = "Decision"
 
 [node name="4" type="Node2D" parent="." unique_id=1708145035]
-position = Vector2(1236, 567)
+position = Vector2(936, 442)
 script = ExtResource("2_55h7r")
 possible_encounters = Array[PackedScene]([ExtResource("4_25v0t")])
 destinations = Array[int]([7])
@@ -121,7 +121,7 @@ theme_override_font_sizes/font_size = 40
 text = "Decision"
 
 [node name="5" type="Node2D" parent="." unique_id=2076113011]
-position = Vector2(1236, 1096)
+position = Vector2(940, 849)
 script = ExtResource("2_55h7r")
 possible_encounters = Array[PackedScene]([ExtResource("4_25v0t")])
 destinations = Array[int]([8, 9])
@@ -142,7 +142,7 @@ theme_override_font_sizes/font_size = 40
 text = "Decision"
 
 [node name="6" type="Node2D" parent="." unique_id=1688194046]
-position = Vector2(1731, 209)
+position = Vector2(1321, 163)
 script = ExtResource("2_55h7r")
 possible_encounters = Array[PackedScene]([ExtResource("4_25v0t")])
 destinations = Array[int]([10])
@@ -163,7 +163,7 @@ theme_override_font_sizes/font_size = 40
 text = "CHALLENGE"
 
 [node name="7" type="Node2D" parent="." unique_id=1223703658]
-position = Vector2(1708, 557)
+position = Vector2(1309, 443)
 script = ExtResource("2_55h7r")
 possible_encounters = Array[PackedScene]([ExtResource("4_25v0t")])
 destinations = Array[int]([10])
@@ -184,7 +184,7 @@ theme_override_font_sizes/font_size = 40
 text = "Decision"
 
 [node name="8" type="Node2D" parent="." unique_id=9344786]
-position = Vector2(1708, 924)
+position = Vector2(1306, 723)
 script = ExtResource("2_55h7r")
 possible_encounters = Array[PackedScene]([ExtResource("4_25v0t")])
 destinations = Array[int]([11])
@@ -205,7 +205,7 @@ theme_override_font_sizes/font_size = 40
 text = "Decision"
 
 [node name="9" type="Node2D" parent="." unique_id=95178738]
-position = Vector2(1716, 1275)
+position = Vector2(1306, 986)
 script = ExtResource("2_55h7r")
 possible_encounters = Array[PackedScene]([ExtResource("4_25v0t")])
 destinations = Array[int]([11])
@@ -226,7 +226,7 @@ theme_override_font_sizes/font_size = 40
 text = "Decision"
 
 [node name="10" type="Node2D" parent="." unique_id=637189746]
-position = Vector2(2173, 399)
+position = Vector2(1649, 312)
 script = ExtResource("2_55h7r")
 possible_encounters = Array[PackedScene]([ExtResource("4_25v0t")])
 destinations = Array[int]([12])
@@ -247,7 +247,7 @@ theme_override_font_sizes/font_size = 40
 text = "Decision"
 
 [node name="11" type="Node2D" parent="." unique_id=391594965]
-position = Vector2(2173, 1094)
+position = Vector2(1653, 847)
 script = ExtResource("2_55h7r")
 possible_encounters = Array[PackedScene]([ExtResource("4_25v0t")])
 destinations = Array[int]([12])
@@ -268,7 +268,7 @@ theme_override_font_sizes/font_size = 40
 text = "Decision"
 
 [node name="12" type="Node2D" parent="." unique_id=1526550537]
-position = Vector2(2482, 736)
+position = Vector2(1886, 569)
 script = ExtResource("2_55h7r")
 possible_encounters = Array[PackedScene]([ExtResource("4_25v0t")])
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://fy7hp0t3msda"
-path="res://.godot/imported/ingredient_card_small_flavor_meaty.png-1b2036368084fce7094329b466b0fc6a.ctex"
+uid="uid://dttxwbvyspfro"
+path="res://.godot/imported/scene_cooking_nutrition_plate_03.png-7c18a2544cb62c8d7ef3c72737580a73.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/interface/ingredient cards/small view/ingredient_card_small_flavor_meaty.png"
-dest_files=["res://.godot/imported/ingredient_card_small_flavor_meaty.png-1b2036368084fce7094329b466b0fc6a.ctex"]
+source_file="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_03.png"
+dest_files=["res://.godot/imported/scene_cooking_nutrition_plate_03.png-7c18a2544cb62c8d7ef3c72737580a73.ctex"]
 
 [params]
 
