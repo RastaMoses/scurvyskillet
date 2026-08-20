@@ -22,6 +22,7 @@ extends Node2D
 
 #STATE
 var dice:Array[RigidBody2D]
+var highlighted_dice: Array[RigidBody2D]
 
 func finish_dish():
 	for die in dice:
@@ -68,6 +69,15 @@ func spawn_die(flavour):
 			new_die.change_sprite(hearty_sprite)
 		"fresh":
 			new_die.change_sprite(fresh_sprite)
+	#set highlight
+	new_die.start_highlight()
+	highlighted_dice.append(new_die)
+
+func reset_highlights():
+	for i in highlighted_dice:
+		i.stop_highlight()
+	highlighted_dice.clear()
+
 func point_explosion(point):
 	for die in dice:
 		var dir: Vector2 = die.global_position - point

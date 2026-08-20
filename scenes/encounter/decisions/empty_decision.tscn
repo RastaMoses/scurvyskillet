@@ -2,4 +2,5 @@
 
 [ext_resource type="PackedScene" uid="uid://benw6bt2l0ot" path="res://scenes/prefabs/decision_prefab.tscn" id="1_2aa47"]
 
-[node name="DecisionSample" unique_id=856639403 instance=ExtResource("1_2aa47")]
+[node name="DecisionSample" unique_id=856639403 node_paths=PackedStringArray("choices") instance=ExtResource("1_2aa47")]
+choices = [NodePath("choice1"), NodePath("choice2"), NodePath("choice3")]

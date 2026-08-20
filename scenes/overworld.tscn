@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cyfhrcxgc7812"]
 
 [ext_resource type="Script" uid="uid://c6wkwwpm73lha" path="res://scripts/Map/map_loader.gd" id="1_fkyvp"]
-[ext_resource type="PackedScene" uid="uid://b5p50mcr5j4g8" path="res://scenes/prefabs/map_prefab.tscn" id="2_fkyvp"]
+[ext_resource type="PackedScene" uid="uid://dunmta1nw4fux" path="res://scenes/maps/empty_map.tscn" id="2_qjxaj"]
 [ext_resource type="Script" uid="uid://cx3kxlhcjwpki" path="res://scripts/event_manager.gd" id="3_e184d"]
 [ext_resource type="Script" uid="uid://cmbe0axqvmhhv" path="res://scripts/abilities_manager.gd" id="4_nesqq"]
 [ext_resource type="PackedScene" uid="uid://ckhln31sq4epk" path="res://scenes/prefabs/player/inventory.tscn" id="5_lsky2"]
@@ -13,8 +13,8 @@
 
 [node name="Overworld" type="Node" parent="." unique_id=1021026839]
 script = ExtResource("1_fkyvp")
-maps_0 = Array[PackedScene]([ExtResource("2_fkyvp")])
-maps_1 = Array[PackedScene]([ExtResource("2_fkyvp")])
+maps_0 = Array[PackedScene]([ExtResource("2_qjxaj")])
+maps_1 = Array[PackedScene]([ExtResource("2_qjxaj")])
 
 [node name="EventManager" type="Node" parent="." unique_id=761654411]
 script = ExtResource("3_e184d")

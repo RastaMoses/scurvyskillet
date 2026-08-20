@@ -52,6 +52,9 @@ func add_ingredient(ingredient):
 	ui.update_flavours()
 	ui.update_nutrition(nutrition)
 	
+	#dice display
+	dice_disp.reset_highlights()
+	
 	for i in ingredient.sweet:
 		dice_disp.spawn_die("sweet")
 	for i in ingredient.sour:
