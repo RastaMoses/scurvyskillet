@@ -35,8 +35,8 @@ func remove_ingredient(card):
 	if ui != null:
 		ui.update_slots()
 
-func instantiate_card_from_resource(ingredient_resource):
-	var card = card_prefab.instantiate()
+func instantiate_card_from_resource(ingredient_resource:Resource):
+	var card:Node = card_prefab.instantiate()
 	add_child(card)
 	card.set_stats(ingredient_resource)
 	add_ingredient(card)
