@@ -56,6 +56,7 @@ mouse_filter = 2
 mouse_behavior_recursive = 1
 script = ExtResource("1_bm6af")
 card_prefab = ExtResource("2_psv22")
+can_stack_uses = false
 
 [node name="UI" type="Control" parent="." unique_id=817898650]
 anchors_preset = 0
@@ -461,9 +462,9 @@ script = ExtResource("2_0lb6f")
 y_sort_enabled = true
 script = ExtResource("35_lk7dj")
 die_scene = ExtResource("36_3j2nc")
-pulse_power = 500.0
-pulse_range = 120.0
+pulse_range = 200.0
 collision_delay = 0.1
+min_dist_to_edge = 40.0
 sweet_sprite = ExtResource("37_sojv3")
 sour_sprite = ExtResource("34_yhjpa")
 spicy_sprite = ExtResource("39_xteku")
