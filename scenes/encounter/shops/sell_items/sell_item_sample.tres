@@ -1,9 +1,0 @@
-[gd_resource type="Resource" format=3 uid="uid://c46bhph0d0ckj"]
-
-[ext_resource type="PackedScene" uid="uid://p1ug5ylfd5re" path="res://scenes/prefabs/card_prefab.tscn" id="1_5st8h"]
-[ext_resource type="Script" uid="uid://d2ae0ri22endl" path="res://scripts/Encounter/sell_item.gd" id="2_yakvk"]
-
-[resource]
-script = ExtResource("2_yakvk")
-ingredient = ExtResource("1_5st8h")
-price = 2

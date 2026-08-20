@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ckhln31sq4epk"]
 
-[ext_resource type="Script" uid="uid://bkv3gvee74qgl" path="res://scripts/Inventory/inventory.gd" id="1_i5bfg"]
+[ext_resource type="Script" uid="uid://bkv3gvee74qgl" path="res://scripts/Inventory/player_inventory.gd" id="1_i5bfg"]
 [ext_resource type="PackedScene" uid="uid://p1ug5ylfd5re" path="res://scenes/prefabs/card_prefab.tscn" id="2_inxy6"]
 [ext_resource type="Script" uid="uid://5ky5q3x7j70d" path="res://scripts/Inventory/inventory_ui.gd" id="3_5ftxm"]
 [ext_resource type="PackedScene" uid="uid://c4hu25tvp3kkd" path="res://scenes/prefabs/player/inventory_ui_slot.tscn" id="4_rw30e"]
@@ -15,11 +15,12 @@
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_2kgow"]
 
-[node name="Inventory" type="Control" unique_id=2008002230]
+[node name="Inventory" type="Control" unique_id=2008002230 node_paths=PackedStringArray("ui")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_i5bfg")
-starting_ingredients = Array[PackedScene]([ExtResource("2_inxy6")])
+card_prefab = ExtResource("2_inxy6")
+ui = NodePath("InventoryUI")
 
 [node name="InventoryUI" type="Control" parent="." unique_id=190865318]
 z_index = 15

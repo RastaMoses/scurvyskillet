@@ -4,9 +4,9 @@ extends Node
 @export var leftover_bone:PackedScene
 
 #CACHED COMPS
-@onready var inventory = get_node("/root/root/Player/Inventory")
+@onready var inventory = get_node("/root/game/Player/Inventory")
 #STATE
-@onready var spice_list:Array[Node] = []
+@onready var spice_list:Array[Resource]
 
 #SIGNALS
 
@@ -27,20 +27,20 @@ func on_dice_roll(ingredient):
 func on_die_roll(ingredient):
 	pass
 
-func on_ingredient_add_to_dish(ingredient):
+func on_ingredient_add_to_dish(card):
 	#Spice
-	if ingredient.abilities.has("spice"):
-		spice_list.append(ingredient)
+	if card.stats.abilities.has("spice"):
+		spice_list.append(card.stats)
 	#Leftovers
 	#Bone Leftovers
-	if ingredient.abilities.has("leftover_bone"):
-		inventory.instantiate_ingredient(leftover_bone)
+	if card.stats.abilities.has("leftover_bone"):
+		inventory.instantiate_card_from_resource(leftover_bone)
 
-func on_try_add_ingredient(ingredient):
+func on_try_add_ingredient(card):
 	var can_add = true
 	#Spice
-	if ingredient.abilities.has("spice"):
+	if card.stats.abilities.has("spice"):
 		for i in spice_list:
-			if i.get_ingredient_name() == ingredient.get_ingredient_name():
+			if i.name == card.stats.name:
 				return false
 	return can_add

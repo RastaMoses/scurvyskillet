@@ -16,7 +16,7 @@ extends Control
 
 #CACHED COMPS
 @onready var inventory = get_parent()
-@onready var event_manager = get_node("/root/root/EventManager")
+@onready var event_manager = get_node("/root/game/EventManager")
 @onready var slots: Array = $ScrollContainer/GridContainer.get_children()
 @onready var bg_bottom = $bg_bottom
 @onready var bg_side = $bg_side
@@ -65,10 +65,12 @@ func remove_slots(amount):
 		slots.remove_at(-1)
 
 func update_slots():
+	#check slot amount
 	var slots_to_remove = 0
 	while inventory.current_ingredients.size() > slots.size():
 		add_slot()
 	for i in range(slots.size()):
+		#update slots with items
 		if (inventory.current_ingredients.size() > i):
 			slots[i].update(inventory.current_ingredients[i])
 		else:
@@ -77,6 +79,7 @@ func update_slots():
 			else:
 				slots[i].update(null)
 	remove_slots(slots_to_remove)
+	#if bottom adjust column amount
 	if (bottom_position):
 		grid_container.columns = slots.size()
 	else:
@@ -137,7 +140,7 @@ func update_topbar():
 	money_text.text = str(inventory.current_money)
 	morale_text.text = str(inventory.current_morale)
 	
-func toggle_large_view(ingredient):
+func toggle_large_view(card):
 	if large_view_button.visible:
 		large_view_button.visible = false
 		for i in slots:
@@ -145,14 +148,14 @@ func toggle_large_view(ingredient):
 			i.large_view_clicked.connect(large_view_button_pressed)
 	else:
 		large_view_button.visible = true
-		if ingredient != null:
-			large_view_button.get_child(0).update(ingredient)
+		if card != null:
+			large_view_button.get_child(0).update(card)
 		for i in slots:
 			i.large_view_clicked.disconnect(large_view_button_pressed)
 			i.large_view_clicked.connect(set_new_large_view)
 
-func large_view_button_pressed(ingredient = null):
-	toggle_large_view(ingredient)
+func large_view_button_pressed(card = null):
+	toggle_large_view(card)
 
-func set_new_large_view(ingredient):
-	large_view_button.get_child(0).update(ingredient)
+func set_new_large_view(card):
+	large_view_button.get_child(0).update(card)

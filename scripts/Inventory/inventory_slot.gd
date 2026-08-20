@@ -19,15 +19,16 @@ extends Panel
 @onready var rarity_textures = $ItemDisplay/Rarity.get_children()
 @onready var icon = $ItemDisplay/item_icon
 var tags
+var uses:int
 var description
 var ingredient_name
 @onready var large_view_button = $large_view_button
 
 #SIGNALS
-signal large_view_clicked(ingredient_data)
+signal large_view_clicked(card_data)
 
 #STATE
-var ingredient
+var card
 var showcase = false
 var dragging = false
 
@@ -42,7 +43,7 @@ func _ready() -> void:
 	large_view_button.pressed.connect(large_view_pressed)
 
 func large_view_pressed():
-	large_view_clicked.emit(ingredient)
+	large_view_clicked.emit(card)
 
 func toggle_only_icon(value):
 	if value:
@@ -56,72 +57,75 @@ func toggle_only_icon(value):
 func update(item):
 	if !item:
 		item_visual.visible = false
-		ingredient == null
+		card == null
 		empty_slot.visible = true
 		large_view_button.visible = false
 	else:
 		large_view_button.visible = true
 		empty_slot.visible = false
 		item_visual.visible = true
-		icon.texture = item.get_icon_texture()
-		ingredient = item
+		icon.texture = item.stats.icon
+		card = item
 		update_flavours()
+		update_uses()
+
+func update_uses(value = uses):
+	uses = value
+	for i in uses_textures:
+			i.visible = false
+	for i in card.uses:
+			uses_textures[i].visible = true
 
 func update_flavours():
 	#flavours
-	if ingredient.hearty > 0:
+	if card.stats.hearty > 0:
 		hearty.visible = true
-		hearty.get_child(0).text = str(ingredient.hearty)
+		hearty.get_child(0).text = str(card.stats.hearty)
 	else:
 		hearty.visible = false
 		
-	if ingredient.sour > 0:
+	if card.stats.sour > 0:
 		sour.visible = true
-		sour.get_child(0).text = str(ingredient.sour)
+		sour.get_child(0).text = str(card.stats.sour)
 	else:
 		sour.visible = false
 		
-	if ingredient.fresh > 0:
+	if card.stats.fresh > 0:
 		fresh.visible = true
-		fresh.get_child(0).text = str(ingredient.fresh)
+		fresh.get_child(0).text = str(card.stats.fresh)
 	else:
 		fresh.visible = false
 		
-	if ingredient.spicy > 0:
+	if card.stats.spicy > 0:
 		spicy.visible = true
-		spicy.get_child(0).text = str(ingredient.spicy)
+		spicy.get_child(0).text = str(card.stats.spicy)
 	else:
 		spicy.visible = false
 		
-	if ingredient.sweet > 0:
+	if card.stats.sweet > 0:
 		sweet.visible = true
-		sweet.get_child(0).text = str(ingredient.sweet)
+		sweet.get_child(0).text = str(card.stats.sweet)
 	else:
 		sweet.visible = false
 	
 	#nutrition
-	nutrition_text.text = str(ingredient.nutrition)
+	nutrition_text.text = str(card.stats.nutrition)
 	
-	#uses
-	for i in uses_textures:
-			i.visible = false
-	for i in ingredient.uses:
-			uses_textures[i].visible = true
 	#rarity
 	for i in rarity_textures.size():
-		if i == ingredient.rarity:
+		if i == card.stats.rarity:
 			rarity_textures[i].visible = true
 		else:
 			rarity_textures[i].visible = false
 	
 	#if large view
 	if large_view == true:
-		tags = ingredient.get_preview().tags
-		description = ingredient.get_preview().description
-		ingredient_name = ingredient.get_preview().ingredient_name
+		tags = card.stats.tags
+		description = card.stats.description
+		ingredient_name = card.stats.name
 
 func _get_drag_data(_at_position: Vector2) -> Variant:
-	if not ingredient:
+	if not card:
 		return
 	if showcase:
 		return
@@ -144,14 +148,14 @@ func _can_drop_data(_at_position: Vector2, _data: Variant) -> bool:
 	return true
 	
 func _drop_data(at_position: Vector2, data: Variant) -> void:
-	var tmp = ingredient
-	ingredient = data.ingredient
+	var tmp = card
+	card = data.card
 	item_visual.show()
-	update(ingredient)
+	update(card)
 	if !showcase:
-		data.ingredient = tmp
+		data.card = tmp
 		data.show()
-		data.update(data.ingredient)
+		data.update(data.card)
 
 func _process(delta: float) -> void:
 	if !dragging:

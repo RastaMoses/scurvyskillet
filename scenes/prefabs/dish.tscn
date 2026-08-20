@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dj0h4ly2gikk" path="res://scripts/Encounter/Dish/dish.gd" id="1_bm6af"]
 [ext_resource type="Script" uid="uid://v63vu2iilw13" path="res://scripts/Inventory/drop_area.gd" id="2_0lb6f"]
 [ext_resource type="Script" uid="uid://b2ck5f4nie52i" path="res://scripts/Encounter/UI/dish_ui.gd" id="2_kkx33"]
+[ext_resource type="PackedScene" uid="uid://p1ug5ylfd5re" path="res://scenes/prefabs/card_prefab.tscn" id="2_psv22"]
 [ext_resource type="Texture2D" uid="uid://d04a0epwuvrll" path="res://sprites/interface/scenes/cooking scene/scene_cooking_pan_fire.png" id="3_k1awt"]
 [ext_resource type="Texture2D" uid="uid://dlg0ek6fn3b75" path="res://sprites/interface/scenes/cooking scene/scene_cooking_pan.png" id="4_ed1d2"]
 [ext_resource type="Texture2D" uid="uid://bbswptox1co8u" path="res://sprites/interface/scenes/cooking scene/scene_cooking_flavor_sweet.png" id="5_ed1d2"]
@@ -54,6 +55,7 @@ offset_bottom = 1080.0
 mouse_filter = 2
 mouse_behavior_recursive = 1
 script = ExtResource("1_bm6af")
+card_prefab = ExtResource("2_psv22")
 
 [node name="UI" type="Control" parent="." unique_id=817898650]
 anchors_preset = 0

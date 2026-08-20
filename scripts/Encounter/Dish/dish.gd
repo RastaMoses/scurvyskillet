@@ -1,4 +1,4 @@
-extends Node
+extends Inventory
 #PARAMS
 @export var nutrition:int = 0
 @export_subgroup("Flavour")
@@ -10,61 +10,48 @@ extends Node
 
 #CACHED COMPS
 var random = RandomNumberGenerator.new()
-@onready var abilities = get_node("/root/root/Player/Abilities")
-@onready var inventory = get_node("/root/root/Player/Inventory")
-@onready var event_manager = get_node("/root/root/EventManager")
+@onready var event_manager = get_node("/root/game/EventManager")
+@onready var player_inventory = get_node("/root/game/Player/Inventory")
+@onready var abilties = get_node("/root/game/Player/Abilities")
 @onready var challenge = get_parent()
 @onready var restricted_tags = challenge.restricted_tags
 signal nutrition_change(new_value)
-@onready var ui = $UI
 @onready var dice_disp = $Dice_Display
+@onready var dish_ui = $UI
+
 #STATE
 var can_drop:bool = true
-var current_ingredients: Array[Node]
 var tags:Array[String]
 
-func check_can_drop(data):
-	#try_add abilities
-	if abilities.on_try_add_ingredient(data) == false:
-		return false
-	#check if a tag is restricted
-	if restricted_tags.size() != 0:
-		for i in restricted_tags:
-			if data.tags.has(i):
-				return false
-	return can_drop
+func _ready() -> void:
+	on_add_ingredient.connect(on_add_to_dish)
 
-func add_ingredient(ingredient):
+func on_add_to_dish(card):
 	#check for abilities on add
-	abilities.on_ingredient_add_to_dish(ingredient)
-	#add ingredient
-	current_ingredients.append(ingredient)
-	ingredient.reparent(self)
-	inventory.remove_ingredient(ingredient)
-	
-	#add tags to the dish
-	for new_tag in ingredient.tags:
+	abilities.on_ingredient_add_to_dish(card)
+	for new_tag in card.stats.tags:
 		if !tags.has(new_tag):
 			tags.append(new_tag)
-	nutrition += ingredient.nutrition
-	event_manager.add_to_dish(ingredient)
-	roll_ingredient(ingredient)
-	ui.update_flavours()
-	ui.update_nutrition(nutrition)
-	
 	#dice display
 	dice_disp.reset_highlights()
-	
-	for i in ingredient.sweet:
+	for i in card.stats.sweet:
 		dice_disp.spawn_die("sweet")
-	for i in ingredient.sour:
+	for i in card.stats.sour:
 		dice_disp.spawn_die("sour")
-	for i in ingredient.spicy:
+	for i in card.stats.spicy:
 		dice_disp.spawn_die("spicy")
-	for i in ingredient.hearty:
+	for i in card.stats.hearty:
 		dice_disp.spawn_die("hearty")
-	for i in ingredient.fresh:
+	for i in card.stats.fresh:
 		dice_disp.spawn_die("fresh")
+	#ui
+	nutrition += card.stats.nutrition
+	event_manager.add_to_dish(card)
+	roll_ingredient(card)
+	
+	dish_ui.update_flavours()
+	dish_ui.update_nutrition(nutrition)
+
 func remove_ingredient(ingredient):
 	nutrition -= ingredient.nutrition
 	nutrition_change.emit(nutrition)
@@ -74,11 +61,13 @@ func remove_ingredient(ingredient):
 		for tag in i.tags:
 			if !tags.has(tag):
 				tags.append(tag)
+
 func remove_all_ingredients():
 	nutrition = 0
 	nutrition_change.emit(nutrition)
 	current_ingredients.clear()
 	tags.clear()
+
 func destroy_all_ingredients():
 	nutrition = 0
 	nutrition_change.emit(nutrition)
@@ -86,15 +75,16 @@ func destroy_all_ingredients():
 		i.queue_free()
 	current_ingredients.clear()
 	tags.clear()
+
 func roll_ingredient(ingredient):
 	var dice_multiplier = 1
 	var result_multiplier = 1
-	abilities.on_dice_roll(ingredient)
-	sweet += roll_dice(dice_multiplier*ingredient.sweet) * result_multiplier
-	sour += roll_dice(dice_multiplier*ingredient.sour) * result_multiplier
-	spicy += roll_dice(dice_multiplier*ingredient.spicy) * result_multiplier
-	hearty += roll_dice(dice_multiplier*ingredient.hearty) * result_multiplier
-	fresh += roll_dice(dice_multiplier*ingredient.fresh) * result_multiplier
+	abilities.on_dice_roll(ingredient.stats)
+	sweet += roll_dice(dice_multiplier*ingredient.stats.sweet) * result_multiplier
+	sour += roll_dice(dice_multiplier*ingredient.stats.sour) * result_multiplier
+	spicy += roll_dice(dice_multiplier*ingredient.stats.spicy) * result_multiplier
+	hearty += roll_dice(dice_multiplier*ingredient.stats.hearty) * result_multiplier
+	fresh += roll_dice(dice_multiplier*ingredient.stats.fresh) * result_multiplier
 
 func roll_dice(amount):
 	var result = 0

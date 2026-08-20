@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dweskuuxdr5ot" path="res://scripts/Inventory/inventory_slot.gd" id="1_80hv5"]
 [ext_resource type="Texture2D" uid="uid://wf1aj4g31of2" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_frame.png" id="2_x2fnd"]
-[ext_resource type="Texture2D" uid="uid://ds0jswtp7xx1r" path="res://sprites/placeholder/kleinb.PNG" id="3_bq2eb"]
 [ext_resource type="Texture2D" uid="uid://bahwac4sb3m0x" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_rarity_1.png" id="4_148xu"]
 [ext_resource type="Texture2D" uid="uid://cscya508gf0jl" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_rarity_2.png" id="5_2tdde"]
 [ext_resource type="Texture2D" uid="uid://df1rnkyxfllky" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_rarity_3.png" id="6_vod2l"]
@@ -57,12 +56,13 @@ texture = ExtResource("2_x2fnd")
 
 [node name="item_icon" type="TextureRect" parent="ItemDisplay" unique_id=1095232349]
 z_index = -1
+custom_minimum_size = Vector2(192, 192)
+custom_maximum_size = Vector2(192, 192)
 layout_mode = 0
 offset_left = 16.0
 offset_top = 64.0
 offset_right = 208.0
 offset_bottom = 256.0
-texture = ExtResource("3_bq2eb")
 expand_mode = 1
 
 [node name="Rarity" type="Control" parent="ItemDisplay" unique_id=80472254]

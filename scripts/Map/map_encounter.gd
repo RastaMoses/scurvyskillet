@@ -6,8 +6,8 @@ extends Node
 
 #CACHED COMPS
 @onready var button = $Button
-@onready var event_manager = get_node("/root/root/EventManager")
-@onready var inventory = get_node("/root/root/Player/Inventory")
+@onready var event_manager = get_node("/root/game/EventManager")
+@onready var inventory = get_node("/root/game/Player/Inventory")
 @onready var random = RandomNumberGenerator.new()
 @onready var map = get_parent()
 #STATE

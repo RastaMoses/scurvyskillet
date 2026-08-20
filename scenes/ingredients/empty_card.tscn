@@ -1,7 +1,0 @@
-[gd_scene format=3 uid="uid://bbobp4gkacvv2"]
-
-[ext_resource type="PackedScene" uid="uid://p1ug5ylfd5re" path="res://scenes/prefabs/card_prefab.tscn" id="1_iugmn"]
-
-[node name="CardSample" unique_id=824626168 instance=ExtResource("1_iugmn")]
-
-[editable path="Preview"]

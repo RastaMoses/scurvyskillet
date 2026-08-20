@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://cyfhrcxgc7812"]
+
+[ext_resource type="Script" uid="uid://c6wkwwpm73lha" path="res://scripts/Map/map_loader.gd" id="1_0tnpc"]
+[ext_resource type="PackedScene" uid="uid://dunmta1nw4fux" path="res://scenes/maps/empty_map.tscn" id="2_vtaks"]
+[ext_resource type="Script" uid="uid://cx3kxlhcjwpki" path="res://scripts/event_manager.gd" id="3_kvpfn"]
+[ext_resource type="Script" uid="uid://cmbe0axqvmhhv" path="res://scripts/abilities_manager.gd" id="4_dinhu"]
+[ext_resource type="PackedScene" uid="uid://ckhln31sq4epk" path="res://scenes/prefabs/player/inventory.tscn" id="5_kvuet"]
+[ext_resource type="Resource" uid="uid://covhmmjexggme" path="res://scenes/ingredients/spicy_leon.tres" id="7_ir15t"]
+[ext_resource type="PackedScene" uid="uid://bodk7w1csegu4" path="res://scenes/debug/debug_mouse.tscn" id="8_ca42v"]
+[ext_resource type="Script" uid="uid://cf1f8f18wnr6h" path="res://scripts/Ingredients/ingredient_pool.gd" id="9_rysoc"]
+
+[node name="game" type="Node2D" unique_id=1075341061]
+
+[node name="Overworld" type="Node" parent="." unique_id=1021026839]
+script = ExtResource("1_0tnpc")
+maps_0 = Array[PackedScene]([ExtResource("2_vtaks")])
+maps_1 = Array[PackedScene]([ExtResource("2_vtaks")])
+
+[node name="EventManager" type="Node" parent="." unique_id=761654411]
+script = ExtResource("3_kvpfn")
+
+[node name="Player" type="Node" parent="." unique_id=1818132485]
+
+[node name="Abilities" type="Node" parent="Player" unique_id=121107139]
+script = ExtResource("4_dinhu")
+
+[node name="Inventory" parent="Player" unique_id=421132193 instance=ExtResource("5_kvuet")]
+mouse_filter = 1
+current_money = 5
+current_morale = 5
+starting_ingredients = Array[Resource]([ExtResource("7_ir15t")])
+
+[node name="debug_mouse" parent="." unique_id=2141378264 instance=ExtResource("8_ca42v")]
+
+[node name="IngredientPool" type="Node" parent="." unique_id=1772734839]
+script = ExtResource("9_rysoc")

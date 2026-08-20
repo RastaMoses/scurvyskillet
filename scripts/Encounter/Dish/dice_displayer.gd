@@ -18,7 +18,7 @@ extends Node2D
 #CACHED COMPS
 @onready var pan_collider = $Pan/CollisionPolygon2D
 @onready var pan_center = $Pan/center
-@onready var event = get_node("/root/root/EventManager")
+@onready var event = get_node("/root/game/EventManager")
 
 #STATE
 var dice:Array[RigidBody2D]
@@ -33,13 +33,10 @@ func spawn_die(flavour):
 	#get point dropped inside static body or closest point if outside
 	var mouse_pos = get_global_mouse_position()
 	var spawn_pos
-	print()
 	if !Geometry2D.is_point_in_polygon(mouse_pos, get_global_polygon(pan_collider)):
-		print("outside collider")
 		var point_on_line: Vector2 = closest_point_on_polygon(mouse_pos, get_global_polygon(pan_collider))
 		spawn_pos = point_on_line.lerp(pan_center.position, rel_dist_to_center)
 	else:
-		print("inside collider")
 		#if point is close to edge of pan, move more inside
 		var point_on_line = closest_point_on_polygon(mouse_pos, get_global_polygon(pan_collider))
 		var dist_to_edge:float = (point_on_line - mouse_pos).length()

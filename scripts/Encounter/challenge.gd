@@ -20,23 +20,23 @@ extends Control
 @export var restricted_tags: Array[String]
 @export_group("Results")
 @export_subgroup("Success")
-@export var success_ingredients: Array[PackedScene]
+@export var success_ingredients: Array[Resource]
 @export var success_morale: int
 @export var success_money: int
 @export_subgroup("Partial")
-@export var partial_ingredients: Array[PackedScene]
+@export var partial_ingredients: Array[Resource]
 @export var partial_morale: int
 @export var partial_money: int
 @export_subgroup("Failure")
-@export var failure_ingredients: Array[PackedScene]
+@export var failure_ingredients: Array[Resource]
 @export var failure_morale: int
 @export var failure_money: int
 @export_group("UI Elements")
 @export var map_icon:Texture
 
 #CACHED COMPS
-@onready var inventory = get_node("/root/root/Player/Inventory")
-@onready var event = get_node("/root/root/EventManager")
+@onready var inventory = get_node("/root/game/Player/Inventory")
+@onready var event = get_node("/root/game/EventManager")
 @onready var dish_node = $Dish
 @onready var map_node = get_parent()
 @onready var ui = $UI
@@ -50,26 +50,26 @@ var inv_save:Array[Node]
 
 
 func on_success():
-	inventory.current_money += success_money
-	inventory.current_morale += success_morale
+	inventory.add_money(success_money)
+	inventory.add_morale(success_morale)
 	for i in success_ingredients:
-		inventory.instantiate_ingredient(i)
+		inventory.add_ingredient(i)
 	print("Succeeded the challenge")
 	end()
 
 func on_partial():
-	inventory.current_money += partial_money
-	inventory.current_morale += partial_morale
+	inventory.add_money(partial_money)
+	inventory.add_morale(partial_morale)
 	for i in partial_ingredients:
-		inventory.instantiate_ingredient(i)
+		inventory.add_ingredient(i)
 	print("Partialed the challenge")
 	end()
 
 func on_failure():
-	inventory.current_money += failure_money
-	inventory.current_morale += failure_morale
+	inventory.add_money(failure_money)
+	inventory.add_morale(failure_morale)
 	for i in failure_ingredients:
-		inventory.instantiate_ingredient(i)
+		inventory.add_ingredient(i)
 	print("Failed the challenge")
 	end()
 

@@ -8,7 +8,7 @@ extends Node
 #CACHED
 @onready var random = RandomNumberGenerator.new()
 
-@onready var inventory = get_node("/root/root/Player/Inventory")
+@onready var inventory = get_node("/root/game/Player/Inventory")
 
 #STATE
 var current_map

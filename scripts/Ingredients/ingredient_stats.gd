@@ -1,6 +1,11 @@
-extends Node
+extends Resource
 #PARAMS
-
+@export var name:String
+@export var icon:Texture
+@export var tags: Array[String]
+@export var rarity:int
+@export var price:int
+@export_multiline() var description:String
 @export_group("Values")
 @export var nutrition:int
 @export_subgroup("Flavour")
@@ -21,20 +26,4 @@ extends Node
 @export var uses: int
 @export_group("Special Abilities")
 @export_enum("leftover_bones", "spice", "ability3") var abilities: Array[String]
-@export_group("Tags")
-@export var tags: Array[String]
-@export var rarity:int
 @export var undroppable: bool = false
-#CACHED COMPS
-
-#STATE
-var inv_index:int
-var texture:Texture
-
-func get_ingredient_name():
-	return $Preview/ItemDisplay/Name/RichTextLabel.text
-
-func get_preview():
-	return $Preview
-func get_icon_texture():
-	return $Preview/ItemDisplay/item_icon.texture

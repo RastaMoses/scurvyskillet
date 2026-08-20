@@ -2,7 +2,7 @@ extends Control
 
 @onready var description_text = $description/text
 @onready var description_title = $description/title
-@onready var player_inventory = get_node("/root/root/Player/Inventory")
+@onready var player_inventory = get_node("/root/game/Player/Inventory")
 
 @export var choices: Array[Node]
 var encounter_type = "decision"
