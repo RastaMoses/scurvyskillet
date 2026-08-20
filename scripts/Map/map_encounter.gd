@@ -3,27 +3,55 @@ extends Node
 #PARAMS
 @export var possible_encounters:Array[PackedScene]
 @export var destinations: Array[int]
+@export_enum("shop","decision","challenge","boss","none") var type:String
+@export_enum("water","island") var bg_type:String
+@export var icons:Array[Texture]
 
 #CACHED COMPS
 @onready var button = $Button
+@onready var icon = $Icon
+@onready var bg_water = $BG/Water
+@onready var bg_island = $BG/Island
 @onready var event_manager = get_node("/root/game/EventManager")
 @onready var inventory = get_node("/root/game/Player/Inventory")
 @onready var random = RandomNumberGenerator.new()
-@onready var map = get_parent()
+@onready var map
+@onready var docking_points = $ShipDockingPoints.get_children()
+var player_ship
 #STATE
 var encounter_index:int
 var encounter
 var encounter_obj
-var encounter_type
 
 func randomize_encounter():
 	var rand = random.randi_range(0,possible_encounters.size()-1)
+	
 	set_encounter(possible_encounters[rand])
 
 func set_encounter(encounter_scene):
 	encounter = encounter_scene
+	#visuals
+	match type:
+		"shop":
+			icon.texture = icons[0]
+		"decision":
+			icon.texture = icons[1]
+		"challenge":
+			icon.texture = icons[2]
+		"boss":
+			icon.texture = icons[3]
+		"none":
+			icon.texture = null
+	match bg_type:
+		"water":
+			bg_water.visible = true
+			bg_island.visible = false
+		"island":
+			bg_water.visible = false
+			bg_island.visible = true
 
 func end_encounter():
+	type = "none"
 	event_manager.encounter_end()
 	map.toggle_map_visible(true)
 	inventory.ui.open()
@@ -31,10 +59,10 @@ func end_encounter():
 	toggle_button(false)
 	show_button(true)
 	encounter_obj.queue_free()
+	player_ship.toggle_ship_visible(true)
 	
 func activate_encounter():
 	event_manager.encounter_start()
-	map.update_player_location(encounter_index)
 	load_encounter(encounter)
 	toggle_button(false)
 	map.toggle_map_visible(false)
@@ -45,10 +73,11 @@ func load_encounter(data):
 		encounter_obj.queue_free()
 	encounter_obj = encounter.instantiate()
 	add_child(encounter_obj)
-	encounter_type = encounter_obj.encounter_type
+	set_encounter(encounter_obj)
 	encounter_obj.global_position = Vector2.ZERO
 	encounter_obj.start()
 	show_button(false)
+	player_ship.toggle_ship_visible(false)
 
 func toggle_button(value):
 	button.disabled = !value
@@ -56,5 +85,13 @@ func toggle_button(value):
 func show_button(value):
 	button.visible = value
 
+func move_ship():
+	var rand_dock = docking_points[random.randi_range(0, docking_points.size()-1)]
+	player_ship.start_moving(rand_dock, encounter_index)
+
+
 func _on_button_pressed() -> void:
+	move_ship()
+	await player_ship.ship_arrived
+	print("ship arrives")
 	activate_encounter()

@@ -17,8 +17,6 @@ func _ready() -> void:
 
 #STATE
 var buy_buttons:Array
-var encounter_type = "shop"
-
 
 func player_sell_ingredient(card):
 	if card.stats.rarity == 0:
@@ -77,7 +75,6 @@ func start():
 func end():
 	map_node.end_encounter()
 	queue_free()
-
 
 func _on_leave_button_pressed() -> void:
 	end()

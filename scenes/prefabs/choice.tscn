@@ -14,6 +14,7 @@ anchor_bottom = 1.0
 grow_vertical = 0
 script = ExtResource("1_61j3v")
 card_prefab = ExtResource("2_jv3kl")
+can_stack_uses = false
 
 [node name="Button" type="Button" parent="." unique_id=1705189317]
 layout_mode = 1

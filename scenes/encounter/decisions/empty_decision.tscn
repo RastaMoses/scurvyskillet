@@ -3,8 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://benw6bt2l0ot" path="res://scenes/prefabs/decision_prefab.tscn" id="1_2aa47"]
 [ext_resource type="Resource" uid="uid://covhmmjexggme" path="res://scenes/ingredients/spicy_leon.tres" id="2_4i6xc"]
 
-[node name="DecisionSample" unique_id=856639403 node_paths=PackedStringArray("choices") instance=ExtResource("1_2aa47")]
-choices = [NodePath("choice1"), NodePath("choice2"), NodePath("choice3")]
+[node name="DecisionSample" unique_id=856639403 instance=ExtResource("1_2aa47")]
 
-[node name="choice1" parent="." index="3" unique_id=704699521]
+[node name="bg" parent="." index="0" unique_id=414026879]
+texture = null
+
+[node name="choice1" parent="Choices" parent_id_path=PackedInt32Array(504841176) index="0" unique_id=704699521]
 r_ingredients = Array[Resource]([ExtResource("2_4i6xc")])

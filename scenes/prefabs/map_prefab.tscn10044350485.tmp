@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://b5p50mcr5j4g8"]
+
+[ext_resource type="Script" uid="uid://cqbk4mjb6vddi" path="res://scripts/Map/map.gd" id="1_evkri"]
+[ext_resource type="Texture2D" uid="uid://cqbdqqn74o4ke" path="res://sprites/interface/scenes/worldmap scene/scene_worldmap_background.png" id="2_fd86p"]
+[ext_resource type="PackedScene" uid="uid://d3m0xjawxe0cp" path="res://scenes/prefabs/encounter.tscn" id="3_u6b3a"]
+[ext_resource type="Texture2D" uid="uid://oi2g7kkk006h" path="res://sprites/interface/scenes/worldmap scene/scene_worldmap_boat.png" id="4_2jk3u"]
+[ext_resource type="Script" uid="uid://dd6rhp5q4wtuh" path="res://scripts/Map/ship_mover.gd" id="4_evkri"]
+
+[node name="Map" type="Node2D" unique_id=1839841650 node_paths=PackedStringArray("encounter_nodes")]
+y_sort_enabled = true
+script = ExtResource("1_evkri")
+encounter_nodes = [null, null, null, null, null, null, null, null, null, null, null, null, null]
+
+[node name="BG" type="Sprite2D" parent="." unique_id=496637297]
+z_index = -1
+scale = Vector2(8, 8)
+texture = ExtResource("2_fd86p")
+centered = false
+
+[node name="0" parent="." unique_id=986483625 instance=ExtResource("3_u6b3a")]
+position = Vector2(160, 456)
+
+[node name="1" parent="." unique_id=1699582653 instance=ExtResource("3_u6b3a")]
+position = Vector2(496, 304)
+destinations = Array[int]([3])
+
+[node name="2" parent="." unique_id=386168653 instance=ExtResource("3_u6b3a")]
+position = Vector2(528, 616)
+destinations = Array[int]([3])
+bg_type = 0
+
+[node name="3" parent="." unique_id=664957354 instance=ExtResource("3_u6b3a")]
+position = Vector2(1000, 424)
+
+[node name="PlayerShip" type="Node2D" parent="." unique_id=1335774875]
+position = Vector2(904, 424)
+script = ExtResource("4_evkri")
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayerShip" unique_id=1966297454]
+scale = Vector2(8, 8)
+texture = ExtResource("4_2jk3u")

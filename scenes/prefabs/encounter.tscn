@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://d3m0xjawxe0cp"]
+
+[ext_resource type="Script" uid="uid://ofgnbg5roiqb" path="res://scripts/Map/map_encounter.gd" id="1_mwowy"]
+[ext_resource type="PackedScene" uid="uid://benw6bt2l0ot" path="res://scenes/prefabs/decision_prefab.tscn" id="2_fh2jv"]
+[ext_resource type="Texture2D" uid="uid://cduvpwmmsdv3t" path="res://sprites/interface/scenes/worldmap scene/scene_worldmap_encounter_shop.png" id="3_vmpao"]
+[ext_resource type="Texture2D" uid="uid://cycegch31ldia" path="res://sprites/interface/scenes/worldmap scene/scene_worldmap_encounter_event.png" id="4_nbxj8"]
+[ext_resource type="Texture2D" uid="uid://d3chqq8ld7ywb" path="res://sprites/interface/scenes/worldmap scene/scene_worldmap_encounter_challenge.png" id="5_g1158"]
+[ext_resource type="Texture2D" uid="uid://00sud1flsvmj" path="res://sprites/interface/scenes/worldmap scene/scene_worldmap_encounter_boss.png" id="6_xcpvw"]
+[ext_resource type="Texture2D" uid="uid://c44450spbnv8f" path="res://sprites/interface/scenes/worldmap scene/scene_worldmap_node_water.png" id="7_g1158"]
+[ext_resource type="Texture2D" uid="uid://c6iotdyyvfkra" path="res://sprites/interface/scenes/worldmap scene/scene_worldmap_node_island.png" id="8_xcpvw"]
+
+[node name="encounter" type="Node2D" unique_id=986483625]
+script = ExtResource("1_mwowy")
+possible_encounters = Array[PackedScene]([ExtResource("2_fh2jv")])
+destinations = Array[int]([1, 2])
+icons = Array[Texture]([ExtResource("3_vmpao"), ExtResource("4_nbxj8"), ExtResource("5_g1158"), ExtResource("6_xcpvw")])
+
+[node name="Button" type="Button" parent="." unique_id=442490857]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -88.0
+offset_top = -80.0
+offset_right = 96.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+flat = true
+text_overrun_behavior = 2
+
+[node name="BG" type="Node2D" parent="." unique_id=1874210110]
+
+[node name="Water" type="Sprite2D" parent="BG" unique_id=1018598813]
+scale = Vector2(8, 8)
+texture = ExtResource("7_g1158")
+
+[node name="Island" type="Sprite2D" parent="BG" unique_id=681307605]
+scale = Vector2(8, 8)
+texture = ExtResource("8_xcpvw")
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=237575219]
+position = Vector2(8, -24)
+scale = Vector2(8, 8)
+texture = ExtResource("4_nbxj8")
+
+[node name="ShipDockingPoints" type="Node2D" parent="." unique_id=18352013]
+
+[node name="Node2D" type="Node2D" parent="ShipDockingPoints" unique_id=806811630]
+position = Vector2(-72, 32)
+
+[node name="Node2D2" type="Node2D" parent="ShipDockingPoints" unique_id=98153611]
+position = Vector2(32, 64)
+
+[node name="Node2D3" type="Node2D" parent="ShipDockingPoints" unique_id=84366410]
+position = Vector2(112, 48)
+
+[node name="Node2D4" type="Node2D" parent="ShipDockingPoints" unique_id=293699935]
+position = Vector2(16, 72)
+
+[node name="Node2D5" type="Node2D" parent="ShipDockingPoints" unique_id=2105686702]
+position = Vector2(72, -72)
+
+[node name="Node2D6" type="Node2D" parent="ShipDockingPoints" unique_id=172466192]
+position = Vector2(-96, 8)
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
