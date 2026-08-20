@@ -7,8 +7,13 @@ extends Inventory
 @export_group("Reward")
 @export var r_money:int
 @export var r_morale:int
-@export var r_random_ingredient:bool = false
-@export var r_ingredients:Array[Resource]
+@export var specific_ingredients:Array[Resource]
+@export var random_ingredient_amount:int = 1
+@export_subgroup("Random Item Reqs")
+@export var and_req:bool = false
+@export_enum("common", "uncommon", "rare", "legendary") var req_rarity:Array[int]
+@export_enum("tag1", "tag2", "tag3", "tag4") var req_tag:Array[String]
+@export_enum("seasoning", "ability2", "leftover", "richard") var req_ability:Array[String]
 @export_group("Cost")
 @export var c_money:int
 @export var c_morale:int
@@ -109,12 +114,13 @@ func button_available():
 func give_rewards():
 	player_inventory.add_money(r_money)
 	player_inventory.add_morale(r_morale)
-	if r_random_ingredient:
-		var rand = random.randi_range(0,r_ingredients.size()-1)
-		player_inventory.instantiate_card_from_resource(r_ingredients[rand])
-	else:
-		for i in r_ingredients:
-			player_inventory.instantiate_card_from_resource(i)
+	if random_ingredient_amount > 0:
+		var index = random_ingredient_amount
+		while index > 0:
+			player_inventory.instantiate_card_from_resource(item_pool.get_random_ingredient(and_req,req_tag,req_ability,req_rarity))
+			index -= 1
+	for i in specific_ingredients:
+		player_inventory.instantiate_card_from_resource(i)
 
 func take_cost():
 	player_inventory.add_money(-c_money)

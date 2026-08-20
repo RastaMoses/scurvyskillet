@@ -18,7 +18,6 @@ func _ready() -> void:
 #STATE
 var buy_buttons:Array
 
-
 func player_sell_ingredient(card):
 	if card.stats.rarity == 0:
 		player_inventory.change_money(player_inventory.current_money + rarity_prices[0])
@@ -76,7 +75,6 @@ func start():
 func end():
 	map_node.end_encounter()
 	queue_free()
-
 
 func _on_leave_button_pressed() -> void:
 	end()

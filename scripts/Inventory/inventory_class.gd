@@ -10,9 +10,10 @@ var current_ingredients: Array[Node]
 @export_group("Can Drop Reqs")
 @export var cd_tags:Array[String]
 @export var cd_ingredients:Array[Resource]
-@export var cd_rarity:int = -1
+@export var cd_rarity:int = -1 #-1 to disable
 #CACHED COMPS
 @onready var abilities = get_node("/root/game/Player/Abilities")
+@onready var item_pool = get_node("/root/game/IngredientPool")
 #SIGNALS
 signal on_add_ingredient(card)
 signal on_remove_ingredient(card)
