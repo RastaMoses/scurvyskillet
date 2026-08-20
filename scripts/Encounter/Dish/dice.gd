@@ -1,12 +1,15 @@
 extends RigidBody2D
 
 #PARAMS
+@export var pixel_multiple:int = 8
 @export var random_power:Vector2
 @export var max_speed = 300
 @export var highlight_duration:float = 5
+@export_group("Sizzle Anim")
 @export var sizzle_scene:PackedScene
 @export var sizzle_interval:float = 1
-@export var pixel_multiple:int = 8
+@export var sizzle_spawn_range:Vector2i = Vector2i(0,2)
+@export var sizzle_pos_range:Vector2 = Vector2(-10,10)
 #CACHED COMPS
 @onready var collision_shape = $CollisionShape2D
 @onready var sprite = $Visuals/Sprite2D
@@ -54,10 +57,12 @@ func _process(delta: float) -> void:
 	if sizzle_active:
 		if sizzle_timer >= sizzle_interval:
 			sizzle_timer = 0
-			var anim = sizzle_scene.instantiate()
-			dice_disp.add_child(anim)
-			anim.global_position = global_position
-			anim.global_rotation = linear_velocity.angle()
+			for i in random.randi_range(sizzle_spawn_range.x,sizzle_spawn_range.y):
+				var anim = sizzle_scene.instantiate()
+				anim.anim_int = random.randi_range(0,2)
+				dice_disp.add_child(anim)
+				anim.global_position = global_position + Vector2(random.randf_range(sizzle_pos_range.x, sizzle_pos_range.y),random.randf_range(sizzle_pos_range.x, sizzle_pos_range.y))
+			#anim.global_rotation = linear_velocity.angle()
 		sizzle_timer += delta
 	#visuals
 	var raw_position: Vector2 = global_position 

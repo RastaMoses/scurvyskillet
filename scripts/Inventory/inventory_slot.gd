@@ -2,6 +2,8 @@ extends Panel
 #PARAMS
 @export var large_view:bool = false
 @export var editor_preview:bool = false
+@export var pixel_multiple:int = 8
+@export var drag_pos_offset:Vector2 = Vector2(96,96)
 
 #CACHED COMPS
 @onready var item_visual: TextureRect = $ItemDisplay
@@ -27,6 +29,7 @@ signal large_view_clicked(ingredient_data)
 #STATE
 var ingredient
 var showcase = false
+var dragging = false
 
 func _ready() -> void:
 	if editor_preview:
@@ -126,7 +129,8 @@ func _get_drag_data(_at_position: Vector2) -> Variant:
 	preview.toggle_only_icon(true)
 	var c = Control.new()
 	c.add_child(preview)
-	preview.position -= Vector2(96,96)
+	preview.dragging = true
+	preview.position -= drag_pos_offset
 	preview.z_index = 100
 	preview.self_modulate = Color.TRANSPARENT
 	c.modulate = Color(c.modulate, 0.7)
@@ -148,3 +152,9 @@ func _drop_data(at_position: Vector2, data: Variant) -> void:
 		data.ingredient = tmp
 		data.show()
 		data.update(data.ingredient)
+
+func _process(delta: float) -> void:
+	if !dragging:
+		return
+	var new_pos = get_global_mouse_position() - drag_pos_offset
+	global_position = (new_pos / pixel_multiple).round() * pixel_multiple

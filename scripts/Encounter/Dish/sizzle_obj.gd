@@ -2,7 +2,7 @@ extends AnimatedSprite2D
 
 @export var pixel_multiple: int = 8  # Change to 4, 8, etc. as needed
 
-	
+var anim_int:int
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -16,7 +16,13 @@ func _ready() -> void:
 	
 	# Snap 2D rotation degrees to the nearest 90-degree increment
 	#global_rotation_degrees = snappedf(global_rotation_degrees, 90.0)
-	play("sizzle")
+	match anim_int:
+		0:
+			play("sizzle1")
+		1:
+			play("sizzle2")
+		2:
+			play("sizzle3")
 
 
 func _on_animation_finished() -> void:

@@ -26,6 +26,8 @@ script = ExtResource("1_jvbsu")
 random_power = Vector2(200, 400)
 sizzle_scene = ExtResource("4_pv3uk")
 sizzle_interval = 0.3
+sizzle_spawn_range = Vector2i(0, 3)
+sizzle_pos_range = Vector2(-30, 40)
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="." unique_id=820687282]
 y_sort_enabled = true
