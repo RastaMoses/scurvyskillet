@@ -1,26 +1,18 @@
 [gd_scene format=3 uid="uid://p1ug5ylfd5re"]
 
-[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/ingredient_stats.gd" id="1_d7r7r"]
-[ext_resource type="PackedScene" uid="uid://7lxu211xbf4i" path="res://scenes/prefabs/player/inventory_ui_large_view.tscn" id="2_syjsv"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/ingredient_stats.gd" id="1_s2ec3"]
+[ext_resource type="PackedScene" uid="uid://7lxu211xbf4i" path="res://scenes/prefabs/player/inventory_ui_large_view.tscn" id="2_x5gls"]
 
 [node name="CardSample" type="Control" unique_id=824626168]
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 2
-script = ExtResource("1_d7r7r")
+script = ExtResource("1_s2ec3")
 nutrition = 3
 sweet = 1
 unlimited_uses = true
 
-[node name="Preview" parent="." unique_id=442831638 instance=ExtResource("2_syjsv")]
+[node name="Preview" parent="." unique_id=442831638 instance=ExtResource("2_x5gls")]
 layout_mode = 0
-mouse_filter = 2
+mouse_behavior_recursive = 1
 editor_preview = true
-
-[node name="EmptySlot" parent="Preview" index="0" unique_id=961373681]
-self_modulate = Color(1, 1, 1, 1)
-
-[node name="Rarity" parent="Preview/ItemDisplay" parent_id_path=PackedInt32Array(442831638, 1942941591) index="4" unique_id=80472254]
-mouse_behavior_recursive = 0
-
-[editable path="Preview"]

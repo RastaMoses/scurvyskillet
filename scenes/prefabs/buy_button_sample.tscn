@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://u2u1v4rgdntw"]
 
-[ext_resource type="Script" uid="uid://bjtjqm0kcr78n" path="res://scripts/Encounter/buy_button.gd" id="1_vhmq1"]
+[ext_resource type="Script" uid="uid://bjtjqm0kcr78n" path="res://scripts/Encounter/buy_button.gd" id="1_etfdk"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_omhyo"]
 
@@ -10,7 +10,7 @@ offset_right = 705.0
 offset_bottom = 208.0
 size_flags_horizontal = 3
 texture = SubResource("PlaceholderTexture2D_omhyo")
-script = ExtResource("1_vhmq1")
+script = ExtResource("1_etfdk")
 
 [node name="Button" type="Button" parent="." unique_id=1909689102]
 layout_mode = 1

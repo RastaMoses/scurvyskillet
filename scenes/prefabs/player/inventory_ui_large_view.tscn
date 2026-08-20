@@ -1,25 +1,25 @@
 [gd_scene format=3 uid="uid://7lxu211xbf4i"]
 
-[ext_resource type="PackedScene" uid="uid://c4hu25tvp3kkd" path="res://scenes/prefabs/player/inventory_ui_slot.tscn" id="1_lf0qv"]
-[ext_resource type="Texture2D" uid="uid://by6apfx54escg" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_frame.png" id="2_u7q7r"]
-[ext_resource type="Texture2D" uid="uid://ban45p6su6txh" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_page.png" id="3_ip6sq"]
-[ext_resource type="Texture2D" uid="uid://b5g8g8u5j2yej" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_rarity_1.png" id="4_7yc3c"]
-[ext_resource type="Texture2D" uid="uid://d12nbvxtvrbes" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_name.png" id="5_1m276"]
-[ext_resource type="Texture2D" uid="uid://b0go1benp7ml1" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_rarity_2.png" id="5_ih15c"]
-[ext_resource type="Texture2D" uid="uid://un4k3xmdjkb2" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_rarity_3.png" id="6_4blq0"]
-[ext_resource type="Texture2D" uid="uid://die6jm6v68afg" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_use_1.png" id="7_4aj0w"]
-[ext_resource type="Texture2D" uid="uid://bcnle8o8ui2ax" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_use_2.png" id="8_1m276"]
-[ext_resource type="Texture2D" uid="uid://dpn3fng3xe0yh" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_use_3.png" id="9_gie2w"]
-[ext_resource type="Texture2D" uid="uid://cc37qnkngqwse" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_use_4.png" id="10_f0i25"]
-[ext_resource type="Texture2D" uid="uid://banbfs6e11s6d" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_flavor_hearty.png" id="11_tgk0l"]
-[ext_resource type="Texture2D" uid="uid://cjkentqsfmrsf" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_flavor_sour.png" id="12_586pw"]
-[ext_resource type="Texture2D" uid="uid://fh6x0jpwhyr7" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_flavor_fresh.png" id="13_2vxpm"]
-[ext_resource type="Texture2D" uid="uid://dleugyq8yv3ke" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_flavor_spicy.png" id="14_r2bhi"]
-[ext_resource type="Texture2D" uid="uid://frmxomtxddj4" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_flavor_sweet.png" id="15_x3nnn"]
-[ext_resource type="Texture2D" uid="uid://c5tmwwau5pvcv" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_tags.png" id="16_ih15c"]
-[ext_resource type="Texture2D" uid="uid://tnxncq7yqfb2" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_nutrition.png" id="19_gie2w"]
+[ext_resource type="PackedScene" uid="uid://c4hu25tvp3kkd" path="res://scenes/prefabs/player/inventory_ui_slot.tscn" id="1_7s216"]
+[ext_resource type="Texture2D" uid="uid://ban45p6su6txh" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_page.png" id="2_4i1hb"]
+[ext_resource type="Texture2D" uid="uid://by6apfx54escg" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_frame.png" id="3_vddt1"]
+[ext_resource type="Texture2D" uid="uid://d12nbvxtvrbes" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_name.png" id="4_5i6pl"]
+[ext_resource type="Texture2D" uid="uid://b5g8g8u5j2yej" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_rarity_1.png" id="5_x2j1e"]
+[ext_resource type="Texture2D" uid="uid://b0go1benp7ml1" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_rarity_2.png" id="6_ssuud"]
+[ext_resource type="Texture2D" uid="uid://un4k3xmdjkb2" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_rarity_3.png" id="7_bijr2"]
+[ext_resource type="Texture2D" uid="uid://die6jm6v68afg" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_use_1.png" id="8_yhw41"]
+[ext_resource type="Texture2D" uid="uid://bcnle8o8ui2ax" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_use_2.png" id="9_pgasg"]
+[ext_resource type="Texture2D" uid="uid://dpn3fng3xe0yh" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_use_3.png" id="10_mnyuj"]
+[ext_resource type="Texture2D" uid="uid://cc37qnkngqwse" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_use_4.png" id="11_sesfm"]
+[ext_resource type="Texture2D" uid="uid://c5tmwwau5pvcv" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_tags.png" id="12_sk55n"]
+[ext_resource type="Texture2D" uid="uid://banbfs6e11s6d" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_flavor_hearty.png" id="13_mff2p"]
+[ext_resource type="Texture2D" uid="uid://cjkentqsfmrsf" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_flavor_sour.png" id="14_dsyyv"]
+[ext_resource type="Texture2D" uid="uid://fh6x0jpwhyr7" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_flavor_fresh.png" id="15_6nx8t"]
+[ext_resource type="Texture2D" uid="uid://dleugyq8yv3ke" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_flavor_spicy.png" id="16_kxvc3"]
+[ext_resource type="Texture2D" uid="uid://frmxomtxddj4" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_flavor_sweet.png" id="17_v5g87"]
+[ext_resource type="Texture2D" uid="uid://tnxncq7yqfb2" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_nutrition.png" id="18_u3kyo"]
 
-[node name="InventoryUILarge" unique_id=442831638 instance=ExtResource("1_lf0qv")]
+[node name="InventoryUILarge" unique_id=442831638 instance=ExtResource("1_7s216")]
 custom_minimum_size = Vector2(512, 768)
 offset_right = 267.0
 offset_bottom = 408.05658
@@ -45,14 +45,14 @@ z_index = -5
 layout_mode = 1
 offset_right = 512.0
 offset_bottom = 768.0
-texture = ExtResource("3_ip6sq")
+texture = ExtResource("2_4i1hb")
 
 [node name="bg_icon" parent="ItemDisplay" index="1" unique_id=1200108444]
 z_index = -2
 layout_mode = 1
 offset_right = 512.0
 offset_bottom = 768.0
-texture = ExtResource("2_u7q7r")
+texture = ExtResource("3_vddt1")
 
 [node name="item_icon" parent="ItemDisplay" index="2" unique_id=1095232349]
 offset_left = 56.0
@@ -66,7 +66,7 @@ clip_contents = true
 layout_mode = 0
 offset_right = 512.0
 offset_bottom = 768.0
-texture = ExtResource("5_1m276")
+texture = ExtResource("4_5i6pl")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ItemDisplay/Name" index="0" unique_id=1795049893]
 layout_mode = 0
@@ -83,17 +83,17 @@ offset_bottom = 768.0
 [node name="0" parent="ItemDisplay/Rarity" index="0" unique_id=2084014227]
 offset_right = 512.0
 offset_bottom = 768.0
-texture = ExtResource("4_7yc3c")
+texture = ExtResource("5_x2j1e")
 
 [node name="1" parent="ItemDisplay/Rarity" index="1" unique_id=316271123]
 offset_right = 512.0
 offset_bottom = 768.0
-texture = ExtResource("5_ih15c")
+texture = ExtResource("6_ssuud")
 
 [node name="2" parent="ItemDisplay/Rarity" index="2" unique_id=452645600]
 offset_right = 512.0
 offset_bottom = 768.0
-texture = ExtResource("6_4blq0")
+texture = ExtResource("7_bijr2")
 
 [node name="Uses" parent="ItemDisplay" index="5" unique_id=1569271460]
 z_index = 1
@@ -103,29 +103,29 @@ offset_bottom = 768.0
 [node name="TextureRect" parent="ItemDisplay/Uses" index="0" unique_id=1139734123]
 offset_right = 512.0
 offset_bottom = 768.0
-texture = ExtResource("7_4aj0w")
+texture = ExtResource("8_yhw41")
 
 [node name="TextureRect2" parent="ItemDisplay/Uses" index="1" unique_id=1518918530]
 offset_right = 512.0
 offset_bottom = 768.0
-texture = ExtResource("8_1m276")
+texture = ExtResource("9_pgasg")
 
 [node name="TextureRect3" parent="ItemDisplay/Uses" index="2" unique_id=2045796380]
 offset_right = 512.0
 offset_bottom = 768.0
-texture = ExtResource("9_gie2w")
+texture = ExtResource("10_mnyuj")
 
 [node name="TextureRect4" parent="ItemDisplay/Uses" index="3" unique_id=367642041]
 offset_right = 512.0
 offset_bottom = 768.0
-texture = ExtResource("10_f0i25")
+texture = ExtResource("11_sesfm")
 
 [node name="Tags" type="TextureRect" parent="ItemDisplay" index="6" unique_id=334733018]
 clip_contents = true
 layout_mode = 0
 offset_right = 512.0
 offset_bottom = 768.0
-texture = ExtResource("16_ih15c")
+texture = ExtResource("12_sk55n")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ItemDisplay/Tags" index="0" unique_id=1623048763]
 layout_mode = 0
@@ -150,7 +150,7 @@ offset_bottom = 768.0
 [node name="Hearty" parent="ItemDisplay/Flavours" index="0" unique_id=669791705]
 offset_right = 512.0
 offset_bottom = 768.0
-texture = ExtResource("11_tgk0l")
+texture = ExtResource("13_mff2p")
 
 [node name="RichTextLabel" parent="ItemDisplay/Flavours/Hearty" index="0" unique_id=1557675878]
 offset_left = 133.0
@@ -160,7 +160,7 @@ offset_bottom = 96.0
 [node name="Sour" parent="ItemDisplay/Flavours" index="1" unique_id=2092495922]
 offset_right = 512.0
 offset_bottom = 768.0
-texture = ExtResource("12_586pw")
+texture = ExtResource("14_dsyyv")
 
 [node name="RichTextLabel" parent="ItemDisplay/Flavours/Sour" index="0" unique_id=1966960468]
 offset_left = 373.0
@@ -171,7 +171,7 @@ text = "1"
 [node name="Fresh" parent="ItemDisplay/Flavours" index="2" unique_id=1739747005]
 offset_right = 512.0
 offset_bottom = 768.0
-texture = ExtResource("13_2vxpm")
+texture = ExtResource("15_6nx8t")
 
 [node name="RichTextLabel" parent="ItemDisplay/Flavours/Fresh" index="0" unique_id=1723724823]
 offset_left = 52.0
@@ -181,7 +181,7 @@ offset_bottom = 96.0
 [node name="Spicy" parent="ItemDisplay/Flavours" index="3" unique_id=55184171]
 offset_right = 512.0
 offset_bottom = 768.0
-texture = ExtResource("14_r2bhi")
+texture = ExtResource("16_kxvc3")
 
 [node name="RichTextLabel" parent="ItemDisplay/Flavours/Spicy" index="0" unique_id=117018499]
 offset_left = 212.0
@@ -191,7 +191,7 @@ offset_bottom = 95.875
 [node name="Sweet" parent="ItemDisplay/Flavours" index="4" unique_id=1468737299]
 offset_right = 512.0
 offset_bottom = 768.0
-texture = ExtResource("15_x3nnn")
+texture = ExtResource("17_v5g87")
 
 [node name="RichTextLabel" parent="ItemDisplay/Flavours/Sweet" index="0" unique_id=982386927]
 offset_left = 292.0
@@ -201,7 +201,7 @@ offset_bottom = 95.875
 [node name="Nutrition" parent="ItemDisplay" index="9" unique_id=781366672]
 offset_right = 512.0
 offset_bottom = 768.0
-texture = ExtResource("19_gie2w")
+texture = ExtResource("18_u3kyo")
 
 [node name="NutritionText" parent="ItemDisplay/Nutrition" index="0" unique_id=367587180]
 offset_left = -245.0

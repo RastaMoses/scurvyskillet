@@ -1,3 +1,5 @@
-[gd_scene format=3 uid="uid://dly0edye1itpl"]
+[gd_scene format=3 uid="uid://dunmta1nw4fux"]
 
-[node name="Map" unique_id=1839841650]
+[ext_resource type="PackedScene" uid="uid://b5p50mcr5j4g8" path="res://scenes/prefabs/map_prefab.tscn" id="1_1vdqj"]
+
+[node name="Map" unique_id=1839841650 instance=ExtResource("1_1vdqj")]

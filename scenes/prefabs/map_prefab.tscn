@@ -4,7 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://b38kn4cla84ww" path="res://sprites/placeholder/Screenshot 2026-08-18 165601.png" id="2_fd86p"]
 [ext_resource type="Script" uid="uid://ofgnbg5roiqb" path="res://scripts/Map/map_encounter.gd" id="3_4gj31"]
 [ext_resource type="PackedScene" uid="uid://benw6bt2l0ot" path="res://scenes/prefabs/decision_prefab.tscn" id="4_evkri"]
-[ext_resource type="PackedScene" uid="uid://dppkgemxlgehl" path="res://scenes/prefabs/shop_sample.tscn" id="5_evkri"]
+[ext_resource type="PackedScene" uid="uid://gk05ip7x56bt" path="res://scenes/encounter/shops/empty_shop.tscn" id="5_evkri"]
+[ext_resource type="PackedScene" uid="uid://4kbfe5ee6m8e" path="res://scenes/encounter/decisions/empty_decision.tscn" id="6_fd86p"]
 
 [node name="Map" type="Node2D" unique_id=1839841650 node_paths=PackedStringArray("encounter_nodes")]
 script = ExtResource("1_evkri")
@@ -55,7 +56,7 @@ offset_bottom = 110.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 40
-text = "CHALLENGE"
+text = "Decision"
 
 [node name="2" type="Node2D" parent="." unique_id=963606167]
 position = Vector2(537, 857)
@@ -81,7 +82,7 @@ text = "Decision"
 [node name="3" type="Node2D" parent="." unique_id=1462896165]
 position = Vector2(944, 168)
 script = ExtResource("3_4gj31")
-possible_encounters = Array[PackedScene]([ExtResource("4_evkri")])
+possible_encounters = Array[PackedScene]([ExtResource("6_fd86p")])
 destinations = Array[int]([6])
 
 [node name="Button" type="Button" parent="3" unique_id=198774685]
@@ -102,7 +103,7 @@ text = "Decision"
 [node name="4" type="Node2D" parent="." unique_id=1708145035]
 position = Vector2(936, 442)
 script = ExtResource("3_4gj31")
-possible_encounters = Array[PackedScene]([ExtResource("4_evkri")])
+possible_encounters = Array[PackedScene]([ExtResource("6_fd86p")])
 destinations = Array[int]([7])
 
 [node name="Button" type="Button" parent="4" unique_id=796344623]
@@ -123,7 +124,7 @@ text = "Decision"
 [node name="5" type="Node2D" parent="." unique_id=2076113011]
 position = Vector2(940, 849)
 script = ExtResource("3_4gj31")
-possible_encounters = Array[PackedScene]([ExtResource("4_evkri")])
+possible_encounters = Array[PackedScene]([ExtResource("6_fd86p")])
 destinations = Array[int]([8, 9])
 
 [node name="Button" type="Button" parent="5" unique_id=381100027]
@@ -144,7 +145,7 @@ text = "Decision"
 [node name="6" type="Node2D" parent="." unique_id=1688194046]
 position = Vector2(1321, 163)
 script = ExtResource("3_4gj31")
-possible_encounters = Array[PackedScene]([ExtResource("4_evkri")])
+possible_encounters = Array[PackedScene]([ExtResource("6_fd86p")])
 destinations = Array[int]([10])
 
 [node name="Button" type="Button" parent="6" unique_id=1982930965]
@@ -165,7 +166,7 @@ text = "CHALLENGE"
 [node name="7" type="Node2D" parent="." unique_id=1223703658]
 position = Vector2(1309, 443)
 script = ExtResource("3_4gj31")
-possible_encounters = Array[PackedScene]([ExtResource("4_evkri")])
+possible_encounters = Array[PackedScene]([ExtResource("6_fd86p")])
 destinations = Array[int]([10])
 
 [node name="Button" type="Button" parent="7" unique_id=1925285680]
@@ -186,7 +187,7 @@ text = "Decision"
 [node name="8" type="Node2D" parent="." unique_id=9344786]
 position = Vector2(1306, 723)
 script = ExtResource("3_4gj31")
-possible_encounters = Array[PackedScene]([ExtResource("4_evkri")])
+possible_encounters = Array[PackedScene]([ExtResource("6_fd86p")])
 destinations = Array[int]([11])
 
 [node name="Button" type="Button" parent="8" unique_id=1363172325]
@@ -207,7 +208,7 @@ text = "Decision"
 [node name="9" type="Node2D" parent="." unique_id=95178738]
 position = Vector2(1306, 986)
 script = ExtResource("3_4gj31")
-possible_encounters = Array[PackedScene]([ExtResource("4_evkri")])
+possible_encounters = Array[PackedScene]([ExtResource("6_fd86p")])
 destinations = Array[int]([11])
 
 [node name="Button" type="Button" parent="9" unique_id=1060125977]
@@ -228,7 +229,7 @@ text = "Decision"
 [node name="10" type="Node2D" parent="." unique_id=637189746]
 position = Vector2(1649, 312)
 script = ExtResource("3_4gj31")
-possible_encounters = Array[PackedScene]([ExtResource("4_evkri")])
+possible_encounters = Array[PackedScene]([ExtResource("6_fd86p")])
 destinations = Array[int]([12])
 
 [node name="Button" type="Button" parent="10" unique_id=1669282647]
@@ -249,7 +250,7 @@ text = "Decision"
 [node name="11" type="Node2D" parent="." unique_id=391594965]
 position = Vector2(1653, 847)
 script = ExtResource("3_4gj31")
-possible_encounters = Array[PackedScene]([ExtResource("4_evkri")])
+possible_encounters = Array[PackedScene]([ExtResource("6_fd86p")])
 destinations = Array[int]([12])
 
 [node name="Button" type="Button" parent="11" unique_id=518353230]
@@ -270,7 +271,7 @@ text = "Decision"
 [node name="12" type="Node2D" parent="." unique_id=1526550537]
 position = Vector2(1886, 569)
 script = ExtResource("3_4gj31")
-possible_encounters = Array[PackedScene]([ExtResource("4_evkri")])
+possible_encounters = Array[PackedScene]([ExtResource("6_fd86p")])
 
 [node name="Button" type="Button" parent="12" unique_id=438453724]
 anchors_preset = 8

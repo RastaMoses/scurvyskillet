@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://dppkgemxlgehl"]
 
-[ext_resource type="Script" uid="uid://js1t03dchpx8" path="res://scripts/Encounter/shop.gd" id="1_lt0pe"]
-[ext_resource type="Resource" uid="uid://c46bhph0d0ckj" path="res://scenes/encounter/shops/sell_items/sell_item_sample.tres" id="2_m2re1"]
-[ext_resource type="Script" uid="uid://v63vu2iilw13" path="res://scripts/Inventory/drop_area.gd" id="2_ttta2"]
-[ext_resource type="Texture2D" uid="uid://d03pcmk05xsne" path="res://sprites/placeholder/baldursgate3_screenshot_600x338_salami.jpg" id="3_mbvut"]
-[ext_resource type="PackedScene" uid="uid://u2u1v4rgdntw" path="res://scenes/prefabs/buy_button_sample.tscn" id="3_ttta2"]
+[ext_resource type="Script" uid="uid://js1t03dchpx8" path="res://scripts/Encounter/shop.gd" id="1_72y8b"]
+[ext_resource type="Resource" uid="uid://c46bhph0d0ckj" path="res://scenes/encounter/shops/sell_items/sell_item_sample.tres" id="2_27xwa"]
+[ext_resource type="PackedScene" uid="uid://u2u1v4rgdntw" path="res://scenes/prefabs/buy_button_sample.tscn" id="3_qwea3"]
+[ext_resource type="Texture2D" uid="uid://d03pcmk05xsne" path="res://sprites/placeholder/baldursgate3_screenshot_600x338_salami.jpg" id="4_gnacu"]
+[ext_resource type="Script" uid="uid://v63vu2iilw13" path="res://scripts/Inventory/drop_area.gd" id="5_tlf87"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_7b41e"]
 
@@ -15,9 +15,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_lt0pe")
-sell_items = Array[Resource]([ExtResource("2_m2re1"), ExtResource("2_m2re1"), ExtResource("2_m2re1")])
-buy_button_sample = ExtResource("3_ttta2")
+script = ExtResource("1_72y8b")
+sell_items = Array[Resource]([ExtResource("2_27xwa"), ExtResource("2_27xwa"), ExtResource("2_27xwa")])
+buy_button_sample = ExtResource("3_qwea3")
 rarity_prices = Array[int]([1, 5, 10])
 
 [node name="bg" type="Sprite2D" parent="." unique_id=474275745]
@@ -28,7 +28,7 @@ texture = SubResource("PlaceholderTexture2D_7b41e")
 [node name="art" type="Sprite2D" parent="." unique_id=989523534]
 position = Vector2(1495.9999, 735)
 scale = Vector2(2.9018543, 3.2470417)
-texture = ExtResource("3_mbvut")
+texture = ExtResource("4_gnacu")
 
 [node name="DropArea" type="Panel" parent="." unique_id=1944757335]
 layout_mode = 0
@@ -36,7 +36,7 @@ offset_top = 912.0
 offset_right = 40.0
 offset_bottom = 952.0
 scale = Vector2(26.6, 12.4800005)
-script = ExtResource("2_ttta2")
+script = ExtResource("5_tlf87")
 
 [node name="BuyContainer" type="GridContainer" parent="." unique_id=862985388]
 layout_mode = 0

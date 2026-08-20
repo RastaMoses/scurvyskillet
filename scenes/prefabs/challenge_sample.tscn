@@ -1,22 +1,22 @@
 [gd_scene format=3 uid="uid://hr6aybbol4hn"]
 
-[ext_resource type="Script" uid="uid://bbkxauiekl5ry" path="res://scripts/Encounter/challenge.gd" id="1_f0fus"]
-[ext_resource type="PackedScene" uid="uid://83c84n5554td" path="res://scenes/prefabs/dish.tscn" id="2_ei7qy"]
-[ext_resource type="Script" uid="uid://clhhe0hu1tyj0" path="res://scripts/Encounter/UI/challenge_ui.gd" id="4_22fbr"]
-[ext_resource type="Texture2D" uid="uid://baee01pvcv84d" path="res://sprites/interface/scenes/cooking scene/scene_cooking_background.png" id="4_n44x6"]
-[ext_resource type="Texture2D" uid="uid://cquwgd0b3fqta" path="res://sprites/interface/general/text frame/text_frame.png" id="5_kvlnp"]
-[ext_resource type="Texture2D" uid="uid://ctt5b3tmu74a2" path="res://sprites/interface/scenes/cooking scene/scene_cooking_example.png" id="6_apk3w"]
-[ext_resource type="Texture2D" uid="uid://b7stpf242kutc" path="res://sprites/interface/scenes/cooking scene/scene_cooking_button_reset.png" id="6_kx87m"]
-[ext_resource type="Texture2D" uid="uid://l1acfj3rcnvt" path="res://sprites/interface/scenes/cooking scene/scene_cooking_button_reset_arrow.png" id="7_d7c23"]
-[ext_resource type="Texture2D" uid="uid://cst1skr2hibgh" path="res://sprites/interface/scenes/cooking scene/scene_cooking_button_cook.png" id="8_kx87m"]
-[ext_resource type="Texture2D" uid="uid://cs0ochjc043hv" path="res://sprites/interface/scenes/cooking scene/scene_cooking_button_cook_shadow.png" id="32_3pcc6"]
+[ext_resource type="Script" uid="uid://bbkxauiekl5ry" path="res://scripts/Encounter/challenge.gd" id="1_glswj"]
+[ext_resource type="Script" uid="uid://clhhe0hu1tyj0" path="res://scripts/Encounter/UI/challenge_ui.gd" id="2_hs7g2"]
+[ext_resource type="Texture2D" uid="uid://baee01pvcv84d" path="res://sprites/interface/scenes/cooking scene/scene_cooking_background.png" id="3_h6ing"]
+[ext_resource type="Texture2D" uid="uid://cquwgd0b3fqta" path="res://sprites/interface/general/text frame/text_frame.png" id="4_x7qnw"]
+[ext_resource type="Texture2D" uid="uid://b7stpf242kutc" path="res://sprites/interface/scenes/cooking scene/scene_cooking_button_reset.png" id="5_dmuak"]
+[ext_resource type="Texture2D" uid="uid://l1acfj3rcnvt" path="res://sprites/interface/scenes/cooking scene/scene_cooking_button_reset_arrow.png" id="6_y21f8"]
+[ext_resource type="Texture2D" uid="uid://cst1skr2hibgh" path="res://sprites/interface/scenes/cooking scene/scene_cooking_button_cook.png" id="7_6r88v"]
+[ext_resource type="Texture2D" uid="uid://cs0ochjc043hv" path="res://sprites/interface/scenes/cooking scene/scene_cooking_button_cook_shadow.png" id="8_ee2dl"]
+[ext_resource type="Texture2D" uid="uid://ctt5b3tmu74a2" path="res://sprites/interface/scenes/cooking scene/scene_cooking_example.png" id="9_t50f7"]
+[ext_resource type="PackedScene" uid="uid://83c84n5554td" path="res://scenes/prefabs/dish.tscn" id="10_l27j6"]
 
 [node name="ChallengeSample2" type="Control" unique_id=993217827]
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 1
 mouse_behavior_recursive = 1
-script = ExtResource("1_f0fus")
+script = ExtResource("1_glswj")
 req_nutrition = 4
 req_sour = 5
 par_nutrition = 2
@@ -40,14 +40,14 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 mouse_behavior_recursive = 1
-script = ExtResource("4_22fbr")
+script = ExtResource("2_hs7g2")
 
 [node name="BG" type="TextureRect" parent="UI" unique_id=428102425]
 layout_mode = 1
 offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_behavior_recursive = 1
-texture = ExtResource("4_n44x6")
+texture = ExtResource("3_h6ing")
 
 [node name="description" type="Control" parent="UI" unique_id=1896810604]
 z_index = 1
@@ -65,7 +65,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_behavior_recursive = 1
-texture = ExtResource("5_kvlnp")
+texture = ExtResource("4_x7qnw")
 
 [node name="text" type="RichTextLabel" parent="UI/description" unique_id=189440853]
 layout_mode = 1
@@ -116,7 +116,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_behavior_recursive = 1
-texture = ExtResource("6_kx87m")
+texture = ExtResource("5_dmuak")
 
 [node name="reset_bag_arrow" type="TextureRect" parent="UI/Reset" unique_id=23805466]
 visible = false
@@ -127,7 +127,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_behavior_recursive = 1
-texture = ExtResource("7_d7c23")
+texture = ExtResource("6_y21f8")
 
 [node name="reset_button" type="Button" parent="UI/Reset" unique_id=7978580]
 z_index = 3
@@ -167,7 +167,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_behavior_recursive = 1
-texture = ExtResource("8_kx87m")
+texture = ExtResource("7_6r88v")
 
 [node name="ladle_shadow" type="TextureRect" parent="UI/Complete" unique_id=1878377346]
 layout_mode = 1
@@ -177,7 +177,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_behavior_recursive = 1
-texture = ExtResource("32_3pcc6")
+texture = ExtResource("8_ee2dl")
 
 [node name="ladle_hover" type="TextureRect" parent="UI/Complete" unique_id=1943485844]
 visible = false
@@ -194,17 +194,16 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = -3.1415927
 mouse_behavior_recursive = 1
-texture = ExtResource("7_d7c23")
+texture = ExtResource("6_y21f8")
 
 [node name="DELETE" type="Sprite2D" parent="." unique_id=740479059]
 visible = false
 position = Vector2(2966, 525)
 scale = Vector2(8, 8)
-texture = ExtResource("6_apk3w")
+texture = ExtResource("9_t50f7")
 
-[node name="Dish" parent="." unique_id=497250350 instance=ExtResource("2_ei7qy")]
+[node name="Dish" parent="." unique_id=497250350 instance=ExtResource("10_l27j6")]
 layout_mode = 0
-mouse_filter = 1
 
 [connection signal="mouse_entered" from="UI/Reset/reset_button" to="UI" method="_on_reset_button_mouse_entered"]
 [connection signal="mouse_exited" from="UI/Reset/reset_button" to="UI" method="_on_reset_button_mouse_exited"]
@@ -212,4 +211,3 @@ mouse_filter = 1
 [connection signal="mouse_entered" from="UI/Complete/roll_dish_button" to="UI" method="_on_roll_dish_button_mouse_entered"]
 [connection signal="mouse_exited" from="UI/Complete/roll_dish_button" to="UI" method="_on_roll_dish_button_mouse_exited"]
 [connection signal="pressed" from="UI/Complete/roll_dish_button" to="." method="_on_roll_dish_pressed"]
-[connection signal="nutrition_change" from="Dish" to="UI" method="_on_dish_nutrition_change"]
