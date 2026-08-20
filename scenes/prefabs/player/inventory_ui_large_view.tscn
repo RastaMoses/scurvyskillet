@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://7lxu211xbf4i"]
 
-[ext_resource type="PackedScene" uid="uid://c4hu25tvp3kkd" path="res://scenes/player/inventory_ui_slot.tscn" id="1_lf0qv"]
+[ext_resource type="PackedScene" uid="uid://c4hu25tvp3kkd" path="res://scenes/prefabs/player/inventory_ui_slot.tscn" id="1_lf0qv"]
 [ext_resource type="Texture2D" uid="uid://by6apfx54escg" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_frame.png" id="2_u7q7r"]
 [ext_resource type="Texture2D" uid="uid://ban45p6su6txh" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_page.png" id="3_ip6sq"]
 [ext_resource type="Texture2D" uid="uid://b5g8g8u5j2yej" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_rarity_1.png" id="4_7yc3c"]
@@ -23,7 +23,6 @@
 custom_minimum_size = Vector2(512, 768)
 offset_right = 267.0
 offset_bottom = 408.05658
-mouse_filter = 1
 large_view = true
 
 [node name="EmptySlot" parent="." index="0" unique_id=961373681]

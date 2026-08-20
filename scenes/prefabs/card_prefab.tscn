@@ -1,18 +1,18 @@
 [gd_scene format=3 uid="uid://p1ug5ylfd5re"]
 
-[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/ingredient_stats.gd" id="1_hai3h"]
-[ext_resource type="PackedScene" uid="uid://7lxu211xbf4i" path="res://scenes/player/inventory_ui_large_view.tscn" id="2_8h71a"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/ingredient_stats.gd" id="1_d7r7r"]
+[ext_resource type="PackedScene" uid="uid://7lxu211xbf4i" path="res://scenes/prefabs/player/inventory_ui_large_view.tscn" id="2_syjsv"]
 
 [node name="CardSample" type="Control" unique_id=824626168]
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 2
-script = ExtResource("1_hai3h")
+script = ExtResource("1_d7r7r")
 nutrition = 3
 sweet = 1
 unlimited_uses = true
 
-[node name="Preview" parent="." unique_id=442831638 instance=ExtResource("2_8h71a")]
+[node name="Preview" parent="." unique_id=442831638 instance=ExtResource("2_syjsv")]
 layout_mode = 0
 mouse_filter = 2
 editor_preview = true

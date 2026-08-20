@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://dppkgemxlgehl"]
 
 [ext_resource type="Script" uid="uid://js1t03dchpx8" path="res://scripts/Encounter/shop.gd" id="1_lt0pe"]
-[ext_resource type="Resource" uid="uid://c46bhph0d0ckj" path="res://scenes/encounter/shops/sell_items/sell_item.tres" id="2_6sqfp"]
+[ext_resource type="Resource" uid="uid://c46bhph0d0ckj" path="res://scenes/encounter/shops/sell_items/sell_item_sample.tres" id="2_m2re1"]
 [ext_resource type="Script" uid="uid://v63vu2iilw13" path="res://scripts/Inventory/drop_area.gd" id="2_ttta2"]
 [ext_resource type="Texture2D" uid="uid://d03pcmk05xsne" path="res://sprites/placeholder/baldursgate3_screenshot_600x338_salami.jpg" id="3_mbvut"]
-[ext_resource type="PackedScene" uid="uid://u2u1v4rgdntw" path="res://scenes/encounter/shops/buy_button_sample.tscn" id="3_ttta2"]
+[ext_resource type="PackedScene" uid="uid://u2u1v4rgdntw" path="res://scenes/prefabs/buy_button_sample.tscn" id="3_ttta2"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_7b41e"]
 
@@ -16,7 +16,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_lt0pe")
-sell_items = Array[Resource]([ExtResource("2_6sqfp"), ExtResource("2_6sqfp"), ExtResource("2_6sqfp")])
+sell_items = Array[Resource]([ExtResource("2_m2re1"), ExtResource("2_m2re1"), ExtResource("2_m2re1")])
 buy_button_sample = ExtResource("3_ttta2")
 rarity_prices = Array[int]([1, 5, 10])
 

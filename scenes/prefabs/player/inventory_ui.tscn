@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://mnqwh85qv88k"]
 
 [ext_resource type="Script" uid="uid://5ky5q3x7j70d" path="res://scripts/Inventory/inventory_ui.gd" id="1_ftr8b"]
-[ext_resource type="PackedScene" uid="uid://c4hu25tvp3kkd" path="res://scenes/player/inventory_ui_slot.tscn" id="2_2kgow"]
+[ext_resource type="PackedScene" uid="uid://c4hu25tvp3kkd" path="res://scenes/prefabs/player/inventory_ui_slot.tscn" id="2_2kgow"]
 [ext_resource type="Texture2D" uid="uid://dcufcw38p0iba" path="res://sprites/interface/general/morale and gold/morale_and_gold_frame.png" id="3_gllbo"]
 [ext_resource type="Texture2D" uid="uid://b0kgy70usnyx" path="res://sprites/interface/scenes/cooking scene/scene_cooking_inventory.png" id="4_emmqn"]
-[ext_resource type="PackedScene" uid="uid://7lxu211xbf4i" path="res://scenes/player/inventory_ui_large_view.tscn" id="4_n5307"]
+[ext_resource type="PackedScene" uid="uid://7lxu211xbf4i" path="res://scenes/prefabs/player/inventory_ui_large_view.tscn" id="4_n5307"]
 [ext_resource type="Texture2D" uid="uid://coxups3dlsrk5" path="res://sprites/interface/general/morale and gold/morale_and_gold_morale.png" id="4_w5eca"]
 [ext_resource type="Texture2D" uid="uid://ciua4pueuxwty" path="res://sprites/interface/general/morale and gold/morale_and_gold_gold.png" id="5_nu8j1"]
 [ext_resource type="Theme" uid="uid://dwjm243i4x47a" path="res://themes/inventory/inv_scroll_container.tres" id="5_qtbir"]

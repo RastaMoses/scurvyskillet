@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://hr6aybbol4hn"]
 
 [ext_resource type="Script" uid="uid://bbkxauiekl5ry" path="res://scripts/Encounter/challenge.gd" id="1_f0fus"]
-[ext_resource type="PackedScene" uid="uid://83c84n5554td" path="res://scenes/encounter/challenges/dish.tscn" id="2_ei7qy"]
+[ext_resource type="PackedScene" uid="uid://83c84n5554td" path="res://scenes/prefabs/dish.tscn" id="2_ei7qy"]
 [ext_resource type="Script" uid="uid://clhhe0hu1tyj0" path="res://scripts/Encounter/UI/challenge_ui.gd" id="4_22fbr"]
 [ext_resource type="Texture2D" uid="uid://baee01pvcv84d" path="res://sprites/interface/scenes/cooking scene/scene_cooking_background.png" id="4_n44x6"]
 [ext_resource type="Texture2D" uid="uid://cquwgd0b3fqta" path="res://sprites/interface/general/text frame/text_frame.png" id="5_kvlnp"]
@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cst1skr2hibgh" path="res://sprites/interface/scenes/cooking scene/scene_cooking_button_cook.png" id="8_kx87m"]
 [ext_resource type="Texture2D" uid="uid://cs0ochjc043hv" path="res://sprites/interface/scenes/cooking scene/scene_cooking_button_cook_shadow.png" id="32_3pcc6"]
 
-[node name="ChallengeSample" type="Control" unique_id=993217827]
+[node name="ChallengeSample2" type="Control" unique_id=993217827]
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 1

@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://blschq5r1rlb0"]
+
+[ext_resource type="PackedScene" uid="uid://hr6aybbol4hn" path="res://scenes/prefabs/challenge_sample.tscn" id="1_gb5af"]
+
+[node name="ChallengeSample" unique_id=993217827 instance=ExtResource("1_gb5af")]

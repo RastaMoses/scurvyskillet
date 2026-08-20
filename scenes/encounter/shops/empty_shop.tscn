@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://gk05ip7x56bt"]
+
+[ext_resource type="PackedScene" uid="uid://dppkgemxlgehl" path="res://scenes/prefabs/shop_sample.tscn" id="1_f30pk"]
+
+[node name="ShopSample" unique_id=1111686658 instance=ExtResource("1_f30pk")]
