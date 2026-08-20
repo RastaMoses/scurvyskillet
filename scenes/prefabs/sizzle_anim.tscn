@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://c6r1ffroignl1"]
+
+[ext_resource type="Texture2D" uid="uid://knibr3pti1l7" path="res://sprites/interface/scenes/cooking scene/scene_cooking_dice_particles.png" id="1_f4iml"]
+[ext_resource type="Script" uid="uid://b37m5itdqk7x0" path="res://scripts/Encounter/Dish/sizzle_obj.gd" id="2_jfgs8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nnm30"]
+atlas = ExtResource("1_f4iml")
+region = Rect2(0, 0, 5, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rcumy"]
+atlas = ExtResource("1_f4iml")
+region = Rect2(5, 0, 5, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nuvao"]
+atlas = ExtResource("1_f4iml")
+region = Rect2(10, 0, 5, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_owdo3"]
+atlas = ExtResource("1_f4iml")
+region = Rect2(15, 0, 5, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pv3uk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nnm30")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rcumy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nuvao")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_owdo3")
+}],
+"loop": 0,
+"name": &"sizzle",
+"speed": 10.0
+}]
+
+[node name="sizzle_anim" type="AnimatedSprite2D" unique_id=726092001]
+z_index = 2
+scale = Vector2(8, 8)
+sprite_frames = SubResource("SpriteFrames_pv3uk")
+animation = &"sizzle"
+script = ExtResource("2_jfgs8")
+
+[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]
