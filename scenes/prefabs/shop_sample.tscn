@@ -34,6 +34,7 @@ sell_items = Array[Resource]([SubResource("Resource_qwea3"), SubResource("Resour
 buy_button_sample = ExtResource("3_qwea3")
 rarity_prices = Array[int]([1, 5, 10])
 card_prefab = ExtResource("2_72y8b")
+can_stack_uses = false
 
 [node name="bg" type="Sprite2D" parent="." unique_id=474275745]
 position = Vector2(1285.75, 705.75)

@@ -1,303 +1,58 @@
 [gd_scene format=3 uid="uid://b5p50mcr5j4g8"]
 
 [ext_resource type="Script" uid="uid://cqbk4mjb6vddi" path="res://scripts/Map/map.gd" id="1_evkri"]
-[ext_resource type="Texture2D" uid="uid://b38kn4cla84ww" path="res://sprites/placeholder/Screenshot 2026-08-18 165601.png" id="2_fd86p"]
-[ext_resource type="Script" uid="uid://ofgnbg5roiqb" path="res://scripts/Map/map_encounter.gd" id="3_4gj31"]
-[ext_resource type="PackedScene" uid="uid://benw6bt2l0ot" path="res://scenes/prefabs/decision_prefab.tscn" id="4_evkri"]
-[ext_resource type="PackedScene" uid="uid://gk05ip7x56bt" path="res://scenes/encounter/shops/empty_shop.tscn" id="5_evkri"]
-[ext_resource type="PackedScene" uid="uid://4kbfe5ee6m8e" path="res://scenes/encounter/decisions/empty_decision.tscn" id="6_fd86p"]
+[ext_resource type="Texture2D" uid="uid://cqbdqqn74o4ke" path="res://sprites/interface/scenes/worldmap scene/scene_worldmap_background.png" id="2_fd86p"]
+[ext_resource type="PackedScene" uid="uid://d3m0xjawxe0cp" path="res://scenes/prefabs/encounter.tscn" id="3_u6b3a"]
+[ext_resource type="Texture2D" uid="uid://oi2g7kkk006h" path="res://sprites/interface/scenes/worldmap scene/scene_worldmap_boat.png" id="4_2jk3u"]
+[ext_resource type="Script" uid="uid://dd6rhp5q4wtuh" path="res://scripts/Map/ship_mover.gd" id="4_evkri"]
+[ext_resource type="PackedScene" uid="uid://hr6aybbol4hn" path="res://scenes/prefabs/challenge_sample.tscn" id="6_fd86p"]
 
 [node name="Map" type="Node2D" unique_id=1839841650 node_paths=PackedStringArray("encounter_nodes")]
+y_sort_enabled = true
 script = ExtResource("1_evkri")
-encounter_nodes = [NodePath("0"), NodePath("1"), NodePath("2"), NodePath("3"), NodePath("4"), NodePath("5"), NodePath("6"), NodePath("7"), NodePath("8"), NodePath("9"), NodePath("10"), NodePath("11"), NodePath("12")]
+encounter_nodes = [null, null, null, null]
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=496637297]
-position = Vector2(965.1, 566.844)
-scale = Vector2(2.3592262, 2.3592262)
+[node name="BG" type="Sprite2D" parent="." unique_id=496637297]
+z_index = -1
+scale = Vector2(8, 8)
 texture = ExtResource("2_fd86p")
+centered = false
 
-[node name="0" type="Node2D" parent="." unique_id=1399256715]
-position = Vector2(142, 574)
-script = ExtResource("3_4gj31")
-possible_encounters = Array[PackedScene]([ExtResource("4_evkri")])
-destinations = Array[int]([1, 2])
+[node name="PlayerShip" type="Node2D" parent="." unique_id=1335774875]
+y_sort_enabled = true
+position = Vector2(112, 528)
+script = ExtResource("4_evkri")
+move_time = 3.0
 
-[node name="Button" type="Button" parent="0" unique_id=1013446682]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -141.5
-offset_top = -110.5
-offset_right = 141.5
-offset_bottom = 110.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 40
-text = "CHALLENGE"
+[node name="Visuals" type="Node2D" parent="PlayerShip" unique_id=1175985895]
 
-[node name="1" type="Node2D" parent="." unique_id=407174435]
-position = Vector2(532, 298)
-script = ExtResource("3_4gj31")
-possible_encounters = Array[PackedScene]([ExtResource("4_evkri")])
-destinations = Array[int]([3, 4])
+[node name="Sprite2D" type="Sprite2D" parent="PlayerShip/Visuals" unique_id=1966297454]
+y_sort_enabled = true
+scale = Vector2(8, 8)
+texture = ExtResource("4_2jk3u")
 
-[node name="Button" type="Button" parent="1" unique_id=1868864194]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -141.5
-offset_top = -110.5
-offset_right = 141.5
-offset_bottom = 110.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 40
-text = "Decision"
+[node name="Encounter" type="Node2D" parent="." unique_id=1514431645]
+y_sort_enabled = true
 
-[node name="2" type="Node2D" parent="." unique_id=963606167]
-position = Vector2(537, 857)
-script = ExtResource("3_4gj31")
-possible_encounters = Array[PackedScene]([ExtResource("5_evkri")])
-destinations = Array[int]([5])
-
-[node name="Button" type="Button" parent="2" unique_id=2089683392]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -141.5
-offset_top = -110.5
-offset_right = 141.5
-offset_bottom = 110.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 40
-text = "Decision"
-
-[node name="3" type="Node2D" parent="." unique_id=1462896165]
-position = Vector2(944, 168)
-script = ExtResource("3_4gj31")
+[node name="0" parent="Encounter" unique_id=986483625 instance=ExtResource("3_u6b3a")]
+position = Vector2(160, 456)
 possible_encounters = Array[PackedScene]([ExtResource("6_fd86p")])
-destinations = Array[int]([6])
+type = "none"
+bg_type = "island"
 
-[node name="Button" type="Button" parent="3" unique_id=198774685]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -141.5
-offset_top = -110.5
-offset_right = 141.5
-offset_bottom = 110.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 40
-text = "Decision"
+[node name="1" parent="Encounter" unique_id=1699582653 instance=ExtResource("3_u6b3a")]
+position = Vector2(496, 304)
+destinations = Array[int]([3])
+type = "decision"
+bg_type = "water"
 
-[node name="4" type="Node2D" parent="." unique_id=1708145035]
-position = Vector2(936, 442)
-script = ExtResource("3_4gj31")
-possible_encounters = Array[PackedScene]([ExtResource("6_fd86p")])
-destinations = Array[int]([7])
+[node name="2" parent="Encounter" unique_id=386168653 instance=ExtResource("3_u6b3a")]
+position = Vector2(528, 616)
+destinations = Array[int]([3])
+type = "decision"
+bg_type = "island"
 
-[node name="Button" type="Button" parent="4" unique_id=796344623]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -141.5
-offset_top = -110.5
-offset_right = 141.5
-offset_bottom = 110.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 40
-text = "Decision"
-
-[node name="5" type="Node2D" parent="." unique_id=2076113011]
-position = Vector2(940, 849)
-script = ExtResource("3_4gj31")
-possible_encounters = Array[PackedScene]([ExtResource("6_fd86p")])
-destinations = Array[int]([8, 9])
-
-[node name="Button" type="Button" parent="5" unique_id=381100027]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -141.5
-offset_top = -110.5
-offset_right = 141.5
-offset_bottom = 110.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 40
-text = "Decision"
-
-[node name="6" type="Node2D" parent="." unique_id=1688194046]
-position = Vector2(1321, 163)
-script = ExtResource("3_4gj31")
-possible_encounters = Array[PackedScene]([ExtResource("6_fd86p")])
-destinations = Array[int]([10])
-
-[node name="Button" type="Button" parent="6" unique_id=1982930965]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -141.5
-offset_top = -110.5
-offset_right = 141.5
-offset_bottom = 110.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 40
-text = "CHALLENGE"
-
-[node name="7" type="Node2D" parent="." unique_id=1223703658]
-position = Vector2(1309, 443)
-script = ExtResource("3_4gj31")
-possible_encounters = Array[PackedScene]([ExtResource("6_fd86p")])
-destinations = Array[int]([10])
-
-[node name="Button" type="Button" parent="7" unique_id=1925285680]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -141.5
-offset_top = -110.5
-offset_right = 141.5
-offset_bottom = 110.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 40
-text = "Decision"
-
-[node name="8" type="Node2D" parent="." unique_id=9344786]
-position = Vector2(1306, 723)
-script = ExtResource("3_4gj31")
-possible_encounters = Array[PackedScene]([ExtResource("6_fd86p")])
-destinations = Array[int]([11])
-
-[node name="Button" type="Button" parent="8" unique_id=1363172325]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -141.5
-offset_top = -110.5
-offset_right = 141.5
-offset_bottom = 110.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 40
-text = "Decision"
-
-[node name="9" type="Node2D" parent="." unique_id=95178738]
-position = Vector2(1306, 986)
-script = ExtResource("3_4gj31")
-possible_encounters = Array[PackedScene]([ExtResource("6_fd86p")])
-destinations = Array[int]([11])
-
-[node name="Button" type="Button" parent="9" unique_id=1060125977]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -141.5
-offset_top = -110.5
-offset_right = 141.5
-offset_bottom = 110.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 40
-text = "Decision"
-
-[node name="10" type="Node2D" parent="." unique_id=637189746]
-position = Vector2(1649, 312)
-script = ExtResource("3_4gj31")
-possible_encounters = Array[PackedScene]([ExtResource("6_fd86p")])
-destinations = Array[int]([12])
-
-[node name="Button" type="Button" parent="10" unique_id=1669282647]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -141.5
-offset_top = -110.5
-offset_right = 141.5
-offset_bottom = 110.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 40
-text = "Decision"
-
-[node name="11" type="Node2D" parent="." unique_id=391594965]
-position = Vector2(1653, 847)
-script = ExtResource("3_4gj31")
-possible_encounters = Array[PackedScene]([ExtResource("6_fd86p")])
-destinations = Array[int]([12])
-
-[node name="Button" type="Button" parent="11" unique_id=518353230]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -141.5
-offset_top = -110.5
-offset_right = 141.5
-offset_bottom = 110.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 40
-text = "Decision"
-
-[node name="12" type="Node2D" parent="." unique_id=1526550537]
-position = Vector2(1886, 569)
-script = ExtResource("3_4gj31")
-possible_encounters = Array[PackedScene]([ExtResource("6_fd86p")])
-
-[node name="Button" type="Button" parent="12" unique_id=438453724]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -141.5
-offset_top = -110.5
-offset_right = 141.5
-offset_bottom = 110.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 40
-text = "Decision"
-
-[connection signal="pressed" from="0/Button" to="0" method="_on_button_pressed"]
-[connection signal="pressed" from="1/Button" to="1" method="_on_button_pressed"]
-[connection signal="pressed" from="2/Button" to="2" method="_on_button_pressed"]
-[connection signal="pressed" from="3/Button" to="3" method="_on_button_pressed"]
-[connection signal="pressed" from="4/Button" to="4" method="_on_button_pressed"]
-[connection signal="pressed" from="5/Button" to="5" method="_on_button_pressed"]
-[connection signal="pressed" from="6/Button" to="6" method="_on_button_pressed"]
-[connection signal="pressed" from="7/Button" to="7" method="_on_button_pressed"]
-[connection signal="pressed" from="8/Button" to="8" method="_on_button_pressed"]
-[connection signal="pressed" from="9/Button" to="9" method="_on_button_pressed"]
-[connection signal="pressed" from="10/Button" to="10" method="_on_button_pressed"]
-[connection signal="pressed" from="11/Button" to="11" method="_on_button_pressed"]
-[connection signal="pressed" from="12/Button" to="12" method="_on_button_pressed"]
+[node name="3" parent="Encounter" unique_id=664957354 instance=ExtResource("3_u6b3a")]
+position = Vector2(1000, 424)
+type = "decision"
+bg_type = "island"

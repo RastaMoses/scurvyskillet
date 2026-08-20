@@ -17,7 +17,6 @@ func _ready() -> void:
 
 #STATE
 var buy_buttons:Array
-var encounter_type = "shop"
 
 
 func player_sell_ingredient(card):

@@ -26,16 +26,15 @@ extends Inventory
 @export var new_encounter:PackedScene
 
 #CACHED COMPS
-@onready var decision_encounter = get_parent()
+
 @onready var drop_area = $DropArea
 @onready var drop_ui = $UI/IngredientDrop
 @onready var ingredient_icon = $UI/IngredientDrop/IngredientIcon
 @onready var button = $Button
 @onready var button_text = $Button/RichTextLabel
 @onready var drop_area_text = $UI/IngredientDrop/RichTextLabel
-
+var decision_encounter
 #STATE
-var encounter_type = "decision"
 
 
 func _ready() -> void:

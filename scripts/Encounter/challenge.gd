@@ -45,7 +45,6 @@ extends Control
 
 
 #STATE
-var encounter_type = "challenge"
 var inv_save:Array[Node]
 
 
