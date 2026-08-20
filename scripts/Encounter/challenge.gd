@@ -36,13 +36,18 @@ extends Control
 
 #CACHED COMPS
 @onready var inventory = get_node("/root/root/Player/Inventory")
+@onready var event = get_node("/root/root/EventManager")
 @onready var dish_node = $Dish
 @onready var map_node = get_parent()
 @onready var ui = $UI
 
+#SIGNAL CONNECTIONS
+
+
 #STATE
 var encounter_type = "challenge"
 var inv_save:Array[Node]
+
 
 func on_success():
 	inventory.current_money += success_money
@@ -113,6 +118,8 @@ func save_inventory():
 		inv_save.push_front(i)
 
 func finish_dish():
+	dish_node.finish_dish()
+	await event.on_dish_finish_anim_done
 	compare_dish(dish_node)
 
 #UI Elements

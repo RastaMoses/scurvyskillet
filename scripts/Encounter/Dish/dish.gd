@@ -98,3 +98,6 @@ func roll_dice(amount):
 
 func start():
 	nutrition_change.emit(0)
+
+func finish_dish():
+	dice_disp.finish_dish()

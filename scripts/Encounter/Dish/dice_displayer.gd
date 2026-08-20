@@ -18,9 +18,15 @@ extends Node2D
 #CACHED COMPS
 @onready var pan_collider = $Pan/CollisionPolygon2D
 @onready var pan_center = $Pan/center
+@onready var event = get_node("/root/root/EventManager")
 
 #STATE
 var dice:Array[RigidBody2D]
+
+func finish_dish():
+	for die in dice:
+		die.stop_movement()
+	event.dish_finish_animation_done()
 
 func spawn_die(flavour):
 	#get point dropped inside static body or closest point if outside
@@ -38,7 +44,6 @@ func spawn_die(flavour):
 		var dist_to_edge:float = (point_on_line - mouse_pos).length()
 		if dist_to_edge < min_dist_to_edge:
 			spawn_pos = point_on_line.lerp(pan_center.position, rel_dist_to_center)
-			print("lerp")
 		else:
 			spawn_pos = mouse_pos
 	#create circular pulse to clear area of other dice
@@ -46,6 +51,7 @@ func spawn_die(flavour):
 	#instantiate dice in that position without collision
 	var new_die = die_scene.instantiate()
 	add_child(new_die)
+	dice.append(new_die)
 	new_die.freeze_mode = RigidBody2D.FREEZE_MODE_KINEMATIC
 	new_die.freeze = true
 	new_die.global_position = spawn_pos
@@ -96,12 +102,3 @@ func closest_point_on_polygon(point: Vector2, polygon: PackedVector2Array) -> Ve
 			closest = p_on_seg
 			
 	return closest
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
