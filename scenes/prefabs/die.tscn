@@ -31,13 +31,15 @@ sizzle_interval = 0.3
 y_sort_enabled = true
 polygon = PackedVector2Array(-32, 24, 1, 41, 39, 23, 3, 5)
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1365063070]
+[node name="Visuals" type="Node2D" parent="." unique_id=134665096]
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals" unique_id=1365063070]
 y_sort_enabled = true
 texture_filter = 1
 scale = Vector2(8, 8)
 texture = ExtResource("2_mda5o")
 
-[node name="highlight" type="Sprite2D" parent="." unique_id=1168113792]
+[node name="highlight" type="Sprite2D" parent="Visuals" unique_id=1168113792]
 position = Vector2(5.9604645e-08, 0.18031567)
 scale = Vector2(7.999999, 8.000001)
 texture = ExtResource("3_mda5o")

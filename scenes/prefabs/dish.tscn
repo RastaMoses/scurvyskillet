@@ -476,7 +476,7 @@ physics_material_override = SubResource("PhysicsMaterial_ecqho")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Dice_Display/Pan" unique_id=1471934749]
 position = Vector2(1347.7517, 432.40854)
 build_mode = 1
-polygon = PackedVector2Array(-259.75174, -176.40854, -108.75171, -218.40854, 46.24829, -222.40854, 223.24829, -190.40854, 356.24826, -112.40853, 404.24826, 7.5914683, 324.24826, 143.59146, 116.24825, 231.59146, -91.75175, 231.59146, -283.75174, 175.59146, -387.75174, 71.59147, -371.75174, -88.40853)
+polygon = PackedVector2Array(-229.75171, -153.40854, -94.75171, -189.40854, 49.24829, -195.40854, 209.24829, -159.40854, 332.2483, -85.40854, 385.2483, 7.591461, 355.2483, 121.59146, 116.24825, 231.59146, -91.75175, 231.59146, -283.75174, 175.59146, -380.7517, 64.59146, -357.7517, -65.40854)
 
 [node name="center" type="Node2D" parent="Dice_Display/Pan" unique_id=383728228]
-position = Vector2(1346, 427)
+position = Vector2(1349, 420)

@@ -37,13 +37,18 @@ animations = [{
 "loop": 0,
 "name": &"sizzle",
 "speed": 10.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"sizzle_anim",
+"speed": 5.0
 }]
 
 [node name="sizzle_anim" type="AnimatedSprite2D" unique_id=726092001]
 z_index = 2
 scale = Vector2(8, 8)
 sprite_frames = SubResource("SpriteFrames_pv3uk")
-animation = &"sizzle"
+animation = &"sizzle_anim"
 script = ExtResource("2_jfgs8")
 
 [connection signal="animation_finished" from="." to="." method="_on_animation_finished"]

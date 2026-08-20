@@ -15,7 +15,7 @@ func _ready() -> void:
 	await get_tree().process_frame
 	
 	# Snap 2D rotation degrees to the nearest 90-degree increment
-	global_rotation_degrees = snappedf(global_rotation_degrees, 90.0)
+	#global_rotation_degrees = snappedf(global_rotation_degrees, 90.0)
 	play("sizzle")
 
 

@@ -6,10 +6,12 @@ extends RigidBody2D
 @export var highlight_duration:float = 5
 @export var sizzle_scene:PackedScene
 @export var sizzle_interval:float = 1
+@export var pixel_multiple:int = 8
 #CACHED COMPS
 @onready var collision_shape = $CollisionShape2D
-@onready var sprite = $Sprite2D
-@onready var highlight_sprite = $highlight
+@onready var sprite = $Visuals/Sprite2D
+@onready var highlight_sprite = $Visuals/highlight
+@onready var visuals = $Visuals
 @onready var random = RandomNumberGenerator.new()
 @onready var dice_disp = get_parent()
 
@@ -57,7 +59,13 @@ func _process(delta: float) -> void:
 			anim.global_position = global_position
 			anim.global_rotation = linear_velocity.angle()
 		sizzle_timer += delta
-
+	#visuals
+	var raw_position: Vector2 = global_position 
+	# Snap to multiples of your chosen pixel size
+	visuals.global_position = Vector2(
+		round(raw_position.x / pixel_multiple) * pixel_multiple,
+		round(raw_position.y / pixel_multiple) * pixel_multiple
+	)
 func start_highlight():
 	highlighted = true
 	highlight_time = highlight_duration
