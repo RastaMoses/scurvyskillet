@@ -7,5 +7,3 @@ func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
 	
 func _drop_data(_at_position: Vector2, data: Variant) -> void:
 	parent.add_ingredient(data.ingredient)
-	data.ingredient = null
-	data.update(null)

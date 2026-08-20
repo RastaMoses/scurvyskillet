@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bodk7w1csegu4"]
+
+[ext_resource type="Script" uid="uid://ddflxjt88os2v" path="res://scripts/Debug/debug_mouse.gd" id="1_yadfs"]
+
+[node name="debug_mouse" type="Node" unique_id=2141378264]
+script = ExtResource("1_yadfs")

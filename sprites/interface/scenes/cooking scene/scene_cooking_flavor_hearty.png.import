@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://5nacx5h2c6cn"
-path="res://.godot/imported/scene_cooking_flavor_meaty.png-3c7eaca9d4491e9c51e9ddb7e85bd87a.ctex"
+path="res://.godot/imported/scene_cooking_flavor_hearty.png-5df5769503de057ca80e17261b4c9784.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/interface/scenes/cooking scene/scene_cooking_flavor_meaty.png"
-dest_files=["res://.godot/imported/scene_cooking_flavor_meaty.png-3c7eaca9d4491e9c51e9ddb7e85bd87a.ctex"]
+source_file="res://sprites/interface/scenes/cooking scene/scene_cooking_flavor_hearty.png"
+dest_files=["res://.godot/imported/scene_cooking_flavor_hearty.png-5df5769503de057ca80e17261b4c9784.ctex"]
 
 [params]
 

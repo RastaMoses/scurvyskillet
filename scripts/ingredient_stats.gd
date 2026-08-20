@@ -1,7 +1,6 @@
 extends Node
 #PARAMS
 
-@export var ingredient_name:String
 @export_group("Values")
 @export var nutrition:int
 @export_subgroup("Flavour")
@@ -21,7 +20,7 @@ extends Node
 @export var unlimited_uses: bool = false
 @export var uses: int
 @export_group("Special Abilities")
-@export var abilities: Array[String]
+@export_enum("leftover_bones", "ability2", "ability3") var abilities: Array[String]
 @export_group("Tags")
 @export var tags: Array[String]
 @export var rarity:int
@@ -31,6 +30,9 @@ extends Node
 #STATE
 var inv_index:int
 var texture:Texture
+
+func get_ingredient_name():
+	return $Preview/ItemDisplay/Name/RichTextLabel.text
 
 func get_preview():
 	return $Preview

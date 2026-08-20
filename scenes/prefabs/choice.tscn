@@ -1,0 +1,104 @@
+[gd_scene format=3 uid="uid://b75jl0uammin5"]
+
+[ext_resource type="Script" uid="uid://dqcweu5fhwb82" path="res://scripts/Encounter/choices.gd" id="1_61j3v"]
+[ext_resource type="Texture2D" uid="uid://htglfgdlhdys" path="res://sprites/interface/scenes/decision scene/scene_decision_button_sign.png" id="2_we2ti"]
+[ext_resource type="Script" uid="uid://v63vu2iilw13" path="res://scripts/Inventory/drop_area.gd" id="2_xd3pp"]
+[ext_resource type="Texture2D" uid="uid://dys7xyagobtu6" path="res://sprites/interface/scenes/decision scene/scene_decision_button_crate.png" id="3_we2ti"]
+
+[node name="choice" type="Control" unique_id=704699521]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+script = ExtResource("1_61j3v")
+
+[node name="Button" type="Button" parent="." unique_id=1705189317]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -184.0
+offset_right = 400.0
+grow_vertical = 0
+icon = ExtResource("2_we2ti")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Button" unique_id=867693461]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.067
+anchor_top = 0.21200001
+anchor_right = 0.067
+anchor_bottom = 0.21200001
+offset_left = 13.199999
+offset_top = -23.00798
+offset_right = 325.2
+offset_bottom = 128.99203
+mouse_behavior_recursive = 1
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UI" type="Control" parent="." unique_id=987613784]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -264.0
+offset_right = 360.0
+grow_vertical = 0
+mouse_behavior_recursive = 1
+
+[node name="IngredientDrop" type="Control" parent="UI" unique_id=834940990]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -264.0
+offset_right = 360.0
+grow_vertical = 0
+mouse_behavior_recursive = 1
+
+[node name="IngredientIcon" type="TextureRect" parent="UI/IngredientDrop" unique_id=1861897201]
+custom_minimum_size = Vector2(192, 192)
+custom_maximum_size = Vector2(192, 192)
+layout_mode = 0
+offset_left = 88.0
+offset_top = 16.0
+offset_right = 280.0
+offset_bottom = 208.0
+mouse_behavior_recursive = 1
+
+[node name="DropBG" type="TextureRect" parent="UI/IngredientDrop" unique_id=98261640]
+layout_mode = 0
+offset_right = 360.0
+offset_bottom = 264.0
+texture = ExtResource("3_we2ti")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/IngredientDrop" unique_id=1646626954]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.067
+anchor_top = 0.21200001
+anchor_right = 0.067
+anchor_bottom = 0.21200001
+offset_left = -0.12000084
+offset_top = 0.03199768
+offset_right = 311.88
+offset_bottom = 152.032
+mouse_behavior_recursive = 1
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DropArea" type="Panel" parent="." unique_id=242936625]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -264.0
+offset_right = 360.0
+grow_vertical = 0
+script = ExtResource("2_xd3pp")

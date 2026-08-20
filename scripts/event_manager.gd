@@ -6,6 +6,7 @@ extends Node
 signal on_encounter_end
 signal on_encounter_start
 signal on_inventory_update
+signal on_dish_finish_anim_done
 #STATE
 
 # Called when the node enters the scene tree for the first time.
@@ -33,3 +34,6 @@ func add_to_ghoulash():
 	
 func update_inventory_position():
 	on_inventory_update.emit()
+
+func dish_finish_animation_done():
+	on_dish_finish_anim_done.emit()

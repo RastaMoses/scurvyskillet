@@ -26,6 +26,7 @@ func set_encounter(encounter_scene):
 func end_encounter():
 	event_manager.encounter_end()
 	map.toggle_map_visible(true)
+	inventory.ui.open()
 	map.set_available_encounters()
 	toggle_button(false)
 	show_button(true)
