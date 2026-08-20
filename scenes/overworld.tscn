@@ -5,7 +5,8 @@
 [ext_resource type="Script" uid="uid://cx3kxlhcjwpki" path="res://scripts/event_manager.gd" id="3_e184d"]
 [ext_resource type="Script" uid="uid://cmbe0axqvmhhv" path="res://scripts/abilities_manager.gd" id="4_nesqq"]
 [ext_resource type="PackedScene" uid="uid://ckhln31sq4epk" path="res://scenes/prefabs/player/inventory.tscn" id="5_lsky2"]
-[ext_resource type="PackedScene" uid="uid://p1ug5ylfd5re" path="res://scenes/prefabs/card_prefab.tscn" id="6_255p0"]
+[ext_resource type="PackedScene" uid="uid://p1ug5ylfd5re" path="res://scenes/prefabs/card_prefab.tscn" id="6_qjxaj"]
+[ext_resource type="PackedScene" uid="uid://cahekguqybot" path="res://scenes/ingredients/card2.tscn" id="7_e184d"]
 [ext_resource type="PackedScene" uid="uid://bodk7w1csegu4" path="res://scenes/debug/debug_mouse.tscn" id="7_rklxl"]
 
 [node name="root" type="Node2D" unique_id=1075341061]
@@ -27,6 +28,6 @@ script = ExtResource("4_nesqq")
 mouse_filter = 1
 current_money = 10
 current_morale = 10
-starting_ingredients = Array[PackedScene]([ExtResource("6_255p0"), ExtResource("6_255p0"), ExtResource("6_255p0")])
+starting_ingredients = Array[PackedScene]([ExtResource("6_qjxaj"), ExtResource("7_e184d")])
 
 [node name="debug_mouse" parent="." unique_id=2141378264 instance=ExtResource("7_rklxl")]

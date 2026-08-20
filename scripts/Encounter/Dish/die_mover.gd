@@ -2,7 +2,7 @@ extends RigidBody2D
 
 #PARAMS
 @export var random_power:Vector2
-@export var min_velocity = 100
+@export var max_speed = 300
 #CACHED COMPS
 @onready var collision_shape = $CollisionShape2D
 @onready var sprite = $Sprite2D
@@ -30,3 +30,7 @@ func change_sprite(texture):
 func stop_movement():
 	linear_velocity = Vector2.ZERO
 	freeze = true
+
+func _process(delta: float) -> void:
+	if linear_velocity.length() > max_speed:
+		linear_velocity *= 0.9

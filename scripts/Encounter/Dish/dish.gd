@@ -24,6 +24,9 @@ var current_ingredients: Array[Node]
 var tags:Array[String]
 
 func check_can_drop(data):
+	#try_add abilities
+	if abilities.on_try_add_ingredient(data) == false:
+		return false
 	#check if a tag is restricted
 	if restricted_tags.size() != 0:
 		for i in restricted_tags:
@@ -33,6 +36,7 @@ func check_can_drop(data):
 
 func add_ingredient(ingredient):
 	#check for abilities on add
+	abilities.on_ingredient_add_to_dish(ingredient)
 	#add ingredient
 	current_ingredients.append(ingredient)
 	ingredient.reparent(self)

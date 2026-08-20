@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cbec14v7l54xf"]
 
-[ext_resource type="Script" uid="uid://dm4u7nvg5wnbc" path="res://scripts/Encounter/Dish/die_mover.gd" id="1_ecqho"]
-[ext_resource type="Texture2D" uid="uid://o5xyo5mnhwhc" path="res://sprites/interface/scenes/cooking scene/scene_cooking_dice_sour.png" id="2_8ifti"]
+[ext_resource type="Script" uid="uid://dm4u7nvg5wnbc" path="res://scripts/Encounter/Dish/die_mover.gd" id="1_jvbsu"]
+[ext_resource type="Texture2D" uid="uid://o5xyo5mnhwhc" path="res://sprites/interface/scenes/cooking scene/scene_cooking_dice_sour.png" id="2_mda5o"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8ifti"]
 friction = 0.0
@@ -21,14 +21,15 @@ lock_rotation = true
 freeze = true
 linear_damp_mode = 1
 angular_damp_mode = 1
-script = ExtResource("1_ecqho")
+script = ExtResource("1_jvbsu")
 random_power = Vector2(200, 400)
-min_velocity = 50
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="." unique_id=820687282]
-polygon = PackedVector2Array(-32, 24, 1, 41, 39, 23, 39, -19, 4, -36, -32, -19)
+y_sort_enabled = true
+polygon = PackedVector2Array(-32, 24, 1, 41, 39, 23, 3, 5)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1365063070]
+y_sort_enabled = true
 texture_filter = 1
 scale = Vector2(8, 8)
-texture = ExtResource("2_8ifti")
+texture = ExtResource("2_mda5o")

@@ -33,6 +33,11 @@ func remove_ingredient(ingredient_instance):
 
 func add_ingredient(ingredient_instance):
 	#Check if ingredient is already in inventory
+	if ingredient_instance.unlimited_uses:
+		ingredient_instance.reparent(self)
+		current_ingredients.push_front(ingredient_instance)
+		ui.update_slots()
+		return
 	var duplicates:Array[Node]
 	for i in current_ingredients:
 		if i.get_ingredient_name() == ingredient_instance.get_ingredient_name():
