@@ -6,6 +6,7 @@ extends Node
 var current_ingredients: Array[Node]
 @export var starting_ingredients: Array[Resource]
 @export var ui:Control
+@export var can_stack_uses:bool = true
 @export_group("Can Drop Reqs")
 @export var cd_tags:Array[String]
 @export var cd_ingredients:Array[Resource]
@@ -14,6 +15,7 @@ var current_ingredients: Array[Node]
 @onready var abilities = get_node("/root/game/Player/Abilities")
 #SIGNALS
 signal on_add_ingredient(card)
+signal on_remove_ingredient(card)
 #STATE
 
 func _ready() -> void:
@@ -28,6 +30,7 @@ func destroy_ingredient(card):
 		card.queue_free()
 
 func remove_ingredient(card):
+	on_remove_ingredient.emit(card)
 	change_ingredient_uses(card, -1)
 	if ui != null:
 		ui.update_slots()
@@ -38,8 +41,9 @@ func instantiate_card_from_resource(ingredient_resource):
 	card.set_stats(ingredient_resource)
 	add_ingredient(card)
 
-func add_ingredient(card):
+func add_ingredient(card:Node):
 	on_add_ingredient.emit(card)
+	card.reparent(self)
 	#Check if ingredient is already in inventory
 	if card.stats.unlimited_uses:
 		current_ingredients.push_front(card)
@@ -51,7 +55,7 @@ func add_ingredient(card):
 		if i.stats == card.stats:
 			duplicates.append(i)
 	#find duplicate with less than 4 uses and assign more uses until the added card has no more
-	if duplicates.size() > 0:
+	if duplicates.size() !=0 and can_stack_uses:
 		for i in duplicates:
 			while i.uses < 4 and card.uses != 0:
 				change_ingredient_uses(i, 1)

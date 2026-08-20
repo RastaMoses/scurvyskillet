@@ -65,9 +65,10 @@ func _process(delta: float) -> void:
 		highlight_time -= delta
 		if highlight_time <= 0:
 			highlight_sprite.self_modulate.a -= delta * highlight_vanish_speed
-			number_sprites[number - 1].self_modulate.a -= delta * number_vanish_speed
+			if number_vanish_speed != 0:
+				number_sprites[number - 1].self_modulate.a -= delta * number_vanish_speed
 			if highlight_sprite.self_modulate.a <= 0:
-				stop_highlight()
+				highlighted = false
 	if sizzle_active:
 		if sizzle_timer >= sizzle_interval:
 			sizzle_timer = 0

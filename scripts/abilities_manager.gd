@@ -41,6 +41,6 @@ func on_try_add_ingredient(card):
 	#Spice
 	if card.stats.abilities.has("spice"):
 		for i in spice_list:
-			if i.name == card.stats.name:
+			if i == card.stats:
 				return false
 	return can_add

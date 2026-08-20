@@ -5,8 +5,7 @@ extends Node2D
 @export var pulse_power:float = 100
 @export var pulse_range:float = 100
 @export var collision_delay: float = 0.2
-@export var rel_dist_to_center:float = 0.2
-@export var min_dist_to_edge:float = 30
+@export var min_dist_to_edge:float = 100
 @export_group("Visuals")
 @export_subgroup("Sprites")
 @export var sweet_sprite:Texture
@@ -35,13 +34,17 @@ func spawn_die(flavour, value):
 	var spawn_pos
 	if !Geometry2D.is_point_in_polygon(mouse_pos, get_global_polygon(pan_collider)):
 		var point_on_line: Vector2 = closest_point_on_polygon(mouse_pos, get_global_polygon(pan_collider))
-		spawn_pos = point_on_line.lerp(pan_center.position, rel_dist_to_center)
+		var distance = point_on_line.distance_to(pan_center.global_position)
+		var rel_dist = min_dist_to_edge/distance
+		spawn_pos = point_on_line.lerp(pan_center.position, rel_dist)
 	else:
 		#if point is close to edge of pan, move more inside
 		var point_on_line = closest_point_on_polygon(mouse_pos, get_global_polygon(pan_collider))
 		var dist_to_edge:float = (point_on_line - mouse_pos).length()
 		if dist_to_edge < min_dist_to_edge:
-			spawn_pos = point_on_line.lerp(pan_center.position, rel_dist_to_center)
+			var distance = point_on_line.distance_to(pan_center.global_position)
+			var rel_dist = min_dist_to_edge/distance
+			spawn_pos = point_on_line.lerp(pan_center.position, rel_dist)
 		else:
 			spawn_pos = mouse_pos
 	#create circular pulse to clear area of other dice

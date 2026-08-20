@@ -1,0 +1,18 @@
+[gd_resource type="Resource" format=3 uid="uid://xhgwjr4bawpf"]
+
+[ext_resource type="Texture2D" uid="uid://c2qb07w24nwqu" path="res://sprites/placeholder/Screenshot 2026-08-20 195817.png" id="1_dncmw"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_3qegn"]
+
+[resource]
+script = ExtResource("2_3qegn")
+name = "Fresh Flo"
+icon = ExtResource("1_dncmw")
+tags = Array[String](["test_tag"])
+rarity = 2
+price = 4
+description = "Something awesome"
+nutrition = 2
+sweet = 1
+sour = 1
+fresh = 3
+uses = 3
