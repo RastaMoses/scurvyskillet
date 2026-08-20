@@ -29,7 +29,7 @@ func finish_dish():
 		die.stop_movement()
 	event.dish_finish_animation_done()
 
-func spawn_die(flavour):
+func spawn_die(flavour, value):
 	#get point dropped inside static body or closest point if outside
 	var mouse_pos = get_global_mouse_position()
 	var spawn_pos
@@ -67,6 +67,7 @@ func spawn_die(flavour):
 		"fresh":
 			new_die.change_sprite(fresh_sprite)
 	#set highlight
+	new_die.display_number(value)
 	new_die.start_highlight()
 	highlighted_dice.append(new_die)
 

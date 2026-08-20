@@ -5,6 +5,8 @@ extends RigidBody2D
 @export var random_power:Vector2
 @export var max_speed = 300
 @export var highlight_duration:float = 5
+@export var highlight_vanish_speed:float = 1
+@export var number_vanish_speed:float = 4
 @export_group("Sizzle Anim")
 @export var sizzle_scene:PackedScene
 @export var sizzle_interval:float = 1
@@ -15,6 +17,7 @@ extends RigidBody2D
 @onready var sprite = $Visuals/Sprite2D
 @onready var highlight_sprite = $Visuals/highlight
 @onready var visuals = $Visuals
+@onready var number_sprites = $Visuals/Numbers.get_children()
 @onready var random = RandomNumberGenerator.new()
 @onready var dice_disp = get_parent()
 
@@ -23,6 +26,7 @@ var move_dir
 var move_power
 var highlight_time:float
 var highlighted:bool = false
+var number
 #sizzle
 var sizzle_active = true
 var sizzle_timer = sizzle_interval
@@ -42,6 +46,12 @@ func wait_activate_collision(wait_time):
 func change_sprite(texture):
 	sprite.texture = texture
 
+func display_number(value):
+	number = value
+	for i in number_sprites:
+		i.visible = false
+	number_sprites[value-1].visible = true
+
 func stop_movement():
 	linear_velocity = Vector2.ZERO
 	freeze = true
@@ -53,7 +63,11 @@ func _process(delta: float) -> void:
 	
 	if highlighted:
 		highlight_time -= delta
-		highlight_sprite.self_modulate.a = highlight_time/highlight_duration
+		if highlight_time <= 0:
+			highlight_sprite.self_modulate.a -= delta * highlight_vanish_speed
+			number_sprites[number - 1].self_modulate.a -= delta * number_vanish_speed
+			if highlight_sprite.self_modulate.a <= 0:
+				stop_highlight()
 	if sizzle_active:
 		if sizzle_timer >= sizzle_interval:
 			sizzle_timer = 0
@@ -75,8 +89,10 @@ func start_highlight():
 	highlighted = true
 	highlight_time = highlight_duration
 	highlight_sprite.visible = true
+	number_sprites[number - 1].visible = true
 
 func stop_highlight():
 	highlighted = false
 	highlight_time = 0
 	highlight_sprite.visible = false
+	number_sprites[number - 1].visible = false

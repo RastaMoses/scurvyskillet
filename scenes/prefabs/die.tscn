@@ -4,6 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://o5xyo5mnhwhc" path="res://sprites/interface/scenes/cooking scene/scene_cooking_dice_sour.png" id="2_mda5o"]
 [ext_resource type="Texture2D" uid="uid://clrmciu31g4ft" path="res://sprites/interface/scenes/cooking scene/scene_cooking_dice_outline.png" id="3_mda5o"]
 [ext_resource type="PackedScene" uid="uid://c6r1ffroignl1" path="res://scenes/prefabs/sizzle_anim.tscn" id="4_pv3uk"]
+[ext_resource type="Texture2D" uid="uid://jn4ffjjk6h5i" path="res://sprites/interface/scenes/cooking scene/scene_cooking_dice_number_1.png" id="5_m65qb"]
+[ext_resource type="Texture2D" uid="uid://ueqjshriu1b7" path="res://sprites/interface/scenes/cooking scene/scene_cooking_dice_number_2.png" id="6_7c8j8"]
+[ext_resource type="Texture2D" uid="uid://burxtw84tm26l" path="res://sprites/interface/scenes/cooking scene/scene_cooking_dice_number_3.png" id="7_ejxjy"]
+[ext_resource type="Texture2D" uid="uid://cs3n70m1lmjtp" path="res://sprites/interface/scenes/cooking scene/scene_cooking_dice_number_4.png" id="8_dutac"]
+[ext_resource type="Texture2D" uid="uid://b177tsm8w7jep" path="res://sprites/interface/scenes/cooking scene/scene_cooking_dice_number_5.png" id="9_aipxk"]
+[ext_resource type="Texture2D" uid="uid://vk6cg5te3yb0" path="res://sprites/interface/scenes/cooking scene/scene_cooking_dice_number_6.png" id="10_ttuxo"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8ifti"]
 friction = 0.0
@@ -24,6 +30,7 @@ linear_damp_mode = 1
 angular_damp_mode = 1
 script = ExtResource("1_jvbsu")
 random_power = Vector2(200, 400)
+highlight_duration = 6.0
 sizzle_scene = ExtResource("4_pv3uk")
 sizzle_interval = 0.3
 sizzle_spawn_range = Vector2i(0, 3)
@@ -45,3 +52,41 @@ texture = ExtResource("2_mda5o")
 position = Vector2(5.9604645e-08, 0.18031567)
 scale = Vector2(7.999999, 8.000001)
 texture = ExtResource("3_mda5o")
+
+[node name="Numbers" type="Node2D" parent="Visuals" unique_id=1576595265]
+
+[node name="1" type="Sprite2D" parent="Visuals/Numbers" unique_id=378640801]
+visible = false
+position = Vector2(0, -40)
+scale = Vector2(8, 8)
+texture = ExtResource("5_m65qb")
+
+[node name="2" type="Sprite2D" parent="Visuals/Numbers" unique_id=838016604]
+visible = false
+position = Vector2(0, -48)
+scale = Vector2(8, 8)
+texture = ExtResource("6_7c8j8")
+
+[node name="3" type="Sprite2D" parent="Visuals/Numbers" unique_id=1800074653]
+visible = false
+position = Vector2(0, -48)
+scale = Vector2(8, 8)
+texture = ExtResource("7_ejxjy")
+
+[node name="4" type="Sprite2D" parent="Visuals/Numbers" unique_id=1578676256]
+visible = false
+position = Vector2(0, -48)
+scale = Vector2(8, 8)
+texture = ExtResource("8_dutac")
+
+[node name="5" type="Sprite2D" parent="Visuals/Numbers" unique_id=465997083]
+visible = false
+position = Vector2(0, -48)
+scale = Vector2(8, 8)
+texture = ExtResource("9_aipxk")
+
+[node name="6" type="Sprite2D" parent="Visuals/Numbers" unique_id=625492797]
+visible = false
+position = Vector2(0, -40)
+scale = Vector2(8, 8)
+texture = ExtResource("10_ttuxo")

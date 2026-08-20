@@ -32,22 +32,12 @@ func on_add_to_dish(card):
 	for new_tag in card.stats.tags:
 		if !tags.has(new_tag):
 			tags.append(new_tag)
-	#dice display
-	dice_disp.reset_highlights()
-	for i in card.stats.sweet:
-		dice_disp.spawn_die("sweet")
-	for i in card.stats.sour:
-		dice_disp.spawn_die("sour")
-	for i in card.stats.spicy:
-		dice_disp.spawn_die("spicy")
-	for i in card.stats.hearty:
-		dice_disp.spawn_die("hearty")
-	for i in card.stats.fresh:
-		dice_disp.spawn_die("fresh")
+	
+	roll_ingredient(card)
+	
 	#ui
 	nutrition += card.stats.nutrition
 	event_manager.add_to_dish(card)
-	roll_ingredient(card)
 	
 	dish_ui.update_flavours()
 	dish_ui.update_nutrition(nutrition)
@@ -76,22 +66,26 @@ func destroy_all_ingredients():
 	current_ingredients.clear()
 	tags.clear()
 
-func roll_ingredient(ingredient):
+func roll_ingredient(card):
 	var dice_multiplier = 1
 	var result_multiplier = 1
-	abilities.on_dice_roll(ingredient.stats)
-	sweet += roll_dice(dice_multiplier*ingredient.stats.sweet) * result_multiplier
-	sour += roll_dice(dice_multiplier*ingredient.stats.sour) * result_multiplier
-	spicy += roll_dice(dice_multiplier*ingredient.stats.spicy) * result_multiplier
-	hearty += roll_dice(dice_multiplier*ingredient.stats.hearty) * result_multiplier
-	fresh += roll_dice(dice_multiplier*ingredient.stats.fresh) * result_multiplier
+	dice_disp.reset_highlights()
+	abilities.on_dice_roll(card.stats)
+	sweet += roll_dice("sweet", dice_multiplier*card.stats.sweet) * result_multiplier
+	sour += roll_dice("sour", dice_multiplier*card.stats.sour) * result_multiplier
+	spicy += roll_dice("spicy",dice_multiplier*card.stats.spicy) * result_multiplier
+	hearty += roll_dice("hearty",dice_multiplier*card.stats.hearty) * result_multiplier
+	fresh += roll_dice("fresh",dice_multiplier*card.stats.fresh) * result_multiplier
+	
 
-func roll_dice(amount):
-	var result = 0
+func roll_dice(flavour,amount):
+	var all_result = 0
 	while amount > 0:
 		amount -= 1
-		result += random.randi_range(1,6)
-	return result
+		var roll_result = random.randi_range(1,6)
+		all_result += roll_result
+		dice_disp.spawn_die(flavour, roll_result)
+	return all_result
 
 func start():
 	nutrition_change.emit(0)
