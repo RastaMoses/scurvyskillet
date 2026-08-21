@@ -33,6 +33,7 @@ custom_minimum_size = Vector2(256, 304)
 offset_right = 256.0
 offset_bottom = 304.0
 mouse_filter = 1
+mouse_behavior_recursive = 2
 script = ExtResource("1_80hv5")
 
 [node name="EmptySlot" type="TextureRect" parent="." unique_id=961373681]
@@ -52,6 +53,7 @@ z_index = -1
 layout_mode = 0
 offset_right = 256.0
 offset_bottom = 304.0
+mouse_behavior_recursive = 1
 texture = ExtResource("2_x2fnd")
 
 [node name="item_icon" type="TextureRect" parent="ItemDisplay" unique_id=1095232349]
@@ -63,6 +65,7 @@ offset_left = 16.0
 offset_top = 64.0
 offset_right = 208.0
 offset_bottom = 256.0
+mouse_behavior_recursive = 1
 expand_mode = 1
 
 [node name="Rarity" type="Control" parent="ItemDisplay" unique_id=80472254]
@@ -115,6 +118,28 @@ layout_mode = 0
 offset_right = 256.0
 offset_bottom = 304.0
 texture = ExtResource("10_xwxd7")
+
+[node name="Nutrition" type="TextureRect" parent="ItemDisplay" unique_id=781366672]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 304.0
+texture = ExtResource("17_qhw41")
+
+[node name="NutritionText" type="RichTextLabel" parent="ItemDisplay/Nutrition" unique_id=367587180]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -82.0
+offset_top = 56.0
+offset_right = -18.0
+offset_bottom = 120.0
+grow_horizontal = 0
+theme = ExtResource("18_or6lv")
+text = "3"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Flavours" type="Control" parent="ItemDisplay" unique_id=2132717140]
 anchors_preset = 0
@@ -220,31 +245,8 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Nutrition" type="TextureRect" parent="ItemDisplay" unique_id=781366672]
-layout_mode = 0
-offset_right = 256.0
-offset_bottom = 304.0
-texture = ExtResource("17_qhw41")
-
-[node name="NutritionText" type="RichTextLabel" parent="ItemDisplay/Nutrition" unique_id=367587180]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -82.0
-offset_top = 56.0
-offset_right = -18.0
-offset_bottom = 120.0
-grow_horizontal = 0
-theme = ExtResource("18_or6lv")
-text = "3"
-scroll_active = false
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="large_view_button" type="Button" parent="." unique_id=1319644790]
-z_index = 100
-z_as_relative = false
+z_index = 5
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

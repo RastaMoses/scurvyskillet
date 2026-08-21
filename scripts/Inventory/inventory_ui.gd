@@ -3,12 +3,14 @@ extends Control
 #PARAMS
 @export var inventory_slot_scene:PackedScene
 @export var min_slots: int = 10
+@export var large_view_bg_fade_speed = 1
 
-@export_group("Bottom Position")
+@export_group("Inventory Positions")
+@export_subgroup("Bottom Position")
 @export var container_size_bottom:Vector2
 @export var container_pos_bottom:Vector2
 
-@export_group("Side Position")
+@export_subgroup("Side Position")
 @export var container_size_side:Vector2
 @export var container_pos_side:Vector2
 @export var max_rows:int = 3
@@ -24,25 +26,31 @@ extends Control
 @onready var grid_container = $ScrollContainer/GridContainer
 @onready var morale_text = $topbar/morale_text
 @onready var money_text = $topbar/money_text
-@onready var large_view_button = $large_view
+
+
+@onready var large_view_button = $LargeView/Button
+@onready var large_view_slot = $LargeView/InventoryUILarge
+@onready var large_view_bg = $LargeView/ButtonBG
 
 #STATE
 var data_bk
 var bottom_position = true
 var current_bg
+var large_view_active = false
 
 var is_open = false
 
 func _ready():
 	update_position(bottom_position)
 	update_topbar()
+	
+	#connect large view buttons
 	large_view_button.pressed.connect(large_view_button_pressed)
 	for i in slots:
 		i.large_view_clicked.connect(large_view_button_pressed)
-	large_view_button.visible = false
 	event_manager.on_encounter_end.connect(encounter_end)
 	event_manager.on_encounter_start.connect(encounter_start)
-	close()
+	reset_large_view()
 func encounter_end():
 	close()
 
@@ -127,10 +135,12 @@ func open():
 	current_bg.visible = true
 	inventory_container.visible = true
 	is_open = true
+	reset_large_view()
 	update_slots()
 	update_topbar()
 	
 func close():
+	reset_large_view()
 	current_bg.visible = false
 	inventory_container.visible = false
 	is_open = false
@@ -140,15 +150,23 @@ func update_topbar():
 	morale_text.text = str(player_inventory.current_morale)
 	
 func toggle_large_view(card):
-	if large_view_button.visible:
+	if large_view_active:
+		
 		large_view_button.visible = false
+		large_view_slot.visible = false
+		large_view_bg.start_fade(-large_view_bg_fade_speed)
+		large_view_active = false
 		for i in slots:
 			i.large_view_clicked.disconnect(set_new_large_view)
 			i.large_view_clicked.connect(large_view_button_pressed)
 	else:
+		
 		large_view_button.visible = true
+		large_view_slot.visible = true
+		large_view_bg.start_fade(large_view_bg_fade_speed)
 		if card != null:
-			large_view_button.get_child(0).update(card)
+			large_view_slot.update(card)
+		large_view_active = true
 		for i in slots:
 			i.large_view_clicked.disconnect(large_view_button_pressed)
 			i.large_view_clicked.connect(set_new_large_view)
@@ -157,4 +175,12 @@ func large_view_button_pressed(card = null):
 	toggle_large_view(card)
 
 func set_new_large_view(card):
-	large_view_button.get_child(0).update(card)
+	large_view_slot.update(card)
+
+func reset_large_view():
+	large_view_bg.stop_fade()
+	large_view_slot.visible = false
+	large_view_button.visible = false
+	if (large_view_active):
+		toggle_large_view(null)
+	large_view_active = false

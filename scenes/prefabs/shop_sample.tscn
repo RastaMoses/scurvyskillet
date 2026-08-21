@@ -27,9 +27,6 @@ grow_vertical = 2
 mouse_behavior_recursive = 1
 script = ExtResource("1_72y8b")
 buy_button_sample = ExtResource("3_qwea3")
-rarity_prices = Array[int]([1, 5, 10])
-morale_gain = 1
-morale_price = 2
 card_prefab = ExtResource("2_72y8b")
 can_stack_uses = false
 

@@ -43,7 +43,7 @@ func on_checking_drop(origin):
 func buy_card(buy_button):
 	if buy_button.sell_card != null:
 		player_inventory.add_ingredient(buy_button.sell_card.stats)
-		remove_ingredient(buy_button.sell_card)
+		destroy_ingredient(buy_button.sell_card)
 		player_inventory.add_money(-buy_button.price)
 	buy_button.sell_out()
 	check_buttons_enabled()
@@ -61,9 +61,9 @@ func check_buttons_enabled():
 		if buy_button.sold_out:
 			return
 		if buy_button.price > player_inventory.current_money:
-			buy_button.is_disabled(true)
+			buy_button.can_buy = false
 		else:
-			buy_button.is_disabled(false)
+			buy_button.can_buy = true
 
 func populate_shop():
 	for i in buy_buttons:

@@ -37,10 +37,10 @@ func destroy_ingredient(card:Node):
 		ui.update_slots()
 	if card.get_parent() == self:
 		card.queue_free()
+	sort_inventory_by_rarity()
 
 func destroy_all_ingredients():
 	destroying_all.emit(self)
-	print(current_ingredients)
 	for i in current_ingredients:
 		i.queue_free()
 	current_ingredients.clear()
@@ -70,11 +70,13 @@ func add_ingredient(resource):
 		on_add_ingredient.emit(self,new_card)
 		if ui != null:
 			ui.update_slots()
-		return
+		return new_card
 	distribute_uses(new_card)
 	on_add_ingredient.emit(self,new_card)
 	if ui != null:
 		ui.update_slots()
+	sort_inventory_by_rarity()
+	return new_card
 
 func distribute_uses(card):
 	if card == null:
@@ -129,3 +131,22 @@ func check_can_drop(data):
 		else:
 			return false
 	return true
+
+func sort_inventory_by_name():
+	current_ingredients.sort_custom(sort_by_name)
+	if ui != null:
+		ui.update_slots()
+func sort_inventory_by_rarity():
+	current_ingredients.sort_custom(sort_by_rarity)
+	if ui != null:
+		ui.update_slots()
+
+func sort_by_rarity(a,b):
+	if a.stats.rarity < b.stats.rarity:
+		return true
+	else:
+		if a.stats.uses < b.stats.uses:
+			return true
+	return false
+func sort_by_name(a, b): 
+	return a.stats.name.naturalnocasecmp_to(b.stats.name) < 0

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" format=3 uid="uid://xhgwjr4bawpf"]
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://xhgwjr4bawpf"]
 
 [ext_resource type="Texture2D" uid="uid://c2qb07w24nwqu" path="res://sprites/placeholder/Screenshot 2026-08-20 195817.png" id="1_dncmw"]
 [ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_3qegn"]

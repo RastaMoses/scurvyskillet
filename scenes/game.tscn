@@ -33,6 +33,7 @@ current_morale = 5
 starting_ingredients = Array[Resource]([ExtResource("7_ir15t"), ExtResource("7_0tnpc")])
 
 [node name="debug_mouse" parent="." unique_id=2141378264 instance=ExtResource("8_ca42v")]
+active = true
 
 [node name="IngredientPool" type="Node" parent="." unique_id=1772734839 groups=["ingredient_pool"]]
 script = ExtResource("9_rysoc")

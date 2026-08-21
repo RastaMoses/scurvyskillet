@@ -43,15 +43,36 @@ scale = Vector2(8, 8)
 texture = ExtResource("3_nujxw")
 centered = false
 
-[node name="Icon" type="Sprite2D" parent="Button" unique_id=1723437266]
+[node name="ItemVisuals" type="Node2D" parent="." unique_id=1838161469]
+
+[node name="InventoryUISlot" parent="ItemVisuals" unique_id=442831638 instance=ExtResource("5_jp23l")]
+z_index = 2
+offset_left = 16.0
+offset_top = -88.0
+offset_right = 272.0
+offset_bottom = 216.0
+mouse_filter = 2
+mouse_behavior_recursive = 1
+showcase = true
+
+[node name="HiddenIcon" type="Node2D" parent="ItemVisuals" unique_id=1500573408]
+
+[node name="BG" type="Sprite2D" parent="ItemVisuals/HiddenIcon" unique_id=1801869450]
+
+[node name="Icon" type="Sprite2D" parent="ItemVisuals/HiddenIcon" unique_id=1074225168]
+z_index = 1
+position = Vector2(128, 72)
+scale = Vector2(8, 8)
+texture = ExtResource("6_isrqj")
+
+[node name="Icon" type="Sprite2D" parent="ItemVisuals" unique_id=1723437266]
 z_as_relative = false
 position = Vector2(192, 184)
 scale = Vector2(8, 8)
 texture = ExtResource("4_iegwe")
 centered = false
 
-[node name="PriceText" type="RichTextLabel" parent="Button" unique_id=2066421690]
-layout_mode = 0
+[node name="PriceText" type="RichTextLabel" parent="ItemVisuals" unique_id=2066421690]
 offset_top = 200.0
 offset_right = 152.0
 offset_bottom = 296.0
@@ -61,27 +82,6 @@ theme = ExtResource("5_db54x")
 text = "1"
 scroll_active = false
 horizontal_alignment = 1
-
-[node name="InventoryUISlot" parent="." unique_id=442831638 instance=ExtResource("5_jp23l")]
-z_index = 2
-layout_mode = 0
-offset_left = 16.0
-offset_top = -88.0
-offset_right = 272.0
-offset_bottom = 216.0
-mouse_filter = 2
-mouse_behavior_recursive = 1
-showcase = true
-
-[node name="HiddenIcon" type="Node2D" parent="." unique_id=1500573408]
-
-[node name="BG" type="Sprite2D" parent="HiddenIcon" unique_id=1801869450]
-
-[node name="Icon" type="Sprite2D" parent="HiddenIcon" unique_id=1074225168]
-z_index = 1
-position = Vector2(128, 72)
-scale = Vector2(8, 8)
-texture = ExtResource("6_isrqj")
 
 [connection signal="gui_input" from="Button" to="." method="_on_button_gui_input"]
 [connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]

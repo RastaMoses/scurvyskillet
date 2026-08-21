@@ -229,3 +229,6 @@ offset_top = 233.0
 offset_right = -166.0
 offset_bottom = 313.0
 text = "2"
+
+[node name="large_view_button" parent="." index="2" unique_id=1319644790]
+visible = false

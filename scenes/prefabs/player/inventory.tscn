@@ -12,6 +12,8 @@
 [ext_resource type="Theme" uid="uid://dwjm243i4x47a" path="res://themes/inventory/inv_scroll_container.tres" id="10_no1hy"]
 [ext_resource type="Theme" uid="uid://fa4mmtcwb3a5" path="res://themes/inventory/inv_grid_container.tres" id="11_lc8fr"]
 [ext_resource type="PackedScene" uid="uid://7lxu211xbf4i" path="res://scenes/prefabs/player/inventory_ui_large_view.tscn" id="12_ul54y"]
+[ext_resource type="Texture2D" uid="uid://brlwxgegkouv1" path="res://sprites/interface/scenes/decision scene/scene_decision_background_water.png" id="13_etcjs"]
+[ext_resource type="Script" uid="uid://cd0ktcwpa3fkn" path="res://scripts/Inventory/sprite_fade.gd" id="14_apfx7"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_2kgow"]
 
@@ -123,6 +125,50 @@ offset_bottom = 871.0
 mouse_filter = 2
 texture = SubResource("PlaceholderTexture2D_2kgow")
 
+[node name="LargeView" type="Control" parent="InventoryUI" unique_id=400635027]
+z_index = -1
+anchors_preset = 0
+mouse_filter = 1
+mouse_behavior_recursive = 1
+
+[node name="Button" type="Button" parent="InventoryUI/LargeView" unique_id=1508888289]
+z_index = -5
+custom_minimum_size = Vector2(1920, 780)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1072.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+mouse_behavior_recursive = 2
+flat = true
+
+[node name="InventoryUILarge" parent="InventoryUI/LargeView" unique_id=1295964210 instance=ExtResource("12_ul54y")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 704.0
+offset_top = 24.0
+offset_right = 1216.0
+offset_bottom = 792.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+
+[node name="ButtonBG" type="Sprite2D" parent="InventoryUI/LargeView" unique_id=669775923]
+modulate = Color(1, 1, 1, 0.35500002)
+z_index = -6
+scale = Vector2(8, 8)
+texture = ExtResource("13_etcjs")
+centered = false
+script = ExtResource("14_apfx7")
+
 [node name="ScrollContainer" type="ScrollContainer" parent="InventoryUI" unique_id=79906176]
 custom_minimum_size = Vector2(1930, 304)
 layout_mode = 1
@@ -167,35 +213,3 @@ layout_mode = 2
 
 [node name="InventoryUISlot8" parent="InventoryUI/ScrollContainer/GridContainer" unique_id=634208404 instance=ExtResource("4_rw30e")]
 layout_mode = 2
-
-[node name="large_view" type="Button" parent="InventoryUI" unique_id=1508888289]
-z_index = 99
-z_as_relative = false
-custom_minimum_size = Vector2(1920, 780)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 1920.0
-offset_bottom = 780.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-mouse_behavior_recursive = 2
-flat = true
-
-[node name="InventoryUILarge" parent="InventoryUI/large_view" unique_id=1295964210 instance=ExtResource("12_ul54y")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -256.0
-offset_top = -366.0
-offset_right = 256.0
-offset_bottom = 402.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 0
-mouse_behavior_recursive = 2

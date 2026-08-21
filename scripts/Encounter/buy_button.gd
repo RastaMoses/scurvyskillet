@@ -9,16 +9,17 @@ extends Control
 
 @onready var button = $Button
 @onready var button_highlight = $Button/Highlight
-@onready var ui_slot = $InventoryUISlot
-@onready var hidden_icon = $HiddenIcon
-@onready var price_text = $Button/PriceText
+@onready var ui_slot = $ItemVisuals/InventoryUISlot
+@onready var hidden_icon = $ItemVisuals/HiddenIcon
+@onready var price_text = $ItemVisuals/PriceText
+@onready var item_visuals = $ItemVisuals
 @onready var item_pool = get_tree().get_first_node_in_group("ingredient_pool")
 
 var sell_card
 var sold_out = false
+var can_buy = true
 var price:int
 var shop
-
 
 func populate():
 	if specific_item != null:
@@ -32,7 +33,7 @@ func set_random_item():
 
 func set_item(resource):
 	sell_card = shop.add_ingredient(resource)
-	
+	toggle_item_icon(true)
 	if !hide_item:
 		price = shop.get_card_price(sell_card)
 		ui_slot.visible = true
@@ -43,26 +44,31 @@ func set_item(resource):
 		price = shop.hidden_item_price
 	
 	ui_slot.update(sell_card)
+	can_buy = true
 	#set ui slot large view button to work with player inventory ui
 	
 	price_text.text = str(price)
 	
-	
 func sell_out():
 	sold_out = true
-	ui_slot.visible = false
-	is_disabled(true)
+	set_clickable(false)
+	toggle_item_icon(false)
 
+func set_clickable(value):
+	can_buy = value
+	if !value:
+		button_highlight.visible = false
 
-func is_disabled(info):
-	button.disabled = info
+func toggle_item_icon(value):
+	item_visuals.visible = value
 
 func large_view_pressed():
 	shop.set_large_view_card(sell_card)
 
 func _on_button_mouse_entered() -> void:
+	if !can_buy:
+		return
 	button_highlight.visible = true
-
 
 func _on_button_mouse_exited() -> void:
 	button_highlight.visible = false
@@ -73,7 +79,11 @@ func _on_button_gui_input(event: InputEvent) -> void:
 		match event.button_index:
 			MOUSE_BUTTON_LEFT:
 				# left button clicked
+				if !can_buy:
+					return
 				shop.buy_card(self)
 			MOUSE_BUTTON_RIGHT:
+				if sold_out or hide_item:
+					return
 				# right button clicked
 				large_view_pressed()
