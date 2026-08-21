@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://diflk17nb77x6" path="res://sprites/interface/scenes/shop scene/scene_shop_button_mugs_outline.png" id="9_rre8l"]
 [ext_resource type="Texture2D" uid="uid://ya1gwkxh7xe7" path="res://sprites/interface/scenes/shop scene/scene_shop_buy_symbols.png" id="10_rre8l"]
 [ext_resource type="Texture2D" uid="uid://l1acfj3rcnvt" path="res://sprites/interface/scenes/cooking scene/scene_cooking_button_reset_arrow.png" id="12_5mvn1"]
+[ext_resource type="Theme" uid="uid://dcisii1tqsjlr" path="res://themes/shop/price_text.tres" id="12_gnrrr"]
 [ext_resource type="Texture2D" uid="uid://cbesexjgiiey7" path="res://sprites/interface/scenes/shop scene/scene_shop_sell_symbols.png" id="14_5mvn1"]
 
 [node name="ShopSample" type="Control" unique_id=1111686658]
@@ -27,6 +28,8 @@ mouse_behavior_recursive = 1
 script = ExtResource("1_72y8b")
 buy_button_sample = ExtResource("3_qwea3")
 rarity_prices = Array[int]([1, 5, 10])
+morale_gain = 1
+morale_price = 2
 card_prefab = ExtResource("2_72y8b")
 can_stack_uses = false
 
@@ -81,6 +84,7 @@ scale = Vector2(8, 8)
 texture = ExtResource("10_rre8l")
 
 [node name="HighlightSprite" type="Sprite2D" parent="UI/BuyRound" unique_id=1077457307]
+visible = false
 position = Vector2(1632, 496)
 scale = Vector2(8, 8)
 texture = ExtResource("9_rre8l")
@@ -102,6 +106,9 @@ offset_top = 448.0
 offset_right = 1672.0
 offset_bottom = 544.0
 mouse_behavior_recursive = 1
+theme = ExtResource("12_gnrrr")
+text = "3"
+scroll_active = false
 
 [node name="BuyButtons" type="Control" parent="UI" unique_id=1400584695]
 anchors_preset = 0

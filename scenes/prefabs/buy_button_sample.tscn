@@ -4,7 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://bkqo8qi1cxyrv" path="res://sprites/interface/scenes/shop scene/scene_shop_button_buy.png" id="2_wxkvu"]
 [ext_resource type="Texture2D" uid="uid://dg58ypqy5fb28" path="res://sprites/interface/scenes/shop scene/scene_shop_button_buy_outline.png" id="3_nujxw"]
 [ext_resource type="Texture2D" uid="uid://ya1gwkxh7xe7" path="res://sprites/interface/scenes/shop scene/scene_shop_buy_symbols.png" id="4_iegwe"]
+[ext_resource type="Theme" uid="uid://dcisii1tqsjlr" path="res://themes/shop/price_text.tres" id="5_db54x"]
 [ext_resource type="PackedScene" uid="uid://c4hu25tvp3kkd" path="res://scenes/prefabs/player/inventory_ui_slot.tscn" id="5_jp23l"]
+[ext_resource type="Texture2D" uid="uid://c2fyvcme11dbr" path="res://sprites/ingredients/ingredient_random.png" id="6_isrqj"]
 
 [node name="buy_button_sample" type="Control" unique_id=1219771888]
 layout_mode = 3
@@ -47,10 +49,14 @@ centered = false
 [node name="PriceText" type="RichTextLabel" parent="Button" unique_id=2066421690]
 layout_mode = 0
 offset_left = 24.0
-offset_top = 192.0
+offset_top = 176.0
 offset_right = 184.0
-offset_bottom = 256.0
+offset_bottom = 272.0
 mouse_behavior_recursive = 1
+theme = ExtResource("5_db54x")
+text = "3"
+scroll_active = false
+horizontal_alignment = 1
 
 [node name="InventoryUISlot" parent="." unique_id=442831638 instance=ExtResource("5_jp23l")]
 z_index = 2
@@ -67,6 +73,10 @@ showcase = true
 [node name="BG" type="Sprite2D" parent="HiddenIcon" unique_id=1801869450]
 
 [node name="Icon" type="Sprite2D" parent="HiddenIcon" unique_id=1074225168]
+z_index = 1
+position = Vector2(128, 72)
+scale = Vector2(8, 8)
+texture = ExtResource("6_isrqj")
 
 [connection signal="gui_input" from="Button" to="." method="_on_button_gui_input"]
 [connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]

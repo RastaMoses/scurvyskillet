@@ -15,6 +15,8 @@ extends Inventory
 @onready var buy_round_button = $UI/BuyRound/Button
 @onready var shop_ui = $UI
 
+#STATE
+var morale_sold_out = false
 func _ready() -> void:
 	checking_drop.connect(on_checking_drop)
 	on_add_ingredient.connect(player_sell_ingredient)
@@ -45,6 +47,8 @@ func buy_morale():
 	player_inventory.add_money(-morale_price)
 	shop_ui.toggle_buy_round_foam(false)
 	buy_round_button.disabled = true
+	morale_sold_out = true
+	shop_ui.hide_buy_round_highlight()
 	
 func check_buttons_enabled():
 	for buy_button in buy_buttons:

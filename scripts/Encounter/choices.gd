@@ -32,9 +32,11 @@ extends Inventory
 #CACHED COMPS
 
 @onready var drop_area = $DropArea
+@onready var drop_highlight = $UI/IngredientDrop/DropHighlight
 @onready var drop_ui = $UI/IngredientDrop
 @onready var ingredient_icon = $UI/IngredientDrop/IngredientIcon
 @onready var button = $Button
+@onready var button_highlight = $Button/Highlight
 @onready var button_text = $Button/RichTextLabel
 @onready var drop_area_text = $UI/IngredientDrop/RichTextLabel
 var decision_encounter
@@ -46,6 +48,10 @@ func _ready() -> void:
 	button_text.text = text
 	drop_area_text.text = text
 	on_add_ingredient.connect(on_ingredient_added)
+	checking_drop.connect(on_checking_drop)
+
+func on_checking_drop():
+	drop_highlight.visible = true
 
 func on_ingredient_added():
 	check_completed()
@@ -157,3 +163,15 @@ func end():
 	if new_encounter == null:
 		decision_encounter.end()
 	queue_free()
+
+
+func _on_button_mouse_entered() -> void:
+	button_highlight.visible = true
+
+
+func _on_button_mouse_exited() -> void:
+	button_highlight.visible = false
+
+
+func _on_drop_area_mouse_exited() -> void:
+	drop_highlight.visible = false

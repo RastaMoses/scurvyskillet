@@ -4,7 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://p1ug5ylfd5re" path="res://scenes/prefabs/card_prefab.tscn" id="2_jv3kl"]
 [ext_resource type="Texture2D" uid="uid://htglfgdlhdys" path="res://sprites/interface/scenes/decision scene/scene_decision_button_sign.png" id="2_we2ti"]
 [ext_resource type="Script" uid="uid://v63vu2iilw13" path="res://scripts/Inventory/drop_area.gd" id="2_xd3pp"]
+[ext_resource type="Texture2D" uid="uid://cti37gpvslw0y" path="res://sprites/interface/scenes/decision scene/scene_decision_button_sign_outline.png" id="3_w532b"]
 [ext_resource type="Texture2D" uid="uid://dys7xyagobtu6" path="res://sprites/interface/scenes/decision scene/scene_decision_button_crate.png" id="3_we2ti"]
+[ext_resource type="Texture2D" uid="uid://xr08dfjbvw6x" path="res://sprites/interface/scenes/decision scene/scene_decision_button_crate_outline.png" id="5_w532b"]
 
 [node name="choice" type="Control" unique_id=704699521]
 layout_mode = 3
@@ -24,7 +26,6 @@ anchor_bottom = 1.0
 offset_top = -184.0
 offset_right = 400.0
 grow_vertical = 0
-icon = ExtResource("2_we2ti")
 flat = true
 icon_alignment = 1
 expand_icon = true
@@ -43,6 +44,18 @@ offset_bottom = 128.99203
 mouse_behavior_recursive = 1
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="BG" type="Sprite2D" parent="Button" unique_id=824428301]
+scale = Vector2(8, 8)
+texture = ExtResource("2_we2ti")
+centered = false
+
+[node name="Highlight" type="Sprite2D" parent="Button" unique_id=1342131952]
+visible = false
+position = Vector2(-8, -8)
+scale = Vector2(8, 8)
+texture = ExtResource("3_w532b")
+centered = false
 
 [node name="UI" type="Control" parent="." unique_id=987613784]
 layout_mode = 1
@@ -95,6 +108,13 @@ mouse_behavior_recursive = 1
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="DropHighlight" type="Sprite2D" parent="UI/IngredientDrop" unique_id=643330784]
+visible = false
+position = Vector2(-8, -8)
+scale = Vector2(8, 8)
+texture = ExtResource("5_w532b")
+centered = false
+
 [node name="DropArea" type="Panel" parent="." unique_id=242936625]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
@@ -105,3 +125,7 @@ offset_top = -264.0
 offset_right = 360.0
 grow_vertical = 0
 script = ExtResource("2_xd3pp")
+
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
+[connection signal="mouse_exited" from="DropArea" to="." method="_on_drop_area_mouse_exited"]

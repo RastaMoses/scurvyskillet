@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://xk6aj68ft76k" path="res://scripts/Encounter/decision.gd" id="1_6nc15"]
 [ext_resource type="Texture2D" uid="uid://brlwxgegkouv1" path="res://sprites/interface/scenes/decision scene/scene_decision_background_water.png" id="2_6nc15"]
+[ext_resource type="Texture2D" uid="uid://ddjgfdqbojroc" path="res://sprites/interface/scenes/decision scene/scene_decision_background_island.png" id="3_6nc15"]
 [ext_resource type="Texture2D" uid="uid://d03pcmk05xsne" path="res://sprites/placeholder/baldursgate3_screenshot_600x338_salami.jpg" id="3_d5b72"]
 [ext_resource type="PackedScene" uid="uid://b75jl0uammin5" path="res://scenes/prefabs/choice.tscn" id="4_spqi1"]
 [ext_resource type="PackedScene" uid="uid://hr6aybbol4hn" path="res://scenes/prefabs/challenge_sample.tscn" id="6_gb2lx"]
@@ -16,12 +17,19 @@ script = ExtResource("1_6nc15")
 choices = [null, null, null]
 metadata/_edit_use_anchors_ = true
 
-[node name="bg" type="TextureRect" parent="." unique_id=414026879]
+[node name="BGWater" type="TextureRect" parent="." unique_id=414026879]
 custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 1
 offset_right = 1920.0
 offset_bottom = 1080.0
 texture = ExtResource("2_6nc15")
+
+[node name="BGLand" type="TextureRect" parent="." unique_id=247136280]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 1
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("3_6nc15")
 
 [node name="art" type="TextureRect" parent="." unique_id=1781471364]
 layout_mode = 1

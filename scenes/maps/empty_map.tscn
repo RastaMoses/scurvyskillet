@@ -5,6 +5,9 @@
 
 [node name="Map" unique_id=1839841650 instance=ExtResource("1_1vdqj")]
 
+[node name="1" parent="Encounter" parent_id_path=PackedInt32Array(1514431645) index="1" unique_id=1699582653]
+bg_type = "island"
+
 [node name="2" parent="Encounter" parent_id_path=PackedInt32Array(1514431645) index="2" unique_id=386168653]
 possible_encounters = Array[PackedScene]([ExtResource("2_flodk")])
 type = "shop"

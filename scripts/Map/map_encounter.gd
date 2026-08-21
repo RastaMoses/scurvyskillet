@@ -74,6 +74,8 @@ func load_encounter(data):
 		encounter_obj.queue_free()
 	encounter_obj = encounter.instantiate()
 	add_child(encounter_obj)
+	if type == "decision":
+		encounter_obj.toggle_bg(bg_type)
 	set_encounter(encounter_obj)
 	encounter_obj.global_position = Vector2.ZERO
 	encounter_obj.start()

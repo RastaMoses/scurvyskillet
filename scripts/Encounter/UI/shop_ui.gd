@@ -18,6 +18,8 @@ func toggle_buy_round_foam(value):
 	buy_round_foam.visible = value
 
 func show_buy_round_highlight():
+	if shop.morale_sold_out:
+		return
 	buy_round_highlight.visible = true
 func hide_buy_round_highlight():
 	buy_round_highlight.visible = false
