@@ -15,8 +15,8 @@ extends Control
 
 
 #CACHED COMPS
-@onready var inventory = get_parent()
-@onready var event_manager = get_node("/root/game/EventManager")
+@onready var player_inventory = get_tree().get_first_node_in_group("player")
+@onready var event_manager = get_tree().get_first_node_in_group("event_manager")
 @onready var slots: Array = $ScrollContainer/GridContainer.get_children()
 @onready var bg_bottom = $bg_bottom
 @onready var bg_side = $bg_side
@@ -35,16 +35,14 @@ var is_open = false
 
 func _ready():
 	update_position(bottom_position)
-	close()
 	update_topbar()
 	large_view_button.pressed.connect(large_view_button_pressed)
 	for i in slots:
 		i.large_view_clicked.connect(large_view_button_pressed)
 	large_view_button.visible = false
-	
 	event_manager.on_encounter_end.connect(encounter_end)
 	event_manager.on_encounter_start.connect(encounter_start)
-
+	close()
 func encounter_end():
 	close()
 
@@ -67,12 +65,12 @@ func remove_slots(amount):
 func update_slots():
 	#check slot amount
 	var slots_to_remove = 0
-	while inventory.current_ingredients.size() > slots.size():
+	while player_inventory.current_ingredients.size() > slots.size():
 		add_slot()
 	for i in range(slots.size()):
 		#update slots with items
-		if (inventory.current_ingredients.size() > i):
-			slots[i].update(inventory.current_ingredients[i])
+		if (player_inventory.current_ingredients.size() > i):
+			slots[i].update(player_inventory.current_ingredients[i])
 		else:
 			if i > min_slots:
 				slots_to_remove += 1
@@ -130,6 +128,7 @@ func open():
 	inventory_container.visible = true
 	is_open = true
 	update_slots()
+	update_topbar()
 	
 func close():
 	current_bg.visible = false
@@ -137,8 +136,8 @@ func close():
 	is_open = false
 
 func update_topbar():
-	money_text.text = str(inventory.current_money)
-	morale_text.text = str(inventory.current_morale)
+	money_text.text = str(player_inventory.current_money)
+	morale_text.text = str(player_inventory.current_morale)
 	
 func toggle_large_view(card):
 	if large_view_button.visible:

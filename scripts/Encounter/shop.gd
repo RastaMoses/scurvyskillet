@@ -17,9 +17,10 @@ extends Inventory
 
 #STATE
 var morale_sold_out = false
+
 func _ready() -> void:
 	checking_drop.connect(on_checking_drop)
-	on_add_ingredient.connect(player_sell_ingredient)
+	dropping_ingredient.connect(player_sell_ingredient)
 	buy_round_button.pressed.connect(buy_morale)
 	buy_buttons = buy_container.get_children()
 	for i in buy_buttons:
@@ -30,6 +31,7 @@ var buy_buttons:Array
 func player_sell_ingredient(origin,card):
 	if origin != self:
 		return
+	player_inventory.remove_ingredient(card)
 	player_inventory.add_money(rarity_prices[card.stats.rarity])
 	check_buttons_enabled()
 

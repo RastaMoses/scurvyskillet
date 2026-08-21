@@ -13,8 +13,7 @@ extends Node
 @onready var icon = $Visuals/Icon
 @onready var bg_water = $Visuals/BG/Water
 @onready var bg_island = $Visuals/BG/Island
-@onready var event_manager = get_node("/root/game/EventManager")
-@onready var inventory = get_node("/root/game/Player/Inventory")
+@onready var event_manager = get_tree().get_first_node_in_group("event_manager")
 @onready var random = RandomNumberGenerator.new()
 @onready var map
 @onready var docking_points = $ShipDockingPoints.get_children()
@@ -55,7 +54,6 @@ func end_encounter():
 	type = "none"
 	event_manager.encounter_end()
 	map.toggle_map_visible(true)
-	inventory.ui.open()
 	map.set_available_encounters()
 	toggle_button(false)
 	show_button(true)

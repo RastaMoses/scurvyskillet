@@ -59,9 +59,9 @@ extends Control
 @export var map_icon:Texture
 
 #CACHED COMPS
-@onready var player_inventory = get_node("/root/game/Player/Inventory")
-@onready var item_pool = get_node("/root/game/IngredientPool")
-@onready var event = get_node("/root/game/EventManager")
+@onready var player_inventory = get_tree().get_first_node_in_group("player")
+@onready var event_manager = get_tree().get_first_node_in_group("event_manager")
+@onready var item_pool = get_tree().get_first_node_in_group("ingredient_pool")
 @onready var dish_node = $Dish
 @onready var map_node = get_parent()
 @onready var ui = $UI
@@ -174,7 +174,7 @@ func save_inventory():
 
 func finish_dish():
 	dish_node.finish_dish()
-	await event.on_dish_finish_anim_done
+	await event_manager.on_dish_finish_anim_done
 	compare_dish(dish_node)
 
 #UI Elements

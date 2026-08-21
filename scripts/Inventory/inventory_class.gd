@@ -12,11 +12,13 @@ var current_ingredients: Array[Node]
 @export var cd_ingredients:Array[Resource]
 @export var cd_rarity:int = -1 #-1 to disable
 #CACHED COMPS
-@onready var abilities = get_node("/root/game/Player/Abilities")
-@onready var item_pool = get_node("/root/game/IngredientPool")
-@onready var player_inventory = get_node("/root/game/Player/Inventory")
+@onready var abilities = get_tree().get_first_node_in_group("ability_manager")
+@onready var player_inventory = get_tree().get_first_node_in_group("player")
+@onready var event_manager = get_tree().get_first_node_in_group("event_manager")
+@onready var item_pool = get_tree().get_first_node_in_group("ingredient_pool")
 #SIGNALS
 signal on_add_ingredient(origin,card)
+signal dropping_ingredient(origin, card)
 signal on_remove_ingredient(origin,card)
 signal checking_drop(origin,card)
 signal removing_all(origin)
@@ -54,6 +56,10 @@ func instantiate_card_from_resource(ingredient_resource:Resource):
 	card.set_stats(ingredient_resource)
 	add_ingredient(card)
 	return card
+
+func drop_ingredient(card):
+	dropping_ingredient.emit(self, card)
+	add_ingredient(card)
 
 func add_ingredient(card:Node):
 	var new_card = card.duplicate(DUPLICATE_DEFAULT | DUPLICATE_INTERNAL_STATE | DUPLICATE_SCRIPTS)

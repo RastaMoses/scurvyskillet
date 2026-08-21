@@ -48,18 +48,20 @@ func _ready() -> void:
 	button.pressed.connect(on_button_press)
 	button_text.text = text
 	drop_area_text.text = text
-	on_add_ingredient.connect(on_ingredient_added)
+	dropping_ingredient.connect(on_ingredient_dropped)
 	checking_drop.connect(on_checking_drop)
 
-func on_checking_drop(origin):
+func on_checking_drop(origin, card):
 	if origin != self:
 		return
 	drop_highlight.visible = true
 
-func on_ingredient_added(origin):
+func on_ingredient_dropped(origin, card):
 	if origin != self:
 		return
+	player_inventory.remove_ingredient(card)
 	check_completed()
+	
 
 func remove_random():
 	var rand_index = random.randi_range(0,player_inventory.current_ingredients.size()-1)

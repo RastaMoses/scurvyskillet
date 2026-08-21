@@ -4,7 +4,7 @@ extends Control
 @onready var description_title = $description/title
 @onready var bg_island = $BGLand
 @onready var bg_water = $BGWater
-@onready var player_inventory = get_node("/root/game/Player/Inventory")
+@onready var player_inventory = get_tree().get_first_node_in_group("player")
 
 @export var choices: Array[Node]
 

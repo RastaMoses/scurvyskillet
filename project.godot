@@ -21,6 +21,14 @@ window/size/viewport_height=1080
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 
+[global_group]
+
+ingredient_pool=""
+event_manager=""
+ability_manager=""
+player=""
+map_loader=""
+
 [gui]
 
 theme/default_font_multichannel_signed_distance_field=true

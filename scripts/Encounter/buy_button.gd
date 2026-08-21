@@ -12,7 +12,7 @@ extends Control
 @onready var ui_slot = $InventoryUISlot
 @onready var hidden_icon = $HiddenIcon
 @onready var price_text = $Button/PriceText
-@onready var item_pool = get_node("/root/game/IngredientPool")
+@onready var item_pool = get_tree().get_first_node_in_group("ingredient_pool")
 
 var sell_card
 var sold_out = false

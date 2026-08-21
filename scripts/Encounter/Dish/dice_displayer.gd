@@ -17,7 +17,7 @@ extends Node2D
 #CACHED COMPS
 @onready var pan_collider = $Pan/CollisionPolygon2D
 @onready var pan_center = $Pan/center
-@onready var event = get_node("/root/game/EventManager")
+@onready var event_manager = get_tree().get_first_node_in_group("event_manager")
 
 #STATE
 var dice:Array[Node]
@@ -26,7 +26,7 @@ var highlighted_dice: Array[RigidBody2D]
 func finish_dish():
 	for die in dice:
 		die.stop_movement()
-	event.dish_finish_animation_done()
+	event_manager.dish_finish_animation_done()
 
 func spawn_die(flavour, value, card):
 	#get point dropped inside static body or closest point if outside

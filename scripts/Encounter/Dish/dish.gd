@@ -10,8 +10,6 @@ extends Inventory
 
 #CACHED COMPS
 var random = RandomNumberGenerator.new()
-@onready var event_manager = get_node("/root/game/EventManager")
-@onready var abilties = get_node("/root/game/Player/Abilities")
 @onready var challenge = get_parent()
 @onready var restricted_tags = challenge.restricted_tags
 @onready var dice_disp = $Dice_Display
@@ -21,7 +19,7 @@ var random = RandomNumberGenerator.new()
 var tags:Array[String]
 
 func _ready() -> void:
-	on_add_ingredient.connect(on_add_to_dish)
+	dropping_ingredient.connect(on_add_to_dish)
 	on_remove_ingredient.connect(on_remove_from_dish)
 	removing_all.connect(on_remove_all)
 	destroying_ingredient.connect(on_destroy_ingredient)
@@ -38,6 +36,7 @@ func on_add_to_dish(origin,card):
 	if origin != self:
 		return
 	#check for abilities on add
+	player_inventory.remove_ingredient(card)
 	abilities.on_ingredient_add_to_dish(card)
 	for new_tag in card.stats.tags:
 		if !tags.has(new_tag):

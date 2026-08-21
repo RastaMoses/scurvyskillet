@@ -1,10 +1,11 @@
 extends Node
 #STATE
-@export_group("Leftover")
-@export var leftover_bone:PackedScene
+@export_group("Leftovers")
+@export var leftovers_bone:PackedScene
 
 #CACHED COMPS
-@onready var inventory = get_node("/root/game/Player/Inventory")
+@onready var player_inventory = get_tree().get_first_node_in_group("player")
+@onready var event_manager = get_tree().get_first_node_in_group("event_manager")
 #STATE
 @onready var spice_list:Array[Resource]
 
@@ -34,7 +35,8 @@ func on_ingredient_add_to_dish(card):
 	#Leftovers
 	#Bone Leftovers
 	if card.stats.abilities.has("leftover_bone"):
-		inventory.instantiate_card_from_resource(leftover_bone)
+		player_inventory.instantiate_card_from_resource(leftovers_bone)
+	
 
 func on_try_add_ingredient(card):
 	var can_add = true
