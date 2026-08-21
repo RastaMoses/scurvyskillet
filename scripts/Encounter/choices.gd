@@ -129,10 +129,10 @@ func give_rewards():
 	if random_ingredient_amount > 0:
 		var index = random_ingredient_amount
 		while index > 0:
-			player_inventory.instantiate_card_from_resource(item_pool.get_random_ingredient(and_req,req_tag,req_ability,req_rarity))
+			player_inventory.add_ingredient(item_pool.get_random_ingredient(and_req,req_tag,req_ability,req_rarity))
 			index -= 1
 	for i in specific_ingredients:
-		player_inventory.instantiate_card_from_resource(i)
+		player_inventory.add_ingredient(i)
 
 func take_cost():
 	player_inventory.add_money(-c_money)

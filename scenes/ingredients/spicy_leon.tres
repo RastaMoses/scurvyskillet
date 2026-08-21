@@ -1,4 +1,4 @@
-[gd_resource type="Resource" format=3 uid="uid://covhmmjexggme"]
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://covhmmjexggme"]
 
 [ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="1_2bdiv"]
 [ext_resource type="Texture2D" uid="uid://ds0jswtp7xx1r" path="res://sprites/placeholder/kleinb.PNG" id="1_4685u"]
@@ -9,7 +9,6 @@ name = "Spicy Leon"
 icon = ExtResource("1_4685u")
 tags = Array[String](["test_tag"])
 rarity = 1
-price = 4
 description = "Something awesome"
 nutrition = 1
 sweet = 1

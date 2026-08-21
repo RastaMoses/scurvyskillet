@@ -3,7 +3,7 @@ class_name Inventory
 extends Node
 
 @export var card_prefab:PackedScene
-var current_ingredients: Array[Node]
+var current_ingredients: Array[Control]
 @export var starting_ingredients: Array[Resource]
 @export var ui:Control
 @export var can_stack_uses:bool = true
@@ -21,7 +21,6 @@ signal on_add_ingredient(origin,card)
 signal dropping_ingredient(origin, card)
 signal on_remove_ingredient(origin,card)
 signal checking_drop(origin,card)
-signal removing_all(origin)
 signal destroying_ingredient(origin,card)
 signal destroying_all(origin)
 #STATE
@@ -29,72 +28,79 @@ var can_drop_card = true
 
 func _ready() -> void:
 	for i in starting_ingredients:
-		instantiate_card_from_resource(i)
+		add_ingredient(i)
 
-func destroy_ingredient(card):
+func destroy_ingredient(card:Node):
 	destroying_ingredient.emit(self,card)
 	current_ingredients.erase(card)
 	if ui != null:
 		ui.update_slots()
 	if card.get_parent() == self:
 		card.queue_free()
+
 func destroy_all_ingredients():
 	destroying_all.emit(self)
+	print(current_ingredients)
 	for i in current_ingredients:
-		destroy_ingredient(i)
+		i.queue_free()
+	current_ingredients.clear()
+	if ui != null:
+		ui.update_slots()
 
 func remove_ingredient(card):
 	on_remove_ingredient.emit(self,card)
 	change_ingredient_uses(card, -1)
+	distribute_uses(card)
 	if ui != null:
 		ui.update_slots()
-
-	
-func instantiate_card_from_resource(ingredient_resource:Resource):
-	var card:Node = card_prefab.instantiate()
-	add_child(card)
-	card.set_stats(ingredient_resource)
-	add_ingredient(card)
-	return card
 
 func drop_ingredient(card):
 	dropping_ingredient.emit(self, card)
-	add_ingredient(card)
+	add_ingredient(card.stats)
+	player_inventory.remove_ingredient(card)
 
-func add_ingredient(card:Node):
-	var new_card = card.duplicate(DUPLICATE_DEFAULT | DUPLICATE_INTERNAL_STATE | DUPLICATE_SCRIPTS)
+func add_ingredient(resource):
+	var new_card:Node = card_prefab.instantiate()
 	add_child(new_card)
-	print(new_card)
-	on_add_ingredient.emit(self,new_card)
+	current_ingredients.append(new_card)
+	new_card.set_stats(resource)
 	#Check if ingredient is already in inventory
 	if new_card.stats.unlimited_uses:
 		current_ingredients.append(new_card)
+		on_add_ingredient.emit(self,new_card)
 		if ui != null:
 			ui.update_slots()
 		return
+	distribute_uses(new_card)
+	on_add_ingredient.emit(self,new_card)
+	if ui != null:
+		ui.update_slots()
+
+func distribute_uses(card):
+	if card == null:
+		return
+	current_ingredients.erase(card)
 	var duplicates:Array[Node]
 	for i in current_ingredients:
-		if i.stats == new_card.stats:
+		if i.stats.name == card.stats.name:
 			duplicates.append(i)
 	#find duplicate with less than 4 uses and assign more uses until the added card has no more
 	if duplicates.size() !=0 and can_stack_uses:
-		for i in duplicates:
-			while i.uses < 4 and new_card.uses != 0:
+		for i in duplicates:	
+			while i.stats.uses < 4 and card.stats.uses != 0:
 				change_ingredient_uses(i, 1)
-				change_ingredient_uses(new_card, -1)
-			if new_card.uses == 0 or new_card == null:
+				change_ingredient_uses(card, -1)
+			if card.stats.uses == 0 or card == null:
 				if ui != null:
 					ui.update_slots()
 				return
-	current_ingredients.append(new_card)
-	if ui != null:
-		ui.update_slots()
+	current_ingredients.append(card)
 
 func change_ingredient_uses(ingredient_card,amount):
 	if ingredient_card.stats.unlimited_uses:
 		return
-	ingredient_card.uses += amount
-	if ingredient_card.uses <= 0:
+	ingredient_card.stats.uses += amount
+	if ingredient_card.stats.uses <= 0:
 		destroy_ingredient(ingredient_card)
 
 func check_can_drop(data):
@@ -104,12 +110,13 @@ func check_can_drop(data):
 		can_drop_card = true
 		return false
 	#check abilities
-	if abilities.on_try_add_ingredient(data) == false:
+	if abilities.on_try_add_ingredient_any_inventory(data) == false:
 		return false
 	#specific ingredient
 	if cd_ingredients.size() != 0:
-		if cd_ingredients.has(data.stats):
-			return true
+		for i in cd_ingredients:
+			if i.stats.name == data.stats.name:
+				return true
 	#check if a tag is required
 	if cd_tags.size() != 0:
 		for i in cd_tags:

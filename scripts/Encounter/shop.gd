@@ -31,8 +31,8 @@ var buy_buttons:Array
 func player_sell_ingredient(origin,card):
 	if origin != self:
 		return
-	player_inventory.remove_ingredient(card)
 	player_inventory.add_money(rarity_prices[card.stats.rarity])
+	player_inventory.remove_ingredient(card)
 	check_buttons_enabled()
 
 func on_checking_drop(origin):
@@ -42,8 +42,8 @@ func on_checking_drop(origin):
 
 func buy_card(buy_button):
 	if buy_button.sell_card != null:
-		player_inventory.add_ingredient(buy_button.sell_card)
-		destroy_ingredient(buy_button.sell_card)
+		player_inventory.add_ingredient(buy_button.sell_card.stats)
+		remove_ingredient(buy_button.sell_card)
 		player_inventory.add_money(-buy_button.price)
 	buy_button.sell_out()
 	check_buttons_enabled()

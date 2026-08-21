@@ -28,7 +28,7 @@ func finish_dish():
 		die.stop_movement()
 	event_manager.dish_finish_animation_done()
 
-func spawn_die(flavour, value, card):
+func spawn_die(flavour, value, card:Node):
 	#get point dropped inside static body or closest point if outside
 	var mouse_pos = get_global_mouse_position()
 	var spawn_pos
@@ -54,6 +54,7 @@ func spawn_die(flavour, value, card):
 	#instantiate dice in that position without collision
 	var new_die = die_scene.instantiate()
 	add_child(new_die)
+	
 	card.dice.append(new_die)
 	
 	new_die.freeze_mode = RigidBody2D.FREEZE_MODE_KINEMATIC

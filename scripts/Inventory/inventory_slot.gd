@@ -90,7 +90,7 @@ func update_uses(value = uses):
 	uses = value
 	for i in uses_textures:
 			i.visible = false
-	for i in card.uses:
+	for i in card.stats.uses:
 			uses_textures[i].visible = true
 
 func update_flavours():

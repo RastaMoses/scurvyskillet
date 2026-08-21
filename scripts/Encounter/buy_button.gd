@@ -31,7 +31,7 @@ func set_random_item():
 	set_item(rand)
 
 func set_item(resource):
-	sell_card = shop.instantiate_card_from_resource(resource)
+	sell_card = shop.add_ingredient(resource)
 	
 	if !hide_item:
 		price = shop.get_card_price(sell_card)

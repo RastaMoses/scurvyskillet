@@ -1,6 +1,6 @@
 extends Node2D
 #Params
-@export var move_time:float = 5.0
+@export var move_time:float = 3.0
 @export var pixel_multiple:int = 8
 
 #CACHED

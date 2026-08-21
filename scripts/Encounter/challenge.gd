@@ -86,10 +86,10 @@ func give_rewards():
 	if reward_random_ingredient_amount > 0:
 		var index = reward_random_ingredient_amount
 		while index > 0:
-			player_inventory.instantiate_card_from_resource(item_pool.get_random_ingredient(reward_and_req,reward_req_tag,reward_req_ability,reward_req_rarity))
+			player_inventory.add_ingredient(item_pool.get_random_ingredient(reward_and_req,reward_req_tag,reward_req_ability,reward_req_rarity))
 			index -= 1
 	for i in reward_specific_ingredients:
-		player_inventory.instantiate_card_from_resource(i)
+		player_inventory.add_ingredient(i)
 
 
 func on_success():
@@ -161,16 +161,6 @@ func compare_dish(completed_dish):
 		on_success()
 		#success
 
-func reset_dish():
-	for j in player_inventory.current_ingredients:
-		player_inventory.remove(j)
-	for i in inv_save:
-		player_inventory.add_ingredient(i)
-	dish_node.remove_all_ingredients()
-	
-func save_inventory():
-	for i in player_inventory.current_ingredients:
-		inv_save.push_front(i)
 
 func finish_dish():
 	dish_node.finish_dish()
@@ -179,7 +169,6 @@ func finish_dish():
 
 #UI Elements
 func start():
-	save_inventory()
 	display_dish()
 	dish_node.start()
 	player_inventory.ui.update_position(true)

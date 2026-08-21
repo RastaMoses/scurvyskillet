@@ -65,4 +65,12 @@ func get_random_ingredient(and_req:bool, tag:Array[String] = [], ability:Array[S
 		
 		return rand_ingr
 	else:
+		printerr("No ingredient fitting the reqs was found")
 		return(null)
+	
+func get_ingredient_by_name(name:String) -> Resource:
+	for i in all_ingredients:
+		if i.name == name:
+			return i
+	printerr("Could not find ingredient with this name")
+	return null

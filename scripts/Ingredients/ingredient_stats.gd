@@ -1,8 +1,9 @@
+class_name Ingredient
 extends Resource
 #PARAMS
 @export var name:String
 @export var icon:Texture
-@export_enum("leftover", "meat") var tags: Array[String]
+@export_enum("leftover", "meat", "fruit","pastry") var tags: Array[String]
 @export_enum("common", "uncommon", "rare", "legendary") var rarity:int
 @export_multiline() var description:String
 @export_group("Values")
@@ -24,5 +25,5 @@ extends Resource
 @export var unlimited_uses: bool = false
 @export var uses: int
 @export_group("Special Abilities")
-@export_enum("leftover_bones", "spice", "undroppable") var abilities: Array[String]
+@export_enum("leftover_bones", "seasoning", "undroppable", "rainbow_cake", "dessert") var abilities: Array[String]
 @export var undroppable: bool = false
