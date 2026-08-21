@@ -3,24 +3,18 @@
 [ext_resource type="Script" uid="uid://js1t03dchpx8" path="res://scripts/Encounter/shop.gd" id="1_72y8b"]
 [ext_resource type="PackedScene" uid="uid://p1ug5ylfd5re" path="res://scenes/prefabs/card_prefab.tscn" id="2_72y8b"]
 [ext_resource type="PackedScene" uid="uid://u2u1v4rgdntw" path="res://scenes/prefabs/buy_button_sample.tscn" id="3_qwea3"]
-[ext_resource type="Texture2D" uid="uid://d03pcmk05xsne" path="res://sprites/placeholder/baldursgate3_screenshot_600x338_salami.jpg" id="4_gnacu"]
+[ext_resource type="Texture2D" uid="uid://b40r4g6730nlf" path="res://sprites/interface/scenes/shop scene/scene_shop_button_sell.png" id="5_mc0oa"]
+[ext_resource type="Texture2D" uid="uid://c8u21kjpsqt38" path="res://sprites/interface/scenes/shop scene/scene_shop_background.png" id="5_puyx4"]
 [ext_resource type="Script" uid="uid://v63vu2iilw13" path="res://scripts/Inventory/drop_area.gd" id="5_tlf87"]
-
-[sub_resource type="GDScript" id="GDScript_27xwa"]
-script/source = "extends Resource
-
-@export var ingredient:Resource
-@export var image:Texture
-@export var morale_gain:int
-@export var price:int
-"
-
-[sub_resource type="Resource" id="Resource_qwea3"]
-script = SubResource("GDScript_27xwa")
-ingredient = ExtResource("2_72y8b")
-price = 2
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_7b41e"]
+[ext_resource type="Script" uid="uid://cq6qfkn71lvan" path="res://scripts/Encounter/UI/shop_ui.gd" id="5_vspyj"]
+[ext_resource type="Texture2D" uid="uid://3yfam7ft462e" path="res://sprites/interface/scenes/shop scene/scene_shop_button_sell_outline.png" id="6_mc0oa"]
+[ext_resource type="Texture2D" uid="uid://cn6to1njpp80y" path="res://sprites/interface/scenes/shop scene/scene_shop_mugs.png" id="6_vspyj"]
+[ext_resource type="Texture2D" uid="uid://c4npni02e6fqk" path="res://sprites/interface/scenes/shop scene/scene_shop_foam.png" id="7_mc0oa"]
+[ext_resource type="Texture2D" uid="uid://fk6jwibtko3i" path="res://sprites/interface/scenes/shop scene/scene_shop_button_mugs.png" id="8_wqlga"]
+[ext_resource type="Texture2D" uid="uid://diflk17nb77x6" path="res://sprites/interface/scenes/shop scene/scene_shop_button_mugs_outline.png" id="9_rre8l"]
+[ext_resource type="Texture2D" uid="uid://ya1gwkxh7xe7" path="res://sprites/interface/scenes/shop scene/scene_shop_buy_symbols.png" id="10_rre8l"]
+[ext_resource type="Texture2D" uid="uid://l1acfj3rcnvt" path="res://sprites/interface/scenes/cooking scene/scene_cooking_button_reset_arrow.png" id="12_5mvn1"]
+[ext_resource type="Texture2D" uid="uid://cbesexjgiiey7" path="res://sprites/interface/scenes/shop scene/scene_shop_sell_symbols.png" id="14_5mvn1"]
 
 [node name="ShopSample" type="Control" unique_id=1111686658]
 layout_mode = 3
@@ -29,52 +23,187 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_behavior_recursive = 1
 script = ExtResource("1_72y8b")
-sell_items = Array[Resource]([SubResource("Resource_qwea3"), SubResource("Resource_qwea3"), SubResource("Resource_qwea3")])
 buy_button_sample = ExtResource("3_qwea3")
 rarity_prices = Array[int]([1, 5, 10])
 card_prefab = ExtResource("2_72y8b")
 can_stack_uses = false
 
-[node name="bg" type="Sprite2D" parent="." unique_id=474275745]
-position = Vector2(1285.75, 705.75)
-scale = Vector2(2572.5, 1412.5)
-texture = SubResource("PlaceholderTexture2D_7b41e")
-
-[node name="art" type="Sprite2D" parent="." unique_id=989523534]
-position = Vector2(1495.9999, 735)
-scale = Vector2(2.9018543, 3.2470417)
-texture = ExtResource("4_gnacu")
-
 [node name="DropArea" type="Panel" parent="." unique_id=1944757335]
+self_modulate = Color(1, 1, 1, 0)
+z_index = 3
 layout_mode = 0
-offset_top = 912.0
-offset_right = 40.0
-offset_bottom = 952.0
-scale = Vector2(26.6, 12.4800005)
+offset_left = 128.0
+offset_top = 488.0
+offset_right = 488.0
+offset_bottom = 744.0
+mouse_behavior_recursive = 2
 script = ExtResource("5_tlf87")
 
-[node name="BuyContainer" type="GridContainer" parent="." unique_id=862985388]
-layout_mode = 0
-offset_right = 803.0
-offset_bottom = 927.0
-
-[node name="LeaveButton" type="Button" parent="." unique_id=393052589]
-layout_mode = 0
-offset_left = 1864.0
-offset_top = 1081.0
-offset_right = 2497.0
-offset_bottom = 1358.0
-text = "LEAVE"
-
-[node name="BuyRound" type="Control" parent="." unique_id=1060888554]
+[node name="UI" type="Control" parent="." unique_id=1934493353]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_behavior_recursive = 1
+script = ExtResource("5_vspyj")
 
-[node name="Button" type="Button" parent="BuyRound" unique_id=794597332]
+[node name="BG" type="Sprite2D" parent="UI" unique_id=474275745]
+z_index = -1
+scale = Vector2(8, 8)
+texture = ExtResource("5_puyx4")
+centered = false
+
+[node name="BuyRound" type="Control" parent="UI" unique_id=1060888554]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_behavior_recursive = 1
+
+[node name="MugsSprite" type="Sprite2D" parent="UI/BuyRound" unique_id=1400197490]
+position = Vector2(1632, 256)
+scale = Vector2(8, 8)
+texture = ExtResource("6_vspyj")
+
+[node name="FoamSprite" type="Sprite2D" parent="UI/BuyRound" unique_id=1143710069]
+position = Vector2(1632, 256)
+scale = Vector2(8, 8)
+texture = ExtResource("7_mc0oa")
+
+[node name="ButtonSprite" type="Sprite2D" parent="UI/BuyRound" unique_id=2026286348]
+position = Vector2(1632, 496)
+scale = Vector2(8, 8)
+texture = ExtResource("8_wqlga")
+
+[node name="IconSprite" type="Sprite2D" parent="UI/BuyRound" unique_id=312437213]
+position = Vector2(1712, 496)
+scale = Vector2(8, 8)
+texture = ExtResource("10_rre8l")
+
+[node name="HighlightSprite" type="Sprite2D" parent="UI/BuyRound" unique_id=1077457307]
+position = Vector2(1632, 496)
+scale = Vector2(8, 8)
+texture = ExtResource("9_rre8l")
+
+[node name="Button" type="Button" parent="UI/BuyRound" unique_id=794597332]
+z_index = 2
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 1432.0
+offset_top = 408.0
+offset_right = 1832.0
+offset_bottom = 600.0
+mouse_behavior_recursive = 2
+flat = true
 
-[connection signal="pressed" from="LeaveButton" to="." method="_on_leave_button_pressed"]
+[node name="MoralePrice" type="RichTextLabel" parent="UI/BuyRound" unique_id=495133747]
+layout_mode = 0
+offset_left = 1464.0
+offset_top = 448.0
+offset_right = 1672.0
+offset_bottom = 544.0
+mouse_behavior_recursive = 1
+
+[node name="BuyButtons" type="Control" parent="UI" unique_id=1400584695]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_behavior_recursive = 1
+
+[node name="buy_button_sample" parent="UI/BuyButtons" unique_id=1219771888 instance=ExtResource("3_qwea3")]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 136.0
+offset_right = 40.0
+offset_bottom = 136.0
+
+[node name="buy_button_sample2" parent="UI/BuyButtons" unique_id=1258386772 instance=ExtResource("3_qwea3")]
+layout_mode = 0
+offset_left = 304.0
+offset_top = 136.0
+offset_right = 304.0
+offset_bottom = 136.0
+
+[node name="buy_button_sample3" parent="UI/BuyButtons" unique_id=1765024236 instance=ExtResource("3_qwea3")]
+layout_mode = 0
+offset_left = 568.0
+offset_top = 136.0
+offset_right = 568.0
+offset_bottom = 136.0
+
+[node name="buy_button_sample4" parent="UI/BuyButtons" unique_id=470567196 instance=ExtResource("3_qwea3")]
+layout_mode = 0
+offset_left = 832.0
+offset_top = 136.0
+offset_right = 832.0
+offset_bottom = 136.0
+
+[node name="buy_button_sample5" parent="UI/BuyButtons" unique_id=1286263616 instance=ExtResource("3_qwea3")]
+layout_mode = 0
+offset_left = 1096.0
+offset_top = 136.0
+offset_right = 1096.0
+offset_bottom = 136.0
+
+[node name="buy_button_sample6" parent="UI/BuyButtons" unique_id=1978801332 instance=ExtResource("3_qwea3")]
+layout_mode = 0
+offset_left = 568.0
+offset_top = 504.0
+offset_right = 568.0
+offset_bottom = 504.0
+hide_item = true
+
+[node name="buy_button_sample7" parent="UI/BuyButtons" unique_id=1226313322 instance=ExtResource("3_qwea3")]
+layout_mode = 0
+offset_left = 832.0
+offset_top = 504.0
+offset_right = 832.0
+offset_bottom = 504.0
+hide_item = true
+
+[node name="buy_button_sample8" parent="UI/BuyButtons" unique_id=172646036 instance=ExtResource("3_qwea3")]
+layout_mode = 0
+offset_left = 1096.0
+offset_top = 504.0
+offset_right = 1096.0
+offset_bottom = 504.0
+hide_item = true
+
+[node name="LeaveButton" type="Button" parent="UI" unique_id=393052589]
+layout_mode = 0
+offset_left = 1568.0
+offset_top = 648.0
+offset_right = 1824.0
+offset_bottom = 784.0
+mouse_behavior_recursive = 2
+flat = true
+
+[node name="BG" type="Sprite2D" parent="UI/LeaveButton" unique_id=822720071]
+position = Vector2(8, 40)
+rotation = 3.1415927
+scale = Vector2(8, 8)
+texture = ExtResource("12_5mvn1")
+flip_v = true
+
+[node name="Highlight" type="Sprite2D" parent="UI/LeaveButton" unique_id=10476286]
+scale = Vector2(8, 8)
+
+[node name="SellBox" type="Node2D" parent="UI" unique_id=135762544]
+
+[node name="BG" type="Sprite2D" parent="UI/SellBox" unique_id=504611164]
+position = Vector2(312, 616)
+scale = Vector2(8, 8)
+texture = ExtResource("5_mc0oa")
+
+[node name="Highlight" type="Sprite2D" parent="UI/SellBox" unique_id=822435411]
+visible = false
+position = Vector2(304, 616)
+scale = Vector2(8, 8)
+texture = ExtResource("6_mc0oa")
+
+[node name="Icon" type="Sprite2D" parent="UI/SellBox" unique_id=945135678]
+position = Vector2(304, 608)
+scale = Vector2(8, 8)
+texture = ExtResource("14_5mvn1")
+
+[connection signal="mouse_exited" from="DropArea" to="UI" method="_on_drop_area_mouse_exited"]
+[connection signal="pressed" from="UI/LeaveButton" to="." method="_on_leave_button_pressed"]

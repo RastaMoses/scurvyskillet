@@ -14,9 +14,11 @@ var current_ingredients: Array[Node]
 #CACHED COMPS
 @onready var abilities = get_node("/root/game/Player/Abilities")
 @onready var item_pool = get_node("/root/game/IngredientPool")
+@onready var player_inventory = get_node("/root/game/Player/Inventory")
 #SIGNALS
 signal on_add_ingredient(card)
 signal on_remove_ingredient(card)
+signal checking_drop
 #STATE
 
 func _ready() -> void:
@@ -41,6 +43,7 @@ func instantiate_card_from_resource(ingredient_resource:Resource):
 	add_child(card)
 	card.set_stats(ingredient_resource)
 	add_ingredient(card)
+	return card
 
 func add_ingredient(card:Node):
 	on_add_ingredient.emit(card)
@@ -77,12 +80,10 @@ func change_ingredient_uses(ingredient_card,amount):
 		destroy_ingredient(ingredient_card)
 
 func check_can_drop(data):
+	checking_drop.emit()
 	#check for requirements
 	#check abilities
 	if abilities.on_try_add_ingredient(data) == false:
-		return false
-	#undroppable items (curses)
-	if data.stats.undroppable:
 		return false
 	#specific ingredient
 	if cd_ingredients.size() != 0:

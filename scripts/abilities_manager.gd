@@ -38,9 +38,6 @@ func on_ingredient_add_to_dish(card):
 
 func on_try_add_ingredient(card):
 	var can_add = true
-	#Spice
-	if card.stats.abilities.has("spice"):
-		for i in spice_list:
-			if i == card.stats:
-				return false
+	if card.stats.abilities.has("undroppable"):
+		can_add = false
 	return can_add

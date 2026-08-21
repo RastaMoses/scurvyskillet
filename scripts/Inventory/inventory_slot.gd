@@ -1,6 +1,7 @@
 extends Panel
 #PARAMS
 @export var large_view:bool = false
+@export var showcase = false
 @export var editor_preview:bool = false
 @export var pixel_multiple:int = 8
 @export var drag_pos_offset:Vector2 = Vector2(96,96)
@@ -29,7 +30,6 @@ signal large_view_clicked(card_data)
 
 #STATE
 var card
-var showcase = false
 var dragging = false
 
 func _ready() -> void:
