@@ -11,7 +11,6 @@ extends Inventory
 #CACHED COMPS
 var random = RandomNumberGenerator.new()
 @onready var event_manager = get_node("/root/game/EventManager")
-@onready var player_inventory = get_node("/root/game/Player/Inventory")
 @onready var abilties = get_node("/root/game/Player/Abilities")
 @onready var challenge = get_parent()
 @onready var restricted_tags = challenge.restricted_tags
@@ -79,7 +78,6 @@ func roll_ingredient(card):
 func roll_dice(flavour,amount):
 	var all_result = 0
 	while amount > 0:
-		print("single dice rolled")
 		amount -= 1
 		var roll_result = random.randi_range(1,6)
 		all_result += roll_result

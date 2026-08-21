@@ -2,9 +2,8 @@ extends Resource
 #PARAMS
 @export var name:String
 @export var icon:Texture
-@export var tags: Array[String]
-@export var rarity:int
-@export var price:int
+@export_enum("leftover", "meat") var tags: Array[String]
+@export_enum("common", "uncommon", "rare", "legendary") var rarity:int
 @export_multiline() var description:String
 @export_group("Values")
 @export var nutrition:int
@@ -25,5 +24,5 @@ extends Resource
 @export var unlimited_uses: bool = false
 @export var uses: int
 @export_group("Special Abilities")
-@export_enum("leftover_bones", "spice", "ability3") var abilities: Array[String]
+@export_enum("leftover_bones", "spice", "undroppable") var abilities: Array[String]
 @export var undroppable: bool = false

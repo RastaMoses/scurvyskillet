@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://dunmta1nw4fux"]
 
 [ext_resource type="PackedScene" uid="uid://b5p50mcr5j4g8" path="res://scenes/prefabs/map_prefab.tscn" id="1_1vdqj"]
-[ext_resource type="PackedScene" uid="uid://4kbfe5ee6m8e" path="res://scenes/encounter/decisions/empty_decision.tscn" id="2_flodk"]
+[ext_resource type="PackedScene" uid="uid://dppkgemxlgehl" path="res://scenes/prefabs/shop_sample.tscn" id="2_flodk"]
 
 [node name="Map" unique_id=1839841650 instance=ExtResource("1_1vdqj")]
 
-[node name="1" parent="." index="2" unique_id=407174435]
+[node name="2" parent="Encounter" parent_id_path=PackedInt32Array(1514431645) index="2" unique_id=386168653]
 possible_encounters = Array[PackedScene]([ExtResource("2_flodk")])
+type = "shop"

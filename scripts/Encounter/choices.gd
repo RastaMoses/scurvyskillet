@@ -1,6 +1,5 @@
 extends Inventory
 #PARAMS
-@onready var player_inventory = get_node("/root/game/Player/Inventory")
 @onready var random = RandomNumberGenerator.new()
 
 @export var text:String

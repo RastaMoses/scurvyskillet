@@ -8,10 +8,11 @@ extends Node
 @export var icons:Array[Texture]
 
 #CACHED COMPS
-@onready var button = $Button
-@onready var icon = $Icon
-@onready var bg_water = $BG/Water
-@onready var bg_island = $BG/Island
+@onready var visuals = $Visuals
+@onready var button = $Visuals/Button
+@onready var icon = $Visuals/Icon
+@onready var bg_water = $Visuals/BG/Water
+@onready var bg_island = $Visuals/BG/Island
 @onready var event_manager = get_node("/root/game/EventManager")
 @onready var inventory = get_node("/root/game/Player/Inventory")
 @onready var random = RandomNumberGenerator.new()
@@ -89,9 +90,10 @@ func move_ship():
 	var rand_dock = docking_points[random.randi_range(0, docking_points.size()-1)]
 	player_ship.start_moving(rand_dock, encounter_index)
 
+func toggle_visuals(value):
+	visuals.visible = value
 
 func _on_button_pressed() -> void:
 	move_ship()
 	await player_ship.ship_arrived
-	print("ship arrives")
 	activate_encounter()

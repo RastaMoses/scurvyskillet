@@ -56,10 +56,13 @@ func get_random_ingredient(and_req:bool, tag:Array[String] = [], ability:Array[S
 					has_ability = true
 			if has_ability:
 				can_add = true
+		if tag == [] and rarity == [] and ability == []:
+			can_add = true
 		if can_add:
 			possible_ingredients.append(i)
 	if possible_ingredients.size() != 0:
 		var rand_ingr = possible_ingredients[random.randi_range(0, possible_ingredients.size()-1)]
+		
 		return rand_ingr
 	else:
 		return(null)

@@ -1,45 +1,41 @@
 extends Inventory
 #PARAMS
-@export var sell_items:Array[Resource]
+#@export var specific_sell_items:Array[Resource]
+#@export var random_ingredient_amount:int = 1
+
+
 @export var buy_button_sample:PackedScene
-@export var rarity_prices:Array[int] = [1,3,5,10,20]
+@export var rarity_prices:Array[int] = [1,2,3,5]
+@export var hidden_item_price:int = 1
 @export var morale_gain:int = 2
-@export var morale_price:int = 5
+@export var morale_price:int = 3
 #CACHED COMPS
-@onready var player_inventory = get_node("/root/game/Player/Inventory")
 @onready var map_node = get_parent()
-@onready var buy_container = $BuyContainer
-@onready var buy_round_button = $BuyRound/Button
+@onready var buy_container = $UI/BuyButtons
+@onready var buy_round_button = $UI/BuyRound/Button
+@onready var shop_ui = $UI
 
 func _ready() -> void:
+	checking_drop.connect(on_checking_drop)
 	on_add_ingredient.connect(player_sell_ingredient)
 	buy_round_button.pressed.connect(buy_morale)
-
+	buy_buttons = buy_container.get_children()
+	for i in buy_buttons:
+		i.shop = self
 #STATE
 var buy_buttons:Array
 
 func player_sell_ingredient(card):
-	if card.stats.rarity == 0:
-		player_inventory.change_money(player_inventory.current_money + rarity_prices[0])
-	if card.stats.rarity == 1:
-		player_inventory.change_money(player_inventory.current_money + rarity_prices[1])
-	if card.stats.rarity == 2:
-		player_inventory.change_money(player_inventory.current_money + rarity_prices[2])
-	if card.stats.rarity == 3:
-		player_inventory.change_money(player_inventory.current_money + rarity_prices[3])
-	if card.stats.rarity == 4:
-		player_inventory.change_money(player_inventory.current_money + rarity_prices[4])
+	player_inventory.add_money(rarity_prices[card.stats.rarity])
 	check_buttons_enabled()
 
-func check_can_drop(data):
-	if data.undroppable:
-		return false
-	else:
-		return true
+func on_checking_drop():
+	shop_ui.toggle_sell_highlight(true)
 
 func buy_card(buy_button):
-	if (buy_button.sell_item != null):
-		player_inventory.add_ingredient(buy_button.sell_item)
+	if (buy_button.sell_card != null):
+		player_inventory.add_ingredient(buy_button.sell_card)
+		destroy_ingredient(buy_button.sell_card)
 		player_inventory.add_money(-buy_button.price)
 	buy_button.sell_out()
 	check_buttons_enabled()
@@ -47,25 +43,25 @@ func buy_card(buy_button):
 func buy_morale():
 	player_inventory.add_morale(morale_gain)
 	player_inventory.add_money(-morale_price)
+	shop_ui.toggle_buy_round_foam(false)
 	buy_round_button.disabled = true
 	
 func check_buttons_enabled():
 	for buy_button in buy_buttons:
 		if buy_button.sold_out:
 			return
-		if buy_button.sell_item.price > player_inventory.current_money:
+		if buy_button.price > player_inventory.current_money:
 			buy_button.is_disabled(true)
 		else:
 			buy_button.is_disabled(false)
 
 func populate_shop():
-	for i in sell_items:
-		var temp = buy_button_sample.instantiate()
-		buy_container.add_child(temp)
-		temp.set_item(i)
-		buy_buttons.append(temp)
-		temp.clicked.connect(buy_card)
+	for i in buy_buttons:
+		i.populate()
 	check_buttons_enabled()
+
+func get_card_price(card):
+	return rarity_prices[card.stats.rarity]
 
 func start():
 	#display visuals
@@ -75,6 +71,9 @@ func start():
 func end():
 	map_node.end_encounter()
 	queue_free()
+
+func set_large_view_card(card):
+	player_inventory.ui.toggle_large_view(card)
 
 func _on_leave_button_pressed() -> void:
 	end()
