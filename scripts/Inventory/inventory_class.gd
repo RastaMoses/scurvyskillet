@@ -16,9 +16,12 @@ var current_ingredients: Array[Node]
 @onready var item_pool = get_node("/root/game/IngredientPool")
 @onready var player_inventory = get_node("/root/game/Player/Inventory")
 #SIGNALS
-signal on_add_ingredient(card)
-signal on_remove_ingredient(card)
-signal checking_drop(card)
+signal on_add_ingredient(origin,card)
+signal on_remove_ingredient(origin,card)
+signal checking_drop(origin,card)
+signal removing_all(origin)
+signal destroying_ingredient(origin,card)
+signal destroying_all(origin)
 #STATE
 var can_drop_card = true
 
@@ -27,18 +30,24 @@ func _ready() -> void:
 		instantiate_card_from_resource(i)
 
 func destroy_ingredient(card):
+	destroying_ingredient.emit(self,card)
 	current_ingredients.erase(card)
 	if ui != null:
 		ui.update_slots()
 	if card.get_parent() == self:
 		card.queue_free()
+func destroy_all_ingredients():
+	destroying_all.emit(self)
+	for i in current_ingredients:
+		destroy_ingredient(i)
 
 func remove_ingredient(card):
-	on_remove_ingredient.emit(card)
+	on_remove_ingredient.emit(self,card)
 	change_ingredient_uses(card, -1)
 	if ui != null:
 		ui.update_slots()
 
+	
 func instantiate_card_from_resource(ingredient_resource:Resource):
 	var card:Node = card_prefab.instantiate()
 	add_child(card)
@@ -47,29 +56,31 @@ func instantiate_card_from_resource(ingredient_resource:Resource):
 	return card
 
 func add_ingredient(card:Node):
-	on_add_ingredient.emit(card)
-	card.reparent(self)
+	var new_card = card.duplicate(DUPLICATE_DEFAULT | DUPLICATE_INTERNAL_STATE | DUPLICATE_SCRIPTS)
+	add_child(new_card)
+	print(new_card)
+	on_add_ingredient.emit(self,new_card)
 	#Check if ingredient is already in inventory
-	if card.stats.unlimited_uses:
-		current_ingredients.push_front(card)
+	if new_card.stats.unlimited_uses:
+		current_ingredients.append(new_card)
 		if ui != null:
 			ui.update_slots()
 		return
 	var duplicates:Array[Node]
 	for i in current_ingredients:
-		if i.stats == card.stats:
+		if i.stats == new_card.stats:
 			duplicates.append(i)
 	#find duplicate with less than 4 uses and assign more uses until the added card has no more
 	if duplicates.size() !=0 and can_stack_uses:
 		for i in duplicates:
-			while i.uses < 4 and card.uses != 0:
+			while i.uses < 4 and new_card.uses != 0:
 				change_ingredient_uses(i, 1)
-				change_ingredient_uses(card, -1)
-			if card.uses == 0 or card == null:
+				change_ingredient_uses(new_card, -1)
+			if new_card.uses == 0 or new_card == null:
 				if ui != null:
 					ui.update_slots()
 				return
-	current_ingredients.push_front(card)
+	current_ingredients.append(new_card)
 	if ui != null:
 		ui.update_slots()
 
@@ -81,7 +92,7 @@ func change_ingredient_uses(ingredient_card,amount):
 		destroy_ingredient(ingredient_card)
 
 func check_can_drop(data):
-	checking_drop.emit(data)
+	checking_drop.emit(self,data)
 	#check for requirements
 	if can_drop_card == false:
 		can_drop_card = true

@@ -29,7 +29,9 @@ var highlight_time:float
 var number_time:float
 var highlighted:bool = false
 var number_shown:bool = false
-var number
+var number:int
+var ingredient_card:Node
+var flavour:String
 #sizzle
 var sizzle_active = true
 var sizzle_timer = sizzle_interval
@@ -121,4 +123,6 @@ func stop_highlight():
 	highlight_time = highlight_duration
 	if highlight_vanish_speed == 0:
 		highlight_sprite.visible = false
-	
+
+func destroy():
+	queue_free()

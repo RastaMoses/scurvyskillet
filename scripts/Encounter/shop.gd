@@ -27,15 +27,19 @@ func _ready() -> void:
 #STATE
 var buy_buttons:Array
 
-func player_sell_ingredient(card):
+func player_sell_ingredient(origin,card):
+	if origin != self:
+		return
 	player_inventory.add_money(rarity_prices[card.stats.rarity])
 	check_buttons_enabled()
 
-func on_checking_drop():
+func on_checking_drop(origin):
+	if origin != self:
+		return
 	shop_ui.toggle_sell_highlight(true)
 
 func buy_card(buy_button):
-	if (buy_button.sell_card != null):
+	if buy_button.sell_card != null:
 		player_inventory.add_ingredient(buy_button.sell_card)
 		destroy_ingredient(buy_button.sell_card)
 		player_inventory.add_money(-buy_button.price)

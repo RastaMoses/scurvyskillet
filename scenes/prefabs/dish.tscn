@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bbswptox1co8u" path="res://sprites/interface/scenes/cooking scene/scene_cooking_flavor_sweet.png" id="5_ed1d2"]
 [ext_resource type="Texture2D" uid="uid://c3325drl1ncyg" path="res://sprites/interface/scenes/cooking scene/scene_cooking_flavor_sour.png" id="6_bgdva"]
 [ext_resource type="Theme" uid="uid://bcm7itye636u" path="res://themes/dish/dish_results_text.tres" id="6_fxvvw"]
+[ext_resource type="Texture2D" uid="uid://c2gjew2smf8xy" path="res://sprites/interface/scenes/cooking scene/scene_cooking_pan_outline.png" id="6_w2npd"]
 [ext_resource type="Texture2D" uid="uid://rw1umk0a0k2u" path="res://sprites/interface/scenes/cooking scene/scene_cooking_flavor_spicy.png" id="7_fudr2"]
 [ext_resource type="Texture2D" uid="uid://5nacx5h2c6cn" path="res://sprites/interface/scenes/cooking scene/scene_cooking_flavor_hearty.png" id="8_7h04f"]
 [ext_resource type="Texture2D" uid="uid://bm2kxsnrf3sj6" path="res://sprites/interface/scenes/cooking scene/scene_cooking_flavor_fresh.png" id="9_em421"]
@@ -91,6 +92,13 @@ offset_bottom = 1080.0
 mouse_filter = 2
 mouse_behavior_recursive = 1
 texture = ExtResource("4_ed1d2")
+
+[node name="highlight" type="Sprite2D" parent="UI/Pan" unique_id=1126400856]
+visible = false
+z_index = 1
+scale = Vector2(8, 8)
+texture = ExtResource("6_w2npd")
+centered = false
 
 [node name="Results" type="Control" parent="UI" unique_id=406643778]
 z_index = 4
@@ -501,3 +509,5 @@ polygon = PackedVector2Array(-229.75171, -153.40854, -94.75171, -189.40854, 49.2
 
 [node name="center" type="Node2D" parent="Dice_Display/Pan" unique_id=383728228]
 position = Vector2(1349, 420)
+
+[connection signal="mouse_exited" from="DropArea" to="UI" method="_on_drop_area_mouse_exited"]

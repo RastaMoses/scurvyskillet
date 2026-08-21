@@ -196,7 +196,7 @@ func hide_dish():
 	dish_node.hide()
 
 func on_reset_button_pressed() -> void:
-	reset_dish()
+	dish_node.destroy_all_ingredients()
 
 func _on_roll_dish_pressed() -> void:
 	finish_dish()

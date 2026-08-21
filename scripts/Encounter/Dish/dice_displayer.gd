@@ -20,7 +20,7 @@ extends Node2D
 @onready var event = get_node("/root/game/EventManager")
 
 #STATE
-var dice:Array[RigidBody2D]
+var dice:Array[Node]
 var highlighted_dice: Array[RigidBody2D]
 
 func finish_dish():
@@ -28,7 +28,7 @@ func finish_dish():
 		die.stop_movement()
 	event.dish_finish_animation_done()
 
-func spawn_die(flavour, value):
+func spawn_die(flavour, value, card):
 	#get point dropped inside static body or closest point if outside
 	var mouse_pos = get_global_mouse_position()
 	var spawn_pos
@@ -49,10 +49,13 @@ func spawn_die(flavour, value):
 			spawn_pos = mouse_pos
 	#create circular pulse to clear area of other dice
 	point_explosion(spawn_pos)
+	
+	
 	#instantiate dice in that position without collision
 	var new_die = die_scene.instantiate()
 	add_child(new_die)
-	dice.append(new_die)
+	card.dice.append(new_die)
+	
 	new_die.freeze_mode = RigidBody2D.FREEZE_MODE_KINEMATIC
 	new_die.freeze = true
 	new_die.global_position = spawn_pos
@@ -69,16 +72,21 @@ func spawn_die(flavour, value):
 			new_die.change_sprite(hearty_sprite)
 		"fresh":
 			new_die.change_sprite(fresh_sprite)
+	new_die.flavour = flavour
 	#set highlight
 	new_die.display_number(value)
 	new_die.start_highlight()
-	highlighted_dice.append(new_die)
 
-func reset_highlights():
-	for i in highlighted_dice:
+func reset_highlights(card):
+	if card == null:
+		return
+	for i in card.dice:
 		i.stop_highlight()
 		i.stop_number()
-	highlighted_dice.clear()
+
+func destroy_dice(card):
+	for die in card.dice:
+		die.destroy()
 
 func point_explosion(point):
 	for die in dice:

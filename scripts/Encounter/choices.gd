@@ -51,10 +51,14 @@ func _ready() -> void:
 	on_add_ingredient.connect(on_ingredient_added)
 	checking_drop.connect(on_checking_drop)
 
-func on_checking_drop():
+func on_checking_drop(origin):
+	if origin != self:
+		return
 	drop_highlight.visible = true
 
-func on_ingredient_added():
+func on_ingredient_added(origin):
+	if origin != self:
+		return
 	check_completed()
 
 func remove_random():
