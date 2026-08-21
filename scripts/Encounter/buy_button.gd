@@ -19,8 +19,6 @@ var sold_out = false
 var price:int
 var shop
 
-func _ready() -> void:
-	ui_slot.large_view_clicked.connect(large_view_pressed)
 
 func populate():
 	if specific_item != null:

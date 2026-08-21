@@ -1,5 +1,18 @@
 [gd_resource type="Theme" format=3 uid="uid://bcm7itye636u"]
 
+[ext_resource type="FontFile" uid="uid://yjp0l2f5soug" path="res://fonts/mc/Minecraft.ttf" id="1_awggx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5v61f"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+
 [resource]
-RichTextLabel/colors/default_color = Color(1, 1, 1, 1)
-RichTextLabel/font_sizes/normal_font_size = 50
+RichTextLabel/colors/default_color = Color(0.8980392, 0.9372549, 0.9372549, 1)
+RichTextLabel/colors/font_shadow_color = Color(0.16862746, 0.13333334, 0.16470589, 1)
+RichTextLabel/constants/shadow_offset_x = 8
+RichTextLabel/constants/shadow_offset_y = 8
+RichTextLabel/font_sizes/normal_font_size = 64
+RichTextLabel/fonts/normal_font = ExtResource("1_awggx")
+RichTextLabel/styles/normal = SubResource("StyleBoxEmpty_5v61f")

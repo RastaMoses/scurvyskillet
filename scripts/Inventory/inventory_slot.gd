@@ -5,6 +5,7 @@ extends Panel
 @export var editor_preview:bool = false
 @export var pixel_multiple:int = 8
 @export var drag_pos_offset:Vector2 = Vector2(96,96)
+@export var clickable:bool = true
 
 #CACHED COMPS
 @onready var item_visual: TextureRect = $ItemDisplay
@@ -25,6 +26,7 @@ var description
 var ingredient_name
 @onready var large_view_button = $large_view_button
 
+
 #SIGNALS
 signal large_view_clicked(card_data)
 
@@ -40,7 +42,10 @@ func _ready() -> void:
 		tags = $ItemDisplay/Tags/RichTextLabel
 		description = $ItemDisplay/Description
 		ingredient_name = $ItemDisplay/Name/RichTextLabel
-	large_view_button.pressed.connect(large_view_pressed)
+	if showcase:
+		large_view_button.visible = false
+	else:
+		large_view_button.pressed.connect(large_view_pressed)
 
 func large_view_pressed():
 	large_view_clicked.emit(card)
@@ -61,7 +66,8 @@ func update(item):
 		empty_slot.visible = true
 		large_view_button.visible = false
 	else:
-		large_view_button.visible = true
+		if !showcase:
+			large_view_button.visible = true
 		empty_slot.visible = false
 		item_visual.visible = true
 		icon.texture = item.stats.icon

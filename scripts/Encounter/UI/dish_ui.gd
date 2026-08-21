@@ -22,8 +22,10 @@ func update_nutrition(new_value: Variant) -> void:
 	nutrition_text.text = str(new_value)
 	if new_value > 0:
 		nutrition_shadow.visible = true
+		nutrition_text.visible = true
 	else:
 		nutrition_shadow.visible = false
+		nutrition_text.visible = false
 	var temp = 0
 	for i in nutrition_plates:
 		i.visible = false

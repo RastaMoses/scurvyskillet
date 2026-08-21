@@ -18,6 +18,8 @@
 [node name="Inventory" type="Control" unique_id=2008002230 node_paths=PackedStringArray("ui")]
 layout_mode = 3
 anchors_preset = 0
+mouse_filter = 1
+mouse_behavior_recursive = 1
 script = ExtResource("1_i5bfg")
 card_prefab = ExtResource("2_inxy6")
 ui = NodePath("InventoryUI")
@@ -54,6 +56,7 @@ layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 2
+mouse_behavior_recursive = 1
 texture = ExtResource("5_lgv2b")
 
 [node name="morale_bg" type="TextureRect" parent="InventoryUI/topbar" unique_id=407186824]
@@ -61,6 +64,7 @@ layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 2
+mouse_behavior_recursive = 1
 texture = ExtResource("6_t5ubi")
 
 [node name="money_bg" type="TextureRect" parent="InventoryUI/topbar" unique_id=1941561537]
@@ -68,6 +72,7 @@ layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 2
+mouse_behavior_recursive = 1
 texture = ExtResource("7_o0n8j")
 
 [node name="morale_text" type="RichTextLabel" parent="InventoryUI/topbar" unique_id=1231471646]
@@ -77,6 +82,7 @@ offset_top = 24.0
 offset_right = 1792.0
 offset_bottom = 96.0
 mouse_filter = 2
+mouse_behavior_recursive = 1
 theme = ExtResource("8_8jixe")
 text = "00"
 scroll_active = false
@@ -90,6 +96,7 @@ offset_top = 16.0
 offset_right = 1856.0
 offset_bottom = 88.0
 mouse_filter = 2
+mouse_behavior_recursive = 1
 theme = ExtResource("8_8jixe")
 text = "00"
 scroll_active = false
@@ -160,16 +167,19 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="large_view" type="Button" parent="InventoryUI" unique_id=1508888289]
-z_index = 200
-custom_minimum_size = Vector2(1920, 1080)
+z_index = 99
+z_as_relative = false
+custom_minimum_size = Vector2(1920, 780)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = 1920.0
-offset_bottom = 1080.0
+offset_bottom = 780.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
+mouse_behavior_recursive = 2
 flat = true
 
 [node name="InventoryUILarge" parent="InventoryUI/large_view" unique_id=1295964210 instance=ExtResource("12_ul54y")]
@@ -180,9 +190,10 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -256.0
-offset_top = -528.0
+offset_top = -366.0
 offset_right = 256.0
-offset_bottom = 240.0
+offset_bottom = 402.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 0
+mouse_behavior_recursive = 2

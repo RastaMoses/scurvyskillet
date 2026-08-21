@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://21k1wwymb7wr" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_shadow.png" id="10_2pbgc"]
 [ext_resource type="Texture2D" uid="uid://oupumk5tx528" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_01.png" id="11_kkx33"]
 [ext_resource type="Texture2D" uid="uid://l8yoj63tdwgb" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_02.png" id="12_fxvvw"]
+[ext_resource type="Theme" uid="uid://b23yl465mcv7t" path="res://themes/dish/nutrition_text.tres" id="13_iw5a0"]
 [ext_resource type="Texture2D" uid="uid://dttxwbvyspfro" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_03.png" id="13_yhjpa"]
 [ext_resource type="Texture2D" uid="uid://b82ymm5g2grfo" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_04.png" id="14_3j2nc"]
 [ext_resource type="Texture2D" uid="uid://dxtr8y8okvps6" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_05.png" id="15_lk7dj"]
@@ -119,12 +120,14 @@ texture = ExtResource("5_ed1d2")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/Results/Sweet" unique_id=352183300]
 layout_mode = 0
-offset_left = 24.0
-offset_right = 112.0
-offset_bottom = 72.0
+offset_left = 14.0
+offset_top = 4.0
+offset_right = 102.0
+offset_bottom = 76.0
 mouse_filter = 2
 mouse_behavior_recursive = 1
 theme = ExtResource("6_fxvvw")
+text = "14"
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -146,12 +149,14 @@ texture = ExtResource("6_bgdva")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/Results/Sour" unique_id=668448864]
 layout_mode = 0
-offset_left = 24.0
-offset_right = 112.0
-offset_bottom = 72.0
+offset_left = 14.0
+offset_top = 4.0
+offset_right = 102.0
+offset_bottom = 76.0
 mouse_filter = 2
 mouse_behavior_recursive = 1
 theme = ExtResource("6_fxvvw")
+text = "14"
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -173,12 +178,14 @@ texture = ExtResource("7_fudr2")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/Results/Spicy" unique_id=1187731099]
 layout_mode = 0
-offset_left = 24.0
-offset_right = 112.0
-offset_bottom = 72.0
+offset_left = 14.0
+offset_top = 4.0
+offset_right = 102.0
+offset_bottom = 76.0
 mouse_filter = 2
 mouse_behavior_recursive = 1
 theme = ExtResource("6_fxvvw")
+text = "14"
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -200,12 +207,14 @@ texture = ExtResource("8_7h04f")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/Results/Hearty" unique_id=468162168]
 layout_mode = 0
-offset_left = 24.0
-offset_right = 112.0
-offset_bottom = 72.0
+offset_left = 14.0
+offset_top = 4.0
+offset_right = 102.0
+offset_bottom = 76.0
 mouse_filter = 2
 mouse_behavior_recursive = 1
 theme = ExtResource("6_fxvvw")
+text = "14"
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -227,12 +236,14 @@ texture = ExtResource("9_em421")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/Results/Fresh" unique_id=1240791199]
 layout_mode = 0
-offset_left = 24.0
-offset_right = 112.0
-offset_bottom = 72.0
+offset_left = 14.0
+offset_top = 4.0
+offset_right = 102.0
+offset_bottom = 76.0
 mouse_filter = 2
 mouse_behavior_recursive = 1
 theme = ExtResource("6_fxvvw")
+text = "14"
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -254,15 +265,17 @@ texture = ExtResource("10_2pbgc")
 [node name="text" type="RichTextLabel" parent="UI/Nutrition" unique_id=434235131]
 z_index = 2
 layout_mode = 0
-offset_left = 623.0
-offset_top = 242.0
-offset_right = 870.0
-offset_bottom = 513.0
+offset_left = 688.0
+offset_top = 368.0
+offset_right = 816.0
+offset_bottom = 465.0
 mouse_filter = 1
 mouse_behavior_recursive = 1
-theme_override_font_sizes/normal_font_size = 200
+theme = ExtResource("13_iw5a0")
 text = "12"
 scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="plates" type="Control" parent="UI/Nutrition" unique_id=683166593]
 anchors_preset = 0
@@ -272,7 +285,6 @@ mouse_filter = 2
 mouse_behavior_recursive = 1
 
 [node name="plate1" type="TextureRect" parent="UI/Nutrition/plates" unique_id=1236609232]
-visible = false
 layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
