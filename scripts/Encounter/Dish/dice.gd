@@ -6,6 +6,7 @@ extends RigidBody2D
 @export var max_speed = 300
 @export var highlight_duration:float = 5
 @export var highlight_vanish_speed:float = 1
+@export var number_duration:float = 10
 @export var number_vanish_speed:float = 4 #zero for never
 @export_group("Sizzle Anim")
 @export var sizzle_scene:PackedScene
@@ -25,7 +26,9 @@ extends RigidBody2D
 var move_dir
 var move_power
 var highlight_time:float
+var number_time:float
 var highlighted:bool = false
+var number_shown:bool = false
 var number
 #sizzle
 var sizzle_active = true
@@ -50,7 +53,7 @@ func display_number(value):
 	number = value
 	for i in number_sprites:
 		i.visible = false
-	number_sprites[value-1].visible = true
+	start_number()
 
 func stop_movement():
 	linear_velocity = Vector2.ZERO
@@ -64,10 +67,16 @@ func _process(delta: float) -> void:
 	if highlighted:
 		highlight_time -= delta
 		if highlight_time <= 0:
-			highlight_sprite.self_modulate.a -= delta * highlight_vanish_speed
+			if highlight_vanish_speed != 0:
+				highlight_sprite.self_modulate.a -= delta * highlight_vanish_speed
+			if highlight_sprite.self_modulate.a <= 0:
+				highlighted = false
+	if number_shown:
+		number_time -= delta
+		if number_time <= 0:
 			if number_vanish_speed != 0:
 				number_sprites[number - 1].self_modulate.a -= delta * number_vanish_speed
-			if highlight_sprite.self_modulate.a <= 0:
+			if number_sprites[number-1].self_modulate.a <= 0:
 				highlighted = false
 	if sizzle_active:
 		if sizzle_timer >= sizzle_interval:
@@ -86,15 +95,30 @@ func _process(delta: float) -> void:
 		round(raw_position.x / pixel_multiple) * pixel_multiple,
 		round(raw_position.y / pixel_multiple) * pixel_multiple
 	)
+
+func start_number():
+	number_shown = false
+	number_time = 0
+	number_sprites[number - 1].visible = true
+	
+func stop_number():
+	number_shown = true
+	number_time = number_duration
+	if number_vanish_speed == 0:
+		number_sprites[number - 1].visible = false
+
+func start_visuals():
+	start_highlight()
+	start_number()
+
 func start_highlight():
 	highlighted = true
 	highlight_time = highlight_duration
 	highlight_sprite.visible = true
-	number_sprites[number - 1].visible = true
 
 func stop_highlight():
 	highlighted = false
 	highlight_time = 0
-	highlight_sprite.visible = false
-	if number_vanish_speed != 0:
-		number_sprites[number - 1].visible = false
+	if highlight_vanish_speed != 0:
+		highlight_sprite.visible = false
+	

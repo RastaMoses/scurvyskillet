@@ -65,7 +65,6 @@ func end_encounter():
 func activate_encounter():
 	event_manager.encounter_start()
 	load_encounter(encounter)
-	toggle_button(false)
 	map.toggle_map_visible(false)
 	
 func load_encounter(data):
@@ -96,6 +95,8 @@ func toggle_visuals(value):
 	visuals.visible = value
 
 func _on_button_pressed() -> void:
+	
+	toggle_button(false)
 	move_ship()
 	await player_ship.ship_arrived
 	activate_encounter()

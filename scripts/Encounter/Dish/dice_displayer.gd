@@ -77,6 +77,7 @@ func spawn_die(flavour, value):
 func reset_highlights():
 	for i in highlighted_dice:
 		i.stop_highlight()
+		i.stop_number()
 	highlighted_dice.clear()
 
 func point_explosion(point):
