@@ -6,7 +6,7 @@ extends RigidBody2D
 @export var max_speed = 300
 @export var highlight_duration:float = 5
 @export var highlight_vanish_speed:float = 1
-@export var number_vanish_speed:float = 4
+@export var number_vanish_speed:float = 4 #zero for never
 @export_group("Sizzle Anim")
 @export var sizzle_scene:PackedScene
 @export var sizzle_interval:float = 1
@@ -96,4 +96,5 @@ func stop_highlight():
 	highlighted = false
 	highlight_time = 0
 	highlight_sprite.visible = false
-	number_sprites[number - 1].visible = false
+	if number_vanish_speed != 0:
+		number_sprites[number - 1].visible = false

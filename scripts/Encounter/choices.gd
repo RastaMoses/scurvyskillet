@@ -28,6 +28,7 @@ extends Inventory
 @export var nutrition:int
 @export_subgroup("New Encounter")
 @export var new_encounter:PackedScene
+@export_enum("shop","decision","challenge","boss","none") var new_encounter_type:String = "challenge"
 
 #CACHED COMPS
 
