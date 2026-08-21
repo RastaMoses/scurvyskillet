@@ -112,13 +112,13 @@ func start_visuals():
 	start_number()
 
 func start_highlight():
-	highlighted = true
-	highlight_time = highlight_duration
+	highlighted = false
+	highlight_time = 0
 	highlight_sprite.visible = true
 
 func stop_highlight():
-	highlighted = false
-	highlight_time = 0
-	if highlight_vanish_speed != 0:
+	highlighted = true
+	highlight_time = highlight_duration
+	if highlight_vanish_speed == 0:
 		highlight_sprite.visible = false
 	

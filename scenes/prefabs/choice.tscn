@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://v63vu2iilw13" path="res://scripts/Inventory/drop_area.gd" id="2_xd3pp"]
 [ext_resource type="Texture2D" uid="uid://cti37gpvslw0y" path="res://sprites/interface/scenes/decision scene/scene_decision_button_sign_outline.png" id="3_w532b"]
 [ext_resource type="Texture2D" uid="uid://dys7xyagobtu6" path="res://sprites/interface/scenes/decision scene/scene_decision_button_crate.png" id="3_we2ti"]
+[ext_resource type="Theme" uid="uid://vdmasea6p0ex" path="res://themes/encounter/choice_button_text.tres" id="5_5ods4"]
 [ext_resource type="Texture2D" uid="uid://xr08dfjbvw6x" path="res://sprites/interface/scenes/decision scene/scene_decision_button_crate_outline.png" id="5_w532b"]
 
 [node name="choice" type="Control" unique_id=704699521]
@@ -30,21 +31,6 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Button" unique_id=867693461]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.067
-anchor_top = 0.21200001
-anchor_right = 0.067
-anchor_bottom = 0.21200001
-offset_left = 13.199999
-offset_top = -23.00798
-offset_right = 325.2
-offset_bottom = 128.99203
-mouse_behavior_recursive = 1
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="BG" type="Sprite2D" parent="Button" unique_id=824428301]
 scale = Vector2(8, 8)
 texture = ExtResource("2_we2ti")
@@ -56,6 +42,23 @@ position = Vector2(-8, -8)
 scale = Vector2(8, 8)
 texture = ExtResource("3_w532b")
 centered = false
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Button" unique_id=867693461]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.067
+anchor_top = 0.21200001
+anchor_right = 0.067
+anchor_bottom = 0.21200001
+offset_left = -0.80000114
+offset_top = -11.008003
+offset_right = 343.2
+offset_bottom = 124.992
+mouse_behavior_recursive = 1
+theme = ExtResource("5_5ods4")
+text = "RUN"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="UI" type="Control" parent="." unique_id=987613784]
 layout_mode = 1
@@ -101,10 +104,12 @@ anchor_top = 0.21200001
 anchor_right = 0.067
 anchor_bottom = 0.21200001
 offset_left = -0.12000084
-offset_top = 0.03199768
+offset_top = 4.0319977
 offset_right = 311.88
-offset_bottom = 152.032
+offset_bottom = 156.032
 mouse_behavior_recursive = 1
+theme = ExtResource("5_5ods4")
+text = "Drop Here!"
 horizontal_alignment = 1
 vertical_alignment = 1
 

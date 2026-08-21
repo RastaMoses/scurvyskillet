@@ -1,0 +1,13 @@
+[gd_resource type="Theme" format=3 uid="uid://cwis241bmc82x"]
+
+[ext_resource type="FontFile" uid="uid://yjp0l2f5soug" path="res://fonts/mc/Minecraft.ttf" id="1_xkmea"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iw5a0"]
+
+[resource]
+RichTextLabel/colors/font_shadow_color = Color(0, 0, 0, 0)
+RichTextLabel/constants/shadow_offset_x = 4
+RichTextLabel/constants/shadow_offset_y = 0
+RichTextLabel/font_sizes/normal_font_size = 32
+RichTextLabel/fonts/normal_font = ExtResource("1_xkmea")
+RichTextLabel/styles/normal = SubResource("StyleBoxEmpty_iw5a0")

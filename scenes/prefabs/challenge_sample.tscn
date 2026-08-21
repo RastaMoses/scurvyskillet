@@ -5,6 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://baee01pvcv84d" path="res://sprites/interface/scenes/cooking scene/scene_cooking_background.png" id="3_h6ing"]
 [ext_resource type="Texture2D" uid="uid://cquwgd0b3fqta" path="res://sprites/interface/general/text frame/text_frame.png" id="4_x7qnw"]
 [ext_resource type="Texture2D" uid="uid://b7stpf242kutc" path="res://sprites/interface/scenes/cooking scene/scene_cooking_button_reset.png" id="5_dmuak"]
+[ext_resource type="Theme" uid="uid://1jb5jgyixo85" path="res://themes/encounter/enc_description.tres" id="5_h6ing"]
+[ext_resource type="Theme" uid="uid://bqlaftpa31pru" path="res://themes/encounter/enc_title.tres" id="6_x7qnw"]
 [ext_resource type="Texture2D" uid="uid://l1acfj3rcnvt" path="res://sprites/interface/scenes/cooking scene/scene_cooking_button_reset_arrow.png" id="6_y21f8"]
 [ext_resource type="Texture2D" uid="uid://cst1skr2hibgh" path="res://sprites/interface/scenes/cooking scene/scene_cooking_button_cook.png" id="7_6r88v"]
 [ext_resource type="Texture2D" uid="uid://cs0ochjc043hv" path="res://sprites/interface/scenes/cooking scene/scene_cooking_button_cook_shadow.png" id="8_ee2dl"]
@@ -74,16 +76,15 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -889.0
-offset_top = -853.0
-offset_right = -417.0
-offset_bottom = -329.0
+offset_left = -888.0
+offset_top = -872.0
+offset_right = -416.0
+offset_bottom = -332.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 1
 mouse_behavior_recursive = 1
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 30
+theme = ExtResource("5_h6ing")
 text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
 [node name="title" type="RichTextLabel" parent="UI/description" unique_id=118090035]
@@ -91,15 +92,16 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -888.0
-offset_top = 71.0
-offset_right = -417.0
-offset_bottom = 167.0
+offset_left = -880.0
+offset_top = 88.0
+offset_right = -424.0
+offset_bottom = 184.0
 grow_horizontal = 2
 mouse_filter = 1
 mouse_behavior_recursive = 1
-theme_override_font_sizes/normal_font_size = 40
+theme = ExtResource("6_x7qnw")
 text = "TITLE OF THE ENCOUNTER WHICH MIGHT BE SUPER DANGEROUS"
+horizontal_alignment = 1
 
 [node name="Reset" type="Control" parent="UI" unique_id=566658081]
 anchors_preset = 0

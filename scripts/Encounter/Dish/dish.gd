@@ -18,12 +18,15 @@ var random = RandomNumberGenerator.new()
 @onready var dish_ui = $UI
 
 #STATE
-var can_drop:bool = true
 var tags:Array[String]
 
 func _ready() -> void:
 	on_add_ingredient.connect(on_add_to_dish)
 	on_remove_ingredient.connect(on_remove_from_dish)
+	checking_drop.connect(on_check_drop)
+
+func on_check_drop(card):
+	can_drop_card = abilities.on_try_add_to_dish(card)
 
 func on_add_to_dish(card):
 	#check for abilities on add

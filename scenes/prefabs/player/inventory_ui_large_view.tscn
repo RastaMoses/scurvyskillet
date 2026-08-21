@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ban45p6su6txh" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_page.png" id="2_4i1hb"]
 [ext_resource type="Texture2D" uid="uid://by6apfx54escg" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_frame.png" id="3_vddt1"]
 [ext_resource type="Texture2D" uid="uid://d12nbvxtvrbes" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_name.png" id="4_5i6pl"]
+[ext_resource type="Theme" uid="uid://cvuy8lf0qm6h3" path="res://themes/cards/large/name_text.tres" id="5_4i1hb"]
 [ext_resource type="Texture2D" uid="uid://b5g8g8u5j2yej" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_rarity_1.png" id="5_x2j1e"]
 [ext_resource type="Texture2D" uid="uid://b0go1benp7ml1" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_rarity_2.png" id="6_ssuud"]
 [ext_resource type="Texture2D" uid="uid://un4k3xmdjkb2" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_rarity_3.png" id="7_bijr2"]
@@ -70,11 +71,14 @@ texture = ExtResource("4_5i6pl")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ItemDisplay/Name" index="0" unique_id=1795049893]
 layout_mode = 0
-offset_left = 238.0
-offset_top = 114.0
-offset_right = 497.0
-offset_bottom = 199.0
-rotation = -0.07950304
+offset_left = 248.0
+offset_top = 104.0
+offset_right = 504.0
+offset_bottom = 192.0
+theme = ExtResource("5_4i1hb")
+text = "Name"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Rarity" parent="ItemDisplay" index="4" unique_id=80472254]
 offset_right = 512.0
@@ -130,17 +134,26 @@ texture = ExtResource("12_sk55n")
 [node name="RichTextLabel" type="RichTextLabel" parent="ItemDisplay/Tags" index="0" unique_id=1623048763]
 layout_mode = 0
 offset_left = 47.999992
-offset_top = 321.0
+offset_top = 332.0
 offset_right = 464.0
-offset_bottom = 393.0
-rotation = 0.031420127
+offset_bottom = 404.0
+theme = ExtResource("5_4i1hb")
+text = "Fish, Leftovers"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Description" type="RichTextLabel" parent="ItemDisplay" index="7" unique_id=1998604938]
 layout_mode = 0
 offset_left = 41.0
 offset_top = 416.0
 offset_right = 465.0
-offset_bottom = 702.0
+offset_bottom = 730.0
+theme = ExtResource("5_4i1hb")
+text = "Abilities1 - Description
+Abilities 2 _ desfsifndgfsngsndfsdnfsdif
+
+FLAVOUR TEXT_____________________________________________________________________________"
+scroll_active = false
 
 [node name="Flavours" parent="ItemDisplay" index="8" unique_id=2132717140]
 z_index = -3
@@ -148,14 +161,16 @@ offset_right = 512.0
 offset_bottom = 768.0
 
 [node name="Hearty" parent="ItemDisplay/Flavours" index="0" unique_id=669791705]
-offset_right = 512.0
+offset_left = 32.0
+offset_right = 544.0
 offset_bottom = 768.0
 texture = ExtResource("13_mff2p")
 
 [node name="RichTextLabel" parent="ItemDisplay/Flavours/Hearty" index="0" unique_id=1557675878]
-offset_left = 133.0
-offset_right = 213.0
-offset_bottom = 96.0
+offset_left = 135.0
+offset_top = 28.125
+offset_right = 215.0
+offset_bottom = 116.0
 
 [node name="Sour" parent="ItemDisplay/Flavours" index="1" unique_id=2092495922]
 offset_right = 512.0
@@ -174,29 +189,34 @@ offset_bottom = 768.0
 texture = ExtResource("15_6nx8t")
 
 [node name="RichTextLabel" parent="ItemDisplay/Flavours/Fresh" index="0" unique_id=1723724823]
-offset_left = 52.0
-offset_right = 132.0
-offset_bottom = 96.0
+offset_left = 54.0
+offset_top = 28.125
+offset_right = 134.0
+offset_bottom = 116.0
 
 [node name="Spicy" parent="ItemDisplay/Flavours" index="3" unique_id=55184171]
-offset_right = 512.0
+offset_left = 64.0
+offset_right = 576.0
 offset_bottom = 768.0
 texture = ExtResource("16_kxvc3")
 
 [node name="RichTextLabel" parent="ItemDisplay/Flavours/Spicy" index="0" unique_id=117018499]
-offset_left = 212.0
-offset_right = 292.0
-offset_bottom = 95.875
+offset_left = 214.0
+offset_top = 28.0
+offset_right = 294.0
+offset_bottom = 115.875
 
 [node name="Sweet" parent="ItemDisplay/Flavours" index="4" unique_id=1468737299]
-offset_right = 512.0
+offset_left = 96.0
+offset_right = 608.0
 offset_bottom = 768.0
 texture = ExtResource("17_v5g87")
 
 [node name="RichTextLabel" parent="ItemDisplay/Flavours/Sweet" index="0" unique_id=982386927]
-offset_left = 292.0
-offset_right = 372.0
-offset_bottom = 95.875
+offset_left = 294.0
+offset_top = 28.0
+offset_right = 374.0
+offset_bottom = 115.875
 
 [node name="Nutrition" parent="ItemDisplay" index="9" unique_id=781366672]
 offset_right = 512.0
@@ -204,7 +224,8 @@ offset_bottom = 768.0
 texture = ExtResource("18_u3kyo")
 
 [node name="NutritionText" parent="ItemDisplay/Nutrition" index="0" unique_id=367587180]
-offset_left = -245.0
-offset_top = 229.0
-offset_right = -165.0
-offset_bottom = 309.0
+offset_left = -246.0
+offset_top = 233.0
+offset_right = -166.0
+offset_bottom = 313.0
+text = "2"

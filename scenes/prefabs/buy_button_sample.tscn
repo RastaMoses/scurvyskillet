@@ -52,13 +52,13 @@ centered = false
 
 [node name="PriceText" type="RichTextLabel" parent="Button" unique_id=2066421690]
 layout_mode = 0
-offset_left = 24.0
-offset_top = 176.0
-offset_right = 184.0
-offset_bottom = 272.0
+offset_top = 200.0
+offset_right = 152.0
+offset_bottom = 296.0
+offset_transform_enabled = true
 mouse_behavior_recursive = 1
 theme = ExtResource("5_db54x")
-text = "3"
+text = "1"
 scroll_active = false
 horizontal_alignment = 1
 

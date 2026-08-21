@@ -20,10 +20,10 @@ extends Panel
 @onready var empty_slot = $EmptySlot
 @onready var rarity_textures = $ItemDisplay/Rarity.get_children()
 @onready var icon = $ItemDisplay/item_icon
-var tags
+var tags:RichTextLabel
 var uses:int
-var description
-var ingredient_name
+var description:RichTextLabel
+var ingredient_name:RichTextLabel
 @onready var large_view_button = $large_view_button
 
 
@@ -72,6 +72,17 @@ func update(item):
 		item_visual.visible = true
 		icon.texture = item.stats.icon
 		card = item
+		if large_view:
+			#update tags display
+			var tags_string = ""
+			for i in card.stats.tags:
+				if tags_string == "":
+					tags_string += String(i)
+				else:
+					tags_string += ", " + String(i)
+			tags.text = tags_string
+			description.text = card.stats.description
+			ingredient_name.text = card.stats.name
 		update_flavours()
 		update_uses()
 
@@ -123,12 +134,6 @@ func update_flavours():
 			rarity_textures[i].visible = true
 		else:
 			rarity_textures[i].visible = false
-	
-	#if large view
-	if large_view == true:
-		tags = card.stats.tags
-		description = card.stats.description
-		ingredient_name = card.stats.name
 
 func _get_drag_data(_at_position: Vector2) -> Variant:
 	if not card:

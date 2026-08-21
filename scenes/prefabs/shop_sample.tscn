@@ -107,6 +107,7 @@ offset_right = 1672.0
 offset_bottom = 544.0
 mouse_behavior_recursive = 1
 theme = ExtResource("12_gnrrr")
+theme_override_font_sizes/normal_font_size = 128
 text = "3"
 scroll_active = false
 

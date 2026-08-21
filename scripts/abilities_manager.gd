@@ -41,3 +41,7 @@ func on_try_add_ingredient(card):
 	if card.stats.abilities.has("undroppable"):
 		can_add = false
 	return can_add
+
+func on_try_add_to_dish(card):
+	if spice_list.has(card.stats):
+		return false

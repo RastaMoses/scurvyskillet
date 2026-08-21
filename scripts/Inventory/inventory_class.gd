@@ -18,8 +18,9 @@ var current_ingredients: Array[Node]
 #SIGNALS
 signal on_add_ingredient(card)
 signal on_remove_ingredient(card)
-signal checking_drop
+signal checking_drop(card)
 #STATE
+var can_drop_card = true
 
 func _ready() -> void:
 	for i in starting_ingredients:
@@ -80,8 +81,11 @@ func change_ingredient_uses(ingredient_card,amount):
 		destroy_ingredient(ingredient_card)
 
 func check_can_drop(data):
-	checking_drop.emit()
+	checking_drop.emit(data)
 	#check for requirements
+	if can_drop_card == false:
+		can_drop_card = true
+		return false
 	#check abilities
 	if abilities.on_try_add_ingredient(data) == false:
 		return false

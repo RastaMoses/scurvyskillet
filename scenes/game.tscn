@@ -26,13 +26,11 @@ script = ExtResource("3_kvpfn")
 script = ExtResource("4_dinhu")
 
 [node name="Inventory" parent="Player" unique_id=421132193 instance=ExtResource("5_kvuet")]
-mouse_filter = 1
 current_money = 5
 current_morale = 5
 starting_ingredients = Array[Resource]([ExtResource("7_ir15t"), ExtResource("7_0tnpc")])
 
 [node name="debug_mouse" parent="." unique_id=2141378264 instance=ExtResource("8_ca42v")]
-active = true
 
 [node name="IngredientPool" type="Node" parent="." unique_id=1772734839]
 script = ExtResource("9_rysoc")

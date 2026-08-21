@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dcufcw38p0iba" path="res://sprites/interface/general/morale and gold/morale_and_gold_frame.png" id="5_lgv2b"]
 [ext_resource type="Texture2D" uid="uid://coxups3dlsrk5" path="res://sprites/interface/general/morale and gold/morale_and_gold_morale.png" id="6_t5ubi"]
 [ext_resource type="Texture2D" uid="uid://ciua4pueuxwty" path="res://sprites/interface/general/morale and gold/morale_and_gold_gold.png" id="7_o0n8j"]
-[ext_resource type="Theme" uid="uid://idl8u2rybumh" path="res://themes/inventory/inv_top_text.tres" id="8_8jixe"]
+[ext_resource type="Theme" uid="uid://cwis241bmc82x" path="res://themes/inventory/top_text.tres" id="8_enydf"]
 [ext_resource type="Texture2D" uid="uid://b0kgy70usnyx" path="res://sprites/interface/scenes/cooking scene/scene_cooking_inventory.png" id="9_k8k7k"]
 [ext_resource type="Theme" uid="uid://dwjm243i4x47a" path="res://themes/inventory/inv_scroll_container.tres" id="10_no1hy"]
 [ext_resource type="Theme" uid="uid://fa4mmtcwb3a5" path="res://themes/inventory/inv_grid_container.tres" id="11_lc8fr"]
@@ -83,8 +83,9 @@ offset_right = 1792.0
 offset_bottom = 96.0
 mouse_filter = 2
 mouse_behavior_recursive = 1
-theme = ExtResource("8_8jixe")
-text = "00"
+theme = ExtResource("8_enydf")
+theme_override_colors/font_shadow_color = Color(0.89411765, 0.44705883, 0.34901962, 1)
+text = "12"
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -92,13 +93,14 @@ vertical_alignment = 1
 [node name="money_text" type="RichTextLabel" parent="InventoryUI/topbar" unique_id=1650746631]
 layout_mode = 0
 offset_left = 1784.0
-offset_top = 16.0
+offset_top = 20.0
 offset_right = 1856.0
-offset_bottom = 88.0
+offset_bottom = 92.0
 mouse_filter = 2
 mouse_behavior_recursive = 1
-theme = ExtResource("8_8jixe")
-text = "00"
+theme = ExtResource("8_enydf")
+theme_override_colors/font_shadow_color = Color(0.93333334, 0.79607844, 0.5647059, 1)
+text = "12"
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
