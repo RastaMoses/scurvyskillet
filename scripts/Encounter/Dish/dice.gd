@@ -31,7 +31,7 @@ var highlighted:bool = false
 var number_shown:bool = false
 var number:int
 var ingredient_card:Node
-var flavour:String
+var flavour:GlobalEnums.Flavour
 #sizzle
 var sizzle_active = true
 var sizzle_timer = sizzle_interval

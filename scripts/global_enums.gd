@@ -14,3 +14,5 @@ enum EncounterType {
 			}
 
 enum EncounterTerrain{ ISLAND, OCEAN}
+
+enum Flavour { SWEET, SPICY, HEARTY, FRESH}
