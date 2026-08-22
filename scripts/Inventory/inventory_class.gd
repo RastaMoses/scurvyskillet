@@ -8,7 +8,7 @@ var current_ingredients: Array[Control]
 @export var ui:Control
 @export var can_stack_uses:bool = true
 @export_group("Can Drop Reqs")
-@export var cd_tags:Array[String]
+@export var cd_tags:Array[GlobalEnums.Tags]
 @export var cd_ingredients:Array[Resource]
 @export var cd_rarity:int = -1 #-1 to disable
 #CACHED COMPS

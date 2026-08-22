@@ -3,9 +3,9 @@ extends Control
 @export var specific_item:Resource
 @export_subgroup("Random Item Reqs")
 @export var and_req:bool = false
-@export_enum("common", "uncommon", "rare", "legendary") var req_rarity:Array[int]
-@export_enum("tag1", "tag2", "tag3", "tag4") var req_tag:Array[String]
-@export_enum("seasoning", "ability2", "leftover", "richard") var req_ability:Array[String]
+@export var req_rarity:Array[GlobalEnums.Rarity]
+@export var req_tag:Array[GlobalEnums.Tags]
+@export var req_ability:Array[Resource]
 
 @onready var button = $Button
 @onready var button_highlight = $Button/Highlight

@@ -11,8 +11,8 @@ extends Inventory
 @export_subgroup("Random Item Reqs")
 @export var and_req:bool = false
 @export_enum("common", "uncommon", "rare", "legendary") var req_rarity:Array[int]
-@export_enum("tag1", "tag2", "tag3", "tag4") var req_tag:Array[String]
-@export_enum("seasoning", "ability2", "leftover", "richard") var req_ability:Array[String]
+@export var req_tag:Array[GlobalEnums.Tags]
+@export var req_ability:Array[Resource]
 @export_group("Cost")
 @export var c_money:int
 @export var c_morale:int
@@ -28,7 +28,7 @@ var sour:int
 @export var nutrition:int
 @export_subgroup("New Encounter")
 @export var new_encounter:PackedScene
-@export_enum("shop","decision","challenge","boss","none") var new_encounter_type:String = "challenge"
+@export var new_encounter_type:GlobalEnums.EncounterType = 0
 
 #CACHED COMPS
 

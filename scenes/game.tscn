@@ -6,13 +6,13 @@
 [ext_resource type="Script" uid="uid://cx3kxlhcjwpki" path="res://scripts/event_manager.gd" id="3_kvpfn"]
 [ext_resource type="Script" uid="uid://cmbe0axqvmhhv" path="res://scripts/abilities_manager.gd" id="4_dinhu"]
 [ext_resource type="PackedScene" uid="uid://ckhln31sq4epk" path="res://scenes/prefabs/player/inventory.tscn" id="5_kvuet"]
-[ext_resource type="Resource" uid="uid://xhgwjr4bawpf" path="res://scenes/ingredients/fresh_flo.tres" id="7_0tnpc"]
-[ext_resource type="Resource" uid="uid://covhmmjexggme" path="res://scenes/ingredients/spicy_leon.tres" id="7_ir15t"]
+[ext_resource type="Resource" uid="uid://xhgwjr4bawpf" path="res://resources/ingredients/fresh_flo.tres" id="7_0tnpc"]
+[ext_resource type="Resource" uid="uid://covhmmjexggme" path="res://resources/ingredients/spicy_leon.tres" id="7_ir15t"]
 [ext_resource type="PackedScene" uid="uid://bodk7w1csegu4" path="res://scenes/debug/debug_mouse.tscn" id="8_ca42v"]
-[ext_resource type="Resource" uid="uid://di81ns4jq1qts" path="res://scenes/ingredients/starter_test.tres" id="9_kvpfn"]
+[ext_resource type="Resource" uid="uid://di81ns4jq1qts" path="res://resources/ingredients/starter_test.tres" id="9_kvpfn"]
 [ext_resource type="Script" uid="uid://cf1f8f18wnr6h" path="res://scripts/Ingredients/ingredient_pool.gd" id="9_rysoc"]
-[ext_resource type="Resource" uid="uid://xpvp5lubwdim" path="res://scenes/ingredients/grapes.tres" id="10_dinhu"]
-[ext_resource type="Resource" uid="uid://dfiy7dljes5ha" path="res://scenes/ingredients/orange_cake.tres" id="11_kvuet"]
+[ext_resource type="Resource" uid="uid://xpvp5lubwdim" path="res://resources/ingredients/grapes.tres" id="10_dinhu"]
+[ext_resource type="Resource" uid="uid://dfiy7dljes5ha" path="res://resources/ingredients/orange_cake.tres" id="11_kvuet"]
 
 [node name="game" type="Node2D" unique_id=1075341061]
 script = ExtResource("1_vtaks")

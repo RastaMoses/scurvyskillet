@@ -108,3 +108,27 @@ func check_rainbow_cake():
 					if already_active:
 						i.stats.nutrition -= 5
 						active_dish_abilties.erase(["rainbow_cake", i])
+
+func check_ability_flavour_conditions():
+	if current_dish.sweet > 0 and current_dish.spicy > 0 and current_dish.hearty > 0 and current_dish.fresh > 0:
+		for i in player_inventory.current_ingredients:
+				if i.stats.abilities.has("rainbow_cake"):
+					var already_active = false
+					for j in active_dish_abilties: #check if card already has active bonus
+						if j[0] == ("rainbow_cake") and j[1] == i:
+							#card already active effect
+							already_active = true
+					if !already_active:
+						i.stats.nutrition += 5
+						active_dish_abilties.append(["rainbow_cake", i])
+	else:
+		for i in player_inventory.current_ingredients:
+				if i.stats.abilities.has("rainbow_cake"):
+					var already_active = false
+					for j in active_dish_abilties: #check if card already has active bonus
+						if j[0] == ("rainbow_cake") and j[1] == i:
+							#card already active effect
+							already_active = true
+					if already_active:
+						i.stats.nutrition -= 5
+						active_dish_abilties.erase(["rainbow_cake", i])

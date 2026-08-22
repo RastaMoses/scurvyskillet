@@ -17,7 +17,8 @@ var par_sour:int
 @export var par_hearty:int
 @export var par_fresh:int
 @export_group("Tag Restrictions")
-@export var restricted_tags: Array[String]
+@export var restricted_tags: Array[GlobalEnums.Tags]
+
 
 @export_category("Results")
 @export_group("Success")
@@ -28,9 +29,9 @@ var par_sour:int
 @export var s_random_ingredient_amount:int = 1
 @export_subgroup("Random Item Reqs")
 @export var s_and_req:bool = false
-@export_enum("common", "uncommon", "rare", "legendary") var s_req_rarity:Array[int]
-@export_enum("tag1", "tag2", "tag3", "tag4") var s_req_tag:Array[String]
-@export_enum("seasoning", "ability2", "leftover", "richard") var s_req_ability:Array[String]
+@export var s_req_rarity:Array[GlobalEnums.Rarity]
+@export var s_req_tag:Array[GlobalEnums.Tags]
+@export var s_req_ability:Array[Resource]
 
 @export_group("Partial")
 @export var partial_morale: int
@@ -40,9 +41,9 @@ var par_sour:int
 @export var p_random_ingredient_amount:int = 1
 @export_subgroup("Random Item Reqs")
 @export var p_and_req:bool = false
-@export_enum("common", "uncommon", "rare", "legendary") var p_req_rarity:Array[int]
-@export_enum("tag1", "tag2", "tag3", "tag4") var p_req_tag:Array[String]
-@export_enum("seasoning", "ability2", "leftover", "richard") var p_req_ability:Array[String]
+@export var p_req_rarity:Array[GlobalEnums.Rarity]
+@export var p_req_tag:Array[GlobalEnums.Tags]
+@export var p_req_ability:Array[Resource]
 
 @export_group("Failure")
 @export var failure_morale: int
@@ -52,9 +53,9 @@ var par_sour:int
 @export var f_random_ingredient_amount:int = 1
 @export_subgroup("Random Item Reqs")
 @export var f_and_req:bool = false
-@export_enum("common", "uncommon", "rare", "legendary") var f_req_rarity:Array[int]
-@export_enum("tag1", "tag2", "tag3", "tag4") var f_req_tag:Array[String]
-@export_enum("seasoning", "ability2", "leftover", "richard") var f_req_ability:Array[String]
+@export var f_req_rarity: Array[GlobalEnums.Rarity]
+@export var f_req_tag:Array[GlobalEnums.Tags]
+@export var f_req_ability:Array[Resource]
 @export_group("UI Elements")
 @export var map_icon:Texture
 
@@ -77,9 +78,9 @@ var reward_morale:int
 var reward_specific_ingredients:Array[Resource]
 var reward_random_ingredient_amount:int
 var reward_and_req:bool
-var reward_req_rarity:Array[int]
-var reward_req_tag:Array[String]
-var reward_req_ability:Array[String]
+var reward_req_rarity:Array[GlobalEnums.Rarity]
+var reward_req_tag:Array[GlobalEnums.Tags]
+var reward_req_ability:Array[Resource]
 
 func give_rewards():
 	player_inventory.add_money(reward_money)
@@ -132,10 +133,6 @@ func on_failure():
 func is_restricted_tag(tag):
 	return restricted_tags.has(tag)
 	
-func use_ghoulash():
-	var ghoulash # get ghoulash as dish
-	compare_dish(ghoulash)
-	pass
 
 func compare_dish(completed_dish):
 	if (completed_dish.nutrition < req_nutrition

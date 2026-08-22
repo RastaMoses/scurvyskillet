@@ -17,7 +17,7 @@ var random = RandomNumberGenerator.new()
 
 #STATE
 var can_add_ingredients = true
-var tags:Array[String]
+var tags:Array[int]
 
 
 func _ready() -> void:

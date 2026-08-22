@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://4kbfe5ee6m8e"]
 
 [ext_resource type="PackedScene" uid="uid://benw6bt2l0ot" path="res://scenes/prefabs/decision_prefab.tscn" id="1_2aa47"]
-[ext_resource type="Resource" uid="uid://covhmmjexggme" path="res://scenes/ingredients/spicy_leon.tres" id="2_4i6xc"]
+[ext_resource type="Resource" uid="uid://covhmmjexggme" path="res://resources/ingredients/spicy_leon.tres" id="2_4i6xc"]
 
 [node name="DecisionSample" unique_id=856639403 instance=ExtResource("1_2aa47")]
 
