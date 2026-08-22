@@ -3,9 +3,12 @@
 [ext_resource type="FontFile" uid="uid://yjp0l2f5soug" path="res://fonts/mc/Minecraft.ttf" id="1_d41ic"]
 
 [resource]
-RichTextLabel/colors/default_color = Color(0.76862746, 0.7764706, 0.72156864, 1)
-RichTextLabel/colors/font_shadow_color = Color(0.5254902, 0.4392157, 0.4, 1)
-RichTextLabel/constants/shadow_offset_x = 8
-RichTextLabel/constants/shadow_offset_y = 0
-RichTextLabel/font_sizes/normal_font_size = 64
-RichTextLabel/fonts/normal_font = ExtResource("1_d41ic")
+altered/base_type = &"standard"
+altered/colors/default_color = Color(0.6039216, 0.8980392, 0.8352941, 1)
+altered/colors/font_shadow_color = Color(0.3882353, 0.76862746, 0.8, 1)
+standard/base_type = &"RichTextLabel"
+standard/colors/default_color = Color(0.76862746, 0.7764706, 0.72156864, 1)
+standard/colors/font_shadow_color = Color(0.5254902, 0.4392157, 0.4, 1)
+standard/constants/shadow_offset_x = 8
+standard/font_sizes/normal_font_size = 64
+standard/fonts/normal_font = ExtResource("1_d41ic")

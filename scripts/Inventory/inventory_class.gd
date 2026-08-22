@@ -90,8 +90,6 @@ func distribute_uses(card):
 				change_ingredient_uses(i, 1)
 				change_ingredient_uses(card, -1)
 			if card.stats.uses == 0 or card == null or card.is_queued_for_deletion():
-				if ui != null:
-					ui.update_slots()
 				return
 				
 	current_ingredients.append(card)
@@ -148,3 +146,12 @@ func sort_by_rarity(a,b):
 	return false
 func sort_by_name(a, b): 
 	return a.stats.name.naturalnocasecmp_to(b.stats.name) < 0
+
+func reset_card_stats(card):
+	#sets stats to be base
+	card.reset_to_base_stats()
+	ui.update_slots()
+
+func reset_all_card_stats():
+	for i in current_ingredients:
+		reset_card_stats(i)

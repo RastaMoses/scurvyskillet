@@ -40,25 +40,25 @@ func on_drop_ingredient(origin, card):
 func on_add_to_dish(origin,card):
 	if origin != self:
 		return
-	#check for abilities on add
-	abilities.on_ingredient_add_to_dish(card, self)
 	for new_tag in card.stats.tags:
 		if !tags.has(new_tag):
 			tags.append(new_tag)
 	
 	roll_ingredient(card)
 	
-	#ui
 	nutrition += card.stats.nutrition
+
 	event_manager.add_to_dish(card)
+	#check for abilities on add
+	abilities.on_ingredient_add_to_dish(card)
 	
+	#ui
 	dish_ui.update_flavours()
 	dish_ui.update_nutrition(nutrition)
 
 func on_destroy_ingredient(origin,card:Node):
 	if origin != self:
 		return
-	
 	remove_card_from_dish(card)
 
 func on_destroy_all_ingredients(origin):
@@ -81,6 +81,7 @@ func remove_card_from_dish(card):
 	dish_ui.update_flavours()
 	
 	abilities.on_ingredient_destroyed_from_dish(card)
+	player_inventory.ui.update_slots()
 
 
 func subtract_dice_values_from_dish(card):

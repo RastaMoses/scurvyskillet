@@ -242,6 +242,7 @@ offset_bottom = 465.0
 mouse_filter = 1
 mouse_behavior_recursive = 1
 theme = ExtResource("13_iw5a0")
+theme_type_variation = &"standard"
 theme_override_font_sizes/normal_font_size = 128
 text = "12"
 scroll_active = false

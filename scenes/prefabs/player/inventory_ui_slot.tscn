@@ -11,12 +11,24 @@
 [ext_resource type="Texture2D" uid="uid://cl52w2y0cryx5" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_use_4.png" id="10_xwxd7"]
 [ext_resource type="Texture2D" uid="uid://fy7hp0t3msda" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_flavor_hearty.png" id="11_i4l7u"]
 [ext_resource type="Theme" uid="uid://dfu5pdupo2wqr" path="res://themes/cards/small/flavour_text.tres" id="12_ascly"]
+[ext_resource type="FontFile" uid="uid://yjp0l2f5soug" path="res://fonts/mc/Minecraft.ttf" id="13_c4s0y"]
 [ext_resource type="Texture2D" uid="uid://b1iapuuqo6wb3" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_flavor_sour.png" id="13_t18i7"]
 [ext_resource type="Texture2D" uid="uid://dd0nfvp3a70up" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_flavor_fresh.png" id="14_a5is7"]
 [ext_resource type="Texture2D" uid="uid://w450hvq004re" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_flavor_spicy.png" id="15_0wb8n"]
 [ext_resource type="Texture2D" uid="uid://cp51kteu70408" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_flavor_sweet.png" id="16_dnwwx"]
 [ext_resource type="Texture2D" uid="uid://ddcdxtkgp0om3" path="res://sprites/interface/ingredient cards/small view/ingredient_card_small_nutrition.png" id="17_qhw41"]
 [ext_resource type="Theme" uid="uid://djqywg2hbepia" path="res://themes/cards/small/nutrition_text.tres" id="18_or6lv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iw5a0"]
+
+[sub_resource type="Theme" id="Theme_80hv5"]
+RichTextLabel/colors/font_shadow_color = Color(0, 0, 0, 1)
+RichTextLabel/constants/shadow_offset_x = 8
+RichTextLabel/constants/shadow_offset_y = 0
+RichTextLabel/font_sizes/normal_font_size = 64
+RichTextLabel/fonts/normal_font = ExtResource("13_c4s0y")
+RichTextLabel/styles/normal = SubResource("StyleBoxEmpty_iw5a0")
+sweet/base_type = &"RichTextLabel"
 
 [node name="InventoryUISlot" type="Panel" unique_id=442831638]
 self_modulate = Color(1, 1, 1, 0)
@@ -143,6 +155,7 @@ offset_right = -18.0
 offset_bottom = 120.0
 grow_horizontal = 0
 theme = ExtResource("18_or6lv")
+theme_type_variation = &"standard"
 text = "3"
 scroll_active = false
 horizontal_alignment = 1
@@ -169,7 +182,7 @@ offset_top = 8.125
 offset_right = 95.0
 offset_bottom = 64.125
 theme = ExtResource("12_ascly")
-theme_override_colors/font_shadow_color = Color(0.77254903, 0.47058824, 0.20784314, 1)
+theme_type_variation = &"hearty"
 text = "2"
 scroll_active = false
 horizontal_alignment = 1
@@ -189,7 +202,7 @@ offset_left = 176.0
 offset_top = 16.0
 offset_right = 216.0
 offset_bottom = 72.0
-theme = ExtResource("12_ascly")
+theme = SubResource("Theme_80hv5")
 bbcode_enabled = true
 text = "[center]1"
 scroll_active = false
@@ -210,7 +223,7 @@ offset_top = 8.125
 offset_right = 55.0
 offset_bottom = 64.125
 theme = ExtResource("12_ascly")
-theme_override_colors/font_shadow_color = Color(0.5803922, 0.6784314, 0.22352941, 1)
+theme_type_variation = &"fresh"
 text = "1"
 scroll_active = false
 horizontal_alignment = 1
@@ -231,7 +244,7 @@ offset_top = 8.0
 offset_right = 135.125
 offset_bottom = 64.0
 theme = ExtResource("12_ascly")
-theme_override_colors/font_shadow_color = Color(0.69803923, 0.21176471, 0.34117648, 1)
+theme_type_variation = &"spicy"
 text = "1"
 scroll_active = false
 horizontal_alignment = 1
@@ -252,7 +265,7 @@ offset_top = 8.0
 offset_right = 175.0
 offset_bottom = 64.0
 theme = ExtResource("12_ascly")
-theme_override_colors/font_shadow_color = Color(0.49411765, 0.39607844, 0.60784316, 1)
+theme_type_variation = &"sweet"
 text = "1"
 scroll_active = false
 horizontal_alignment = 1
