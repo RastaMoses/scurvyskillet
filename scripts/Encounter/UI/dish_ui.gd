@@ -21,53 +21,73 @@ extends Control
 @onready var nutrition_shadow = $Nutrition/shadow
 @onready var pan_highlight = $Pan/highlight
 
+var sweet_bg_moved = false
+var sour_bg_moved = false
+var spicy_bg_moved = false
+var hearty_bg_moved = false
+var fresh_bg_moved = false
 
 func update_flavours():
 	
 	sweet_text.text = str(dish.sweet)
 	if dish.sweet == 0:
 		sweet_text.visible = false
-		sweet_bg.start_moving_to_destination(Vector2(sweet_bg.global_position.x + result_bg_move_x,
-		sweet_bg.global_position.y),result_bg_move_duration)
+		if !sweet_bg_moved:
+			sweet_bg.start_moving_to_destination(Vector2(sweet_bg.global_position.x + result_bg_move_x,
+			sweet_bg.global_position.y),result_bg_move_duration)
+			sweet_bg_moved = true
 	else:
-		sweet_bg.move_to_last_position(result_bg_move_duration)
+		sweet_bg.start_moving_to_destination(sweet_bg.start_location, result_bg_move_duration)
 		sweet_text.visible = true
+		sweet_bg_moved = false
 	
 	sour_text.text = str(dish.sour)
 	if dish.sour == 0:
 		sour_text.visible = false
-		sour_bg.start_moving_to_destination(Vector2(sour_bg.global_position.x + result_bg_move_x,
-		sour_bg.global_position.y),result_bg_move_duration)
+		if !sour_bg_moved:
+			sour_bg.start_moving_to_destination(Vector2(sour_bg.global_position.x + result_bg_move_x,
+			sour_bg.global_position.y),result_bg_move_duration)
+			sour_bg_moved = true
 	else:
-		sour_bg.move_to_last_position(result_bg_move_duration)
+		sour_bg.start_moving_to_destination(sour_bg.start_location, result_bg_move_duration)
 		sour_text.visible = true
+		sour_bg_moved = false
 	
 	spicy_text.text = str(dish.spicy)
 	if dish.spicy == 0:
 		spicy_text.visible = false
-		spicy_bg.start_moving_to_destination(Vector2(spicy_bg.global_position.x + result_bg_move_x,
-		spicy_bg.global_position.y),result_bg_move_duration)
+		if !spicy_bg_moved:
+			spicy_bg.start_moving_to_destination(Vector2(spicy_bg.global_position.x + result_bg_move_x,
+			spicy_bg.global_position.y),result_bg_move_duration)
+			spicy_bg_moved = true
 	else:
-		spicy_bg.move_to_last_position(result_bg_move_duration)
+		spicy_bg.start_moving_to_destination(spicy_bg.start_location, result_bg_move_duration)
 		spicy_text.visible = true
+		spicy_bg_moved = false
 	
 	hearty_text.text = str(dish.hearty)
 	if dish.hearty == 0:
 		hearty_text.visible = false
-		hearty_bg.start_moving_to_destination(Vector2(hearty_bg.global_position.x + result_bg_move_x,
-		hearty_bg.global_position.y),result_bg_move_duration)
+		if !hearty_bg_moved:
+			hearty_bg.start_moving_to_destination(Vector2(hearty_bg.global_position.x + result_bg_move_x,
+			hearty_bg.global_position.y),result_bg_move_duration)
+			hearty_bg_moved = true
 	else:
-		hearty_bg.move_to_last_position(result_bg_move_duration)
+		hearty_bg.start_moving_to_destination(hearty_bg.start_location, result_bg_move_duration)
 		hearty_text.visible = true
+		hearty_bg_moved = false
 	
 	fresh_text.text = str(dish.fresh)
 	if dish.fresh == 0:
 		fresh_text.visible = false
-		fresh_bg.start_moving_to_destination(Vector2(fresh_bg.global_position.x + result_bg_move_x,
-		fresh_bg.global_position.y),result_bg_move_duration)
+		if !fresh_bg_moved:
+			fresh_bg.start_moving_to_destination(Vector2(fresh_bg.global_position.x + result_bg_move_x,
+			fresh_bg.global_position.y),result_bg_move_duration)
+			fresh_bg_moved = true
 	else:
-		fresh_bg.move_to_last_position(result_bg_move_duration)
+		fresh_bg.start_moving_to_destination(fresh_bg.start_location, result_bg_move_duration)
 		fresh_text.visible = true
+		fresh_bg_moved = false
 
 
 func update_nutrition(new_value: Variant) -> void:

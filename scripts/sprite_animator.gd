@@ -10,6 +10,8 @@ var move_destination:Vector2
 var start_location
 var time_moved:float
 
+func _ready() -> void:
+	start_location = position
 
 func start_fade(speed:float = 1):
 	fade_speed = speed * max_fade
@@ -30,7 +32,6 @@ func start_moving_to_destination(destination, duration):
 	move_duration = duration
 	move_destination = destination
 	move_active = true
-	start_location = global_position
 
 func move_to_last_position(duration = 0):
 	if duration == 0:
