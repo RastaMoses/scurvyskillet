@@ -3,7 +3,7 @@ extends Inventory
 @export var nutrition:int = 0
 @export_subgroup("Flavour")
 @export var sweet:int
-@export var sour:int
+var sour:int
 @export var spicy:int
 @export var hearty:int
 @export var fresh:int

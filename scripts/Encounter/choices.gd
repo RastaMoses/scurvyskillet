@@ -21,7 +21,7 @@ extends Inventory
 @export var ingredient_amount:int
 @export var randomIngredients:int
 @export var sweet:int
-@export var sour:int
+var sour:int
 @export var spicy:int
 @export var hearty:int
 @export var fresh:int

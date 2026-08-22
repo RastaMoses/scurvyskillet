@@ -3,21 +3,21 @@ extends Resource
 #PARAMS
 @export var name:String
 @export var icon:Texture
-@export_enum("leftover", "meat", "fruit","pastry") var tags: Array[String]
+@export_enum("leftover", "meat", "fruit","pastry","ferment","drink") var tags: Array[String]
 @export_enum("common", "uncommon", "rare", "legendary") var rarity:int
 @export_multiline() var description:String
 @export_group("Values")
 @export var nutrition:int
 @export_subgroup("Flavour")
 @export var sweet:int
-@export var sour:int
+var sour:int
 @export var spicy:int
 @export var hearty:int
 @export var fresh:int
 @export_subgroup("Immortal Ghoulash")
 @export var ig_nutrition:int
 @export var ig_sweet:int
-@export var ig_sour:int
+var ig_sour:int
 @export var ig_spicy:int
 @export var ig_hearty:int
 @export var ig_fresh:int
@@ -26,5 +26,5 @@ extends Resource
 @export var uses: int = 1
 @export_group("Special Abilities")
 @export_enum(	"leftover_bones", "seasoning", "undroppable", "rainbow_cake", "dessert",
-				 "starter") var abilities: Array[String]
+				 "starter","spoilable","grapes","fresh_milk") var abilities: Array[String]
 @export var undroppable: bool = false

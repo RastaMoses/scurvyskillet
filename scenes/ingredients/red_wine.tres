@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://26mq66pmasl7"]
+
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="1_7xhbe"]
+[ext_resource type="Texture2D" uid="uid://b8jcbsyaaxb25" path="res://sprites/ingredients/ingredient_toursi.png" id="1_snds2"]
+
+[resource]
+script = ExtResource("1_7xhbe")
+name = "Red Wine"
+icon = ExtResource("1_snds2")
+tags = Array[String](["fruit", "ferment", "drink"])
+rarity = 1
+nutrition = 2
+sweet = 1
+spicy = 1
+hearty = 1
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"

@@ -5,14 +5,14 @@ extends Control
 @export_group("Success")
 @export var req_nutrition:int
 @export var req_sweet:int
-@export var req_sour:int
+var req_sour:int
 @export var req_spicy:int
 @export var req_hearty:int
 @export var req_fresh:int
 @export_group("Partial")
 @export var par_nutrition:int
 @export var par_sweet:int
-@export var par_sour:int
+var par_sour:int
 @export var par_spicy:int
 @export var par_hearty:int
 @export var par_fresh:int

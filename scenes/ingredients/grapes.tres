@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://xpvp5lubwdim"]
+
+[ext_resource type="Texture2D" uid="uid://xxmklcph07gh" path="res://sprites/ingredients/ingredient_fig.png" id="1_6fd2s"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="1_ec0af"]
+
+[resource]
+script = ExtResource("1_ec0af")
+name = "Grapes"
+icon = ExtResource("1_6fd2s")
+tags = Array[String](["fruit"])
+rarity = 1
+nutrition = 1
+sweet = 2
+abilities = Array[String](["spoilable", "grapes"])
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"

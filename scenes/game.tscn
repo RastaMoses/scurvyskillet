@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bodk7w1csegu4" path="res://scenes/debug/debug_mouse.tscn" id="8_ca42v"]
 [ext_resource type="Resource" uid="uid://di81ns4jq1qts" path="res://scenes/ingredients/starter_test.tres" id="9_kvpfn"]
 [ext_resource type="Script" uid="uid://cf1f8f18wnr6h" path="res://scripts/Ingredients/ingredient_pool.gd" id="9_rysoc"]
+[ext_resource type="Resource" uid="uid://xpvp5lubwdim" path="res://scenes/ingredients/grapes.tres" id="10_dinhu"]
 
 [node name="game" type="Node2D" unique_id=1075341061]
 script = ExtResource("1_vtaks")
@@ -31,7 +32,7 @@ script = ExtResource("4_dinhu")
 [node name="Inventory" parent="Player" unique_id=421132193 groups=["player"] instance=ExtResource("5_kvuet")]
 current_money = 100
 current_morale = 5
-starting_ingredients = Array[Resource]([ExtResource("7_ir15t"), ExtResource("7_0tnpc"), ExtResource("9_kvpfn")])
+starting_ingredients = Array[Resource]([ExtResource("7_ir15t"), ExtResource("7_0tnpc"), ExtResource("9_kvpfn"), ExtResource("10_dinhu"), ExtResource("10_dinhu"), ExtResource("10_dinhu")])
 
 [node name="debug_mouse" parent="." unique_id=2141378264 instance=ExtResource("8_ca42v")]
 
