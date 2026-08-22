@@ -42,7 +42,6 @@ func on_add_to_dish(origin,card):
 		return
 	#check for abilities on add
 	abilities.on_ingredient_add_to_dish(card, self)
-	
 	for new_tag in card.stats.tags:
 		if !tags.has(new_tag):
 			tags.append(new_tag)
@@ -99,8 +98,8 @@ func subtract_dice_values_from_dish(card):
 func roll_ingredient(card:Node):
 	var dice_multiplier = 1
 	var result_multiplier = 1
-	if current_ingredients.size() != 0:
-		dice_disp.reset_highlights(current_ingredients.back())
+	if current_ingredients.size() > 1:
+		dice_disp.reset_highlights(current_ingredients[current_ingredients.size()-2])
 	abilities.on_dice_roll(card)
 	sweet += roll_dice("sweet", dice_multiplier*card.stats.sweet,card) * result_multiplier
 	sour += roll_dice("sour", dice_multiplier*card.stats.sour,card) * result_multiplier

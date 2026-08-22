@@ -6,6 +6,7 @@ extends Node2D
 @export var pulse_range:float = 100
 @export var collision_delay: float = 0.2
 @export var min_dist_to_edge:float = 100
+@export var random_spawn_offset:float = 20.0
 @export_group("Visuals")
 @export_subgroup("Sprites")
 @export var sweet_sprite:Texture
@@ -18,6 +19,7 @@ extends Node2D
 @onready var pan_collider = $Pan/CollisionPolygon2D
 @onready var pan_center = $Pan/center
 @onready var event_manager = get_tree().get_first_node_in_group("event_manager")
+@onready var random = RandomNumberGenerator.new()
 
 #STATE
 var dice:Array[Node]
@@ -30,7 +32,8 @@ func finish_dish():
 
 func spawn_die(flavour, value, card:Node):
 	#get point dropped inside static body or closest point if outside
-	var mouse_pos = get_global_mouse_position()
+	var rand_pos = Vector2(random.randf_range(-random_spawn_offset,random_spawn_offset),random.randf_range(-random_spawn_offset,random_spawn_offset))
+	var mouse_pos = rand_pos + get_global_mouse_position()
 	var spawn_pos
 	if !Geometry2D.is_point_in_polygon(mouse_pos, get_global_polygon(pan_collider)):
 		var point_on_line: Vector2 = closest_point_on_polygon(mouse_pos, get_global_polygon(pan_collider))
@@ -54,11 +57,10 @@ func spawn_die(flavour, value, card:Node):
 	#instantiate dice in that position without collision
 	var new_die = die_scene.instantiate()
 	add_child(new_die)
-	
+	dice.append(new_die)
 	card.dice.append(new_die)
 	
-	new_die.freeze_mode = RigidBody2D.FREEZE_MODE_KINEMATIC
-	new_die.freeze = true
+	
 	new_die.global_position = spawn_pos
 	new_die.wait_activate_collision(collision_delay)
 	#set sprite based on flavour

@@ -13,7 +13,7 @@
 [ext_resource type="Theme" uid="uid://fa4mmtcwb3a5" path="res://themes/inventory/inv_grid_container.tres" id="11_lc8fr"]
 [ext_resource type="PackedScene" uid="uid://7lxu211xbf4i" path="res://scenes/prefabs/player/inventory_ui_large_view.tscn" id="12_ul54y"]
 [ext_resource type="Texture2D" uid="uid://brlwxgegkouv1" path="res://sprites/interface/scenes/decision scene/scene_decision_background_water.png" id="13_etcjs"]
-[ext_resource type="Script" uid="uid://cd0ktcwpa3fkn" path="res://scripts/Inventory/sprite_fade.gd" id="14_apfx7"]
+[ext_resource type="Script" uid="uid://cd0ktcwpa3fkn" path="res://scripts/sprite_animator.gd" id="14_apfx7"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_2kgow"]
 

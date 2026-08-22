@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://c2gjew2smf8xy" path="res://sprites/interface/scenes/cooking scene/scene_cooking_pan_outline.png" id="6_w2npd"]
 [ext_resource type="Texture2D" uid="uid://rw1umk0a0k2u" path="res://sprites/interface/scenes/cooking scene/scene_cooking_flavor_spicy.png" id="7_fudr2"]
 [ext_resource type="Texture2D" uid="uid://5nacx5h2c6cn" path="res://sprites/interface/scenes/cooking scene/scene_cooking_flavor_hearty.png" id="8_7h04f"]
+[ext_resource type="Script" uid="uid://cd0ktcwpa3fkn" path="res://scripts/sprite_animator.gd" id="8_16xbi"]
 [ext_resource type="Texture2D" uid="uid://bm2kxsnrf3sj6" path="res://sprites/interface/scenes/cooking scene/scene_cooking_flavor_fresh.png" id="9_em421"]
 [ext_resource type="Texture2D" uid="uid://21k1wwymb7wr" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_shadow.png" id="10_2pbgc"]
 [ext_resource type="Texture2D" uid="uid://oupumk5tx528" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_01.png" id="11_kkx33"]
@@ -111,27 +112,41 @@ grow_vertical = 2
 mouse_filter = 2
 mouse_behavior_recursive = 1
 
-[node name="Sweet" type="TextureRect" parent="UI/Results" unique_id=888929451]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1800.0
-offset_top = 456.0
-offset_right = 32.0
-offset_bottom = -552.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-mouse_behavior_recursive = 1
+[node name="Sweet" type="Sprite2D" parent="UI/Results" unique_id=1797402510]
+position = Vector2(1872, 488)
+scale = Vector2(8, 8)
 texture = ExtResource("5_ed1d2")
+script = ExtResource("8_16xbi")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/Results/Sweet" unique_id=352183300]
+[node name="Sour" type="Sprite2D" parent="UI/Results" unique_id=1491695365]
+visible = false
+texture = ExtResource("6_bgdva")
+script = ExtResource("8_16xbi")
+
+[node name="Spicy" type="Sprite2D" parent="UI/Results" unique_id=61961273]
+position = Vector2(1872, 400)
+scale = Vector2(8, 8)
+texture = ExtResource("7_fudr2")
+script = ExtResource("8_16xbi")
+
+[node name="Hearty" type="Sprite2D" parent="UI/Results" unique_id=244703998]
+position = Vector2(1872, 312)
+scale = Vector2(8, 8)
+texture = ExtResource("8_7h04f")
+script = ExtResource("8_16xbi")
+
+[node name="Fresh" type="Sprite2D" parent="UI/Results" unique_id=1953743277]
+position = Vector2(1872, 224)
+scale = Vector2(8, 8)
+texture = ExtResource("9_em421")
+script = ExtResource("8_16xbi")
+
+[node name="SweetText" type="RichTextLabel" parent="UI/Results" unique_id=352183300]
 layout_mode = 0
-offset_left = 14.0
-offset_top = 4.0
-offset_right = 102.0
-offset_bottom = 76.0
+offset_left = 1814.0
+offset_top = 460.0
+offset_right = 1902.0
+offset_bottom = 532.0
 mouse_filter = 2
 mouse_behavior_recursive = 1
 theme = ExtResource("6_fxvvw")
@@ -141,28 +156,13 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Sour" type="TextureRect" parent="UI/Results" unique_id=686105460]
+[node name="SourText" type="RichTextLabel" parent="UI/Results" unique_id=668448864]
 visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1800.0
-offset_top = 512.0
-offset_right = 32.0
-offset_bottom = -496.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-mouse_behavior_recursive = 1
-texture = ExtResource("6_bgdva")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/Results/Sour" unique_id=668448864]
 layout_mode = 0
-offset_left = 14.0
-offset_top = 4.0
-offset_right = 102.0
-offset_bottom = 76.0
+offset_left = 1814.0
+offset_top = 516.0
+offset_right = 1902.0
+offset_bottom = 588.0
 mouse_filter = 2
 mouse_behavior_recursive = 1
 theme = ExtResource("6_fxvvw")
@@ -171,27 +171,12 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Spicy" type="TextureRect" parent="UI/Results" unique_id=996175792]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1800.0
-offset_top = 368.0
-offset_right = 32.0
-offset_bottom = -640.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-mouse_behavior_recursive = 1
-texture = ExtResource("7_fudr2")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/Results/Spicy" unique_id=1187731099]
+[node name="SpicyText" type="RichTextLabel" parent="UI/Results" unique_id=1187731099]
 layout_mode = 0
-offset_left = 14.0
-offset_top = 4.0
-offset_right = 102.0
-offset_bottom = 76.0
+offset_left = 1814.0
+offset_top = 372.0
+offset_right = 1902.0
+offset_bottom = 444.0
 mouse_filter = 2
 mouse_behavior_recursive = 1
 theme = ExtResource("6_fxvvw")
@@ -201,27 +186,12 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Hearty" type="TextureRect" parent="UI/Results" unique_id=1460899211]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1800.0
-offset_top = 280.0
-offset_right = 32.0
-offset_bottom = -728.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-mouse_behavior_recursive = 1
-texture = ExtResource("8_7h04f")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/Results/Hearty" unique_id=468162168]
+[node name="HeartyText" type="RichTextLabel" parent="UI/Results" unique_id=468162168]
 layout_mode = 0
-offset_left = 14.0
-offset_top = 4.0
-offset_right = 102.0
-offset_bottom = 76.0
+offset_left = 1814.0
+offset_top = 284.0
+offset_right = 1902.0
+offset_bottom = 356.0
 mouse_filter = 2
 mouse_behavior_recursive = 1
 theme = ExtResource("6_fxvvw")
@@ -231,27 +201,12 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Fresh" type="TextureRect" parent="UI/Results" unique_id=1736620807]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1800.0
-offset_top = 192.0
-offset_right = 32.0
-offset_bottom = -816.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-mouse_behavior_recursive = 1
-texture = ExtResource("9_em421")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/Results/Fresh" unique_id=1240791199]
+[node name="FreshText" type="RichTextLabel" parent="UI/Results" unique_id=1240791199]
 layout_mode = 0
-offset_left = 14.0
-offset_top = 4.0
-offset_right = 102.0
-offset_bottom = 76.0
+offset_left = 1814.0
+offset_top = 196.0
+offset_right = 1902.0
+offset_bottom = 268.0
 mouse_filter = 2
 mouse_behavior_recursive = 1
 theme = ExtResource("6_fxvvw")
@@ -488,9 +443,10 @@ script = ExtResource("2_0lb6f")
 y_sort_enabled = true
 script = ExtResource("35_lk7dj")
 die_scene = ExtResource("36_3j2nc")
-pulse_power = 90.0
-collision_delay = 0.1
-min_dist_to_edge = 60.0
+pulse_power = 75.0
+pulse_range = 200.0
+collision_delay = 0.3
+min_dist_to_edge = 50.0
 sweet_sprite = ExtResource("37_sojv3")
 sour_sprite = ExtResource("34_yhjpa")
 spicy_sprite = ExtResource("39_xteku")
@@ -499,7 +455,8 @@ fresh_sprite = ExtResource("41_omnk6")
 
 [node name="Pan" type="StaticBody2D" parent="Dice_Display" unique_id=1117849328]
 z_index = -1
-collision_mask = 0
+collision_mask = 6
+collision_priority = 10.075
 physics_material_override = SubResource("PhysicsMaterial_ecqho")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Dice_Display/Pan" unique_id=1471934749]

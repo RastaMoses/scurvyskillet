@@ -37,7 +37,6 @@ func destroy_ingredient(card:Node):
 		ui.update_slots()
 	if card.get_parent() == self:
 		card.queue_free()
-	sort_inventory_by_rarity()
 
 func destroy_all_ingredients():
 	destroying_all.emit(self)
@@ -50,6 +49,7 @@ func destroy_all_ingredients():
 func remove_ingredient(card):
 	on_remove_ingredient.emit(self,card)
 	change_ingredient_uses(card, -1)
+	current_ingredients.erase(card)
 	distribute_uses(card)
 	if ui != null:
 		ui.update_slots()
@@ -62,40 +62,38 @@ func drop_ingredient(card):
 func add_ingredient(resource):
 	var new_card:Node = card_prefab.instantiate()
 	add_child(new_card)
-	current_ingredients.append(new_card)
 	new_card.set_stats(resource)
 	#Check if ingredient is already in inventory
 	if new_card.stats.unlimited_uses:
-		current_ingredients.append(new_card)
-		on_add_ingredient.emit(self,new_card)
 		if ui != null:
 			ui.update_slots()
+		current_ingredients.append(new_card)
+		on_add_ingredient.emit(self,new_card)
 		return new_card
 	distribute_uses(new_card)
 	on_add_ingredient.emit(self,new_card)
 	if ui != null:
 		ui.update_slots()
-	sort_inventory_by_rarity()
 	return new_card
 
 func distribute_uses(card):
-	if card == null:
+	if card == null or card.is_queued_for_deletion():
 		return
-	current_ingredients.erase(card)
 	var duplicates:Array[Node]
 	for i in current_ingredients:
 		if i.stats.name == card.stats.name:
 			duplicates.append(i)
 	#find duplicate with less than 4 uses and assign more uses until the added card has no more
 	if duplicates.size() !=0 and can_stack_uses:
-		for i in duplicates:	
+		for i in duplicates:
 			while i.stats.uses < 4 and card.stats.uses != 0:
 				change_ingredient_uses(i, 1)
 				change_ingredient_uses(card, -1)
-			if card.stats.uses == 0 or card == null:
+			if card.stats.uses == 0 or card == null or card.is_queued_for_deletion():
 				if ui != null:
 					ui.update_slots()
 				return
+				
 	current_ingredients.append(card)
 
 func change_ingredient_uses(ingredient_card,amount):
@@ -103,7 +101,7 @@ func change_ingredient_uses(ingredient_card,amount):
 		return
 	ingredient_card.stats.uses += amount
 	if ingredient_card.stats.uses <= 0:
-		destroy_ingredient(ingredient_card)
+		ingredient_card.queue_free()
 
 func check_can_drop(data):
 	checking_drop.emit(self,data)
