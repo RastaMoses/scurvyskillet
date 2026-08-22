@@ -62,6 +62,7 @@ extends Control
 @onready var player_inventory = get_tree().get_first_node_in_group("player")
 @onready var event_manager = get_tree().get_first_node_in_group("event_manager")
 @onready var item_pool = get_tree().get_first_node_in_group("ingredient_pool")
+@onready var ability_manager = get_tree().get_first_node_in_group("ability_manager")
 @onready var dish_node = $Dish
 @onready var map_node = get_parent()
 @onready var ui = $UI
@@ -172,6 +173,7 @@ func start():
 	display_dish()
 	dish_node.start()
 	player_inventory.ui.update_position(true)
+	ability_manager.on_challenge_start(dish_node)
 
 func end():
 	map_node.end_encounter()

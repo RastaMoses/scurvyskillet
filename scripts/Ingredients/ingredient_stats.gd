@@ -23,7 +23,8 @@ extends Resource
 @export var ig_fresh:int
 @export_group("Uses")
 @export var unlimited_uses: bool = false
-@export var uses: int
+@export var uses: int = 1
 @export_group("Special Abilities")
-@export_enum("leftover_bones", "seasoning", "undroppable", "rainbow_cake", "dessert") var abilities: Array[String]
+@export_enum(	"leftover_bones", "seasoning", "undroppable", "rainbow_cake", "dessert",
+				 "starter") var abilities: Array[String]
 @export var undroppable: bool = false

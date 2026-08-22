@@ -7,21 +7,21 @@ extends Node
 @onready var player_inventory = get_tree().get_first_node_in_group("player")
 @onready var event_manager = get_tree().get_first_node_in_group("event_manager")
 #STATE
-@onready var seasoning_list:Array[String]
-
+@onready var seasoning_list:Array[Node]
 var can_add_any_ingredients_to_dish = true
+var current_dish
 #SIGNALS
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+
+func on_ingredient_destroyed_from_dish(card):
+	seasoning_list.erase(card)
+
 func on_dish_complete():
 	#reset all dish specific states
 	seasoning_list.clear()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func on_challenge_start(dish):
+	current_dish = dish
 
 func on_challenge_end():
 	can_add_any_ingredients_to_dish = true
@@ -37,9 +37,9 @@ func on_ingredient_add_to_dish(card, dish): #before adding own stats to dish
 	if card.stats.abilities.has("dessert"):
 		can_add_any_ingredients_to_dish = false
 	
-	#Spice
+	#Seasoning
 	if card.stats.abilities.has("seasoning"):
-		seasoning_list.append(card.stats.name)
+		seasoning_list.append(card)
 	#Leftovers
 	#Bone Leftovers
 	if card.stats.abilities.has("leftover_bone"):
@@ -55,11 +55,13 @@ func on_try_add_ingredient_any_inventory(card):
 	var can_add = true
 	if card.stats.abilities.has("undroppable"):
 		can_add = false
-	
 	return can_add
 
 func on_try_add_to_dish(card):
-	if seasoning_list.has(card.stats.name):
+	for i in seasoning_list:
+		if seasoning_list.has(card.stats.name):
+			return false
+	if card.stats.abilities.has("starter") and current_dish.current_ingredients.size() > 0:
 		return false
 	
 	return true

@@ -58,6 +58,7 @@ func on_add_to_dish(origin,card):
 func on_destroy_ingredient(origin,card:Node):
 	if origin != self:
 		return
+	
 	remove_card_from_dish(card)
 
 func on_destroy_all_ingredients(origin):
@@ -78,6 +79,8 @@ func remove_card_from_dish(card):
 	dice_disp.destroy_dice(card)
 	dish_ui.update_nutrition(nutrition)
 	dish_ui.update_flavours()
+	
+	abilities.on_ingredient_destroyed_from_dish(card)
 
 
 func subtract_dice_values_from_dish(card):
