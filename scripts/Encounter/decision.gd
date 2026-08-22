@@ -6,6 +6,7 @@ extends Control
 @onready var bg_ocean = $BGWater
 @onready var player_inventory = get_tree().get_first_node_in_group("player")
 
+@export var terrain_type:GlobalEnums.EncounterTerrain
 @export var choices: Array[Node]
 
 func start():
@@ -15,8 +16,8 @@ func start():
 		i.start()
 	player_inventory.ui.update_position(true)
 
-func toggle_bg(bg_type:int):
-	match bg_type:
+func toggle_bg():
+	match terrain_type:
 		GlobalEnums.EncounterTerrain.OCEAN:
 			bg_ocean.visible = true
 			bg_island.visible = false

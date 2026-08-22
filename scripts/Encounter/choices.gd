@@ -10,7 +10,7 @@ extends Inventory
 @export var random_ingredient_amount:int = 1
 @export_subgroup("Random Item Reqs")
 @export var and_req:bool = false
-@export_enum("common", "uncommon", "rare", "legendary") var req_rarity:Array[int]
+@export var req_rarity:Array[GlobalEnums.Rarity]
 @export var req_tag:Array[GlobalEnums.Tags]
 @export var req_ability:Array[Resource]
 @export_group("Cost")

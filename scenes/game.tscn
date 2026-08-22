@@ -29,6 +29,7 @@ script = ExtResource("3_kvpfn")
 
 [node name="Abilities" type="Node" parent="Player" unique_id=121107139 groups=["ability_manager"]]
 script = ExtResource("4_dinhu")
+debug_inactive = true
 
 [node name="Inventory" parent="Player" unique_id=421132193 groups=["player"] instance=ExtResource("5_kvuet")]
 current_money = 100

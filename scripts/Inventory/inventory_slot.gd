@@ -81,9 +81,9 @@ func update(item):
 			var tags_string = ""
 			for i in card.stats.tags:
 				if tags_string == "":
-					tags_string += String(get_tag_name(i))
+					tags_string += str(get_tag_name(i))
 				else:
-					tags_string += ", " + String(get_tag_name(i))
+					tags_string += ", " + str(get_tag_name(i))
 			tags.text = tags_string
 			description.text = card.stats.description
 			ingredient_name.text = card.stats.name
@@ -225,4 +225,5 @@ func _process(delta: float) -> void:
 
 func get_tag_name(tag:GlobalEnums.Tags):
 	#match tag name to int
+	print(tag)
 	pass

@@ -21,8 +21,8 @@ extends Node
 var player_ship
 #STATE
 var encounter_index:int
-var encounter
-var encounter_obj
+var encounter:PackedScene
+var encounter_obj:Node
 
 func randomize_encounter():
 	var rand = random.randi_range(0,possible_encounters.size()-1)
@@ -73,9 +73,7 @@ func load_encounter(data):
 		encounter_obj.queue_free()
 	encounter_obj = encounter.instantiate()
 	add_child(encounter_obj)
-	if type == GlobalEnums.EncounterType.DECISION:
-		encounter_obj.toggle_bg(bg_type)
-	set_encounter(encounter_obj)
+	set_encounter(encounter)
 	encounter_obj.global_position = Vector2.ZERO
 	encounter_obj.start()
 	show_button(false)
@@ -95,7 +93,6 @@ func toggle_visuals(value):
 	visuals.visible = value
 
 func _on_button_pressed() -> void:
-	
 	toggle_button(false)
 	move_ship()
 	await player_ship.ship_arrived

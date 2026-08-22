@@ -5,11 +5,13 @@ var all_ingredients:Array[Resource]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var dir := DirAccess.open("res://resources/ingredients/")
-	if dir == null: printerr("Could not get ingredient folder")
-	for i in dir.get_files():
-		var ingr = load(dir.get_current_dir() + "/" + i)
-		all_ingredients.append(ingr)
+	var dir_path := "res://resources/ingredients/"
+	var paths : PackedStringArray = ResourceLoader.list_directory(dir_path)
+	if paths == null: printerr("Could not get ingredient folder")
+	for path in paths:
+		var ingr:Resource= ResourceLoader.load(dir_path + path) as Resource
+		if ingr:
+			all_ingredients.append(ingr)
 
 func get_random_ingredient(and_req:bool, tag:Array[GlobalEnums.Tags] = [], ability:Array[Resource] = [],rarity:Array[GlobalEnums.Rarity] = []) -> Resource:
 	var possible_ingredients:Array[Resource]

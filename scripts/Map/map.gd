@@ -16,7 +16,6 @@ func _ready() -> void:
 		i.player_ship = ship
 
 func populate_map():
-	
 	var temp = 0
 	for i in encounter_nodes:
 		i.encounter_index = temp

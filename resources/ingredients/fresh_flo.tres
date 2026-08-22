@@ -7,7 +7,6 @@
 script = ExtResource("2_3qegn")
 name = "Fresh Flo"
 icon = ExtResource("1_dncmw")
-tags = Array[String](["test_tag"])
 rarity = 2
 description = "Something awesome"
 nutrition = 2

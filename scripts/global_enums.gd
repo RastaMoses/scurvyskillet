@@ -6,7 +6,7 @@ enum Tags {
 			}
 
 enum Rarity {
-			COMMON, UNCOMMON, RARE, LEGENDARY
+			COMMON, UNCOMMON, RARE, LEGENDARY, NONE
 			}
 
 enum EncounterType {

@@ -1,5 +1,6 @@
 extends Node
 #STATE
+@export var debug_inactive:bool = false
 @export_group("Leftovers")
 @export var leftovers_bone:Resource
 
@@ -14,6 +15,8 @@ var current_dish
 
 
 func on_ingredient_destroyed_from_dish(card):
+	if debug_inactive:
+		return
 	for i in active_dish_abilties:
 		
 		if i[1] == card:
@@ -22,6 +25,8 @@ func on_ingredient_destroyed_from_dish(card):
 	check_rainbow_cake()
 
 func on_encounter_end():
+	if debug_inactive:
+		return
 	#spoilable
 	var spoiled_cards:Array
 	for i in player_inventory.current_ingredients:
@@ -36,23 +41,34 @@ func on_encounter_end():
 	
 
 func on_dish_complete():
+	if debug_inactive:
+		return
 	#reset all dish specific states
 	active_dish_abilties.clear()
 
 func on_challenge_start(dish):
+	if debug_inactive:
+		return
 	current_dish = dish
 
 func on_challenge_end():
+	if debug_inactive:
+		return
 	active_dish_abilties.clear()
 
 func on_dice_roll(card):
+	if debug_inactive:
+		return
 	pass
 
 func on_die_roll(card):
+	if debug_inactive:
+		return
 	pass
 
 func on_ingredient_add_to_dish(card): #before adding own stats to dish
-	
+	if debug_inactive:
+		return
 	if card.stats.abilities.has("dessert"):
 		active_dish_abilties.append(["dessert", card])
 	
@@ -67,12 +83,16 @@ func on_ingredient_add_to_dish(card): #before adding own stats to dish
 	check_rainbow_cake()
 
 func on_try_add_ingredient_any_inventory(card):
+	if debug_inactive:
+		return
 	var can_add = true
 	if card.stats.abilities.has("undroppable"):
 		can_add = false
 	return can_add
 
 func on_try_add_to_dish(card):
+	if debug_inactive:
+		return
 	for i in active_dish_abilties:
 		if i[0] == "dessert":
 			return false
@@ -86,6 +106,8 @@ func on_try_add_to_dish(card):
 
 
 func check_rainbow_cake():
+	if debug_inactive:
+		return
 	if current_dish.sweet > 0 and current_dish.spicy > 0 and current_dish.hearty > 0 and current_dish.fresh > 0:
 		for i in player_inventory.current_ingredients:
 				if i.stats.abilities.has("rainbow_cake"):
@@ -110,6 +132,8 @@ func check_rainbow_cake():
 						active_dish_abilties.erase(["rainbow_cake", i])
 
 func check_ability_flavour_conditions():
+	if debug_inactive:
+		return
 	if current_dish.sweet > 0 and current_dish.spicy > 0 and current_dish.hearty > 0 and current_dish.fresh > 0:
 		for i in player_inventory.current_ingredients:
 				if i.stats.abilities.has("rainbow_cake"):

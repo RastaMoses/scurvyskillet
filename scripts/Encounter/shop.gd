@@ -26,7 +26,7 @@ func _ready() -> void:
 	for i in buy_buttons:
 		i.shop = self
 #STATE
-var buy_buttons:Array
+var buy_buttons:Array[Node]
 
 func player_sell_ingredient(origin,card):
 	if origin != self:

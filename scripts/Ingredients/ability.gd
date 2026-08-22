@@ -55,7 +55,6 @@ extends Resource
 @export_group("Dish_Specific")
 @export_subgroup("Limit")
 @export var limit_amount_in_dish:int = -1
-@export var limit
 
 
 func check_can_add_to_dish(dish):

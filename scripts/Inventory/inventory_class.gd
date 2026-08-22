@@ -10,7 +10,7 @@ var current_ingredients: Array[Control]
 @export_group("Can Drop Reqs")
 @export var cd_tags:Array[GlobalEnums.Tags]
 @export var cd_ingredients:Array[Resource]
-@export var cd_rarity:int = -1 #-1 to disable
+@export var cd_rarity:Array[GlobalEnums.Rarity] #-1 to disable
 #CACHED COMPS
 @onready var abilities = get_tree().get_first_node_in_group("ability_manager")
 @onready var player_inventory = get_tree().get_first_node_in_group("player")
@@ -121,11 +121,10 @@ func check_can_drop(data):
 			if data.stats.tags.has(i):
 				return true
 	#check for rarity
-	if cd_rarity != -1:
-		if data.stats.rarity == cd_rarity:
-			return true
-		else:
-			return false
+	if cd_rarity.size() != 0:
+		for i in cd_rarity:
+			if data.stats.rarity.has(i):
+				return true
 	return true
 
 func sort_inventory_by_name():
