@@ -159,7 +159,6 @@ offset_right = 1216.0
 offset_bottom = 792.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 0
 
 [node name="ButtonBG" type="Sprite2D" parent="InventoryUI/LargeView" unique_id=669775923]
 modulate = Color(1, 1, 1, 0.35500002)
@@ -179,6 +178,7 @@ offset_top = 776.0
 offset_right = 1930.0
 offset_bottom = 1080.0
 grow_vertical = 0
+mouse_behavior_recursive = 2
 theme = ExtResource("10_no1hy")
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 0
