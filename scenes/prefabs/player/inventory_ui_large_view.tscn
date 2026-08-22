@@ -102,6 +102,12 @@ offset_right = 512.0
 offset_bottom = 768.0
 texture = ExtResource("7_bijr2")
 
+[node name="3" parent="ItemDisplay/Rarity" index="3" unique_id=1183605160]
+offset_left = 40.0
+offset_top = 32.0
+offset_right = 296.0
+offset_bottom = 336.0
+
 [node name="Uses" parent="ItemDisplay" index="5" unique_id=1569271460]
 z_index = 1
 offset_right = 512.0
