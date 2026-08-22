@@ -1,13 +1,29 @@
 [gd_resource type="Theme" format=3 uid="uid://dfu5pdupo2wqr"]
 
-[ext_resource type="FontFile" uid="uid://yjp0l2f5soug" path="res://fonts/mc/Minecraft.ttf" id="1_5y2tq"]
+[ext_resource type="FontFile" uid="uid://yjp0l2f5soug" path="res://fonts/mc/Minecraft.ttf" id="1_46v3a"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iw5a0"]
 
 [resource]
-RichTextLabel/colors/font_shadow_color = Color(0, 0, 0, 1)
-RichTextLabel/constants/shadow_offset_x = 8
-RichTextLabel/constants/shadow_offset_y = 0
-RichTextLabel/font_sizes/normal_font_size = 64
-RichTextLabel/fonts/normal_font = ExtResource("1_5y2tq")
-RichTextLabel/styles/normal = SubResource("StyleBoxEmpty_iw5a0")
+altered/colors/default_color = Color(0.6039216, 0.8980392, 0.8352941, 1)
+altered/colors/font_shadow_color = Color(0.3882353, 0.76862746, 0.8, 1)
+fresh/base_type = &"standard"
+fresh/colors/default_color = Color(1, 1, 1, 1)
+fresh/colors/font_shadow_color = Color(0.5803922, 0.6784314, 0.22352941, 1)
+hearty/base_type = &"standard"
+hearty/colors/default_color = Color(1, 1, 1, 1)
+hearty/colors/font_shadow_color = Color(0.77254903, 0.47058824, 0.20784314, 1)
+spicy/base_type = &"standard"
+spicy/colors/default_color = Color(1, 1, 1, 1)
+spicy/colors/font_shadow_color = Color(0.69803923, 0.21176471, 0.34117648, 1)
+standard/base_type = &"RichTextLabel"
+standard/colors/default_color = Color(1, 1, 1, 1)
+standard/colors/font_shadow_color = Color(0, 0, 0, 1)
+standard/constants/shadow_offset_x = 8
+standard/constants/shadow_offset_y = 0
+standard/font_sizes/normal_font_size = 64
+standard/fonts/normal_font = ExtResource("1_46v3a")
+standard/styles/normal = SubResource("StyleBoxEmpty_iw5a0")
+sweet/base_type = &"standard"
+sweet/colors/default_color = Color(1, 1, 1, 1)
+sweet/colors/font_shadow_color = Color(0.49411765, 0.39607844, 0.60784316, 1)

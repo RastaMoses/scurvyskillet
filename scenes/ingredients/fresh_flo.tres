@@ -12,5 +12,7 @@ rarity = 2
 description = "Something awesome"
 nutrition = 2
 sweet = 1
+spicy = 1
+hearty = 1
 fresh = 3
 uses = 3

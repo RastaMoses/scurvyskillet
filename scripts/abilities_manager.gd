@@ -15,9 +15,11 @@ var current_dish
 
 func on_ingredient_destroyed_from_dish(card):
 	for i in active_dish_abilties:
+		
 		if i[1] == card:
 			active_dish_abilties.erase(i)
-			break
+		#inventory abilities recheck
+	check_rainbow_cake()
 
 func on_encounter_end():
 	#spoilable
@@ -49,7 +51,7 @@ func on_dice_roll(card):
 func on_die_roll(card):
 	pass
 
-func on_ingredient_add_to_dish(card, dish): #before adding own stats to dish
+func on_ingredient_add_to_dish(card): #before adding own stats to dish
 	
 	if card.stats.abilities.has("dessert"):
 		active_dish_abilties.append(["dessert", card])
@@ -62,11 +64,7 @@ func on_ingredient_add_to_dish(card, dish): #before adding own stats to dish
 	if card.stats.abilities.has("leftover_bone"):
 		player_inventory.add_ingredient(leftovers_bone)
 	
-	#if all flavours are present
-	if dish.sweet > 0 and dish.spicy > 0 and dish.hearty > 0 and dish.fresh > 0:
-		if card.stats.abilities.has("rainbow_cake"):
-			card.nutrition += 5
-
+	check_rainbow_cake()
 
 func on_try_add_ingredient_any_inventory(card):
 	var can_add = true
@@ -85,3 +83,28 @@ func on_try_add_to_dish(card):
 		return false
 	
 	return true
+
+
+func check_rainbow_cake():
+	if current_dish.sweet > 0 and current_dish.spicy > 0 and current_dish.hearty > 0 and current_dish.fresh > 0:
+		for i in player_inventory.current_ingredients:
+				if i.stats.abilities.has("rainbow_cake"):
+					var already_active = false
+					for j in active_dish_abilties: #check if card already has active bonus
+						if j[0] == ("rainbow_cake") and j[1] == i:
+							#card already active effect
+							already_active = true
+					if !already_active:
+						i.stats.nutrition += 5
+						active_dish_abilties.append(["rainbow_cake", i])
+	else:
+		for i in player_inventory.current_ingredients:
+				if i.stats.abilities.has("rainbow_cake"):
+					var already_active = false
+					for j in active_dish_abilties: #check if card already has active bonus
+						if j[0] == ("rainbow_cake") and j[1] == i:
+							#card already active effect
+							already_active = true
+					if already_active:
+						i.stats.nutrition -= 5
+						active_dish_abilties.erase(["rainbow_cake", i])

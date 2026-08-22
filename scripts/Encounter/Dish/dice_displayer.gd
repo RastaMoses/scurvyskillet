@@ -89,6 +89,7 @@ func reset_highlights(card):
 
 func destroy_dice(card):
 	for die in card.dice:
+		dice.erase(die)
 		die.destroy()
 
 func point_explosion(point):

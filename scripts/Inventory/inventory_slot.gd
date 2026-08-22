@@ -6,6 +6,10 @@ extends Panel
 @export var pixel_multiple:int = 8
 @export var drag_pos_offset:Vector2 = Vector2(96,96)
 @export var clickable:bool = true
+@export var standard_flavour_text_theme:Theme
+@export var altered_flavour_text_theme:Theme
+@export var standard_nutrition_text_theme:Theme
+@export var altered_nutrition_text_theme:Theme
 
 #CACHED COMPS
 @onready var item_visual: TextureRect = $ItemDisplay
@@ -98,35 +102,79 @@ func update_flavours():
 	if card.stats.hearty > 0:
 		hearty.visible = true
 		hearty.get_child(0).text = str(card.stats.hearty)
+		if card.stats.hearty != card.base_stats.hearty:
+			hearty.get_child(0).theme_type_variation = "altered"
+		else:
+			hearty.get_child(0).theme_type_variation = "hearty"
 	else:
-		hearty.visible = false
+		if card.stats.hearty != card.base_stats.hearty:
+			hearty.get_child(0).theme_type_variation = "altered"
+		else:
+			hearty.get_child(0).theme_type_variation = "hearty"
+			hearty.visible = false
 		
 	if card.stats.sour > 0:
 		sour.visible = true
 		sour.get_child(0).text = str(card.stats.sour)
+		if card.stats.sour != card.base_stats.sour:
+			sour.get_child(0).theme_type_variation = "altered"
+		else:
+			sour.get_child(0).theme_type_variation = "sour"
 	else:
-		sour.visible = false
+		if card.stats.sour != card.base_stats.sour:
+			sour.get_child(0).theme_type_variation = "altered"
+		else:
+			sour.get_child(0).theme_type_variation = "sour"
+			sour.visible = false
 		
 	if card.stats.fresh > 0:
 		fresh.visible = true
 		fresh.get_child(0).text = str(card.stats.fresh)
+		if card.stats.fresh != card.base_stats.fresh:
+			fresh.get_child(0).theme_type_variation = "altered"
+		else:
+			fresh.get_child(0).theme_type_variation = "fresh"
 	else:
-		fresh.visible = false
+		if card.stats.fresh != card.base_stats.fresh:
+			fresh.get_child(0).theme_type_variation = "altered"
+		else:
+			fresh.get_child(0).theme_type_variation = "fresh"
+			fresh.visible = false
 		
 	if card.stats.spicy > 0:
 		spicy.visible = true
 		spicy.get_child(0).text = str(card.stats.spicy)
+		if card.stats.spicy != card.base_stats.spicy:
+			spicy.get_child(0).theme_type_variation = "altered"
+		else:
+			spicy.get_child(0).theme_type_variation = "spicy"
 	else:
-		spicy.visible = false
+		if card.stats.spicy != card.base_stats.spicy:
+			spicy.get_child(0).theme_type_variation = "altered"
+		else:
+			spicy.get_child(0).theme_type_variation = "spicy"
+			spicy.visible = false
 		
 	if card.stats.sweet > 0:
 		sweet.visible = true
 		sweet.get_child(0).text = str(card.stats.sweet)
+		if card.stats.sweet != card.base_stats.sweet:
+			sweet.get_child(0).theme_type_variation = "altered"
+		else:
+			sweet.get_child(0).theme_type_variation = "sweet"
 	else:
-		sweet.visible = false
+		if card.stats.sweet != card.base_stats.sweet:
+			sweet.get_child(0).theme_type_variation = "altered"
+		else:
+			sweet.get_child(0).theme_type_variation = "sweet"
+			sweet.visible = false
 	
 	#nutrition
 	nutrition_text.text = str(card.stats.nutrition)
+	if card.stats.nutrition != card.base_stats.nutrition:
+		nutrition_text.theme_type_variation = "altered"
+	else:
+		nutrition_text.theme_type_variation = "standard"
 	
 	#rarity
 	for i in rarity_textures.size():

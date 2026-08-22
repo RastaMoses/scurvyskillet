@@ -25,6 +25,7 @@ func start_game():
 
 func encounter_load():
 	player_inventory.ui.open()
+	player_inventory.reset_all_card_stats()
 
 func encounter_start():
 	#disable map interface
@@ -35,6 +36,7 @@ func encounter_end():
 	#perishables ability
 	on_encounter_end.emit()
 	player_inventory.ui.open()
+	
 
 func dish_complete(dish):
 	pass
