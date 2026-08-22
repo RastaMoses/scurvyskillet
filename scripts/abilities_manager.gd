@@ -2,7 +2,7 @@ extends Node
 #STATE
 @export var debug_inactive:bool = false
 @export_group("Leftovers")
-@export var leftovers_bone:Resource
+@export var leftovers_bone:Ingredient
 
 #CACHED COMPS
 @onready var player_inventory = get_tree().get_first_node_in_group("player")
@@ -84,7 +84,7 @@ func on_ingredient_add_to_dish(card): #before adding own stats to dish
 
 func on_try_add_ingredient_any_inventory(card):
 	if debug_inactive:
-		return
+		return true
 	var can_add = true
 	if card.stats.abilities.has("undroppable"):
 		can_add = false
@@ -92,7 +92,7 @@ func on_try_add_ingredient_any_inventory(card):
 
 func on_try_add_to_dish(card):
 	if debug_inactive:
-		return
+		return true
 	for i in active_dish_abilties:
 		if i[0] == "dessert":
 			return false

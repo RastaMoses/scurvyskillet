@@ -3,13 +3,13 @@ class_name Inventory
 extends Node
 
 @export var card_prefab:PackedScene
-var current_ingredients: Array[Control]
-@export var starting_ingredients: Array[Resource]
+var current_ingredients: Array[Node]
+@export var starting_ingredients: Array[Ingredient]
 @export var ui:Control
 @export var can_stack_uses:bool = true
 @export_group("Can Drop Reqs")
 @export var cd_tags:Array[GlobalEnums.Tags]
-@export var cd_ingredients:Array[Resource]
+@export var cd_ingredients:Array[Ingredient]
 @export var cd_rarity:Array[GlobalEnums.Rarity] #-1 to disable
 #CACHED COMPS
 @onready var abilities = get_tree().get_first_node_in_group("ability_manager")

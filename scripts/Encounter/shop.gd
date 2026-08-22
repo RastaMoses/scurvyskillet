@@ -1,3 +1,4 @@
+class_name Shop
 extends Inventory
 #PARAMS
 #@export var specific_sell_items:Array[Resource]
@@ -17,6 +18,7 @@ extends Inventory
 
 #STATE
 var morale_sold_out = false
+var buy_buttons:Array[Node]
 
 func _ready() -> void:
 	checking_drop.connect(on_checking_drop)
@@ -25,8 +27,6 @@ func _ready() -> void:
 	buy_buttons = buy_container.get_children()
 	for i in buy_buttons:
 		i.shop = self
-#STATE
-var buy_buttons:Array[Node]
 
 func player_sell_ingredient(origin,card):
 	if origin != self:
@@ -35,7 +35,7 @@ func player_sell_ingredient(origin,card):
 	player_inventory.remove_ingredient(card)
 	check_buttons_enabled()
 
-func on_checking_drop(origin):
+func on_checking_drop(origin, data):
 	if origin != self:
 		return
 	shop_ui.toggle_sell_highlight(true)

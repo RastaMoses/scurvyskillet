@@ -1,3 +1,4 @@
+class_name Challenge
 extends Control
 
 #PARAMS
@@ -25,37 +26,37 @@ var par_sour:int
 @export var success_morale: int
 @export var success_money: int
 @export_subgroup("Ingredients")
-@export var s_specific_ingredients:Array[Resource]
+@export var s_specific_ingredients:Array[Ingredient]
 @export var s_random_ingredient_amount:int = 1
 @export_subgroup("Random Item Reqs")
 @export var s_and_req:bool = false
 @export var s_req_rarity:Array[GlobalEnums.Rarity]
 @export var s_req_tag:Array[GlobalEnums.Tags]
-@export var s_req_ability:Array[Resource]
+@export var s_req_ability:Array[Ability]
 
 @export_group("Partial")
 @export var partial_morale: int
 @export var partial_money: int
 @export_subgroup("Ingredients")
-@export var p_specific_ingredients:Array[Resource]
+@export var p_specific_ingredients:Array[Ingredient]
 @export var p_random_ingredient_amount:int = 1
 @export_subgroup("Random Item Reqs")
 @export var p_and_req:bool = false
 @export var p_req_rarity:Array[GlobalEnums.Rarity]
 @export var p_req_tag:Array[GlobalEnums.Tags]
-@export var p_req_ability:Array[Resource]
+@export var p_req_ability:Array[Ability]
 
 @export_group("Failure")
 @export var failure_morale: int
 @export var failure_money: int
 @export_subgroup("Ingredients")
-@export var f_specific_ingredients:Array[Resource]
+@export var f_specific_ingredients:Array[Ingredient]
 @export var f_random_ingredient_amount:int = 1
 @export_subgroup("Random Item Reqs")
 @export var f_and_req:bool = false
 @export var f_req_rarity: Array[GlobalEnums.Rarity]
 @export var f_req_tag:Array[GlobalEnums.Tags]
-@export var f_req_ability:Array[Resource]
+@export var f_req_ability:Array[Ability]
 @export_group("UI Elements")
 @export var map_icon:Texture
 
@@ -75,12 +76,12 @@ var par_sour:int
 var inv_save:Array[Node]
 var reward_money:int
 var reward_morale:int
-var reward_specific_ingredients:Array[Resource]
+var reward_specific_ingredients:Array[Ingredient]
 var reward_random_ingredient_amount:int
 var reward_and_req:bool
 var reward_req_rarity:Array[GlobalEnums.Rarity]
 var reward_req_tag:Array[GlobalEnums.Tags]
-var reward_req_ability:Array[Resource]
+var reward_req_ability:Array[Ability]
 
 func give_rewards():
 	player_inventory.add_money(reward_money)

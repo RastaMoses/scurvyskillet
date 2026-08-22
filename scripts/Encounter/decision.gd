@@ -7,10 +7,9 @@ extends Control
 @onready var player_inventory = get_tree().get_first_node_in_group("player")
 
 @export var terrain_type:GlobalEnums.EncounterTerrain
-@export var choices: Array[Node]
+@export var choices: Array[Choices]
 
 func start():
-	choices = $Choices.get_children()
 	for i in choices:
 		i.decision_encounter = self
 		i.start()

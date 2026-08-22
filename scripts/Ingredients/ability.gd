@@ -1,4 +1,6 @@
+class_name Ability
 extends Resource
+
 @export_category("Basic")
 @export var name:String
 @export var stack_ability:bool = false

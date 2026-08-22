@@ -1,3 +1,4 @@
+class_name Dish
 extends Inventory
 #PARAMS
 @export var nutrition:int = 0
@@ -11,7 +12,7 @@ var sour:int
 #CACHED COMPS
 var random = RandomNumberGenerator.new()
 @onready var challenge = get_parent()
-@onready var restricted_tags = challenge.restricted_tags
+@onready var restricted_tags:Array[GlobalEnums.Tags] = challenge.restricted_tags
 @onready var dice_disp = $Dice_Display
 @onready var dish_ui = $UI
 
@@ -40,7 +41,7 @@ func on_drop_ingredient(origin, card):
 func on_add_to_dish(origin,card):
 	if origin != self:
 		return
-	for new_tag in card.stats.tags:
+	for new_tag:GlobalEnums.Tags in card.stats.tags:
 		if !tags.has(new_tag):
 			tags.append(new_tag)
 	
@@ -70,7 +71,7 @@ func on_destroy_all_ingredients(origin):
 func remove_card_from_dish(card):
 	tags.clear()
 	for i in current_ingredients:
-		for tag in i.stats.tags:
+		for tag:GlobalEnums.Tags in i.stats.tags:
 			if !tags.has(tag):
 				tags.append(tag)
 	#remove dice values

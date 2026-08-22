@@ -26,5 +26,5 @@ var sour:int
 @export var unlimited_uses: bool = false
 @export var uses: int = 1
 @export_group("Special Abilities")
-@export var abilities: Array[Resource]
+@export var abilities: Array[Ability]
 @export var undroppable: bool = false

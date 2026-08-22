@@ -11,5 +11,4 @@ script = ExtResource("1_s2ec3")
 
 [node name="Preview" parent="." unique_id=442831638 instance=ExtResource("2_x5gls")]
 layout_mode = 0
-mouse_behavior_recursive = 1
 editor_preview = true

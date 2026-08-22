@@ -1,3 +1,4 @@
+class_name Choices
 extends Inventory
 #PARAMS
 @onready var random = RandomNumberGenerator.new()
@@ -6,13 +7,13 @@ extends Inventory
 @export_group("Reward")
 @export var r_money:int
 @export var r_morale:int
-@export var specific_ingredients:Array[Resource]
+@export var specific_ingredients:Array[Ingredient]
 @export var random_ingredient_amount:int = 1
 @export_subgroup("Random Item Reqs")
 @export var and_req:bool = false
 @export var req_rarity:Array[GlobalEnums.Rarity]
 @export var req_tag:Array[GlobalEnums.Tags]
-@export var req_ability:Array[Resource]
+@export var req_ability:Array[Ability]
 @export_group("Cost")
 @export var c_money:int
 @export var c_morale:int
@@ -28,7 +29,7 @@ var sour:int
 @export var nutrition:int
 @export_subgroup("New Encounter")
 @export var new_encounter:PackedScene
-@export var new_encounter_type:GlobalEnums.EncounterType = 0
+@export var new_encounter_type:GlobalEnums.EncounterType
 
 #CACHED COMPS
 

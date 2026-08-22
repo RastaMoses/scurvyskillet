@@ -1,11 +1,12 @@
+class_name BuyButton
 extends Control
 @export var hide_item:bool = false
-@export var specific_item:Resource
+@export var specific_item:Ingredient
 @export_subgroup("Random Item Reqs")
 @export var and_req:bool = false
 @export var req_rarity:Array[GlobalEnums.Rarity]
 @export var req_tag:Array[GlobalEnums.Tags]
-@export var req_ability:Array[Resource]
+@export var req_ability:Array[Ability]
 
 @onready var button = $Button
 @onready var button_highlight = $Button/Highlight

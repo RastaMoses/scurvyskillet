@@ -1,6 +1,6 @@
 extends Node
 
-var all_ingredients:Array[Resource]
+var all_ingredients:Array[Ingredient]
 @onready var random = RandomNumberGenerator.new()
 
 # Called when the node enters the scene tree for the first time.
@@ -9,12 +9,12 @@ func _ready() -> void:
 	var paths : PackedStringArray = ResourceLoader.list_directory(dir_path)
 	if paths == null: printerr("Could not get ingredient folder")
 	for path in paths:
-		var ingr:Resource= ResourceLoader.load(dir_path + path) as Resource
+		var ingr:Ingredient= ResourceLoader.load(dir_path + path) as Ingredient
 		if ingr:
 			all_ingredients.append(ingr)
 
-func get_random_ingredient(and_req:bool, tag:Array[GlobalEnums.Tags] = [], ability:Array[Resource] = [],rarity:Array[GlobalEnums.Rarity] = []) -> Resource:
-	var possible_ingredients:Array[Resource]
+func get_random_ingredient(and_req:bool, tag:Array[GlobalEnums.Tags] = [], ability:Array[Ability] = [],rarity:Array[GlobalEnums.Rarity] = []) -> Resource:
+	var possible_ingredients:Array[Ingredient]
 	for i in all_ingredients:
 		var can_add:bool
 		#if all req
@@ -63,7 +63,7 @@ func get_random_ingredient(and_req:bool, tag:Array[GlobalEnums.Tags] = [], abili
 		if can_add:
 			possible_ingredients.append(i)
 	if possible_ingredients.size() != 0:
-		var rand_ingr = possible_ingredients[random.randi_range(0, possible_ingredients.size()-1)]
+		var rand_ingr:Ingredient = possible_ingredients[random.randi_range(0, possible_ingredients.size()-1)]
 		
 		return rand_ingr
 	else:

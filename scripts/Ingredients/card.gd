@@ -1,7 +1,7 @@
 extends Node
 
-var stats:Resource
-var base_stats:Resource
+var stats:Ingredient
+var base_stats:Ingredient
 var price:int
 var dice:Array[RigidBody2D]
 
@@ -9,7 +9,7 @@ var dice:Array[RigidBody2D]
 func _ready() -> void:
 	$Preview.queue_free()
 
-func set_stats(resource:Resource):
+func set_stats(resource:Ingredient):
 	stats = resource.duplicate(true)
 	base_stats = resource
 
