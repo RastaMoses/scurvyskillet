@@ -47,8 +47,8 @@
 [ext_resource type="Texture2D" uid="uid://c6sve5qqxbut0" path="res://sprites/interface/scenes/cooking scene/scene_cooking_dice_fresh.png" id="41_omnk6"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ecqho"]
-friction = 0.0
-bounce = 1.0
+friction = 0.03
+bounce = 1.1
 
 [node name="Dish" type="Control" unique_id=497250350]
 layout_mode = 3
@@ -447,11 +447,10 @@ script = ExtResource("2_0lb6f")
 y_sort_enabled = true
 script = ExtResource("35_lk7dj")
 die_scene = ExtResource("36_3j2nc")
-pulse_power = 30.0
-pulse_range = 60.0
-collision_delay = 0.5
-min_dist_to_edge = 70.0
-random_spawn_offset = 100.0
+pulse_power = 20.0
+collision_delay = 0.1
+min_dist_to_edge = 30.0
+random_spawn_offset = 30.0
 sweet_sprite = ExtResource("37_sojv3")
 sour_sprite = ExtResource("34_yhjpa")
 spicy_sprite = ExtResource("39_xteku")
@@ -461,13 +460,13 @@ fresh_sprite = ExtResource("41_omnk6")
 [node name="Pan" type="StaticBody2D" parent="Dice_Display" unique_id=1117849328]
 z_index = -1
 collision_mask = 6
-collision_priority = 10.075
+collision_priority = 100.0
 physics_material_override = SubResource("PhysicsMaterial_ecqho")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Dice_Display/Pan" unique_id=1471934749]
 position = Vector2(1347.7517, 432.40854)
 build_mode = 1
-polygon = PackedVector2Array(-229.75171, -153.40854, -94.75171, -189.40854, 49.24829, -195.40854, 209.24829, -159.40854, 332.2483, -85.40854, 385.2483, 7.591461, 355.2483, 121.59146, 116.24825, 231.59146, -91.75175, 231.59146, -283.75174, 175.59146, -380.7517, 64.59146, -357.7517, -65.40854)
+polygon = PackedVector2Array(-229.75171, -153.40854, -159.75171, -174.40854, -94.75171, -189.40854, -14.751709, -193.40854, 54.24829, -190.40854, 136.24829, -182.40854, 209.24829, -159.40854, 274.2483, -126.40854, 332.2483, -85.40854, 363.2483, -40.40854, 385.2483, 7.591461, 378.2483, 60.59146, 355.2483, 121.59146, 316.2483, 150.59146, 264.2483, 184.59146, 119.24829, 229.59146, -91.75175, 231.59146, -192.75171, 212.59146, -283.75174, 175.59146, -346.7517, 114.59146, -380.7517, 64.59146, -377.7517, -1.4085388, -357.7517, -65.40854, -297.7517, -114.40854)
 
 [node name="center" type="Node2D" parent="Dice_Display/Pan" unique_id=383728228]
 position = Vector2(1349, 420)

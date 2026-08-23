@@ -44,10 +44,10 @@ func start_move():
 	linear_velocity = rand_dir * random_power
 
 func wait_activate_collision(wait_time):
-	collision_layer = 3
+	set_collision_layer_value(2, false)
 	start_move()
 	await get_tree().create_timer(wait_time).timeout
-	collision_layer = 2
+	set_collision_layer_value(2, true)
 	
 
 func change_sprite(texture):
