@@ -51,6 +51,7 @@ func spawn_die(flavour, value, card:Node):
 		else:
 			spawn_pos = mouse_pos
 	#create circular pulse to clear area of other dice
+	
 	point_explosion(spawn_pos)
 	
 	
@@ -91,11 +92,16 @@ func destroy_dice(card):
 		die.destroy()
 
 func point_explosion(point):
+	#lower power based on distance to edge
+	var point_distance = point.distance_to(pan_center.global_position)
+	var rel_dist = (min_dist_to_edge/2)/point_distance
+	rel_dist = clampf(rel_dist, 0, 1)
+	
 	for die in dice:
 		var dir: Vector2 = die.global_position - point
 		var dist: float = dir.length()
 		if dist < pulse_range:
-			die.apply_impulse(dir.normalized() * pulse_power)
+			die.apply_impulse(dir.normalized() * pulse_power * rel_dist)
 
 func get_global_polygon(collider: CollisionPolygon2D) -> PackedVector2Array:
 	var local_poly = collider.polygon
