@@ -65,48 +65,48 @@ func on_ingredient_dropped(origin, card):
 	
 
 func remove_random():
-	var rand_index = random.randi_range(0,player_inventory.current_ingredients.size()-1)
-	ingredient_icon.texture = player_inventory.current_ingredients[rand_index].get_icon_texture()
-	player_inventory.remove_ingredient(player_inventory.current_ingredients[rand_index])
+	var rand_index = random.randi_range(0,player_inventory.current_cards.size()-1)
+	ingredient_icon.texture = player_inventory.current_cards[rand_index].get_icon_texture()
+	player_inventory.remove_ingredient(player_inventory.current_cards[rand_index])
 
 func check_completed():
 	#if amount of ingredients or amount of flavour/nutrition is fullfilled
 	#amount
-	if (current_ingredients.size() < ingredient_amount):
+	if (current_cards.size() < ingredient_amount):
 		return
 	#values
 	var sweet_sum = 0
-	for i in current_ingredients:
+	for i in current_cards:
 		sweet_sum += i.sweet
 	if sweet_sum < sweet:
 		return
 		
 	var sour_sum = 0
-	for i in current_ingredients:
+	for i in current_cards:
 		sour_sum += i.sour
 	if sour_sum < sour:
 		return
 		
 	var spicy_sum = 0
-	for i in current_ingredients:
+	for i in current_cards:
 		spicy_sum += i.spicy
 	if spicy_sum < spicy:
 		return
 	
 	var hearty_sum = 0
-	for i in current_ingredients:
+	for i in current_cards:
 		hearty_sum += i.hearty
 	if hearty_sum < hearty:
 		return
 	
 	var fresh_sum = 0
-	for i in current_ingredients:
+	for i in current_cards:
 		fresh_sum += i.fresh
 	if fresh_sum < fresh:
 		return
 	
 	var nutrition_sum = 0
-	for i in current_ingredients:
+	for i in current_cards:
 		nutrition_sum += i.nutrition
 	if nutrition_sum < nutrition:
 		return
@@ -116,7 +116,7 @@ func button_available():
 	if player_inventory.current_money < c_money or player_inventory.current_morale < c_morale:
 		disable_button()
 		return
-	if player_inventory.current_ingredients.size()<randomIngredients:
+	if player_inventory.current_cards.size()<randomIngredients:
 		disable_button()
 		return
 	if drop_ingredients:
@@ -130,10 +130,11 @@ func give_rewards():
 	if random_ingredient_amount > 0:
 		var index = random_ingredient_amount
 		while index > 0:
-			player_inventory.add_ingredient(item_pool.get_random_ingredient(and_req,req_tag,req_ability,req_rarity))
+			player_inventory.instantiate_card_and_add(item_pool.get_random_ingredient(and_req,req_tag,req_ability,req_rarity))
 			index -= 1
 	for i in specific_ingredients:
-		player_inventory.add_ingredient(i)
+		
+		player_inventory.instantiate_card_and_add(i)
 
 func take_cost():
 	player_inventory.add_money(-c_money)

@@ -13,7 +13,7 @@ func _ready() -> void:
 		if ingr:
 			all_ingredients.append(ingr)
 
-func get_random_ingredient(and_req:bool, tag:Array[GlobalEnums.Tags] = [], ability:Array[Ability] = [],rarity:Array[GlobalEnums.Rarity] = []) -> Resource:
+func get_random_ingredient(and_req:bool, tag:Array[GlobalEnums.Tags] = [], ability:Array[Ability] = [],rarity:Array[GlobalEnums.Rarity] = []) -> Ingredient:
 	var possible_ingredients:Array[Ingredient]
 	for i in all_ingredients:
 		var can_add:bool
@@ -70,7 +70,7 @@ func get_random_ingredient(and_req:bool, tag:Array[GlobalEnums.Tags] = [], abili
 		printerr("No ingredient fitting the reqs was found")
 		return(null)
 	
-func get_ingredient_by_name(name:String) -> Resource:
+func get_ingredient_by_name(name:String) -> Ingredient:
 	for i in all_ingredients:
 		if i.name == name:
 			return i

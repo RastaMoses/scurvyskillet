@@ -89,10 +89,10 @@ func give_rewards():
 	if reward_random_ingredient_amount > 0:
 		var index = reward_random_ingredient_amount
 		while index > 0:
-			player_inventory.add_ingredient(item_pool.get_random_ingredient(reward_and_req,reward_req_tag,reward_req_ability,reward_req_rarity))
+			player_inventory.instantiate_card_and_add(item_pool.get_random_ingredient(reward_and_req,reward_req_tag,reward_req_ability,reward_req_rarity))
 			index -= 1
 	for i in reward_specific_ingredients:
-		player_inventory.add_ingredient(i)
+		player_inventory.instantiate_card_and_add(i)
 
 
 func on_success():

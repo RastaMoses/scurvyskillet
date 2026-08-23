@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://6ruganst4wys"]
+
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_1lef3"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_et51m"]
+[ext_resource type="Resource" uid="uid://c0q8hg35hs4qk" path="res://resources/abilities/seasoning.tres" id="2_h53k5"]
+[ext_resource type="Texture2D" uid="uid://dp2bitokqk8ch" path="res://sprites/ingredients/ingredient_salt.png" id="2_og01i"]
+
+[resource]
+script = ExtResource("2_et51m")
+name = "Seasoning Test"
+icon = ExtResource("2_og01i")
+hearty = 1
+abilities = Array[ExtResource("1_1lef3")]([ExtResource("2_h53k5")])
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"

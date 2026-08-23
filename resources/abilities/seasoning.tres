@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Ability" format=3 uid="uid://c0q8hg35hs4qk"]
+
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="1_ntxay"]
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="2_yrnqy"]
+
+[resource]
+script = ExtResource("2_yrnqy")
+name = "Seasoning"
+continuous = true
+try_add_to_dish_cond = true
+self_target = true
+limit_ingredients_int = 1
+metadata/_custom_type_script = "uid://bnelk35k2xjth"

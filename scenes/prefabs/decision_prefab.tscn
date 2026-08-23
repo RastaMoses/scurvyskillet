@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cquwgd0b3fqta" path="res://sprites/interface/general/text frame/text_frame.png" id="7_i3565"]
 [ext_resource type="Theme" uid="uid://bqlaftpa31pru" path="res://themes/encounter/enc_title.tres" id="7_spqi1"]
 [ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="8_spqi1"]
-[ext_resource type="Resource" uid="uid://dy0trqeragb2x" path="res://resources/ingredients/grapes.tres" id="9_pjm46"]
+[ext_resource type="Resource" uid="uid://dy0trqeragb2x" path="res://resources/ingredients/test_dessert.tres" id="9_pjm46"]
 
 [node name="DecisionPrefab" type="Control" unique_id=856639403 node_paths=PackedStringArray("choices")]
 layout_mode = 3

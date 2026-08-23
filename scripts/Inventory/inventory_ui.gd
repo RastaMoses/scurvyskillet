@@ -73,12 +73,12 @@ func remove_slots(amount):
 func update_slots():
 	#check slot amount
 	var slots_to_remove = 0
-	while player_inventory.current_ingredients.size() > slots.size():
+	while player_inventory.current_cards.size() > slots.size():
 		add_slot()
 	for i in range(slots.size()):
 		#update slots with items
-		if (player_inventory.current_ingredients.size() > i):
-			slots[i].update(player_inventory.current_ingredients[i])
+		if (player_inventory.current_cards.size() > i):
+			slots[i].update(player_inventory.current_cards[i])
 		else:
 			if i > min_slots:
 				slots_to_remove += 1

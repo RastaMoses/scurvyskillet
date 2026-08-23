@@ -42,7 +42,7 @@ func on_checking_drop(origin, data):
 
 func buy_card(buy_button):
 	if buy_button.sell_card != null:
-		player_inventory.add_ingredient(buy_button.sell_card.stats)
+		player_inventory.add_card(buy_button.sell_card)
 		destroy_ingredient(buy_button.sell_card)
 		player_inventory.add_money(-buy_button.price)
 	buy_button.sell_out()

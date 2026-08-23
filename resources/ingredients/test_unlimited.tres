@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://dk8thir6n0eio"]
+
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_qfspm"]
+[ext_resource type="Texture2D" uid="uid://chejg2uclxxiu" path="res://sprites/ingredients/ingredient_chili.png" id="3_qfspm"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="4_3wdtu"]
+
+[resource]
+script = ExtResource("4_3wdtu")
+name = "Standard"
+icon = ExtResource("3_qfspm")
+nutrition = 2
+sweet = 1
+spicy = 1
+hearty = 1
+fresh = 1
+unlimited_uses = true
+uses = 4
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Ability" format=3 uid="uid://b16uu00maltce"]
+
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="1_r3nxv"]
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="2_o8pfd"]
+
+[resource]
+script = ExtResource("2_o8pfd")
+name = "Rainbow Cake"
+this_add_to_dish_cond = true
+sweet_cond_dish_min = 1
+spicy_cond_dish_min = 1
+fresh_cond_dish_min = 1
+hearty_cond_dish_min = 1
+self_target = true
+nutrition_effect = 5
+metadata/_custom_type_script = "uid://bnelk35k2xjth"
