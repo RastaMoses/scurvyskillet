@@ -1,6 +1,7 @@
+class_name Map
 extends Node
 #PARAMS
-@export var encounter_nodes: Array[Node]
+@export var encounter_nodes: Array[MapEncounter]
 @export var map_difficulty:int
 #CACHED COMPS
 @onready var map_bg = $BG
@@ -10,13 +11,11 @@ extends Node
 #STATE
 
 func _ready() -> void:
-	encounter_nodes = $Encounter.get_children()
 	for i in encounter_nodes:
 		i.map = self
 		i.player_ship = ship
 
 func populate_map():
-	
 	var temp = 0
 	for i in encounter_nodes:
 		i.encounter_index = temp

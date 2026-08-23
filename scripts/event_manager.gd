@@ -44,9 +44,6 @@ func dish_complete(dish):
 func add_to_dish(ingredient):
 	pass
 
-func add_to_ghoulash():
-	pass
-
 	
 func update_inventory_position():
 	on_inventory_update.emit()

@@ -1,9 +1,11 @@
+class_name PlayerInventory
 extends Inventory
 
 #PARAMS
 @export_group("Values")
 @export var current_money:int
 @export var current_morale:int
+
 
 func add_money(new_value):
 	current_money += new_value

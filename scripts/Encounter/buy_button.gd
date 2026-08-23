@@ -1,11 +1,12 @@
+class_name BuyButton
 extends Control
 @export var hide_item:bool = false
-@export var specific_item:Resource
+@export var specific_item:Ingredient
 @export_subgroup("Random Item Reqs")
 @export var and_req:bool = false
-@export_enum("common", "uncommon", "rare", "legendary") var req_rarity:Array[int]
-@export_enum("tag1", "tag2", "tag3", "tag4") var req_tag:Array[String]
-@export_enum("seasoning", "ability2", "leftover", "richard") var req_ability:Array[String]
+@export var req_rarity:Array[GlobalEnums.Rarity]
+@export var req_tag:Array[GlobalEnums.Tags]
+@export var req_ability:Array[Ability]
 
 @onready var button = $Button
 @onready var button_highlight = $Button/Highlight
@@ -32,7 +33,7 @@ func set_random_item():
 	set_item(rand)
 
 func set_item(resource):
-	sell_card = shop.add_ingredient(resource)
+	sell_card = shop.instantiate_card_and_add(resource)
 	toggle_item_icon(true)
 	if !hide_item:
 		price = shop.get_card_price(sell_card)

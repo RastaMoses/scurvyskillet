@@ -1,17 +1,18 @@
+class_name MapEncounter
 extends Node
 
 #PARAMS
 @export var possible_encounters:Array[PackedScene]
 @export var destinations: Array[int]
-@export_enum("shop","decision","challenge","boss","none") var type:String
-@export_enum("water","island") var bg_type:String
+@export var type:GlobalEnums.EncounterType
+@export var bg_type:GlobalEnums.EncounterTerrain
 @export var icons:Array[Texture]
 
 #CACHED COMPS
 @onready var visuals = $Visuals
 @onready var button = $Visuals/Button
 @onready var icon = $Visuals/Icon
-@onready var bg_water = $Visuals/BG/Water
+@onready var bg_ocean = $Visuals/BG/Water
 @onready var bg_island = $Visuals/BG/Island
 @onready var event_manager = get_tree().get_first_node_in_group("event_manager")
 @onready var ability_manager = get_tree().get_first_node_in_group("ability_manager")
@@ -21,8 +22,8 @@ extends Node
 var player_ship
 #STATE
 var encounter_index:int
-var encounter
-var encounter_obj
+var encounter:PackedScene
+var encounter_obj:Node
 
 func randomize_encounter():
 	var rand = random.randi_range(0,possible_encounters.size()-1)
@@ -33,26 +34,26 @@ func set_encounter(encounter_scene):
 	encounter = encounter_scene
 	#visuals
 	match type:
-		"shop":
+		GlobalEnums.EncounterType.SHOP:
 			icon.texture = icons[0]
-		"decision":
+		GlobalEnums.EncounterType.DECISION:
 			icon.texture = icons[1]
-		"challenge":
+		GlobalEnums.EncounterType.CHALLENGE:
 			icon.texture = icons[2]
-		"boss":
+		GlobalEnums.EncounterType.BOSS:
 			icon.texture = icons[3]
-		"none":
+		GlobalEnums.EncounterType.NONE:
 			icon.texture = null
 	match bg_type:
-		"water":
-			bg_water.visible = true
+		GlobalEnums.EncounterTerrain.OCEAN:
+			bg_ocean.visible = true
 			bg_island.visible = false
-		"island":
-			bg_water.visible = false
+		GlobalEnums.EncounterTerrain.ISLAND:
+			bg_ocean.visible = false
 			bg_island.visible = true
 
 func end_encounter():
-	type = "none"
+	type = GlobalEnums.EncounterType.NONE
 	event_manager.encounter_end()
 	map.toggle_map_visible(true)
 	map.set_available_encounters()
@@ -73,9 +74,7 @@ func load_encounter(data):
 		encounter_obj.queue_free()
 	encounter_obj = encounter.instantiate()
 	add_child(encounter_obj)
-	if type == "decision":
-		encounter_obj.toggle_bg(bg_type)
-	set_encounter(encounter_obj)
+	set_encounter(encounter)
 	encounter_obj.global_position = Vector2.ZERO
 	encounter_obj.start()
 	show_button(false)
@@ -95,7 +94,6 @@ func toggle_visuals(value):
 	visuals.visible = value
 
 func _on_button_pressed() -> void:
-	
 	toggle_button(false)
 	move_ship()
 	await player_ship.ship_arrived

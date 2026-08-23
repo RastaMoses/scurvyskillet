@@ -3,21 +3,21 @@ class_name Inventory
 extends Node
 
 @export var card_prefab:PackedScene
-var current_ingredients: Array[Control]
-@export var starting_ingredients: Array[Resource]
+var current_cards: Array[Node]
+@export var starting_ingredients: Array[Ingredient]
 @export var ui:Control
 @export var can_stack_uses:bool = true
 @export_group("Can Drop Reqs")
-@export var cd_tags:Array[String]
-@export var cd_ingredients:Array[Resource]
-@export var cd_rarity:int = -1 #-1 to disable
+@export var cd_tags:Array[GlobalEnums.Tags]
+@export var cd_ingredients:Array[Ingredient]
+@export var cd_rarity:Array[GlobalEnums.Rarity] #-1 to disable
 #CACHED COMPS
 @onready var abilities = get_tree().get_first_node_in_group("ability_manager")
 @onready var player_inventory = get_tree().get_first_node_in_group("player")
 @onready var event_manager = get_tree().get_first_node_in_group("event_manager")
 @onready var item_pool = get_tree().get_first_node_in_group("ingredient_pool")
 #SIGNALS
-signal on_add_ingredient(origin,card)
+signal on_add_card(origin,card)
 signal dropping_ingredient(origin, card)
 signal on_remove_ingredient(origin,card)
 signal checking_drop(origin,card)
@@ -28,11 +28,11 @@ var can_drop_card = true
 
 func _ready() -> void:
 	for i in starting_ingredients:
-		add_ingredient(i)
+		instantiate_card_and_add(i)
 
 func destroy_ingredient(card:Node):
 	destroying_ingredient.emit(self,card)
-	current_ingredients.erase(card)
+	current_cards.erase(card)
 	if ui != null:
 		ui.update_slots()
 	if card.get_parent() == self:
@@ -40,38 +40,46 @@ func destroy_ingredient(card:Node):
 
 func destroy_all_ingredients():
 	destroying_all.emit(self)
-	for i in current_ingredients:
+	for i in current_cards:
 		i.queue_free()
-	current_ingredients.clear()
+	current_cards.clear()
 	if ui != null:
 		ui.update_slots()
 
 func remove_ingredient(card):
 	on_remove_ingredient.emit(self,card)
-	change_ingredient_uses(card, -1)
-	current_ingredients.erase(card)
-	distribute_uses(card)
+	if !card.stats.unlimited_uses:
+		change_ingredient_uses(card, -1)
+		current_cards.erase(card)
+		distribute_uses(card)
 	if ui != null:
 		ui.update_slots()
 
 func drop_ingredient(card):
 	dropping_ingredient.emit(self, card)
-	add_ingredient(card.stats)
+	add_card(card)
 	player_inventory.remove_ingredient(card)
 
-func add_ingredient(resource):
+func instantiate_card_and_add(resource:Ingredient):
+	var temp_card:Node = card_prefab.instantiate()
+	temp_card.set_stats(resource.duplicate(true), resource)
+	var new_card = add_card(temp_card)
+	temp_card.queue_free()
+	return new_card
+
+func add_card(card):
 	var new_card:Node = card_prefab.instantiate()
 	add_child(new_card)
-	new_card.set_stats(resource)
+	new_card.set_stats(card.stats, card.base_stats)
 	#Check if ingredient is already in inventory
 	if new_card.stats.unlimited_uses:
 		if ui != null:
 			ui.update_slots()
-		current_ingredients.append(new_card)
-		on_add_ingredient.emit(self,new_card)
+		current_cards.append(new_card)
+		on_add_card.emit(self,new_card)
 		return new_card
 	distribute_uses(new_card)
-	on_add_ingredient.emit(self,new_card)
+	on_add_card.emit(self,new_card)
 	if ui != null:
 		ui.update_slots()
 	return new_card
@@ -80,8 +88,9 @@ func distribute_uses(card):
 	if card == null or card.is_queued_for_deletion():
 		return
 	var duplicates:Array[Node]
-	for i in current_ingredients:
-		if i.stats.name == card.stats.name:
+	for i in current_cards:
+		if i.base_stats == card.base_stats:
+			
 			duplicates.append(i)
 	#find duplicate with less than 4 uses and assign more uses until the added card has no more
 	if duplicates.size() !=0 and can_stack_uses:
@@ -92,11 +101,9 @@ func distribute_uses(card):
 			if card.stats.uses == 0 or card == null or card.is_queued_for_deletion():
 				return
 				
-	current_ingredients.append(card)
+	current_cards.append(card)
 
 func change_ingredient_uses(ingredient_card,amount):
-	if ingredient_card.stats.unlimited_uses:
-		return
 	ingredient_card.stats.uses += amount
 	if ingredient_card.stats.uses <= 0:
 		ingredient_card.queue_free()
@@ -121,19 +128,18 @@ func check_can_drop(data):
 			if data.stats.tags.has(i):
 				return true
 	#check for rarity
-	if cd_rarity != -1:
-		if data.stats.rarity == cd_rarity:
-			return true
-		else:
-			return false
+	if cd_rarity.size() != 0:
+		for i in cd_rarity:
+			if data.stats.rarity.has(i):
+				return true
 	return true
 
 func sort_inventory_by_name():
-	current_ingredients.sort_custom(sort_by_name)
+	current_cards.sort_custom(sort_by_name)
 	if ui != null:
 		ui.update_slots()
 func sort_inventory_by_rarity():
-	current_ingredients.sort_custom(sort_by_rarity)
+	current_cards.sort_custom(sort_by_rarity)
 	if ui != null:
 		ui.update_slots()
 
@@ -153,5 +159,5 @@ func reset_card_stats(card):
 	ui.update_slots()
 
 func reset_all_card_stats():
-	for i in current_ingredients:
+	for i in current_cards:
 		reset_card_stats(i)

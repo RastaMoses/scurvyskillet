@@ -65,15 +65,13 @@ func spawn_die(flavour, value, card:Node):
 	new_die.wait_activate_collision(collision_delay)
 	#set sprite based on flavour
 	match flavour:
-		"sweet":
+		GlobalEnums.Flavour.SWEET:
 			new_die.change_sprite(sweet_sprite)
-		"sour":
-			new_die.change_sprite(sour_sprite)
-		"spicy":
+		GlobalEnums.Flavour.SPICY:
 			new_die.change_sprite(spicy_sprite)
-		"hearty":
+		GlobalEnums.Flavour.HEARTY:
 			new_die.change_sprite(hearty_sprite)
-		"fresh":
+		GlobalEnums.Flavour.FRESH:
 			new_die.change_sprite(fresh_sprite)
 	new_die.flavour = flavour
 	#set highlight

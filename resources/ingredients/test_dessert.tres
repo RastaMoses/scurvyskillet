@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://dy0trqeragb2x"]
+
+[ext_resource type="Texture2D" uid="uid://xxmklcph07gh" path="res://sprites/ingredients/ingredient_fig.png" id="1_6fd2s"]
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_ak0ht"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="1_ec0af"]
+[ext_resource type="Resource" uid="uid://c6pq78v7nhhp0" path="res://resources/abilities/dessert.tres" id="2_5oqpn"]
+
+[resource]
+script = ExtResource("1_ec0af")
+name = "Grapes"
+icon = ExtResource("1_6fd2s")
+tags = Array[int]([2])
+rarity = 1
+nutrition = 2
+sweet = 1
+abilities = Array[ExtResource("1_ak0ht")]([ExtResource("2_5oqpn")])
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"

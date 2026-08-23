@@ -111,7 +111,7 @@ func _on_drop_area_mouse_exited() -> void:
 	toggle_highlight_pan(false)
 
 func _process(delta: float) -> void:
-	if active_plates != current_nutrition and !plate_anim_active:
+	if active_plates != current_nutrition and !plate_anim_active and current_nutrition < nutrition_plates.size():
 		animate_plates()
 
 func animate_plates():

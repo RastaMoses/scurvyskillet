@@ -3,25 +3,36 @@
 [ext_resource type="PackedScene" uid="uid://b5p50mcr5j4g8" path="res://scenes/prefabs/map_prefab.tscn" id="1_1vdqj"]
 [ext_resource type="PackedScene" uid="uid://dppkgemxlgehl" path="res://scenes/prefabs/shop_sample.tscn" id="2_flodk"]
 [ext_resource type="PackedScene" uid="uid://hr6aybbol4hn" path="res://scenes/prefabs/challenge_sample.tscn" id="3_fio5h"]
+[ext_resource type="PackedScene" uid="uid://d3m0xjawxe0cp" path="res://scenes/prefabs/encounter.tscn" id="4_01vp7"]
+[ext_resource type="PackedScene" uid="uid://benw6bt2l0ot" path="res://scenes/prefabs/decision_prefab.tscn" id="5_softy"]
 
-[node name="Map" unique_id=1839841650 instance=ExtResource("1_1vdqj")]
+[node name="Map" unique_id=1839841650 node_paths=PackedStringArray("encounter_nodes") instance=ExtResource("1_1vdqj")]
+encounter_nodes = [NodePath("Encounter/0"), NodePath("Encounter/1"), NodePath("Encounter/2"), NodePath("Encounter/3"), NodePath("Encounter/4")]
 
 [node name="0" parent="Encounter" parent_id_path=PackedInt32Array(1514431645) index="0" unique_id=986483625]
 destinations = Array[int]([1, 2, 3])
+bg_type = 1
 
 [node name="1" parent="Encounter" parent_id_path=PackedInt32Array(1514431645) index="1" unique_id=1699582653]
 position = Vector2(430, 193)
-destinations = Array[int]([])
-bg_type = "island"
+destinations = Array[int]([4])
+type = 2
+bg_type = 1
 
 [node name="2" parent="Encounter" parent_id_path=PackedInt32Array(1514431645) index="2" unique_id=386168653]
 position = Vector2(470, 632)
 possible_encounters = Array[PackedScene]([ExtResource("2_flodk")])
-destinations = Array[int]([])
-type = "shop"
+destinations = Array[int]([4])
+type = 1
 
 [node name="3" parent="Encounter" parent_id_path=PackedInt32Array(1514431645) index="3" unique_id=664957354]
 position = Vector2(497, 395)
 possible_encounters = Array[PackedScene]([ExtResource("3_fio5h")])
+destinations = Array[int]([4])
+type = 3
+
+[node name="4" parent="Encounter" parent_id_path=PackedInt32Array(1514431645) index="4" unique_id=37416426 instance=ExtResource("4_01vp7")]
+position = Vector2(898, 395)
+possible_encounters = Array[PackedScene]([ExtResource("5_softy"), ExtResource("3_fio5h"), ExtResource("2_flodk")])
 destinations = Array[int]([])
-type = "challenge"
+type = 2

@@ -3,25 +3,25 @@ extends Control
 @onready var description_text = $description/text
 @onready var description_title = $description/title
 @onready var bg_island = $BGLand
-@onready var bg_water = $BGWater
+@onready var bg_ocean = $BGWater
 @onready var player_inventory = get_tree().get_first_node_in_group("player")
 
-@export var choices: Array[Node]
+@export var terrain_type:GlobalEnums.EncounterTerrain
+@export var choices: Array[Choices]
 
 func start():
-	choices = $Choices.get_children()
 	for i in choices:
 		i.decision_encounter = self
 		i.start()
 	player_inventory.ui.update_position(true)
 
-func toggle_bg(bg_type:String):
-	match bg_type:
-		"water":
-			bg_water.visible = true
+func toggle_bg():
+	match terrain_type:
+		GlobalEnums.EncounterTerrain.OCEAN:
+			bg_ocean.visible = true
 			bg_island.visible = false
-		"island":
-			bg_water.visible = false
+		GlobalEnums.EncounterTerrain.ISLAND:
+			bg_ocean.visible = false
 			bg_island.visible = true
 
 func end():
@@ -29,5 +29,4 @@ func end():
 	queue_free()
 
 func load_new_encounter(encounter):
-	get_parent().type = "challenge"
 	get_parent().load_encounter(encounter)
