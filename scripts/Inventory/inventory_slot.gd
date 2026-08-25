@@ -77,10 +77,11 @@ func update(item):
 			var tags_string = ""
 			for i in card.stats.tags:
 				if tags_string == "":
-					tags_string += String(get_tag_name(i))
+					tags_string += get_tag_name(i)
 				else:
-					tags_string += ", " + String(get_tag_name(i))
+					tags_string += ", " + get_tag_name(i)
 			tags.text = tags_string
+			tags.fit_font_to_content()
 			description.text = card.stats.description
 			ingredient_name.text = card.stats.name
 		update_flavours()
@@ -219,7 +220,6 @@ func _process(delta: float) -> void:
 	global_position = (new_pos / pixel_multiple).round() * pixel_multiple
 
 
-func get_tag_name(tag:GlobalEnums.Tags):
-	#match tag name to int
-	return "tag_fix this code"
-	pass
+func get_tag_name(state: GlobalEnums.Tags) -> String:
+	var enum_name := str(GlobalEnums.Tags.find_key(state)).to_lower()
+	return enum_name.left(1).to_upper() + enum_name.substr(1)

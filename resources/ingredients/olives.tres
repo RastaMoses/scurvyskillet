@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://df44km22pjob"]
+
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_t4ry1"]
+[ext_resource type="Resource" uid="uid://bq462h2rwgyas" path="res://resources/abilities/make_olive_oil.tres" id="2_20ww1"]
+[ext_resource type="Texture2D" uid="uid://dna33w1y4jxj4" path="res://sprites/ingredients/ingredient_olives.png" id="2_27y3e"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_wfy5q"]
+
+[resource]
+script = ExtResource("2_wfy5q")
+name = "Olives"
+icon = ExtResource("2_27y3e")
+tags = Array[int]([14])
+rarity = 1
+nutrition = 1
+hearty = 1
+fresh = 1
+abilities = Array[ExtResource("1_t4ry1")]([ExtResource("2_20ww1")])
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"

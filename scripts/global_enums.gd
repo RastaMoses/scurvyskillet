@@ -1,8 +1,9 @@
 extends Node
 class_name GlobalEnums
 
-enum Tags {
-			LEFTOVER, MEAT, FRUIT, PASTRY, FERMENT, DRINK
+enum Tags { 
+			DAIRY, DRINK, EGG, FERMENT, FISH, FRUIT, GRAINS, LEAF, MEAT,
+			MONSTER, OIL, PASTRY, PEPPER, SWEETS, VEGETABLE, LEFTOVERS
 			}
 
 enum Rarity {

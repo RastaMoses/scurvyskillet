@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://cvwej8rw6nqq6"]
+
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_tvqac"]
+[ext_resource type="Resource" uid="uid://nhh41sn5jlgy" path="res://resources/abilities/boned.tres" id="2_oe4j8"]
+[ext_resource type="Texture2D" uid="uid://b3piky50wd7xn" path="res://sprites/ingredients/ingredient_chicken.png" id="3_uf7lj"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="4_sl5pk"]
+
+[resource]
+script = ExtResource("4_sl5pk")
+name = "Chicken"
+icon = ExtResource("3_uf7lj")
+tags = Array[int]([8])
+rarity = 1
+nutrition = 2
+hearty = 2
+abilities = Array[ExtResource("1_tvqac")]([ExtResource("2_oe4j8")])
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"

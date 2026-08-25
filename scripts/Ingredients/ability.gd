@@ -23,7 +23,11 @@ extends Resource
 @export var end_encounter_cond:bool = false
 @export_subgroup("Shop")
 @export var sell_cond:bool = false
-
+@export_group("Card")
+@export var specific_ingredient_cond:Ingredient = null
+@export var card_abilities_cond:Array[Ability] = []
+@export var card_tags_cond:Array[GlobalEnums.Tags] = []
+@export var card_rarity_cond:Array[GlobalEnums.Rarity] = []
 @export_group("Dish")
 @export_subgroup("Maximum")
 @export var sweet_cond_dish_max:int = -1
@@ -42,7 +46,7 @@ extends Resource
 @export var dice_count_cond_dish_min:int = -1
 @export var ingredient_count_cond_dish_min:int = -1
 @export_subgroup("Tags")
-@export var tags_cond:Array[GlobalEnums.Tags] = []
+@export var dish_tags_cond:Array[GlobalEnums.Tags] = []
 @export var specific_ingredients_in_dish_cond:Array[Ingredient] = []
 #endregion
 #region Effects Params
@@ -75,6 +79,7 @@ extends Resource
 @export var fresh_effect:int = 0
 @export var hearty_effect:int = 0
 @export var nutrition_effect:int = 0
+@export var uses_effect:int = 0
 #endregion
 #endregion
 #---------------------CONDITIONS CHECKING----------------------

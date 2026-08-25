@@ -3,6 +3,10 @@
 [ext_resource type="FontFile" uid="uid://yjp0l2f5soug" path="res://fonts/mc/Minecraft.ttf" id="1_iv8rq"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iw5a0"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
 
 [resource]
 RichTextLabel/colors/default_color = Color(0.5254902, 0.4392157, 0.4, 1)

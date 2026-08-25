@@ -47,13 +47,16 @@ func destroy_all_ingredients():
 		ui.update_slots()
 
 func remove_ingredient(card):
-	on_remove_ingredient.emit(self,card)
+	if !current_cards.has(card):
+		return
+	
 	if !card.stats.unlimited_uses:
 		change_ingredient_uses(card, -1)
 		current_cards.erase(card)
 		distribute_uses(card)
 	if ui != null:
 		ui.update_slots()
+	on_remove_ingredient.emit(self,card)
 
 func drop_ingredient(card):
 	dropping_ingredient.emit(self, card)

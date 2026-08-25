@@ -9,8 +9,11 @@
 [ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="7_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://bodk7w1csegu4" path="res://scenes/debug/debug_mouse.tscn" id="8_ca42v"]
 [ext_resource type="Script" uid="uid://cf1f8f18wnr6h" path="res://scripts/Ingredients/ingredient_pool.gd" id="9_rysoc"]
+[ext_resource type="Resource" uid="uid://cvwej8rw6nqq6" path="res://resources/ingredients/chicken.tres" id="10_dinhu"]
 [ext_resource type="Resource" uid="uid://dk8thir6n0eio" path="res://resources/ingredients/test_unlimited.tres" id="10_trtic"]
 [ext_resource type="Resource" uid="uid://6kr8y2msyum" path="res://resources/ingredients/test_rainbow_cake.tres" id="11_kvuet"]
+[ext_resource type="Resource" uid="uid://cudhcbra3g05f" path="res://resources/ingredients/grapes.tres" id="11_trtic"]
+[ext_resource type="Resource" uid="uid://df44km22pjob" path="res://resources/ingredients/olives.tres" id="12_trtic"]
 
 [node name="game" type="Node2D" unique_id=1075341061]
 script = ExtResource("1_vtaks")
@@ -32,7 +35,7 @@ debug_inactive = true
 [node name="Inventory" parent="Player" unique_id=421132193 groups=["player"] instance=ExtResource("5_kvuet")]
 current_money = 100
 current_morale = 5
-starting_ingredients = Array[ExtResource("7_kvpfn")]([ExtResource("10_trtic"), ExtResource("11_kvuet")])
+starting_ingredients = Array[ExtResource("7_kvpfn")]([ExtResource("10_trtic"), ExtResource("11_kvuet"), ExtResource("10_dinhu"), ExtResource("11_trtic"), ExtResource("12_trtic")])
 
 [node name="debug_mouse" parent="." unique_id=2141378264 instance=ExtResource("8_ca42v")]
 

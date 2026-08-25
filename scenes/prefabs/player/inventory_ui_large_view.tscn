@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://c5tmwwau5pvcv" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_tags.png" id="12_sk55n"]
 [ext_resource type="Texture2D" uid="uid://banbfs6e11s6d" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_flavor_hearty.png" id="13_mff2p"]
 [ext_resource type="Texture2D" uid="uid://cjkentqsfmrsf" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_flavor_sour.png" id="14_dsyyv"]
+[ext_resource type="Script" uid="uid://bnstjkvxfsbha" path="res://scripts/Inventory/fit_font_size.gd" id="14_vddt1"]
 [ext_resource type="Texture2D" uid="uid://fh6x0jpwhyr7" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_flavor_fresh.png" id="15_6nx8t"]
 [ext_resource type="Texture2D" uid="uid://dleugyq8yv3ke" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_flavor_spicy.png" id="16_kxvc3"]
 [ext_resource type="Texture2D" uid="uid://frmxomtxddj4" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_flavor_sweet.png" id="17_v5g87"]
@@ -142,16 +143,21 @@ mouse_behavior_recursive = 1
 texture = ExtResource("12_sk55n")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ItemDisplay/Tags" index="0" unique_id=1623048763]
+custom_maximum_size = Vector2(411, 56)
 layout_mode = 0
-offset_left = 47.999992
-offset_top = 332.0
-offset_right = 464.0
-offset_bottom = 404.0
+offset_left = 51.0
+offset_top = 336.0
+offset_right = 462.0
+offset_bottom = 392.0
 mouse_behavior_recursive = 1
 theme = ExtResource("5_4i1hb")
 text = "Fish, Leftovers"
+scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
+script = ExtResource("14_vddt1")
+minimum_font_size = 16
+padding = Vector2(0, 0)
 
 [node name="Description" type="RichTextLabel" parent="ItemDisplay" index="7" unique_id=1998604938]
 layout_mode = 0

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Ability" format=3 uid="uid://bq462h2rwgyas"]
+
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="1_tyutg"]
+[ext_resource type="Resource" uid="uid://dim8b7x5br3sn" path="res://resources/ingredients/olive_oil.tres" id="2_bcis2"]
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="2_e4i2p"]
+
+[resource]
+script = ExtResource("2_e4i2p")
+name = "Make Olive Oil"
+this_add_to_dish_cond = true
+ingredient_count_cond_dish_max = 0
+add_specific_ingredients_effect = Array[ExtResource("1_tyutg")]([ExtResource("2_bcis2")])
+metadata/_custom_type_script = "uid://bnelk35k2xjth"

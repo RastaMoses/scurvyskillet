@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Ability" format=3 uid="uid://nhh41sn5jlgy"]
+
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="1_1qead"]
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="2_3d7od"]
+[ext_resource type="Resource" uid="uid://c346t8m6fjtct" path="res://resources/ingredients/bones.tres" id="2_gs0eh"]
+
+[resource]
+script = ExtResource("2_3d7od")
+name = "Boned"
+this_add_to_dish_cond = true
+add_specific_ingredients_effect = Array[ExtResource("1_1qead")]([ExtResource("2_gs0eh")])
+metadata/_custom_type_script = "uid://bnelk35k2xjth"

@@ -77,37 +77,37 @@ func check_completed():
 	#values
 	var sweet_sum = 0
 	for i in current_cards:
-		sweet_sum += i.sweet
+		sweet_sum += i.stats.sweet
 	if sweet_sum < sweet:
 		return
 		
 	var sour_sum = 0
 	for i in current_cards:
-		sour_sum += i.sour
+		sour_sum += i.stats.sour
 	if sour_sum < sour:
 		return
 		
 	var spicy_sum = 0
 	for i in current_cards:
-		spicy_sum += i.spicy
+		spicy_sum += i.stats.spicy
 	if spicy_sum < spicy:
 		return
 	
 	var hearty_sum = 0
 	for i in current_cards:
-		hearty_sum += i.hearty
+		hearty_sum += i.stats.hearty
 	if hearty_sum < hearty:
 		return
 	
 	var fresh_sum = 0
 	for i in current_cards:
-		fresh_sum += i.fresh
+		fresh_sum += i.stats.fresh
 	if fresh_sum < fresh:
 		return
 	
 	var nutrition_sum = 0
 	for i in current_cards:
-		nutrition_sum += i.nutrition
+		nutrition_sum += i.stats.nutrition
 	if nutrition_sum < nutrition:
 		return
 	complete()

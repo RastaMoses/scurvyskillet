@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Ability" format=3 uid="uid://bsrcu3n1cl65c"]
+
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="1_o0vkp"]
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="2_ldo7o"]
+
+[resource]
+script = ExtResource("2_ldo7o")
+name = "Spoiling"
+end_encounter_cond = true
+self_target = true
+uses_effect = -1
+metadata/_custom_type_script = "uid://bnelk35k2xjth"

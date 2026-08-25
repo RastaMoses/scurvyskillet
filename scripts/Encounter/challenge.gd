@@ -104,7 +104,7 @@ func on_success():
 	reward_req_rarity = s_req_rarity
 	reward_req_tag = s_req_tag
 	reward_req_ability = s_req_ability
-	give_rewards()
+	
 	end()
 
 func on_partial():
@@ -116,7 +116,7 @@ func on_partial():
 	reward_req_rarity = p_req_rarity
 	reward_req_tag = p_req_tag
 	reward_req_ability = p_req_ability
-	give_rewards()
+	
 	end()
 
 func on_failure():
@@ -128,8 +128,8 @@ func on_failure():
 	reward_req_rarity = f_req_rarity
 	reward_req_tag = f_req_tag
 	reward_req_ability = f_req_ability
-	give_rewards()
 	end()
+	
 
 func is_restricted_tag(tag):
 	return restricted_tags.has(tag)
@@ -175,6 +175,7 @@ func start():
 
 func end():
 	map_node.end_encounter()
+	give_rewards()
 	queue_free()
 
 func display_dish():

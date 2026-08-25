@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://dim8b7x5br3sn"]
+
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_t6501"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_fmdeh"]
+[ext_resource type="Texture2D" uid="uid://15gks8rco6i0" path="res://sprites/ingredients/ingredient_olive_oil.png" id="2_j4cmo"]
+
+[resource]
+script = ExtResource("2_fmdeh")
+name = "Olive Oil"
+icon = ExtResource("2_j4cmo")
+tags = Array[int]([14, 10])
+rarity = 1
+nutrition = 1
+hearty = 1
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"

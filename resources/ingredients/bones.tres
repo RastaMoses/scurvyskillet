@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://c346t8m6fjtct"]
+
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_upib2"]
+[ext_resource type="Texture2D" uid="uid://cxdxq50lxqe3d" path="res://sprites/ingredients/ingredient_bones.png" id="2_4xgc7"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_xnhpd"]
+
+[resource]
+script = ExtResource("2_xnhpd")
+name = "Bones"
+icon = ExtResource("2_4xgc7")
+tags = Array[int]([15])
+rarity = 1
+nutrition = 1
+hearty = 1
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"

@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bbkxauiekl5ry" path="res://scripts/Encounter/challenge.gd" id="1_glswj"]
 [ext_resource type="Script" uid="uid://clhhe0hu1tyj0" path="res://scripts/Encounter/UI/challenge_ui.gd" id="2_hs7g2"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_y21f8"]
+[ext_resource type="Resource" uid="uid://cudhcbra3g05f" path="res://resources/ingredients/grapes.tres" id="3_6r88v"]
 [ext_resource type="Texture2D" uid="uid://baee01pvcv84d" path="res://sprites/interface/scenes/cooking scene/scene_cooking_background.png" id="3_h6ing"]
 [ext_resource type="Texture2D" uid="uid://cquwgd0b3fqta" path="res://sprites/interface/general/text frame/text_frame.png" id="4_x7qnw"]
 [ext_resource type="Texture2D" uid="uid://b7stpf242kutc" path="res://sprites/interface/scenes/cooking scene/scene_cooking_button_reset.png" id="5_dmuak"]
@@ -22,6 +24,8 @@ mouse_behavior_recursive = 1
 script = ExtResource("1_glswj")
 req_nutrition = 4
 par_nutrition = 2
+s_specific_ingredients = Array[ExtResource("2_y21f8")]([ExtResource("3_6r88v")])
+s_random_ingredient_amount = 0
 
 [node name="InventoryReference" type="Panel" parent="." unique_id=1068085367]
 visible = false

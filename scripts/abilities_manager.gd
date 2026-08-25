@@ -18,6 +18,7 @@ class AbilityTrigger:
 @onready var event_manager = get_tree().get_first_node_in_group("event_manager")
 @onready var item_pool = get_tree().get_first_node_in_group("ingredient_pool")
 #STATE
+var encounter_trigger:Array[AbilityTrigger]
 var dish_trigger:Array[AbilityTrigger]
 var dish_next_ingredient_trigger:Array
 var current_dish
@@ -25,6 +26,13 @@ var current_dish
 #------------Trigger Management-----------------------
 #region Tracking
 #DISH
+func add_ability_to_encounter_trigger(ability, card, preview):
+	var t = AbilityTrigger.new(ability, card, ability.duration, preview)
+	encounter_trigger.append(t)
+func remove_ability_from_encounter_trigger(ability: Ability, card: Node) -> void:
+	encounter_trigger = encounter_trigger.filter(func(t: AbilityTrigger): 
+		return not (t.ability == ability and t.source_card == card)
+	)
 func add_ability_to_dish_trigger(ability, card, preview):
 	var t = AbilityTrigger.new(ability, card, ability.duration, preview)
 	dish_trigger.append(t)
@@ -40,7 +48,12 @@ func dish_trigger_already_active(ability, card) -> bool:
 			#is already in list
 			return true
 	return false
-	
+func encounter_trigger_already_active(ability, card) -> bool:
+	for t in encounter_trigger:
+		if t.ability == ability and t.source_card == card:
+			#is already in list
+			return true
+	return false
 func check_dish_conditions(ability) ->bool: #checks if conditions are met to activate triggers
 	#if a condition is not met returns false
 	# Get current dish node (you already store current_dish)
@@ -75,10 +88,10 @@ func check_dish_conditions(ability) ->bool: #checks if conditions are met to act
 	# You’ll need to expose those on your dish node.
 
 	# Tags condition example:
-	if not ability.tags_cond.is_empty():
+	if not ability.dish_tags_cond.is_empty():
 		var dish_tags: Array[GlobalEnums.Tags] = dish.tags  # ensure this exists
 		var has_all = true
-		for tag in ability.tags_cond:
+		for tag in ability.dish_tags_cond:
 			if not dish_tags.has(tag):
 				has_all = false
 				break
@@ -95,7 +108,23 @@ func check_dish_conditions(ability) ->bool: #checks if conditions are met to act
 			if not dish_base_ingr.has(req):
 				return false
 	return true
+func check_card_conditions(ability, source_card) -> bool:
+	#Tags condition
+	if not ability.card_tags_cond.is_empty():
+		var card_tags: Array[GlobalEnums.Tags] = source_card.stats.tags  # ensure this exists
+		var has_all = true
+		for tag in ability.card_tags_cond:
+			if not card_tags.has(tag):
+				has_all = false
+				break
+		if not has_all:
+			return false
 	
+	# ingredient on card_cond:
+	if ability.specific_ingredient_cond != null:
+		if source_card.base_stats != ability.specific_ingredient_cond:
+			return false
+	return true
 func evaluate_add_to_dish_triggers(added_card: Node) -> void:
 	# Iterate over a copy because we may remove elements
 	for t in dish_trigger.slice(0):
@@ -103,7 +132,6 @@ func evaluate_add_to_dish_triggers(added_card: Node) -> void:
 		var card = t.source_card
 		
 		var activates = false
-
 		# Condition: this card’s ability triggers when this specific card is added
 		if ability.this_add_to_dish_cond and card.base_stats == added_card.base_stats:
 			activates = true
@@ -123,7 +151,9 @@ func evaluate_add_to_dish_triggers(added_card: Node) -> void:
 		if not activates:
 			continue
 
-		# Here you could also check dish stats (sweet, spicy, counts, tags, etc.)
+		#Checking general conditions
+		if not check_card_conditions(t.ability, added_card):
+			continue
 		if not check_dish_conditions(ability):
 			continue
 		activate_effects(t, added_card)
@@ -147,6 +177,8 @@ func evaluate_try_add_to_dish_triggers(try_card:Node) -> bool:
 		
 		if not activates:
 				continue
+				
+		
 		#Check if ability restricts the card drop try
 		if ability.limit_ingredients_int != -1:
 			#check targeting
@@ -170,6 +202,22 @@ func evaluate_try_add_to_dish_triggers(try_card:Node) -> bool:
 	
 	return can_drop
 
+func evaluate_encounter_end_triggers(source_card):
+	for t in encounter_trigger.slice(0):
+		var ability = t.ability
+		var card = t.source_card
+		
+		var activates = false
+		if !ability.end_encounter_cond:
+			continue
+		if not check_card_conditions(t.ability, source_card):
+			continue
+		activate_effects(t, t.source_card)
+		# Handle duration / non‑continuous
+		if not ability.continuous:
+			t.remaining -= 1
+			if t.remaining <= 0:
+				remove_ability_from_encounter_trigger(ability, card)
 
 #endregion
 #-----------------CONDITIONS_----------------------
@@ -207,7 +255,20 @@ func on_ingredient_destroyed_from_dish(card):
 		#inventory abilities recheck
 		
 func on_encounter_end():
-	pass
+	for card in player_inventory.current_cards:
+		for ability:Ability in card.stats.abilities:
+			if ability == null:
+				continue
+			#check if already active
+			if encounter_trigger_already_active(ability, card):
+					#add to trigger_list if stackable
+				if ability.stackable:
+					add_ability_to_encounter_trigger(ability, card, false)
+				#else: do nothing, already active and not stackable
+			else:
+				#first time ability is called
+				add_ability_to_encounter_trigger(ability, card, false)
+		evaluate_encounter_end_triggers(card)
 
 func on_dish_complete():
 	remove_all_from_dish_trigger()
@@ -238,22 +299,30 @@ func activate_effects(trigger, context_card):
 	
 	#self card effects
 	if ability.self_target:
+		#modify own stats
 		#add stat effects
 		ability_card.stats.sweet += ability.sweet_effect
 		ability_card.stats.spicy += ability.spicy_effect
 		ability_card.stats.hearty += ability.hearty_effect
 		ability_card.stats.fresh += ability.fresh_effect
 		ability_card.stats.nutrition += ability.nutrition_effect
-	#modify own stats
-	#can be played
+		
+		if ability.uses_effect > 0:
+			for i in ability.uses_effect:
+				player_inventory.instantiate_card_and_add(ability_card.base_stats)
+		if ability.uses_effect < 0:
+			for i in ability.uses_effect * -1:
+				player_inventory.remove_ingredient(ability_card)
+		#can be played
 	
 	
 	# dont do any other effects if only preview
 	if trigger.preview:
 		return
+	
 # Example: add specific ingredients to player inventory
 	for ingr: Ingredient in trigger.ability.add_specific_ingredients_effect:
-		player_inventory.instantiate_ingredient_and_add(ingr)
+		player_inventory.instantiate_card_and_add(ingr)
 
 	# Example: add random ingredients
 	if ability.add_random_ingredients_amount_effect > 0:
@@ -262,7 +331,7 @@ func activate_effects(trigger, context_card):
 			var req_rarity: Array[GlobalEnums.Rarity] = ability.rand_ingr_rarity_filter
 			var ing = item_pool.get_random_ingredient(false, req_tag, [], req_rarity)
 			if ing:
-				player_inventory.instantiate_ingredient_and_add(ing)
+				player_inventory.instantiate_card_and_add(ing)
 
 	#limit amount possible in dish
 	
