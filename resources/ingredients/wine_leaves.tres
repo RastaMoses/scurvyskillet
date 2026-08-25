@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://ds1o7xj856ka1"]
+
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_3exni"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_2a36t"]
+[ext_resource type="Resource" uid="uid://c723u1dewey2b" path="res://resources/abilities/dolmades.tres" id="2_2l2x4"]
+[ext_resource type="Texture2D" uid="uid://ctn2ll2v2mx7f" path="res://sprites/ingredients/ingredient_wine_leafs.png" id="3_8ttxf"]
+
+[resource]
+script = ExtResource("2_2a36t")
+name = "Wine Leaves"
+icon = ExtResource("3_8ttxf")
+tags = Array[int]([7])
+rarity = 1
+nutrition = 2
+fresh = 2
+abilities = Array[ExtResource("1_3exni")]([ExtResource("2_2l2x4")])
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"

@@ -16,7 +16,7 @@ extends Resource
 @export_subgroup("Dish")
 @export var try_add_to_dish_cond:bool = false
 @export var this_add_to_dish_cond:bool = false
-@export var any_add_to_dish_cond:bool = false
+@export var any_other_add_to_dish_cond:bool = false
 @export var finish_dish_cond:bool = false
 @export_subgroup("Encounter")
 @export var start_encounter_cond:bool = false
@@ -24,10 +24,6 @@ extends Resource
 @export_subgroup("Shop")
 @export var sell_cond:bool = false
 @export_group("Card")
-@export var specific_ingredient_cond:Ingredient = null
-@export var card_abilities_cond:Array[Ability] = []
-@export var card_tags_cond:Array[GlobalEnums.Tags] = []
-@export var card_rarity_cond:Array[GlobalEnums.Rarity] = []
 @export_group("Dish")
 @export_subgroup("Maximum")
 @export var sweet_cond_dish_max:int = -1
@@ -55,11 +51,14 @@ extends Resource
 
 @export_group("Target")
 @export var self_target:bool = false
-@export var next_ingredient_target:bool = false
+@export var played_ingredient_target:bool = false
 @export var all_ingredients_in_dish_target:bool = false
 @export var all_in_player_inventory_target:bool = false
 @export_subgroup("Target Filter")
-@export var with_tag_filter_target:Array[GlobalEnums.Tags]
+@export var specific_ingredient_filter:Ingredient = null
+@export var card_abilities_filter:Array[Ability] = []
+@export var card_tags_filter:Array[GlobalEnums.Tags] = []
+@export var card_rarity_filter:Array[GlobalEnums.Rarity] = []
 @export_subgroup("Dice")
 @export var all_sweet_dice_target:bool = false
 @export var all_spicy_dice_target:bool = false

@@ -90,7 +90,7 @@ func add_card(card):
 func distribute_uses(card):
 	if card == null or card.is_queued_for_deletion():
 		return
-	var duplicates:Array[Node]
+	var duplicates:Array[Node] = []
 	for i in current_cards:
 		if i.base_stats == card.base_stats:
 			

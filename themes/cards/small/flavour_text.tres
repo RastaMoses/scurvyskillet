@@ -5,6 +5,7 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iw5a0"]
 
 [resource]
+altered/base_type = &"standard"
 altered/colors/default_color = Color(0.6039216, 0.8980392, 0.8352941, 1)
 altered/colors/font_shadow_color = Color(0.3882353, 0.76862746, 0.8, 1)
 fresh/base_type = &"standard"
