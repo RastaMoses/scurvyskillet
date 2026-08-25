@@ -28,13 +28,12 @@ var current_dish
 func add_ability_to_encounter_trigger(ability, card, preview):
 	var t = AbilityTrigger.new(ability, card, ability.duration, preview)
 	encounter_trigger.append(t)
-
 func add_ability_to_dish_trigger(ability, card, preview):
 	var t = AbilityTrigger.new(ability, card, ability.duration, preview)
 	dish_trigger.append(t)
-
 func remove_all_from_dish_trigger():
 	dish_trigger.clear()
+
 func dish_trigger_already_active(ability, card) -> bool:
 	for t in dish_trigger:
 		if t.ability == ability and t.source_card == card:
@@ -47,6 +46,8 @@ func encounter_trigger_already_active(ability, card) -> bool:
 			#is already in list
 			return true
 	return false
+#endregion
+#region trigger evaulation
 func check_dish_conditions(ability) ->bool: #checks if conditions are met to activate triggers
 	#if a condition is not met returns false
 	# Get current dish node (you already store current_dish)
@@ -101,42 +102,8 @@ func check_dish_conditions(ability) ->bool: #checks if conditions are met to act
 			if not dish_base_ingr.has(req):
 				return false
 	return true
-func check_target_filter(trigger, context_card) -> bool:
-	var ability = trigger.ability
-	var source_card = trigger.source_card
-	
-	if ability.played_ingredient_target:
-		#Tags filter (OR)
-		if not ability.card_tags_filter.is_empty():
-			var card_tags: Array[GlobalEnums.Tags] = context_card.stats.tags  # ensure this exists
-			var has_one = false
-			for tag in card_tags:
-				if ability.card_tags_filter.has(tag):
-					has_one = true
-					break
-			if not has_one:
-				return false
-		#rarity filter
-		if not ability.card_rarity_filter.is_empty():
-			var card_rarity = context_card.stats.rarity  # ensure this exists
-			var has_all = true
-			if not ability.card_rarity_filter.has(card_rarity):
-				return false
-		#Ability filter (OR)
-		if not ability.card_abilities_filter.is_empty():
-			var card_abilities: Array[Ability] = context_card.stats.abilities  # ensure this exists
-			var has_one = false
-			for ab in card_abilities:
-				if ability.card_abilities_filter.has(ab):
-					has_one = true
-					break
-			if not has_one:
-				return false
-		# ingredient on card_cond:
-		if ability.specific_ingredient_filter != null:
-			if context_card.base_stats != ability.specific_ingredient_filter:
-				return false
-	return true
+
+
 func evaluate_add_to_dish_triggers(added_card: Node, preview:bool = false) -> void:
 	# Iterate over a copy because we may remove elements
 	for t in dish_trigger.slice(0):
@@ -164,7 +131,6 @@ func evaluate_add_to_dish_triggers(added_card: Node, preview:bool = false) -> vo
 			t.remaining -= 1
 			if t.remaining <= 0:
 				dish_trigger.erase(t)
-
 func evaluate_try_add_to_dish_triggers(try_card:Node, preview:bool = false) -> bool:
 	var can_drop = true
 	for t in dish_trigger.slice(0):
@@ -203,7 +169,6 @@ func evaluate_try_add_to_dish_triggers(try_card:Node, preview:bool = false) -> b
 				dish_trigger.erase(t)
 	
 	return can_drop
-
 func evaluate_encounter_end_triggers(source_card):
 	for t in encounter_trigger.slice(0):
 		var ability = t.ability
@@ -358,6 +323,11 @@ func activate_effects(trigger, context_card):
 			if ing:
 				player_inventory.instantiate_card_and_add(ing)
 
+	#Dice Reroll
+	if not ability.all_dice_target.is_empty():
+		for flavour in ability.all_dice_target:
+			if ability.reroll:
+				current_dish.reroll_all_dice_of_flavour(flavour)
 	#limit amount possible in dish
 	
 	# Extend here for other effects:
@@ -365,8 +335,47 @@ func activate_effects(trigger, context_card):
 	# - modify dice
 	# - morale/money changes via event_manager, etc
 
+func check_target_filter(trigger, context_card) -> bool:
+	var ability = trigger.ability
+	var source_card = trigger.source_card
+	
+	if ability.played_ingredient_target:
+		#Tags filter (OR)
+		if not ability.card_tags_filter.is_empty():
+			var card_tags: Array[GlobalEnums.Tags] = context_card.stats.tags  # ensure this exists
+			var has_one = false
+			for tag in card_tags:
+				if ability.card_tags_filter.has(tag):
+					has_one = true
+					break
+			if not has_one:
+				return false
+		#rarity filter
+		if not ability.card_rarity_filter.is_empty():
+			var card_rarity = context_card.stats.rarity  # ensure this exists
+			var has_all = true
+			if not ability.card_rarity_filter.has(card_rarity):
+				return false
+		#Ability filter (OR)
+		if not ability.card_abilities_filter.is_empty():
+			var card_abilities: Array[Ability] = context_card.stats.abilities  # ensure this exists
+			var has_one = false
+			for ab in card_abilities:
+				if ability.card_abilities_filter.has(ab):
+					has_one = true
+					break
+			if not has_one:
+				return false
+		# ingredient on card_cond:
+		if ability.specific_ingredient_filter != null:
+			if context_card.base_stats != ability.specific_ingredient_filter:
+				return false
+	
+	return true
+
 #endregion
 
+#region Preview
 func preview_card_abilities_add_dish(card):
 	#for each ability on new card checks if already active and adds if supposed to
 	card.set_preview()
@@ -383,3 +392,4 @@ func preview_card_abilities_add_dish(card):
 			#first time ability is called
 			add_ability_to_dish_trigger(ability, card, true)
 	evaluate_add_to_dish_triggers(card, true)
+#endregion

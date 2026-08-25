@@ -104,6 +104,7 @@ func start_number():
 	number_shown = false
 	number_time = 0
 	number_sprites[number - 1].visible = true
+	number_sprites[number - 1].self_modulate.a = 1
 	
 func stop_number():
 	number_shown = true
@@ -119,6 +120,7 @@ func start_highlight():
 	highlighted = false
 	highlight_time = 0
 	highlight_sprite.visible = true
+	highlight_sprite.self_modulate.a = 1
 
 func stop_highlight():
 	highlighted = true

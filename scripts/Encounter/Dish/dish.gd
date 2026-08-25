@@ -78,7 +78,8 @@ func remove_card_from_dish(card):
 				tags.append(tag)
 	#remove dice values
 	nutrition -= card.stats.nutrition
-	subtract_dice_values_from_dish(card)
+	for die in card.dice:
+		subtract_die_value_from_dish(die)
 	abilities.on_ingredient_destroyed_from_dish(card)
 	
 	#ui
@@ -90,23 +91,23 @@ func remove_card_from_dish(card):
 		abilities.preview_card_abilities_add_dish(temp)
 	player_inventory.ui.update_slots()
 
-func subtract_dice_values_from_dish(card):
-	for die in card.dice:
-		match die.flavour:
-			GlobalEnums.Flavour.SWEET:
-				sweet -= die.number
-			GlobalEnums.Flavour.SPICY:
-				spicy -= die.number
-			GlobalEnums.Flavour.HEARTY:
-				hearty -= die.number
-			GlobalEnums.Flavour.FRESH:
-				fresh -= die.number
+func subtract_die_value_from_dish(die):
+	match die.flavour:
+		GlobalEnums.Flavour.SWEET:
+			sweet -= die.number
+		GlobalEnums.Flavour.SPICY:
+			spicy -= die.number
+		GlobalEnums.Flavour.HEARTY:
+			hearty -= die.number
+		GlobalEnums.Flavour.FRESH:
+			fresh -= die.number
 
 func roll_ingredient(card:Node):
 	var dice_multiplier = 1
 	var result_multiplier = 1
 	if current_cards.size() > 1:
-		dice_disp.reset_highlights(current_cards[current_cards.size()-2])
+		for i in current_cards:
+			dice_disp.reset_highlights(i)
 	abilities.on_dice_roll(card)
 	sweet += roll_dice(GlobalEnums.Flavour.SWEET, dice_multiplier*card.stats.sweet,card) * result_multiplier
 	spicy += roll_dice(GlobalEnums.Flavour.SPICY,dice_multiplier*card.stats.spicy,card) * result_multiplier
@@ -121,6 +122,28 @@ func roll_dice(flavour,amount,card:Node):
 		all_result += roll_result
 		dice_disp.spawn_die(flavour, roll_result, card)
 	return all_result
+
+func reroll_all_dice_of_flavour(flavour:GlobalEnums.Flavour):
+	for ingr in current_cards:
+		for die in ingr.dice:
+			if die.flavour == flavour:
+				reroll_die(die)
+
+func reroll_die(die):
+	subtract_die_value_from_dish(die)
+	var roll_result = random.randi_range(1,6)
+	die.display_number(roll_result)
+	match die.flavour:
+		GlobalEnums.Flavour.SWEET:
+			sweet += roll_result
+		GlobalEnums.Flavour.SPICY:
+			spicy += roll_result
+		GlobalEnums.Flavour.HEARTY:
+			hearty += roll_result
+		GlobalEnums.Flavour.FRESH:
+			fresh += roll_result
+	
+	die.start_visuals()
 
 func start():
 	dish_ui.update_nutrition(nutrition)
