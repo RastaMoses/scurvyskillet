@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://bsboei8v6c4x5"]
+
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_cqfnr"]
+[ext_resource type="Texture2D" uid="uid://bqejql3rx6sj2" path="res://sprites/ingredients/ingredient_Skyllamari.png" id="2_ftag7"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_rrbsu"]
+[ext_resource type="Resource" uid="uid://c25kwvotwakw5" path="res://resources/abilities/skyllamari.tres" id="2_x4rlx"]
+
+[resource]
+script = ExtResource("2_rrbsu")
+name = "Skyllamari"
+icon = ExtResource("2_ftag7")
+tags = Array[int]([9, 4])
+rarity = 3
+nutrition = 1
+sweet = 2
+hearty = 2
+abilities = Array[ExtResource("1_cqfnr")]([ExtResource("2_x4rlx")])
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"

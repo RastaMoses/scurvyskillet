@@ -78,6 +78,8 @@ extends Resource
 @export var hearty_effect:int = 0
 @export var nutrition_effect:int = 0
 @export var uses_effect:int = 0
+@export_subgroup("Modifier")
+@export var times_tag_in_dish:Array[GlobalEnums.Tags] = []
 @export_group("Dice")
 @export var reroll:bool = false
 @export var set_dice_number:int = 0

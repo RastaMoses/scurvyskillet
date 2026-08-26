@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Ability" format=3 uid="uid://c25kwvotwakw5"]
+
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="1_nskwx"]
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="2_02vig"]
+
+[resource]
+script = ExtResource("2_02vig")
+name = "Skyllamari"
+this_add_to_dish_cond = true
+self_target = true
+nutrition_effect = 3
+times_tag_in_dish = Array[int]([4])
+metadata/_custom_type_script = "uid://bnelk35k2xjth"

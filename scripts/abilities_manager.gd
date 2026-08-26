@@ -271,28 +271,42 @@ func activate_effects(trigger, context_card):
 	#-----------PREVIEW EFFECTS-----------
 	#self card effects
 	if ability.self_target:
+		var multiplier = 1
 		#modify own stats
+		if !ability.times_tag_in_dish.is_empty():
+			for card in current_dish.current_cards:
+				for tag in ability.times_tag_in_dish:
+					if card.stats.tags.has(tag):
+						multiplier += 1
+						break
 		#add stat effects
-		ability_card.stats.sweet += ability.sweet_effect
-		ability_card.stats.spicy += ability.spicy_effect
-		ability_card.stats.hearty += ability.hearty_effect
-		ability_card.stats.fresh += ability.fresh_effect
-		ability_card.stats.nutrition += ability.nutrition_effect
+		ability_card.stats.sweet += ability.sweet_effect * multiplier
+		ability_card.stats.spicy += ability.spicy_effect * multiplier
+		ability_card.stats.hearty += ability.hearty_effect * multiplier
+		ability_card.stats.fresh += ability.fresh_effect * multiplier
+		ability_card.stats.nutrition += ability.nutrition_effect * multiplier
 		
 	#can be played
 	
 	if ability.played_ingredient_target:
+		var multiplier = 1
 		var apply_effects = true
 		#check for target filters
 		apply_effects = check_target_filter(trigger, context_card)
 		#modify other cards stats
+		if !ability.times_tag_in_dish.is_empty():
+			for card in current_dish.current_ingredients:
+				for tag in ability.times_tag_in_dish:
+					if card.stats.tags.has(tag):
+						multiplier += 1
+						break
 		if apply_effects:
 			#add stat effects
-			context_card.stats.sweet += ability.sweet_effect
-			context_card.stats.spicy += ability.spicy_effect
-			context_card.stats.hearty += ability.hearty_effect
-			context_card.stats.fresh += ability.fresh_effect
-			context_card.stats.nutrition += ability.nutrition_effect
+			context_card.stats.sweet += ability.sweet_effect * multiplier
+			context_card.stats.spicy += ability.spicy_effect * multiplier
+			context_card.stats.hearty += ability.hearty_effect * multiplier
+			context_card.stats.fresh += ability.fresh_effect * multiplier
+			context_card.stats.nutrition += ability.nutrition_effect * multiplier
 	
 	
 	#-----------NON- PREVIEW EFFECTS-----------
