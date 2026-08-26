@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Ability" format=3 uid="uid://vvgkht6x7ghv"]
+
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="1_55gcl"]
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="2_vfb33"]
+
+[resource]
+script = ExtResource("2_vfb33")
+name = "Gryphomelette"
+this_add_to_dish_cond = true
+all_dice_target = true
+dice_number_filter = Array[int]([1, 2])
+set_dice_number = 4
+metadata/_custom_type_script = "uid://bnelk35k2xjth"

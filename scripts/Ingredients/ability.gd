@@ -54,13 +54,15 @@ extends Resource
 @export var played_ingredient_target:bool = false
 @export var all_ingredients_in_dish_target:bool = false
 @export var all_in_player_inventory_target:bool = false
-@export var all_dice_target:Array[GlobalEnums.Flavour] = []
+@export var all_dice_target:bool = false
 @export_subgroup("Target Filter")
 @export var specific_ingredient_filter:Ingredient = null
 @export var card_abilities_filter:Array[Ability] = []
 @export var card_tags_filter:Array[GlobalEnums.Tags] = []
 @export var card_rarity_filter:Array[GlobalEnums.Rarity] = []
 @export_subgroup("Dice")
+@export var dice_number_filter:Array[int] = []
+@export var dice_flavour_filter:Array[GlobalEnums.Flavour] = []
 @export_group("Dish")
 @export var limit_ingredients_int:int = -1
 @export_group("Add Ingredient")
@@ -78,6 +80,7 @@ extends Resource
 @export var uses_effect:int = 0
 @export_group("Dice")
 @export var reroll:bool = false
+@export var set_dice_number:int = 0
 #endregion
 #endregion
 #---------------------CONDITIONS CHECKING----------------------

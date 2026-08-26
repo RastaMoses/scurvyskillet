@@ -33,6 +33,8 @@ func add_ability_to_dish_trigger(ability, card, preview):
 	dish_trigger.append(t)
 func remove_all_from_dish_trigger():
 	dish_trigger.clear()
+	for card in player_inventory.current_cards:
+		card.reset_preview()
 
 func dish_trigger_already_active(ability, card) -> bool:
 	for t in dish_trigger:
@@ -103,8 +105,7 @@ func check_dish_conditions(ability) ->bool: #checks if conditions are met to act
 				return false
 	return true
 
-
-func evaluate_add_to_dish_triggers(added_card: Node, preview:bool = false) -> void:
+func evaluate_add_to_dish_triggers(added_card: Node, preview:bool = false, drag_preview:bool = false) -> void:
 	# Iterate over a copy because we may remove elements
 	for t in dish_trigger.slice(0):
 		var ability = t.ability
@@ -124,6 +125,11 @@ func evaluate_add_to_dish_triggers(added_card: Node, preview:bool = false) -> vo
 
 		#Checking general conditions
 		if not check_dish_conditions(ability):
+			continue
+		if preview:
+			set_card_preview_effects(t, added_card)
+			if drag_preview:
+				set_dice_preview_effects(t, added_card)
 			continue
 		activate_effects(t, added_card)
 		# Handle duration / non‑continuous
@@ -237,6 +243,7 @@ func on_encounter_end():
 
 func on_dish_complete():
 	remove_all_from_dish_trigger()
+	current_dish = null
 	pass
 
 func on_challenge_start(dish):
@@ -286,11 +293,7 @@ func activate_effects(trigger, context_card):
 			context_card.stats.hearty += ability.hearty_effect
 			context_card.stats.fresh += ability.fresh_effect
 			context_card.stats.nutrition += ability.nutrition_effect
-			
 	
-	# dont do any other effects if only preview
-	if trigger.preview:
-		return
 	
 	#-----------NON- PREVIEW EFFECTS-----------
 	
@@ -324,10 +327,28 @@ func activate_effects(trigger, context_card):
 				player_inventory.instantiate_card_and_add(ing)
 
 	#Dice Reroll
-	if not ability.all_dice_target.is_empty():
-		for flavour in ability.all_dice_target:
-			if ability.reroll:
-				current_dish.reroll_all_dice_of_flavour(flavour)
+	if ability.all_dice_target:
+		if not ability.dice_flavour_filter.is_empty():
+			for flavour in ability.dice_flavour_filter:
+				for ingr in current_dish.current_cards:
+					for die in ingr.dice:
+						if die.flavour == flavour:
+							#if flavour filter applies
+							if ability.reroll:
+								current_dish.reroll_die(die)
+							if ability.set_dice_number != 0:
+								die.display_number(ability.set_dice_number)
+				
+		if not ability.dice_number_filter.is_empty():
+			for number in ability.dice_number_filter:
+				for card in current_dish.current_cards:
+					for die in card.dice:
+						if die.number == number:
+							#if dice filter applies
+							if ability.reroll:
+								current_dish.reroll_die(die)
+							if ability.set_dice_number != 0:
+								die.display_number(ability.set_dice_number)
 	#limit amount possible in dish
 	
 	# Extend here for other effects:
@@ -376,7 +397,9 @@ func check_target_filter(trigger, context_card) -> bool:
 #endregion
 
 #region Preview
-func preview_card_abilities_add_dish(card):
+func preview_card_abilities_add_dish(card, drag:bool = false):
+	if current_dish == null:
+		return
 	#for each ability on new card checks if already active and adds if supposed to
 	card.set_preview()
 	for ability:Ability in card.stats.abilities:
@@ -391,5 +414,76 @@ func preview_card_abilities_add_dish(card):
 		else:
 			#first time ability is called
 			add_ability_to_dish_trigger(ability, card, true)
-	evaluate_add_to_dish_triggers(card, true)
+	evaluate_add_to_dish_triggers(card, true, drag)
+
+func stop_preview_add_to_dish():
+	if current_dish == null:
+		return
+	for i in player_inventory.current_cards:
+		i.reset_preview()
+		preview_card_abilities_add_dish(i)
+	for i in current_dish.current_cards:
+		i.reset_preview()
+	for t in dish_trigger:
+		if t.preview == true:
+			dish_trigger.erase(t)
+	
+
+func set_dice_preview_effects(trigger, context_card):
+	var ability = trigger.ability
+	var ability_card = trigger.source_card
+	#-----------PREVIEW EFFECTS-----------
+	if ability.all_dice_target:
+		if not ability.dice_flavour_filter.is_empty():
+			for flavour in ability.dice_flavour_filter:
+				for ingr in current_dish.current_cards:
+					for die in ingr.dice:
+						if die.flavour == flavour:
+							#if flavour filter applies
+							if ability.reroll:
+								die.set_preview()
+							if ability.set_dice_number != 0:
+								die.set_preview()
+				
+		if not ability.dice_number_filter.is_empty():
+			for number in ability.dice_number_filter:
+				for card in current_dish.current_cards:
+					for die in card.dice:
+						if die.number == number:
+							#if dice filter applies
+							if ability.reroll:
+								die.set_preview()
+							if ability.set_dice_number != 0:
+								die.set_preview()
+
+func set_card_preview_effects(trigger, context_card):
+	var ability = trigger.ability
+	var ability_card = trigger.source_card
+	#-----------PREVIEW EFFECTS-----------
+	#self card effects
+	if ability.self_target:
+		#modify own stats
+		#add stat effects
+		ability_card.stats.sweet += ability.sweet_effect
+		ability_card.stats.spicy += ability.spicy_effect
+		ability_card.stats.hearty += ability.hearty_effect
+		ability_card.stats.fresh += ability.fresh_effect
+		ability_card.stats.nutrition += ability.nutrition_effect
+		
+	#can be played
+	
+	if ability.played_ingredient_target:
+		var apply_effects = true
+		#check for target filters
+		apply_effects = check_target_filter(trigger, context_card)
+		#modify other cards stats
+		if apply_effects:
+			#add stat effects
+			context_card.stats.sweet += ability.sweet_effect
+			context_card.stats.spicy += ability.spicy_effect
+			context_card.stats.hearty += ability.hearty_effect
+			context_card.stats.fresh += ability.fresh_effect
+			context_card.stats.nutrition += ability.nutrition_effect
+	
+	
 #endregion

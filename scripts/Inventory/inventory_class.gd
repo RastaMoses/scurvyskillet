@@ -164,3 +164,10 @@ func reset_card_stats(card):
 func reset_all_card_stats():
 	for i in current_cards:
 		reset_card_stats(i)
+
+func set_ability_drag_preview(card):
+	abilities.preview_card_abilities_add_dish(card, true)
+
+func stop_ability_drag_preview(card):
+	abilities.stop_preview_add_to_dish()
+	

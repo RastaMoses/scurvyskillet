@@ -7,6 +7,7 @@
 script = ExtResource("2_wfcou")
 name = "Refreshing"
 this_add_to_dish_cond = true
-all_dice_target = Array[int]([3])
+all_dice_target = true
+dice_flavour_filter = Array[int]([3])
 reroll = true
 metadata/_custom_type_script = "uid://bnelk35k2xjth"

@@ -29,10 +29,13 @@ var ingredient_name:RichTextLabel
 
 #SIGNALS
 signal large_view_clicked(card_data)
+signal dragged(card_data)
+signal stop_drag(card_data)
 
 #STATE
 var card
 var dragging = false
+var dragging_preview = false
 
 func _ready() -> void:
 	if editor_preview:
@@ -62,7 +65,7 @@ func toggle_only_icon(value):
 func update(item):
 	if !item:
 		item_visual.visible = false
-		card == null
+		card = null
 		empty_slot.visible = true
 		large_view_button.visible = false
 	else:
@@ -189,13 +192,16 @@ func _get_drag_data(_at_position: Vector2) -> Variant:
 	preview.toggle_only_icon(true)
 	var c = Control.new()
 	c.add_child(preview)
-	preview.dragging = true
+	preview.dragging_preview = true
 	preview.position -= drag_pos_offset
 	preview.z_index = 100
 	preview.self_modulate = Color.TRANSPARENT
 	c.modulate = Color(c.modulate, 0.7)
 	set_drag_preview(c)
 	item_visual.hide()
+	#Started drag
+	dragged.emit(card)
+	dragging = true
 	return self
 
 func _can_drop_data(_at_position: Vector2, _data: Variant) -> bool:
@@ -213,12 +219,17 @@ func _drop_data(at_position: Vector2, data: Variant) -> void:
 		data.show()
 		data.update(data.card)
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_DRAG_END:
+		if dragging:
+			stop_drag.emit(card)
+			dragging = false
+
 func _process(delta: float) -> void:
-	if !dragging:
+	if !dragging_preview:
 		return
 	var new_pos = get_global_mouse_position() - drag_pos_offset
 	global_position = (new_pos / pixel_multiple).round() * pixel_multiple
-
 
 func get_tag_name(state: GlobalEnums.Tags) -> String:
 	var enum_name := str(GlobalEnums.Tags.find_key(state)).to_lower()

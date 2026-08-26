@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://xl1hhjkkb3sk"]
+
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_ifrho"]
+[ext_resource type="Resource" uid="uid://vvgkht6x7ghv" path="res://resources/abilities/gryphomelette.tres" id="2_dmtr3"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_pg7b8"]
+[ext_resource type="Texture2D" uid="uid://dro0xq3ythtq3" path="res://sprites/ingredients/ingredient_gryphomelette.png" id="3_c1cei"]
+
+[resource]
+script = ExtResource("2_pg7b8")
+name = "Gryphomelette"
+icon = ExtResource("3_c1cei")
+rarity = 3
+nutrition = 3
+spicy = 2
+hearty = 2
+abilities = Array[ExtResource("1_ifrho")]([ExtResource("2_dmtr3")])
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"

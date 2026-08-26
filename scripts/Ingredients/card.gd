@@ -17,6 +17,9 @@ func set_stats(new_stats:Ingredient,resource:Ingredient):
 
 func reset_preview():
 	stats = temp_stats.duplicate(true)
+	for i in dice:
+		if i !=null:
+			i.reset_preview()
 
 func set_preview():
 	temp_stats = stats.duplicate(true)

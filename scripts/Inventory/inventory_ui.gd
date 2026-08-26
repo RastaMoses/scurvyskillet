@@ -48,6 +48,8 @@ func _ready():
 	large_view_button.pressed.connect(large_view_button_pressed)
 	for i in slots:
 		i.large_view_clicked.connect(large_view_button_pressed)
+		i.dragged.connect(card_dragged)
+		i.stop_drag.connect(card_drag_ended)
 	event_manager.on_encounter_end.connect(encounter_end)
 	event_manager.on_encounter_start.connect(encounter_start)
 	reset_large_view()
@@ -62,6 +64,8 @@ func add_slot():
 	grid_container.add_child(temp)
 	slots.append(temp)
 	temp.large_view_clicked.connect(large_view_button_pressed)
+	temp.dragged.connect(card_dragged)
+	temp.stop_drag.connect(card_drag_ended)
 
 func remove_slots(amount):
 	var i = 0
@@ -147,7 +151,8 @@ func close():
 func update_topbar():
 	money_text.text = str(player_inventory.current_money)
 	morale_text.text = str(player_inventory.current_morale)
-	
+
+#region Large View
 func toggle_large_view(card):
 	if large_view_active:
 		
@@ -183,3 +188,10 @@ func reset_large_view():
 	if (large_view_active):
 		toggle_large_view(null)
 	large_view_active = false
+#endregion
+
+#region Ability UI
+func card_dragged(card):
+	player_inventory.set_ability_drag_preview(card)
+func card_drag_ended(card):
+	player_inventory.stop_ability_drag_preview(card)

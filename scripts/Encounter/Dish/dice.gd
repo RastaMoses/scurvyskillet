@@ -36,6 +36,11 @@ var flavour:GlobalEnums.Flavour
 var sizzle_active = true
 var sizzle_timer = sizzle_interval
 
+#Preview
+var preview = false
+var temp_number_shown:bool
+var temp_highlighted:bool
+
 #Signals
 
 func start_move():
@@ -54,10 +59,12 @@ func change_sprite(texture):
 	sprite.texture = texture
 
 func display_number(value):
+	await get_tree().process_frame
 	number = value
 	for i in number_sprites:
 		i.visible = false
 	start_number()
+	start_highlight()
 
 func stop_movement():
 	linear_velocity = Vector2.ZERO
@@ -75,13 +82,15 @@ func _process(delta: float) -> void:
 				highlight_sprite.self_modulate.a -= delta * highlight_vanish_speed
 			if highlight_sprite.self_modulate.a <= 0:
 				highlighted = false
+				highlight_sprite.visible = false
 	if number_shown:
 		number_time -= delta
 		if number_time <= 0:
 			if number_vanish_speed != 0:
 				number_sprites[number - 1].self_modulate.a -= delta * number_vanish_speed
 			if number_sprites[number-1].self_modulate.a <= 0:
-				highlighted = false
+				number_shown = false
+				number_sprites[number-1].visible = false
 	if sizzle_active:
 		if sizzle_timer >= sizzle_interval:
 			sizzle_timer = 0
@@ -100,22 +109,33 @@ func _process(delta: float) -> void:
 		round(raw_position.y / pixel_multiple) * pixel_multiple
 	)
 
-func start_number():
-	number_shown = false
-	number_time = 0
-	number_sprites[number - 1].visible = true
-	number_sprites[number - 1].self_modulate.a = 1
-	
-func stop_number():
-	number_shown = true
-	number_time = number_duration
-	if number_vanish_speed == 0:
-		number_sprites[number - 1].visible = false
 
-func start_visuals():
+func reset_preview():
+	if preview:
+		number_shown = temp_number_shown
+		highlighted = temp_highlighted
+		preview = false
+	
+func set_preview():
+	if number_shown == true:
+		temp_number_shown = false
+	else:
+		if number_sprites[number - 1].visible:
+			temp_number_shown = false
+		else:
+			temp_number_shown = true
+	
+	if highlighted == true:
+		temp_highlighted = false
+	else:
+		if highlight_sprite.visible:
+			temp_highlighted = false
+		else:
+			temp_highlighted = true
+	preview = true
 	start_highlight()
 	start_number()
-
+	
 func start_highlight():
 	highlighted = false
 	highlight_time = 0
@@ -128,5 +148,16 @@ func stop_highlight():
 	if highlight_vanish_speed == 0:
 		highlight_sprite.visible = false
 
+func start_number():
+	number_shown = false
+	number_time = 0
+	number_sprites[number - 1].visible = true
+	number_sprites[number - 1].self_modulate.a = 1
+	
+func stop_number():
+	number_shown = true
+	number_time = number_duration
+	if number_vanish_speed == 0:
+		number_sprites[number - 1].visible = false
 func destroy():
 	queue_free()

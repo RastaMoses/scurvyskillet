@@ -77,7 +77,6 @@ func spawn_die(flavour, value, card:Node):
 	new_die.flavour = flavour
 	#set highlight
 	new_die.display_number(value)
-	new_die.start_highlight()
 
 func reset_highlights(card):
 	if card == null:

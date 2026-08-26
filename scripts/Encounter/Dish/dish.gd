@@ -28,6 +28,10 @@ func _ready() -> void:
 	destroying_all.connect(on_destroy_all_ingredients)
 	checking_drop.connect(on_check_drop)
 
+func start():
+	dish_ui.update_nutrition(nutrition)
+	dish_ui.update_flavours()
+
 func on_check_drop(origin,card):
 	if origin != self:
 		return
@@ -123,11 +127,18 @@ func roll_dice(flavour,amount,card:Node):
 		dice_disp.spawn_die(flavour, roll_result, card)
 	return all_result
 
-func reroll_all_dice_of_flavour(flavour:GlobalEnums.Flavour):
-	for ingr in current_cards:
-		for die in ingr.dice:
-			if die.flavour == flavour:
-				reroll_die(die)
+func finish_dish():
+	dice_disp.finish_dish()
+
+func count_ingredient_in_dish(target:Ingredient) -> int:
+	var count = 0
+	for card in current_cards:
+		if card.base_stats == target:
+			count += 1
+	return count
+
+#region Ability Effects
+
 
 func reroll_die(die):
 	subtract_die_value_from_dish(die)
@@ -142,19 +153,7 @@ func reroll_die(die):
 			hearty += roll_result
 		GlobalEnums.Flavour.FRESH:
 			fresh += roll_result
-	
-	die.start_visuals()
 
-func start():
-	dish_ui.update_nutrition(nutrition)
-	dish_ui.update_flavours()
 
-func finish_dish():
-	dice_disp.finish_dish()
 
-func count_ingredient_in_dish(target:Ingredient) -> int:
-	var count = 0
-	for card in current_cards:
-		if card.base_stats == target:
-			count += 1
-	return count
+#endregion
