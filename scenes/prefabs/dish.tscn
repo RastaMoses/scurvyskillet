@@ -235,10 +235,10 @@ texture = ExtResource("10_2pbgc")
 [node name="text" type="RichTextLabel" parent="UI/Nutrition" unique_id=434235131]
 z_index = 2
 layout_mode = 0
-offset_left = 688.0
-offset_top = 368.0
-offset_right = 816.0
-offset_bottom = 465.0
+offset_left = 660.0
+offset_top = 360.0
+offset_right = 812.0
+offset_bottom = 469.0
 mouse_filter = 1
 mouse_behavior_recursive = 1
 theme = ExtResource("13_iw5a0")
@@ -257,7 +257,6 @@ mouse_filter = 2
 mouse_behavior_recursive = 1
 
 [node name="plate1" type="TextureRect" parent="UI/Nutrition/plates" unique_id=1236609232]
-visible = false
 layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0

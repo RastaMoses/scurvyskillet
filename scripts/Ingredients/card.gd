@@ -1,26 +1,31 @@
 extends Node
 
 var stats:Ingredient
-var temp_stats: Ingredient
+var committed_stats: Ingredient
+var preview_stats: Ingredient
 var base_stats:Ingredient
 var price:int
 var dice:Array[RigidBody2D]
+var preview_active:bool = false
 
 
 func _ready() -> void:
 	$Preview.queue_free()
 
 func set_stats(new_stats:Ingredient,resource:Ingredient):
-	stats = new_stats.duplicate(true)
+	committed_stats = new_stats.duplicate(true)
+	stats = committed_stats
 	base_stats = resource
-	temp_stats = stats.duplicate(true)
+	preview_stats = stats.duplicate(true)
 
-func reset_preview():
-	stats = temp_stats.duplicate(true)
-	for i in dice:
-		if i !=null:
-			i.reset_preview()
+func clear_preview():
+	preview_stats = committed_stats.duplicate(true)
+	stats = committed_stats
 
-func set_preview():
-	temp_stats = stats.duplicate(true)
+func begin_preview(new_preview_stats:Ingredient):
+	print(stats.name)
+	print("start preview and nutrition of preview is:")
+	print(preview_stats.nutrition)
+	preview_stats = new_preview_stats
+	stats = preview_stats
 	

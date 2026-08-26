@@ -192,6 +192,6 @@ func reset_large_view():
 
 #region Ability UI
 func card_dragged(card):
-	player_inventory.set_ability_drag_preview(card)
+	player_inventory.set_card_drag(card)
 func card_drag_ended(card):
-	player_inventory.stop_ability_drag_preview(card)
+	player_inventory.stop_card_drag()

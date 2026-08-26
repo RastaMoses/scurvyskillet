@@ -231,6 +231,7 @@ func _process(delta: float) -> void:
 	var new_pos = get_global_mouse_position() - drag_pos_offset
 	global_position = (new_pos / pixel_multiple).round() * pixel_multiple
 
+
 func get_tag_name(state: GlobalEnums.Tags) -> String:
 	var enum_name := str(GlobalEnums.Tags.find_key(state)).to_lower()
 	return enum_name.left(1).to_upper() + enum_name.substr(1)

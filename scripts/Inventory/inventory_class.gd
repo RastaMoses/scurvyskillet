@@ -16,6 +16,7 @@ var current_cards: Array[Node]
 @onready var player_inventory = get_tree().get_first_node_in_group("player")
 @onready var event_manager = get_tree().get_first_node_in_group("event_manager")
 @onready var item_pool = get_tree().get_first_node_in_group("ingredient_pool")
+
 #SIGNALS
 signal on_add_card(origin,card)
 signal dropping_ingredient(origin, card)
@@ -23,8 +24,11 @@ signal on_remove_ingredient(origin,card)
 signal checking_drop(origin,card)
 signal destroying_ingredient(origin,card)
 signal destroying_all(origin)
+signal card_start_drag(origin,card)
+signal card_stop_drag(origin)
 #STATE
 var can_drop_card = true
+var dragging_card:Node = null
 
 func _ready() -> void:
 	for i in starting_ingredients:
@@ -49,7 +53,6 @@ func destroy_all_ingredients():
 func remove_ingredient(card):
 	if !current_cards.has(card):
 		return
-	
 	if !card.stats.unlimited_uses:
 		change_ingredient_uses(card, -1)
 		current_cards.erase(card)
@@ -60,8 +63,8 @@ func remove_ingredient(card):
 
 func drop_ingredient(card):
 	dropping_ingredient.emit(self, card)
-	add_card(card)
 	player_inventory.remove_ingredient(card)
+	add_card(card)
 
 func instantiate_card_and_add(resource:Ingredient):
 	var temp_card:Node = card_prefab.instantiate()
@@ -75,16 +78,15 @@ func add_card(card):
 	add_child(new_card)
 	new_card.set_stats(card.stats, card.base_stats)
 	#Check if ingredient is already in inventory
-	if new_card.stats.unlimited_uses:
-		if ui != null:
-			ui.update_slots()
+	if new_card.committed_stats.unlimited_uses:
 		current_cards.append(new_card)
-		on_add_card.emit(self,new_card)
-		return new_card
-	distribute_uses(new_card)
+	else:
+		distribute_uses(new_card)
 	on_add_card.emit(self,new_card)
+	
 	if ui != null:
 		ui.update_slots()
+	
 	return new_card
 
 func distribute_uses(card):
@@ -93,12 +95,11 @@ func distribute_uses(card):
 	var duplicates:Array[Node] = []
 	for i in current_cards:
 		if i.base_stats == card.base_stats:
-			
 			duplicates.append(i)
 	#find duplicate with less than 4 uses and assign more uses until the added card has no more
-	if duplicates.size() !=0 and can_stack_uses:
+	if can_stack_uses:
 		for i in duplicates:
-			while i.stats.uses < 4 and card.stats.uses != 0:
+			while i.stats.uses < 4 and card.stats.uses > 0:
 				change_ingredient_uses(i, 1)
 				change_ingredient_uses(card, -1)
 			if card.stats.uses == 0 or card == null or card.is_queued_for_deletion():
@@ -156,18 +157,10 @@ func sort_by_rarity(a,b):
 func sort_by_name(a, b): 
 	return a.stats.name.naturalnocasecmp_to(b.stats.name) < 0
 
-func reset_card_stats(card):
-	#sets stats to be base
-	card.reset_to_base_stats()
-	ui.update_slots()
+func set_card_drag(card):
+	dragging_card = card
+	card_start_drag.emit(self, card)
 
-func reset_all_card_stats():
-	for i in current_cards:
-		reset_card_stats(i)
-
-func set_ability_drag_preview(card):
-	abilities.preview_card_abilities_add_dish(card, true)
-
-func stop_ability_drag_preview(card):
-	abilities.stop_preview_add_to_dish()
-	
+func stop_card_drag():
+	dragging_card = null
+	card_stop_drag.emit(self)
