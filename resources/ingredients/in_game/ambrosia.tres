@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://xr2mxu8h5d0r"]
+
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_6mffx"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_5gafg"]
+[ext_resource type="Resource" uid="uid://d3v4djl7t1bx1" path="res://resources/abilities/godlike_taste.tres" id="2_8juhp"]
+[ext_resource type="Texture2D" uid="uid://hjkcao526cs6" path="res://sprites/ingredients/ingredient_ambrosia.png" id="3_hqbv3"]
+
+[resource]
+script = ExtResource("2_5gafg")
+name = "Ambrosia"
+icon = ExtResource("3_hqbv3")
+tags = Array[int]([1])
+rarity = 3
+description = "Godlike Taste: Gain 3 Morale"
+nutrition = 1
+sweet = 3
+abilities = Array[ExtResource("1_6mffx")]([ExtResource("2_8juhp")])
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"

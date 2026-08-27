@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://j1a6xd1rwb4"]
+
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_rihd2"]
+[ext_resource type="Resource" uid="uid://dqjvpuqaqn5v7" path="res://resources/abilities/fruitfull.tres" id="2_8au0g"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_t3n4i"]
+[ext_resource type="Resource" uid="uid://ci64gmwabva6a" path="res://resources/abilities/no_fruit_no_problem.tres" id="3_4xsxy"]
+[ext_resource type="Texture2D" uid="uid://cf52o6mnno7i5" path="res://sprites/ingredients/ingredient_apple_of_discord.png" id="4_mwiwg"]
+
+[resource]
+script = ExtResource("2_t3n4i")
+name = "Apple of Discord"
+icon = ExtResource("4_mwiwg")
+tags = Array[int]([5])
+rarity = 3
+description = "You cannot use this if you used other Fruit Ingredients
+You cannot use Fruit ingredients after this"
+nutrition = 3
+sweet = 3
+fresh = 3
+abilities = Array[ExtResource("1_rihd2")]([ExtResource("2_8au0g"), ExtResource("3_4xsxy")])
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://bf7cre7ia068a"]
+
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_ywqdl"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_jnnkm"]
+[ext_resource type="Texture2D" uid="uid://ds0jswtp7xx1r" path="res://sprites/placeholder/kleinb.PNG" id="2_s6yoc"]
+[ext_resource type="Resource" uid="uid://byvdbwlvgfue3" path="res://resources/abilities/centaur.tres" id="2_x5iy0"]
+
+[resource]
+script = ExtResource("2_jnnkm")
+name = "Centaur Shanks"
+icon = ExtResource("2_s6yoc")
+tags = Array[int]([8, 9])
+rarity = 3
+description = "For every 4 Dice in the dish, gain +4 Nutrition"
+hearty = 4
+abilities = Array[ExtResource("1_ywqdl")]([ExtResource("2_x5iy0")])
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"

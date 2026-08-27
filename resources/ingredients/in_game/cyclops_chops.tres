@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://cr30k07vdrvpo"]
+
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_cqqoj"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_1gbis"]
+[ext_resource type="Texture2D" uid="uid://dr2lvwoqdxg2s" path="res://sprites/ingredients/ingredient_cyclops_chops.png" id="2_rkhrr"]
+[ext_resource type="Resource" uid="uid://f1kptdw2ut3h" path="res://resources/abilities/only_meats.tres" id="2_rpyyp"]
+
+[resource]
+script = ExtResource("2_1gbis")
+name = "Cyclops Chops"
+icon = ExtResource("2_rkhrr")
+tags = Array[int]([9, 8])
+rarity = 3
+description = "Can only play 'Meat' after playing this"
+nutrition = 3
+hearty = 5
+abilities = Array[ExtResource("1_cqqoj")]([ExtResource("2_rpyyp")])
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"

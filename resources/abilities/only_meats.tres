@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Ability" format=3 uid="uid://f1kptdw2ut3h"]
+
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="1_jfjkj"]
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="2_v6eo1"]
+
+[resource]
+script = ExtResource("2_v6eo1")
+name = "OnlyMeats"
+continuous = true
+try_add_to_dish_cond = true
+played_ingredient_target = true
+card_tags_filter = Array[int]([8])
+can_only_play = true
+metadata/_custom_type_script = "uid://bnelk35k2xjth"

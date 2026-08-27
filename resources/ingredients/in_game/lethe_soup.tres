@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://5asg7mvtoesq"]
+
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_q0h28"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_mbctq"]
+[ext_resource type="Resource" uid="uid://dwfoqqaff6ee1" path="res://resources/abilities/lethe.tres" id="2_twudl"]
+[ext_resource type="Texture2D" uid="uid://w1nnak0i7uk4" path="res://sprites/ingredients/ingredient_lethe_soup.png" id="3_1wxo2"]
+
+[resource]
+script = ExtResource("2_mbctq")
+name = "Lethe Soup"
+icon = ExtResource("3_1wxo2")
+rarity = 3
+description = "Reroll all dice ... Dis? Dsssss..."
+nutrition = 1
+sweet = 1
+spicy = 1
+hearty = 1
+fresh = 1
+abilities = Array[ExtResource("1_q0h28")]([ExtResource("2_twudl")])
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"

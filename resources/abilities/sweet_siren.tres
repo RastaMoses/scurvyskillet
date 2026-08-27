@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Ability" format=3 uid="uid://clyw6ixs1wa6k"]
+
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="1_uctjx"]
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="2_pwx7b"]
+
+[resource]
+script = ExtResource("2_pwx7b")
+name = "Sweet Siren"
+this_add_to_dish_cond = true
+dish_target = true
+flavours_filter = Array[int]([1, 2, 3])
+equal_stats_to_flavour = 0
+metadata/_custom_type_script = "uid://bnelk35k2xjth"

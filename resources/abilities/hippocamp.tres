@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Ability" format=3 uid="uid://dvt8xqrefiomk"]
+
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="1_4f7f8"]
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="2_7oty6"]
+
+[resource]
+script = ExtResource("2_7oty6")
+name = "Hippocamp"
+this_add_to_dish_cond = true
+self_target = true
+uses_effect = 3
+times_tag_in_dish = Array[int]([4, 8])
+metadata/_custom_type_script = "uid://bnelk35k2xjth"

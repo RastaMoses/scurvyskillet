@@ -12,17 +12,17 @@ extends Inventory
 @export_subgroup("Random Item Reqs")
 @export var and_req:bool = false
 @export var req_rarity:Array[GlobalEnums.Rarity]
-@export var req_tag:Array[GlobalEnums.Tags]
+@export var req_tags:Array[GlobalEnums.Tags]
 @export var req_ability:Array[Ability]
 @export_group("Cost")
 @export var c_money:int
 @export var c_morale:int
 @export_subgroup("Ingredient Cost Requirements")
 @export var drop_ingredients:bool
+@export var req_specific_ingredients:Array[Ingredient]
 @export var ingredient_amount:int
 @export var randomIngredients:int
 @export var sweet:int
-var sour:int
 @export var spicy:int
 @export var hearty:int
 @export var fresh:int
@@ -55,8 +55,25 @@ func _ready() -> void:
 func on_checking_drop(origin, card):
 	if origin != self:
 		return
-	drop_highlight.visible = true
-
+	var droppable = true
+	
+	#specific ingredient
+	if req_ability.size() != 0:
+		for i in req_ability:
+			if i.committed_stats.name == card.stats.name:
+				droppable = false
+	#check if a tag is required
+	if req_tags.size() != 0:
+		for i in req_tags:
+			if !card.committed_stats.tags.has(i):
+				droppable = false
+	#check for rarity
+	if req_rarity.size() != 0:
+		for i in req_rarity:
+			if !card.committed_stats.rarity.has(i):
+				droppable = false
+	drop_highlight.visible = droppable
+	can_drop_card = droppable
 func on_ingredient_dropped(origin, card):
 	if origin != self:
 		return
@@ -79,12 +96,6 @@ func check_completed():
 	for i in current_cards:
 		sweet_sum += i.stats.sweet
 	if sweet_sum < sweet:
-		return
-		
-	var sour_sum = 0
-	for i in current_cards:
-		sour_sum += i.stats.sour
-	if sour_sum < sour:
 		return
 		
 	var spicy_sum = 0
@@ -130,7 +141,7 @@ func give_rewards():
 	if random_ingredient_amount > 0:
 		var index = random_ingredient_amount
 		while index > 0:
-			player_inventory.instantiate_card_and_add(item_pool.get_random_ingredient(and_req,req_tag,req_ability,req_rarity))
+			player_inventory.instantiate_card_and_add(item_pool.get_random_ingredient(and_req,req_tags,req_ability,req_rarity))
 			index -= 1
 	for i in specific_ingredients:
 		

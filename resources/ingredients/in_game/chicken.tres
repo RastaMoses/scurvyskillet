@@ -11,6 +11,7 @@ name = "Chicken"
 icon = ExtResource("3_uf7lj")
 tags = Array[int]([8])
 rarity = 1
+description = "Boned: Gain 1 \"Bones\""
 nutrition = 2
 hearty = 2
 abilities = Array[ExtResource("1_tvqac")]([ExtResource("2_oe4j8")])

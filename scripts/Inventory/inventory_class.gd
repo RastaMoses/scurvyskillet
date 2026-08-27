@@ -7,10 +7,7 @@ var current_cards: Array[Node]
 @export var starting_ingredients: Array[Ingredient]
 @export var ui:Control
 @export var can_stack_uses:bool = true
-@export_group("Can Drop Reqs")
-@export var cd_tags:Array[GlobalEnums.Tags]
-@export var cd_ingredients:Array[Ingredient]
-@export var cd_rarity:Array[GlobalEnums.Rarity] #-1 to disable
+
 #CACHED COMPS
 @onready var abilities = get_tree().get_first_node_in_group("ability_manager")
 @onready var player_inventory = get_tree().get_first_node_in_group("player")
@@ -120,28 +117,14 @@ func change_ingredient_uses(ingredient_card,amount):
 
 func check_can_drop(data):
 	checking_drop.emit(self,data)
-	#check for requirements
+	#check for requirements from signal
 	if can_drop_card == false:
 		can_drop_card = true
 		return false
 	#check abilities
 	if abilities.on_try_add_ingredient_any_inventory(data) == false:
 		return false
-	#specific ingredient
-	if cd_ingredients.size() != 0:
-		for i in cd_ingredients:
-			if i.stats.name == data.stats.name:
-				return true
-	#check if a tag is required
-	if cd_tags.size() != 0:
-		for i in cd_tags:
-			if data.stats.tags.has(i):
-				return true
-	#check for rarity
-	if cd_rarity.size() != 0:
-		for i in cd_rarity:
-			if data.stats.rarity.has(i):
-				return true
+	
 	return true
 
 func sort_inventory_by_name():

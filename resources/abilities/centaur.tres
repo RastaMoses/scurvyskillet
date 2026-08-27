@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Ability" format=3 uid="uid://byvdbwlvgfue3"]
+
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="1_og8gt"]
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="2_ed5g0"]
+
+[resource]
+script = ExtResource("2_ed5g0")
+name = "Centaur"
+this_add_to_dish_cond = true
+self_target = true
+nutrition_effect = 4
+times_dice_amount = 4
+metadata/_custom_type_script = "uid://bnelk35k2xjth"

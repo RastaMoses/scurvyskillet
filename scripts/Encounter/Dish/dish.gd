@@ -19,6 +19,7 @@ var random = RandomNumberGenerator.new()
 #STATE
 var can_add_ingredients = true
 var tags:Array[GlobalEnums.Tags]
+var dice:Array[RigidBody2D]
 
 
 func _ready() -> void:
@@ -45,7 +46,9 @@ func on_stop_drag(origin):
 func on_check_drop(origin,card):
 	if origin != self:
 		return
-	can_drop_card = abilities.on_try_add_to_dish(card)
+	#check abilities
+	if abilities.on_try_add_to_dish(card) == false:
+		can_drop_card = false
 	dish_ui.toggle_highlight_pan(can_drop_card)
 
 func on_drop_ingredient(origin, card):
@@ -88,6 +91,7 @@ func remove_card_from_dish(card):
 	nutrition -= card.stats.nutrition
 	for die in card.dice:
 		subtract_die_value_from_dish(die)
+		dice.erase(die)
 	abilities.on_ingredient_destroyed_from_dish(card)
 	
 	#ui
@@ -153,12 +157,11 @@ func roll_ingredient(card:Node, dice_multiplier:int = 1):
 	roll_dice(GlobalEnums.Flavour.FRESH,dice_multiplier*card.stats.fresh,card)
 
 func roll_dice(flavour,amount,card:Node):
-	
 	while amount > 0:
 		amount -= 1
 		var roll_result = random.randi_range(1,6)
-		dice_disp.spawn_die(flavour, roll_result, card)
-		
+		var die = dice_disp.spawn_die(flavour, roll_result, card)
+		dice.append(die)
 func reroll_die(die):
 	subtract_die_value_from_dish(die)
 	var roll_result = random.randi_range(1,6)

@@ -14,6 +14,6 @@ enum EncounterType {
 			NONE, SHOP, DECISION, CHALLENGE, BOSS
 			}
 
-enum EncounterTerrain{ ISLAND, OCEAN}
+enum EncounterTerrain{ ISLAND, OCEAN, NONE}
 
-enum Flavour { SWEET, SPICY, HEARTY, FRESH}
+enum Flavour { SWEET, SPICY, HEARTY, FRESH, NONE}

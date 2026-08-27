@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://r6n38gslo14a"]
+
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_6a321"]
+[ext_resource type="Texture2D" uid="uid://c70swjyup325t" path="res://sprites/ingredients/ingredient_broccoli.png" id="2_beq3f"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_fxisf"]
+
+[resource]
+script = ExtResource("2_fxisf")
+name = "Broccoli"
+icon = ExtResource("2_beq3f")
+tags = Array[int]([14])
+description = "The great green Gemüse"
+nutrition = 1
+fresh = 1
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"

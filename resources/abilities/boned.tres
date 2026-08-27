@@ -7,7 +7,6 @@
 [resource]
 script = ExtResource("2_3d7od")
 name = "Boned"
-duration = 0
 this_add_to_dish_cond = true
 add_specific_ingredients_effect = Array[ExtResource("1_1qead")]([ExtResource("2_gs0eh")])
 metadata/_custom_type_script = "uid://bnelk35k2xjth"

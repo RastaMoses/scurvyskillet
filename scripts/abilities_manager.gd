@@ -122,8 +122,8 @@ func check_dish_conditions_for_cards(ability:Ability, cards:Array[Node]) ->bool:
 	
 	return true
 func die_matches_ability(die:Node, ability:Ability) -> bool:
-	if not ability.dice_flavour_filter.is_empty():
-		if not ability.dice_flavour_filter.has(die.flavour):
+	if not ability.flavour_filter.is_empty():
+		if not ability.flavour_filter.has(die.flavour):
 			return false
 	if not ability.dice_number_filter.is_empty():
 		if not ability.dice_number_filter.has(die.number):
@@ -145,6 +145,7 @@ func check_target_filter(ability, context_card) -> bool:
 			var card_tags: Array[GlobalEnums.Tags] = context_card.committed_stats.tags  # ensure this exists
 			var has_one = false
 			for tag in card_tags:
+				
 				if ability.card_tags_filter.has(tag):
 					has_one = true
 					break
@@ -170,7 +171,6 @@ func check_target_filter(ability, context_card) -> bool:
 		if ability.specific_ingredient_filter != null:
 			if context_card.base_stats != ability.specific_ingredient_filter:
 				return false
-	
 	return true
 #endregion
 #----------Trigger evaluation---------
@@ -192,10 +192,11 @@ func evaluate_try_add_to_dish_triggers(try_card:Node) -> bool:
 	var can_drop = true
 	for t in dish_triggers.slice(0):
 		var ability = t.ability
+		
 		var card = t.source_card
-		var activates = false
-		if ability.try_add_to_dish_cond:
-			activates = true
+		var activates = true
+		if not ability.try_add_to_dish_cond:
+			activates = false
 		if not check_dish_conditions_for_cards(ability, current_dish.current_cards):
 			activates = false
 		
@@ -203,16 +204,25 @@ func evaluate_try_add_to_dish_triggers(try_card:Node) -> bool:
 		
 		if not activates:
 				continue
-				
-		#Check if ability restricts the card drop try
-		if ability.limit_ingredients_int != -1:
-			#check targeting
-			#if self target and its the same base ingredient
-			if ability.self_target and card.base_stats == try_card.base_stats:
+		if ability.played_ingredient_target:
+			if ability.can_only_play:
+				if not check_target_filter(ability,try_card):
+					can_drop = false
+			if ability.can_not_play:
+				if check_target_filter(ability,try_card):
+					can_drop = false
+		#check targeting
+		#if self target and its the same base ingredient
+		if ability.self_target and card.base_stats == try_card.base_stats:
+			#Check if ability restricts the card drop try
+			if ability.limit_ingredients_int != -1:
 				if ability.limit_ingredients_int <= current_dish.count_ingredient_in_dish(try_card.base_stats):
 					can_drop = false
+			if ability.can_not_play:
+					can_drop = false
 			#if all ingr in dish target
-			if ability.all_ingredients_in_dish_target:
+		if ability.all_ingredients_in_dish_target:
+			if ability.limit_ingredients_int != -1:
 				if ability.limit_ingredients_int <= current_dish.current_cards.size():
 					can_drop = false
 			
@@ -344,6 +354,45 @@ func activate_effects(trigger, context_card):
 				for i in ability.uses_effect * -1:
 					player_inventory.remove_ingredient(ability_card)
 	
+	if ability.dish_target:
+		if ability.add_stats_dish:
+			if check_target_filter(ability, context_card):
+				var multiplier = get_ability_multiplier(ability, current_dish.current_cards)
+				current_dish.sweet += ability.sweet_effect * multiplier
+				current_dish.spicy += ability.spicy_effect * multiplier
+				current_dish.hearty += ability.hearty_effect * multiplier
+				current_dish.fresh += ability.fresh_effect * multiplier
+				current_dish.nutrition += ability.nutrition_effect * multiplier
+		if ability.multiply_dish:
+			if check_target_filter(ability, context_card):
+				var multiplier = get_ability_multiplier(ability, current_dish.current_cards)
+				current_dish.sweet *= ability.sweet_effect + multiplier
+				current_dish.spicy *= ability.spicy_effect + multiplier
+				current_dish.hearty *= ability.hearty_effect + multiplier
+				current_dish.fresh *= ability.fresh_effect + multiplier
+				current_dish.nutrition *= ability.nutrition_effect + multiplier
+		if ability.equal_stats_to_flavour != GlobalEnums.Flavour.NONE:
+			var temp_stat:int = 0
+			match ability.equal_stats_to_flavour:
+				GlobalEnums.Flavour.SWEET:
+					temp_stat = current_dish.sweet
+				GlobalEnums.Flavour.SPICY:
+					temp_stat = current_dish.spicy
+				GlobalEnums.Flavour.HEARTY:
+					temp_stat = current_dish.hearty
+				GlobalEnums.Flavour.FRESH:
+					temp_stat = current_dish.fresh
+			for flavour in ability.flavours_filter:
+				match flavour:
+					GlobalEnums.Flavour.SWEET:
+						current_dish.sweet = temp_stat
+					GlobalEnums.Flavour.SPICY:
+						current_dish.spicy = temp_stat
+					GlobalEnums.Flavour.HEARTY:
+						current_dish.hearty = temp_stat
+					GlobalEnums.Flavour.FRESH:
+						current_dish.fresh = temp_stat
+			
 # Example: add specific ingredients to player inventory
 	for ingr: Ingredient in trigger.ability.add_specific_ingredients_effect:
 		player_inventory.instantiate_card_and_add(ingr)
@@ -369,7 +418,8 @@ func activate_effects(trigger, context_card):
 				if ability.set_dice_number != 0:
 					die.display_number(ability.set_dice_number)
 	#limit amount possible in dish
-	
+	if ability.morale_gain != 0:
+		player_inventory.add_morale(ability.morale_gain)
 	# Extend here for other effects:
 	# - modify dish stats
 	# - modify dice
@@ -383,7 +433,7 @@ func apply_stat_effect(target_stats: Ingredient,ability: Ability,multiplier: int
 	target_stats.nutrition += ability.nutrition_effect * multiplier
 
 func get_ability_multiplier(ability, cards) -> int:
-	var multiplier = 1
+	var multiplier:int = 1
 	if !ability.times_tag_in_dish.is_empty():
 		multiplier = 0
 		for card in cards:
@@ -391,6 +441,8 @@ func get_ability_multiplier(ability, cards) -> int:
 				if card.committed_stats.tags.has(tag):
 					multiplier += 1
 					break
+	if ability.times_dice_amount != 0:
+		multiplier = floor(current_dish.dice.size()/ability.times_dice_amount)
 	return multiplier
 #endregion
 

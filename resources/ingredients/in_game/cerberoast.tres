@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://dtwomaqjhfwp4"]
+
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_3lacx"]
+[ext_resource type="Texture2D" uid="uid://bcs4v7kwktqg1" path="res://sprites/ingredients/ingredient_cerberoast.png" id="2_4cks6"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_dvm6f"]
+
+[resource]
+script = ExtResource("2_dvm6f")
+name = "Cerberoast"
+icon = ExtResource("2_4cks6")
+tags = Array[int]([9])
+rarity = 3
+description = "If the dish has at least 3 Fresh and 3 Sweet, add +3 Nutrition, Hearty and Spicy"
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"

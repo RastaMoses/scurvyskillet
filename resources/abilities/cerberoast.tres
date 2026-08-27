@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Ability" format=3 uid="uid://rp62pnptriee"]
+
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="1_321w6"]
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="2_gtx47"]
+
+[resource]
+script = ExtResource("2_gtx47")
+name = "Cerberoast"
+this_add_to_dish_cond = true
+sweet_cond_dish_min = 3
+fresh_cond_dish_min = 3
+dish_target = true
+spicy_effect = 3
+hearty_effect = 3
+nutrition_effect = 3
+metadata/_custom_type_script = "uid://bnelk35k2xjth"

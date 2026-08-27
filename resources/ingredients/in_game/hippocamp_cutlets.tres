@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://vxb3w03xoo14"]
+
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_tng7u"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_kwsn8"]
+[ext_resource type="Resource" uid="uid://dvt8xqrefiomk" path="res://resources/abilities/hippocamp.tres" id="2_xjieo"]
+[ext_resource type="Texture2D" uid="uid://ds4t3jxcp5kov" path="res://sprites/ingredients/ingredient_hippocamp_cutlet.png" id="3_aqmsj"]
+
+[resource]
+script = ExtResource("2_kwsn8")
+name = "Hippocamp Cutlets"
+icon = ExtResource("3_aqmsj")
+tags = Array[int]([4, 8, 9])
+rarity = 3
+description = "For every 'Fish' and 'Meat' Ingredient used gains +3 Nutrition"
+hearty = 1
+fresh = 1
+abilities = Array[ExtResource("1_tng7u")]([ExtResource("2_xjieo")])
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"

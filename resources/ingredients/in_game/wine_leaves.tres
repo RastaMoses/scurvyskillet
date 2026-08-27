@@ -11,6 +11,7 @@ name = "Wine Leaves"
 icon = ExtResource("3_8ttxf")
 tags = Array[int]([7])
 rarity = 1
+description = "Dolmades: If the next ingredient used is \"Rice\", it has +2 Nutrition and +3 Hearty"
 nutrition = 2
 fresh = 2
 abilities = Array[ExtResource("1_3exni")]([ExtResource("2_2l2x4")])

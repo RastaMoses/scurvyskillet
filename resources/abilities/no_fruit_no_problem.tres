@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Ability" format=3 uid="uid://ci64gmwabva6a"]
+
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="1_msswn"]
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="2_t63nd"]
+
+[resource]
+script = ExtResource("2_t63nd")
+name = "No Fruit No Problem"
+try_add_to_dish_cond = true
+dish_tags_cond = Array[int]([5])
+self_target = true
+limit_ingredients_int = 0
+metadata/_custom_type_script = "uid://bnelk35k2xjth"

@@ -11,6 +11,7 @@ name = "Orange"
 icon = ExtResource("2_6pvx1")
 tags = Array[int]([5])
 rarity = 1
+description = "If this is the first ingredient used, gain 1 \"Orange Juice\""
 nutrition = 1
 sweet = 2
 abilities = Array[ExtResource("1_asa8p")]([ExtResource("2_mbi80")])

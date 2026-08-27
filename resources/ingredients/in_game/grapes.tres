@@ -1,16 +1,17 @@
 [gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://cudhcbra3g05f"]
 
-[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_jx3r3"]
-[ext_resource type="Resource" uid="uid://bsrcu3n1cl65c" path="res://resources/abilities/spoiling.tres" id="2_5oqpn"]
-[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_ak0ht"]
-[ext_resource type="Resource" uid="uid://ye5sk5qhqe21" path="res://resources/abilities/makes_wine.tres" id="3_6lwth"]
-[ext_resource type="Texture2D" uid="uid://c3rdtn8u5g8jd" path="res://sprites/ingredients/ingredient_grapes.png" id="4_6lwth"]
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_sdgte"]
+[ext_resource type="Resource" uid="uid://bsrcu3n1cl65c" path="res://resources/abilities/spoiling.tres" id="2_881u5"]
+[ext_resource type="Resource" uid="uid://ye5sk5qhqe21" path="res://resources/abilities/makes_wine.tres" id="3_awmm7"]
+[ext_resource type="Texture2D" uid="uid://c3rdtn8u5g8jd" path="res://sprites/ingredients/ingredient_grapes.png" id="4_2yqcv"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="5_ltbpy"]
 
 [resource]
-script = ExtResource("2_ak0ht")
-icon = ExtResource("4_6lwth")
+script = ExtResource("5_ltbpy")
+icon = ExtResource("4_2yqcv")
 tags = Array[int]([2, 4])
+description = "Spoiling: Loses 1 Use after each Encounter"
 nutrition = 1
 sweet = 2
-abilities = Array[ExtResource("1_jx3r3")]([ExtResource("2_5oqpn"), ExtResource("3_6lwth")])
+abilities = Array[ExtResource("1_sdgte")]([ExtResource("2_881u5"), ExtResource("3_awmm7")])
 metadata/_custom_type_script = "uid://bqsibdi6kwplu"

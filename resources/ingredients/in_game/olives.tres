@@ -11,6 +11,7 @@ name = "Olives"
 icon = ExtResource("2_27y3e")
 tags = Array[int]([14])
 rarity = 1
+description = "If this is the first ingredient added, gain 1 \"Olive Oil\""
 nutrition = 1
 hearty = 1
 fresh = 1

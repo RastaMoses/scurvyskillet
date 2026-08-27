@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://5537hmviyge6"]
+
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_fmfd2"]
+[ext_resource type="Resource" uid="uid://d1fn2laoge3vp" path="res://resources/abilities/dryad_trick.tres" id="2_6do56"]
+[ext_resource type="Texture2D" uid="uid://1q08jw5oyy6t" path="res://sprites/ingredients/ingredient_dryad_salad.png" id="2_33h4i"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_bumvh"]
+
+[resource]
+script = ExtResource("2_bumvh")
+name = "Dryad Salad"
+icon = ExtResource("2_33h4i")
+tags = Array[int]([7, 14])
+rarity = 3
+description = "Double the dishes Freshness"
+nutrition = 3
+sweet = 1
+fresh = 1
+abilities = Array[ExtResource("1_fmfd2")]([ExtResource("2_6do56")])
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"
