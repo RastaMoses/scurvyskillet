@@ -38,7 +38,9 @@ func destroy_ingredient(card:Node):
 	destroying_ingredient.emit(self,card)
 	current_cards.erase(card)
 	if ui != null:
+		current_cards = ui.get_slots_cards_list()
 		ui.update_slots()
+		current_cards = ui.get_slots_cards_list()
 	if card.get_parent() == self:
 		card.queue_free()
 
@@ -49,6 +51,7 @@ func destroy_all_ingredients():
 	current_cards.clear()
 	if ui != null:
 		ui.update_slots()
+		current_cards = ui.get_slots_cards_list()
 
 func remove_ingredient(card):
 	if !current_cards.has(card):
@@ -60,6 +63,7 @@ func remove_ingredient(card):
 		distribute_uses(card)
 	if ui != null:
 		ui.update_slots()
+		current_cards = ui.get_slots_cards_list()
 	on_remove_ingredient.emit(self,card)
 
 func drop_ingredient(card):
@@ -87,6 +91,7 @@ func add_card(card):
 	
 	if ui != null:
 		ui.update_slots()
+		current_cards = ui.get_slots_cards_list()
 	
 	return new_card
 

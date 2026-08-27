@@ -112,8 +112,10 @@ func _process(delta: float) -> void:
 
 func reset_preview():
 	if preview:
-		number_shown = temp_number_shown
-		highlighted = temp_highlighted
+		if temp_number_shown:
+			stop_number()
+		if temp_highlighted:
+			stop_highlight()
 		preview = false
 	
 func set_preview():

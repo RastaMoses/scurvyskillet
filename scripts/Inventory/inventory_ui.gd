@@ -74,7 +74,25 @@ func remove_slots(amount):
 		slots.back().queue_free()
 		slots.remove_at(-1)
 
+func get_slots_cards_list() -> Array[Node]:
+	var card_order:Array[Node] = []
+	for slot in slots:
+		if slot.card != null:
+			card_order.append(slot.card)
+	return card_order
+
 func update_slots():
+	var slot_order: Array[Node] = get_slots_cards_list()
+	# Reorder current_cards to match the visual slot order
+	# Only if the slot order differs from current_cards
+	if slot_order.size() > 0 and slot_order.size() == player_inventory.current_cards.size():
+		var needs_reorder = false
+		for i in range(slot_order.size()):
+			if slot_order[i] != player_inventory.current_cards[i]:
+				needs_reorder = true
+				break
+		if needs_reorder:
+			player_inventory.current_cards = slot_order
 	#check slot amount
 	var slots_to_remove = 0
 	while player_inventory.current_cards.size() > slots.size():
@@ -82,8 +100,7 @@ func update_slots():
 	for i in range(slots.size()):
 		#update slots with items
 		if (player_inventory.current_cards.size() > i):
-			if !slots[i].dragging:
-				slots[i].update(player_inventory.current_cards[i])
+			slots[i].update(player_inventory.current_cards[i])
 		else:
 			if i > min_slots:
 				slots_to_remove += 1
@@ -140,7 +157,6 @@ func open():
 	inventory_container.visible = true
 	is_open = true
 	reset_large_view()
-	update_slots()
 	update_topbar()
 	
 func close():

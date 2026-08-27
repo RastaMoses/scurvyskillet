@@ -68,6 +68,8 @@ func update(item):
 		card = null
 		empty_slot.visible = true
 		large_view_button.visible = false
+	elif dragging:
+		card = item
 	else:
 		if !showcase:
 			large_view_button.visible = true
@@ -89,7 +91,6 @@ func update(item):
 			ingredient_name.text = card.stats.name
 		update_flavours()
 		update_uses()
-
 func update_uses(value = uses):
 	uses = value
 	for i in uses_textures:
@@ -218,12 +219,17 @@ func _drop_data(at_position: Vector2, data: Variant) -> void:
 		data.card = tmp
 		data.show()
 		data.update(data.card)
+	
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_DRAG_END:
-		if dragging:
+		stopped_drag()
+
+func stopped_drag():
+	if dragging:
 			stop_drag.emit(card)
 			dragging = false
+			update(card)
 
 func _process(delta: float) -> void:
 	if !dragging_preview:

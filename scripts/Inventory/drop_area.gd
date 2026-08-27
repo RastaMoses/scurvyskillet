@@ -6,5 +6,6 @@ func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
 	return parent.check_can_drop(data.card)
 	
 func _drop_data(_at_position: Vector2, data: Variant) -> void:
+	print("dropped data at drop area")
 	get_parent().drop_ingredient(data.card)
 		

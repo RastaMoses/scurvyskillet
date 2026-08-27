@@ -17,3 +17,4 @@ func add_morale(new_value):
 
 func update_ui():
 	ui.update_slots()
+	current_cards = ui.get_slots_cards_list()
