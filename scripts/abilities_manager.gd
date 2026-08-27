@@ -35,7 +35,13 @@ func remove_all_from_dish_triggers():
 	dish_triggers.clear()
 	for card in player_inventory.current_cards:
 		card.reset_preview()
-
+func progress_dish_triggers_duration():
+	# Handle duration / non‑continuous
+	for t in dish_triggers:
+		if !t.ability.continuous:
+			t.remaining -= 1
+			if t.remaining <= 0:
+				dish_triggers.erase(t)
 func dish_triggers_already_active(ability, card) -> bool:
 	for t in dish_triggers:
 		if t.ability == ability and t.source_card == card:
@@ -49,7 +55,7 @@ func encounter_trigger_already_active(ability, card) -> bool:
 			return true
 	return false
 #endregion
-
+#-----------------CONDITIONS_----------------------
 #region Condition Checking
 func check_dish_conditions_for_cards(ability:Ability, cards:Array[Node]) ->bool: #checks if conditions are met to activate triggers
 	var tags: Array[GlobalEnums.Tags] = []
@@ -64,31 +70,37 @@ func check_dish_conditions_for_cards(ability:Ability, cards:Array[Node]) ->bool:
 	if dish == null:
 		return true
 	#check sweet min/max
-	if ability.sweet_cond_dish_max > -1 and dish.sweet >=  ability.sweet_cond_dish_max:
+	if ability.sweet_cond_dish_max > -1 and dish.sweet >  ability.sweet_cond_dish_max:
 		return false
 	if ability.sweet_cond_dish_min > -1 and dish.sweet < ability.sweet_cond_dish_min:
 		return false
 	#check spicy minmax
-	if ability.spicy_cond_dish_max > -1 and dish.spicy >=  ability.spicy_cond_dish_max:
+	if ability.spicy_cond_dish_max > -1 and dish.spicy >  ability.spicy_cond_dish_max:
 		return false
 	if ability.spicy_cond_dish_min > -1 and dish.spicy < ability.spicy_cond_dish_min:
 		return false
 	#check hearty minmax
-	if ability.hearty_cond_dish_max > -1 and dish.hearty >=  ability.hearty_cond_dish_max:
+	if ability.hearty_cond_dish_max > -1 and dish.hearty >  ability.hearty_cond_dish_max:
 		return false
 	if ability.hearty_cond_dish_min > -1 and dish.hearty < ability.hearty_cond_dish_min:
 		return false
 		#check fresh minmax
-	if ability.fresh_cond_dish_max > -1 and dish.fresh >= ability.fresh_cond_dish_max:
+	if ability.fresh_cond_dish_max > -1 and dish.fresh > ability.fresh_cond_dish_max:
 		return false
 	if ability.fresh_cond_dish_min > -1 and dish.fresh < ability.fresh_cond_dish_min:
 		return false
 	#nutrition check
-	if ability.nutrition_cond_dish_max > -1 and dish.nutrition >= ability.nutrition_cond_dish_max:
+	if ability.nutrition_cond_dish_max > -1 and dish.nutrition > ability.nutrition_cond_dish_max:
 		return false
 	if ability.nutrition_cond_dish_min > -1 and dish.nutrition < ability.nutrition_cond_dish_min:
 		return false
-	# You’ll need to expose those on your dish node.
+	
+	if ability.ingredient_count_cond_dish_max > -1:
+		if dish.current_cards.size() > ability.ingredient_count_cond_dish_max:
+			return false
+	if ability.ingredient_count_cond_dish_min > -1:
+		if dish.current_cards.size() < ability.ingredient_count_cond_dish_min:
+			return false
 
 	# Tags condition example:
 	if not ability.dish_tags_cond.is_empty():
@@ -106,6 +118,8 @@ func check_dish_conditions_for_cards(ability:Ability, cards:Array[Node]) ->bool:
 		for req in ability.ingredients_in_dish_cond:
 			if not cards.has(req):
 				return false
+	
+	
 	return true
 func die_matches_ability(die:Node, ability:Ability) -> bool:
 	if not ability.dice_flavour_filter.is_empty():
@@ -159,7 +173,7 @@ func check_target_filter(ability, context_card) -> bool:
 	
 	return true
 #endregion
-
+#----------Trigger evaluation---------
 #region trigger evaulation
 func evaluate_add_to_dish_triggers(added_card: Node) -> void:
 	# Iterate over a copy because we may remove elements
@@ -173,11 +187,7 @@ func evaluate_add_to_dish_triggers(added_card: Node) -> void:
 		if not check_dish_conditions_for_cards(ability, current_dish.current_cards):
 			continue
 		activate_effects(t, added_card)
-	# Handle duration / non‑continuous
-		if not ability.continuous:
-			t.remaining -= 1
-			if t.remaining <= 0:
-				dish_triggers.erase(t)
+	
 func evaluate_try_add_to_dish_triggers(try_card:Node) -> bool:
 	var can_drop = true
 	for t in dish_triggers.slice(0):
@@ -188,16 +198,15 @@ func evaluate_try_add_to_dish_triggers(try_card:Node) -> bool:
 			activates = true
 		if not check_dish_conditions_for_cards(ability, current_dish.current_cards):
 			activates = false
+		
 		# Condition: this card’s ability triggers when any card is trying to be added to dish
 		
 		if not activates:
 				continue
 				
-		
 		#Check if ability restricts the card drop try
 		if ability.limit_ingredients_int != -1:
 			#check targeting
-			
 			#if self target and its the same base ingredient
 			if ability.self_target and card.base_stats == try_card.base_stats:
 				if ability.limit_ingredients_int <= current_dish.count_ingredient_in_dish(try_card.base_stats):
@@ -226,7 +235,7 @@ func evaluate_encounter_end_triggers(source_card):
 				encounter_trigger.erase(t)
 
 #endregion
-#-----------------CONDITIONS_----------------------
+#----------------SIGNAL MANAGEMENT------------
 #region Signals
 
 func on_ingredient_add_to_dish(card): #after adding own stats to dish
@@ -245,6 +254,7 @@ func on_ingredient_add_to_dish(card): #after adding own stats to dish
 			add_ability_to_dish_triggers(ability, card)
 	evaluate_add_to_dish_triggers(card)
 	rebuild_inventory_previews()
+	progress_dish_triggers_duration()
 	
 func on_try_add_ingredient_any_inventory(card):
 	pass
@@ -364,7 +374,7 @@ func activate_effects(trigger, context_card):
 	# - modify dish stats
 	# - modify dice
 	# - morale/money changes via event_manager, etc
-
+	
 func apply_stat_effect(target_stats: Ingredient,ability: Ability,multiplier: int) -> void:
 	target_stats.sweet += ability.sweet_effect * multiplier
 	target_stats.spicy += ability.spicy_effect * multiplier

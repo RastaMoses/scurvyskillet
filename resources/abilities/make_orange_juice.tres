@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Ability" format=3 uid="uid://cp06bdkdav5yh"]
+
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="1_00vnm"]
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="2_n3l7h"]
+[ext_resource type="Resource" uid="uid://c23ashl5vqhq8" path="res://resources/ingredients/in_game/orange_juice.tres" id="2_rfgwp"]
+
+[resource]
+script = ExtResource("2_n3l7h")
+name = "Make Orange Juice"
+this_add_to_dish_cond = true
+ingredient_count_cond_dish_max = 1
+add_specific_ingredients_effect = Array[ExtResource("1_00vnm")]([ExtResource("2_rfgwp")])
+metadata/_custom_type_script = "uid://bnelk35k2xjth"

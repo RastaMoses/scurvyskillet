@@ -2,11 +2,12 @@
 
 [ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="1_gxs02"]
 [ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="2_l54s0"]
-[ext_resource type="Resource" uid="uid://4bxgfqbbvoqi" path="res://resources/ingredients/rice.tres" id="3_l54s0"]
+[ext_resource type="Resource" uid="uid://4bxgfqbbvoqi" path="res://resources/ingredients/in_game/rice.tres" id="3_l54s0"]
 
 [resource]
 script = ExtResource("2_l54s0")
 name = "Dolmades"
+duration = 1
 any_other_add_to_dish_cond = true
 played_ingredient_target = true
 specific_ingredient_filter = ExtResource("3_l54s0")

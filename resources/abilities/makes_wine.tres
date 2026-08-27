@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="1_4bq00"]
 [ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="2_8r3v2"]
-[ext_resource type="Resource" uid="uid://d24ccsx0kj3u1" path="res://resources/ingredients/red_wine.tres" id="2_8ssem"]
+[ext_resource type="Resource" uid="uid://d24ccsx0kj3u1" path="res://resources/ingredients/in_game/red_wine.tres" id="2_8ssem"]
 [ext_resource type="Resource" uid="uid://bsrcu3n1cl65c" path="res://resources/abilities/spoiling.tres" id="3_8r3v2"]
 
 [resource]

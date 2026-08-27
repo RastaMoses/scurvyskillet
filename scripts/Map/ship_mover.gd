@@ -38,7 +38,6 @@ func _process(delta: float) -> void:
 		time_moved = clampf(time_moved,0.0,1.0)
 		var eased_time = ease(time_moved, smoothing_curve)
 		global_position = lerp(start_pos, destination, eased_time)
-		print(time_moved)
 		if time_moved >= 1:
 			arrive()
 	#visuals

@@ -5,7 +5,7 @@ extends Resource
 @export var name:String
 @export var continuous:bool = false
 @export var stackable:bool = false
-@export var duration:int = 1
+@export var duration:int = 0
 
 #region Params
 #region Conditions Params

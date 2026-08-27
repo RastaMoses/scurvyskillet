@@ -5,7 +5,7 @@ var all_ingredients:Array[Ingredient]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var dir_path := "res://resources/ingredients/"
+	var dir_path := "res://resources/ingredients/in_game/"
 	var paths : PackedStringArray = ResourceLoader.list_directory(dir_path)
 	if paths == null: printerr("Could not get ingredient folder")
 	for path in paths:

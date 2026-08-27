@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://bmdtbsqg3c5nh"]
+
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_asa8p"]
+[ext_resource type="Texture2D" uid="uid://cv5cieggol1h3" path="res://sprites/ingredients/ingredient_orange.png" id="2_6pvx1"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_58csa"]
+[ext_resource type="Resource" uid="uid://cp06bdkdav5yh" path="res://resources/abilities/make_orange_juice.tres" id="2_mbi80"]
+
+[resource]
+script = ExtResource("2_58csa")
+name = "Orange"
+icon = ExtResource("2_6pvx1")
+tags = Array[int]([5])
+rarity = 1
+nutrition = 1
+sweet = 2
+abilities = Array[ExtResource("1_asa8p")]([ExtResource("2_mbi80")])
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"
