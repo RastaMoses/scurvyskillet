@@ -200,8 +200,8 @@ func _get_drag_data(_at_position: Vector2) -> Variant:
 	set_drag_preview(c)
 	item_visual.hide()
 	#Started drag
-	dragged.emit(card)
 	dragging = true
+	dragged.emit(card)
 	return self
 
 func _can_drop_data(_at_position: Vector2, _data: Variant) -> bool:

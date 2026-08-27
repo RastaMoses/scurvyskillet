@@ -14,3 +14,6 @@ func add_money(new_value):
 func add_morale(new_value):
 	current_morale += new_value
 	ui.update_topbar()
+
+func update_ui():
+	ui.update_slots()

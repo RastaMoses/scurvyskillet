@@ -59,10 +59,11 @@ func on_add_to_dish(origin,card):
 	if current_cards.size() > 1:
 		for i in current_cards:
 			dice_disp.reset_highlights(i)
-	roll_ingredient(card)
-	recalculate_dish()
+	
 	#check for abilities on add
 	abilities.on_ingredient_add_to_dish(card)
+	roll_ingredient(card)
+	recalculate_dish()
 	#ui
 	dish_ui.update_flavours()
 	dish_ui.update_nutrition(nutrition)
@@ -75,7 +76,8 @@ func on_destroy_ingredient(origin,card:Node):
 func on_destroy_all_ingredients(origin):
 	if origin != self:
 		return
-
+	for card in current_cards:
+		remove_card_from_dish(card)
 func remove_card_from_dish(card):
 	tags.clear()
 	for i in current_cards:
@@ -92,7 +94,6 @@ func remove_card_from_dish(card):
 	dice_disp.destroy_dice(card)
 	dish_ui.update_nutrition(nutrition)
 	dish_ui.update_flavours()
-	player_inventory.ui.update_slots()
 #endregion
 
 func subtract_die_value_from_dish(die):
@@ -115,9 +116,9 @@ func recalculate_dish():
 	tags.clear()
 	
 	for card in current_cards:
-		nutrition += card.stats.nutrition
+		nutrition += card.committed_stats.nutrition
 		
-		for tag in card.stats.tags:
+		for tag in card.committed_stats.tags:
 			if not tags.has(tag):
 				tags.append(tag)
 		for die in card.dice:

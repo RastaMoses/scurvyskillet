@@ -280,6 +280,7 @@ func on_dish_complete():
 
 func on_challenge_start(dish):
 	current_dish = dish
+	rebuild_inventory_previews()
 
 func on_challenge_end():
 	pass
@@ -304,43 +305,35 @@ func activate_effects(trigger, context_card):
 	#self card effects
 	if ability.self_target:
 		#modify own stats
-		var multiplier = get_ability_multiplier(ability)
+		var multiplier = get_ability_multiplier(ability, current_dish.current_cards)
 		#add stat effects
 		apply_stat_effect(ability_card.committed_stats, ability, multiplier)
-		
+		if ability.uses_effect > 0:
+			for i in ability.uses_effect:
+				player_inventory.instantiate_card_and_add(ability_card.base_stats)
+		if ability.uses_effect < 0:
+			for i in ability.uses_effect * -1:
+				player_inventory.remove_ingredient(ability_card)
 	#can be played
 	
 	if ability.played_ingredient_target:
 		
 		var apply_effects = true
 		#check for target filters
-		apply_effects = check_target_filter(trigger, context_card)
+		apply_effects = check_target_filter(ability, context_card)
 		#modify other cards stats
 		
 		if apply_effects:
 			#add stat effects
-			var multiplier = get_ability_multiplier(ability)
+			var multiplier = get_ability_multiplier(ability, current_dish.current_cards)
 			apply_stat_effect(context_card.committed_stats, ability, multiplier)
+			if ability.uses_effect > 0:
+				for i in ability.uses_effect:
+					player_inventory.instantiate_card_and_add(ability_card.base_stats)
+			if ability.uses_effect < 0:
+				for i in ability.uses_effect * -1:
+					player_inventory.remove_ingredient(ability_card)
 	
-	
-	#-----------NON- PREVIEW EFFECTS-----------
-	
-	#self card effects
-	if ability.self_target:
-		if ability.uses_effect > 0:
-			for i in ability.uses_effect:
-				player_inventory.instantiate_card_and_add(ability_card.base_stats)
-		if ability.uses_effect < 0:
-			for i in ability.uses_effect * -1:
-				player_inventory.remove_ingredient(ability_card)
-	
-	if ability.played_ingredient_target:
-		if ability.uses_effect > 0:
-			for i in ability.uses_effect:
-				player_inventory.instantiate_card_and_add(ability_card.base_stats)
-		if ability.uses_effect < 0:
-			for i in ability.uses_effect * -1:
-				player_inventory.remove_ingredient(ability_card)
 # Example: add specific ingredients to player inventory
 	for ingr: Ingredient in trigger.ability.add_specific_ingredients_effect:
 		player_inventory.instantiate_card_and_add(ingr)
@@ -379,10 +372,11 @@ func apply_stat_effect(target_stats: Ingredient,ability: Ability,multiplier: int
 	target_stats.fresh += ability.fresh_effect * multiplier
 	target_stats.nutrition += ability.nutrition_effect * multiplier
 
-func get_ability_multiplier(ability) -> int:
+func get_ability_multiplier(ability, cards) -> int:
 	var multiplier = 1
 	if !ability.times_tag_in_dish.is_empty():
-		for card in current_dish.current_cards:
+		multiplier = 0
+		for card in cards:
 			for tag in ability.times_tag_in_dish:
 				if card.committed_stats.tags.has(tag):
 					multiplier += 1
@@ -391,57 +385,80 @@ func get_ability_multiplier(ability) -> int:
 #endregion
 
 #region Preview
-func calculate_dish_preview(dragged_card:Node) -> Dictionary:
-	if current_dish == null or dragged_card == null:
+func calculate_dish_preview() -> Dictionary:
+	if current_dish == null:
 		return {}
 	
 	var preview_stats: Dictionary = {}
 	var dish_cards = current_dish.current_cards
 	
 	for card in player_inventory.current_cards:
-		if card == dragged_card:
+		if not is_instance_valid(card):
 			continue
 		preview_stats[card] = card.committed_stats.duplicate(true)
+		
 	
 	#apply abilities belonging to dragged card
-	for ability: Ability in dragged_card.committed_stats.abilities:
-		if ability == null:
-			continue
-		apply_drag_ability_preview(ability, dragged_card, dish_cards, preview_stats)
+	if dragged_card != null:
+		for ability: Ability in dragged_card.committed_stats.abilities:
+			if ability == null:
+				continue
+			apply_drag_ability_preview(ability, dragged_card, dish_cards, preview_stats)
+	for trigger in dish_triggers:
+		apply_existing_trigger_preview_to_all(trigger, preview_stats)
+	apply_card_ability_previews(preview_stats)
+	
 	return {"stats": preview_stats}
+func apply_card_ability_previews(preview_stats):
+	for target_card:Node in preview_stats.keys():
+		var hypothetical_cards = current_dish.current_cards.duplicate(true)
+		hypothetical_cards.append(target_card)
+		for ability in target_card.stats.abilities:
+			
+			var temp_trigger = AbilityTrigger.new(ability,target_card,ability.duration)
+			if not trigger_matches_context_card(temp_trigger,target_card):
+				continue
+			
+			#Checking general conditions
+			if not check_dish_conditions_for_cards(ability, hypothetical_cards):
+				continue
+			
+			#Apply preview effects
+			var multiplier = get_ability_multiplier(ability, hypothetical_cards)
+			
+			if ability.self_target:
+				apply_stat_effect(preview_stats[target_card],ability, multiplier)
 
-func apply_existing_trigger_preview(trigger, dragged_card,hypothetical_cards, preview_stats):
+func apply_existing_trigger_preview_to_all(trigger, preview_stats):
 	var ability = trigger.ability
 	var source_card:Node  = trigger.source_card
 	
-	if not trigger_matches_context_card(trigger,dragged_card):
-		return
+	for target_card in preview_stats.keys():
+		
+		if not trigger_matches_context_card(trigger,target_card):
+			continue
 
-	#Checking general conditions
-	if not check_dish_conditions_for_cards(ability, current_dish.current_cards):
-		return
-	
-	#Apply preview effects
-	var multiplier = get_ability_multiplier(ability)
-	if ability.self_target:
-		#modify own stats
+		#Checking general conditions
+		if not check_dish_conditions_for_cards(ability, current_dish.current_cards):
+			continue
 		
-		apply_stat_effect(preview_stats[source_card],ability, multiplier)
+		#Apply preview effects
+		var multiplier = get_ability_multiplier(ability, current_dish.current_cards)
 		
-	if ability.played_ingredient_target:
-		var apply_effects = true
-		#check for target filters
-		apply_effects = check_target_filter(ability, dragged_card)
-		#modify other stats
-		if apply_effects:
-			apply_stat_effect(preview_stats[dragged_card],ability, multiplier)
+		if ability.played_ingredient_target:
+			var apply_effects = true
+			#check for target filters
+			apply_effects = check_target_filter(ability, target_card)
+			#modify other stats
+			if apply_effects:
+				apply_stat_effect(preview_stats[target_card],ability, multiplier)
 
 func apply_drag_ability_preview(ability, dragged_card, dish_cards, preview_stats):
 	
 	if not check_dish_conditions_for_cards(ability, dish_cards):
 		return
 	
-	var multiplier := get_ability_multiplier(ability)
+	var multiplier := get_ability_multiplier(ability, current_dish.current_cards)
 		
 	if ability.played_ingredient_target:
 		for target_card in preview_stats.keys():
@@ -463,21 +480,22 @@ func set_dice_preview_effects(ability):
 				die.set_preview()
 
 func rebuild_inventory_previews():
-	if current_dish == null or dragged_card == null:
+	if current_dish == null:
 		return
 	clear_all_card_previews()
 	clear_dice_preview()
 	
-	if not on_try_add_to_dish(dragged_card):
-		return
+	#if not on_try_add_to_dish(dragged_card):
+		#return
 	
-	var result:= calculate_dish_preview(dragged_card)
+	var result:= calculate_dish_preview()
 	var preview_stats: Dictionary = result.get("stats", {})
 	
 	for target_card in preview_stats.keys():
 			if not is_instance_valid(target_card):
 				continue
 			target_card.begin_preview(preview_stats[target_card])
+	player_inventory.update_ui()
 	
 func clear_dice_preview() -> void:
 	if current_dish == null:
@@ -493,7 +511,7 @@ func start_drag_preview(card):
 
 func stop_drag_preview():
 	dragged_card = null
-	clear_all_previews()
+	rebuild_inventory_previews()
 
 func clear_all_card_previews():
 	for card in player_inventory.current_cards:

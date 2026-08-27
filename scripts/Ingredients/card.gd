@@ -23,9 +23,6 @@ func clear_preview():
 	stats = committed_stats
 
 func begin_preview(new_preview_stats:Ingredient):
-	print(stats.name)
-	print("start preview and nutrition of preview is:")
-	print(preview_stats.nutrition)
 	preview_stats = new_preview_stats
 	stats = preview_stats
 	

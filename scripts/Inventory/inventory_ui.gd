@@ -82,7 +82,8 @@ func update_slots():
 	for i in range(slots.size()):
 		#update slots with items
 		if (player_inventory.current_cards.size() > i):
-			slots[i].update(player_inventory.current_cards[i])
+			if !slots[i].dragging:
+				slots[i].update(player_inventory.current_cards[i])
 		else:
 			if i > min_slots:
 				slots_to_remove += 1

@@ -53,6 +53,7 @@ func destroy_all_ingredients():
 func remove_ingredient(card):
 	if !current_cards.has(card):
 		return
+	card.clear_preview()
 	if !card.stats.unlimited_uses:
 		change_ingredient_uses(card, -1)
 		current_cards.erase(card)
