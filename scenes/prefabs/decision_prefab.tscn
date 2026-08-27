@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://xk6aj68ft76k" path="res://scripts/Encounter/decision.gd" id="1_6nc15"]
 [ext_resource type="Texture2D" uid="uid://brlwxgegkouv1" path="res://sprites/interface/scenes/decision scene/scene_decision_background_water.png" id="2_6nc15"]
 [ext_resource type="Texture2D" uid="uid://ddjgfdqbojroc" path="res://sprites/interface/scenes/decision scene/scene_decision_background_island.png" id="3_6nc15"]
+[ext_resource type="Texture2D" uid="uid://bis6qgefgntaq" path="res://sprites/interface/scenes/decision scene/scene_decision_illustration_example.png" id="4_pjm46"]
 [ext_resource type="PackedScene" uid="uid://b75jl0uammin5" path="res://scenes/prefabs/choice.tscn" id="4_spqi1"]
 [ext_resource type="Theme" uid="uid://1jb5jgyixo85" path="res://themes/encounter/enc_description.tres" id="6_d5b72"]
 [ext_resource type="PackedScene" uid="uid://hr6aybbol4hn" path="res://scenes/prefabs/challenge_sample.tscn" id="6_gb2lx"]
@@ -37,12 +38,10 @@ texture = ExtResource("3_6nc15")
 
 [node name="art" type="TextureRect" parent="." unique_id=1781471364]
 layout_mode = 1
-offset_left = 664.0
-offset_top = 47.999996
-offset_right = 1264.0
-offset_bottom = 386.0
-scale = Vector2(1.9400781, 2.1708584)
+offset_right = 1920.0
+offset_bottom = 1080.0
 mouse_behavior_recursive = 1
+texture = ExtResource("4_pjm46")
 
 [node name="inventory_position" type="Panel" parent="." unique_id=1245198712]
 visible = false
@@ -86,7 +85,7 @@ offset_bottom = -332.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 1
-mouse_behavior_recursive = 1
+mouse_behavior_recursive = 2
 theme = ExtResource("6_d5b72")
 text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
