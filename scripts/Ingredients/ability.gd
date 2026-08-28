@@ -2,7 +2,7 @@ class_name Ability
 extends Resource
 
 @export_category("Basic")
-@export var name:String
+@export_multiline() var description:String
 @export var continuous:bool = false
 @export var stackable:bool = false
 @export var duration:int = 0
@@ -72,6 +72,7 @@ extends Resource
 @export var equal_stats_to_flavour:GlobalEnums.Flavour = GlobalEnums.Flavour.NONE
 @export var multiply_dish:bool = false
 @export_group("Add Ingredient")
+@export var add_ingredient_by_name:String = ""
 @export var add_specific_ingredients_effect:Array[Ingredient] = []
 @export var add_random_ingredients_amount_effect:int = 0
 @export_subgroup("Random Ingr Filter")

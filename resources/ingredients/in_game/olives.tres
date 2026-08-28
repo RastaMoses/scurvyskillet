@@ -9,7 +9,7 @@
 script = ExtResource("2_wfy5q")
 name = "Olives"
 icon = ExtResource("2_27y3e")
-tags = Array[int]([14])
+tags = Array[int]([15])
 rarity = 1
 description = "If this is the first ingredient added, gain 1 \"Olive Oil\""
 nutrition = 1

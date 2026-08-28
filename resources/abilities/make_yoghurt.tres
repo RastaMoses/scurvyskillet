@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Ability" format=3 uid="uid://re0a2f21gm5n"]
+
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="1_xx37k"]
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="2_m1qef"]
+[ext_resource type="Resource" uid="uid://wctp3an6jgl0" path="res://resources/ingredients/in_game/yoghurt.tres" id="2_wd0dr"]
+
+[resource]
+script = ExtResource("2_m1qef")
+description = "Adds yoghurt to the player at the end of encounter"
+end_encounter_cond = true
+add_specific_ingredients_effect = Array[ExtResource("1_xx37k")]([ExtResource("2_wd0dr")])
+metadata/_custom_type_script = "uid://bnelk35k2xjth"

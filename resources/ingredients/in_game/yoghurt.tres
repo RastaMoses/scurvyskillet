@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://wctp3an6jgl0"]
+
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_e2gol"]
+[ext_resource type="Texture2D" uid="uid://byafx2b3agqjd" path="res://sprites/ingredients/ingredient_yogurt.png" id="2_k2pfb"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_lgw34"]
+
+[resource]
+script = ExtResource("2_lgw34")
+name = "Yoghurt"
+icon = ExtResource("2_k2pfb")
+tags = Array[int]([0, 3])
+rarity = 1
+nutrition = 3
+sweet = 1
+hearty = 1
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"

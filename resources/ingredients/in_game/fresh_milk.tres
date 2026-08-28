@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://dp5e4ra716qhy"]
+
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_2mgyo"]
+[ext_resource type="Texture2D" uid="uid://cpvoqpnpalxvp" path="res://sprites/ingredients/ingredient_fresh_milk.png" id="2_7pu81"]
+[ext_resource type="Resource" uid="uid://bsrcu3n1cl65c" path="res://resources/abilities/spoiling.tres" id="2_am2vx"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_c33bi"]
+[ext_resource type="Resource" uid="uid://re0a2f21gm5n" path="res://resources/abilities/make_yoghurt.tres" id="3_cd5m3"]
+
+[resource]
+script = ExtResource("2_c33bi")
+name = "Fresh Milk"
+icon = ExtResource("2_7pu81")
+tags = Array[int]([0])
+rarity = 1
+description = "Spoiling: Loses 1 Use after each Encounter"
+nutrition = 2
+sweet = 1
+abilities = Array[ExtResource("1_2mgyo")]([ExtResource("2_am2vx"), ExtResource("3_cd5m3")])
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"

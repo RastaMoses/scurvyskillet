@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_1pahw")
-name = "Dryad Trick"
+description = "Double dishes Fresh Score"
 this_add_to_dish_cond = true
 dish_target = true
 multiply_dish = true

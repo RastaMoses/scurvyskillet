@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("2_l54s0")
-name = "Dolmades"
+description = "If the next ingredient you use is Rice, it adds +2 Nutrition and +3 Hearty to the dish"
 duration = 1
 any_other_add_to_dish_cond = true
 dish_target = true

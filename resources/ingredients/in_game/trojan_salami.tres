@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://cw25o02wmlgwb"]
+
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_4muta"]
+[ext_resource type="Texture2D" uid="uid://d1ntatpniqt4o" path="res://sprites/ingredients/ingredient_trojan_horse_salami.png" id="2_walsn"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="3_rl6ca"]
+
+[resource]
+script = ExtResource("3_rl6ca")
+name = "Trojan Salami"
+icon = ExtResource("2_walsn")
+tags = Array[int]([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16])
+rarity = 2
+description = "Who knows whats really in there"
+nutrition = 3
+spicy = 1
+hearty = 1
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"

@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_6e551")
-name = "Godlike Taste"
+description = "Gain +3 morale"
 this_add_to_dish_cond = true
 morale_gain = 3
 metadata/_custom_type_script = "uid://bnelk35k2xjth"

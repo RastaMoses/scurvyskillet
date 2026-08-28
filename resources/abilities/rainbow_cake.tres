@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_o8pfd")
-name = "Rainbow Cake"
+description = "If there are all flavours present in the dish, this gets +5 nutrition"
 this_add_to_dish_cond = true
 sweet_cond_dish_min = 1
 spicy_cond_dish_min = 1

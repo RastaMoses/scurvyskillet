@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://vququse4xxl0"]
+
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_cciwg"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_falmh"]
+[ext_resource type="Texture2D" uid="uid://b8jcbsyaaxb25" path="res://sprites/ingredients/ingredient_toursi.png" id="2_n7k1n"]
+
+[resource]
+script = ExtResource("2_falmh")
+name = "Toursi"
+icon = ExtResource("2_n7k1n")
+tags = Array[int]([3])
+description = "They aged like wine"
+nutrition = 1
+spicy = 1
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"

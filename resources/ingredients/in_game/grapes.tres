@@ -8,8 +8,9 @@
 
 [resource]
 script = ExtResource("5_ltbpy")
+name = "Grapes"
 icon = ExtResource("4_2yqcv")
-tags = Array[int]([2, 4])
+tags = Array[int]([5])
 description = "Spoiling: Loses 1 Use after each Encounter"
 nutrition = 1
 sweet = 2

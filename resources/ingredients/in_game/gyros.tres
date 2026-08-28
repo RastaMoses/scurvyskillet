@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://cd02p072r033n"]
+
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_y7apn"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_6kb43"]
+[ext_resource type="Texture2D" uid="uid://b0r4siiiea0pk" path="res://sprites/ingredients/ingredient_Gyros.png" id="2_vtywe"]
+
+[resource]
+script = ExtResource("2_6kb43")
+name = "Gyros"
+icon = ExtResource("2_vtywe")
+tags = Array[int]([8])
+description = "GYYYYYROS"
+nutrition = 1
+hearty = 1
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"

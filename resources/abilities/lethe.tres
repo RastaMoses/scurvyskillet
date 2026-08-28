@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_qd67c")
-name = "Lethe"
+description = "Reroll all dice"
 this_add_to_dish_cond = true
 all_dice_target = true
 flavours_filter = Array[int]([0, 1, 2, 3])

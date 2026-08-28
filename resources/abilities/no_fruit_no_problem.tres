@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_t63nd")
-name = "No Fruit No Problem"
+description = "Can only be played if no fruit are in the dish"
 try_add_to_dish_cond = true
 dish_tags_cond = Array[int]([5])
 self_target = true

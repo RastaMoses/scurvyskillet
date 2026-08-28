@@ -9,7 +9,7 @@
 script = ExtResource("2_rrbsu")
 name = "Skyllamari"
 icon = ExtResource("2_ftag7")
-tags = Array[int]([9, 4])
+tags = Array[int]([4, 9])
 rarity = 3
 description = "Gains +3 Nutrition for every 'Fish' in the dish"
 nutrition = 1

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://cs3b0836bfdsh"]
+
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_eglej"]
+[ext_resource type="Texture2D" uid="uid://ccug3nlg2haef" path="res://sprites/ingredients/ingredient_metaxa.png" id="2_xf12k"]
+[ext_resource type="Resource" uid="uid://drniqfi8yqy3l" path="res://resources/abilities/reheart.tres" id="2_ys2jn"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="3_ys2jn"]
+
+[resource]
+script = ExtResource("3_ys2jn")
+name = "Metaxa"
+icon = ExtResource("2_xf12k")
+tags = Array[int]([0, 15])
+rarity = 2
+description = "Reheartening: Reroll all Hearty dice"
+nutrition = 2
+hearty = 1
+abilities = Array[ExtResource("1_eglej")]([ExtResource("2_ys2jn")])
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"

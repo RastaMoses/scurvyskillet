@@ -9,7 +9,7 @@
 script = ExtResource("2_bumvh")
 name = "Dryad Salad"
 icon = ExtResource("2_33h4i")
-tags = Array[int]([7, 14])
+tags = Array[int]([7, 15])
 rarity = 3
 description = "Double the dishes Freshness"
 nutrition = 3

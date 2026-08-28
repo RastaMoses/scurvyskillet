@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://bwfsyos2cf6ij"]
+
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_sr44p"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_7q45j"]
+[ext_resource type="Texture2D" uid="uid://durq88obou7cv" path="res://sprites/ingredients/ingredient_caviar.png" id="2_edeyk"]
+
+[resource]
+script = ExtResource("2_7q45j")
+name = "Caviar"
+icon = ExtResource("2_edeyk")
+tags = Array[int]([2, 4])
+rarity = 1
+description = "Eggspensive and delfishous"
+nutrition = 3
+sweet = 1
+spicy = 1
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"

@@ -9,7 +9,7 @@
 script = ExtResource("2_1gbis")
 name = "Cyclops Chops"
 icon = ExtResource("2_rkhrr")
-tags = Array[int]([9, 8])
+tags = Array[int]([8, 9])
 rarity = 3
 description = "Can only play 'Meat' after playing this"
 nutrition = 3

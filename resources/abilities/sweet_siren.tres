@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_pwx7b")
-name = "Sweet Siren"
+description = "All of your Flavour Scores become equal to your Sweet Score"
 this_add_to_dish_cond = true
 dish_target = true
 flavours_filter = Array[int]([1, 2, 3])

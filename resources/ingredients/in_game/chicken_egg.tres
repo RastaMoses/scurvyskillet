@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://btpvxmpobyxj1"]
+
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_8d0n3"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_px528"]
+[ext_resource type="Texture2D" uid="uid://cqll3ui8eqhix" path="res://sprites/ingredients/ingredient_chicken_eggs.png" id="2_rar4f"]
+
+[resource]
+script = ExtResource("2_px528")
+name = "Chicken Egg"
+icon = ExtResource("2_rar4f")
+tags = Array[int]([2])
+description = "Either way the egg goes in first"
+nutrition = 2
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"

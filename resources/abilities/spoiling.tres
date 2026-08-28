@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_ldo7o")
-name = "Spoiling"
+description = "After every encounter, remove 1 use from each stack with this ability"
 end_encounter_cond = true
 self_target = true
 uses_effect = -1

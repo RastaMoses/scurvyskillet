@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://dh22af8uxprri"]
+
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_phuhr"]
+[ext_resource type="Texture2D" uid="uid://bq2d4i6s18n52" path="res://sprites/ingredients/ingredient_pepper.png" id="2_1fw2m"]
+[ext_resource type="Resource" uid="uid://c0q8hg35hs4qk" path="res://resources/abilities/seasoning.tres" id="2_c13hc"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_l7jwi"]
+
+[resource]
+script = ExtResource("2_l7jwi")
+name = "Pepper"
+icon = ExtResource("2_1fw2m")
+tags = Array[int]([13])
+rarity = 1
+description = "Seasoning: This can only be added once per dish"
+spicy = 3
+abilities = Array[ExtResource("1_phuhr")]([ExtResource("2_c13hc")])
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"

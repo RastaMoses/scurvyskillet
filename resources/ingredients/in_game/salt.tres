@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://ci42d1wd7pd7t"]
+
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_jwlwq"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_6af6g"]
+[ext_resource type="Resource" uid="uid://c0q8hg35hs4qk" path="res://resources/abilities/seasoning.tres" id="2_ibjsf"]
+[ext_resource type="Texture2D" uid="uid://dp2bitokqk8ch" path="res://sprites/ingredients/ingredient_salt.png" id="2_r6dm0"]
+
+[resource]
+script = ExtResource("2_6af6g")
+name = "Salt"
+icon = ExtResource("2_r6dm0")
+tags = Array[int]([13])
+rarity = 1
+description = "Seasoning: This can only be added once per dish"
+hearty = 3
+abilities = Array[ExtResource("1_jwlwq")]([ExtResource("2_ibjsf")])
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"

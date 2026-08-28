@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Ability" format=3 uid="uid://blfsr67o0l3f0"]
+
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="1_n7kji"]
+[ext_resource type="Resource" uid="uid://cn23lev45ytc5" path="res://resources/ingredients/in_game/phoenix_ashes.tres" id="2_n7kji"]
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="3_v4w3h"]
+
+[resource]
+script = ExtResource("3_v4w3h")
+description = "On adding to dish, adds a phoenix ash to the player inventory"
+this_add_to_dish_cond = true
+add_specific_ingredients_effect = Array[ExtResource("1_n7kji")]([ExtResource("2_n7kji")])
+metadata/_custom_type_script = "uid://bnelk35k2xjth"

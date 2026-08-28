@@ -222,6 +222,8 @@ func evaluate_try_add_to_dish_triggers(try_card:Node) -> bool:
 					can_drop = false
 			#if all ingr in dish target
 		if ability.all_ingredients_in_dish_target:
+			if ability.can_not_play:
+					can_drop = false
 			if ability.limit_ingredients_int != -1:
 				if ability.limit_ingredients_int <= current_dish.current_cards.size():
 					can_drop = false
@@ -394,7 +396,10 @@ func activate_effects(trigger, context_card):
 						current_dish.fresh = temp_stat
 			
 # Example: add specific ingredients to player inventory
-	for ingr: Ingredient in trigger.ability.add_specific_ingredients_effect:
+	if ability.add_specific_ingredient_by_name != "":
+		var ingr  = item_pool.get_ingredient_by_name(ability.add_specific_ingredient_by_name)
+		player_inventory.instantiate_card_and_add(ingr)
+	for ingr: Ingredient in ability.add_specific_ingredients_effect:
 		player_inventory.instantiate_card_and_add(ingr)
 
 	# Example: add random ingredients

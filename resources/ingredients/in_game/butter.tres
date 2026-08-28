@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://4mrg6r2ipp7x"]
+
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_bdlwd"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_fys8o"]
+[ext_resource type="Texture2D" uid="uid://d0aocdexq4ds3" path="res://sprites/ingredients/ingredient_butter.png" id="2_ic76q"]
+
+[resource]
+script = ExtResource("2_fys8o")
+name = "Butter"
+icon = ExtResource("2_ic76q")
+tags = Array[int]([0])
+description = "Spread it thic"
+nutrition = 2
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"

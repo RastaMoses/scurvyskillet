@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://d3kmm78rl7gxd"]
+
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_jooyu"]
+[ext_resource type="Texture2D" uid="uid://ds0jswtp7xx1r" path="res://sprites/placeholder/kleinb.PNG" id="2_hi3sc"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_vidvw"]
+
+[resource]
+script = ExtResource("2_vidvw")
+name = "Kimchi"
+icon = ExtResource("2_hi3sc")
+tags = Array[int]([3, 15])
+rarity = 1
+description = "A sour treat from overseas"
+nutrition = 3
+spicy = 1
+fresh = 1
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"

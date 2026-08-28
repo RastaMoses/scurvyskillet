@@ -8,7 +8,7 @@
 script = ExtResource("2_fmdeh")
 name = "Olive Oil"
 icon = ExtResource("2_j4cmo")
-tags = Array[int]([14, 10])
+tags = Array[int]([15, 10])
 rarity = 1
 nutrition = 1
 hearty = 1

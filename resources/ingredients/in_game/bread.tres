@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://ml7hmdoqdh1i"]
+
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_vvk4a"]
+[ext_resource type="Texture2D" uid="uid://ds0jswtp7xx1r" path="res://sprites/placeholder/kleinb.PNG" id="2_a3cfv"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_owgmf"]
+
+[resource]
+script = ExtResource("2_owgmf")
+name = "Bread"
+icon = ExtResource("2_a3cfv")
+tags = Array[int]([11])
+description = "Not a standard for no reason"
+nutrition = 2
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"

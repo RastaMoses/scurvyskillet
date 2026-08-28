@@ -8,7 +8,7 @@
 script = ExtResource("2_xnhpd")
 name = "Bones"
 icon = ExtResource("2_4xgc7")
-tags = Array[int]([15])
+tags = Array[int]([16])
 rarity = 1
 nutrition = 1
 hearty = 1

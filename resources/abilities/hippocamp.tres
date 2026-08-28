@@ -5,9 +5,9 @@
 
 [resource]
 script = ExtResource("2_7oty6")
-name = "Hippocamp"
+description = "For every Fish Ingredient and for every Meat Ingredient you used (including this), this adds +3 Nutrition"
 this_add_to_dish_cond = true
 self_target = true
-uses_effect = 3
+nutrition_effect = 3
 times_tag_in_dish = Array[int]([4, 8])
 metadata/_custom_type_script = "uid://bnelk35k2xjth"

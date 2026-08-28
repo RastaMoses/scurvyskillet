@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_v6eo1")
-name = "OnlyMeats"
+description = "You can only use Meat Ingredients after using this"
 continuous = true
 try_add_to_dish_cond = true
 played_ingredient_target = true

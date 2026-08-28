@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("2_e4i2p")
-name = "Make Olive Oil"
+description = "if this is the first ingredient used it adds a olive oil to the player"
 this_add_to_dish_cond = true
 ingredient_count_cond_dish_max = 1
 add_specific_ingredients_effect = Array[ExtResource("1_tyutg")]([ExtResource("2_bcis2")])

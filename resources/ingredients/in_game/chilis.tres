@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://bst7fftb04e36"]
+
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_hvss6"]
+[ext_resource type="Texture2D" uid="uid://chejg2uclxxiu" path="res://sprites/ingredients/ingredient_chili.png" id="2_kmkk6"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_wahxv"]
+
+[resource]
+script = ExtResource("2_wahxv")
+name = "Chilis"
+icon = ExtResource("2_kmkk6")
+tags = Array[int]([12])
+description = "Not thaaat spicy"
+nutrition = 1
+spicy = 1
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"

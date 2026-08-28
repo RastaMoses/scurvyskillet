@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://byrvely1tly2c"]
+
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_dvs1b"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_lelml"]
+[ext_resource type="Texture2D" uid="uid://28shqo8mysvb" path="res://sprites/ingredients/ingredient_titan_tofu.png" id="2_wpg38"]
+
+[resource]
+script = ExtResource("2_lelml")
+name = "Titan Tofu"
+icon = ExtResource("2_wpg38")
+tags = Array[int]([9, 15])
+rarity = 3
+nutrition = 10
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"

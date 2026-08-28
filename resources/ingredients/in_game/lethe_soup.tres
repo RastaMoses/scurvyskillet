@@ -9,6 +9,7 @@
 script = ExtResource("2_mbctq")
 name = "Lethe Soup"
 icon = ExtResource("3_1wxo2")
+tags = Array[int]([1])
 rarity = 3
 description = "Reroll all dice ... Dis? Dsssss..."
 nutrition = 1

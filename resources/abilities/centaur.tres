@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_ed5g0")
-name = "Centaur"
+description = "For every 4 dice in the dish, gain +4 nutrition"
 this_add_to_dish_cond = true
 self_target = true
 nutrition_effect = 4

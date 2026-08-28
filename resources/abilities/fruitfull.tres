@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_aj6w5")
-name = "Fruitfull"
+description = "No more fruit can be added after this"
 continuous = true
 try_add_to_dish_cond = true
 played_ingredient_target = true

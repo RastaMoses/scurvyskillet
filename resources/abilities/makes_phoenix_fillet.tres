@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Ability" format=3 uid="uid://b3awms1642quf"]
+
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="1_4oygp"]
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="2_70six"]
+
+[resource]
+script = ExtResource("2_70six")
+description = "at end of encounter gives the player phoenix fillet"
+end_encounter_cond = true
+add_ingredient_by_name = "Phoenix Fillet"
+metadata/_custom_type_script = "uid://bnelk35k2xjth"

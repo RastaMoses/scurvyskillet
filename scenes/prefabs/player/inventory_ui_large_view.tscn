@@ -91,23 +91,22 @@ offset_bottom = 768.0
 [node name="0" parent="ItemDisplay/Rarity" index="0" unique_id=2084014227]
 offset_right = 512.0
 offset_bottom = 768.0
-texture = ExtResource("5_x2j1e")
+texture = null
 
 [node name="1" parent="ItemDisplay/Rarity" index="1" unique_id=316271123]
 offset_right = 512.0
 offset_bottom = 768.0
-texture = ExtResource("6_ssuud")
+texture = ExtResource("5_x2j1e")
 
 [node name="2" parent="ItemDisplay/Rarity" index="2" unique_id=452645600]
 offset_right = 512.0
 offset_bottom = 768.0
-texture = ExtResource("7_bijr2")
+texture = ExtResource("6_ssuud")
 
 [node name="3" parent="ItemDisplay/Rarity" index="3" unique_id=1183605160]
-offset_left = 40.0
-offset_top = 32.0
-offset_right = 296.0
-offset_bottom = 336.0
+offset_right = 512.0
+offset_bottom = 768.0
+texture = ExtResource("7_bijr2")
 
 [node name="Uses" parent="ItemDisplay" index="5" unique_id=1569271460]
 z_index = 1

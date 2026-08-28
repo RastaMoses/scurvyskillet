@@ -20,6 +20,7 @@ func _ready() -> void:
 
 func start_game():
 	starting_game.emit()
+	player_inventory.update_ui()
 	player_inventory.ui.open()
 	map_loader.start_game()
 

@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_yrnqy")
-name = "Seasoning"
+description = "After adding this this ingredient can not be added again"
 continuous = true
 try_add_to_dish_cond = true
 self_target = true

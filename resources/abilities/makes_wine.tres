@@ -3,12 +3,10 @@
 [ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="1_4bq00"]
 [ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="2_8r3v2"]
 [ext_resource type="Resource" uid="uid://d24ccsx0kj3u1" path="res://resources/ingredients/in_game/red_wine.tres" id="2_8ssem"]
-[ext_resource type="Resource" uid="uid://bsrcu3n1cl65c" path="res://resources/abilities/spoiling.tres" id="3_8r3v2"]
 
 [resource]
 script = ExtResource("2_8r3v2")
-name = "Makes Wine"
+description = "Adds wine to the player at the end of encounter"
 end_encounter_cond = true
-card_abilities_cond = Array[ExtResource("2_8r3v2")]([ExtResource("3_8r3v2")])
 add_specific_ingredients_effect = Array[ExtResource("1_4bq00")]([ExtResource("2_8ssem")])
 metadata/_custom_type_script = "uid://bnelk35k2xjth"

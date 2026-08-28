@@ -8,7 +8,7 @@
 script = ExtResource("2_0btfb")
 name = "Red Wine"
 icon = ExtResource("2_afsfm")
-tags = Array[int]([2, 4, 5])
+tags = Array[int]([1, 3, 5])
 rarity = 1
 nutrition = 2
 sweet = 1

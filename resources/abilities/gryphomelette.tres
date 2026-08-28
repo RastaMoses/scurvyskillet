@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_vfb33")
-name = "Gryphomelette"
+description = "Turn all dice on 1 or 2 into 4s"
 this_add_to_dish_cond = true
 all_dice_target = true
 dice_number_filter = Array[int]([1, 2])

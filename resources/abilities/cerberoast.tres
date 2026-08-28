@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_gtx47")
-name = "Cerberoast"
+description = "If you have at least 3 Healthy and 3 Sweet, this adds +3 to Nutrition, Hearty and Spicy"
 this_add_to_dish_cond = true
 sweet_cond_dish_min = 3
 fresh_cond_dish_min = 3

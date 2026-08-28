@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://cy6coj560k6y0"]
+
+[ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_63xci"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_2i7e1"]
+[ext_resource type="Resource" uid="uid://c0q8hg35hs4qk" path="res://resources/abilities/seasoning.tres" id="2_ie4vy"]
+[ext_resource type="Texture2D" uid="uid://c6xkts118m840" path="res://sprites/ingredients/ingredient_sugar.png" id="3_8eyjp"]
+
+[resource]
+script = ExtResource("2_2i7e1")
+name = "Sugar"
+icon = ExtResource("3_8eyjp")
+tags = Array[int]([13])
+rarity = 1
+description = "Seasoning: This can only be added once per dish"
+sweet = 3
+abilities = Array[ExtResource("1_63xci")]([ExtResource("2_ie4vy")])
+metadata/_custom_type_script = "uid://bqsibdi6kwplu"
