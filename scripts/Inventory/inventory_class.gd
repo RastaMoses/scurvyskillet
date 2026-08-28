@@ -127,25 +127,6 @@ func check_can_drop(data):
 	
 	return true
 
-func sort_inventory_by_name():
-	current_cards.sort_custom(sort_by_name)
-	if ui != null:
-		ui.update_slots()
-func sort_inventory_by_rarity():
-	current_cards.sort_custom(sort_by_rarity)
-	if ui != null:
-		ui.update_slots()
-
-func sort_by_rarity(a,b):
-	if a.stats.rarity < b.stats.rarity:
-		return true
-	else:
-		if a.stats.uses < b.stats.uses:
-			return true
-	return false
-func sort_by_name(a, b): 
-	return a.stats.name.naturalnocasecmp_to(b.stats.name) < 0
-
 func set_card_drag(card):
 	dragging_card = card
 	card_start_drag.emit(self, card)

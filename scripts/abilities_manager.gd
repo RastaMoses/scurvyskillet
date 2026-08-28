@@ -326,8 +326,9 @@ func activate_effects(trigger, context_card):
 	var ability_card = trigger.source_card
 	#-----------PREVIEW EFFECTS-----------
 	#self card effects
-	if ability.self_target and current_dish != null:
+	if ability.self_target:
 		#modify own stats
+		
 		var multiplier = get_ability_multiplier(ability, current_dish.current_cards)
 		#add stat effects
 		apply_stat_effect(ability_card.committed_stats, ability, multiplier)
@@ -440,14 +441,14 @@ func apply_stat_effect(target_stats: Ingredient,ability: Ability,multiplier: int
 
 func get_ability_multiplier(ability, cards) -> int:
 	var multiplier:int = 1
-	if !ability.times_tag_in_dish.is_empty():
+	if !ability.times_tag_in_dish.is_empty() and current_dish != null:
 		multiplier = 0
 		for card in cards:
 			for tag in ability.times_tag_in_dish:
 				if card.committed_stats.tags.has(tag):
 					multiplier += 1
 					break
-	if ability.times_dice_amount != 0:
+	if ability.times_dice_amount != 0 and current_dish != null:
 		multiplier = floor(current_dish.dice.size()/ability.times_dice_amount)
 	return multiplier
 #endregion

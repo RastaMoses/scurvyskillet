@@ -30,7 +30,7 @@ script = ExtResource("1_i5bfg")
 card_prefab = ExtResource("2_inxy6")
 ui = NodePath("InventoryUI")
 
-[node name="InventoryUI" type="Control" parent="." unique_id=190865318]
+[node name="InventoryUI" type="Control" parent="." unique_id=190865318 groups=["player_inventory_ui"]]
 z_index = 15
 layout_mode = 1
 anchors_preset = 15
@@ -253,3 +253,27 @@ texture = ExtResource("17_dndqy")
 script = ExtResource("17_3h3nv")
 move_x = -8
 move_wait_time = 0.6
+
+[node name="InventorySort" type="Control" parent="InventoryUI" unique_id=1845504047]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Rarity" type="Button" parent="InventoryUI/InventorySort" unique_id=1635132077]
+layout_mode = 0
+offset_top = 672.0
+offset_right = 112.0
+offset_bottom = 768.0
+mouse_behavior_recursive = 2
+text = "RARITY"
+
+[node name="Alphabetically" type="Button" parent="InventoryUI/InventorySort" unique_id=1263506452]
+layout_mode = 0
+offset_top = 560.0
+offset_right = 112.0
+offset_bottom = 656.0
+mouse_behavior_recursive = 2
+text = "AZ"
+
+[connection signal="pressed" from="InventoryUI/InventorySort/Rarity" to="InventoryUI" method="_on_rarity_pressed"]
+[connection signal="pressed" from="InventoryUI/InventorySort/Alphabetically" to="InventoryUI" method="_on_alphabetically_pressed"]

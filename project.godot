@@ -28,6 +28,7 @@ event_manager=""
 ability_manager=""
 player=""
 map_loader=""
+player_inventory_ui=""
 
 [gui]
 

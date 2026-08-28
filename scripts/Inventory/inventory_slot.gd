@@ -36,8 +36,10 @@ signal stop_drag(card_data)
 var card
 var dragging = false
 var dragging_preview = false
+var ui:Node
 
 func _ready() -> void:
+	ui = get_tree().get_first_node_in_group("player_inventory_ui")
 	if editor_preview:
 		visible = false
 	if large_view:
@@ -224,6 +226,8 @@ func _drop_data(at_position: Vector2, data: Variant) -> void:
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_DRAG_END:
 		stopped_drag()
+		if get_viewport().gui_is_drag_successful():
+			ui.update_slots_order()
 
 func stopped_drag():
 	if dragging:
