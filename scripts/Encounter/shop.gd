@@ -76,7 +76,6 @@ func get_card_price(card):
 func start():
 	#display visuals
 	populate_shop()
-	player_inventory.ui.update_position(true)
 
 func end():
 	map_node.end_encounter()

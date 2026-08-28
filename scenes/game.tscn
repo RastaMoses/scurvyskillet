@@ -6,8 +6,18 @@
 [ext_resource type="Script" uid="uid://cx3kxlhcjwpki" path="res://scripts/event_manager.gd" id="3_kvpfn"]
 [ext_resource type="Script" uid="uid://cmbe0axqvmhhv" path="res://scripts/abilities_manager.gd" id="4_dinhu"]
 [ext_resource type="PackedScene" uid="uid://ckhln31sq4epk" path="res://scenes/prefabs/player/inventory.tscn" id="5_kvuet"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="7_ca42v"]
 [ext_resource type="PackedScene" uid="uid://bodk7w1csegu4" path="res://scenes/debug/debug_mouse.tscn" id="8_ca42v"]
+[ext_resource type="Resource" uid="uid://cn23lev45ytc5" path="res://resources/ingredients/in_game/phoenix_ashes.tres" id="8_rysoc"]
 [ext_resource type="Script" uid="uid://cf1f8f18wnr6h" path="res://scripts/Ingredients/ingredient_pool.gd" id="9_rysoc"]
+[ext_resource type="Resource" uid="uid://wctp3an6jgl0" path="res://resources/ingredients/in_game/yoghurt.tres" id="9_ssvqc"]
+[ext_resource type="Resource" uid="uid://bsboei8v6c4x5" path="res://resources/ingredients/in_game/skyllamari.tres" id="10_264po"]
+[ext_resource type="Resource" uid="uid://ds1o7xj856ka1" path="res://resources/ingredients/in_game/wine_leaves.tres" id="11_1kice"]
+[ext_resource type="Resource" uid="uid://xl1hhjkkb3sk" path="res://resources/ingredients/in_game/gryphomelette.tres" id="12_5newe"]
+[ext_resource type="Resource" uid="uid://4bxgfqbbvoqi" path="res://resources/ingredients/in_game/rice.tres" id="13_37s47"]
+[ext_resource type="Resource" uid="uid://c23ashl5vqhq8" path="res://resources/ingredients/in_game/orange_juice.tres" id="14_bt5mj"]
+[ext_resource type="Resource" uid="uid://dim8b7x5br3sn" path="res://resources/ingredients/in_game/olive_oil.tres" id="15_ssvqc"]
+[ext_resource type="Resource" uid="uid://c346t8m6fjtct" path="res://resources/ingredients/in_game/bones.tres" id="16_264po"]
 
 [node name="game" type="Node2D" unique_id=1075341061]
 script = ExtResource("1_vtaks")
@@ -28,6 +38,7 @@ script = ExtResource("4_dinhu")
 [node name="Inventory" parent="Player" unique_id=421132193 groups=["player"] instance=ExtResource("5_kvuet")]
 current_money = 100
 current_morale = 5
+starting_ingredients = Array[ExtResource("7_ca42v")]([ExtResource("8_rysoc"), ExtResource("9_ssvqc"), ExtResource("9_ssvqc"), ExtResource("9_ssvqc"), ExtResource("9_ssvqc"), ExtResource("10_264po"), ExtResource("11_1kice"), ExtResource("12_5newe"), ExtResource("13_37s47"), ExtResource("14_bt5mj"), ExtResource("14_bt5mj"), ExtResource("15_ssvqc"), ExtResource("16_264po")])
 
 [node name="debug_mouse" parent="." unique_id=2141378264 instance=ExtResource("8_ca42v")]
 

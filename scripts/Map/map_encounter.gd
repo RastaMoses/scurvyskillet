@@ -59,9 +59,10 @@ func end_encounter():
 	map.set_available_encounters()
 	toggle_button(false)
 	show_button(true)
+	ability_manager.on_encounter_end()
 	encounter_obj.queue_free()
 	player_ship.toggle_ship_visible(true)
-	ability_manager.on_encounter_end()
+	
 	
 func activate_encounter():
 	event_manager.encounter_start()

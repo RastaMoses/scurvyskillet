@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://do7ovrk3gpyhx"]
 
 [ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_p0tvg"]
-[ext_resource type="Texture2D" uid="uid://ds0jswtp7xx1r" path="res://sprites/placeholder/kleinb.PNG" id="2_hqhgl"]
+[ext_resource type="Texture2D" uid="uid://b53s0a8w0od70" path="res://sprites/placeholder/pngtree-vanilla-custard-dessert-png-image_10928793.png" id="2_hqhgl"]
 [ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_n00yy"]
 
 [resource]

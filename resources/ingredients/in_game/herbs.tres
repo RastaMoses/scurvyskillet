@@ -1,14 +1,14 @@
 [gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://cap23hebmehbq"]
 
 [ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_rlyk3"]
-[ext_resource type="Texture2D" uid="uid://ds0jswtp7xx1r" path="res://sprites/placeholder/kleinb.PNG" id="2_ap53g"]
 [ext_resource type="Resource" uid="uid://c0q8hg35hs4qk" path="res://resources/abilities/seasoning.tres" id="2_b8c1i"]
 [ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_vpdt5"]
+[ext_resource type="Texture2D" uid="uid://c0klrovufaf1l" path="res://sprites/placeholder/27287-5-herbs.png" id="3_ap53g"]
 
 [resource]
 script = ExtResource("2_vpdt5")
 name = "Herbs"
-icon = ExtResource("2_ap53g")
+icon = ExtResource("3_ap53g")
 tags = Array[int]([13])
 rarity = 1
 description = "Seasoning: This can only be added once per dish"

@@ -14,6 +14,10 @@
 [ext_resource type="PackedScene" uid="uid://7lxu211xbf4i" path="res://scenes/prefabs/player/inventory_ui_large_view.tscn" id="12_ul54y"]
 [ext_resource type="Texture2D" uid="uid://brlwxgegkouv1" path="res://sprites/interface/scenes/decision scene/scene_decision_background_water.png" id="13_etcjs"]
 [ext_resource type="Script" uid="uid://cd0ktcwpa3fkn" path="res://scripts/sprite_animator.gd" id="14_apfx7"]
+[ext_resource type="Script" uid="uid://bg58rkwvnuhi5" path="res://scripts/Inventory/scroll_hint_displayer.gd" id="14_p47cp"]
+[ext_resource type="Texture2D" uid="uid://lp3c3q5qpcwl" path="res://sprites/interface/general/inventory/inventory_scroll_reverse.png" id="16_dndqy"]
+[ext_resource type="Script" uid="uid://bog5ewji0yscq" path="res://scripts/Inventory/scroll_hint.gd" id="17_3h3nv"]
+[ext_resource type="Texture2D" uid="uid://bjjx1b7lsoh1g" path="res://sprites/interface/general/inventory/inventory_scroll_hint.png.png" id="17_dndqy"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_2kgow"]
 
@@ -38,7 +42,7 @@ mouse_filter = 2
 script = ExtResource("3_5ftxm")
 inventory_slot_scene = ExtResource("4_rw30e")
 min_slots = 8
-container_size_bottom = Vector2(1930, 304)
+container_size_bottom = Vector2(1920, 304)
 container_pos_bottom = Vector2(0, 776)
 container_size_side = Vector2(591, 699)
 container_pos_side = Vector2(1302, 172)
@@ -147,6 +151,7 @@ mouse_behavior_recursive = 2
 flat = true
 
 [node name="InventoryUILarge" parent="InventoryUI/LargeView" unique_id=1295964210 instance=ExtResource("12_ul54y")]
+clip_contents = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -168,27 +173,30 @@ texture = ExtResource("13_etcjs")
 centered = false
 script = ExtResource("14_apfx7")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="InventoryUI" unique_id=79906176]
-custom_minimum_size = Vector2(1930, 304)
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
+[node name="ScrollContainer" type="ScrollContainer" parent="InventoryUI" unique_id=79906176 node_paths=PackedStringArray("horizontal_hint_left", "horizontal_hint_right")]
+custom_minimum_size = Vector2(1920, 304)
+custom_maximum_size = Vector2(1920, 304)
+layout_mode = 0
 offset_top = 776.0
-offset_right = 1930.0
+offset_right = 1920.0
 offset_bottom = 1080.0
-grow_vertical = 0
 mouse_behavior_recursive = 2
 theme = ExtResource("10_no1hy")
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 0
-scroll_hint_mode = 1
+script = ExtResource("14_p47cp")
+horizontal_hint_left = NodePath("../Scrollbar Hints/Left")
+horizontal_hint_right = NodePath("../Scrollbar Hints/Right")
+margin_top = 96.0
+margin_bottom = 88.0
 
 [node name="GridContainer" type="GridContainer" parent="InventoryUI/ScrollContainer" unique_id=1747725328]
 custom_minimum_size = Vector2(1920, 304)
+custom_maximum_size = Vector2(-1, 304)
+propagate_maximum_size = false
 layout_mode = 2
 theme = ExtResource("11_lc8fr")
-columns = 10
+columns = 8
 
 [node name="InventoryUISlot" parent="InventoryUI/ScrollContainer/GridContainer" unique_id=442831638 instance=ExtResource("4_rw30e")]
 layout_mode = 2
@@ -211,5 +219,37 @@ layout_mode = 2
 [node name="InventoryUISlot7" parent="InventoryUI/ScrollContainer/GridContainer" unique_id=843676205 instance=ExtResource("4_rw30e")]
 layout_mode = 2
 
-[node name="InventoryUISlot8" parent="InventoryUI/ScrollContainer/GridContainer" unique_id=634208404 instance=ExtResource("4_rw30e")]
+[node name="InventoryUISlot8" parent="InventoryUI/ScrollContainer/GridContainer" unique_id=1170623601 instance=ExtResource("4_rw30e")]
 layout_mode = 2
+
+[node name="Scrollbar Hints" type="Control" parent="InventoryUI" unique_id=331360101]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_behavior_recursive = 1
+
+[node name="Left" type="TextureRect" parent="InventoryUI/Scrollbar Hints" unique_id=1368702239]
+custom_minimum_size = Vector2(80, 120)
+custom_maximum_size = Vector2(80, 120)
+layout_mode = 0
+offset_top = 872.0
+offset_right = 80.0
+offset_bottom = 992.0
+mouse_behavior_recursive = 2
+texture = ExtResource("16_dndqy")
+script = ExtResource("17_3h3nv")
+move_wait_time = 0.6
+
+[node name="Right" type="TextureRect" parent="InventoryUI/Scrollbar Hints" unique_id=2008420243]
+custom_minimum_size = Vector2(80, 120)
+custom_maximum_size = Vector2(80, 120)
+layout_mode = 0
+offset_left = 1840.0
+offset_top = 872.0
+offset_right = 1920.0
+offset_bottom = 992.0
+mouse_behavior_recursive = 2
+texture = ExtResource("17_dndqy")
+script = ExtResource("17_3h3nv")
+move_x = -8
+move_wait_time = 0.6

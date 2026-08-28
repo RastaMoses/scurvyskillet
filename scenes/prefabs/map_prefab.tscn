@@ -22,8 +22,8 @@ centered = false
 y_sort_enabled = true
 position = Vector2(112, 528)
 script = ExtResource("4_evkri")
-move_time = 3.0
-smoothing_curve = -1.425
+move_time = 2.4
+smoothing_curve = -1.725
 
 [node name="Visuals" type="Node2D" parent="PlayerShip" unique_id=1175985895]
 

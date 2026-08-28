@@ -1,6 +1,3 @@
 [gd_resource type="Theme" format=3 uid="uid://dwjm243i4x47a"]
 
-[ext_resource type="Texture2D" uid="uid://b0j8xnujermqm" path="res://sprites/placeholder/fast-forward - left.png" id="1_ycpka"]
-
 [resource]
-ScrollContainer/icons/scroll_hint_horizontal = ExtResource("1_ycpka")

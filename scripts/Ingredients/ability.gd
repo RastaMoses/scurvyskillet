@@ -61,7 +61,7 @@ extends Resource
 @export var card_abilities_filter:Array[Ability] = []
 @export var card_tags_filter:Array[GlobalEnums.Tags] = []
 @export var card_rarity_filter:Array[GlobalEnums.Rarity] = []
-@export var flavours_filter:Array[GlobalEnums.Flavour] = []
+@export var flavour_filter:Array[GlobalEnums.Flavour] = []
 @export_subgroup("Dice")
 @export var dice_number_filter:Array[int] = []
 @export_group("Dish")

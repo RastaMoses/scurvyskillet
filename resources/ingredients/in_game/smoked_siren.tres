@@ -3,12 +3,12 @@
 [ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_3hdog"]
 [ext_resource type="Resource" uid="uid://clyw6ixs1wa6k" path="res://resources/abilities/sweet_siren.tres" id="2_5u85r"]
 [ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_c2ujq"]
-[ext_resource type="Texture2D" uid="uid://ds0jswtp7xx1r" path="res://sprites/placeholder/kleinb.PNG" id="3_66vrv"]
+[ext_resource type="Texture2D" uid="uid://chmbpv8f6k0ve" path="res://sprites/placeholder/pngtree-mermaid-cartoon-png-image_15269690.png" id="3_5u85r"]
 
 [resource]
 script = ExtResource("2_c2ujq")
 name = "Smoked Siren"
-icon = ExtResource("3_66vrv")
+icon = ExtResource("3_5u85r")
 tags = Array[int]([4, 9])
 rarity = 3
 description = "All dish Flavours become equal to its Sweet"

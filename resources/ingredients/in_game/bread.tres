@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://ml7hmdoqdh1i"]
 
 [ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_vvk4a"]
-[ext_resource type="Texture2D" uid="uid://ds0jswtp7xx1r" path="res://sprites/placeholder/kleinb.PNG" id="2_a3cfv"]
+[ext_resource type="Texture2D" uid="uid://hak4gp7jd3wf" path="res://sprites/placeholder/pngtree-slice-of-bread-png-image_15792753.png" id="2_a3cfv"]
 [ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_owgmf"]
 
 [resource]

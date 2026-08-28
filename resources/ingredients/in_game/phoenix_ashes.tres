@@ -3,13 +3,13 @@
 [ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_6aqft"]
 [ext_resource type="Resource" uid="uid://bsrcu3n1cl65c" path="res://resources/abilities/spoiling.tres" id="2_3hii3"]
 [ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_jvwk0"]
-[ext_resource type="Texture2D" uid="uid://ds0jswtp7xx1r" path="res://sprites/placeholder/kleinb.PNG" id="3_uwtdl"]
 [ext_resource type="Resource" uid="uid://b3awms1642quf" path="res://resources/abilities/makes_phoenix_fillet.tres" id="3_y5tpi"]
+[ext_resource type="Texture2D" uid="uid://cybw7tpvbop86" path="res://sprites/placeholder/pngtree-chicken-bones-cut-out-chicken-wings-photo-png-image_13604004.png" id="4_uwtdl"]
 
 [resource]
 script = ExtResource("2_jvwk0")
 name = "Phoenix Ashes"
-icon = ExtResource("3_uwtdl")
+icon = ExtResource("4_uwtdl")
 tags = Array[int]([16, 9])
 rarity = 3
 spicy = 4

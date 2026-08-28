@@ -294,10 +294,11 @@ func on_encounter_end():
 				#first time ability is called
 				add_ability_to_encounter_trigger(ability, card)
 		evaluate_encounter_end_triggers(card)
+	
+	current_dish = null
 
 func on_dish_complete():
 	remove_all_from_dish_triggers()
-	current_dish = null
 	pass
 
 func on_challenge_start(dish):
@@ -325,7 +326,7 @@ func activate_effects(trigger, context_card):
 	var ability_card = trigger.source_card
 	#-----------PREVIEW EFFECTS-----------
 	#self card effects
-	if ability.self_target:
+	if ability.self_target and current_dish != null:
 		#modify own stats
 		var multiplier = get_ability_multiplier(ability, current_dish.current_cards)
 		#add stat effects
@@ -338,7 +339,7 @@ func activate_effects(trigger, context_card):
 				player_inventory.remove_ingredient(ability_card)
 	#can be played
 	
-	if ability.played_ingredient_target:
+	if ability.played_ingredient_target and current_dish != null:
 		
 		var apply_effects = true
 		#check for target filters
@@ -356,7 +357,7 @@ func activate_effects(trigger, context_card):
 				for i in ability.uses_effect * -1:
 					player_inventory.remove_ingredient(ability_card)
 	
-	if ability.dish_target:
+	if ability.dish_target and current_dish != null:
 		if ability.add_stats_dish:
 			if check_target_filter(ability, context_card):
 				var multiplier = get_ability_multiplier(ability, current_dish.current_cards)
@@ -384,7 +385,7 @@ func activate_effects(trigger, context_card):
 					temp_stat = current_dish.hearty
 				GlobalEnums.Flavour.FRESH:
 					temp_stat = current_dish.fresh
-			for flavour in ability.flavours_filter:
+			for flavour in ability.flavour_filter:
 				match flavour:
 					GlobalEnums.Flavour.SWEET:
 						current_dish.sweet = temp_stat
@@ -396,8 +397,8 @@ func activate_effects(trigger, context_card):
 						current_dish.fresh = temp_stat
 			
 # Example: add specific ingredients to player inventory
-	if ability.add_specific_ingredient_by_name != "":
-		var ingr  = item_pool.get_ingredient_by_name(ability.add_specific_ingredient_by_name)
+	if ability.add_ingredient_by_name != "":
+		var ingr  = item_pool.get_ingredient_by_name(ability.add_ingredient_by_name)
 		player_inventory.instantiate_card_and_add(ingr)
 	for ingr: Ingredient in ability.add_specific_ingredients_effect:
 		player_inventory.instantiate_card_and_add(ingr)

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://betvt83v0uwhr"]
 
 [ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_npqig"]
-[ext_resource type="Texture2D" uid="uid://ds0jswtp7xx1r" path="res://sprites/placeholder/kleinb.PNG" id="2_p2kqu"]
+[ext_resource type="Texture2D" uid="uid://byhdi0mke5qrd" path="res://sprites/placeholder/honey.png" id="2_p2kqu"]
 [ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_spitf"]
 
 [resource]

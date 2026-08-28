@@ -170,7 +170,6 @@ func finish_dish():
 func start():
 	display_dish()
 	dish_node.start()
-	player_inventory.ui.update_position(true)
 	ability_manager.on_challenge_start(dish_node)
 
 func end():

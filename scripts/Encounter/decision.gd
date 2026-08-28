@@ -13,7 +13,6 @@ func start():
 	for i in choices:
 		i.decision_encounter = self
 		i.start()
-	player_inventory.ui.update_position(true)
 
 func toggle_bg():
 	match terrain_type:

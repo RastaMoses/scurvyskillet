@@ -32,8 +32,9 @@ sweet/base_type = &"RichTextLabel"
 
 [node name="InventoryUISlot" type="Panel" unique_id=442831638]
 self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(256, 304)
-offset_right = 256.0
+custom_minimum_size = Vector2(240, 304)
+clip_contents = true
+offset_right = 240.0
 offset_bottom = 304.0
 mouse_behavior_recursive = 2
 script = ExtResource("1_80hv5")

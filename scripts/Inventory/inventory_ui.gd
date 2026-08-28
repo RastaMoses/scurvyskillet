@@ -35,13 +35,11 @@ extends Control
 #STATE
 var data_bk
 var bottom_position = true
-var current_bg
 var large_view_active = false
 
 var is_open = false
 
 func _ready():
-	update_position(bottom_position)
 	update_topbar()
 	
 	#connect large view buttons
@@ -113,7 +111,8 @@ func update_slots():
 	else:
 		var new_columns = ceili(float(slots.size())/float(max_rows))
 		grid_container.columns = new_columns
-
+		#Scrollbar
+	$ScrollContainer._call_deferred_update_hints()
 func _process(delta: float) -> void:
 	if (Input.is_action_just_pressed("Inventory")):
 		if (is_open):
@@ -141,19 +140,16 @@ func update_position(bottom):
 		inventory_container.position = container_pos_bottom
 		inventory_container.custom_minimum_size = container_size_bottom
 		grid_container.size = container_size_bottom
-		current_bg = bg_bottom
 		bg_side.visible = false
 	else:
 		inventory_container.size = container_size_side
 		inventory_container.position = container_pos_side
 		inventory_container.custom_minimum_size = container_size_side
 		grid_container.size = container_size_side
-		current_bg = bg_side
 		bg_bottom.visible = false
 	open()
 	
 func open():
-	current_bg.visible = true
 	inventory_container.visible = true
 	is_open = true
 	reset_large_view()
@@ -161,7 +157,6 @@ func open():
 	
 func close():
 	reset_large_view()
-	current_bg.visible = false
 	inventory_container.visible = false
 	is_open = false
 
