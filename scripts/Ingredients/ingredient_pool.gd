@@ -21,44 +21,50 @@ func get_random_ingredient(and_req:bool, tag:Array[GlobalEnums.Tags] = [], abili
 		if and_req:
 			#check if rarity is given
 			can_add = true
-			if !rarity.has(i.rarity):
-				can_add = false
+			if !rarity.is_empty():
+				if !rarity.has(i.rarity):
+					can_add = false
 			#check if a tag is in the ingredients tags
-			var has_tag = false
-			for j in i.tags:
-				if tag.has(j):
-					has_tag = true
-			if !has_tag:
-				can_add = false
-			#check abilities
-			var has_ability = false
-			for j in i.abilities:
-				if ability.has(j):
-					has_ability = true
-			if !has_ability:
-				can_add = false
+			if !tag.is_empty():
+				var has_tag = false
+				for j in i.tags:
+					if tag.has(j):
+						has_tag = true
+				if !has_tag:
+					can_add = false
+			if !ability.is_empty():
+				#check abilities
+				var has_ability = false
+				for j in i.abilities:
+					if ability.has(j):
+						has_ability = true
+				if !has_ability:
+					can_add = false
 			
 		else:
 			#any must suffice
 			#check if rarity is given
 			can_add = false
-			if rarity.has(i.rarity):
-				can_add = true
+			if !rarity.is_empty():
+				if rarity.has(i.rarity):
+					can_add = true
 			#check if a tag is in the ingredients tags
-			var has_tag = false
-			for j in i.tags:
-				if tag.has(j):
-					has_tag = true
-			if has_tag:
-				can_add = true
-			#check abilities
-			var has_ability = false
-			for j in i.abilities:
-				if ability.has(j):
-					has_ability = true
-			if has_ability:
-				can_add = true
-		if tag == [] and rarity == [] and ability == []:
+			if !tag.is_empty():
+				var has_tag = false
+				for j in i.tags:
+					if tag.has(j):
+						has_tag = true
+				if has_tag:
+					can_add = true
+			if !ability.is_empty():
+				#check abilities
+				var has_ability = false
+				for j in i.abilities:
+					if ability.has(j):
+						has_ability = true
+				if has_ability:
+					can_add = true
+		if tag.is_empty() and rarity.is_empty() and ability.is_empty():
 			can_add = true
 		if can_add:
 			possible_ingredients.append(i)

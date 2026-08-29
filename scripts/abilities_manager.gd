@@ -328,10 +328,10 @@ func activate_effects(trigger, context_card):
 	#self card effects
 	if ability.self_target:
 		#modify own stats
-		
-		var multiplier = get_ability_multiplier(ability, current_dish.current_cards)
-		#add stat effects
-		apply_stat_effect(ability_card.committed_stats, ability, multiplier)
+		if current_dish:
+			var multiplier = get_ability_multiplier(ability, current_dish.current_cards)
+			#add stat effects
+			apply_stat_effect(ability_card.committed_stats, ability, multiplier)
 		if ability.uses_effect > 0:
 			for i in ability.uses_effect:
 				player_inventory.instantiate_card_and_add(ability_card.base_stats)

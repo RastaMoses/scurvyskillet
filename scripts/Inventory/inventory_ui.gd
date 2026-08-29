@@ -235,7 +235,7 @@ func sort_by_name(a, b):
 		return false
 	if not a.committed_stats or not b.committed_stats:
 		return false
-	var cmp:int = a.committed_stats.name.naturalnocasecmp_to(b.committed_stats.name) < 0
+	var cmp:int = a.committed_stats.name.naturalnocasecmp_to(b.committed_stats.name)
 	if cmp != 0:
 		return cmp < 0
 	return a.committed_stats.uses > b.committed_stats.uses
