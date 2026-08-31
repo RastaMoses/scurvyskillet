@@ -171,6 +171,10 @@ func check_target_filter(ability, context_card) -> bool:
 		if ability.specific_ingredient_filter != null:
 			if context_card.base_stats != ability.specific_ingredient_filter:
 				return false
+	# ingredient on card_cond:
+	if ability.specific_ingredient_filter != null:
+		if context_card.base_stats != ability.specific_ingredient_filter:
+			return false
 	return true
 #endregion
 #----------Trigger evaluation---------
@@ -362,11 +366,11 @@ func activate_effects(trigger, context_card):
 		if ability.add_stats_dish:
 			if check_target_filter(ability, context_card):
 				var multiplier = get_ability_multiplier(ability, current_dish.current_cards)
-				current_dish.sweet += ability.sweet_effect * multiplier
-				current_dish.spicy += ability.spicy_effect * multiplier
-				current_dish.hearty += ability.hearty_effect * multiplier
-				current_dish.fresh += ability.fresh_effect * multiplier
-				current_dish.nutrition += ability.nutrition_effect * multiplier
+				current_dish.ability_sweet += ability.sweet_effect * multiplier
+				current_dish.ability_spicy += ability.spicy_effect * multiplier
+				current_dish.ability_hearty += ability.hearty_effect * multiplier
+				current_dish.ability_fresh += ability.fresh_effect * multiplier
+				current_dish.ability_nutrition += ability.nutrition_effect * multiplier
 		if ability.multiply_dish:
 			if check_target_filter(ability, context_card):
 				var multiplier = get_ability_multiplier(ability, current_dish.current_cards)

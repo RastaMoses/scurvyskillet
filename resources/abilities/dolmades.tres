@@ -7,10 +7,11 @@
 [resource]
 script = ExtResource("2_l54s0")
 description = "If the next ingredient you use is Rice, it adds +2 Nutrition and +3 Hearty to the dish"
-duration = 1
+duration = 2
 any_other_add_to_dish_cond = true
 dish_target = true
 specific_ingredient_filter = ExtResource("3_l54s0")
+add_stats_dish = true
 hearty_effect = 3
 nutrition_effect = 2
 metadata/_custom_type_script = "uid://bnelk35k2xjth"

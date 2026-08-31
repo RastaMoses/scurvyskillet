@@ -4,10 +4,14 @@ extends Inventory
 @export var nutrition:int = 0
 @export_subgroup("Flavour")
 @export var sweet:int
-var sour:int
 @export var spicy:int
 @export var hearty:int
 @export var fresh:int
+@export var ability_sweet:int = 0
+@export var ability_spicy:int = 0
+@export var ability_hearty:int = 0
+@export var ability_fresh:int = 0
+@export var ability_nutrition:int = 0
 
 #CACHED COMPS
 var random = RandomNumberGenerator.new()
@@ -79,8 +83,21 @@ func on_destroy_ingredient(origin,card:Node):
 func on_destroy_all_ingredients(origin):
 	if origin != self:
 		return
+	ability_sweet = 0
+	ability_spicy = 0
+	ability_hearty = 0
+	ability_fresh = 0
+	ability_nutrition = 0
 	for card in current_cards:
 		remove_card_from_dish(card)
+	sweet = 0
+	spicy = 0
+	hearty = 0
+	fresh = 0
+	nutrition = 0
+	#ui
+	dish_ui.update_flavours()
+	dish_ui.update_nutrition(nutrition)
 func remove_card_from_dish(card):
 	tags.clear()
 	for i in current_cards:
@@ -88,7 +105,7 @@ func remove_card_from_dish(card):
 			if !tags.has(tag):
 				tags.append(tag)
 	#remove dice values
-	nutrition -= card.stats.nutrition
+	nutrition -= card.committed_stats.nutrition
 	for die in card.dice:
 		subtract_die_value_from_dish(die)
 		dice.erase(die)
@@ -120,22 +137,27 @@ func recalculate_dish():
 	tags.clear()
 	
 	for card in current_cards:
+		print(card.stats.name)
 		nutrition += card.committed_stats.nutrition
 		
 		for tag in card.committed_stats.tags:
 			if not tags.has(tag):
 				tags.append(tag)
-		for die in card.dice:
-			match die.flavour:
-				GlobalEnums.Flavour.SWEET:
-					sweet += die.number
-				GlobalEnums.Flavour.SPICY:
-					spicy += die.number
-				GlobalEnums.Flavour.HEARTY:
-					hearty += die.number
-				GlobalEnums.Flavour.FRESH:
-					fresh += die.number
-
+	for die in dice:
+		match die.flavour:
+			GlobalEnums.Flavour.SWEET:
+				sweet += die.number
+			GlobalEnums.Flavour.SPICY:
+				spicy += die.number
+			GlobalEnums.Flavour.HEARTY:
+				hearty += die.number
+			GlobalEnums.Flavour.FRESH:
+				fresh += die.number
+	sweet += ability_sweet
+	spicy += ability_spicy
+	hearty += ability_hearty
+	fresh += ability_fresh
+	nutrition += ability_nutrition
 func finish_dish():
 	dice_disp.finish_dish()
 
@@ -149,12 +171,11 @@ func count_ingredient_in_dish(target:Ingredient) -> int:
 #region Dice
 
 func roll_ingredient(card:Node, dice_multiplier:int = 1):
-	
 	abilities.on_dice_roll(card)
-	roll_dice(GlobalEnums.Flavour.SWEET, dice_multiplier*card.stats.sweet,card)
-	roll_dice(GlobalEnums.Flavour.SPICY,dice_multiplier*card.stats.spicy,card)
-	roll_dice(GlobalEnums.Flavour.HEARTY,dice_multiplier*card.stats.hearty,card)
-	roll_dice(GlobalEnums.Flavour.FRESH,dice_multiplier*card.stats.fresh,card)
+	roll_dice(GlobalEnums.Flavour.SWEET, dice_multiplier*card.committed_stats.sweet,card)
+	roll_dice(GlobalEnums.Flavour.SPICY,dice_multiplier*card.committed_stats.spicy,card)
+	roll_dice(GlobalEnums.Flavour.HEARTY,dice_multiplier*card.committed_stats.hearty,card)
+	roll_dice(GlobalEnums.Flavour.FRESH,dice_multiplier*card.committed_stats.fresh,card)
 
 func roll_dice(flavour,amount,card:Node):
 	while amount > 0:

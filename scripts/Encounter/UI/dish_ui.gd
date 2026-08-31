@@ -33,7 +33,6 @@ var active_plates:int = 0
 var current_nutrition:int = 0
 
 func update_flavours():
-	
 	sweet_text.text = str(dish.sweet)
 	if dish.sweet == 0:
 		sweet_text.visible = false
@@ -45,18 +44,6 @@ func update_flavours():
 		sweet_bg.start_moving_to_destination(sweet_bg.start_location, result_bg_move_duration)
 		sweet_text.visible = true
 		sweet_bg_moved = false
-	
-	sour_text.text = str(dish.sour)
-	if dish.sour == 0:
-		sour_text.visible = false
-		if !sour_bg_moved:
-			sour_bg.start_moving_to_destination(Vector2(sour_bg.global_position.x + result_bg_move_x,
-			sour_bg.global_position.y),result_bg_move_duration)
-			sour_bg_moved = true
-	else:
-		sour_bg.start_moving_to_destination(sour_bg.start_location, result_bg_move_duration)
-		sour_text.visible = true
-		sour_bg_moved = false
 	
 	spicy_text.text = str(dish.spicy)
 	if dish.spicy == 0:

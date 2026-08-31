@@ -55,7 +55,6 @@ func set_random_item():
 			rand_rar_chances.append(GlobalEnums.Rarity.LEGENDARY)
 		var rand_rar:GlobalEnums.Rarity = rand_rar_chances[random.randi_range(0, rand_rar_chances.size()-1)]
 		rarity_req.append(rand_rar)
-		print(rand_rar)
 	else:
 		rarity_req = req_rarity
 	var rand_ingr = item_pool.get_random_ingredient(and_req,req_tag,req_ability,rarity_req)
