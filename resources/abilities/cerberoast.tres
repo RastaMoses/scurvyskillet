@@ -10,6 +10,7 @@ this_add_to_dish_cond = true
 sweet_cond_dish_min = 3
 fresh_cond_dish_min = 3
 dish_target = true
+add_stats_dish = true
 spicy_effect = 3
 hearty_effect = 3
 nutrition_effect = 3

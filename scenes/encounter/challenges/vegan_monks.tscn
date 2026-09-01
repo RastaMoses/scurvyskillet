@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://b7krmoqmpsl0u"]
+
+[ext_resource type="PackedScene" uid="uid://hr6aybbol4hn" path="res://scenes/prefabs/challenge_sample.tscn" id="1_hclfp"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_3pv5k"]
+[ext_resource type="Resource" uid="uid://d24ccsx0kj3u1" path="res://resources/ingredients/in_game/red_wine.tres" id="3_j5p5i"]
+
+[node name="ChallengeSample2" unique_id=993217827 instance=ExtResource("1_hclfp")]
+req_nutrition = 10
+req_hearty = 4
+req_fresh = 10
+par_nutrition = 7
+par_fresh = 5
+restricted_tags = Array[int]([4, 8, 0, 2])
+success_morale = 2
+s_specific_ingredients = Array[ExtResource("2_3pv5k")]([ExtResource("3_j5p5i"), ExtResource("3_j5p5i"), ExtResource("3_j5p5i")])
+s_random_ingredient_amount = 1
+s_and_req = true
+s_req_rarity = Array[int]([0, 1])
+s_req_tag = Array[int]([15, 5])
+p_and_req = true
+p_req_rarity = Array[int]([0])
+p_req_tag = Array[int]([15, 5])
+failure_morale = -2
+
+[node name="text" parent="UI/description" parent_id_path=PackedInt32Array(1896810604) index="1" unique_id=189440853]
+text = "They will not eat any meat or fish."
+
+[node name="title" parent="UI/description" parent_id_path=PackedInt32Array(1896810604) index="2" unique_id=118090035]
+text = "Vegan Monks need Food!"

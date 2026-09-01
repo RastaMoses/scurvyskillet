@@ -14,7 +14,7 @@ extends Control
 @export var legendary_chance:int = 1
 @export_subgroup("Random Rarity Max Spawn Uses")
 @export var common_uses:int = 3
-@export var uncommon_uses:int = 2
+@export var uncommon_uses:int = 1
 @export var rare_uses:int = 1
 @export var legendary_uses:int = 1
 

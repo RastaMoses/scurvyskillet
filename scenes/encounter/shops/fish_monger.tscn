@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://0asi546041v"]
+
+[ext_resource type="PackedScene" uid="uid://dppkgemxlgehl" path="res://scenes/prefabs/shop_sample.tscn" id="1_x6anm"]
+
+[node name="ShopSample" unique_id=1111686658 instance=ExtResource("1_x6anm")]
+
+[node name="buy_button_sample" parent="UI/BuyButtons" parent_id_path=PackedInt32Array(1400584695) index="0" unique_id=1219771888]
+and_req = false
+req_tag = Array[int]([4, 2, 10, 16, 13])
+
+[node name="buy_button_sample2" parent="UI/BuyButtons" parent_id_path=PackedInt32Array(1400584695) index="1" unique_id=1258386772]
+and_req = false
+req_tag = Array[int]([4, 2, 10, 16, 13])
+
+[node name="buy_button_sample3" parent="UI/BuyButtons" parent_id_path=PackedInt32Array(1400584695) index="2" unique_id=1765024236]
+and_req = false
+req_tag = Array[int]([4, 2, 10, 16, 13])
+
+[node name="buy_button_sample4" parent="UI/BuyButtons" parent_id_path=PackedInt32Array(1400584695) index="3" unique_id=470567196]
+and_req = false
+req_tag = Array[int]([4, 2, 10, 16, 13])
+
+[node name="buy_button_sample5" parent="UI/BuyButtons" parent_id_path=PackedInt32Array(1400584695) index="4" unique_id=1286263616]
+and_req = false
+req_tag = Array[int]([4, 2, 10, 16, 13])
+
+[node name="buy_button_sample6" parent="UI/BuyButtons" parent_id_path=PackedInt32Array(1400584695) index="5" unique_id=1978801332]
+and_req = false
+req_tag = Array[int]([4, 2, 10, 16, 13])
+
+[node name="buy_button_sample7" parent="UI/BuyButtons" parent_id_path=PackedInt32Array(1400584695) index="6" unique_id=1226313322]
+and_req = false
+req_tag = Array[int]([4, 2, 10, 16, 13])
+
+[node name="buy_button_sample8" parent="UI/BuyButtons" parent_id_path=PackedInt32Array(1400584695) index="7" unique_id=172646036]
+and_req = false
+req_tag = Array[int]([4, 2, 10, 16, 13])

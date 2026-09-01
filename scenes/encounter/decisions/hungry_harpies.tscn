@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://cdk3g4xkwsfqy"]
+
+[ext_resource type="PackedScene" uid="uid://benw6bt2l0ot" path="res://scenes/prefabs/decision_prefab.tscn" id="1_i3j7s"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_ted6c"]
+[ext_resource type="Resource" uid="uid://btpvxmpobyxj1" path="res://resources/ingredients/in_game/chicken_egg.tres" id="3_sirl3"]
+
+[node name="DecisionSample" unique_id=856639403 instance=ExtResource("1_i3j7s")]
+
+[node name="BGWater" parent="." index="0" unique_id=414026879]
+texture = null
+
+[node name="BGLand" parent="." index="1" unique_id=247136280]
+visible = true
+
+[node name="art" parent="." index="2" unique_id=1781471364]
+visible = false
+
+[node name="text" parent="description" parent_id_path=PackedInt32Array(747135996) index="1" unique_id=670048361]
+text = "You spot a flock of loitering harpies on the cliffs overhead. 
+
+You might be able to befriend them with sweet gifts;
+
+Scare them off with spice;
+
+Or just take the L."
+
+[node name="title" parent="description" parent_id_path=PackedInt32Array(747135996) index="2" unique_id=1975928171]
+text = "Hungry Harpies"
+
+[node name="choice1" parent="Choices" parent_id_path=PackedInt32Array(504841176) index="0" unique_id=704699521]
+text = "Befriend"
+r_money = 2
+r_morale = 2
+drop_ingredients = true
+sweet = 3
+
+[node name="choice2" parent="Choices" parent_id_path=PackedInt32Array(504841176) index="1" unique_id=669889480]
+text = "Scare Them"
+r_morale = 2
+specific_ingredients = Array[ExtResource("2_ted6c")]([ExtResource("3_sirl3"), ExtResource("3_sirl3")])
+drop_ingredients = true
+spicy = 3
+
+[node name="choice3" parent="Choices" parent_id_path=PackedInt32Array(504841176) index="2" unique_id=474290282]
+text = "Get Ambushed"
+c_morale = 1

@@ -16,6 +16,7 @@ anchor_top = 1.0
 anchor_bottom = 1.0
 grow_vertical = 0
 script = ExtResource("1_61j3v")
+random_ingredient_amount = 0
 card_prefab = ExtResource("2_jv3kl")
 can_stack_uses = false
 

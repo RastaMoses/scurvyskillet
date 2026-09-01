@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://d3easqv184mu1"]
+
+[ext_resource type="PackedScene" uid="uid://b5p50mcr5j4g8" path="res://scenes/prefabs/map_prefab.tscn" id="1_5vbx6"]
+[ext_resource type="PackedScene" uid="uid://d3m0xjawxe0cp" path="res://scenes/prefabs/encounter.tscn" id="2_p6csh"]
+[ext_resource type="PackedScene" uid="uid://b7krmoqmpsl0u" path="res://scenes/encounter/challenges/vegan_monks.tscn" id="2_pp0bg"]
+[ext_resource type="PackedScene" uid="uid://cdk3g4xkwsfqy" path="res://scenes/encounter/decisions/hungry_harpies.tscn" id="3_shbf5"]
+[ext_resource type="PackedScene" uid="uid://0asi546041v" path="res://scenes/encounter/shops/fish_monger.tscn" id="4_fg40y"]
+
+[node name="Map" unique_id=1839841650 node_paths=PackedStringArray("encounter_nodes") instance=ExtResource("1_5vbx6")]
+encounter_nodes = [NodePath("Encounter/0"), NodePath("Encounter/1"), NodePath("Encounter/2"), NodePath("Encounter/3"), NodePath("Encounter/4"), NodePath("Encounter/5"), NodePath("Encounter/6"), NodePath("Encounter/7"), NodePath("Encounter/8")]
+
+[node name="0" parent="Encounter" parent_id_path=PackedInt32Array(1514431645) index="0" unique_id=986483625]
+position = Vector2(193, 461)
+
+[node name="1" parent="Encounter" parent_id_path=PackedInt32Array(1514431645) index="1" unique_id=1699582653]
+possible_encounters = Array[PackedScene]([ExtResource("2_pp0bg")])
+type = 3
+
+[node name="2" parent="Encounter" parent_id_path=PackedInt32Array(1514431645) index="2" unique_id=386168653]
+possible_encounters = Array[PackedScene]([ExtResource("3_shbf5")])
+type = 2
+
+[node name="3" parent="Encounter" parent_id_path=PackedInt32Array(1514431645) index="3" unique_id=664957354]
+position = Vector2(758, 440)
+possible_encounters = Array[PackedScene]([ExtResource("4_fg40y")])
+destinations = Array[int]([4, 5])
+type = 1
+bg_type = 1
+
+[node name="4" parent="Encounter" parent_id_path=PackedInt32Array(1514431645) index="4" unique_id=1721472287 instance=ExtResource("2_p6csh")]
+position = Vector2(955, 235)
+
+[node name="5" parent="Encounter" parent_id_path=PackedInt32Array(1514431645) index="5" unique_id=2306135 instance=ExtResource("2_p6csh")]
+position = Vector2(984, 652)
+
+[node name="6" parent="Encounter" parent_id_path=PackedInt32Array(1514431645) index="6" unique_id=1695874700 instance=ExtResource("2_p6csh")]
+position = Vector2(1299, 219)
+
+[node name="7" parent="Encounter" parent_id_path=PackedInt32Array(1514431645) index="7" unique_id=405134870 instance=ExtResource("2_p6csh")]
+position = Vector2(1346, 632)
+
+[node name="8" parent="Encounter" parent_id_path=PackedInt32Array(1514431645) index="8" unique_id=1941259482 instance=ExtResource("2_p6csh")]
+position = Vector2(1611, 445)

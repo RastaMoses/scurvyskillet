@@ -55,8 +55,6 @@ extends Control
 @export var f_req_rarity: Array[GlobalEnums.Rarity]
 @export var f_req_tag:Array[GlobalEnums.Tags]
 @export var f_req_ability:Array[Ability]
-@export_group("UI Elements")
-@export var map_icon:Texture
 
 #CACHED COMPS
 @onready var player_inventory = get_tree().get_first_node_in_group("player")

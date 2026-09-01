@@ -8,6 +8,6 @@ script = ExtResource("2_r6g4r")
 description = "After using this, no more ingredients can be added"
 continuous = true
 try_add_to_dish_cond = true
-all_ingredients_in_dish_target = true
+played_ingredient_target = true
 can_not_play = true
 metadata/_custom_type_script = "uid://bnelk35k2xjth"
