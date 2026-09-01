@@ -10,7 +10,6 @@ extends Node2D
 @export_group("Visuals")
 @export_subgroup("Sprites")
 @export var sweet_sprite:Texture
-@export var sour_sprite:Texture
 @export var spicy_sprite:Texture
 @export var hearty_sprite:Texture
 @export var fresh_sprite:Texture

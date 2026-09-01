@@ -12,7 +12,6 @@ extends Panel
 @onready var texture = $ItemDisplay.texture
 @onready var uses_textures = $ItemDisplay/Uses.get_children()
 @onready var hearty = $ItemDisplay/Flavours/Hearty
-@onready var sour = $ItemDisplay/Flavours/Sour
 @onready var fresh = $ItemDisplay/Flavours/Fresh
 @onready var spicy = $ItemDisplay/Flavours/Spicy
 @onready var sweet = $ItemDisplay/Flavours/Sweet
@@ -115,21 +114,7 @@ func update_flavours():
 		else:
 			hearty.get_child(0).theme_type_variation = "hearty"
 			hearty.visible = false
-		
-	if card.stats.sour > 0:
-		sour.visible = true
-		sour.get_child(0).text = str(card.stats.sour)
-		if card.stats.sour != card.base_stats.sour:
-			sour.get_child(0).theme_type_variation = "altered"
-		else:
-			sour.get_child(0).theme_type_variation = "sour"
-	else:
-		if card.stats.sour != card.base_stats.sour:
-			sour.get_child(0).theme_type_variation = "altered"
-		else:
-			sour.get_child(0).theme_type_variation = "sour"
-			sour.visible = false
-		
+	
 	if card.stats.fresh > 0:
 		fresh.visible = true
 		fresh.get_child(0).text = str(card.stats.fresh)

@@ -5,7 +5,6 @@ extends Control
 
 @onready var dish = get_parent()
 @onready var sweet_text = $Results/SweetText
-@onready var sour_text = $Results/SourText
 @onready var spicy_text = $Results/SpicyText
 @onready var hearty_text = $Results/HeartyText
 @onready var fresh_text = $Results/FreshText
@@ -14,7 +13,6 @@ extends Control
 @onready var spicy_bg = $Results/Spicy
 @onready var hearty_bg = $Results/Hearty
 @onready var fresh_bg = $Results/Fresh
-@onready var sour_bg = $Results/Sour
 
 
 @onready var nutrition_text = $Nutrition/text
@@ -23,7 +21,6 @@ extends Control
 @onready var pan_highlight = $Pan/highlight
 
 var sweet_bg_moved = false
-var sour_bg_moved = false
 var spicy_bg_moved = false
 var hearty_bg_moved = false
 var fresh_bg_moved = false

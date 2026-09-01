@@ -10,7 +10,6 @@ extends Resource
 @export var nutrition:int
 @export_subgroup("Flavour")
 @export var sweet:int
-var sour:int
 @export var spicy:int
 @export var hearty:int
 @export var fresh:int
@@ -18,7 +17,6 @@ var sour:int
 #@export_subgroup("Immortal Ghoulash")
 #@export var ig_nutrition:int
 #@export var ig_sweet:int
-#var ig_sour:int
 #@export var ig_spicy:int
 #@export var ig_hearty:int
 #@export var ig_fresh:int

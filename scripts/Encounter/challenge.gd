@@ -6,14 +6,12 @@ extends Control
 @export_group("Success")
 @export var req_nutrition:int
 @export var req_sweet:int
-var req_sour:int
 @export var req_spicy:int
 @export var req_hearty:int
 @export var req_fresh:int
 @export_group("Partial")
 @export var par_nutrition:int
 @export var par_sweet:int
-var par_sour:int
 @export var par_spicy:int
 @export var par_hearty:int
 @export var par_fresh:int
@@ -138,14 +136,12 @@ func is_restricted_tag(tag):
 func compare_dish(completed_dish):
 	if (completed_dish.nutrition < req_nutrition
 	or completed_dish.sweet < req_sweet
-	or completed_dish.sour < req_sour
 	or completed_dish.spicy < req_spicy
 	or completed_dish.hearty < req_hearty
 	or completed_dish.fresh < req_fresh
 	or completed_dish.tags.any(is_restricted_tag)): #check if restricted tag is used
 		if (completed_dish.nutrition < par_nutrition
 		or completed_dish.sweet < par_sweet
-		or completed_dish.sour < par_sour
 		or completed_dish.spicy < par_spicy
 		or completed_dish.hearty < par_hearty
 		or completed_dish.fresh < par_fresh
