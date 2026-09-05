@@ -64,9 +64,9 @@ func remove_ingredient(card):
 	on_remove_ingredient.emit(self,card)
 
 func drop_ingredient(card):
-	dropping_ingredient.emit(self, card)
 	player_inventory.remove_ingredient(card)
 	add_card(card)
+	dropping_ingredient.emit(self, card)
 
 func instantiate_card_and_add(resource:Ingredient):
 	var temp_card:Node = card_prefab.instantiate()

@@ -58,10 +58,9 @@ func on_checking_drop(origin, card):
 	var droppable = true
 	
 	#specific ingredient
-	if req_ability.size() != 0:
-		for i in req_ability:
-			if i.committed_stats.name == card.stats.name:
-				droppable = false
+	if req_specific_ingredients.size() != 0:
+		if not req_specific_ingredients.has(card.base_stats):
+			droppable = false
 	#check if a tag is required
 	if req_tags.size() != 0:
 		for i in req_tags:
@@ -74,10 +73,10 @@ func on_checking_drop(origin, card):
 				droppable = false
 	drop_highlight.visible = droppable
 	can_drop_card = droppable
+
 func on_ingredient_dropped(origin, card):
 	if origin != self:
 		return
-	player_inventory.remove_ingredient(card)
 	check_completed()
 	
 
@@ -94,31 +93,33 @@ func check_completed():
 	#values
 	var sweet_sum = 0
 	for i in current_cards:
-		sweet_sum += i.stats.sweet
+		sweet_sum += i.committed_stats.sweet
+	print("Choice Sweet Sum on check completed")
+	print(sweet_sum)
 	if sweet_sum < sweet:
 		return
 		
 	var spicy_sum = 0
 	for i in current_cards:
-		spicy_sum += i.stats.spicy
+		spicy_sum += i.committed_stats.spicy
 	if spicy_sum < spicy:
 		return
 	
 	var hearty_sum = 0
 	for i in current_cards:
-		hearty_sum += i.stats.hearty
+		hearty_sum += i.committed_stats.hearty
 	if hearty_sum < hearty:
 		return
 	
 	var fresh_sum = 0
 	for i in current_cards:
-		fresh_sum += i.stats.fresh
+		fresh_sum += i.committed_stats.fresh
 	if fresh_sum < fresh:
 		return
 	
 	var nutrition_sum = 0
 	for i in current_cards:
-		nutrition_sum += i.stats.nutrition
+		nutrition_sum += i.committed_stats.nutrition
 	if nutrition_sum < nutrition:
 		return
 	complete()

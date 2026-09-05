@@ -32,7 +32,6 @@ func player_sell_ingredient(origin,card):
 	if origin != self:
 		return
 	player_inventory.add_money(rarity_prices[card.stats.rarity])
-	player_inventory.remove_ingredient(card)
 	check_buttons_enabled()
 
 func on_checking_drop(origin, data):
