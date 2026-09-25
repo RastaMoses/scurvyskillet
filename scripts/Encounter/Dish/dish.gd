@@ -137,7 +137,6 @@ func recalculate_dish():
 	tags.clear()
 	
 	for card in current_cards:
-		print(card.stats.name)
 		nutrition += card.committed_stats.nutrition
 		
 		for tag in card.committed_stats.tags:

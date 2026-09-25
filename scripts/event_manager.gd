@@ -49,4 +49,5 @@ func update_inventory_position():
 	on_inventory_update.emit()
 
 func dish_finish_animation_done():
+	await get_tree().create_timer(1).timeout
 	on_dish_finish_anim_done.emit()

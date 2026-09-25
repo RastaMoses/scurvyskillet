@@ -20,13 +20,9 @@ extends Control
 @onready var player_inventory = get_tree().get_first_node_in_group("player")
 @onready var event_manager = get_tree().get_first_node_in_group("event_manager")
 @onready var slots: Array = $ScrollContainer/GridContainer.get_children()
-@onready var bg_bottom = $bg_bottom
-@onready var bg_side = $bg_side
+@onready var bg = $bg_bottom
 @onready var inventory_container = $ScrollContainer
 @onready var grid_container = $ScrollContainer/GridContainer
-@onready var morale_text = $topbar/morale_text
-@onready var money_text = $topbar/money_text
-
 
 @onready var large_view_button = $LargeView/Button
 @onready var large_view_slot = $LargeView/InventoryUILarge
@@ -40,7 +36,7 @@ var large_view_active = false
 var is_open = false
 
 func _ready():
-	update_topbar()
+	open()
 	#connect large view buttons
 	large_view_button.pressed.connect(large_view_button_pressed)
 	for i in slots:
@@ -71,8 +67,6 @@ func remove_slots(amount):
 		slots.back().queue_free()
 		slots.remove_at(-1)
 
-
-
 func update_slots():
 	
 	#check slot amount
@@ -96,16 +90,7 @@ func update_slots():
 		var new_columns = ceili(float(slots.size())/float(max_rows))
 		grid_container.columns = new_columns
 		#Scrollbar
-	$ScrollContainer._call_deferred_update_hints()
-func _process(delta: float) -> void:
-	if (Input.is_action_just_pressed("Inventory")):
-		if (is_open):
-			close()
-		else:
-			open()
-	#Sets cursor to not be blocked (visual)
-	if Input.get_current_cursor_shape()==CURSOR_FORBIDDEN:
-		DisplayServer.cursor_set_shape(DisplayServer.CURSOR_ARROW)
+	inventory_container._call_deferred_update_hints()
 
 #Drag and drop not outside window
 func _notification(what: int) -> void:
@@ -124,29 +109,23 @@ func update_position(bottom):
 		inventory_container.position = container_pos_bottom
 		inventory_container.custom_minimum_size = container_size_bottom
 		grid_container.size = container_size_bottom
-		bg_side.visible = false
-	else:
-		inventory_container.size = container_size_side
-		inventory_container.position = container_pos_side
-		inventory_container.custom_minimum_size = container_size_side
-		grid_container.size = container_size_side
-		bg_bottom.visible = false
+	#else:
+		#inventory_container.size = container_size_side
+		#inventory_container.position = container_pos_side
+		#inventory_container.custom_minimum_size = container_size_side
+		#grid_container.size = container_size_side
+		#bg_bottom.visible = false
 	open()
 	
 func open():
 	inventory_container.visible = true
 	is_open = true
 	reset_large_view()
-	update_topbar()
 	
 func close():
 	reset_large_view()
 	inventory_container.visible = false
 	is_open = false
-
-func update_topbar():
-	money_text.text = str(player_inventory.current_money)
-	morale_text.text = str(player_inventory.current_morale)
 
 #region Large View
 func toggle_large_view(card):

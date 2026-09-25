@@ -94,8 +94,6 @@ func check_completed():
 	var sweet_sum = 0
 	for i in current_cards:
 		sweet_sum += i.committed_stats.sweet
-	print("Choice Sweet Sum on check completed")
-	print(sweet_sum)
 	if sweet_sum < sweet:
 		return
 		

@@ -183,3 +183,5 @@ func on_reset_button_pressed() -> void:
 
 func _on_roll_dish_pressed() -> void:
 	finish_dish()
+
+#Dish Log

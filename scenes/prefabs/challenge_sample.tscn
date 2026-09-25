@@ -11,10 +11,13 @@
 [ext_resource type="Theme" uid="uid://bqlaftpa31pru" path="res://themes/encounter/enc_title.tres" id="6_x7qnw"]
 [ext_resource type="Texture2D" uid="uid://l1acfj3rcnvt" path="res://sprites/interface/scenes/cooking scene/scene_cooking_button_reset_arrow.png" id="6_y21f8"]
 [ext_resource type="Texture2D" uid="uid://cst1skr2hibgh" path="res://sprites/interface/scenes/cooking scene/scene_cooking_button_cook.png" id="7_6r88v"]
+[ext_resource type="Theme" uid="uid://b8b007diwy4r1" path="res://themes/dish/description_vbox.tres" id="7_ee2dl"]
 [ext_resource type="Texture2D" uid="uid://cs0ochjc043hv" path="res://sprites/interface/scenes/cooking scene/scene_cooking_button_cook_shadow.png" id="8_ee2dl"]
 [ext_resource type="Texture2D" uid="uid://ctt5b3tmu74a2" path="res://sprites/interface/scenes/cooking scene/scene_cooking_example.png" id="9_t50f7"]
 [ext_resource type="PackedScene" uid="uid://83c84n5554td" path="res://scenes/prefabs/dish.tscn" id="10_l27j6"]
 [ext_resource type="Texture2D" uid="uid://0gs45yeo06st" path="res://sprites/interface/scenes/cooking scene/scene_cooking_button_cook_outline.png" id="11_x7qnw"]
+
+[sub_resource type="Theme" id="Theme_5p3kb"]
 
 [node name="ChallengeSample2" type="Control" unique_id=993217827]
 layout_mode = 3
@@ -73,39 +76,43 @@ grow_vertical = 2
 mouse_behavior_recursive = 1
 texture = ExtResource("4_x7qnw")
 
-[node name="text" type="RichTextLabel" parent="UI/description" unique_id=189440853]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -888.0
-offset_top = -872.0
-offset_right = -416.0
-offset_bottom = -332.0
-grow_horizontal = 2
-grow_vertical = 0
-mouse_filter = 1
-mouse_behavior_recursive = 2
-theme = ExtResource("5_h6ing")
-text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/description" unique_id=1085043928]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 80.0
+offset_right = 544.0
+offset_bottom = 752.0
+theme = SubResource("Theme_5p3kb")
+scroll_vertical_custom_step = 8.0
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+scroll_hint_mode = 1
 
-[node name="title" type="RichTextLabel" parent="UI/description" unique_id=118090035]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -880.0
-offset_top = 88.0
-offset_right = -424.0
-offset_bottom = 184.0
-grow_horizontal = 2
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/description/ScrollContainer" unique_id=749325280]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("7_ee2dl")
+
+[node name="title" type="RichTextLabel" parent="UI/description/ScrollContainer/VBoxContainer" unique_id=118090035]
+layout_mode = 2
 mouse_filter = 1
 mouse_behavior_recursive = 1
 theme = ExtResource("6_x7qnw")
 text = "TITLE OF THE ENCOUNTER WHICH MIGHT BE SUPER DANGEROUS"
+fit_content = true
+scroll_active = false
 horizontal_alignment = 1
+
+[node name="text" type="RichTextLabel" parent="UI/description/ScrollContainer/VBoxContainer" unique_id=189440853]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 1
+mouse_behavior_recursive = 2
+theme = ExtResource("5_h6ing")
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+fit_content = true
+scroll_active = false
 
 [node name="Reset" type="Control" parent="UI" unique_id=566658081]
 anchors_preset = 0

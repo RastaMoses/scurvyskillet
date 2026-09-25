@@ -1,6 +1,6 @@
 
 class_name Inventory
-extends Node
+extends Control
 
 @export var card_prefab:PackedScene
 var current_cards: Array[Node]
