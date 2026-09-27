@@ -41,10 +41,7 @@ grow_vertical = 2
 script = ExtResource("3_5ftxm")
 inventory_slot_scene = ExtResource("4_rw30e")
 min_slots = 8
-container_size_bottom = Vector2(1920, 304)
-container_pos_bottom = Vector2(0, 776)
-container_size_side = Vector2(591, 699)
-container_pos_side = Vector2(1302, 172)
+max_rows = 1
 
 [node name="topbar" type="Control" parent="InventoryUI" unique_id=1235091762]
 z_index = 4
@@ -132,9 +129,9 @@ texture = SubResource("PlaceholderTexture2D_2kgow")
 custom_minimum_size = Vector2(1920, 304)
 custom_maximum_size = Vector2(1920, 304)
 layout_mode = 0
-offset_top = 776.0
+offset_top = 784.0
 offset_right = 1920.0
-offset_bottom = 1080.0
+offset_bottom = 1088.0
 mouse_behavior_recursive = 2
 theme = ExtResource("10_no1hy")
 horizontal_scroll_mode = 3
@@ -155,27 +152,35 @@ columns = 8
 
 [node name="InventoryUISlot" parent="InventoryUI/ScrollContainer/GridContainer" unique_id=442831638 instance=ExtResource("4_rw30e")]
 layout_mode = 2
+mouse_filter = 0
 
 [node name="InventoryUISlot2" parent="InventoryUI/ScrollContainer/GridContainer" unique_id=1649551522 instance=ExtResource("4_rw30e")]
 layout_mode = 2
+mouse_filter = 0
 
 [node name="InventoryUISlot3" parent="InventoryUI/ScrollContainer/GridContainer" unique_id=1840363840 instance=ExtResource("4_rw30e")]
 layout_mode = 2
+mouse_filter = 0
 
 [node name="InventoryUISlot4" parent="InventoryUI/ScrollContainer/GridContainer" unique_id=660806607 instance=ExtResource("4_rw30e")]
 layout_mode = 2
+mouse_filter = 0
 
 [node name="InventoryUISlot5" parent="InventoryUI/ScrollContainer/GridContainer" unique_id=1790947940 instance=ExtResource("4_rw30e")]
 layout_mode = 2
+mouse_filter = 0
 
 [node name="InventoryUISlot6" parent="InventoryUI/ScrollContainer/GridContainer" unique_id=358400740 instance=ExtResource("4_rw30e")]
 layout_mode = 2
+mouse_filter = 0
 
 [node name="InventoryUISlot7" parent="InventoryUI/ScrollContainer/GridContainer" unique_id=843676205 instance=ExtResource("4_rw30e")]
 layout_mode = 2
+mouse_filter = 0
 
 [node name="InventoryUISlot8" parent="InventoryUI/ScrollContainer/GridContainer" unique_id=1170623601 instance=ExtResource("4_rw30e")]
 layout_mode = 2
+mouse_filter = 0
 
 [node name="Scrollbar Hints" type="Control" parent="InventoryUI" unique_id=331360101]
 anchors_preset = 0

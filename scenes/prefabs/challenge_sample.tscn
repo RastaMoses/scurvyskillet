@@ -229,10 +229,8 @@ grow_vertical = 2
 script = ExtResource("15_xb3ol")
 inventory_slot_scene = ExtResource("16_hpn60")
 min_slots = 8
-container_size_bottom = Vector2(1920, 304)
-container_pos_bottom = Vector2(0, 776)
-container_size_side = Vector2(591, 699)
-container_pos_side = Vector2(1302, 172)
+max_rows = 2
+horizontal = false
 
 [node name="bg_bottom" type="TextureRect" parent="UI/InventoryUI" unique_id=588866398]
 z_index = -2
@@ -262,8 +260,8 @@ offset_right = 544.0
 offset_bottom = 488.0
 mouse_behavior_recursive = 2
 theme = ExtResource("18_3ik1o")
-horizontal_scroll_mode = 3
-vertical_scroll_mode = 0
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
 script = ExtResource("19_2dco2")
 horizontal_hint_left = NodePath("../Scrollbar Hints/Left")
 horizontal_hint_right = NodePath("../Scrollbar Hints/Right")
@@ -281,6 +279,9 @@ columns = 2
 layout_mode = 2
 
 [node name="InventoryUISlot2" parent="UI/InventoryUI/ScrollContainer/GridContainer" unique_id=207692839 instance=ExtResource("16_hpn60")]
+layout_mode = 2
+
+[node name="InventoryUISlot3" parent="UI/InventoryUI/ScrollContainer/GridContainer" unique_id=1675736401 instance=ExtResource("16_hpn60")]
 layout_mode = 2
 
 [node name="Scrollbar Hints" type="Control" parent="UI/InventoryUI" unique_id=1002798057]
@@ -317,25 +318,38 @@ move_x = -8
 move_wait_time = 0.6
 
 [node name="InventorySort" type="Control" parent="UI/InventoryUI" unique_id=311507277]
+visible = false
 anchors_preset = 0
-offset_right = 40.0
+offset_left = 576.0
+offset_right = 616.0
 offset_bottom = 40.0
 
 [node name="Rarity" type="Button" parent="UI/InventoryUI/InventorySort" unique_id=1134411387]
 layout_mode = 0
-offset_top = 672.0
+offset_top = 176.0
 offset_right = 112.0
-offset_bottom = 768.0
+offset_bottom = 272.0
 mouse_behavior_recursive = 2
+disabled = true
 text = "RARITY"
 
 [node name="Alphabetically" type="Button" parent="UI/InventoryUI/InventorySort" unique_id=2006115511]
 layout_mode = 0
-offset_top = 560.0
+offset_top = 64.0
 offset_right = 112.0
-offset_bottom = 656.0
+offset_bottom = 160.0
 mouse_behavior_recursive = 2
+disabled = true
 text = "AZ"
+
+[node name="InvToggle" type="Button" parent="UI" unique_id=2091992756]
+layout_mode = 0
+offset_left = 592.0
+offset_top = 64.0
+offset_right = 704.0
+offset_bottom = 152.0
+mouse_behavior_recursive = 2
+text = "Dish Inv"
 
 [node name="Dish" parent="." unique_id=497250350 node_paths=PackedStringArray("ui") instance=ExtResource("10_l27j6")]
 layout_mode = 0
@@ -350,3 +364,4 @@ can_drag_cards = true
 [connection signal="pressed" from="UI/Complete/roll_dish_button" to="." method="_on_roll_dish_pressed"]
 [connection signal="pressed" from="UI/InventoryUI/InventorySort/Rarity" to="UI/InventoryUI" method="_on_rarity_pressed"]
 [connection signal="pressed" from="UI/InventoryUI/InventorySort/Alphabetically" to="UI/InventoryUI" method="_on_alphabetically_pressed"]
+[connection signal="pressed" from="UI/InvToggle" to="UI" method="_on_inv_toggle_pressed"]

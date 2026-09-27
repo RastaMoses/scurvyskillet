@@ -6,29 +6,23 @@ extends Control
 @export var min_slots: int = 10
 
 @export_group("Inventory Positions")
-@export_subgroup("Bottom Position")
-@export var container_size_bottom:Vector2
-@export var container_pos_bottom:Vector2
-
-@export_subgroup("Side Position")
-@export var container_size_side:Vector2
-@export var container_pos_side:Vector2
 @export var max_rows:int = 3
+@export var horizontal = true
+@export var max_columns:int = 2
 
 
 #CACHED COMPS
 
-@onready var event_manager = get_tree().get_first_node_in_group("event_manager")
-@onready var slots: Array = $ScrollContainer/GridContainer.get_children()
-@onready var inventory_container = $ScrollContainer
-@onready var grid_container = $ScrollContainer/GridContainer
+var event_manager
+var slots
+var inventory_container
+var grid_container
 
-@onready var large_view
+var large_view
 
 
 #STATE
 var data_bk
-var bottom_position = true
 var large_view_active = false
 
 var is_open = false
@@ -36,6 +30,10 @@ var inventory
 
 func init_ui():
 	large_view = get_tree().get_first_node_in_group("card_large_view")
+	event_manager = get_tree().get_first_node_in_group("event_manager")
+	slots = $ScrollContainer/GridContainer.get_children()
+	inventory_container = $ScrollContainer
+	grid_container = $ScrollContainer/GridContainer
 	for i in slots:
 		i.init_slot(self)
 		i.large_view_clicked.connect(large_view.button_pressed)
@@ -75,11 +73,11 @@ func update_slots():
 		slots[i].showcase = inventory.can_drag_cards
 	remove_slots(slots_to_remove)
 	#if bottom adjust column amount
-	if (bottom_position):
-		grid_container.columns = slots.size()
-	else:
+	if (horizontal):
 		var new_columns = ceili(float(slots.size())/float(max_rows))
 		grid_container.columns = new_columns
+	else:
+		grid_container.columns = max_columns
 		#Scrollbar
 	inventory_container._call_deferred_update_hints()
 
@@ -165,7 +163,7 @@ func sort_by_name(a, b):
 func _on_rarity_pressed() -> void:
 	sort_inventory_by_rarity()
 
-
 func _on_alphabetically_pressed() -> void:
 	sort_inventory_alphabetically()
+
 #endregion

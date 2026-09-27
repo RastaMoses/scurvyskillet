@@ -10,22 +10,22 @@ extends Panel
 @export var buy_item = false
 
 #CACHED COMPS
-@onready var item_visual: TextureRect = $ItemDisplay
-@onready var texture = $ItemDisplay.texture
-@onready var uses_textures = $ItemDisplay/Uses.get_children()
-@onready var hearty = $ItemDisplay/Flavours/Hearty
-@onready var fresh = $ItemDisplay/Flavours/Fresh
-@onready var spicy = $ItemDisplay/Flavours/Spicy
-@onready var sweet = $ItemDisplay/Flavours/Sweet
-@onready var nutrition_text = $ItemDisplay/Nutrition/NutritionText
-@onready var empty_slot = $EmptySlot
-@onready var rarity_textures = $ItemDisplay/Rarity.get_children()
-@onready var icon = $ItemDisplay/item_icon
+var item_visual
+var texture
+var uses_textures
+var hearty
+var fresh
+var spicy
+var sweet
+var nutrition_text
+var empty_slot
+var rarity_textures
+var icon
 var tags:RichTextLabel
 var uses:int
 var description:RichTextLabel
 var ingredient_name:RichTextLabel
-@onready var large_view_button = $large_view_button
+var large_view_button
 
 
 #SIGNALS
@@ -43,6 +43,18 @@ var dragging_preview = false
 var ui:InventoryUI
 func init_slot(ui_node = null) -> void:
 	ui = ui_node
+	item_visual = $ItemDisplay
+	texture = $ItemDisplay.texture
+	uses_textures = $ItemDisplay/Uses.get_children()
+	hearty = $ItemDisplay/Flavours/Hearty
+	fresh = $ItemDisplay/Flavours/Fresh
+	spicy = $ItemDisplay/Flavours/Spicy
+	sweet = $ItemDisplay/Flavours/Sweet
+	nutrition_text = $ItemDisplay/Nutrition/NutritionText
+	empty_slot = $EmptySlot
+	rarity_textures = $ItemDisplay/Rarity.get_children()
+	icon = $ItemDisplay/item_icon
+	large_view_button = $large_view_button
 	if editor_preview:
 		visible = false
 	if large_view:
@@ -71,9 +83,9 @@ func _on_button_gui_input(event: InputEvent) -> void:
 
 func toggle_only_icon(value):
 	if value:
-		for i in item_visual.get_children():
+		for i in $ItemDisplay.get_children():
 			i.visible = false
-		icon.visible = true
+		$ItemDisplay/item_icon.visible = true
 	else:
 		for i in item_visual.get_children():
 			i.visible = true
@@ -199,6 +211,7 @@ func _get_drag_data(_at_position: Vector2) -> Variant:
 	if showcase:
 		return
 	var preview = duplicate()
+	preview.init_slot()
 	preview.toggle_only_icon(true)
 	var c = Control.new()
 	c.add_child(preview)

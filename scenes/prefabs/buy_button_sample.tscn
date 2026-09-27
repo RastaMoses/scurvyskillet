@@ -77,16 +77,14 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 8.0
+offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("8_f3jxs")
 inventory_slot_scene = ExtResource("5_jp23l")
 min_slots = 8
-container_size_bottom = Vector2(1920, 304)
-container_pos_bottom = Vector2(0, 776)
-container_size_side = Vector2(591, 699)
-container_pos_side = Vector2(1302, 172)
 
 [node name="ScrollContainer" type="ScrollContainer" parent="ItemVisuals/InventoryUI" unique_id=1354631701 node_paths=PackedStringArray("horizontal_hint_left", "horizontal_hint_right")]
 layout_mode = 0
