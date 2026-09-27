@@ -1,11 +1,13 @@
 extends Panel
 #PARAMS
 @export var large_view:bool = false
+@export var large_view_clickable = true
 @export var showcase = false
 @export var editor_preview:bool = false
 @export var pixel_multiple:int = 8
 @export var drag_pos_offset:Vector2 = Vector2(96,96)
 @export var clickable:bool = true
+@export var buy_item = false
 
 #CACHED COMPS
 @onready var item_visual: TextureRect = $ItemDisplay
@@ -27,18 +29,20 @@ var ingredient_name:RichTextLabel
 
 
 #SIGNALS
-signal large_view_clicked(card_data)
+signal large_view_clicked(card_data, right_mouse)
 signal dragged(card_data)
 signal stop_drag(card_data)
+signal button_mouse_entered
+signal button_mouse_exited
+signal slot_clicked(event)
 
 #STATE
 var card
 var dragging = false
 var dragging_preview = false
-var ui:Node
-
-func _ready() -> void:
-	ui = get_tree().get_first_node_in_group("player_inventory_ui")
+var ui:InventoryUI
+func init_slot(ui_node = null) -> void:
+	ui = ui_node
 	if editor_preview:
 		visible = false
 	if large_view:
@@ -46,23 +50,41 @@ func _ready() -> void:
 		tags = $ItemDisplay/Tags/RichTextLabel
 		description = $ItemDisplay/Description
 		ingredient_name = $ItemDisplay/Name/RichTextLabel
-	if showcase:
+	if !clickable:
 		large_view_button.visible = false
-	else:
-		large_view_button.pressed.connect(large_view_pressed)
 
-func large_view_pressed():
-	large_view_clicked.emit(card)
+func _on_button_gui_input(event: InputEvent) -> void:
+	if !clickable:
+		return
+	if event is InputEventMouseButton and event.pressed:
+		match event.button_index:
+			MOUSE_BUTTON_LEFT:
+				if buy_item:
+					slot_clicked.emit(event)
+				# left button clicked
+				if large_view_clickable:
+					large_view_clicked.emit(card, false)
+			MOUSE_BUTTON_RIGHT:
+				# right button clicked
+				if large_view_clickable:
+					large_view_clicked.emit(card, true)
 
 func toggle_only_icon(value):
 	if value:
-		for i in $ItemDisplay.get_children():
+		for i in item_visual.get_children():
 			i.visible = false
-		$ItemDisplay/item_icon.visible = true
+		icon.visible = true
 	else:
 		for i in item_visual.get_children():
 			i.visible = true
 
+func toggle_visuals(value):
+	if !value:
+		for i in item_visual.get_children():
+			i.visible = false
+	else:
+		for i in item_visual.get_children():
+			i.visible = true
 func update(item):
 	if !item:
 		item_visual.visible = false
@@ -72,7 +94,7 @@ func update(item):
 	elif dragging:
 		card = item
 	else:
-		if !showcase:
+		if clickable:
 			large_view_button.visible = true
 		empty_slot.visible = false
 		item_visual.visible = true
@@ -209,10 +231,13 @@ func _drop_data(at_position: Vector2, data: Variant) -> void:
 	
 
 func _notification(what: int) -> void:
+	if editor_preview:
+		return
 	if what == NOTIFICATION_DRAG_END:
 		stopped_drag()
 		if get_viewport().gui_is_drag_successful():
-			ui.update_slots_order()
+			if ui != null:
+				ui.update_slots_order()
 
 func stopped_drag():
 	if dragging:
@@ -230,3 +255,11 @@ func _process(delta: float) -> void:
 func get_tag_name(state: GlobalEnums.Tags) -> String:
 	var enum_name := str(GlobalEnums.Tags.find_key(state)).to_lower()
 	return enum_name.left(1).to_upper() + enum_name.substr(1)
+
+
+func _on_large_view_button_mouse_entered() -> void:
+	button_mouse_entered.emit()
+
+
+func _on_large_view_button_mouse_exited() -> void:
+	button_mouse_exited.emit()

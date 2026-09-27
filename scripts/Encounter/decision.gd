@@ -5,9 +5,13 @@ extends Control
 @onready var bg_island = $BGLand
 @onready var bg_ocean = $BGWater
 @onready var player_inventory = get_tree().get_first_node_in_group("player")
+@onready var event_manager = get_tree().get_first_node_in_group("event_manager")
 
 @export var terrain_type:GlobalEnums.EncounterTerrain
 @export var choices: Array[Choices]
+
+func _ready() -> void:
+	event_manager.large_view_toggled.connect(toggle_large_view)
 
 func start():
 	for i in choices:
@@ -29,3 +33,7 @@ func end():
 
 func load_new_encounter(encounter):
 	get_parent().load_encounter(encounter)
+
+func toggle_large_view(value):
+	for i in choices:
+		i.toggle_interactable(!value)

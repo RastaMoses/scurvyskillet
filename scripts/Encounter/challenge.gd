@@ -79,6 +79,9 @@ var reward_req_rarity:Array[GlobalEnums.Rarity]
 var reward_req_tag:Array[GlobalEnums.Tags]
 var reward_req_ability:Array[Ability]
 
+func _ready() -> void:
+	event_manager.large_view_toggled.connect(toggle_large_view)
+
 func give_rewards():
 	player_inventory.add_money(reward_money)
 	player_inventory.add_morale(reward_morale)
@@ -183,5 +186,8 @@ func on_reset_button_pressed() -> void:
 
 func _on_roll_dish_pressed() -> void:
 	finish_dish()
+
+func toggle_large_view(value):
+	ui.toggle_disable_buttons(value)
 
 #Dish Log

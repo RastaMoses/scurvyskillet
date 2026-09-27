@@ -1,42 +1,39 @@
 [gd_scene format=3 uid="uid://u2u1v4rgdntw"]
 
 [ext_resource type="Script" uid="uid://bjtjqm0kcr78n" path="res://scripts/Encounter/buy_button.gd" id="1_etfdk"]
+[ext_resource type="PackedScene" uid="uid://p1ug5ylfd5re" path="res://scenes/prefabs/card_prefab.tscn" id="2_f3jxs"]
 [ext_resource type="Texture2D" uid="uid://bkqo8qi1cxyrv" path="res://sprites/interface/scenes/shop scene/scene_shop_button_buy.png" id="2_wxkvu"]
 [ext_resource type="Texture2D" uid="uid://dg58ypqy5fb28" path="res://sprites/interface/scenes/shop scene/scene_shop_button_buy_outline.png" id="3_nujxw"]
 [ext_resource type="Texture2D" uid="uid://ya1gwkxh7xe7" path="res://sprites/interface/scenes/shop scene/scene_shop_buy_symbols.png" id="4_iegwe"]
 [ext_resource type="Theme" uid="uid://dcisii1tqsjlr" path="res://themes/shop/price_text.tres" id="5_db54x"]
 [ext_resource type="PackedScene" uid="uid://c4hu25tvp3kkd" path="res://scenes/prefabs/player/inventory_ui_slot.tscn" id="5_jp23l"]
 [ext_resource type="Texture2D" uid="uid://c2fyvcme11dbr" path="res://sprites/ingredients/ingredient_random.png" id="6_isrqj"]
+[ext_resource type="Script" uid="uid://5ky5q3x7j70d" path="res://scripts/Inventory/inventory_ui.gd" id="8_f3jxs"]
+[ext_resource type="Theme" uid="uid://dwjm243i4x47a" path="res://themes/inventory/inv_scroll_container.tres" id="10_0pym3"]
+[ext_resource type="Script" uid="uid://bg58rkwvnuhi5" path="res://scripts/Inventory/scroll_hint_displayer.gd" id="11_8tsnp"]
+[ext_resource type="Theme" uid="uid://fa4mmtcwb3a5" path="res://themes/inventory/inv_grid_container.tres" id="12_5bj7i"]
+[ext_resource type="Texture2D" uid="uid://lp3c3q5qpcwl" path="res://sprites/interface/general/inventory/inventory_scroll_reverse.png" id="13_hwg3f"]
+[ext_resource type="Script" uid="uid://bog5ewji0yscq" path="res://scripts/Inventory/scroll_hint.gd" id="14_l74m3"]
+[ext_resource type="Texture2D" uid="uid://bjjx1b7lsoh1g" path="res://sprites/interface/general/inventory/inventory_scroll_hint.png.png" id="15_t7ov7"]
 
-[node name="buy_button_sample" type="Control" unique_id=1219771888]
+[node name="buy_button_sample" type="Control" unique_id=1219771888 node_paths=PackedStringArray("ui")]
 layout_mode = 3
 anchors_preset = 0
 size_flags_horizontal = 3
 mouse_behavior_recursive = 1
 script = ExtResource("1_etfdk")
 and_req = true
+card_prefab = ExtResource("2_f3jxs")
+ui = NodePath("ItemVisuals/InventoryUI")
 
-[node name="Button" type="Button" parent="." unique_id=1909689102]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 272.0
-offset_bottom = 288.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-mouse_behavior_recursive = 2
-flat = true
-
-[node name="BG" type="Sprite2D" parent="Button" unique_id=202833545]
+[node name="BG" type="Sprite2D" parent="." unique_id=202833545]
 z_as_relative = false
 position = Vector2(8, 8)
 scale = Vector2(8, 8)
 texture = ExtResource("2_wxkvu")
 centered = false
 
-[node name="Highlight" type="Sprite2D" parent="Button" unique_id=2041542032]
+[node name="Highlight" type="Sprite2D" parent="." unique_id=2041542032]
 visible = false
 z_as_relative = false
 scale = Vector2(8, 8)
@@ -44,16 +41,6 @@ texture = ExtResource("3_nujxw")
 centered = false
 
 [node name="ItemVisuals" type="Node2D" parent="." unique_id=1838161469]
-
-[node name="InventoryUISlot" parent="ItemVisuals" unique_id=442831638 instance=ExtResource("5_jp23l")]
-z_index = 2
-offset_left = 16.0
-offset_top = -88.0
-offset_right = 272.0
-offset_bottom = 216.0
-mouse_filter = 2
-mouse_behavior_recursive = 1
-showcase = true
 
 [node name="HiddenIcon" type="Node2D" parent="ItemVisuals" unique_id=1500573408]
 
@@ -83,6 +70,133 @@ text = "1"
 scroll_active = false
 horizontal_alignment = 1
 
-[connection signal="gui_input" from="Button" to="." method="_on_button_gui_input"]
-[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
-[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
+[node name="InventoryUI" type="Control" parent="ItemVisuals" unique_id=441944375]
+z_index = 1
+z_as_relative = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("8_f3jxs")
+inventory_slot_scene = ExtResource("5_jp23l")
+min_slots = 8
+container_size_bottom = Vector2(1920, 304)
+container_pos_bottom = Vector2(0, 776)
+container_size_side = Vector2(591, 699)
+container_pos_side = Vector2(1302, 172)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ItemVisuals/InventoryUI" unique_id=1354631701 node_paths=PackedStringArray("horizontal_hint_left", "horizontal_hint_right")]
+layout_mode = 0
+offset_left = 16.0
+offset_top = -88.0
+offset_right = 256.0
+offset_bottom = 272.0
+mouse_filter = 2
+mouse_behavior_recursive = 2
+theme = ExtResource("10_0pym3")
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 0
+script = ExtResource("11_8tsnp")
+horizontal_hint_left = NodePath("../Scrollbar Hints/Left")
+horizontal_hint_right = NodePath("../Scrollbar Hints/Right")
+
+[node name="GridContainer" type="GridContainer" parent="ItemVisuals/InventoryUI/ScrollContainer" unique_id=1024484898]
+propagate_maximum_size = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+mouse_behavior_recursive = 2
+theme = ExtResource("12_5bj7i")
+columns = 2
+
+[node name="InventoryUISlot" parent="ItemVisuals/InventoryUI/ScrollContainer/GridContainer" unique_id=719767535 instance=ExtResource("5_jp23l")]
+clip_contents = false
+layout_mode = 2
+mouse_filter = 2
+showcase = true
+buy_item = true
+
+[node name="EmptySlot" parent="ItemVisuals/InventoryUI/ScrollContainer/GridContainer/InventoryUISlot" index="0" unique_id=961373681]
+mouse_filter = 2
+
+[node name="ItemDisplay" parent="ItemVisuals/InventoryUI/ScrollContainer/GridContainer/InventoryUISlot" index="1" unique_id=1942941591]
+mouse_filter = 2
+
+[node name="large_view_button" parent="ItemVisuals/InventoryUI/ScrollContainer/GridContainer/InventoryUISlot" index="2" unique_id=1319644790]
+anchors_preset = -1
+anchor_left = -0.033
+anchor_right = 1.033
+anchor_bottom = 1.2110001
+offset_left = -0.07999992
+offset_top = 56.0
+offset_right = 0.08000183
+offset_bottom = -0.14401245
+mouse_filter = 0
+
+[node name="Scrollbar Hints" type="Control" parent="ItemVisuals/InventoryUI" unique_id=50127661]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_behavior_recursive = 1
+
+[node name="Left" type="TextureRect" parent="ItemVisuals/InventoryUI/Scrollbar Hints" unique_id=137630241]
+custom_minimum_size = Vector2(80, 120)
+custom_maximum_size = Vector2(80, 120)
+layout_mode = 0
+offset_top = 872.0
+offset_right = 80.0
+offset_bottom = 992.0
+mouse_behavior_recursive = 2
+texture = ExtResource("13_hwg3f")
+script = ExtResource("14_l74m3")
+move_wait_time = 0.6
+
+[node name="Right" type="TextureRect" parent="ItemVisuals/InventoryUI/Scrollbar Hints" unique_id=1623981378]
+custom_minimum_size = Vector2(80, 120)
+custom_maximum_size = Vector2(80, 120)
+layout_mode = 0
+offset_left = 1840.0
+offset_top = 872.0
+offset_right = 1920.0
+offset_bottom = 992.0
+mouse_behavior_recursive = 2
+texture = ExtResource("15_t7ov7")
+script = ExtResource("14_l74m3")
+move_x = -8
+move_wait_time = 0.6
+
+[node name="InventorySort" type="Control" parent="ItemVisuals/InventoryUI" unique_id=1513486359]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Rarity" type="Button" parent="ItemVisuals/InventoryUI/InventorySort" unique_id=577797637]
+layout_mode = 0
+offset_top = 672.0
+offset_right = 112.0
+offset_bottom = 768.0
+mouse_filter = 2
+mouse_behavior_recursive = 1
+disabled = true
+text = "RARITY"
+
+[node name="Alphabetically" type="Button" parent="ItemVisuals/InventoryUI/InventorySort" unique_id=1152111075]
+layout_mode = 0
+offset_top = 560.0
+offset_right = 112.0
+offset_bottom = 656.0
+mouse_filter = 2
+mouse_behavior_recursive = 1
+disabled = true
+text = "AZ"
+
+[connection signal="pressed" from="ItemVisuals/InventoryUI/InventorySort/Rarity" to="ItemVisuals/InventoryUI" method="_on_rarity_pressed"]
+[connection signal="pressed" from="ItemVisuals/InventoryUI/InventorySort/Alphabetically" to="ItemVisuals/InventoryUI" method="_on_alphabetically_pressed"]
+
+[editable path="ItemVisuals/InventoryUI/ScrollContainer/GridContainer/InventoryUISlot"]

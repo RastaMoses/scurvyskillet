@@ -2,3 +2,4 @@
 
 [resource]
 GridContainer/constants/h_separation = 0
+GridContainer/constants/v_separation = 0

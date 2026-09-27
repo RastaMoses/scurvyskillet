@@ -42,10 +42,13 @@ extends Inventory
 @onready var button_text = $Button/RichTextLabel
 @onready var drop_area_text = $UI/IngredientDrop/RichTextLabel
 var decision_encounter
+
+var interactable = true
 #STATE
 
 
 func _ready() -> void:
+	init_inventory()
 	button.pressed.connect(on_button_press)
 	button_text.text = text
 	drop_area_text.text = text
@@ -55,8 +58,7 @@ func _ready() -> void:
 func on_checking_drop(origin, card):
 	if origin != self:
 		return
-	var droppable = true
-	
+	var droppable = interactable
 	#specific ingredient
 	if req_specific_ingredients.size() != 0:
 		if not req_specific_ingredients.has(card.base_stats):
@@ -166,6 +168,7 @@ func disable_button():
 	button.disabled = true
 	if (drop_ingredients):
 		button.visible = false
+
 func enable_button():
 	button.visible = true
 	button.disabled = false
@@ -173,6 +176,16 @@ func enable_button():
 func enable_drop_area():
 	drop_area.visible = drop_ingredients
 	drop_ui.visible = drop_ingredients
+
+func toggle_interactable(value):
+	button_highlight.visible = false
+	drop_highlight.visible = false
+	if value:
+		interactable = true
+		button_available()
+	else:
+		interactable = false
+		disable_button()
 
 func start():
 	button_available()
@@ -185,12 +198,13 @@ func end():
 
 
 func _on_button_mouse_entered() -> void:
-	button_highlight.visible = true
-
+	if interactable:
+		button_highlight.visible = true
 
 func _on_button_mouse_exited() -> void:
-	button_highlight.visible = false
-
+	if interactable:
+		button_highlight.visible = false
 
 func _on_drop_area_mouse_exited() -> void:
-	drop_highlight.visible = false
+	if interactable:
+		drop_highlight.visible = false

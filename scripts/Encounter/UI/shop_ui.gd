@@ -6,6 +6,8 @@ extends Control
 @onready var buy_round_foam = $BuyRound/FoamSprite
 @onready var sell_highlight = $SellBox/Highlight
 @onready var moral_price_text = $BuyRound/MoralePrice
+@onready var leave_button = $LeaveButton
+@onready var leave_button_hl = $LeaveButton/Highlight
 @onready var shop = get_parent()
 
 #STATE
@@ -25,8 +27,45 @@ func hide_buy_round_highlight():
 	buy_round_highlight.visible = false
 
 func toggle_sell_highlight(value):
+	if !shop.interactable:
+		sell_highlight.visible = false
+		return
 	sell_highlight.visible = value
 
+func toggle_leave_highlight(value):
+	leave_button_hl.visible = value
+
+func toggle_interactable():
+	print("shop ui toggle interactable")
+	var value = shop.interactable
+	buy_round_button.disabled = !value
+	leave_button.disabled = !value
+	if !value:
+		for i in shop.buy_buttons:
+			if i.hide_item:
+				for j in i.ui.slots:
+					j.large_view_button.mouse_filter = MouseFilter.MOUSE_FILTER_IGNORE
+		buy_round_button.mouse_filter = MouseFilter.MOUSE_FILTER_IGNORE
+	else:
+		for i in shop.buy_buttons:
+			if i.hide_item:
+				for j in i.ui.slots:
+					j.large_view_button.mouse_filter = MouseFilter.MOUSE_FILTER_STOP
+		buy_round_button.mouse_filter = MouseFilter.MOUSE_FILTER_STOP
+	toggle_sell_highlight(false)
+	hide_buy_round_highlight()
+	
 
 func _on_drop_area_mouse_exited() -> void:
-	toggle_sell_highlight(false)
+	if shop.interactable:
+		toggle_sell_highlight(false)
+
+
+func _on_leave_button_mouse_entered() -> void:
+	if shop.interactable:
+		toggle_leave_highlight(true)
+
+
+func _on_leave_button_mouse_exited() -> void:
+	if shop.interactable:
+		toggle_leave_highlight(false)

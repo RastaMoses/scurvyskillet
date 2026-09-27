@@ -1,5 +1,5 @@
 class_name BuyButton
-extends Control
+extends Inventory
 @export var hide_item:bool = false
 @export var specific_item:Ingredient
 @export_group("Random Item")
@@ -20,14 +20,11 @@ extends Control
 
 
 
-@onready var button = $Button
-@onready var button_highlight = $Button/Highlight
-@onready var ui_slot = $ItemVisuals/InventoryUISlot
+@onready var button_highlight = $Highlight
 @onready var hidden_icon = $ItemVisuals/HiddenIcon
 @onready var price_text = $ItemVisuals/PriceText
 @onready var item_visuals = $ItemVisuals
 @onready var random = RandomNumberGenerator.new()
-@onready var item_pool = get_tree().get_first_node_in_group("ingredient_pool")
 
 var sell_card
 var sold_out = false
@@ -35,6 +32,12 @@ var can_buy = true
 var price:int
 var shop
 
+func _ready() -> void:
+	init_inventory()
+	for ui_slot in ui.slots:
+		ui_slot.button_mouse_entered.connect(_on_button_mouse_entered)
+		ui_slot.button_mouse_exited.connect(_on_button_mouse_exited)
+		ui_slot.slot_clicked.connect(slot_clicked)
 func populate():
 	if specific_item != null:
 		set_item(specific_item)
@@ -75,18 +78,20 @@ func set_card_uses():
 			var rand = random.randi_range(1,legendary_uses)
 			sell_card.committed_stats.uses = rand
 func set_item(resource):
-	sell_card = shop.instantiate_card_and_add(resource)
+	sell_card = instantiate_card_and_add(resource)
 	toggle_item_icon(true)
 	if !hide_item:
 		price = shop.get_card_price(sell_card)
-		ui_slot.visible = true
+		ui.visible = true
 		hidden_icon.visible = false
 	else:
-		ui_slot.visible = false
+		for i in ui.slots:
+			i.large_view_clickable = false
+			i.toggle_visuals(false)
 		hidden_icon.visible = true
 		price = shop.hidden_item_price
 	set_card_uses()
-	ui_slot.update(sell_card)
+	ui.update_slots()
 	can_buy = true
 	#set ui slot large view button to work with player inventory ui
 	
@@ -105,28 +110,19 @@ func set_clickable(value):
 func toggle_item_icon(value):
 	item_visuals.visible = value
 
-func large_view_pressed():
-	shop.set_large_view_card(sell_card)
-
 func _on_button_mouse_entered() -> void:
 	if !can_buy:
+		return
+	if !shop.interactable and hide_item:
 		return
 	button_highlight.visible = true
 
 func _on_button_mouse_exited() -> void:
 	button_highlight.visible = false
 
-#check left or right click
-func _on_button_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.pressed:
-		match event.button_index:
-			MOUSE_BUTTON_LEFT:
-				# left button clicked
-				if !can_buy:
-					return
-				shop.buy_card(self)
-			MOUSE_BUTTON_RIGHT:
-				if sold_out or hide_item:
-					return
-				# right button clicked
-				large_view_pressed()
+func slot_clicked(event):
+	if !shop.interactable:
+		return
+	if !can_buy:
+		return
+	shop.buy_card(self)

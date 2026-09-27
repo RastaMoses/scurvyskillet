@@ -29,6 +29,7 @@ ability_manager=""
 player=""
 map_loader=""
 player_inventory_ui=""
+card_large_view=""
 
 [gui]
 

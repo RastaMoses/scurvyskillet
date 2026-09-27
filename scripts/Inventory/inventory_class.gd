@@ -7,6 +7,7 @@ var current_cards: Array[Node]
 @export var starting_ingredients: Array[Ingredient]
 @export var ui:Control
 @export var can_stack_uses:bool = true
+@export var can_drag_cards:bool = false
 
 #CACHED COMPS
 @onready var abilities = get_tree().get_first_node_in_group("ability_manager")
@@ -27,7 +28,11 @@ signal card_stop_drag(origin)
 var can_drop_card = true
 var dragging_card:Node = null
 
-func _ready() -> void:
+func init_inventory() -> void:
+	if ui != null:
+		ui.init_ui()
+		ui.inventory = self
+		ui.update_slots()
 	for i in starting_ingredients:
 		instantiate_card_and_add(i)
 
@@ -85,7 +90,6 @@ func add_card(card):
 	else:
 		distribute_uses(new_card)
 	on_add_card.emit(self,new_card)
-	
 	if ui != null:
 		ui.update_slots()
 		current_cards = ui.get_slots_cards_list()

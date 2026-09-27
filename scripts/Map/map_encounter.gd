@@ -1,5 +1,5 @@
 class_name MapEncounter
-extends Node
+extends Control
 
 #PARAMS
 @export var possible_encounters:Array[PackedScene]
@@ -83,6 +83,10 @@ func load_encounter(data):
 
 func toggle_button(value):
 	button.disabled = !value
+	if value:
+		button.mouse_filter = MouseFilter.MOUSE_FILTER_STOP
+	else:
+		button.mouse_filter = MouseFilter.MOUSE_FILTER_IGNORE
 
 func show_button(value):
 	button.visible = value

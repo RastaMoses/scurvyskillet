@@ -16,11 +16,15 @@ extends Inventory
 @onready var buy_round_button = $UI/BuyRound/Button
 @onready var shop_ui = $UI
 
+
 #STATE
 var morale_sold_out = false
 var buy_buttons:Array[Node]
+var interactable = true
 
 func _ready() -> void:
+	event_manager.large_view_toggled.connect(toggle_large_view)
+	init_inventory()
 	checking_drop.connect(on_checking_drop)
 	dropping_ingredient.connect(player_sell_ingredient)
 	buy_round_button.pressed.connect(buy_morale)
@@ -36,6 +40,9 @@ func player_sell_ingredient(origin,card):
 
 func on_checking_drop(origin, data):
 	if origin != self:
+		return
+	if !interactable:
+		can_drop_card = false
 		return
 	shop_ui.toggle_sell_highlight(true)
 
@@ -80,8 +87,11 @@ func end():
 	map_node.end_encounter()
 	queue_free()
 
-func set_large_view_card(card):
-	player_inventory.ui.toggle_large_view(card)
+func toggle_large_view(value):
+	print("shop toggle interact")
+	interactable = !value
+	shop_ui.toggle_interactable()
+			
 
 func _on_leave_button_pressed() -> void:
 	end()

@@ -13,11 +13,21 @@
 [ext_resource type="Texture2D" uid="uid://cst1skr2hibgh" path="res://sprites/interface/scenes/cooking scene/scene_cooking_button_cook.png" id="7_6r88v"]
 [ext_resource type="Theme" uid="uid://b8b007diwy4r1" path="res://themes/dish/description_vbox.tres" id="7_ee2dl"]
 [ext_resource type="Texture2D" uid="uid://cs0ochjc043hv" path="res://sprites/interface/scenes/cooking scene/scene_cooking_button_cook_shadow.png" id="8_ee2dl"]
-[ext_resource type="Texture2D" uid="uid://ctt5b3tmu74a2" path="res://sprites/interface/scenes/cooking scene/scene_cooking_example.png" id="9_t50f7"]
 [ext_resource type="PackedScene" uid="uid://83c84n5554td" path="res://scenes/prefabs/dish.tscn" id="10_l27j6"]
 [ext_resource type="Texture2D" uid="uid://0gs45yeo06st" path="res://sprites/interface/scenes/cooking scene/scene_cooking_button_cook_outline.png" id="11_x7qnw"]
+[ext_resource type="Script" uid="uid://5ky5q3x7j70d" path="res://scripts/Inventory/inventory_ui.gd" id="15_xb3ol"]
+[ext_resource type="PackedScene" uid="uid://c4hu25tvp3kkd" path="res://scenes/prefabs/player/inventory_ui_slot.tscn" id="16_hpn60"]
+[ext_resource type="Texture2D" uid="uid://b0kgy70usnyx" path="res://sprites/interface/scenes/cooking scene/scene_cooking_inventory.png" id="17_k2bil"]
+[ext_resource type="Theme" uid="uid://dwjm243i4x47a" path="res://themes/inventory/inv_scroll_container.tres" id="18_3ik1o"]
+[ext_resource type="Script" uid="uid://bg58rkwvnuhi5" path="res://scripts/Inventory/scroll_hint_displayer.gd" id="19_2dco2"]
+[ext_resource type="Theme" uid="uid://fa4mmtcwb3a5" path="res://themes/inventory/inv_grid_container.tres" id="20_4hcvv"]
+[ext_resource type="Texture2D" uid="uid://lp3c3q5qpcwl" path="res://sprites/interface/general/inventory/inventory_scroll_reverse.png" id="21_xa3pd"]
+[ext_resource type="Script" uid="uid://bog5ewji0yscq" path="res://scripts/Inventory/scroll_hint.gd" id="22_r4574"]
+[ext_resource type="Texture2D" uid="uid://bjjx1b7lsoh1g" path="res://sprites/interface/general/inventory/inventory_scroll_hint.png.png" id="23_tx541"]
 
 [sub_resource type="Theme" id="Theme_5p3kb"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_s7dlr"]
 
 [node name="ChallengeSample2" type="Control" unique_id=993217827]
 layout_mode = 3
@@ -29,16 +39,6 @@ req_nutrition = 4
 par_nutrition = 2
 s_specific_ingredients = Array[ExtResource("2_y21f8")]([ExtResource("3_6r88v")])
 s_random_ingredient_amount = 0
-
-[node name="InventoryReference" type="Panel" parent="." unique_id=1068085367]
-visible = false
-layout_mode = 0
-offset_left = 3.0
-offset_top = 1021.0
-offset_right = 2565.0
-offset_bottom = 1409.0
-mouse_filter = 1
-mouse_behavior_recursive = 1
 
 [node name="UI" type="Control" parent="." unique_id=96621391]
 layout_mode = 1
@@ -168,6 +168,7 @@ offset_top = 456.00012
 offset_right = 2063.8276
 offset_bottom = 606.56696
 rotation = 0.958211
+mouse_filter = 1
 mouse_behavior_recursive = 2
 flat = true
 
@@ -216,14 +217,130 @@ rotation = -3.1415927
 mouse_behavior_recursive = 1
 texture = ExtResource("6_y21f8")
 
-[node name="DELETE" type="Sprite2D" parent="." unique_id=740479059]
-visible = false
-position = Vector2(2966, 525)
-scale = Vector2(8, 8)
-texture = ExtResource("9_t50f7")
+[node name="InventoryUI" type="Control" parent="UI" unique_id=460537099]
+z_index = 15
+z_as_relative = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("15_xb3ol")
+inventory_slot_scene = ExtResource("16_hpn60")
+min_slots = 8
+container_size_bottom = Vector2(1920, 304)
+container_pos_bottom = Vector2(0, 776)
+container_size_side = Vector2(591, 699)
+container_pos_side = Vector2(1302, 172)
 
-[node name="Dish" parent="." unique_id=497250350 instance=ExtResource("10_l27j6")]
+[node name="bg_bottom" type="TextureRect" parent="UI/InventoryUI" unique_id=588866398]
+z_index = -2
 layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+texture = ExtResource("17_k2bil")
+
+[node name="bg_side" type="TextureRect" parent="UI/InventoryUI" unique_id=1347858231]
+visible = false
+layout_mode = 0
+offset_left = 1302.0
+offset_top = 172.0
+offset_right = 1893.0
+offset_bottom = 871.0
+mouse_filter = 2
+texture = SubResource("PlaceholderTexture2D_s7dlr")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/InventoryUI" unique_id=240135501 node_paths=PackedStringArray("horizontal_hint_left", "horizontal_hint_right")]
+custom_minimum_size = Vector2(480, 570)
+custom_maximum_size = Vector2(480, 570)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 184.0
+offset_right = 544.0
+offset_bottom = 488.0
+mouse_behavior_recursive = 2
+theme = ExtResource("18_3ik1o")
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 0
+script = ExtResource("19_2dco2")
+horizontal_hint_left = NodePath("../Scrollbar Hints/Left")
+horizontal_hint_right = NodePath("../Scrollbar Hints/Right")
+
+[node name="GridContainer" type="GridContainer" parent="UI/InventoryUI/ScrollContainer" unique_id=482735856]
+propagate_maximum_size = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_behavior_recursive = 2
+theme = ExtResource("20_4hcvv")
+columns = 2
+
+[node name="InventoryUISlot" parent="UI/InventoryUI/ScrollContainer/GridContainer" unique_id=442831638 instance=ExtResource("16_hpn60")]
+layout_mode = 2
+
+[node name="InventoryUISlot2" parent="UI/InventoryUI/ScrollContainer/GridContainer" unique_id=207692839 instance=ExtResource("16_hpn60")]
+layout_mode = 2
+
+[node name="Scrollbar Hints" type="Control" parent="UI/InventoryUI" unique_id=1002798057]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_behavior_recursive = 1
+
+[node name="Left" type="TextureRect" parent="UI/InventoryUI/Scrollbar Hints" unique_id=1847595334]
+custom_minimum_size = Vector2(80, 120)
+custom_maximum_size = Vector2(80, 120)
+layout_mode = 0
+offset_top = 872.0
+offset_right = 80.0
+offset_bottom = 992.0
+mouse_behavior_recursive = 2
+texture = ExtResource("21_xa3pd")
+script = ExtResource("22_r4574")
+move_wait_time = 0.6
+
+[node name="Right" type="TextureRect" parent="UI/InventoryUI/Scrollbar Hints" unique_id=1537283938]
+custom_minimum_size = Vector2(80, 120)
+custom_maximum_size = Vector2(80, 120)
+layout_mode = 0
+offset_left = 1840.0
+offset_top = 872.0
+offset_right = 1920.0
+offset_bottom = 992.0
+mouse_behavior_recursive = 2
+texture = ExtResource("23_tx541")
+script = ExtResource("22_r4574")
+move_x = -8
+move_wait_time = 0.6
+
+[node name="InventorySort" type="Control" parent="UI/InventoryUI" unique_id=311507277]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Rarity" type="Button" parent="UI/InventoryUI/InventorySort" unique_id=1134411387]
+layout_mode = 0
+offset_top = 672.0
+offset_right = 112.0
+offset_bottom = 768.0
+mouse_behavior_recursive = 2
+text = "RARITY"
+
+[node name="Alphabetically" type="Button" parent="UI/InventoryUI/InventorySort" unique_id=2006115511]
+layout_mode = 0
+offset_top = 560.0
+offset_right = 112.0
+offset_bottom = 656.0
+mouse_behavior_recursive = 2
+text = "AZ"
+
+[node name="Dish" parent="." unique_id=497250350 node_paths=PackedStringArray("ui") instance=ExtResource("10_l27j6")]
+layout_mode = 0
+ui = NodePath("../UI/InventoryUI")
+can_drag_cards = true
 
 [connection signal="mouse_entered" from="UI/Reset/reset_button" to="UI" method="_on_reset_button_mouse_entered"]
 [connection signal="mouse_exited" from="UI/Reset/reset_button" to="UI" method="_on_reset_button_mouse_exited"]
@@ -231,3 +348,5 @@ layout_mode = 0
 [connection signal="mouse_entered" from="UI/Complete/roll_dish_button" to="UI" method="_on_roll_dish_button_mouse_entered"]
 [connection signal="mouse_exited" from="UI/Complete/roll_dish_button" to="UI" method="_on_roll_dish_button_mouse_exited"]
 [connection signal="pressed" from="UI/Complete/roll_dish_button" to="." method="_on_roll_dish_pressed"]
+[connection signal="pressed" from="UI/InventoryUI/InventorySort/Rarity" to="UI/InventoryUI" method="_on_rarity_pressed"]
+[connection signal="pressed" from="UI/InventoryUI/InventorySort/Alphabetically" to="UI/InventoryUI" method="_on_alphabetically_pressed"]

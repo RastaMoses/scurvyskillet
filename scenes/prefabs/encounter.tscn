@@ -9,15 +9,19 @@
 [ext_resource type="Texture2D" uid="uid://c44450spbnv8f" path="res://sprites/interface/scenes/worldmap scene/scene_worldmap_node_water.png" id="7_g1158"]
 [ext_resource type="Texture2D" uid="uid://c6iotdyyvfkra" path="res://sprites/interface/scenes/worldmap scene/scene_worldmap_node_island.png" id="8_xcpvw"]
 
-[node name="encounter" type="Node2D" unique_id=986483625]
+[node name="encounter" type="Control" unique_id=622237046]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_mwowy")
 possible_encounters = Array[PackedScene]([ExtResource("2_fh2jv")])
 destinations = Array[int]([1, 2])
 icons = Array[Texture]([ExtResource("3_vmpao"), ExtResource("4_nbxj8"), ExtResource("5_g1158"), ExtResource("6_xcpvw")])
 
-[node name="Visuals" type="Node2D" parent="." unique_id=1787295848]
+[node name="Visuals" type="Control" parent="." unique_id=1012908620]
+anchors_preset = 0
 
 [node name="Button" type="Button" parent="Visuals" unique_id=442490857]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

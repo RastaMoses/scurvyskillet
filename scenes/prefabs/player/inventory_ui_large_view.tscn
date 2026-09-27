@@ -91,7 +91,6 @@ offset_bottom = 768.0
 [node name="0" parent="ItemDisplay/Rarity" index="0" unique_id=2084014227]
 offset_right = 512.0
 offset_bottom = 768.0
-texture = null
 
 [node name="1" parent="ItemDisplay/Rarity" index="1" unique_id=316271123]
 offset_right = 512.0
@@ -248,4 +247,4 @@ offset_right = 374.0
 offset_bottom = 115.875
 
 [node name="large_view_button" parent="." index="2" unique_id=1319644790]
-visible = false
+mouse_filter = 0

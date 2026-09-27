@@ -7,6 +7,7 @@ extends Node
 @onready var map_bg = $BG
 @onready var map_loader = get_parent()
 @onready var ship = $PlayerShip
+@onready var event_manager = get_tree().get_first_node_in_group("event_manager")
 
 #STATE
 
@@ -14,6 +15,7 @@ func _ready() -> void:
 	for i in encounter_nodes:
 		i.map = self
 		i.player_ship = ship
+	event_manager.large_view_toggled.connect(toggle_large_view)
 
 func populate_map():
 	var temp = 0
@@ -43,3 +45,13 @@ func toggle_map_visible(value):
 			i.visible = value
 		else:
 			i.toggle_visuals(value)
+
+func toggle_large_view(value):
+	if value:
+		toggle_disable_buttons(!value)
+	else:
+		set_available_encounters()
+
+func toggle_disable_buttons(value):
+	for i in encounter_nodes:
+		i.toggle_button(value)

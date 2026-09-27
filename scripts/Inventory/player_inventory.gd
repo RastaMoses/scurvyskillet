@@ -9,10 +9,22 @@ extends Inventory
 @export_group("UI")
 @export var morale_text:RichTextLabel
 @export var money_text:RichTextLabel
+@onready var large_view = get_tree().get_first_node_in_group("card_large_view")
 
 func _ready() -> void:
+	large_view.init_large_view(ui)
+	init_inventory()
 	update_topbar()
-	ui.update_slots()
+	ui.open()
+	
+	event_manager.on_encounter_end.connect(encounter_end)
+	event_manager.on_encounter_start.connect(encounter_start)
+	
+	
+func encounter_end():
+	ui.close()
+
+func encounter_start():
 	ui.open()
 
 func _process(delta: float) -> void:

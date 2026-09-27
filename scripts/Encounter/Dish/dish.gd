@@ -27,6 +27,7 @@ var dice:Array[RigidBody2D]
 
 
 func _ready() -> void:
+	init_inventory()
 	on_add_card.connect(on_add_to_dish)
 	dropping_ingredient.connect(on_drop_ingredient)
 	destroying_ingredient.connect(on_destroy_ingredient)

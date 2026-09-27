@@ -1,9 +1,9 @@
+class_name InventoryUI
 extends Control
 
 #PARAMS
 @export var inventory_slot_scene:PackedScene
 @export var min_slots: int = 10
-@export var large_view_bg_fade_speed = 1
 
 @export_group("Inventory Positions")
 @export_subgroup("Bottom Position")
@@ -17,16 +17,14 @@ extends Control
 
 
 #CACHED COMPS
-@onready var player_inventory = get_tree().get_first_node_in_group("player")
+
 @onready var event_manager = get_tree().get_first_node_in_group("event_manager")
 @onready var slots: Array = $ScrollContainer/GridContainer.get_children()
-@onready var bg = $bg_bottom
 @onready var inventory_container = $ScrollContainer
 @onready var grid_container = $ScrollContainer/GridContainer
 
-@onready var large_view_button = $LargeView/Button
-@onready var large_view_slot = $LargeView/InventoryUILarge
-@onready var large_view_bg = $LargeView/ButtonBG
+@onready var large_view
+
 
 #STATE
 var data_bk
@@ -34,29 +32,22 @@ var bottom_position = true
 var large_view_active = false
 
 var is_open = false
+var inventory
 
-func _ready():
-	open()
-	#connect large view buttons
-	large_view_button.pressed.connect(large_view_button_pressed)
+func init_ui():
+	large_view = get_tree().get_first_node_in_group("card_large_view")
 	for i in slots:
-		i.large_view_clicked.connect(large_view_button_pressed)
+		i.init_slot(self)
+		i.large_view_clicked.connect(large_view.button_pressed)
 		i.dragged.connect(card_dragged)
 		i.stop_drag.connect(card_drag_ended)
-	event_manager.on_encounter_end.connect(encounter_end)
-	event_manager.on_encounter_start.connect(encounter_start)
-	reset_large_view()
-func encounter_end():
-	close()
-
-func encounter_start():
-	open()
 
 func add_slot():
 	var temp = inventory_slot_scene.instantiate()
 	grid_container.add_child(temp)
 	slots.append(temp)
-	temp.large_view_clicked.connect(large_view_button_pressed)
+	temp.init_slot(self)
+	temp.large_view_clicked.connect(large_view.button_pressed)
 	temp.dragged.connect(card_dragged)
 	temp.stop_drag.connect(card_drag_ended)
 
@@ -68,20 +59,20 @@ func remove_slots(amount):
 		slots.remove_at(-1)
 
 func update_slots():
-	
 	#check slot amount
 	var slots_to_remove = 0
-	while player_inventory.current_cards.size() > slots.size():
+	while inventory.current_cards.size() > slots.size():
 		add_slot()
 	for i in range(slots.size()):
 		#update slots with items
-		if (player_inventory.current_cards.size() > i):
-			slots[i].update(player_inventory.current_cards[i])
+		if (inventory.current_cards.size() > i):
+			slots[i].update(inventory.current_cards[i])
 		else:
 			if i > min_slots:
 				slots_to_remove += 1
 			else:
 				slots[i].update(null)
+		slots[i].showcase = inventory.can_drag_cards
 	remove_slots(slots_to_remove)
 	#if bottom adjust column amount
 	if (bottom_position):
@@ -101,75 +92,27 @@ func _notification(what: int) -> void:
 			if data_bk:
 				data_bk.item_visual.show()
 				data_bk = null
-
-func update_position(bottom):
-	bottom_position = bottom
-	if bottom_position:
-		inventory_container.size = container_size_bottom
-		inventory_container.position = container_pos_bottom
-		inventory_container.custom_minimum_size = container_size_bottom
-		grid_container.size = container_size_bottom
-	#else:
-		#inventory_container.size = container_size_side
-		#inventory_container.position = container_pos_side
-		#inventory_container.custom_minimum_size = container_size_side
-		#grid_container.size = container_size_side
-		#bg_bottom.visible = false
-	open()
 	
 func open():
 	inventory_container.visible = true
 	is_open = true
-	reset_large_view()
+	large_view.reset_large_view()
+	update_slots()
 	
 func close():
-	reset_large_view()
+	large_view.reset_large_view()
 	inventory_container.visible = false
 	is_open = false
 
 #region Large View
-func toggle_large_view(card):
-	if large_view_active:
-		
-		large_view_button.visible = false
-		large_view_slot.visible = false
-		large_view_bg.start_fade(-large_view_bg_fade_speed)
-		large_view_active = false
-		for i in slots:
-			i.large_view_clicked.disconnect(set_new_large_view)
-			i.large_view_clicked.connect(large_view_button_pressed)
-	else:
-		
-		large_view_button.visible = true
-		large_view_slot.visible = true
-		large_view_bg.start_fade(large_view_bg_fade_speed)
-		if card != null:
-			large_view_slot.update(card)
-		large_view_active = true
-		for i in slots:
-			i.large_view_clicked.disconnect(large_view_button_pressed)
-			i.large_view_clicked.connect(set_new_large_view)
 
-func large_view_button_pressed(card = null):
-	toggle_large_view(card)
-
-func set_new_large_view(card):
-	large_view_slot.update(card)
-
-func reset_large_view():
-	large_view_bg.stop_fade()
-	large_view_slot.visible = false
-	large_view_button.visible = false
-	if (large_view_active):
-		toggle_large_view(null)
-	large_view_active = false
 #endregion
 
 #region Ability UI
 func card_dragged(card):
-	player_inventory.set_card_drag(card)
+	inventory.set_card_drag(card)
 func card_drag_ended(card):
-	player_inventory.stop_card_drag()
+	inventory.stop_card_drag()
 #endregion
 
 #region Sorting
@@ -183,20 +126,20 @@ func update_slots_order():
 	var slot_order: Array[Node] = get_slots_cards_list()
 	# Reorder current_cards to match the visual slot order
 	# Only if the slot order differs from current_cards
-	if slot_order.size() > 0 and slot_order.size() == player_inventory.current_cards.size():
+	if slot_order.size() > 0 and slot_order.size() == inventory.current_cards.size():
 		var needs_reorder = false
 		for i in range(slot_order.size()):
-			if slot_order[i] != player_inventory.current_cards[i]:
+			if slot_order[i] != inventory.current_cards[i]:
 				needs_reorder = true
 				break
 		if needs_reorder:
-			player_inventory.current_cards = slot_order
+			inventory.current_cards = slot_order
 
 func sort_inventory_alphabetically():
-	player_inventory.current_cards.sort_custom(sort_by_name)
+	inventory.current_cards.sort_custom(sort_by_name)
 	update_slots()
 func sort_inventory_by_rarity():
-	player_inventory.current_cards.sort_custom(sort_by_rarity)
+	inventory.current_cards.sort_custom(sort_by_rarity)
 	update_slots()
 		
 func sort_by_rarity(a,b):

@@ -12,6 +12,7 @@ signal on_encounter_start
 signal on_inventory_update
 signal on_dish_finish_anim_done
 signal starting_game
+signal large_view_toggled(value)
 #STATE
 
 # Called when the node enters the scene tree for the first time.
@@ -21,7 +22,6 @@ func _ready() -> void:
 func start_game():
 	starting_game.emit()
 	player_inventory.update_ui()
-	player_inventory.ui.open()
 	map_loader.start_game()
 
 func encounter_load():
@@ -44,6 +44,8 @@ func dish_complete(dish):
 func add_to_dish(ingredient):
 	pass
 
+func large_view_toggle(value):
+	large_view_toggled.emit(value)
 	
 func update_inventory_position():
 	on_inventory_update.emit()

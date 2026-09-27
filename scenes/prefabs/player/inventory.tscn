@@ -11,9 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://b0kgy70usnyx" path="res://sprites/interface/scenes/cooking scene/scene_cooking_inventory.png" id="9_k8k7k"]
 [ext_resource type="Theme" uid="uid://dwjm243i4x47a" path="res://themes/inventory/inv_scroll_container.tres" id="10_no1hy"]
 [ext_resource type="Theme" uid="uid://fa4mmtcwb3a5" path="res://themes/inventory/inv_grid_container.tres" id="11_lc8fr"]
-[ext_resource type="PackedScene" uid="uid://7lxu211xbf4i" path="res://scenes/prefabs/player/inventory_ui_large_view.tscn" id="12_ul54y"]
-[ext_resource type="Texture2D" uid="uid://brlwxgegkouv1" path="res://sprites/interface/scenes/decision scene/scene_decision_background_water.png" id="13_etcjs"]
-[ext_resource type="Script" uid="uid://cd0ktcwpa3fkn" path="res://scripts/sprite_animator.gd" id="14_apfx7"]
 [ext_resource type="Script" uid="uid://bg58rkwvnuhi5" path="res://scripts/Inventory/scroll_hint_displayer.gd" id="14_p47cp"]
 [ext_resource type="Texture2D" uid="uid://lp3c3q5qpcwl" path="res://sprites/interface/general/inventory/inventory_scroll_reverse.png" id="16_dndqy"]
 [ext_resource type="Script" uid="uid://bog5ewji0yscq" path="res://scripts/Inventory/scroll_hint.gd" id="17_3h3nv"]
@@ -34,13 +31,13 @@ ui = NodePath("InventoryUI")
 
 [node name="InventoryUI" type="Control" parent="." unique_id=190865318 groups=["player_inventory_ui"]]
 z_index = 15
+z_as_relative = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 script = ExtResource("3_5ftxm")
 inventory_slot_scene = ExtResource("4_rw30e")
 min_slots = 8
@@ -130,50 +127,6 @@ offset_right = 1893.0
 offset_bottom = 871.0
 mouse_filter = 2
 texture = SubResource("PlaceholderTexture2D_2kgow")
-
-[node name="LargeView" type="Control" parent="InventoryUI" unique_id=400635027]
-z_index = -1
-anchors_preset = 0
-mouse_filter = 1
-mouse_behavior_recursive = 1
-
-[node name="Button" type="Button" parent="InventoryUI/LargeView" unique_id=1508888289]
-z_index = -5
-custom_minimum_size = Vector2(1920, 780)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 1920.0
-offset_bottom = 1072.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-mouse_behavior_recursive = 2
-flat = true
-
-[node name="InventoryUILarge" parent="InventoryUI/LargeView" unique_id=1295964210 instance=ExtResource("12_ul54y")]
-clip_contents = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 704.0
-offset_top = 24.0
-offset_right = 1216.0
-offset_bottom = 792.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ButtonBG" type="Sprite2D" parent="InventoryUI/LargeView" unique_id=669775923]
-modulate = Color(1, 1, 1, 0.35500002)
-z_index = -6
-scale = Vector2(8, 8)
-texture = ExtResource("13_etcjs")
-centered = false
-script = ExtResource("14_apfx7")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="InventoryUI" unique_id=79906176 node_paths=PackedStringArray("horizontal_hint_left", "horizontal_hint_right")]
 custom_minimum_size = Vector2(1920, 304)

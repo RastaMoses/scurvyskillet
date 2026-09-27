@@ -10,34 +10,64 @@
 encounter_nodes = [NodePath("Encounter/0"), NodePath("Encounter/1"), NodePath("Encounter/2"), NodePath("Encounter/3"), NodePath("Encounter/4"), NodePath("Encounter/5"), NodePath("Encounter/6"), NodePath("Encounter/7"), NodePath("Encounter/8")]
 
 [node name="0" parent="Encounter" parent_id_path=PackedInt32Array(1514431645) index="0" unique_id=986483625]
-position = Vector2(193, 461)
+offset_left = 160.0
+offset_top = 456.0
+offset_right = 160.0
+offset_bottom = 456.0
+destinations = Array[int]([1, 2, 3])
 
 [node name="1" parent="Encounter" parent_id_path=PackedInt32Array(1514431645) index="1" unique_id=1699582653]
+offset_left = 496.0
+offset_top = 304.0
+offset_right = 496.0
+offset_bottom = 304.0
 possible_encounters = Array[PackedScene]([ExtResource("2_pp0bg")])
 type = 3
 
 [node name="2" parent="Encounter" parent_id_path=PackedInt32Array(1514431645) index="2" unique_id=386168653]
+offset_left = 528.0
+offset_top = 616.0
+offset_right = 528.0
+offset_bottom = 616.0
 possible_encounters = Array[PackedScene]([ExtResource("3_shbf5")])
 type = 2
 
 [node name="3" parent="Encounter" parent_id_path=PackedInt32Array(1514431645) index="3" unique_id=664957354]
-position = Vector2(758, 440)
+offset_left = 1000.0
+offset_top = 424.0
+offset_right = 1000.0
+offset_bottom = 424.0
 possible_encounters = Array[PackedScene]([ExtResource("4_fg40y")])
 destinations = Array[int]([4, 5])
 type = 1
 bg_type = 1
 
 [node name="4" parent="Encounter" parent_id_path=PackedInt32Array(1514431645) index="4" unique_id=1721472287 instance=ExtResource("2_p6csh")]
-position = Vector2(955, 235)
+offset_left = 1207.0
+offset_top = 225.0
+offset_right = 1207.0
+offset_bottom = 225.0
 
 [node name="5" parent="Encounter" parent_id_path=PackedInt32Array(1514431645) index="5" unique_id=2306135 instance=ExtResource("2_p6csh")]
-position = Vector2(984, 652)
+offset_left = 1272.0
+offset_top = 725.0
+offset_right = 1272.0
+offset_bottom = 725.0
 
 [node name="6" parent="Encounter" parent_id_path=PackedInt32Array(1514431645) index="6" unique_id=1695874700 instance=ExtResource("2_p6csh")]
-position = Vector2(1299, 219)
+offset_left = 1572.0
+offset_top = 183.0
+offset_right = 1572.0
+offset_bottom = 183.0
 
 [node name="7" parent="Encounter" parent_id_path=PackedInt32Array(1514431645) index="7" unique_id=405134870 instance=ExtResource("2_p6csh")]
-position = Vector2(1346, 632)
+offset_left = 1612.0
+offset_top = 713.0
+offset_right = 1612.0
+offset_bottom = 713.0
 
 [node name="8" parent="Encounter" parent_id_path=PackedInt32Array(1514431645) index="8" unique_id=1941259482 instance=ExtResource("2_p6csh")]
-position = Vector2(1611, 445)
+offset_left = 1826.0
+offset_top = 437.0
+offset_right = 1826.0
+offset_bottom = 437.0
