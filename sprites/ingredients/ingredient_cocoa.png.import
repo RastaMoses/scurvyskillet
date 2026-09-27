@@ -2,20 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-<<<<<<< HEAD
-uid="uid://dlj7ef6766g2m"
-=======
-uid="uid://cop248u0lmpta"
->>>>>>> origin/main
-path="res://.godot/imported/ingredient_herbs.png-d5cdea4ee2d600254011e750d33d963b.ctex"
+uid="uid://n811rcwvipl"
+path="res://.godot/imported/ingredient_cocoa.png-350c823f3125901ed2b5b4d452ff8120.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/ingredients/ingredient_herbs.png"
-dest_files=["res://.godot/imported/ingredient_herbs.png-d5cdea4ee2d600254011e750d33d963b.ctex"]
+source_file="res://sprites/ingredients/ingredient_cocoa.png"
+dest_files=["res://.godot/imported/ingredient_cocoa.png-350c823f3125901ed2b5b4d452ff8120.ctex"]
 
 [params]
 
