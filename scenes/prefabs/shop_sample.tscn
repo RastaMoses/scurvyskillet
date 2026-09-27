@@ -238,10 +238,6 @@ grow_vertical = 2
 script = ExtResource("17_ev3ab")
 inventory_slot_scene = ExtResource("18_o7aay")
 min_slots = 8
-container_size_bottom = Vector2(1920, 304)
-container_pos_bottom = Vector2(0, 776)
-container_size_side = Vector2(591, 699)
-container_pos_side = Vector2(1302, 172)
 
 [node name="bg_bottom" type="TextureRect" parent="InventoryUI" unique_id=1752599872]
 visible = false

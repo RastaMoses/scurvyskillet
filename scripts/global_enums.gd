@@ -17,3 +17,5 @@ enum EncounterType {
 enum EncounterTerrain{ ISLAND, OCEAN, NONE}
 
 enum Flavour { SWEET, SPICY, HEARTY, FRESH, NONE}
+
+enum Country {NONE, MEDITERRANEAN, NORDIC, JUNGLE, ASIAN}

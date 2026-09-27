@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bnelk35k2xjth" path="res://scripts/Ingredients/ability.gd" id="1_lfo26"]
 [ext_resource type="Resource" uid="uid://blfsr67o0l3f0" path="res://resources/abilities/makes_phoenix_ashes.tres" id="2_kfbkk"]
 [ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_n26q8"]
-[ext_resource type="Texture2D" uid="uid://diti6xvf03rss" path="res://sprites/placeholder/pngtree-chicken-hot-wings-png-image_15240411.png" id="3_8i0je"]
+[ext_resource type="Texture2D" uid="uid://bpnurxptce4yb" path="res://sprites/ingredients/ingredient_phoenix_fillet.png" id="3_8i0je"]
 
 [resource]
 script = ExtResource("2_n26q8")

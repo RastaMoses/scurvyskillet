@@ -5,6 +5,7 @@ extends Resource
 @export var icon:Texture
 @export var tags: Array[GlobalEnums.Tags]
 @export var rarity:GlobalEnums.Rarity
+@export var country: Array[GlobalEnums.Country]
 @export_multiline() var description:String
 @export_group("Values")
 @export var nutrition:int
