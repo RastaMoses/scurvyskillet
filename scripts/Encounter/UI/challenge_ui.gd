@@ -6,6 +6,7 @@ extends Control
 @onready var ladle_hover = $Complete/ladle_hover
 @onready var ladle_highlight = $Complete/highlight
 @onready var des_vbox = $description/ScrollContainer/VBoxContainer
+@onready var inventory_display = $InventoryUI
 
 var disabled = false
 
@@ -46,3 +47,7 @@ func toggle_disable_buttons(value):
 	ladle_highlight.visible = false
 	
 	
+
+
+func _on_inv_toggle_pressed() -> void:
+	inventory_display.visible = !inventory_display.visible
