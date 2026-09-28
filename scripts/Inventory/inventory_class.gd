@@ -138,3 +138,39 @@ func set_card_drag(card):
 func stop_card_drag():
 	dragging_card = null
 	card_stop_drag.emit(self)
+
+#region Helper
+func count_ingredient_in_inventory(target:Ingredient) -> int:
+	var count = 0
+	for card in current_cards:
+		if card.base_stats == target:
+			count += 1
+	return count
+
+func get_tag_amount_in_inventory(search_tag) -> int:
+	var tag_ingr:Array[Card]
+	for i in current_cards:
+		if tag_ingr.has(i.committed_stats):
+			continue
+		if i.committed_stats.tags.has(search_tag):
+			tag_ingr.append(i)
+	return tag_ingr.size()
+
+func get_country_amount_in_inventory(search_country) -> int:
+	var country_ingr:Array[Card]
+	for i in current_cards:
+		if country_ingr.has(i.committed_stats):
+			continue
+		if i.committed_stats.country.has(search_country):
+			country_ingr.append(i)
+	return country_ingr.size()
+
+func get_rarity_amount_in_inventory(search) -> int:
+	var rarity_ingr:Array[Card]
+	for i in current_cards:
+		if rarity_ingr.has(i.committed_stats):
+			continue
+		if i.committed_stats.rarity.has(search):
+			rarity_ingr.append(i)
+	return rarity_ingr.size()
+#endregion

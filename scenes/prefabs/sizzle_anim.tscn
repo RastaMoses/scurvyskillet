@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c6r1ffroignl1"]
 
 [ext_resource type="Texture2D" uid="uid://knibr3pti1l7" path="res://sprites/interface/scenes/cooking scene/scene_cooking_dice_particles.png" id="1_f4iml"]
-[ext_resource type="Script" uid="uid://b37m5itdqk7x0" path="res://scripts/Encounter/Dish/sizzle_obj.gd" id="2_jfgs8"]
+[ext_resource type="Script" uid="uid://b37m5itdqk7x0" path="res://scripts/Encounter/Challenge/sizzle_obj.gd" id="2_jfgs8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jfgs8"]
 atlas = ExtResource("1_f4iml")

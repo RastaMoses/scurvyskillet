@@ -161,12 +161,8 @@ func recalculate_dish():
 func finish_dish():
 	dice_disp.finish_dish()
 
-func count_ingredient_in_dish(target:Ingredient) -> int:
-	var count = 0
-	for card in current_cards:
-		if card.base_stats == target:
-			count += 1
-	return count
+
+
 
 #region Dice
 

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cbec14v7l54xf"]
 
-[ext_resource type="Script" uid="uid://dm4u7nvg5wnbc" path="res://scripts/Encounter/Dish/dice.gd" id="1_jvbsu"]
+[ext_resource type="Script" uid="uid://dm4u7nvg5wnbc" path="res://scripts/Encounter/Challenge/dice.gd" id="1_jvbsu"]
 [ext_resource type="Texture2D" uid="uid://o5xyo5mnhwhc" path="res://sprites/interface/scenes/cooking scene/scene_cooking_dice_sour.png" id="2_mda5o"]
 [ext_resource type="Texture2D" uid="uid://clrmciu31g4ft" path="res://sprites/interface/scenes/cooking scene/scene_cooking_dice_outline.png" id="3_mda5o"]
 [ext_resource type="PackedScene" uid="uid://c6r1ffroignl1" path="res://scenes/prefabs/sizzle_anim.tscn" id="4_pv3uk"]

@@ -220,7 +220,7 @@ func evaluate_try_add_to_dish_triggers(try_card:Node) -> bool:
 		if ability.self_target and card.base_stats == try_card.base_stats:
 			#Check if ability restricts the card drop try
 			if ability.limit_ingredients_int != -1:
-				if ability.limit_ingredients_int <= current_dish.count_ingredient_in_dish(try_card.base_stats):
+				if ability.limit_ingredients_int <= current_dish.count_ingredient_in_inventory(try_card.base_stats):
 					can_drop = false
 			if ability.can_not_play:
 					can_drop = false

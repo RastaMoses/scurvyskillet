@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://hr6aybbol4hn"]
 
-[ext_resource type="Script" uid="uid://bbkxauiekl5ry" path="res://scripts/Encounter/challenge.gd" id="1_glswj"]
+[ext_resource type="Script" uid="uid://bbkxauiekl5ry" path="res://scripts/Encounter/Challenge/challenge.gd" id="1_glswj"]
 [ext_resource type="Script" uid="uid://clhhe0hu1tyj0" path="res://scripts/Encounter/UI/challenge_ui.gd" id="2_hs7g2"]
 [ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_y21f8"]
 [ext_resource type="Resource" uid="uid://cudhcbra3g05f" path="res://resources/ingredients/in_game/grapes.tres" id="3_6r88v"]
@@ -24,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://lp3c3q5qpcwl" path="res://sprites/interface/general/inventory/inventory_scroll_reverse.png" id="21_xa3pd"]
 [ext_resource type="Script" uid="uid://bog5ewji0yscq" path="res://scripts/Inventory/scroll_hint.gd" id="22_r4574"]
 [ext_resource type="Texture2D" uid="uid://bjjx1b7lsoh1g" path="res://sprites/interface/general/inventory/inventory_scroll_hint.png.png" id="23_tx541"]
+[ext_resource type="Script" uid="uid://07c07oncxt2w" path="res://scripts/Encounter/Challenge/combination_manager.gd" id="25_xb3ol"]
 
 [sub_resource type="Theme" id="Theme_5p3kb"]
 
@@ -355,6 +356,9 @@ text = "Dish Inv"
 layout_mode = 0
 ui = NodePath("../UI/InventoryUI")
 can_drag_cards = true
+
+[node name="CombinationManager" type="Node" parent="." unique_id=1302914162]
+script = ExtResource("25_xb3ol")
 
 [connection signal="mouse_entered" from="UI/Reset/reset_button" to="UI" method="_on_reset_button_mouse_entered"]
 [connection signal="mouse_exited" from="UI/Reset/reset_button" to="UI" method="_on_reset_button_mouse_exited"]
