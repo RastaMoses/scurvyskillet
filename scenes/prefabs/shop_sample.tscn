@@ -42,7 +42,7 @@ card_prefab = ExtResource("2_72y8b")
 ui = NodePath("InventoryUI")
 can_stack_uses = false
 
-[node name="DropArea" type="Panel" parent="." unique_id=1944757335]
+[node name="DropArea" type="Panel" parent="." unique_id=1944757335 node_paths=PackedStringArray("parent_inventory")]
 self_modulate = Color(1, 1, 1, 0)
 z_index = 3
 layout_mode = 0
@@ -52,6 +52,7 @@ offset_right = 488.0
 offset_bottom = 744.0
 mouse_behavior_recursive = 2
 script = ExtResource("5_tlf87")
+parent_inventory = NodePath("..")
 
 [node name="UI" type="Control" parent="." unique_id=1934493353]
 anchors_preset = 0

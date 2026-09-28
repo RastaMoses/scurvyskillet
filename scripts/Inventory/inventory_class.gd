@@ -74,8 +74,6 @@ func drop_ingredient(card):
 	add_card(card)
 	dropping_ingredient.emit(self, card)
 
-
-
 func add_card(card):
 	var new_card:Node = card_prefab.instantiate()
 	add_child(new_card)
@@ -159,10 +157,10 @@ func get_tags_in_inventory() -> Array[GlobalEnums.Tags]:
 				tags.append(tag)
 	return tags
 
-func get_all_cards_with_tag(search_tag) -> Array[Card]:
+func get_all_cards_with_tag(search_tag:GlobalEnums.Tags) -> Array[Card]:
 	var tag_ingr:Array[Card]
 	for i in current_cards:
-		if tag_ingr.has(i.committed_stats):
+		if tag_ingr.has(i):
 			continue
 		if i.committed_stats.tags.has(search_tag):
 			tag_ingr.append(i)
@@ -212,7 +210,7 @@ func can_cover_tags(required_tags:Array[GlobalEnums.Tags]) -> bool:
 func get_country_amount_in_inventory(search_country) -> int:
 	var country_ingr:Array[Card]
 	for i in current_cards:
-		if country_ingr.has(i.committed_stats):
+		if country_ingr.has(i):
 			continue
 		if i.committed_stats.country.has(search_country):
 			country_ingr.append(i)
@@ -221,9 +219,9 @@ func get_country_amount_in_inventory(search_country) -> int:
 func get_rarity_amount_in_inventory(search) -> int:
 	var rarity_ingr:Array[Card]
 	for i in current_cards:
-		if rarity_ingr.has(i.committed_stats):
+		if rarity_ingr.has(i):
 			continue
-		if i.committed_stats.rarity.has(search):
+		if i.committed_stats.rarity == search:
 			rarity_ingr.append(i)
 	return rarity_ingr.size()
 

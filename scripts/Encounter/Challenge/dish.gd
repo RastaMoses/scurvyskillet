@@ -17,7 +17,6 @@ extends Inventory
 var random = RandomNumberGenerator.new()
 @onready var challenge = get_parent()
 @onready var dice_disp = $Dice_Display
-@onready var dish_ui = $UI
 
 #STATE
 var can_add_ingredients = true
@@ -35,8 +34,8 @@ func _ready() -> void:
 	player_inventory.card_stop_drag.connect(on_stop_drag)
 
 func start():
-	dish_ui.update_nutrition(nutrition)
-	dish_ui.update_flavours()
+	challenge.ui.update_nutrition(nutrition)
+	challenge.ui.update_flavours(self)
 
 #region inventory signals
 func on_start_drag(origin, card):
@@ -52,7 +51,7 @@ func on_check_drop(origin,card):
 	#check abilities
 	if abilities.on_try_add_to_dish(card) == false:
 		can_drop_card = false
-	dish_ui.toggle_highlight_pan(can_drop_card)
+	challenge.ui.toggle_highlight_pan(can_drop_card)
 
 func on_drop_ingredient(origin, card):
 	if origin != self:
@@ -71,8 +70,8 @@ func on_add_to_dish(origin,card):
 	roll_ingredient(card)
 	recalculate_dish()
 	#ui
-	dish_ui.update_flavours()
-	dish_ui.update_nutrition(nutrition)
+	challenge.ui.update_flavours(self)
+	challenge.ui.update_nutrition(nutrition)
 
 func on_destroy_ingredient(origin,card:Node):
 	if origin != self:
@@ -95,8 +94,8 @@ func on_destroy_all_ingredients(origin):
 	fresh = 0
 	nutrition = 0
 	#ui
-	dish_ui.update_flavours()
-	dish_ui.update_nutrition(nutrition)
+	challenge.ui.update_flavours(self)
+	challenge.ui.update_nutrition(nutrition)
 func remove_card_from_dish(card):
 	#remove dice values
 	nutrition -= card.committed_stats.nutrition
@@ -107,8 +106,8 @@ func remove_card_from_dish(card):
 	
 	#ui
 	dice_disp.destroy_dice(card)
-	dish_ui.update_nutrition(nutrition)
-	dish_ui.update_flavours()
+	challenge.ui.update_nutrition(nutrition)
+	challenge.ui.update_flavours(self)
 #endregion
 
 func subtract_die_value_from_dish(die):
@@ -149,9 +148,6 @@ func recalculate_dish():
 	nutrition += ability_nutrition
 func finish_dish():
 	dice_disp.finish_dish()
-
-
-
 
 #region Dice
 

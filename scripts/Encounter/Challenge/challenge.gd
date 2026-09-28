@@ -82,7 +82,24 @@ var reward_req_ability:Array[Ability]
 
 func _ready() -> void:
 	event_manager.large_view_toggled.connect(toggle_large_view)
+	ui.finish_dish_pressed.connect(finish_dish)
+	ui.reset_dish_pressed.connect(reset_dish)
+#region Helper
+func is_restricted_tag(tag):
+	return restricted_tags.has(tag)
+#endregion
+func start():
+	dish_node.start()
+	ability_manager.on_challenge_start(dish_node)
 
+func end():
+	
+	await ui.end_challenge_pressed
+	map_node.end_encounter()
+	give_rewards()
+	queue_free()
+
+#region Results
 func give_rewards():
 	player_inventory.add_money(reward_money)
 	player_inventory.add_morale(reward_morale)
@@ -93,7 +110,6 @@ func give_rewards():
 			index -= 1
 	for i in reward_specific_ingredients:
 		player_inventory.instantiate_card_and_add(i)
-
 
 func on_success():
 	reward_money = success_money
@@ -130,10 +146,7 @@ func on_failure():
 	reward_req_ability = f_req_ability
 	end()
 	
-
-func is_restricted_tag(tag):
-	return restricted_tags.has(tag)
-	
+#endregion
 
 func compare_dish(completed_dish):
 	if (completed_dish.nutrition < req_nutrition
@@ -158,40 +171,18 @@ func compare_dish(completed_dish):
 		on_success()
 		#success
 
-
 func finish_dish():
 	dish_node.finish_dish()
 	await event_manager.on_dish_finish_anim_done
+	ui.toggle_result_screen(true)
 	combination_manager.start_combinations(dish_node)
 	compare_dish(combination_manager.upgraded_dish)
 
-#UI Elements
-func start():
-	display_dish()
-	dish_node.start()
-	ability_manager.on_challenge_start(dish_node)
-
-func end():
-	await ui.
-	map_node.end_encounter()
-	give_rewards()
-	queue_free()
-
-func display_dish():
-	#visually show dish node
-	dish_node.show()
-	
-func hide_dish():
-	dish_node.hide()
-
-func on_reset_button_pressed() -> void:
+func reset_dish():
 	dish_node.destroy_all_ingredients()
 
-func _on_roll_dish_pressed() -> void:
-	finish_dish()
-
-
+#region UI functions
 func toggle_large_view(value):
 	ui.toggle_disable_buttons(value)
 
-#Dish Log
+#endregion

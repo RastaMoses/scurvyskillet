@@ -24,7 +24,10 @@ func _ready() -> void:
 
 #region Helper
 func set_comb_active(c_name):
-	active_combinations.append(get_combination_by_name(c_name))
+	var combination = get_combination_by_name(c_name)
+	if combination == null:
+		return
+	active_combinations.append(combination)
 
 func get_combination_by_name(c_name) -> Combination:
 	var comb:Combination
@@ -82,7 +85,7 @@ func check_combinations():
 #Check for tags
 	#Pure
 	for tag in dish.get_tags_in_inventory():
-		if dish.current_ingredient.size() == dish.get_all_cards_with_tag(tag).size():
+		if dish.current_cards.size() == dish.get_all_cards_with_tag(tag).size():
 			set_comb_active("Pure")
 			break
 	
@@ -98,7 +101,7 @@ func check_combinations():
 		set_comb_active("Salmonella")
 	
 	#Quishe
-	if (dish.get_all_cards_with_tag("Egg").size() >= dish.current_cards.size()/2 and dish.current_cards.size() > 1):
+	if (dish.get_all_cards_with_tag(GlobalEnums.Tags.EGG).size() >= dish.current_cards.size()/2 and dish.current_cards.size() > 1):
 		set_comb_active("Quishe")
 #endregion
 #region Rarity
@@ -198,6 +201,8 @@ func activate_effects():
 		#region Create
 
 		#endregion
-
+		challenge.ui.add_combination_result_text(combination)
+		challenge.ui.update_flavours(upgraded_dish)
+		challenge.ui.update_nutrition(upgraded_dish.nutrition)
 
 #endregion
