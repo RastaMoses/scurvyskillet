@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cop248u0lmpta"
-path="res://.godot/imported/ingredient_herbs.png-d5cdea4ee2d600254011e750d33d963b.ctex"
+uid="uid://bp2y82neoymdc"
+path="res://.godot/imported/ingredient_squash.png-1bbcfb0cd796ff005b7ca02fe4be884b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/ingredients/ingredient_herbs.png"
-dest_files=["res://.godot/imported/ingredient_herbs.png-d5cdea4ee2d600254011e750d33d963b.ctex"]
+source_file="res://sprites/ingredients/ingredient_squash.png"
+dest_files=["res://.godot/imported/ingredient_squash.png-1bbcfb0cd796ff005b7ca02fe4be884b.ctex"]
 
 [params]
 

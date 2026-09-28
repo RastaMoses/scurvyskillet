@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cop248u0lmpta"
-path="res://.godot/imported/ingredient_herbs.png-d5cdea4ee2d600254011e750d33d963b.ctex"
+uid="uid://c3iyjcjtl5xyy"
+path="res://.godot/imported/ingredient_taco.png-ba0b8ae09799e1b54b0d09907666e783.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/ingredients/ingredient_herbs.png"
-dest_files=["res://.godot/imported/ingredient_herbs.png-d5cdea4ee2d600254011e750d33d963b.ctex"]
+source_file="res://sprites/ingredients/ingredient_taco.png"
+dest_files=["res://.godot/imported/ingredient_taco.png-ba0b8ae09799e1b54b0d09907666e783.ctex"]
 
 [params]
 

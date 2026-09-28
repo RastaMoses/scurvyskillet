@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cop248u0lmpta"
-path="res://.godot/imported/ingredient_herbs.png-d5cdea4ee2d600254011e750d33d963b.ctex"
+uid="uid://4juyryeexkxb"
+path="res://.godot/imported/ingredient_ginger.png-faa4137648c6042a3afdbe9d0f4784f8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/ingredients/ingredient_herbs.png"
-dest_files=["res://.godot/imported/ingredient_herbs.png-d5cdea4ee2d600254011e750d33d963b.ctex"]
+source_file="res://sprites/ingredients/ingredient_ginger.png"
+dest_files=["res://.godot/imported/ingredient_ginger.png-faa4137648c6042a3afdbe9d0f4784f8.ctex"]
 
 [params]
 

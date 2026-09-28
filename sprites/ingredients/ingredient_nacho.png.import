@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cop248u0lmpta"
-path="res://.godot/imported/ingredient_herbs.png-d5cdea4ee2d600254011e750d33d963b.ctex"
+uid="uid://cxi8xc65o35ql"
+path="res://.godot/imported/ingredient_nacho.png-d896e2c565521764c1d688100069cc23.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/ingredients/ingredient_herbs.png"
-dest_files=["res://.godot/imported/ingredient_herbs.png-d5cdea4ee2d600254011e750d33d963b.ctex"]
+source_file="res://sprites/ingredients/ingredient_nacho.png"
+dest_files=["res://.godot/imported/ingredient_nacho.png-d896e2c565521764c1d688100069cc23.ctex"]
 
 [params]
 
