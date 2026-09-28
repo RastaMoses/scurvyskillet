@@ -37,9 +37,40 @@ mouse_filter = 1
 mouse_behavior_recursive = 1
 script = ExtResource("1_glswj")
 req_nutrition = 4
+req_sweet = null
+req_spicy = null
+req_hearty = null
+req_fresh = null
 par_nutrition = 2
+par_sweet = null
+par_spicy = null
+par_hearty = null
+par_fresh = null
+restricted_tags = null
+success_morale = null
+success_money = null
 s_specific_ingredients = Array[ExtResource("2_y21f8")]([ExtResource("3_6r88v")])
 s_random_ingredient_amount = 0
+s_and_req = null
+s_req_rarity = null
+s_req_tag = null
+s_req_ability = null
+partial_morale = null
+partial_money = null
+p_specific_ingredients = null
+p_random_ingredient_amount = null
+p_and_req = null
+p_req_rarity = null
+p_req_tag = null
+p_req_ability = null
+failure_morale = null
+failure_money = null
+f_specific_ingredients = null
+f_random_ingredient_amount = null
+f_and_req = null
+f_req_rarity = null
+f_req_tag = null
+f_req_ability = null
 
 [node name="UI" type="Control" parent="." unique_id=96621391]
 layout_mode = 1
@@ -352,12 +383,37 @@ offset_bottom = 152.0
 mouse_behavior_recursive = 2
 text = "Dish Inv"
 
+[node name="ResultScreen" type="Control" parent="UI" unique_id=1975332036]
+z_index = 4
+anchors_preset = 0
+offset_left = 944.0
+offset_top = 80.0
+offset_right = 1656.0
+offset_bottom = 792.0
+
+[node name="BG" type="TextureRect" parent="UI/ResultScreen" unique_id=744282982]
+layout_mode = 0
+offset_left = -48.0
+offset_top = 640.0
+offset_right = 1872.0
+offset_bottom = 1720.0
+rotation = -1.5707964
+texture = ExtResource("4_x7qnw")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/ResultScreen" unique_id=706833371]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 104.0
+offset_right = 696.0
+offset_bottom = 568.0
+theme = ExtResource("5_h6ing")
+
 [node name="Dish" parent="." unique_id=497250350 node_paths=PackedStringArray("ui") instance=ExtResource("10_l27j6")]
 layout_mode = 0
 ui = NodePath("../UI/InventoryUI")
 can_drag_cards = true
 
-[node name="CombinationManager" type="Node" parent="." unique_id=1302914162]
+[node name="CombinationManager" type="Node" parent="." unique_id=1302914162 groups=["combination_manager"]]
 script = ExtResource("25_xb3ol")
 
 [connection signal="mouse_entered" from="UI/Reset/reset_button" to="UI" method="_on_reset_button_mouse_entered"]

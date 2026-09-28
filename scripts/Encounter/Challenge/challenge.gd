@@ -61,6 +61,7 @@ extends Control
 @onready var event_manager = get_tree().get_first_node_in_group("event_manager")
 @onready var item_pool = get_tree().get_first_node_in_group("ingredient_pool")
 @onready var ability_manager = get_tree().get_first_node_in_group("ability_manager")
+@onready var combination_manager = get_tree().get_first_node_in_group("combination_manager")
 @onready var dish_node = $Dish
 @onready var map_node = get_parent()
 @onready var ui = $UI
@@ -140,13 +141,13 @@ func compare_dish(completed_dish):
 	or completed_dish.spicy < req_spicy
 	or completed_dish.hearty < req_hearty
 	or completed_dish.fresh < req_fresh
-	or completed_dish.tags.any(is_restricted_tag)): #check if restricted tag is used
+	or completed_dish.get_tags_in_inventory().any(is_restricted_tag)): #check if restricted tag is used
 		if (completed_dish.nutrition < par_nutrition
 		or completed_dish.sweet < par_sweet
 		or completed_dish.spicy < par_spicy
 		or completed_dish.hearty < par_hearty
 		or completed_dish.fresh < par_fresh
-		or completed_dish.tags.any(is_restricted_tag)): #check if restricted tag is used
+		or completed_dish.get_tags_in_inventory().any(is_restricted_tag)): #check if restricted tag is used
 			#fail
 			on_failure()
 		else:
@@ -161,7 +162,8 @@ func compare_dish(completed_dish):
 func finish_dish():
 	dish_node.finish_dish()
 	await event_manager.on_dish_finish_anim_done
-	compare_dish(dish_node)
+	combination_manager.start_combinations(dish_node)
+	compare_dish(combination_manager.upgraded_dish)
 
 #UI Elements
 func start():
@@ -170,6 +172,7 @@ func start():
 	ability_manager.on_challenge_start(dish_node)
 
 func end():
+	await ui.
 	map_node.end_encounter()
 	give_rewards()
 	queue_free()
@@ -186,6 +189,7 @@ func on_reset_button_pressed() -> void:
 
 func _on_roll_dish_pressed() -> void:
 	finish_dish()
+
 
 func toggle_large_view(value):
 	ui.toggle_disable_buttons(value)

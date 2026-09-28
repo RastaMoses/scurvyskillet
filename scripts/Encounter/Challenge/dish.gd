@@ -16,13 +16,11 @@ extends Inventory
 #CACHED COMPS
 var random = RandomNumberGenerator.new()
 @onready var challenge = get_parent()
-@onready var restricted_tags:Array[GlobalEnums.Tags] = challenge.restricted_tags
 @onready var dice_disp = $Dice_Display
 @onready var dish_ui = $UI
 
 #STATE
 var can_add_ingredients = true
-var tags:Array[GlobalEnums.Tags]
 var dice:Array[RigidBody2D]
 
 
@@ -100,11 +98,6 @@ func on_destroy_all_ingredients(origin):
 	dish_ui.update_flavours()
 	dish_ui.update_nutrition(nutrition)
 func remove_card_from_dish(card):
-	tags.clear()
-	for i in current_cards:
-		for tag:GlobalEnums.Tags in i.stats.tags:
-			if !tags.has(tag):
-				tags.append(tag)
 	#remove dice values
 	nutrition -= card.committed_stats.nutrition
 	for die in card.dice:
@@ -135,14 +128,10 @@ func recalculate_dish():
 	spicy = 0
 	hearty = 0
 	fresh = 0
-	tags.clear()
 	
 	for card in current_cards:
 		nutrition += card.committed_stats.nutrition
 		
-		for tag in card.committed_stats.tags:
-			if not tags.has(tag):
-				tags.append(tag)
 	for die in dice:
 		match die.flavour:
 			GlobalEnums.Flavour.SWEET:

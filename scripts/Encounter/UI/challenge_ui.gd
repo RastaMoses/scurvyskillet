@@ -10,6 +10,8 @@ extends Control
 
 var disabled = false
 
+signal end_challenge_pressed
+
 func _on_reset_button_mouse_entered() -> void:
 	if disabled:
 		return
@@ -46,8 +48,5 @@ func toggle_disable_buttons(value):
 	ladle_hover.visible = false
 	ladle_highlight.visible = false
 	
-	
-
-
 func _on_inv_toggle_pressed() -> void:
 	inventory_display.visible = !inventory_display.visible

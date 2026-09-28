@@ -7,7 +7,7 @@ extends Node
 @onready var item_pool = get_tree().get_first_node_in_group("ingredient_pool")
 
 #State
-var dish
+var dish:Dish
 var upgraded_dish
 var all_combinations:Array[Combination]
 var active_combinations:Array[Combination]
@@ -43,15 +43,24 @@ func get_combinations_with_relevant_ingr(rel_ingr) -> int:
 		if i.relevant_ingredients.has(rel_ingr):
 			count += 1
 	return count
+	
+func order_active_combinations():
+	#Sort the active combinations based on effec type and specific dependencies (addition before multiply)
+	return
 #endregion
 
-func start_combinations(new_dish):
+func start_combinations(new_dish:Dish):
 	dish = new_dish
 	check_combinations()
+	order_active_combinations()
 	activate_effects()
 
 func check_combinations():
 
+#Check if dish empty
+	if dish.current_cards.size() == 0:
+		set_comb_active("Admit Defeat")
+		return
 #region Stats
 #Check for stats
 	#Lacking
@@ -66,12 +75,31 @@ func check_combinations():
 	if (dish.sweet > dish.spicy
 	and dish.sweet > dish.hearty
 	and dish.sweet > dish.fresh
-	and dish.get_tag_amount_in_inventory(GlobalEnums.Tags.FRUIT)):
+	and dish.get_all_cards_with_tag(GlobalEnums.Tags.FRUIT).size() >= 3):
 		set_comb_active("Jam")
 #endregion
 #region Tags
 #Check for tags
+	#Pure
+	for tag in dish.get_tags_in_inventory():
+		if dish.current_ingredient.size() == dish.get_all_cards_with_tag(tag).size():
+			set_comb_active("Pure")
+			break
 	
+	#Dry
+	if (dish.get_all_cards_with_tag(GlobalEnums.Tags.DRINK).size() == 0
+	and dish.get_all_cards_with_tag(GlobalEnums.Tags.OIL).size() == 0
+	and dish.get_all_cards_with_tag(GlobalEnums.Tags.FERMENT).size() == 0
+	and dish.get_all_cards_with_tag(GlobalEnums.Tags.FRUIT).size() == 0):
+		set_comb_active("Dry")
+	
+	#Salmonella
+	if (dish.can_cover_tags([GlobalEnums.Tags.MEAT, GlobalEnums.Tags.FISH, GlobalEnums.Tags.MONSTER])):
+		set_comb_active("Salmonella")
+	
+	#Quishe
+	if (dish.get_all_cards_with_tag("Egg").size() >= dish.current_cards.size()/2 and dish.current_cards.size() > 1):
+		set_comb_active("Quishe")
 #endregion
 #region Rarity
 #Check for Rarity
@@ -120,7 +148,15 @@ func check_combinations():
 	if (dish.count_ingredient_in_inventory(item_pool.get_ingredient_by_name("Corn")) > 0
 	and dish.count_ingredient_in_inventory(item_pool.get_ingredient_by_name("Butter")) > 0):
 		set_comb_active("Buttercob")
-
+	
+	#Barely Cooked
+	if (dish.get_unique_base_ingredients().size() == 1):
+		set_comb_active("Barely Cooked")
+	
+	if (dish.count_ingredient_in_inventory(item_pool.get_ingredient_by_name("Dough")) > 0
+	and dish.count_ingredient_in_inventory(item_pool.get_ingredient_by_name("Tomato")) > 0
+	and dish.current_cards.size() >= 3):
+		set_comb_active("Pizza")
 #endregion
 
 
@@ -146,19 +182,22 @@ func check_combinations():
 func activate_effects():
 	upgraded_dish = dish.duplicate()
 	#activate based on effect type (if has debuff come last)
-	return
-#region Buffs
+	for combination in active_combinations:
+		match combination.name:
+			
+		#region Buffs
+			"Quishe":
+				upgraded_dish.nutrition = upgraded_dish.nutrition * 2
+		#endregion
+		#region Debuffs
 
-#endregion
-#region Debuffs
+		#endregion
+		#region Player
 
-#endregion
-#region Morale/Money
+		#endregion
+		#region Create
 
-#endregion
-#region Create
-
-#endregion
+		#endregion
 
 
 #endregion
