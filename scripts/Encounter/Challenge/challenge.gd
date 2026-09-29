@@ -61,6 +61,7 @@ extends Control
 @onready var event_manager = get_tree().get_first_node_in_group("event_manager")
 @onready var item_pool = get_tree().get_first_node_in_group("ingredient_pool")
 @onready var ability_manager = get_tree().get_first_node_in_group("ability_manager")
+@onready var combination_manager = get_tree().get_first_node_in_group("combination_manager")
 @onready var dish_node = $Dish
 @onready var map_node = get_parent()
 @onready var ui = $UI
@@ -69,7 +70,6 @@ extends Control
 
 
 #STATE
-var inv_save:Array[Node]
 var reward_money:int
 var reward_morale:int
 var reward_specific_ingredients:Array[Ingredient]
@@ -81,7 +81,24 @@ var reward_req_ability:Array[Ability]
 
 func _ready() -> void:
 	event_manager.large_view_toggled.connect(toggle_large_view)
+	ui.finish_dish_pressed.connect(finish_dish)
+	ui.reset_dish_pressed.connect(reset_dish)
+#region Helper
+func is_restricted_tag(tag):
+	return restricted_tags.has(tag)
+#endregion
+func start():
+	dish_node.start()
+	ability_manager.on_challenge_start(dish_node)
 
+func end():
+	
+	await ui.end_challenge_pressed
+	map_node.end_encounter()
+	give_rewards()
+	queue_free()
+
+#region Results
 func give_rewards():
 	player_inventory.add_money(reward_money)
 	player_inventory.add_morale(reward_morale)
@@ -92,7 +109,6 @@ func give_rewards():
 			index -= 1
 	for i in reward_specific_ingredients:
 		player_inventory.instantiate_card_and_add(i)
-
 
 func on_success():
 	reward_money = success_money
@@ -129,24 +145,21 @@ func on_failure():
 	reward_req_ability = f_req_ability
 	end()
 	
-
-func is_restricted_tag(tag):
-	return restricted_tags.has(tag)
-	
+#endregion
 
 func compare_dish(completed_dish):
 	if (completed_dish.nutrition < req_nutrition
-	or completed_dish.sweet < req_sweet
-	or completed_dish.spicy < req_spicy
-	or completed_dish.hearty < req_hearty
-	or completed_dish.fresh < req_fresh
-	or completed_dish.tags.any(is_restricted_tag)): #check if restricted tag is used
+	or completed_dish.flavours[GlobalEnums.Flavour.SWEET] < req_sweet
+	or completed_dish.flavours[GlobalEnums.Flavour.SPICY] < req_spicy
+	or completed_dish.flavours[GlobalEnums.Flavour.HEARTY] < req_hearty
+	or completed_dish.flavours[GlobalEnums.Flavour.FRESH] < req_fresh
+	or completed_dish.get_tags_in_inventory().any(is_restricted_tag)): #check if restricted tag is used
 		if (completed_dish.nutrition < par_nutrition
-		or completed_dish.sweet < par_sweet
-		or completed_dish.spicy < par_spicy
-		or completed_dish.hearty < par_hearty
-		or completed_dish.fresh < par_fresh
-		or completed_dish.tags.any(is_restricted_tag)): #check if restricted tag is used
+		or completed_dish.flavours[GlobalEnums.Flavour.SWEET] < par_sweet
+		or completed_dish.flavours[GlobalEnums.Flavour.SPICY] < par_spicy
+		or completed_dish.flavours[GlobalEnums.Flavour.HEARTY] < par_hearty
+		or completed_dish.flavours[GlobalEnums.Flavour.FRESH] < par_fresh
+		or completed_dish.get_tags_in_inventory().any(is_restricted_tag)): #check if restricted tag is used
 			#fail
 			on_failure()
 		else:
@@ -157,37 +170,18 @@ func compare_dish(completed_dish):
 		on_success()
 		#success
 
-
 func finish_dish():
 	dish_node.finish_dish()
 	await event_manager.on_dish_finish_anim_done
-	compare_dish(dish_node)
+	ui.toggle_result_screen(true)
+	combination_manager.start_combinations(dish_node)
+	compare_dish(combination_manager.upgraded_dish)
 
-#UI Elements
-func start():
-	display_dish()
-	dish_node.start()
-	ability_manager.on_challenge_start(dish_node)
-
-func end():
-	map_node.end_encounter()
-	give_rewards()
-	queue_free()
-
-func display_dish():
-	#visually show dish node
-	dish_node.show()
-	
-func hide_dish():
-	dish_node.hide()
-
-func on_reset_button_pressed() -> void:
+func reset_dish():
 	dish_node.destroy_all_ingredients()
 
-func _on_roll_dish_pressed() -> void:
-	finish_dish()
-
+#region UI functions
 func toggle_large_view(value):
 	ui.toggle_disable_buttons(value)
 
-#Dish Log
+#endregion

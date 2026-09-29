@@ -80,5 +80,5 @@ func get_ingredient_by_name(name:String) -> Ingredient:
 	for i in all_ingredients:
 		if i.name == name:
 			return i
-	printerr("Could not find ingredient with this name")
+	printerr("Could not find ingredient with this name: " + name)
 	return null

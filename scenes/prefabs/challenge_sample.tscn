@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://hr6aybbol4hn"]
 
-[ext_resource type="Script" uid="uid://bbkxauiekl5ry" path="res://scripts/Encounter/challenge.gd" id="1_glswj"]
+[ext_resource type="Script" uid="uid://bbkxauiekl5ry" path="res://scripts/Encounter/Challenge/challenge.gd" id="1_glswj"]
 [ext_resource type="Script" uid="uid://clhhe0hu1tyj0" path="res://scripts/Encounter/UI/challenge_ui.gd" id="2_hs7g2"]
 [ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_y21f8"]
 [ext_resource type="Resource" uid="uid://cudhcbra3g05f" path="res://resources/ingredients/in_game/grapes.tres" id="3_6r88v"]
@@ -13,7 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://cst1skr2hibgh" path="res://sprites/interface/scenes/cooking scene/scene_cooking_button_cook.png" id="7_6r88v"]
 [ext_resource type="Theme" uid="uid://b8b007diwy4r1" path="res://themes/dish/description_vbox.tres" id="7_ee2dl"]
 [ext_resource type="Texture2D" uid="uid://cs0ochjc043hv" path="res://sprites/interface/scenes/cooking scene/scene_cooking_button_cook_shadow.png" id="8_ee2dl"]
-[ext_resource type="PackedScene" uid="uid://83c84n5554td" path="res://scenes/prefabs/dish.tscn" id="10_l27j6"]
 [ext_resource type="Texture2D" uid="uid://0gs45yeo06st" path="res://sprites/interface/scenes/cooking scene/scene_cooking_button_cook_outline.png" id="11_x7qnw"]
 [ext_resource type="Script" uid="uid://5ky5q3x7j70d" path="res://scripts/Inventory/inventory_ui.gd" id="15_xb3ol"]
 [ext_resource type="PackedScene" uid="uid://c4hu25tvp3kkd" path="res://scenes/prefabs/player/inventory_ui_slot.tscn" id="16_hpn60"]
@@ -24,10 +23,174 @@
 [ext_resource type="Texture2D" uid="uid://lp3c3q5qpcwl" path="res://sprites/interface/general/inventory/inventory_scroll_reverse.png" id="21_xa3pd"]
 [ext_resource type="Script" uid="uid://bog5ewji0yscq" path="res://scripts/Inventory/scroll_hint.gd" id="22_r4574"]
 [ext_resource type="Texture2D" uid="uid://bjjx1b7lsoh1g" path="res://sprites/interface/general/inventory/inventory_scroll_hint.png.png" id="23_tx541"]
+[ext_resource type="Script" uid="uid://dj0h4ly2gikk" path="res://scripts/Encounter/Challenge/dish.gd" id="24_tcho6"]
+[ext_resource type="PackedScene" uid="uid://p1ug5ylfd5re" path="res://scenes/prefabs/card_prefab.tscn" id="25_0rvbw"]
+[ext_resource type="Script" uid="uid://07c07oncxt2w" path="res://scripts/Encounter/Challenge/combination_manager.gd" id="25_xb3ol"]
+[ext_resource type="Texture2D" uid="uid://d04a0epwuvrll" path="res://sprites/interface/scenes/cooking scene/scene_cooking_pan_fire.png" id="27_1pkyc"]
+[ext_resource type="Texture2D" uid="uid://dlg0ek6fn3b75" path="res://sprites/interface/scenes/cooking scene/scene_cooking_pan.png" id="28_fivfm"]
+[ext_resource type="Texture2D" uid="uid://c2gjew2smf8xy" path="res://sprites/interface/scenes/cooking scene/scene_cooking_pan_outline.png" id="29_kwv47"]
+[ext_resource type="Texture2D" uid="uid://bbswptox1co8u" path="res://sprites/interface/scenes/cooking scene/scene_cooking_flavor_sweet.png" id="30_m7klv"]
+[ext_resource type="Script" uid="uid://cd0ktcwpa3fkn" path="res://scripts/sprite_animator.gd" id="31_ro2u2"]
+[ext_resource type="Texture2D" uid="uid://c3325drl1ncyg" path="res://sprites/interface/scenes/cooking scene/scene_cooking_flavor_sour.png" id="32_ypqpd"]
+[ext_resource type="Texture2D" uid="uid://rw1umk0a0k2u" path="res://sprites/interface/scenes/cooking scene/scene_cooking_flavor_spicy.png" id="33_t1n2v"]
+[ext_resource type="Texture2D" uid="uid://5nacx5h2c6cn" path="res://sprites/interface/scenes/cooking scene/scene_cooking_flavor_hearty.png" id="34_tmb07"]
+[ext_resource type="Texture2D" uid="uid://bm2kxsnrf3sj6" path="res://sprites/interface/scenes/cooking scene/scene_cooking_flavor_fresh.png" id="35_xthvj"]
+[ext_resource type="Theme" uid="uid://bcm7itye636u" path="res://themes/dish/dish_results_text.tres" id="36_xwi65"]
+[ext_resource type="Texture2D" uid="uid://21k1wwymb7wr" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_shadow.png" id="37_lx64j"]
+[ext_resource type="Theme" uid="uid://djqywg2hbepia" path="res://themes/cards/small/nutrition_text.tres" id="38_vopdb"]
+[ext_resource type="Script" uid="uid://bnstjkvxfsbha" path="res://scripts/Inventory/fit_font_size.gd" id="39_anfg1"]
+[ext_resource type="Texture2D" uid="uid://oupumk5tx528" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_01.png" id="40_nlbif"]
+[ext_resource type="Texture2D" uid="uid://l8yoj63tdwgb" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_02.png" id="41_hi441"]
+[ext_resource type="Texture2D" uid="uid://dttxwbvyspfro" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_03.png" id="42_w2137"]
+[ext_resource type="Texture2D" uid="uid://b82ymm5g2grfo" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_04.png" id="43_i46yf"]
+[ext_resource type="Texture2D" uid="uid://dxtr8y8okvps6" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_05.png" id="44_i4lfb"]
+[ext_resource type="Texture2D" uid="uid://ciwes8b7el5o2" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_06.png" id="45_v2xnm"]
+[ext_resource type="Texture2D" uid="uid://duabao5fbqaqi" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_07.png" id="46_jn8uc"]
+[ext_resource type="Texture2D" uid="uid://wslol6pe4pee" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_08.png" id="47_16wqt"]
+[ext_resource type="Texture2D" uid="uid://c50jsecscedwj" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_09.png" id="48_cguij"]
+[ext_resource type="Texture2D" uid="uid://dycqd48stbb8y" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_10.png" id="49_rgx8h"]
+[ext_resource type="Texture2D" uid="uid://ds0ditt6c3564" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_11.png" id="50_j0s5h"]
+[ext_resource type="Texture2D" uid="uid://dv3s7gtoqsgop" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_12.png" id="51_thvsx"]
+[ext_resource type="Texture2D" uid="uid://fk5rj2if2yya" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_13.png" id="52_vr4cn"]
+[ext_resource type="Texture2D" uid="uid://dc7adjl02458u" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_14.png" id="53_qgafy"]
+[ext_resource type="Texture2D" uid="uid://tcv2odvxgx80" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_15.png" id="54_w18yr"]
+[ext_resource type="Texture2D" uid="uid://cxp0vbkc8l8j8" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_16.png" id="55_j7lvq"]
+[ext_resource type="Texture2D" uid="uid://dp045es473oaa" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_17.png" id="56_rrl8g"]
+[ext_resource type="Texture2D" uid="uid://cjcv7ro8pa1w3" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_18.png" id="57_0lyi6"]
+[ext_resource type="Texture2D" uid="uid://bqy1xr15y1dfj" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_19.png" id="58_b21qk"]
+[ext_resource type="Texture2D" uid="uid://64syy6inf2k0" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_20.png" id="59_lxrxu"]
+[ext_resource type="Texture2D" uid="uid://jso4fb173d32" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_21.png" id="60_4ousx"]
+[ext_resource type="Texture2D" uid="uid://br06cxkesxqsc" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_22.png" id="61_fiswi"]
+[ext_resource type="Script" uid="uid://v63vu2iilw13" path="res://scripts/Inventory/drop_area.gd" id="62_smjam"]
+[ext_resource type="Script" uid="uid://db3ak1ye8g3gv" path="res://scripts/Encounter/Challenge/dice_displayer.gd" id="63_xitfq"]
+[ext_resource type="PackedScene" uid="uid://cbec14v7l54xf" path="res://scenes/prefabs/die.tscn" id="64_o5vi4"]
+[ext_resource type="Texture2D" uid="uid://dndpt4u0pabdo" path="res://sprites/interface/scenes/cooking scene/scene_cooking_dice_sweet.png" id="65_vkg8j"]
+[ext_resource type="Texture2D" uid="uid://3ntidflxxyjh" path="res://sprites/interface/scenes/cooking scene/scene_cooking_dice_spicy.png" id="66_mvvmk"]
+[ext_resource type="Texture2D" uid="uid://bs2uq23jti7pu" path="res://sprites/interface/scenes/cooking scene/scene_cooking_dice_meaty.png" id="67_2bj75"]
+[ext_resource type="Texture2D" uid="uid://c6sve5qqxbut0" path="res://sprites/interface/scenes/cooking scene/scene_cooking_dice_fresh.png" id="68_sxkpw"]
 
 [sub_resource type="Theme" id="Theme_5p3kb"]
 
+[sub_resource type="GDScript" id="GDScript_85ex6"]
+script/source = "extends Control
+@export_subgroup(\"Flavour Display\")
+@export var result_bg_move_x:int = 80
+@export var result_bg_move_duration:float = 1.0
+@export var plate_anim_speed:float = 1
+
+@onready var sweet_text = $Results/SweetText
+@onready var spicy_text = $Results/SpicyText
+@onready var hearty_text = $Results/HeartyText
+@onready var fresh_text = $Results/FreshText
+
+@onready var sweet_bg = $Results/Sweet
+@onready var spicy_bg = $Results/Spicy
+@onready var hearty_bg = $Results/Hearty
+@onready var fresh_bg = $Results/Fresh
+
+
+@onready var nutrition_text = $Nutrition/text
+@onready var nutrition_plates = $Nutrition/plates.get_children()
+@onready var nutrition_shadow = $Nutrition/shadow
+@onready var pan_highlight = $Pan/highlight
+
+var sweet_bg_moved = false
+var spicy_bg_moved = false
+var hearty_bg_moved = false
+var fresh_bg_moved = false
+
+var plate_anim_active = false
+var active_plates:int = 0
+var current_nutrition:int = 0
+
+func update_flavours(dish):
+	sweet_text.text = str(dish.sweet)
+	if dish.sweet == 0:
+		sweet_text.visible = false
+		if !sweet_bg_moved:
+			sweet_bg.start_moving_to_destination(Vector2(sweet_bg.global_position.x + result_bg_move_x,
+			sweet_bg.global_position.y),result_bg_move_duration)
+			sweet_bg_moved = true
+	else:
+		sweet_bg.start_moving_to_destination(sweet_bg.start_location, result_bg_move_duration)
+		sweet_text.visible = true
+		sweet_bg_moved = false
+	
+	spicy_text.text = str(dish.spicy)
+	if dish.spicy == 0:
+		spicy_text.visible = false
+		if !spicy_bg_moved:
+			spicy_bg.start_moving_to_destination(Vector2(spicy_bg.global_position.x + result_bg_move_x,
+			spicy_bg.global_position.y),result_bg_move_duration)
+			spicy_bg_moved = true
+	else:
+		spicy_bg.start_moving_to_destination(spicy_bg.start_location, result_bg_move_duration)
+		spicy_text.visible = true
+		spicy_bg_moved = false
+	
+	hearty_text.text = str(dish.hearty)
+	if dish.hearty == 0:
+		hearty_text.visible = false
+		if !hearty_bg_moved:
+			hearty_bg.start_moving_to_destination(Vector2(hearty_bg.global_position.x + result_bg_move_x,
+			hearty_bg.global_position.y),result_bg_move_duration)
+			hearty_bg_moved = true
+	else:
+		hearty_bg.start_moving_to_destination(hearty_bg.start_location, result_bg_move_duration)
+		hearty_text.visible = true
+		hearty_bg_moved = false
+	
+	fresh_text.text = str(dish.fresh)
+	if dish.fresh == 0:
+		fresh_text.visible = false
+		if !fresh_bg_moved:
+			fresh_bg.start_moving_to_destination(Vector2(fresh_bg.global_position.x + result_bg_move_x,
+			fresh_bg.global_position.y),result_bg_move_duration)
+			fresh_bg_moved = true
+	else:
+		fresh_bg.start_moving_to_destination(fresh_bg.start_location, result_bg_move_duration)
+		fresh_text.visible = true
+		fresh_bg_moved = false
+
+func update_nutrition(new_value: Variant) -> void:
+	nutrition_text.text = str(new_value)
+	current_nutrition = new_value
+	if new_value > 0:
+		nutrition_shadow.visible = true
+		nutrition_text.visible = true
+	else:
+		nutrition_shadow.visible = false
+		nutrition_text.visible = false
+
+func toggle_highlight_pan(value):
+	pan_highlight.visible = value
+
+func _on_drop_area_mouse_exited() -> void:
+	toggle_highlight_pan(false)
+
+func _process(delta: float) -> void:
+	if active_plates != current_nutrition and !plate_anim_active and current_nutrition < nutrition_plates.size():
+		animate_plates()
+
+func animate_plates():
+	plate_anim_active = true
+	var plate_diff = current_nutrition - active_plates
+	if plate_diff > 0:
+		nutrition_plates[1+active_plates].visible = true
+		await get_tree().create_timer(1.0/plate_anim_speed).timeout
+		active_plates += 1
+	else:
+		nutrition_plates[active_plates].visible = false
+		await get_tree().create_timer(1.0/plate_anim_speed).timeout
+		active_plates -= 1
+	plate_anim_active = false
+"
+
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_s7dlr"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ecqho"]
+friction = 0.03
+bounce = 1.1
 
 [node name="ChallengeSample2" type="Control" unique_id=993217827]
 layout_mode = 3
@@ -152,7 +315,7 @@ offset_bottom = 779.0
 mouse_behavior_recursive = 2
 flat = true
 
-[node name="Complete" type="Control" parent="UI" unique_id=1106766389]
+[node name="Finish" type="Control" parent="UI" unique_id=1106766389]
 z_index = 2
 anchors_preset = 0
 offset_right = 1920.0
@@ -160,7 +323,7 @@ offset_bottom = 1080.0
 mouse_filter = 1
 mouse_behavior_recursive = 1
 
-[node name="roll_dish_button" type="Button" parent="UI/Complete" unique_id=967192702]
+[node name="finish_dish_button" type="Button" parent="UI/Finish" unique_id=967192702]
 z_index = 4
 layout_mode = 0
 offset_left = 1715.0
@@ -172,7 +335,7 @@ mouse_filter = 1
 mouse_behavior_recursive = 2
 flat = true
 
-[node name="ladle" type="TextureRect" parent="UI/Complete" unique_id=109433895]
+[node name="ladle" type="TextureRect" parent="UI/Finish" unique_id=109433895]
 z_index = 2
 layout_mode = 1
 anchors_preset = 15
@@ -183,7 +346,7 @@ grow_vertical = 2
 mouse_behavior_recursive = 1
 texture = ExtResource("7_6r88v")
 
-[node name="ladle_shadow" type="TextureRect" parent="UI/Complete" unique_id=1878377346]
+[node name="ladle_shadow" type="TextureRect" parent="UI/Finish" unique_id=1878377346]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -193,14 +356,14 @@ grow_vertical = 2
 mouse_behavior_recursive = 1
 texture = ExtResource("8_ee2dl")
 
-[node name="highlight" type="Sprite2D" parent="UI/Complete" unique_id=1464646887]
+[node name="highlight" type="Sprite2D" parent="UI/Finish" unique_id=1464646887]
 visible = false
 z_index = 2
 scale = Vector2(8, 8)
 texture = ExtResource("11_x7qnw")
 centered = false
 
-[node name="ladle_hover" type="TextureRect" parent="UI/Complete" unique_id=1943485844]
+[node name="ladle_hover" type="TextureRect" parent="UI/Finish" unique_id=1943485844]
 visible = false
 z_index = 2
 layout_mode = 1
@@ -216,6 +379,499 @@ grow_vertical = 2
 rotation = -3.1415927
 mouse_behavior_recursive = 1
 texture = ExtResource("6_y21f8")
+
+[node name="InvToggle" type="Button" parent="UI" unique_id=2091992756]
+layout_mode = 0
+offset_left = 592.0
+offset_top = 64.0
+offset_right = 704.0
+offset_bottom = 152.0
+mouse_behavior_recursive = 2
+text = "Dish Inv"
+
+[node name="ResultScreen" type="Control" parent="UI" unique_id=1975332036]
+visible = false
+z_index = 4
+anchors_preset = 0
+offset_left = 944.0
+offset_top = 80.0
+offset_right = 1656.0
+offset_bottom = 792.0
+mouse_filter = 1
+mouse_behavior_recursive = 1
+
+[node name="ResultPanel" type="Control" parent="UI/ResultScreen" unique_id=1352390679]
+anchors_preset = 0
+offset_top = 48.0
+offset_right = 744.0
+offset_bottom = 632.0
+mouse_filter = 1
+mouse_behavior_recursive = 1
+
+[node name="BG" type="TextureRect" parent="UI/ResultScreen/ResultPanel" unique_id=744282982]
+layout_mode = 0
+offset_left = -48.0
+offset_top = 592.0
+offset_right = 1872.0
+offset_bottom = 1672.0
+rotation = -1.5707964
+mouse_behavior_recursive = 1
+texture = ExtResource("4_x7qnw")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/ResultScreen/ResultPanel" unique_id=280903245]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 56.0
+offset_right = 696.0
+offset_bottom = 520.0
+mouse_behavior_recursive = 2
+theme = SubResource("Theme_5p3kb")
+scroll_vertical_custom_step = 8.0
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+scroll_hint_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ResultScreen/ResultPanel/ScrollContainer" unique_id=5729971]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_behavior_recursive = 1
+theme = ExtResource("7_ee2dl")
+
+[node name="title" type="RichTextLabel" parent="UI/ResultScreen/ResultPanel/ScrollContainer/VBoxContainer" unique_id=400063253]
+layout_mode = 2
+mouse_filter = 1
+mouse_behavior_recursive = 1
+theme = ExtResource("6_x7qnw")
+text = "DISH RESULTS"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="combination_text" type="RichTextLabel" parent="UI/ResultScreen/ResultPanel/ScrollContainer/VBoxContainer" unique_id=1302513355]
+layout_mode = 2
+mouse_filter = 1
+mouse_behavior_recursive = 1
+theme = ExtResource("5_h6ing")
+fit_content = true
+scroll_active = false
+
+[node name="EndButton" type="Button" parent="UI/ResultScreen/ResultPanel" unique_id=805562974]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -152.0
+offset_top = -120.0
+offset_bottom = -24.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_behavior_recursive = 2
+text = "End Challenge"
+
+[node name="ToggleResultPanel" type="Button" parent="UI/ResultScreen" unique_id=29925087]
+z_index = 5
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -32.0
+offset_top = 40.0
+offset_right = 48.0
+offset_bottom = 120.0
+grow_horizontal = 0
+mouse_behavior_recursive = 2
+text = "Toggle"
+
+[node name="Dish" type="Control" parent="UI" unique_id=817898650]
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+mouse_behavior_recursive = 1
+script = SubResource("GDScript_85ex6")
+result_bg_move_duration = 2.0
+plate_anim_speed = 4.0
+
+[node name="Pan" type="Control" parent="UI/Dish" unique_id=1516231476]
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+mouse_behavior_recursive = 1
+
+[node name="fire" type="TextureRect" parent="UI/Dish/Pan" unique_id=1037339575]
+z_index = 1
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+mouse_behavior_recursive = 1
+texture = ExtResource("27_1pkyc")
+
+[node name="texture" type="TextureRect" parent="UI/Dish/Pan" unique_id=1042688915]
+z_index = 2
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+mouse_behavior_recursive = 1
+texture = ExtResource("28_fivfm")
+
+[node name="highlight" type="Sprite2D" parent="UI/Dish/Pan" unique_id=1126400856]
+visible = false
+z_index = 1
+scale = Vector2(8, 8)
+texture = ExtResource("29_kwv47")
+centered = false
+
+[node name="Results" type="Control" parent="UI/Dish" unique_id=406643778]
+z_index = 4
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+
+[node name="Sweet" type="Sprite2D" parent="UI/Dish/Results" unique_id=1797402510]
+position = Vector2(1872, 488)
+scale = Vector2(8, 8)
+texture = ExtResource("30_m7klv")
+script = ExtResource("31_ro2u2")
+
+[node name="Sour" type="Sprite2D" parent="UI/Dish/Results" unique_id=1491695365]
+visible = false
+texture = ExtResource("32_ypqpd")
+script = ExtResource("31_ro2u2")
+
+[node name="Spicy" type="Sprite2D" parent="UI/Dish/Results" unique_id=61961273]
+position = Vector2(1872, 400)
+scale = Vector2(8, 8)
+texture = ExtResource("33_t1n2v")
+script = ExtResource("31_ro2u2")
+
+[node name="Hearty" type="Sprite2D" parent="UI/Dish/Results" unique_id=244703998]
+position = Vector2(1872, 312)
+scale = Vector2(8, 8)
+texture = ExtResource("34_tmb07")
+script = ExtResource("31_ro2u2")
+
+[node name="Fresh" type="Sprite2D" parent="UI/Dish/Results" unique_id=1953743277]
+position = Vector2(1872, 224)
+scale = Vector2(8, 8)
+texture = ExtResource("35_xthvj")
+script = ExtResource("31_ro2u2")
+
+[node name="SweetText" type="RichTextLabel" parent="UI/Dish/Results" unique_id=352183300]
+layout_mode = 0
+offset_left = 1814.0
+offset_top = 460.0
+offset_right = 1902.0
+offset_bottom = 532.0
+mouse_filter = 2
+mouse_behavior_recursive = 1
+theme = ExtResource("36_xwi65")
+theme_override_colors/font_shadow_color = Color(0.49411765, 0.39607844, 0.60784316, 1)
+text = "14"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SourText" type="RichTextLabel" parent="UI/Dish/Results" unique_id=668448864]
+visible = false
+layout_mode = 0
+offset_left = 1814.0
+offset_top = 516.0
+offset_right = 1902.0
+offset_bottom = 588.0
+mouse_filter = 2
+mouse_behavior_recursive = 1
+theme = ExtResource("36_xwi65")
+text = "14"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpicyText" type="RichTextLabel" parent="UI/Dish/Results" unique_id=1187731099]
+layout_mode = 0
+offset_left = 1814.0
+offset_top = 372.0
+offset_right = 1902.0
+offset_bottom = 444.0
+mouse_filter = 2
+mouse_behavior_recursive = 1
+theme = ExtResource("36_xwi65")
+theme_override_colors/font_shadow_color = Color(0.69803923, 0.21176471, 0.34117648, 1)
+text = "14"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HeartyText" type="RichTextLabel" parent="UI/Dish/Results" unique_id=468162168]
+layout_mode = 0
+offset_left = 1814.0
+offset_top = 284.0
+offset_right = 1902.0
+offset_bottom = 356.0
+mouse_filter = 2
+mouse_behavior_recursive = 1
+theme = ExtResource("36_xwi65")
+theme_override_colors/font_shadow_color = Color(0.77254903, 0.47058824, 0.20784314, 1)
+text = "14"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FreshText" type="RichTextLabel" parent="UI/Dish/Results" unique_id=1240791199]
+layout_mode = 0
+offset_left = 1814.0
+offset_top = 196.0
+offset_right = 1902.0
+offset_bottom = 268.0
+mouse_filter = 2
+mouse_behavior_recursive = 1
+theme = ExtResource("36_xwi65")
+theme_override_colors/font_shadow_color = Color(0.5803922, 0.6784314, 0.22352941, 1)
+text = "14"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Nutrition" type="Control" parent="UI/Dish" unique_id=108100769]
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 1
+mouse_behavior_recursive = 1
+
+[node name="shadow" type="TextureRect" parent="UI/Dish/Nutrition" unique_id=387355561]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_behavior_recursive = 1
+texture = ExtResource("37_lx64j")
+
+[node name="text" type="RichTextLabel" parent="UI/Dish/Nutrition" unique_id=434235131]
+z_index = 2
+custom_maximum_size = Vector2(171.52295, 96)
+layout_mode = 0
+offset_left = 660.0
+offset_top = 367.0
+offset_right = 831.52295
+offset_bottom = 463.0
+mouse_filter = 1
+mouse_behavior_recursive = 1
+theme = ExtResource("38_vopdb")
+theme_type_variation = &"standard"
+theme_override_font_sizes/normal_font_size = 128
+text = "12"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("39_anfg1")
+maximum_font_size = 128
+minimum_font_size = 64
+padding = Vector2(0, 0)
+
+[node name="plates" type="Control" parent="UI/Dish/Nutrition" unique_id=683166593]
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+mouse_behavior_recursive = 1
+
+[node name="plate1" type="TextureRect" parent="UI/Dish/Nutrition/plates" unique_id=1236609232]
+visible = false
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_behavior_recursive = 1
+texture = ExtResource("40_nlbif")
+
+[node name="plate2" type="TextureRect" parent="UI/Dish/Nutrition/plates" unique_id=1778575357]
+visible = false
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_behavior_recursive = 1
+texture = ExtResource("41_hi441")
+
+[node name="plate3" type="TextureRect" parent="UI/Dish/Nutrition/plates" unique_id=961816938]
+visible = false
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_behavior_recursive = 1
+texture = ExtResource("42_w2137")
+
+[node name="plate4" type="TextureRect" parent="UI/Dish/Nutrition/plates" unique_id=1341237171]
+visible = false
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_behavior_recursive = 1
+texture = ExtResource("43_i46yf")
+
+[node name="plate5" type="TextureRect" parent="UI/Dish/Nutrition/plates" unique_id=1525068397]
+visible = false
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_behavior_recursive = 1
+texture = ExtResource("44_i4lfb")
+
+[node name="plate6" type="TextureRect" parent="UI/Dish/Nutrition/plates" unique_id=1706927210]
+visible = false
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_behavior_recursive = 1
+texture = ExtResource("45_v2xnm")
+
+[node name="plate7" type="TextureRect" parent="UI/Dish/Nutrition/plates" unique_id=430065961]
+visible = false
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_behavior_recursive = 1
+texture = ExtResource("46_jn8uc")
+
+[node name="plate8" type="TextureRect" parent="UI/Dish/Nutrition/plates" unique_id=928467015]
+visible = false
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_behavior_recursive = 1
+texture = ExtResource("47_16wqt")
+
+[node name="plate9" type="TextureRect" parent="UI/Dish/Nutrition/plates" unique_id=1785618226]
+visible = false
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_behavior_recursive = 1
+texture = ExtResource("48_cguij")
+
+[node name="plate10" type="TextureRect" parent="UI/Dish/Nutrition/plates" unique_id=1819404259]
+visible = false
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_behavior_recursive = 1
+texture = ExtResource("49_rgx8h")
+
+[node name="plate11" type="TextureRect" parent="UI/Dish/Nutrition/plates" unique_id=1521969908]
+visible = false
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_behavior_recursive = 1
+texture = ExtResource("50_j0s5h")
+
+[node name="plate12" type="TextureRect" parent="UI/Dish/Nutrition/plates" unique_id=1733467429]
+visible = false
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_behavior_recursive = 1
+texture = ExtResource("51_thvsx")
+
+[node name="plate13" type="TextureRect" parent="UI/Dish/Nutrition/plates" unique_id=1122322294]
+visible = false
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_behavior_recursive = 1
+texture = ExtResource("52_vr4cn")
+
+[node name="plate14" type="TextureRect" parent="UI/Dish/Nutrition/plates" unique_id=83138088]
+visible = false
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_behavior_recursive = 1
+texture = ExtResource("53_qgafy")
+
+[node name="plate15" type="TextureRect" parent="UI/Dish/Nutrition/plates" unique_id=165553997]
+visible = false
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_behavior_recursive = 1
+texture = ExtResource("54_w18yr")
+
+[node name="plate16" type="TextureRect" parent="UI/Dish/Nutrition/plates" unique_id=69887774]
+visible = false
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_behavior_recursive = 1
+texture = ExtResource("55_j7lvq")
+
+[node name="plate17" type="TextureRect" parent="UI/Dish/Nutrition/plates" unique_id=493069959]
+visible = false
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_behavior_recursive = 1
+texture = ExtResource("56_rrl8g")
+
+[node name="plate18" type="TextureRect" parent="UI/Dish/Nutrition/plates" unique_id=9312846]
+visible = false
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_behavior_recursive = 1
+texture = ExtResource("57_0lyi6")
+
+[node name="plate19" type="TextureRect" parent="UI/Dish/Nutrition/plates" unique_id=1637109193]
+visible = false
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_behavior_recursive = 1
+texture = ExtResource("58_b21qk")
+
+[node name="plate20" type="TextureRect" parent="UI/Dish/Nutrition/plates" unique_id=1000498888]
+visible = false
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_behavior_recursive = 1
+texture = ExtResource("59_lxrxu")
+
+[node name="plate21" type="TextureRect" parent="UI/Dish/Nutrition/plates" unique_id=1013409676]
+visible = false
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_behavior_recursive = 1
+texture = ExtResource("60_4ousx")
+
+[node name="plate22" type="TextureRect" parent="UI/Dish/Nutrition/plates" unique_id=1517504319]
+visible = false
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_behavior_recursive = 1
+texture = ExtResource("61_fiswi")
+
+[node name="DropArea" type="Panel" parent="UI/Dish" unique_id=2096391922 node_paths=PackedStringArray("parent_inventory")]
+self_modulate = Color(1, 1, 1, 0)
+z_index = 100
+layout_mode = 0
+offset_left = 976.0
+offset_top = 144.0
+offset_right = 1747.0
+offset_bottom = 640.0
+mouse_behavior_recursive = 2
+script = ExtResource("62_smjam")
+parent_inventory = NodePath("../../../Dish")
 
 [node name="InventoryUI" type="Control" parent="UI" unique_id=460537099]
 z_index = 15
@@ -342,26 +998,54 @@ mouse_behavior_recursive = 2
 disabled = true
 text = "AZ"
 
-[node name="InvToggle" type="Button" parent="UI" unique_id=2091992756]
-layout_mode = 0
-offset_left = 592.0
-offset_top = 64.0
-offset_right = 704.0
-offset_bottom = 152.0
-mouse_behavior_recursive = 2
-text = "Dish Inv"
-
-[node name="Dish" parent="." unique_id=497250350 node_paths=PackedStringArray("ui") instance=ExtResource("10_l27j6")]
-layout_mode = 0
+[node name="Dish" type="Control" parent="." unique_id=497250350 node_paths=PackedStringArray("ui")]
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+mouse_behavior_recursive = 1
+script = ExtResource("24_tcho6")
+card_prefab = ExtResource("25_0rvbw")
 ui = NodePath("../UI/InventoryUI")
+can_stack_uses = false
 can_drag_cards = true
+
+[node name="Dice_Display" type="Node2D" parent="Dish" unique_id=2018810667]
+y_sort_enabled = true
+script = ExtResource("63_xitfq")
+die_scene = ExtResource("64_o5vi4")
+pulse_power = 30.0
+pulse_range = 300.0
+collision_delay = 0.4
+min_dist_to_edge = 30.0
+random_spawn_offset = 30.0
+sweet_sprite = ExtResource("65_vkg8j")
+spicy_sprite = ExtResource("66_mvvmk")
+hearty_sprite = ExtResource("67_2bj75")
+fresh_sprite = ExtResource("68_sxkpw")
+
+[node name="Pan" type="StaticBody2D" parent="Dish/Dice_Display" unique_id=1117849328]
+z_index = -1
+collision_mask = 2
+collision_priority = 100.0
+physics_material_override = SubResource("PhysicsMaterial_ecqho")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Dish/Dice_Display/Pan" unique_id=1471934749]
+position = Vector2(1347.7517, 432.40854)
+build_mode = 1
+polygon = PackedVector2Array(-229.75171, -153.40854, -159.75171, -174.40854, -94.75171, -189.40854, -14.751709, -193.40854, 54.24829, -190.40854, 136.24829, -182.40854, 209.24829, -159.40854, 274.2483, -126.40854, 332.2483, -85.40854, 363.2483, -40.40854, 385.2483, 7.591461, 378.2483, 60.59146, 355.2483, 121.59146, 316.2483, 150.59146, 264.2483, 184.59146, 119.24829, 229.59146, -91.75175, 231.59146, -192.75171, 212.59146, -283.75174, 175.59146, -346.7517, 114.59146, -380.7517, 64.59146, -377.7517, -1.4085388, -357.7517, -65.40854, -297.7517, -114.40854)
+
+[node name="center" type="Node2D" parent="Dish/Dice_Display/Pan" unique_id=383728228]
+position = Vector2(1349, 420)
+
+[node name="CombinationManager" type="Node" parent="." unique_id=1302914162 groups=["combination_manager"]]
+script = ExtResource("25_xb3ol")
 
 [connection signal="mouse_entered" from="UI/Reset/reset_button" to="UI" method="_on_reset_button_mouse_entered"]
 [connection signal="mouse_exited" from="UI/Reset/reset_button" to="UI" method="_on_reset_button_mouse_exited"]
-[connection signal="pressed" from="UI/Reset/reset_button" to="." method="on_reset_button_pressed"]
-[connection signal="mouse_entered" from="UI/Complete/roll_dish_button" to="UI" method="_on_roll_dish_button_mouse_entered"]
-[connection signal="mouse_exited" from="UI/Complete/roll_dish_button" to="UI" method="_on_roll_dish_button_mouse_exited"]
-[connection signal="pressed" from="UI/Complete/roll_dish_button" to="." method="_on_roll_dish_pressed"]
+[connection signal="mouse_entered" from="UI/Finish/finish_dish_button" to="UI" method="_on_roll_dish_button_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Finish/finish_dish_button" to="UI" method="_on_roll_dish_button_mouse_exited"]
+[connection signal="pressed" from="UI/Finish/finish_dish_button" to="." method="_on_roll_dish_pressed"]
+[connection signal="pressed" from="UI/InvToggle" to="UI" method="_on_inv_toggle_pressed"]
 [connection signal="pressed" from="UI/InventoryUI/InventorySort/Rarity" to="UI/InventoryUI" method="_on_rarity_pressed"]
 [connection signal="pressed" from="UI/InventoryUI/InventorySort/Alphabetically" to="UI/InventoryUI" method="_on_alphabetically_pressed"]
-[connection signal="pressed" from="UI/InvToggle" to="UI" method="_on_inv_toggle_pressed"]

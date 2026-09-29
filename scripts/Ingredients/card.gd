@@ -1,3 +1,4 @@
+class_name Card
 extends Node
 
 var stats:Ingredient

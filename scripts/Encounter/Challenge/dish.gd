@@ -3,26 +3,17 @@ extends Inventory
 #PARAMS
 @export var nutrition:int = 0
 @export_subgroup("Flavour")
-@export var sweet:int
-@export var spicy:int
-@export var hearty:int
-@export var fresh:int
-@export var ability_sweet:int = 0
-@export var ability_spicy:int = 0
-@export var ability_hearty:int = 0
-@export var ability_fresh:int = 0
+@export var flavours:Array[int] = [0,0,0,0,0]
+@export var ability_flavours:Array[int] = [0,0,0,0,0]
 @export var ability_nutrition:int = 0
 
 #CACHED COMPS
 var random = RandomNumberGenerator.new()
 @onready var challenge = get_parent()
-@onready var restricted_tags:Array[GlobalEnums.Tags] = challenge.restricted_tags
 @onready var dice_disp = $Dice_Display
-@onready var dish_ui = $UI
 
 #STATE
 var can_add_ingredients = true
-var tags:Array[GlobalEnums.Tags]
 var dice:Array[RigidBody2D]
 
 
@@ -37,8 +28,30 @@ func _ready() -> void:
 	player_inventory.card_stop_drag.connect(on_stop_drag)
 
 func start():
-	dish_ui.update_nutrition(nutrition)
-	dish_ui.update_flavours()
+	challenge.ui.update_nutrition(nutrition)
+	challenge.ui.update_flavours(self)
+
+func subtract_die_value_from_dish(die):
+	flavours[die.flavour] -= die.number
+
+func add_die_value_to_dish(die):
+	flavours[die.flavour] += die.number
+
+func recalculate_dish():
+	nutrition = 0
+	for i in flavours:
+		i = 0
+	
+	for card in current_cards:
+		nutrition += card.committed_stats.nutrition
+	for die in dice:
+		add_die_value_to_dish(die)
+	#add ability stats
+	for i in range(flavours.size()):
+		flavours[i] += ability_flavours[i]
+	nutrition += ability_nutrition
+func finish_dish():
+	dice_disp.finish_dish()
 
 #region inventory signals
 func on_start_drag(origin, card):
@@ -54,7 +67,7 @@ func on_check_drop(origin,card):
 	#check abilities
 	if abilities.on_try_add_to_dish(card) == false:
 		can_drop_card = false
-	dish_ui.toggle_highlight_pan(can_drop_card)
+	challenge.ui.toggle_highlight_pan(can_drop_card)
 
 func on_drop_ingredient(origin, card):
 	if origin != self:
@@ -73,8 +86,8 @@ func on_add_to_dish(origin,card):
 	roll_ingredient(card)
 	recalculate_dish()
 	#ui
-	dish_ui.update_flavours()
-	dish_ui.update_nutrition(nutrition)
+	challenge.ui.update_flavours(self)
+	challenge.ui.update_nutrition(nutrition)
 
 func on_destroy_ingredient(origin,card:Node):
 	if origin != self:
@@ -84,27 +97,22 @@ func on_destroy_ingredient(origin,card:Node):
 func on_destroy_all_ingredients(origin):
 	if origin != self:
 		return
-	ability_sweet = 0
-	ability_spicy = 0
-	ability_hearty = 0
-	ability_fresh = 0
+	ability_flavours[GlobalEnums.Flavour.SWEET] = 0
+	ability_flavours[GlobalEnums.Flavour.SPICY] = 0
+	ability_flavours[GlobalEnums.Flavour.HEARTY] = 0
+	ability_flavours[GlobalEnums.Flavour.FRESH] = 0
 	ability_nutrition = 0
 	for card in current_cards:
 		remove_card_from_dish(card)
-	sweet = 0
-	spicy = 0
-	hearty = 0
-	fresh = 0
+	flavours[GlobalEnums.Flavour.SWEET] = 0
+	flavours[GlobalEnums.Flavour.SPICY] = 0
+	flavours[GlobalEnums.Flavour.HEARTY] = 0
+	flavours[GlobalEnums.Flavour.FRESH] = 0
 	nutrition = 0
 	#ui
-	dish_ui.update_flavours()
-	dish_ui.update_nutrition(nutrition)
+	challenge.ui.update_flavours(self)
+	challenge.ui.update_nutrition(nutrition)
 func remove_card_from_dish(card):
-	tags.clear()
-	for i in current_cards:
-		for tag:GlobalEnums.Tags in i.stats.tags:
-			if !tags.has(tag):
-				tags.append(tag)
 	#remove dice values
 	nutrition -= card.committed_stats.nutrition
 	for die in card.dice:
@@ -114,59 +122,9 @@ func remove_card_from_dish(card):
 	
 	#ui
 	dice_disp.destroy_dice(card)
-	dish_ui.update_nutrition(nutrition)
-	dish_ui.update_flavours()
+	challenge.ui.update_nutrition(nutrition)
+	challenge.ui.update_flavours(self)
 #endregion
-
-func subtract_die_value_from_dish(die):
-	match die.flavour:
-		GlobalEnums.Flavour.SWEET:
-			sweet -= die.number
-		GlobalEnums.Flavour.SPICY:
-			spicy -= die.number
-		GlobalEnums.Flavour.HEARTY:
-			hearty -= die.number
-		GlobalEnums.Flavour.FRESH:
-			fresh -= die.number
-
-func recalculate_dish():
-	nutrition = 0
-	sweet = 0
-	spicy = 0
-	hearty = 0
-	fresh = 0
-	tags.clear()
-	
-	for card in current_cards:
-		nutrition += card.committed_stats.nutrition
-		
-		for tag in card.committed_stats.tags:
-			if not tags.has(tag):
-				tags.append(tag)
-	for die in dice:
-		match die.flavour:
-			GlobalEnums.Flavour.SWEET:
-				sweet += die.number
-			GlobalEnums.Flavour.SPICY:
-				spicy += die.number
-			GlobalEnums.Flavour.HEARTY:
-				hearty += die.number
-			GlobalEnums.Flavour.FRESH:
-				fresh += die.number
-	sweet += ability_sweet
-	spicy += ability_spicy
-	hearty += ability_hearty
-	fresh += ability_fresh
-	nutrition += ability_nutrition
-func finish_dish():
-	dice_disp.finish_dish()
-
-func count_ingredient_in_dish(target:Ingredient) -> int:
-	var count = 0
-	for card in current_cards:
-		if card.base_stats == target:
-			count += 1
-	return count
 
 #region Dice
 
@@ -189,12 +147,30 @@ func reroll_die(die):
 	die.display_number(roll_result)
 	match die.flavour:
 		GlobalEnums.Flavour.SWEET:
-			sweet += roll_result
+			flavours[GlobalEnums.Flavour.SWEET] += roll_result
 		GlobalEnums.Flavour.SPICY:
-			spicy += roll_result
+			flavours[GlobalEnums.Flavour.SPICY] += roll_result
 		GlobalEnums.Flavour.HEARTY:
-			hearty += roll_result
+			flavours[GlobalEnums.Flavour.HEARTY] += roll_result
 		GlobalEnums.Flavour.FRESH:
-			fresh += roll_result
+			flavours[GlobalEnums.Flavour.FRESH] += roll_result
 
+#endregion
+
+#region Helper
+func get_greatest_flavour() -> GlobalEnums.Flavour:
+	var flavours_dup = flavours.duplicate()
+	var max_index:int = 0
+	for i in range(1, flavours_dup.size()):
+		if flavours_dup[i] > flavours[max_index]:
+			max_index = i
+	return max_index
+
+func get_lowest_flavour() ->GlobalEnums.Flavour:
+	var flavours_dup = flavours.duplicate()
+	var min_index:int = 0
+	for i in range(1, flavours_dup.size()):
+		if flavours_dup[i] < flavours[min_index]:
+			min_index = i
+	return min_index
 #endregion

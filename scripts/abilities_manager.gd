@@ -1,3 +1,4 @@
+class_name AbilityManager
 extends Node
 
 class AbilityTrigger:
@@ -21,7 +22,26 @@ var dish_triggers:Array[AbilityTrigger]
 var dish_next_ingredient_trigger:Array
 var current_dish
 var dragged_card: Node = null
-#SIGNALS
+var all_abilities:Array[Ability]
+
+func _ready() -> void:
+	var dir_path := "res://resources/abilities/"
+	var paths : PackedStringArray = ResourceLoader.list_directory(dir_path)
+	if paths == null: printerr("Could not get ingredient folder")
+	for path in paths:
+		var ability:Ability= ResourceLoader.load(dir_path + path) as Ability
+		if ability:
+			all_abilities.append(ability)
+
+#---------Ability Collection---------
+#region Abilties Collection
+func get_ability_by_name(name:String) -> Ability:
+	for i in all_abilities:
+		if i.name == name:
+			return i
+	printerr("Could not find ingredient with this name: " + name)
+	return null
+#endregion
 #------------Trigger Management-----------------------
 #region Tracking
 #DISH
@@ -57,7 +77,7 @@ func encounter_trigger_already_active(ability, card) -> bool:
 #endregion
 #-----------------CONDITIONS_----------------------
 #region Condition Checking
-func check_dish_conditions_for_cards(ability:Ability, cards:Array[Node]) ->bool: #checks if conditions are met to activate triggers
+func check_dish_conditions_for_cards(ability:Ability, cards:Array[Card]) ->bool: #checks if conditions are met to activate triggers
 	var tags: Array[GlobalEnums.Tags] = []
 	
 	for card in cards:
@@ -70,24 +90,24 @@ func check_dish_conditions_for_cards(ability:Ability, cards:Array[Node]) ->bool:
 	if dish == null:
 		return true
 	#check sweet min/max
-	if ability.sweet_cond_dish_max > -1 and dish.sweet >  ability.sweet_cond_dish_max:
+	if ability.sweet_cond_dish_max > -1 and dish.flavours[GlobalEnums.Flavour.SWEET] >  ability.sweet_cond_dish_max:
 		return false
-	if ability.sweet_cond_dish_min > -1 and dish.sweet < ability.sweet_cond_dish_min:
+	if ability.sweet_cond_dish_min > -1 and dish.flavours[GlobalEnums.Flavour.SWEET] < ability.sweet_cond_dish_min:
 		return false
 	#check spicy minmax
-	if ability.spicy_cond_dish_max > -1 and dish.spicy >  ability.spicy_cond_dish_max:
+	if ability.spicy_cond_dish_max > -1 and dish.flavours[GlobalEnums.Flavour.SPICY] >  ability.spicy_cond_dish_max:
 		return false
-	if ability.spicy_cond_dish_min > -1 and dish.spicy < ability.spicy_cond_dish_min:
+	if ability.spicy_cond_dish_min > -1 and dish.flavours[GlobalEnums.Flavour.SPICY] < ability.spicy_cond_dish_min:
 		return false
 	#check hearty minmax
-	if ability.hearty_cond_dish_max > -1 and dish.hearty >  ability.hearty_cond_dish_max:
+	if ability.hearty_cond_dish_max > -1 and dish.flavours[GlobalEnums.Flavour.HEARTY] >  ability.hearty_cond_dish_max:
 		return false
-	if ability.hearty_cond_dish_min > -1 and dish.hearty < ability.hearty_cond_dish_min:
+	if ability.hearty_cond_dish_min > -1 and dish.flavours[GlobalEnums.Flavour.HEARTY] < ability.hearty_cond_dish_min:
 		return false
 		#check fresh minmax
-	if ability.fresh_cond_dish_max > -1 and dish.fresh > ability.fresh_cond_dish_max:
+	if ability.fresh_cond_dish_max > -1 and dish.flavours[GlobalEnums.Flavour.FRESH] > ability.fresh_cond_dish_max:
 		return false
-	if ability.fresh_cond_dish_min > -1 and dish.fresh < ability.fresh_cond_dish_min:
+	if ability.fresh_cond_dish_min > -1 and dish.flavours[GlobalEnums.Flavour.FRESH] < ability.fresh_cond_dish_min:
 		return false
 	#nutrition check
 	if ability.nutrition_cond_dish_max > -1 and dish.nutrition > ability.nutrition_cond_dish_max:
@@ -220,7 +240,7 @@ func evaluate_try_add_to_dish_triggers(try_card:Node) -> bool:
 		if ability.self_target and card.base_stats == try_card.base_stats:
 			#Check if ability restricts the card drop try
 			if ability.limit_ingredients_int != -1:
-				if ability.limit_ingredients_int <= current_dish.count_ingredient_in_dish(try_card.base_stats):
+				if ability.limit_ingredients_int <= current_dish.count_ingredient_in_inventory(try_card.base_stats):
 					can_drop = false
 			if ability.can_not_play:
 					can_drop = false
@@ -366,40 +386,40 @@ func activate_effects(trigger, context_card):
 		if ability.add_stats_dish:
 			if check_target_filter(ability, context_card):
 				var multiplier = get_ability_multiplier(ability, current_dish.current_cards)
-				current_dish.ability_sweet += ability.sweet_effect * multiplier
-				current_dish.ability_spicy += ability.spicy_effect * multiplier
-				current_dish.ability_hearty += ability.hearty_effect * multiplier
-				current_dish.ability_fresh += ability.fresh_effect * multiplier
+				current_dish.ability_flavours[GlobalEnums.Flavour.SWEET] += ability.sweet_effect * multiplier
+				current_dish.ability_flavours[GlobalEnums.Flavour.SPICY] += ability.spicy_effect * multiplier
+				current_dish.ability_flavours[GlobalEnums.Flavour.HEARTY] += ability.hearty_effect * multiplier
+				current_dish.ability_flavours[GlobalEnums.Flavour.FRESH] += ability.fresh_effect * multiplier
 				current_dish.ability_nutrition += ability.nutrition_effect * multiplier
 		if ability.multiply_dish:
 			if check_target_filter(ability, context_card):
 				var multiplier = get_ability_multiplier(ability, current_dish.current_cards)
-				current_dish.sweet *= ability.sweet_effect + multiplier
-				current_dish.spicy *= ability.spicy_effect + multiplier
-				current_dish.hearty *= ability.hearty_effect + multiplier
-				current_dish.fresh *= ability.fresh_effect + multiplier
+				current_dish.flavours[GlobalEnums.Flavour.SWEET] *= ability.sweet_effect + multiplier
+				current_dish.flavours[GlobalEnums.Flavour.SPICY] *= ability.spicy_effect + multiplier
+				current_dish.flavours[GlobalEnums.Flavour.HEARTY] *= ability.hearty_effect + multiplier
+				current_dish.flavours[GlobalEnums.Flavour.FRESH] *= ability.fresh_effect + multiplier
 				current_dish.nutrition *= ability.nutrition_effect + multiplier
 		if ability.equal_stats_to_flavour != GlobalEnums.Flavour.NONE:
 			var temp_stat:int = 0
 			match ability.equal_stats_to_flavour:
 				GlobalEnums.Flavour.SWEET:
-					temp_stat = current_dish.sweet
+					temp_stat = current_dish.flavours[GlobalEnums.Flavour.SWEET]
 				GlobalEnums.Flavour.SPICY:
-					temp_stat = current_dish.spicy
+					temp_stat = current_dish.flavours[GlobalEnums.Flavour.SPICY]
 				GlobalEnums.Flavour.HEARTY:
-					temp_stat = current_dish.hearty
+					temp_stat = current_dish.flavours[GlobalEnums.Flavour.HEARTY]
 				GlobalEnums.Flavour.FRESH:
-					temp_stat = current_dish.fresh
+					temp_stat = current_dish.flavours[GlobalEnums.Flavour.FRESH]
 			for flavour in ability.flavour_filter:
 				match flavour:
 					GlobalEnums.Flavour.SWEET:
-						current_dish.sweet = temp_stat
+						current_dish.flavours[GlobalEnums.Flavour.SWEET] = temp_stat
 					GlobalEnums.Flavour.SPICY:
-						current_dish.spicy = temp_stat
+						current_dish.flavours[GlobalEnums.Flavour.SPICY] = temp_stat
 					GlobalEnums.Flavour.HEARTY:
-						current_dish.hearty = temp_stat
+						current_dish.flavours[GlobalEnums.Flavour.HEARTY] = temp_stat
 					GlobalEnums.Flavour.FRESH:
-						current_dish.fresh = temp_stat
+						current_dish.flavours[GlobalEnums.Flavour.FRESH] = temp_stat
 			
 # Example: add specific ingredients to player inventory
 	if ability.add_ingredient_by_name != "":

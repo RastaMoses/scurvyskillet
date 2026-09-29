@@ -2,6 +2,7 @@ class_name Ability
 extends Resource
 
 @export_category("Basic")
+@export var name:String
 @export_multiline() var description:String
 @export var continuous:bool = false
 @export var stackable:bool = false

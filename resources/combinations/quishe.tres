@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Combination" format=3 uid="uid://bmrfvj0o3kjf0"]
+
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="1_xkhrb"]
+[ext_resource type="Script" uid="uid://budyq2mxcg0tx" path="res://scripts/Encounter/Challenge/combination.gd" id="2_61oyd"]
+
+[resource]
+script = ExtResource("2_61oyd")
+name = "Quishe"
+description = "At least half of the ingredients used (min 2) are Eggs: Double the Nutrition."
+types = Array[int]([0])
+rarity = 1
+metadata/_custom_type_script = "uid://budyq2mxcg0tx"
