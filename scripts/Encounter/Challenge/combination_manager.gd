@@ -15,7 +15,9 @@ var all_combinations:Array[Combination]
 var active_combinations:Array[Combination]
 
 var mult_flavours:Array[float] = [1.0,1.0,1.0,1.0,1.0]
+var div_flavours:Array[float] = [1.0,1.0,1.0,1.0,1.0]
 var mult_nutrition:float = 1.0
+var div_nutrition:float = 1.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -63,6 +65,7 @@ func start_combinations(new_dish:Dish):
 	order_active_combinations()
 	activate_effects()
 	apply_multipliers()
+	apply_dividers()
 #region Requirements
 func check_combinations():
 
@@ -279,24 +282,57 @@ func activate_effects():
 	
 	for combination in active_combinations:
 		match combination.name:
-			
 		#region Buffs
 			"Quishe":
-				mult_nutrition += 2.0
+				mult_nutrition += 1.0
 			"3-Course Meal":
-				mult_nutrition += 1.5
+				mult_nutrition += 0.5
 				for flav in mult_flavours:
-					flav += 1.5
+					flav += 0.5
 			"Buttercob":
-				mult_nutrition += 1.25
+				mult_nutrition += 0.25
 			"Dolmades":
-				mult_flavours[GlobalEnums.Flavour.FRESH] += 1.5
+				mult_flavours[GlobalEnums.Flavour.HEARTY] += 0.5
 			"Fine Dining":
-				mult_flavours[dish.get_greatest_flavour()] += 2.5
-			
+				mult_flavours[dish.get_greatest_flavour()] += 1.5
+			"Fusion Kitchen":
+				mult_flavours[dish.get_greatest_flavour()] += 0.5
+				mult_flavours[dish.get_lowest_flavour()] += 0.5
+			"Pure":
+				for i in range(0,mult_flavours.size()):
+					if i != dish.get_greatest_flavour():
+						mult_flavours[i] += 0.5
+			"Salad":
+				mult_flavours[GlobalEnums.Flavour.FRESH] += 0.5
+			"Sushi":
+				var sushi_mult:float
+				sushi_mult = float(dish.current_cards.size()) * 0.1
+				mult_nutrition += sushi_mult
+			"Topping":
+				#Get second to last card
+				var second_last_card = dish.current_cards[dish.current_cards.size()-2]
+				if second_last_card.committed_stats.sweet > 0:
+					mult_flavours[GlobalEnums.Flavour.SWEET] += 0.3
+				if second_last_card.committed_stats.spicy > 0:
+					mult_flavours[GlobalEnums.Flavour.SPICY] += 0.3
+				if second_last_card.committed_stats.hearty > 0:
+					mult_flavours[GlobalEnums.Flavour.HEARTY] += 0.3
+				if second_last_card.committed_stats.fresh > 0:
+					mult_flavours[GlobalEnums.Flavour.FRESH] += 0.3
+			"Deep Fried":
+				mult_flavours[GlobalEnums.Flavour.HEARTY] += 1.0
+				mult_nutrition += 1.0
+				div_flavours[GlobalEnums.Flavour.FRESH] += 1.0
+				
 		#endregion
 		#region Debuffs
-
+			"Barely Cooked":
+				for flavour in div_flavours:
+					flavour += 1.0
+				div_nutrition += 1.0
+			"Dry":
+				div_flavours[GlobalEnums.Flavour.FRESH] += 0.25
+			
 		#endregion
 		#region Player
 
@@ -314,5 +350,13 @@ func apply_multipliers():
 	upgraded_dish.flavours[GlobalEnums.Flavour.HEARTY] = floori(float(upgraded_dish.flavours[GlobalEnums.Flavour.HEARTY] * mult_flavours[GlobalEnums.Flavour.HEARTY]))
 	upgraded_dish.flavours[GlobalEnums.Flavour.FRESH] = floori(float(upgraded_dish.flavours[GlobalEnums.Flavour.FRESH] * mult_flavours[GlobalEnums.Flavour.FRESH]))
 	upgraded_dish.nutrition = floori(float(upgraded_dish.nutrition * mult_nutrition))
+	
+func apply_dividers():
+	upgraded_dish.flavours[GlobalEnums.Flavour.SPICY] = floori(float(upgraded_dish.flavours[GlobalEnums.Flavour.SPICY] / div_flavours[GlobalEnums.Flavour.SPICY]))
+	upgraded_dish.flavours[GlobalEnums.Flavour.SWEET] = floori(float(upgraded_dish.flavours[GlobalEnums.Flavour.SWEET] / div_flavours[GlobalEnums.Flavour.SWEET]))
+	upgraded_dish.flavours[GlobalEnums.Flavour.HEARTY] = floori(float(upgraded_dish.flavours[GlobalEnums.Flavour.HEARTY] / div_flavours[GlobalEnums.Flavour.HEARTY]))
+	upgraded_dish.flavours[GlobalEnums.Flavour.FRESH] = floori(float(upgraded_dish.flavours[GlobalEnums.Flavour.FRESH] / div_flavours[GlobalEnums.Flavour.FRESH]))
+	upgraded_dish.nutrition = floori(float(upgraded_dish.nutrition * div_nutrition))
+	
 
 #endregion

@@ -166,4 +166,11 @@ func get_greatest_flavour() -> GlobalEnums.Flavour:
 			max_index = i
 	return max_index
 
+func get_lowest_flavour() ->GlobalEnums.Flavour:
+	var flavours_dup = flavours.duplicate()
+	var min_index:int = 0
+	for i in range(1, flavours_dup.size()):
+		if flavours_dup[i] < flavours[min_index]:
+			min_index = i
+	return min_index
 #endregion
