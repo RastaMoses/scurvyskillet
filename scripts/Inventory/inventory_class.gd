@@ -3,7 +3,7 @@ class_name Inventory
 extends Control
 
 @export var card_prefab:PackedScene
-var current_cards: Array[Node]
+var current_cards: Array[Card]
 @export var starting_ingredients: Array[Ingredient]
 @export var ui:Control
 @export var can_stack_uses:bool = true
@@ -91,6 +91,7 @@ func add_card(card):
 	return new_card
 #endregion
 
+#region Inventory Funcitons
 func instantiate_card_and_add(resource:Ingredient):
 	var temp_card:Node = card_prefab.instantiate()
 	temp_card.set_stats(resource.duplicate(true), resource)
@@ -141,7 +142,9 @@ func stop_card_drag():
 	dragging_card = null
 	card_stop_drag.emit(self)
 
-#region Helper
+#endregion
+
+#region Get Info
 func count_ingredient_in_inventory(target:Ingredient) -> int:
 	var count = 0
 	for card in current_cards:
@@ -149,6 +152,46 @@ func count_ingredient_in_inventory(target:Ingredient) -> int:
 			count += 1
 	return count
 
+func get_cards_of_ingredient(search:Ingredient) -> Array[Card]:
+	var cards:Array[Card]
+	for card in current_cards:
+		if card.base_stats == search:
+			cards.append(card)
+	return cards
+
+func get_unique_base_ingredients() -> Array[Ingredient]:
+	var unique_ingr:Array[Ingredient]
+	for i in current_cards:
+		if unique_ingr.has(i.base_stats):
+			continue
+		unique_ingr.append(i.base_stats)
+	return unique_ingr
+
+func get_rarity_amount_in_inventory(search) -> int:
+	var rarity_ingr:Array[Card]
+	for i in current_cards:
+		if rarity_ingr.has(i):
+			continue
+		if i.committed_stats.rarity == search:
+			rarity_ingr.append(i)
+	return rarity_ingr.size()
+
+#region Order
+func get_card_index(card:Card) -> int:
+	var index = current_cards.find(card)
+	if index == -1:
+		printerr("The card (" + card.committed_stats.name + ") doesnt exist in this inventory: " + self.name)
+	return index
+
+func get_indexes_of_ingredient(ingredient:Ingredient) -> Array[int]:
+	var cards = get_cards_of_ingredient(ingredient)
+	var indexes:Array[int]
+	for card in cards:
+		indexes.append(get_card_index(card))
+	return indexes
+
+#endregion
+#region Tags
 func get_tags_in_inventory() -> Array[GlobalEnums.Tags]:
 	var tags:Array[GlobalEnums.Tags]
 	for card in current_cards:
@@ -207,29 +250,128 @@ func can_cover_tags(required_tags:Array[GlobalEnums.Tags]) -> bool:
 	# All tags covered successfully
 	return true
 
-func get_country_amount_in_inventory(search_country) -> int:
+#endregion
+#region Country
+func get_countries_in_inventory() -> Array[GlobalEnums.Country]:
+	var countries:Array[GlobalEnums.Country]
+	for card in current_cards:
+		for country in card.committed_stats.countries:
+			if not countries.has(country):
+				countries.append(country)
+	return countries
+
+func get_all_cards_with_country(search_country:GlobalEnums.Country) -> Array[Card]:
 	var country_ingr:Array[Card]
 	for i in current_cards:
 		if country_ingr.has(i):
 			continue
-		if i.committed_stats.country.has(search_country):
+		if i.committed_stats.countries.has(search_country):
 			country_ingr.append(i)
-	return country_ingr.size()
+	return country_ingr
 
-func get_rarity_amount_in_inventory(search) -> int:
-	var rarity_ingr:Array[Card]
-	for i in current_cards:
-		if rarity_ingr.has(i):
-			continue
-		if i.committed_stats.rarity == search:
-			rarity_ingr.append(i)
-	return rarity_ingr.size()
+func get_cards_with_countries(countries:Array[GlobalEnums.Country]) -> Array[Card]:
+	var cards_with_countries:Array[Card]
+	for country in countries:
+		var country_cards = get_all_cards_with_country(country)
+		for card in country_cards:
+			if cards_with_countries.has(card):
+				cards_with_countries.erase(card)
+		cards_with_countries.append_array(country_cards)
+	return cards_with_countries
 
-func get_unique_base_ingredients() -> Array[Ingredient]:
-	var unique_ingr:Array[Ingredient]
+func can_cover_countries(required_countries:Array[GlobalEnums.Country]) -> bool:
+	#Check if cards can cover all required countries, with each card counting for only one country.
+	var cards = get_cards_with_countries(required_countries)
+	var available_cards = cards.duplicate()
+	var countries_to_cover = required_countries.duplicate()
+	if cards.size() < required_countries.size():
+		return false
+	countries_to_cover.sort_custom(func(a, b): 
+		var count_a = available_cards.count(func(card): return card.committed_stats.countries.has(a))
+		var count_b = available_cards.count(func(card): return card.committed_stats.countries.has(b))
+		return count_a < count_b)
+	for country in countries_to_cover:
+		var found_card_idx = -1
+		
+		# Find first available card that has this country
+		for i in range(available_cards.size()):
+			var card_countries = available_cards[i].committed_stats.countries
+			if card_countries.has(country):
+				found_card_idx = i
+				break
+		
+		# No card found for this country → fail
+		if found_card_idx == -1:
+			return false
+		
+		# Remove the used card (each card counts once)
+		available_cards.remove_at(found_card_idx)
+	
+	# All countries covered successfully
+	return true
+
+
+#endregion
+#region Abilities
+func get_abilities_in_inventory() -> Array[Ability]:
+	var abilities:Array[Ability]
+	for card in current_cards:
+		for ability in card.committed_stats.abilities:
+			if not abilities.has(ability):
+				abilities.append(ability)
+	return abilities
+
+func get_all_cards_with_ability(search_ability:Ability) -> Array[Card]:
+	var ability_ingr:Array[Card]
 	for i in current_cards:
-		if unique_ingr.has(i.base_stats):
+		if ability_ingr.has(i):
 			continue
-		unique_ingr.append(i.base_stats)
-	return unique_ingr
+		if i.committed_stats.abilities.has(search_ability):
+			ability_ingr.append(i)
+	return ability_ingr
+
+func get_cards_with_abilities(abilities:Array[Ability]) -> Array[Card]:
+	var cards_with_abilities:Array[Card]
+	for ability in abilities:
+		var ability_cards = get_all_cards_with_ability(ability)
+		for card in ability_cards:
+			if cards_with_abilities.has(card):
+				cards_with_abilities.erase(card)
+		cards_with_abilities.append_array(ability_cards)
+	return cards_with_abilities
+
+func can_cover_abilities(required_abilities:Array[Ability]) -> bool:
+	#Check if cards can cover all required abilities, with each card counting for only one ability.
+	var cards = get_cards_with_abilities(required_abilities)
+	var available_cards = cards.duplicate()
+	var abilities_to_cover = required_abilities.duplicate()
+	if cards.size() < required_abilities.size():
+		return false
+	abilities_to_cover.sort_custom(func(a, b): 
+		var count_a = available_cards.count(func(card): return card.committed_stats.abilities.has(a))
+		var count_b = available_cards.count(func(card): return card.committed_stats.abilities.has(b))
+		return count_a < count_b)
+	for ability in abilities_to_cover:
+		var found_card_idx = -1
+		
+		# Find first available card that has this ability
+		for i in range(available_cards.size()):
+			var card_abilities = available_cards[i].committed_stats.abilities
+			if card_abilities.has(ability):
+				found_card_idx = i
+				break
+		
+		# No card found for this ability → fail
+		if found_card_idx == -1:
+			return false
+		
+		# Remove the used card (each card counts once)
+		available_cards.remove_at(found_card_idx)
+	
+	# All abilities covered successfully
+	return true
+
+#endregion
+
+
 #endregion

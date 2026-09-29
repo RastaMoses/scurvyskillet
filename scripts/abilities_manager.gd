@@ -1,3 +1,4 @@
+class_name AbilityManager
 extends Node
 
 class AbilityTrigger:
@@ -21,7 +22,26 @@ var dish_triggers:Array[AbilityTrigger]
 var dish_next_ingredient_trigger:Array
 var current_dish
 var dragged_card: Node = null
-#SIGNALS
+var all_abilities:Array[Ability]
+
+func _ready() -> void:
+	var dir_path := "res://resources/abilities/"
+	var paths : PackedStringArray = ResourceLoader.list_directory(dir_path)
+	if paths == null: printerr("Could not get ingredient folder")
+	for path in paths:
+		var ability:Ability= ResourceLoader.load(dir_path + path) as Ability
+		if ability:
+			all_abilities.append(ability)
+
+#---------Ability Collection---------
+#region Abilties Collection
+func get_ability_by_name(name:String) -> Ability:
+	for i in all_abilities:
+		if i.name == name:
+			return i
+	printerr("Could not find ingredient with this name: " + name)
+	return null
+#endregion
 #------------Trigger Management-----------------------
 #region Tracking
 #DISH

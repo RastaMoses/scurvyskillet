@@ -1,3 +1,4 @@
+class_name CombinationManager
 extends Node
 
 #Params
@@ -5,6 +6,7 @@ extends Node
 #Comps
 @onready var challenge = get_parent() 
 @onready var item_pool = get_tree().get_first_node_in_group("ingredient_pool")
+@onready var ability_manager:AbilityManager = get_tree().get_first_node_in_group("ability_manager")
 
 #State
 var dish:Dish
@@ -80,6 +82,11 @@ func check_combinations():
 	and dish.sweet > dish.fresh
 	and dish.get_all_cards_with_tag(GlobalEnums.Tags.FRUIT).size() >= 3):
 		set_comb_active("Jam")
+	
+	#Scoville Hell
+	if dish.spicy > dish.fresh + dish.hearty + dish.sweet:
+		set_comb_active("Scoville Hell")
+	
 #endregion
 #region Tags
 #Check for tags
@@ -101,8 +108,48 @@ func check_combinations():
 		set_comb_active("Salmonella")
 	
 	#Quishe
-	if (dish.get_all_cards_with_tag(GlobalEnums.Tags.EGG).size() >= dish.current_cards.size()/2 and dish.current_cards.size() > 1):
+	if (dish.get_all_cards_with_tag(GlobalEnums.Tags.EGG).size() >= dish.current_cards.size()/2
+	 and dish.current_cards.size() > 1):
 		set_comb_active("Quishe")
+	
+	#Salad
+	if (dish.current_cards.size() > 1
+	and dish.get_cards_with_tags([GlobalEnums.Tags.FRUIT, GlobalEnums.Tags.VEGETABLE]).size() >= dish.current_cards.size()/2):
+		set_comb_active("Salad")
+	
+	#Sandwich
+	if (dish.can_cover_tags([GlobalEnums.Tags.PASTRY, GlobalEnums.Tags.PASTRY, GlobalEnums.Tags.VEGETABLE])
+	and dish.get_cards_with_tags([GlobalEnums.Tags.FISH, GlobalEnums.Tags.MEAT]).size() >= 1):
+		set_comb_active("Sandwich")
+	
+	#Smoothie
+	if (dish.current_cards.size() > 1
+	and dish.get_all_cards_with_tag(GlobalEnums.Tags.FRUIT).size() == dish.get_all_cards_with_tag(GlobalEnums.Tags.DRINK).size()):
+		set_comb_active("Smoothie")
+	
+	#Parfait
+	if (dish.can_cover_tags([GlobalEnums.Tags.GRAINS, GlobalEnums.Tags.DAIRY, GlobalEnums.Tags.FRUIT])):
+		set_comb_active("Parfait")
+	
+	#Deep Fried
+	var oil_amount = dish.get_all_cards_with_tag(GlobalEnums.Tags.OIL).size()
+	if (oil_amount > dish.get_all_cards_with_tag(GlobalEnums.Tags.MEAT).size()
+	and oil_amount > dish.get_all_cards_with_tag(GlobalEnums.Tags.FISH).size()
+	and oil_amount > dish.get_all_cards_with_tag(GlobalEnums.Tags.MONSTER).size()
+	and oil_amount > dish.get_all_cards_with_tag(GlobalEnums.Tags.FRUIT).size()
+	and oil_amount > dish.get_all_cards_with_tag(GlobalEnums.Tags.VEGETABLE).size()
+	and dish.get_cards_with_tags([GlobalEnums.Tags.MEAT,GlobalEnums.Tags.FISH, 
+	GlobalEnums.Tags.MONSTER, GlobalEnums.Tags.FRUIT, GlobalEnums.Tags.VEGETABLE]).size() > 0):
+		set_comb_active("Deep Fried")
+	
+	#Reinheitsgebot
+	if (dish.can_cover_tags([GlobalEnums.Tags.GRAINS, GlobalEnums.Tags.FERMENT, GlobalEnums.Tags.DRINK])
+	and dish.current_cards.size() <= 3):
+		set_comb_active("Reinheitsgebot")
+	
+	#Overseasoned
+	if dish.get_all_cards_with_tag(GlobalEnums.Tags.SPICE).size() >= 5:
+		set_comb_active("Overseasoned")
 #endregion
 #region Rarity
 #Check for Rarity
@@ -132,17 +179,14 @@ func check_combinations():
 #region Countries
 #check for countries
 	#Get Dish Countries
-	var dish_countries:Array[GlobalEnums.Country]
-	if dish.get_country_amount_in_inventory(GlobalEnums.Country.MEDITERRANEAN) > 0:
-		dish_countries.append(GlobalEnums.Country.MEDITERRANEAN)
-	if dish.get_country_amount_in_inventory(GlobalEnums.Country.NORDIC) > 0:
-		dish_countries.append(GlobalEnums.Country.NORDIC)
-	if dish.get_country_amount_in_inventory(GlobalEnums.Country.JUNGLE) > 0:
-		dish_countries.append(GlobalEnums.Country.JUNGLE)
-	if dish.get_country_amount_in_inventory(GlobalEnums.Country.ASIAN) > 0:
-		dish_countries.append(GlobalEnums.Country.ASIAN)
-	#Fusion Kitchen
-	if dish_countries.size() >= 3:
+	var dish_countries:Array[GlobalEnums.Country] = dish.get_countries_in_inventory()
+	if dish.can_cover_countries(dish_countries) and dish_countries.size() >= 3:
+		set_comb_active("Fusion Kitchen")
+#endregion
+#region Abilities
+#3-Course Meal
+	if (dish.can_cover_abilities([ability_manager.get_ability_by_name("Starter"), ability_manager.get_ability_by_name("Dessert")])
+	and dish.current_cards.size() >= 3):
 		set_comb_active("Fusion Kitchen")
 #endregion
 #region Ingredients
@@ -160,6 +204,48 @@ func check_combinations():
 	and dish.count_ingredient_in_inventory(item_pool.get_ingredient_by_name("Tomato")) > 0
 	and dish.current_cards.size() >= 3):
 		set_comb_active("Pizza")
+	
+	#Sushi
+	if (dish.count_ingredient_in_inventory(item_pool.get_ingredient_by_name("Seaweed")) > 0
+	and dish.count_ingredient_in_inventory(item_pool.get_ingredient_by_name("Rice")) > 0
+	and dish.get_all_cards_with_tag(GlobalEnums.Tags.FISH).size() > 0):
+		set_comb_active("Sushi")
+	
+	#Mayan Hot Cocoa
+	if (dish.count_ingredient_in_inventory(item_pool.get_ingredient_by_name("Cacao")) > 0
+	and dish.get_all_cards_with_tag(GlobalEnums.Tags.DRINK).size() > 0):
+		set_comb_active("Mayan Hot Cocoa")
+	
+	#Chocolate
+	if (dish.count_ingredient_in_inventory(item_pool.get_ingredient_by_name("Cacao")) > 0
+	and dish.count_ingredient_in_inventory(item_pool.get_ingredient_by_name("Sugar")) > 0
+	and dish.get_all_cards_with_tag(GlobalEnums.Tags.DAIRY).size() > 0):
+		set_comb_active("Chocolate")
+	
+	#Rum
+	if (dish.count_ingredient_in_inventory(item_pool.get_ingredient_by_name("Sugarcane")) > 0
+	and dish.get_all_cards_with_tag(GlobalEnums.Tags.FERMENT).size() > 0):
+		set_comb_active("Rum")
+	
+#Check if certain item orders are correct
+	
+	#Dolmades
+	var wine_leaves_indexes = dish.get_indexes_of_ingredient(item_pool.get_ingredient_by_name("Wine Leaves"))
+	var rice_indexes = dish.get_indexes_of_ingredient(item_pool.get_ingredient_by_name("Rice"))
+	var dolmades_activates = false
+	if wine_leaves_indexes.size() > 0 and rice_indexes.size() > 0:
+		for wine_leaves in wine_leaves_indexes:
+			for rice in rice_indexes:
+				if wine_leaves == rice - 1:
+					dolmades_activates = true
+					break
+		if dolmades_activates:
+			set_comb_active("Dolmades")
+	
+	#Topping
+	if (dish.current_cards.size() >= 2
+	and dish.current_cards.back().committed_stats.tags.has(GlobalEnums.Tags.SPICE)):
+		set_comb_active("Topping")
 #endregion
 
 
