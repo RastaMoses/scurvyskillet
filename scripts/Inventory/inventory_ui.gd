@@ -114,14 +114,14 @@ func card_drag_ended(card):
 #endregion
 
 #region Sorting
-func get_slots_cards_list() -> Array[Node]:
-	var card_order:Array[Node] = []
+func get_slots_cards_list() -> Array[Card]:
+	var card_order:Array[Card] = []
 	for slot in slots:
 		if slot.card != null:
 			card_order.append(slot.card)
 	return card_order
 func update_slots_order():
-	var slot_order: Array[Node] = get_slots_cards_list()
+	var slot_order: Array[Card] = get_slots_cards_list()
 	# Reorder current_cards to match the visual slot order
 	# Only if the slot order differs from current_cards
 	if slot_order.size() > 0 and slot_order.size() == inventory.current_cards.size():

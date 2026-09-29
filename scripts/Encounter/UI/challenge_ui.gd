@@ -106,8 +106,8 @@ func add_combination_result_text(combination):
 	new_text_box.text = new_text
 
 func update_flavours(dish):
-	sweet_text.text = str(dish.sweet)
-	if dish.sweet == 0:
+	sweet_text.text = str(dish.flavours[GlobalEnums.Flavour.SWEET])
+	if dish.flavours[GlobalEnums.Flavour.SWEET] == 0:
 		sweet_text.visible = false
 		if !sweet_bg_moved:
 			sweet_bg.start_moving_to_destination(Vector2(sweet_bg.global_position.x + result_bg_move_x,
@@ -118,8 +118,8 @@ func update_flavours(dish):
 		sweet_text.visible = true
 		sweet_bg_moved = false
 	
-	spicy_text.text = str(dish.spicy)
-	if dish.spicy == 0:
+	spicy_text.text = str(dish.flavours[GlobalEnums.Flavour.SPICY])
+	if dish.flavours[GlobalEnums.Flavour.SPICY] == 0:
 		spicy_text.visible = false
 		if !spicy_bg_moved:
 			spicy_bg.start_moving_to_destination(Vector2(spicy_bg.global_position.x + result_bg_move_x,
@@ -130,8 +130,8 @@ func update_flavours(dish):
 		spicy_text.visible = true
 		spicy_bg_moved = false
 	
-	hearty_text.text = str(dish.hearty)
-	if dish.hearty == 0:
+	hearty_text.text = str(dish.flavours[GlobalEnums.Flavour.HEARTY])
+	if dish.flavours[GlobalEnums.Flavour.HEARTY] == 0:
 		hearty_text.visible = false
 		if !hearty_bg_moved:
 			hearty_bg.start_moving_to_destination(Vector2(hearty_bg.global_position.x + result_bg_move_x,
@@ -142,8 +142,8 @@ func update_flavours(dish):
 		hearty_text.visible = true
 		hearty_bg_moved = false
 	
-	fresh_text.text = str(dish.fresh)
-	if dish.fresh == 0:
+	fresh_text.text = str(dish.flavours[GlobalEnums.Flavour.FRESH])
+	if dish.flavours[GlobalEnums.Flavour.FRESH] == 0:
 		fresh_text.visible = false
 		if !fresh_bg_moved:
 			fresh_bg.start_moving_to_destination(Vector2(fresh_bg.global_position.x + result_bg_move_x,

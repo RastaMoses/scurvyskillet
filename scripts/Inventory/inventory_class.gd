@@ -102,7 +102,7 @@ func instantiate_card_and_add(resource:Ingredient):
 func distribute_uses(card):
 	if card == null or card.is_queued_for_deletion():
 		return
-	var duplicates:Array[Node] = []
+	var duplicates:Array[Card] = []
 	for i in current_cards:
 		if i.base_stats == card.base_stats:
 			duplicates.append(i)
@@ -255,7 +255,7 @@ func can_cover_tags(required_tags:Array[GlobalEnums.Tags]) -> bool:
 func get_countries_in_inventory() -> Array[GlobalEnums.Country]:
 	var countries:Array[GlobalEnums.Country]
 	for card in current_cards:
-		for country in card.committed_stats.countries:
+		for country in card.committed_stats.country:
 			if not countries.has(country):
 				countries.append(country)
 	return countries
@@ -265,7 +265,7 @@ func get_all_cards_with_country(search_country:GlobalEnums.Country) -> Array[Car
 	for i in current_cards:
 		if country_ingr.has(i):
 			continue
-		if i.committed_stats.countries.has(search_country):
+		if i.committed_stats.country.has(search_country):
 			country_ingr.append(i)
 	return country_ingr
 
@@ -287,15 +287,15 @@ func can_cover_countries(required_countries:Array[GlobalEnums.Country]) -> bool:
 	if cards.size() < required_countries.size():
 		return false
 	countries_to_cover.sort_custom(func(a, b): 
-		var count_a = available_cards.count(func(card): return card.committed_stats.countries.has(a))
-		var count_b = available_cards.count(func(card): return card.committed_stats.countries.has(b))
+		var count_a = available_cards.count(func(card): return card.committed_stats.country.has(a))
+		var count_b = available_cards.count(func(card): return card.committed_stats.country.has(b))
 		return count_a < count_b)
 	for country in countries_to_cover:
 		var found_card_idx = -1
 		
 		# Find first available card that has this country
 		for i in range(available_cards.size()):
-			var card_countries = available_cards[i].committed_stats.countries
+			var card_countries = available_cards[i].committed_stats.country
 			if card_countries.has(country):
 				found_card_idx = i
 				break

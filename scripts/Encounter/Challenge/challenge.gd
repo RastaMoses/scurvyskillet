@@ -70,7 +70,6 @@ extends Control
 
 
 #STATE
-var inv_save:Array[Node]
 var reward_money:int
 var reward_morale:int
 var reward_specific_ingredients:Array[Ingredient]
@@ -150,16 +149,16 @@ func on_failure():
 
 func compare_dish(completed_dish):
 	if (completed_dish.nutrition < req_nutrition
-	or completed_dish.sweet < req_sweet
-	or completed_dish.spicy < req_spicy
-	or completed_dish.hearty < req_hearty
-	or completed_dish.fresh < req_fresh
+	or completed_dish.flavours[GlobalEnums.Flavour.SWEET] < req_sweet
+	or completed_dish.flavours[GlobalEnums.Flavour.SPICY] < req_spicy
+	or completed_dish.flavours[GlobalEnums.Flavour.HEARTY] < req_hearty
+	or completed_dish.flavours[GlobalEnums.Flavour.FRESH] < req_fresh
 	or completed_dish.get_tags_in_inventory().any(is_restricted_tag)): #check if restricted tag is used
 		if (completed_dish.nutrition < par_nutrition
-		or completed_dish.sweet < par_sweet
-		or completed_dish.spicy < par_spicy
-		or completed_dish.hearty < par_hearty
-		or completed_dish.fresh < par_fresh
+		or completed_dish.flavours[GlobalEnums.Flavour.SWEET] < par_sweet
+		or completed_dish.flavours[GlobalEnums.Flavour.SPICY] < par_spicy
+		or completed_dish.flavours[GlobalEnums.Flavour.HEARTY] < par_hearty
+		or completed_dish.flavours[GlobalEnums.Flavour.FRESH] < par_fresh
 		or completed_dish.get_tags_in_inventory().any(is_restricted_tag)): #check if restricted tag is used
 			#fail
 			on_failure()

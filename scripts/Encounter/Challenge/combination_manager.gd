@@ -14,6 +14,9 @@ var upgraded_dish
 var all_combinations:Array[Combination]
 var active_combinations:Array[Combination]
 
+var mult_flavours:Array[float] = [1.0,1.0,1.0,1.0,1.0]
+var mult_nutrition:float = 1.0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var dir_path := "res://resources/combinations/"
@@ -59,7 +62,8 @@ func start_combinations(new_dish:Dish):
 	check_combinations()
 	order_active_combinations()
 	activate_effects()
-
+	apply_multipliers()
+#region Requirements
 func check_combinations():
 
 #Check if dish empty
@@ -70,21 +74,21 @@ func check_combinations():
 #Check for stats
 	#Lacking
 	if (dish.nutrition < 0
-	or dish.sweet < 0
-	or dish.spicy < 0
-	or dish.hearty < 0
-	or dish.fresh < 0):
+	or dish.flavours[GlobalEnums.Flavour.SWEET] < 0
+	or dish.flavours[GlobalEnums.Flavour.SPICY] < 0
+	or dish.flavours[GlobalEnums.Flavour.HEARTY] < 0
+	or dish.flavours[GlobalEnums.Flavour.FRESH] < 0):
 		set_comb_active("Lacking")
 	
 	#Jam
-	if (dish.sweet > dish.spicy
-	and dish.sweet > dish.hearty
-	and dish.sweet > dish.fresh
+	if (dish.flavours[GlobalEnums.Flavour.SWEET] > dish.flavours[GlobalEnums.Flavour.SPICY]
+	and dish.flavours[GlobalEnums.Flavour.SWEET] > dish.flavours[GlobalEnums.Flavour.HEARTY]
+	and dish.flavours[GlobalEnums.Flavour.SWEET] > dish.flavours[GlobalEnums.Flavour.FRESH]
 	and dish.get_all_cards_with_tag(GlobalEnums.Tags.FRUIT).size() >= 3):
 		set_comb_active("Jam")
 	
 	#Scoville Hell
-	if dish.spicy > dish.fresh + dish.hearty + dish.sweet:
+	if dish.flavours[GlobalEnums.Flavour.SPICY] > dish.flavours[GlobalEnums.Flavour.FRESH] + dish.flavours[GlobalEnums.Flavour.HEARTY] + dish.flavours[GlobalEnums.Flavour.SWEET]:
 		set_comb_active("Scoville Hell")
 	
 #endregion
@@ -265,18 +269,31 @@ func check_combinations():
 	if (active_combinations.has(get_combination_by_name("Pizza"))
 	and dish.count_ingredient_in_inventory(item_pool.get_ingredient_by_name("Pineapple")) > 0):
 		set_comb_active("Split Opinion")
+	#endregion
 #endregion
-
 #region Effects
 func activate_effects():
 	upgraded_dish = dish.duplicate()
 	#activate based on effect type (if has debuff come last)
+	
+	
 	for combination in active_combinations:
 		match combination.name:
 			
 		#region Buffs
 			"Quishe":
-				upgraded_dish.nutrition = upgraded_dish.nutrition * 2
+				mult_nutrition += 2.0
+			"3-Course Meal":
+				mult_nutrition += 1.5
+				for flav in mult_flavours:
+					flav += 1.5
+			"Buttercob":
+				mult_nutrition += 1.25
+			"Dolmades":
+				mult_flavours[GlobalEnums.Flavour.FRESH] += 1.5
+			"Fine Dining":
+				mult_flavours[dish.get_greatest_flavour()] += 2.5
+			
 		#endregion
 		#region Debuffs
 
@@ -290,5 +307,12 @@ func activate_effects():
 		challenge.ui.add_combination_result_text(combination)
 		challenge.ui.update_flavours(upgraded_dish)
 		challenge.ui.update_nutrition(upgraded_dish.nutrition)
+
+func apply_multipliers():
+	upgraded_dish.flavours[GlobalEnums.Flavour.SPICY] = floori(float(upgraded_dish.flavours[GlobalEnums.Flavour.SPICY] * mult_flavours[GlobalEnums.Flavour.SPICY]))
+	upgraded_dish.flavours[GlobalEnums.Flavour.SWEET] = floori(float(upgraded_dish.flavours[GlobalEnums.Flavour.SWEET] * mult_flavours[GlobalEnums.Flavour.SWEET]))
+	upgraded_dish.flavours[GlobalEnums.Flavour.HEARTY] = floori(float(upgraded_dish.flavours[GlobalEnums.Flavour.HEARTY] * mult_flavours[GlobalEnums.Flavour.HEARTY]))
+	upgraded_dish.flavours[GlobalEnums.Flavour.FRESH] = floori(float(upgraded_dish.flavours[GlobalEnums.Flavour.FRESH] * mult_flavours[GlobalEnums.Flavour.FRESH]))
+	upgraded_dish.nutrition = floori(float(upgraded_dish.nutrition * mult_nutrition))
 
 #endregion
