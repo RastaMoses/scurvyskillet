@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Combination" format=3 uid="uid://doifs2s4rlofr"]
+
+[ext_resource type="Script" uid="uid://budyq2mxcg0tx" path="res://scripts/Encounter/Challenge/combination.gd" id="1_opx5l"]
+
+[resource]
+script = ExtResource("1_opx5l")
+name = "Split Opinion"
+description = "Pizza Recipe cooked with Pineapple: Half Morale and double Money"
+types = Array[int]([3])
+rarity = 3
+metadata/_custom_type_script = "uid://budyq2mxcg0tx"

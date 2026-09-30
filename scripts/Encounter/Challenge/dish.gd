@@ -3,8 +3,8 @@ extends Inventory
 #PARAMS
 @export var nutrition:int = 0
 @export_subgroup("Flavour")
-@export var flavours:Array[int] = [0,0,0,0,0]
-@export var ability_flavours:Array[int] = [0,0,0,0,0]
+@export var flavours:Dictionary[GlobalEnums.Flavour, int]
+@export var ability_flavours:Dictionary[GlobalEnums.Flavour, int]
 @export var ability_nutrition:int = 0
 
 #CACHED COMPS
@@ -26,7 +26,10 @@ func _ready() -> void:
 	checking_drop.connect(on_check_drop)
 	player_inventory.card_start_drag.connect(on_start_drag)
 	player_inventory.card_stop_drag.connect(on_stop_drag)
-
+	for flavour in GlobalEnums.Flavour:
+		flavours[GlobalEnums.Flavour[flavour]] = 0
+		ability_flavours[GlobalEnums.Flavour[flavour]] = 0
+	
 func start():
 	challenge.ui.update_nutrition(nutrition)
 	challenge.ui.update_flavours(self)
@@ -40,15 +43,14 @@ func add_die_value_to_dish(die):
 func recalculate_dish():
 	nutrition = 0
 	for i in flavours:
-		i = 0
-	
+		flavours[i] = 0
 	for card in current_cards:
 		nutrition += card.committed_stats.nutrition
 	for die in dice:
 		add_die_value_to_dish(die)
 	#add ability stats
 	for i in GlobalEnums.Flavour:
-		flavours[i] += ability_flavours[i]
+		flavours[GlobalEnums.Flavour[i]] += ability_flavours[GlobalEnums.Flavour[i]]
 	nutrition += ability_nutrition
 func finish_dish():
 	dice_disp.finish_dish()
@@ -98,10 +100,10 @@ func on_destroy_all_ingredients(origin):
 	if origin != self:
 		return
 	for flavour in ability_flavours:
-		flavour = 0
+		ability_flavours[flavour] = 0
 	ability_nutrition = 0
 	for flavour in flavours:
-		flavour = 0
+		flavours[flavour] = 0
 	nutrition = 0
 	for card in current_cards:
 		remove_card_from_dish(card)
@@ -127,25 +129,19 @@ func remove_card_from_dish(card):
 func roll_ingredient(card:Node, dice_multiplier:int = 1):
 	abilities.on_dice_roll(card)
 	for flavour in GlobalEnums.Flavour:
-		if flavour != GlobalEnums.Flavour.NONE:
-			roll_dice(flavour,dice_multiplier * (card.get_flavours()[flavour]), card)
+		if GlobalEnums.Flavour[flavour] != GlobalEnums.Flavour.NONE:
+			roll_dice(flavour,dice_multiplier * (card.get_flavours()[GlobalEnums.Flavour[flavour]]), card)
 
 func roll_dice(flavour,amount,card:Node):
 	while amount > 0:
 		amount -= 1
 		var roll_result = random.randi_range(1,6)
-		var die = dice_disp.spawn_die(flavour, roll_result, card)
+		var die = dice_disp.spawn_die(GlobalEnums.Flavour[flavour], roll_result, card)
 		dice.append(die)
 func reroll_die(die):
 	subtract_die_value_from_dish(die)
 	var roll_result = random.randi_range(1,6)
 	die.display_number(roll_result)
 	flavours[die.flavour] += roll_result
-
-#endregion
-
-#region Helper
-
-
 
 #endregion

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Combination" format=3 uid="uid://uk3v87r2px1n"]
+
+[ext_resource type="Script" uid="uid://budyq2mxcg0tx" path="res://scripts/Encounter/Challenge/combination.gd" id="1_dau5v"]
+
+[resource]
+script = ExtResource("1_dau5v")
+name = "Overseasoned"
+description = "5 or more Spice Ingredients used: [-100%] to the weakest Flavour of combined Spices used"
+types = Array[int]([2])
+rarity = 4
+metadata/_custom_type_script = "uid://budyq2mxcg0tx"

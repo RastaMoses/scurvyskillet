@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Combination" format=3 uid="uid://dcf1fijsh2osx"]
+
+[ext_resource type="Script" uid="uid://budyq2mxcg0tx" path="res://scripts/Encounter/Challenge/combination.gd" id="1_51rx5"]
+
+[resource]
+script = ExtResource("1_51rx5")
+name = "Lacking"
+description = "Any Flavour is negative: [-30%] Nutrition"
+types = Array[int]([1])
+rarity = 4
+metadata/_custom_type_script = "uid://budyq2mxcg0tx"

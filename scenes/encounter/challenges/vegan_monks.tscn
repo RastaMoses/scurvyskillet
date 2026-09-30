@@ -22,8 +22,8 @@ p_req_rarity = Array[int]([0])
 p_req_tag = Array[int]([15, 5])
 failure_morale = -2
 
-[node name="text" parent="UI/description" parent_id_path=PackedInt32Array(1896810604) index="1" unique_id=189440853]
-text = "They will not eat any meat or fish."
-
-[node name="title" parent="UI/description" parent_id_path=PackedInt32Array(1896810604) index="2" unique_id=118090035]
+[node name="title" parent="UI/description/ScrollContainer/VBoxContainer" parent_id_path=PackedInt32Array(749325280) index="0" unique_id=118090035]
 text = "Vegan Monks need Food!"
+
+[node name="text" parent="UI/description/ScrollContainer/VBoxContainer" parent_id_path=PackedInt32Array(749325280) index="1" unique_id=189440853]
+text = "They will not eat any meat or fish."

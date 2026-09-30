@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Combination" format=3 uid="uid://qh6r85dlp3mk"]
+
+[ext_resource type="Script" uid="uid://budyq2mxcg0tx" path="res://scripts/Encounter/Challenge/combination.gd" id="1_nyygx"]
+
+[resource]
+script = ExtResource("1_nyygx")
+name = "Based"
+description = "An Ingredient is used in 5 Recipies: Create 2 Legendary Ingredients with a Tag used by the Based Ingredient"
+types = Array[int]([2])
+rarity = 3
+metadata/_custom_type_script = "uid://budyq2mxcg0tx"

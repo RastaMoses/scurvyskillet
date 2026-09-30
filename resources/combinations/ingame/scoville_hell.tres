@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Combination" format=3 uid="uid://2bb6gp0epjio"]
+
+[ext_resource type="Script" uid="uid://budyq2mxcg0tx" path="res://scripts/Encounter/Challenge/combination.gd" id="1_5li2r"]
+
+[resource]
+script = ExtResource("1_5li2r")
+name = "Scoville Hell"
+description = "Spicy Flavour is stronger than the other Flavours combined: [-25%] to Nutrition and all Flavours except Spicy, which gains [+100%]"
+types = Array[int]([0, 1])
+rarity = 2
+metadata/_custom_type_script = "uid://budyq2mxcg0tx"

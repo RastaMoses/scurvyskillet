@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Combination" format=3 uid="uid://csx5rqe15tq6m"]
+
+[ext_resource type="Script" uid="uid://budyq2mxcg0tx" path="res://scripts/Encounter/Challenge/combination.gd" id="1_sm2s8"]
+
+[resource]
+script = ExtResource("1_sm2s8")
+name = "Rum"
+description = "Sugarcane and any Ferment Ingredient used: Create Rum"
+types = Array[int]([2])
+rarity = 1
+metadata/_custom_type_script = "uid://budyq2mxcg0tx"

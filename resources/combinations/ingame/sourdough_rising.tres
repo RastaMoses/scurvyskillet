@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Combination" format=3 uid="uid://ceu504e1xeil1"]
+
+[ext_resource type="Script" uid="uid://budyq2mxcg0tx" path="res://scripts/Encounter/Challenge/combination.gd" id="1_d2jc0"]
+
+[resource]
+script = ExtResource("1_d2jc0")
+name = "Sourdough Rising"
+description = "Used Dough was in no other Recipe: Create a random Pastry"
+types = Array[int]([2])
+rarity = 1
+metadata/_custom_type_script = "uid://budyq2mxcg0tx"

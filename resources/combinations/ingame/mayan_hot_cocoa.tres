@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Combination" format=3 uid="uid://cn8rc61fn3kwi"]
+
+[ext_resource type="Script" uid="uid://budyq2mxcg0tx" path="res://scripts/Encounter/Challenge/combination.gd" id="1_v5i3u"]
+
+[resource]
+script = ExtResource("1_v5i3u")
+name = "Mayan Hot Cocoa"
+description = "Cacao and Drink used: Create Mayan Cocoa"
+types = Array[int]([2])
+rarity = 1
+metadata/_custom_type_script = "uid://budyq2mxcg0tx"

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Combination" format=3 uid="uid://y4towedqd53i"]
+
+[ext_resource type="Script" uid="uid://budyq2mxcg0tx" path="res://scripts/Encounter/Challenge/combination.gd" id="1_6wpsb"]
+
+[resource]
+script = ExtResource("1_6wpsb")
+name = "Slop"
+description = "No Recipe: [-50%] to all Flavours and Nutrition"
+types = Array[int]([1])
+rarity = 4
+metadata/_custom_type_script = "uid://budyq2mxcg0tx"

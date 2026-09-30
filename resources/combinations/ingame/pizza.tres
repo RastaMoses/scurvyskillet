@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Combination" format=3 uid="uid://ldx5l6tht246"]
+
+[ext_resource type="Script" uid="uid://budyq2mxcg0tx" path="res://scripts/Encounter/Challenge/combination.gd" id="1_b35t8"]
+
+[resource]
+script = ExtResource("1_b35t8")
+name = "Pizza"
+description = "Dough, Tomato, Cheese and any other Ingredient used: "
+types = Array[int]([0])
+rarity = 2
+metadata/_custom_type_script = "uid://budyq2mxcg0tx"

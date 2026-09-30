@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Combination" format=3 uid="uid://dll21sxho6b5r"]
+
+[ext_resource type="Script" uid="uid://budyq2mxcg0tx" path="res://scripts/Encounter/Challenge/combination.gd" id="1_v45kf"]
+
+[resource]
+script = ExtResource("1_v45kf")
+name = "Topping"
+description = "Spice was the last Ingredient used: [+30%] to all Flavours the second-to-last Ingredient had"
+types = Array[int]([0])
+rarity = 1
+metadata/_custom_type_script = "uid://budyq2mxcg0tx"

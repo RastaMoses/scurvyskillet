@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Combination" format=3 uid="uid://ck8fkn5d08qgy"]
+
+[ext_resource type="Script" uid="uid://budyq2mxcg0tx" path="res://scripts/Encounter/Challenge/combination.gd" id="1_rkd7g"]
+
+[resource]
+script = ExtResource("1_rkd7g")
+name = "Pure"
+description = "All Ingredients share a Tag: [+30%] to all Flavours except the strongest"
+types = Array[int]([0])
+rarity = 2
+metadata/_custom_type_script = "uid://budyq2mxcg0tx"

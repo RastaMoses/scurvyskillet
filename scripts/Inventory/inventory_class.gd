@@ -93,6 +93,8 @@ func add_card(card):
 
 #region Inventory Funcitons
 func instantiate_card_and_add(resource:Ingredient):
+	if resource == null:
+		return
 	var temp_card:Node = card_prefab.instantiate()
 	temp_card.set_stats(resource.duplicate(true), resource)
 	var new_card = add_card(temp_card)
@@ -221,14 +223,20 @@ func get_cards_with_tags(tags:Array[GlobalEnums.Tags], card_pool:Array[Card] = c
 
 func can_cover_tags(required_tags:Array[GlobalEnums.Tags], card_pool:Array[Card] = current_cards) -> bool:
 	#Check if cards can cover all required tags, with each card counting for only one tag.
-	var cards = get_cards_with_tags(required_tags, card_pool)
-	var available_cards = cards.duplicate()
+	var cards:Array[Card] = get_cards_with_tags(required_tags, card_pool)
+	var available_cards:Array[Card] = cards.duplicate()
 	var tags_to_cover = required_tags.duplicate()
 	if cards.size() < required_tags.size():
 		return false
-	tags_to_cover.sort_custom(func(a, b): 
-		var count_a = available_cards.count(func(card): return card.committed_stats.tags.has(a))
-		var count_b = available_cards.count(func(card): return card.committed_stats.tags.has(b))
+	tags_to_cover.sort_custom(func(a, b):
+		var count_a = 0
+		for card in available_cards:
+			if card.committed_stats.tags.has(a):
+				count_a += 1
+		var count_b = 0
+		for card in available_cards:
+			if card.committed_stats.tags.has(b):
+				count_b += 1
 		return count_a < count_b)
 	for tag in tags_to_cover:
 		var found_card_idx = -1
@@ -381,7 +389,7 @@ func get_greatest_flavour(flavours_pool) -> GlobalEnums.Flavour:
 			max_index = i
 	return max_index
 
-func get_lowest_flavour(flavours_pool:Array[int] = get_flavours_sum(current_cards)) -> GlobalEnums.Flavour:
+func get_lowest_flavour(flavours_pool:Dictionary = get_flavours_sum(current_cards)) -> GlobalEnums.Flavour:
 	var flavours_dup = flavours_pool.duplicate()
 	var min_index:int = 0
 	for i in range(1, flavours_dup.size()):
@@ -394,7 +402,7 @@ func get_flavours_sum(card_pool:Array[Card] = current_cards):
 	for card in card_pool:
 		var card_flavours = card.get_flavours()
 		for flavour in GlobalEnums.Flavour:
-			flavour_sums[flavour] += card_flavours[flavour]
+			flavour_sums[GlobalEnums.Flavour[flavour]] += card_flavours[GlobalEnums.Flavour[flavour]]
 	return flavour_sums
 #endregion
 

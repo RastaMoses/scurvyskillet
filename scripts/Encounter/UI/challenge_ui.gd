@@ -93,7 +93,6 @@ func toggle_disable_buttons(value):
 	ladle_highlight.visible = false
 
 func toggle_mouse_filter(node:Control, value:bool):
-	print("toggle mouse filter challenge ui")
 	if value:
 		node.mouse_filter = MouseFilter.MOUSE_FILTER_STOP
 	else:

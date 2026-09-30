@@ -22,7 +22,7 @@ var mult_nutrition:Array[float] = [1.0]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var dir_path := "res://resources/combinations/"
+	var dir_path := "res://resources/combinations/ingame/"
 	var paths : PackedStringArray = ResourceLoader.list_directory(dir_path)
 	if paths == null: printerr("Could not get Combination folder")
 	for path in paths:
@@ -75,8 +75,7 @@ func check_combinations():
 #region Stats
 #Check for stats
 	#Lacking
-	if (dish.nutrition < 0
-	or dish.flavours[GlobalEnums.Flavour.SWEET] < 0
+	if (dish.flavours[GlobalEnums.Flavour.SWEET] < 0
 	or dish.flavours[GlobalEnums.Flavour.SPICY] < 0
 	or dish.flavours[GlobalEnums.Flavour.HEARTY] < 0
 	or dish.flavours[GlobalEnums.Flavour.FRESH] < 0):
@@ -225,10 +224,12 @@ func check_combinations():
 	#Pizza
 	var pizza_dough_cards = dish.get_cards_of_ingredient(item_pool.get_ingredient_by_name("Dough"))
 	var pizza_tomato_cards = dish.get_cards_of_ingredient(item_pool.get_ingredient_by_name("Tomato"))
+	var pizza_cheese_cards = dish.get_cards_of_ingredient(item_pool.get_ingredient_by_name("Cheese"))
 	if (pizza_dough_cards.size() > 0
 	and pizza_tomato_cards.size() > 0
-	and dish.current_cards.size() >= 3):
-		set_comb_active("Pizza",[pizza_dough_cards, pizza_tomato_cards])
+	and pizza_cheese_cards.size() > 0
+	and dish.current_cards.size() >= 4):
+		set_comb_active("Pizza",[pizza_dough_cards, pizza_tomato_cards, pizza_cheese_cards])
 	
 	#Sushi
 	var sushi_seaweed_cards = dish.get_cards_of_ingredient(item_pool.get_ingredient_by_name("Seaweed"))
@@ -295,21 +296,25 @@ func check_combinations():
 		set_comb_active("Split Opinion", [split_opinion_cards])
 	
 	#----------------------Check Ingredients in combs--------
-	#Rising Dough 
+	#Sourdough Rising 
 	var dough = item_pool.get_ingredient_by_name("Dough")
 	var dough_cards = dish.get_cards_of_ingredient(dough)
 	if (not dough_cards.is_empty()
 	and dish.get_cards_of_ingredient(dough, all_cards_used).is_empty()):
-		set_comb_active("Rising Dough", [dough_cards])
+		set_comb_active("Sourdough Rising", [dough_cards])
 	#--------------------------Check all combs-----------------
 	#Based 
 	var based_cards:Dictionary[Card, int]
 	#Get combination amount card is used in (no duplicates per combination)
 	for combination in active_combinations:
-		var combination_cards:Array
-		for card_array in combination:
-			for card in card_array:
+		print(str(combination.name) + " -  Array iterated")
+		var combination_cards:Array[Card]
+		for card_array:Array[Card] in active_combinations[combination]:
+			for card:Card in card_array:
+				print(card.committed_stats.name)
 				if not combination_cards.has(card):
+					if not based_cards.has(card):
+						based_cards[card] = 0
 					based_cards[card] += 1
 					combination_cards.append(card)
 	var based_cards_finalists:Array[Card]
@@ -353,17 +358,22 @@ func activate_effects():
 					if i != dish.get_greatest_flavour(dish.flavours):
 						mult_flavours[i].append(1.5)
 			"Salad":
-				mult_flavours[GlobalEnums.Flavour.FRESH].append(1.5)
+				mult_flavours[GlobalEnums.Flavour.FRESH].append(1.3)
 			"Sushi":
 				var sushi_mult:float
-				sushi_mult = 1.0 + (float(dish.current_cards.size()) * 0.1)
+				var unique_cards
+				for card_array in active_combinations[get_combination_by_name("Sushi")]:
+					for card in card_array:
+						if not unique_cards.has(card):
+							unique_cards.append(card)
+				sushi_mult = 1.0 + (float(unique_cards.size()) * 0.1)
 				mult_nutrition.append(sushi_mult)
 			"Topping":
 				#Get second to last card
 				var second_last_card_flavours = dish.current_cards[dish.current_cards.size()-2].get_flavours()
 				for flavour in GlobalEnums.Flavour:
-					if second_last_card_flavours[flavour] > 0:
-						mult_flavours[flavour].append(1.3)
+					if second_last_card_flavours[GlobalEnums.Flavour[flavour]] > 0:
+						mult_flavours[GlobalEnums.Flavour[flavour]].append(1.3)
 			"Deep Fried":
 				mult_flavours[GlobalEnums.Flavour.HEARTY].append(2.0)
 				mult_nutrition.append(2.0)
@@ -386,14 +396,14 @@ func activate_effects():
 			"Scoville Hell":
 				mult_nutrition.append(0.5)
 				for flavour in GlobalEnums.Flavour:
-					if flavour == GlobalEnums.Flavour.SPICY:
-						mult_flavours[flavour].append(2.0)
+					if GlobalEnums.Flavour[flavour] == GlobalEnums.Flavour.SPICY:
+						mult_flavours[GlobalEnums.Flavour[flavour]].append(2.0)
 					else:
-						mult_flavours[flavour].append(0.5)
+						mult_flavours[GlobalEnums.Flavour[flavour]].append(0.75)
 			"Slop":
 				mult_nutrition.append(0.5)
 				for flavour in GlobalEnums.Flavour:
-					mult_flavours[flavour].append(0.5)
+					mult_flavours[GlobalEnums.Flavour[flavour]].append(0.5)
 			
 		#endregion
 		#region Player
@@ -429,7 +439,7 @@ func activate_effects():
 					player.instantiate_card_and_add(item_pool.get_ingredient_by_name("Beer"))
 			"Rum":
 				player.instantiate_card_and_add(item_pool.get_ingredient_by_name("Rum"))
-			"Rising Dough":
+			"Sourdough Rising":
 				player.instantiate_card_and_add(item_pool.get_random_ingredient(true, [GlobalEnums.Tags.PASTRY]))
 			"Based":
 				#Get Comb Card Tags

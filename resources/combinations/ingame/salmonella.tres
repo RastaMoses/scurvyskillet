@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Combination" format=3 uid="uid://by8e78pyvxnf0"]
+
+[ext_resource type="Script" uid="uid://budyq2mxcg0tx" path="res://scripts/Encounter/Challenge/combination.gd" id="1_dn1gp"]
+
+[resource]
+script = ExtResource("1_dn1gp")
+name = "Salmonella"
+description = "A Fish, Meat and Monster Ingredient used: Lose 1 Morale"
+types = Array[int]([3])
+rarity = 4
+metadata/_custom_type_script = "uid://budyq2mxcg0tx"

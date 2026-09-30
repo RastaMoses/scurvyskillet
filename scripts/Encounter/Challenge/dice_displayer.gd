@@ -29,7 +29,7 @@ func finish_dish():
 		die.stop_movement()
 	event_manager.dish_finish_animation_done()
 
-func spawn_die(flavour, value, card:Node):
+func spawn_die(flavour:GlobalEnums.Flavour, value, card:Node):
 	#get point dropped inside static body or closest point if outside
 	var rand_pos = Vector2(random.randf_range(-random_spawn_offset,random_spawn_offset),random.randf_range(-random_spawn_offset,random_spawn_offset))
 	var mouse_pos = rand_pos + get_global_mouse_position()

@@ -104,8 +104,8 @@ func check_completed():
 	for flavour in GlobalEnums.Flavour:
 		var sum = 0
 		for i in current_cards:
-			sum += i.get_flavours()[flavour]
-		if sum < get_req_flavours()[flavour]:
+			sum += i.get_flavours()[GlobalEnums.Flavour[flavour]]
+		if sum < get_req_flavours()[GlobalEnums.Flavour[flavour]]:
 			return
 	var sum = 0
 	for i in current_cards:
