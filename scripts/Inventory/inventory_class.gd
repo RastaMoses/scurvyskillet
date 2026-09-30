@@ -145,31 +145,31 @@ func stop_card_drag():
 #endregion
 
 #region Get Info
-func count_ingredient_in_inventory(target:Ingredient) -> int:
+func count_ingredient_in_inventory(target:Ingredient, card_pool:Array[Card] = current_cards) -> int:
 	var count = 0
-	for card in current_cards:
+	for card in card_pool:
 		if card.base_stats == target:
 			count += 1
 	return count
 
-func get_cards_of_ingredient(search:Ingredient) -> Array[Card]:
+func get_cards_of_ingredient(search:Ingredient, card_pool:Array[Card] = current_cards) -> Array[Card]:
 	var cards:Array[Card]
-	for card in current_cards:
+	for card in card_pool:
 		if card.base_stats == search:
 			cards.append(card)
 	return cards
 
-func get_unique_base_ingredients() -> Array[Ingredient]:
+func get_unique_base_ingredients(card_pool:Array[Card] = current_cards) -> Array[Ingredient]:
 	var unique_ingr:Array[Ingredient]
-	for i in current_cards:
+	for i in card_pool:
 		if unique_ingr.has(i.base_stats):
 			continue
 		unique_ingr.append(i.base_stats)
 	return unique_ingr
 
-func get_rarity_amount_in_inventory(search) -> int:
+func get_rarity_amount_in_inventory(search, card_pool:Array[Card] = current_cards) -> int:
 	var rarity_ingr:Array[Card]
-	for i in current_cards:
+	for i in card_pool:
 		if rarity_ingr.has(i):
 			continue
 		if i.committed_stats.rarity == search:
@@ -192,36 +192,36 @@ func get_indexes_of_ingredient(ingredient:Ingredient) -> Array[int]:
 
 #endregion
 #region Tags
-func get_tags_in_inventory() -> Array[GlobalEnums.Tags]:
+func get_tags_in_inventory(card_pool:Array[Card] = current_cards) -> Array[GlobalEnums.Tags]:
 	var tags:Array[GlobalEnums.Tags]
-	for card in current_cards:
+	for card in card_pool:
 		for tag in card.committed_stats.tags:
 			if not tags.has(tag):
 				tags.append(tag)
 	return tags
 
-func get_all_cards_with_tag(search_tag:GlobalEnums.Tags) -> Array[Card]:
+func get_all_cards_with_tag(search_tag:GlobalEnums.Tags, card_pool:Array[Card] = current_cards) -> Array[Card]:
 	var tag_ingr:Array[Card]
-	for i in current_cards:
+	for i in card_pool:
 		if tag_ingr.has(i):
 			continue
 		if i.committed_stats.tags.has(search_tag):
 			tag_ingr.append(i)
 	return tag_ingr
 
-func get_cards_with_tags(tags:Array[GlobalEnums.Tags]) -> Array[Card]:
+func get_cards_with_tags(tags:Array[GlobalEnums.Tags], card_pool:Array[Card] = current_cards) -> Array[Card]:
 	var cards_with_tags:Array[Card]
 	for tag in tags:
-		var tag_cards = get_all_cards_with_tag(tag)
+		var tag_cards = get_all_cards_with_tag(tag, card_pool)
 		for card in tag_cards:
 			if cards_with_tags.has(card):
 				cards_with_tags.erase(card)
 		cards_with_tags.append_array(tag_cards)
 	return cards_with_tags
 
-func can_cover_tags(required_tags:Array[GlobalEnums.Tags]) -> bool:
+func can_cover_tags(required_tags:Array[GlobalEnums.Tags], card_pool:Array[Card] = current_cards) -> bool:
 	#Check if cards can cover all required tags, with each card counting for only one tag.
-	var cards = get_cards_with_tags(required_tags)
+	var cards = get_cards_with_tags(required_tags, card_pool)
 	var available_cards = cards.duplicate()
 	var tags_to_cover = required_tags.duplicate()
 	if cards.size() < required_tags.size():
@@ -252,36 +252,36 @@ func can_cover_tags(required_tags:Array[GlobalEnums.Tags]) -> bool:
 
 #endregion
 #region Country
-func get_countries_in_inventory() -> Array[GlobalEnums.Country]:
+func get_countries_in_inventory(card_pool:Array[Card] = current_cards) -> Array[GlobalEnums.Country]:
 	var countries:Array[GlobalEnums.Country]
-	for card in current_cards:
+	for card in card_pool:
 		for country in card.committed_stats.country:
 			if not countries.has(country):
 				countries.append(country)
 	return countries
 
-func get_all_cards_with_country(search_country:GlobalEnums.Country) -> Array[Card]:
+func get_all_cards_with_country(search_country:GlobalEnums.Country, card_pool:Array[Card] = current_cards) -> Array[Card]:
 	var country_ingr:Array[Card]
-	for i in current_cards:
+	for i in card_pool:
 		if country_ingr.has(i):
 			continue
 		if i.committed_stats.country.has(search_country):
 			country_ingr.append(i)
 	return country_ingr
 
-func get_cards_with_countries(countries:Array[GlobalEnums.Country]) -> Array[Card]:
+func get_cards_with_countries(countries:Array[GlobalEnums.Country], card_pool:Array[Card] = current_cards) -> Array[Card]:
 	var cards_with_countries:Array[Card]
 	for country in countries:
-		var country_cards = get_all_cards_with_country(country)
+		var country_cards = get_all_cards_with_country(country, card_pool)
 		for card in country_cards:
 			if cards_with_countries.has(card):
 				cards_with_countries.erase(card)
 		cards_with_countries.append_array(country_cards)
 	return cards_with_countries
 
-func can_cover_countries(required_countries:Array[GlobalEnums.Country]) -> bool:
+func can_cover_countries(required_countries:Array[GlobalEnums.Country], card_pool:Array[Card] = current_cards) -> bool:
 	#Check if cards can cover all required countries, with each card counting for only one country.
-	var cards = get_cards_with_countries(required_countries)
+	var cards = get_cards_with_countries(required_countries, card_pool)
 	var available_cards = cards.duplicate()
 	var countries_to_cover = required_countries.duplicate()
 	if cards.size() < required_countries.size():
@@ -313,36 +313,36 @@ func can_cover_countries(required_countries:Array[GlobalEnums.Country]) -> bool:
 
 #endregion
 #region Abilities
-func get_abilities_in_inventory() -> Array[Ability]:
+func get_abilities_in_inventory(card_pool:Array[Card] = current_cards) -> Array[Ability]:
 	var abilities:Array[Ability]
-	for card in current_cards:
+	for card in card_pool:
 		for ability in card.committed_stats.abilities:
 			if not abilities.has(ability):
 				abilities.append(ability)
 	return abilities
 
-func get_all_cards_with_ability(search_ability:Ability) -> Array[Card]:
+func get_all_cards_with_ability(search_ability:Ability, card_pool:Array[Card] = current_cards) -> Array[Card]:
 	var ability_ingr:Array[Card]
-	for i in current_cards:
+	for i in card_pool:
 		if ability_ingr.has(i):
 			continue
 		if i.committed_stats.abilities.has(search_ability):
 			ability_ingr.append(i)
 	return ability_ingr
 
-func get_cards_with_abilities(abilities:Array[Ability]) -> Array[Card]:
+func get_cards_with_abilities(abilities:Array[Ability], card_pool:Array[Card] = current_cards) -> Array[Card]:
 	var cards_with_abilities:Array[Card]
 	for ability in abilities:
-		var ability_cards = get_all_cards_with_ability(ability)
+		var ability_cards = get_all_cards_with_ability(ability, card_pool)
 		for card in ability_cards:
 			if cards_with_abilities.has(card):
 				cards_with_abilities.erase(card)
 		cards_with_abilities.append_array(ability_cards)
 	return cards_with_abilities
 
-func can_cover_abilities(required_abilities:Array[Ability]) -> bool:
+func can_cover_abilities(required_abilities:Array[Ability], card_pool:Array[Card] = current_cards) -> bool:
 	#Check if cards can cover all required abilities, with each card counting for only one ability.
-	var cards = get_cards_with_abilities(required_abilities)
+	var cards = get_cards_with_abilities(required_abilities, card_pool)
 	var available_cards = cards.duplicate()
 	var abilities_to_cover = required_abilities.duplicate()
 	if cards.size() < required_abilities.size():
@@ -372,6 +372,30 @@ func can_cover_abilities(required_abilities:Array[Ability]) -> bool:
 	return true
 
 #endregion
+#region Flavours
+func get_greatest_flavour(flavours_pool) -> GlobalEnums.Flavour:
+	var flavours_dup = flavours_pool.duplicate()
+	var max_index:int = 0
+	for i in range(1, flavours_dup.size()):
+		if flavours_dup[i] > flavours_pool[max_index]:
+			max_index = i
+	return max_index
 
+func get_lowest_flavour(flavours_pool:Array[int] = get_flavours_sum(current_cards)) -> GlobalEnums.Flavour:
+	var flavours_dup = flavours_pool.duplicate()
+	var min_index:int = 0
+	for i in range(1, flavours_dup.size()):
+		if flavours_dup[i] < flavours_pool[min_index]:
+			min_index = i
+	return min_index
+
+func get_flavours_sum(card_pool:Array[Card] = current_cards):
+	var flavour_sums:Array[int] = [0,0,0,0,0]
+	for card in card_pool:
+		var card_flavours = card.get_flavours()
+		for flavour in GlobalEnums.Flavour:
+			flavour_sums[flavour] += card_flavours[flavour]
+	return flavour_sums
+#endregion
 
 #endregion

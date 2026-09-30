@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Combination" format=3 uid="uid://dbsvt4uied0ko"]
+
+[ext_resource type="Script" uid="uid://budyq2mxcg0tx" path="res://scripts/Encounter/Challenge/combination.gd" id="1_0g1dg"]
+
+[resource]
+script = ExtResource("1_0g1dg")
+name = "Fine Dining"
+description = "Only Rare or Legendary Ingredients used: [+250%] to the strongest Flavour"
+types = Array[int]([0])
+rarity = 2
+metadata/_custom_type_script = "uid://budyq2mxcg0tx"

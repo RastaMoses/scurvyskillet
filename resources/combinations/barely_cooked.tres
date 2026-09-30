@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Combination" format=3 uid="uid://uohc70eejex7"]
+
+[ext_resource type="Script" uid="uid://budyq2mxcg0tx" path="res://scripts/Encounter/Challenge/combination.gd" id="1_wv468"]
+
+[resource]
+script = ExtResource("1_wv468")
+name = "Barely Cooked"
+description = "Only one type of Ingredient was used: [-50%] to all Flavours and Nutrition"
+types = Array[int]([1])
+rarity = 4
+metadata/_custom_type_script = "uid://budyq2mxcg0tx"

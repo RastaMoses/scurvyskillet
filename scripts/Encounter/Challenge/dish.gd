@@ -47,7 +47,7 @@ func recalculate_dish():
 	for die in dice:
 		add_die_value_to_dish(die)
 	#add ability stats
-	for i in range(flavours.size()):
+	for i in GlobalEnums.Flavour:
 		flavours[i] += ability_flavours[i]
 	nutrition += ability_nutrition
 func finish_dish():
@@ -97,18 +97,14 @@ func on_destroy_ingredient(origin,card:Node):
 func on_destroy_all_ingredients(origin):
 	if origin != self:
 		return
-	ability_flavours[GlobalEnums.Flavour.SWEET] = 0
-	ability_flavours[GlobalEnums.Flavour.SPICY] = 0
-	ability_flavours[GlobalEnums.Flavour.HEARTY] = 0
-	ability_flavours[GlobalEnums.Flavour.FRESH] = 0
+	for flavour in ability_flavours:
+		flavour = 0
 	ability_nutrition = 0
+	for flavour in flavours:
+		flavour = 0
+	nutrition = 0
 	for card in current_cards:
 		remove_card_from_dish(card)
-	flavours[GlobalEnums.Flavour.SWEET] = 0
-	flavours[GlobalEnums.Flavour.SPICY] = 0
-	flavours[GlobalEnums.Flavour.HEARTY] = 0
-	flavours[GlobalEnums.Flavour.FRESH] = 0
-	nutrition = 0
 	#ui
 	challenge.ui.update_flavours(self)
 	challenge.ui.update_nutrition(nutrition)
@@ -130,10 +126,9 @@ func remove_card_from_dish(card):
 
 func roll_ingredient(card:Node, dice_multiplier:int = 1):
 	abilities.on_dice_roll(card)
-	roll_dice(GlobalEnums.Flavour.SWEET, dice_multiplier*card.committed_stats.sweet,card)
-	roll_dice(GlobalEnums.Flavour.SPICY,dice_multiplier*card.committed_stats.spicy,card)
-	roll_dice(GlobalEnums.Flavour.HEARTY,dice_multiplier*card.committed_stats.hearty,card)
-	roll_dice(GlobalEnums.Flavour.FRESH,dice_multiplier*card.committed_stats.fresh,card)
+	for flavour in GlobalEnums.Flavour:
+		if flavour != GlobalEnums.Flavour.NONE:
+			roll_dice(flavour,dice_multiplier * (card.get_flavours()[flavour]), card)
 
 func roll_dice(flavour,amount,card:Node):
 	while amount > 0:
@@ -145,32 +140,12 @@ func reroll_die(die):
 	subtract_die_value_from_dish(die)
 	var roll_result = random.randi_range(1,6)
 	die.display_number(roll_result)
-	match die.flavour:
-		GlobalEnums.Flavour.SWEET:
-			flavours[GlobalEnums.Flavour.SWEET] += roll_result
-		GlobalEnums.Flavour.SPICY:
-			flavours[GlobalEnums.Flavour.SPICY] += roll_result
-		GlobalEnums.Flavour.HEARTY:
-			flavours[GlobalEnums.Flavour.HEARTY] += roll_result
-		GlobalEnums.Flavour.FRESH:
-			flavours[GlobalEnums.Flavour.FRESH] += roll_result
+	flavours[die.flavour] += roll_result
 
 #endregion
 
 #region Helper
-func get_greatest_flavour() -> GlobalEnums.Flavour:
-	var flavours_dup = flavours.duplicate()
-	var max_index:int = 0
-	for i in range(1, flavours_dup.size()):
-		if flavours_dup[i] > flavours[max_index]:
-			max_index = i
-	return max_index
 
-func get_lowest_flavour() ->GlobalEnums.Flavour:
-	var flavours_dup = flavours.duplicate()
-	var min_index:int = 0
-	for i in range(1, flavours_dup.size()):
-		if flavours_dup[i] < flavours[min_index]:
-			min_index = i
-	return min_index
+
+
 #endregion

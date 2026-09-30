@@ -55,6 +55,14 @@ func _ready() -> void:
 	dropping_ingredient.connect(on_ingredient_dropped)
 	checking_drop.connect(on_checking_drop)
 
+func get_req_flavours() -> Array[int]:
+	var flavours = [0,0,0,0,0]
+	flavours[GlobalEnums.Flavour.SWEET] = sweet
+	flavours[GlobalEnums.Flavour.SPICY] = spicy
+	flavours[GlobalEnums.Flavour.HEARTY] = hearty
+	flavours[GlobalEnums.Flavour.FRESH] = fresh
+	return flavours
+
 func on_checking_drop(origin, card):
 	if origin != self:
 		return
@@ -93,34 +101,16 @@ func check_completed():
 	if (current_cards.size() < ingredient_amount):
 		return
 	#values
-	var sweet_sum = 0
+	for flavour in GlobalEnums.Flavour:
+		var sum = 0
+		for i in current_cards:
+			sum += i.get_flavours()[flavour]
+		if sum < get_req_flavours()[flavour]:
+			return
+	var sum = 0
 	for i in current_cards:
-		sweet_sum += i.committed_stats.sweet
-	if sweet_sum < sweet:
-		return
-		
-	var spicy_sum = 0
-	for i in current_cards:
-		spicy_sum += i.committed_stats.spicy
-	if spicy_sum < spicy:
-		return
-	
-	var hearty_sum = 0
-	for i in current_cards:
-		hearty_sum += i.committed_stats.hearty
-	if hearty_sum < hearty:
-		return
-	
-	var fresh_sum = 0
-	for i in current_cards:
-		fresh_sum += i.committed_stats.fresh
-	if fresh_sum < fresh:
-		return
-	
-	var nutrition_sum = 0
-	for i in current_cards:
-		nutrition_sum += i.committed_stats.nutrition
-	if nutrition_sum < nutrition:
+		sum += i.committed_stats.nutrition
+	if sum < nutrition:
 		return
 	complete()
 

@@ -27,3 +27,10 @@ func begin_preview(new_preview_stats:Ingredient):
 	preview_stats = new_preview_stats
 	stats = preview_stats
 	
+func get_flavours() -> Array[int]:
+	var flavours:Array[int] = [0,0,0,0,0]
+	flavours[GlobalEnums.Flavour.SWEET] = committed_stats.sweet
+	flavours[GlobalEnums.Flavour.SPICY] = committed_stats.spicy
+	flavours[GlobalEnums.Flavour.HEARTY] = committed_stats.hearty
+	flavours[GlobalEnums.Flavour.FRESH] = committed_stats.fresh
+	return flavours

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Combination" format=3 uid="uid://dpyllgrm6msob"]
+
+[ext_resource type="Script" uid="uid://budyq2mxcg0tx" path="res://scripts/Encounter/Challenge/combination.gd" id="1_1hrwt"]
+
+[resource]
+script = ExtResource("1_1hrwt")
+name = "Chocolate"
+description = "Cacao, Sugar and any Dairy used: Create Chocolate times the amount of Sugar and Dairy used"
+types = Array[int]([2])
+rarity = 2
+metadata/_custom_type_script = "uid://budyq2mxcg0tx"

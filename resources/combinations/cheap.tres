@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Combination" format=3 uid="uid://bni4k4u5kgycl"]
+
+[ext_resource type="Script" uid="uid://budyq2mxcg0tx" path="res://scripts/Encounter/Challenge/combination.gd" id="1_eliyr"]
+
+[resource]
+script = ExtResource("1_eliyr")
+name = "Cheap"
+description = "Only Common Ingredients used: Gain [5] Money"
+types = Array[int]([3])
+metadata/_custom_type_script = "uid://budyq2mxcg0tx"
