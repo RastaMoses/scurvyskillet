@@ -31,7 +31,7 @@ func _ready() -> void:
 			all_combinations.append(ingr)
 
 #region Helper
-func set_comb_active(c_name, cards:Array = [[]]):
+func set_comb_active(c_name, cards = [[]]):
 	var combination = get_combination_by_name(c_name)
 	if combination == null:
 		return
@@ -138,7 +138,8 @@ func check_combinations():
 	var smoothie_fruit_cards = dish.get_all_cards_with_tag(GlobalEnums.Tags.FRUIT)
 	var smoothie_drink_cards = dish.get_all_cards_with_tag(GlobalEnums.Tags.DRINK)
 	if (dish.current_cards.size() > 1
-	and smoothie_fruit_cards.size() == smoothie_drink_cards.size()):
+	and smoothie_fruit_cards.size() == smoothie_drink_cards.size()
+	and smoothie_fruit_cards.size() > 0):
 		set_comb_active("Smoothie", [smoothie_drink_cards, smoothie_fruit_cards])
 	
 	#Parfait
@@ -278,7 +279,7 @@ func check_combinations():
 					dolmades_activates = true
 					break
 		if dolmades_activates:
-			set_comb_active("Dolmades" [dolmades_used_cards])
+			set_comb_active("Dolmades", [dolmades_used_cards])
 	
 	#Topping
 	if (dish.current_cards.size() >= 2
@@ -309,7 +310,7 @@ func check_combinations():
 	for combination in active_combinations:
 		print(str(combination.name) + " -  Array iterated")
 		var combination_cards:Array[Card]
-		for card_array:Array[Card] in active_combinations[combination]:
+		for card_array:Array in active_combinations[combination]:
 			for card:Card in card_array:
 				print(card.committed_stats.name)
 				if not combination_cards.has(card):
@@ -349,19 +350,23 @@ func activate_effects():
 			"Dolmades":
 				mult_flavours[GlobalEnums.Flavour.HEARTY].append(1.5)
 			"Fine Dining":
-				mult_flavours[dish.get_greatest_flavour(dish)].append(1.5)
+				for flavour in dish.get_greatest_flavours(dish.flavours):
+					mult_flavours[flavour].append(1.5)
 			"Fusion Kitchen":
-				mult_flavours[dish.get_greatest_flavour(dish.flavours)].append(1.5)
-				mult_flavours[dish.get_lowest_flavour(dish.flavours)].append(1.5)
+				for flavour in dish.get_greatest_flavours(dish.flavours):
+					mult_flavours[flavour].append(1.5)
+				for flavour in dish.get_lowest_flavours(dish.flavours):
+					mult_flavours[flavour].append(1.5)
 			"Pure":
-				for i in range(0,mult_flavours.size()):
-					if i != dish.get_greatest_flavour(dish.flavours):
-						mult_flavours[i].append(1.5)
+				for flavour in dish.get_greatest_flavours(dish.flavours):
+					for i in range(0,mult_flavours.size()):
+						if i != flavour:
+							mult_flavours[i].append(1.5)
 			"Salad":
 				mult_flavours[GlobalEnums.Flavour.FRESH].append(1.3)
 			"Sushi":
 				var sushi_mult:float
-				var unique_cards
+				var unique_cards = []
 				for card_array in active_combinations[get_combination_by_name("Sushi")]:
 					for card in card_array:
 						if not unique_cards.has(card):
@@ -391,8 +396,9 @@ func activate_effects():
 				mult_nutrition.append(float(2.0/3.0))
 			"Overseasoned":
 				var spices = dish.get_all_cards_with_tag(GlobalEnums.Tags.SPICE)
-				var lowest_flav = dish.get_lowest_flavour(spices)
-				mult_flavours[lowest_flav].append(0.0)
+				var lowest_flav = dish.get_lowest_flavours(spices)
+				for flavour in lowest_flav:
+					mult_flavours[flavour].append(0.0)
 			"Scoville Hell":
 				mult_nutrition.append(0.5)
 				for flavour in GlobalEnums.Flavour:
@@ -460,12 +466,12 @@ func activate_effects():
 		challenge.ui.update_nutrition(upgraded_dish.nutrition)
 
 func apply_multipliers():
-	for i in range(upgraded_dish.flavours.size()):
-		var modified:float = float(upgraded_dish.flavours[i])
-		for mult in mult_flavours[i]:
-			modified = modified * mult
+	for flavour in GlobalEnums.Flavour:
+		var modified_flav:float = float(upgraded_dish.flavours[GlobalEnums.Flavour[flavour]])
+		for mult in mult_flavours[GlobalEnums.Flavour[flavour]]:
+			modified_flav = modified_flav * mult
 			#Here all single modifiers are applied (FOR animation relevant?)
-		upgraded_dish.flavours[i] = floori(modified)
+		upgraded_dish.flavours[GlobalEnums.Flavour[flavour]] = floori(modified_flav)
 	var modified:float = upgraded_dish.nutrition
 	for mult in mult_nutrition:
 		modified = modified * mult

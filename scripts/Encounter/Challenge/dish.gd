@@ -52,8 +52,7 @@ func recalculate_dish():
 	for i in GlobalEnums.Flavour:
 		flavours[GlobalEnums.Flavour[i]] += ability_flavours[GlobalEnums.Flavour[i]]
 	nutrition += ability_nutrition
-func finish_dish():
-	dice_disp.finish_dish()
+	
 
 #region inventory signals
 func on_start_drag(origin, card):

@@ -66,7 +66,7 @@ func update_slots():
 		if (inventory.current_cards.size() > i):
 			slots[i].update(inventory.current_cards[i])
 		else:
-			if i > min_slots:
+			if i > min_slots - 1:
 				slots_to_remove += 1
 			else:
 				slots[i].update(null)
@@ -109,7 +109,7 @@ func close():
 #region Ability UI
 func card_dragged(card):
 	inventory.set_card_drag(card)
-func card_drag_ended(card):
+func card_drag_ended(_card):
 	inventory.stop_card_drag()
 #endregion
 

@@ -232,7 +232,7 @@ func _can_drop_data(_at_position: Vector2, _data: Variant) -> bool:
 		return false
 	return true
 	
-func _drop_data(at_position: Vector2, data: Variant) -> void:
+func _drop_data(_at_position: Vector2, data: Variant) -> void:
 	var tmp = card
 	card = data.card
 	item_visual.show()
@@ -258,7 +258,7 @@ func stopped_drag():
 			dragging = false
 			update(card)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if !dragging_preview:
 		return
 	var new_pos = get_global_mouse_position() - drag_pos_offset

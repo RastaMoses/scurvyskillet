@@ -21,6 +21,11 @@
 [ext_resource type="Resource" uid="uid://cudhcbra3g05f" path="res://resources/ingredients/in_game/grapes.tres" id="13_ir15t"]
 [ext_resource type="Resource" uid="uid://c23ashl5vqhq8" path="res://resources/ingredients/in_game/orange_juice.tres" id="14_bt5mj"]
 [ext_resource type="Resource" uid="uid://dqqv70e8mb1j5" path="res://resources/ingredients/in_game/orange_cake.tres" id="14_ca42v"]
+[ext_resource type="Resource" uid="uid://c366pnymwc305" path="res://resources/ingredients/in_game/balsamico.tres" id="20_bhx41"]
+[ext_resource type="Resource" uid="uid://ml7hmdoqdh1i" path="res://resources/ingredients/in_game/bread.tres" id="21_qnb83"]
+[ext_resource type="Resource" uid="uid://cw25o02wmlgwb" path="res://resources/ingredients/in_game/trojan_salami.tres" id="22_sww3w"]
+[ext_resource type="Resource" uid="uid://ytpkfsy15x04" path="res://resources/ingredients/in_game/tsoureki.tres" id="23_suyxu"]
+[ext_resource type="Resource" uid="uid://bsboei8v6c4x5" path="res://resources/ingredients/in_game/skyllamari.tres" id="24_sgl2t"]
 
 [node name="game" type="Node2D" unique_id=1075341061]
 script = ExtResource("1_vtaks")
@@ -85,7 +90,7 @@ script = ExtResource("4_dinhu")
 [node name="Inventory" parent="Player" unique_id=421132193 groups=["player"] instance=ExtResource("5_kvuet")]
 current_money = 100
 current_morale = 5
-starting_ingredients = Array[ExtResource("7_ca42v")]([ExtResource("8_rysoc"), ExtResource("11_1kice"), ExtResource("12_5newe"), ExtResource("13_37s47"), ExtResource("14_bt5mj"), ExtResource("13_ir15t"), ExtResource("13_ir15t"), ExtResource("12_5newe"), ExtResource("14_ca42v")])
+starting_ingredients = Array[ExtResource("7_ca42v")]([ExtResource("8_rysoc"), ExtResource("11_1kice"), ExtResource("12_5newe"), ExtResource("13_37s47"), ExtResource("14_bt5mj"), ExtResource("13_ir15t"), ExtResource("13_ir15t"), ExtResource("12_5newe"), ExtResource("14_ca42v"), ExtResource("20_bhx41"), ExtResource("21_qnb83"), ExtResource("21_qnb83"), ExtResource("22_sww3w"), ExtResource("23_suyxu"), ExtResource("24_sgl2t")])
 
 [node name="debug_mouse" parent="." unique_id=2141378264 instance=ExtResource("8_ca42v")]
 

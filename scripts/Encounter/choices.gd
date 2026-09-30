@@ -84,7 +84,7 @@ func on_checking_drop(origin, card):
 	drop_highlight.visible = droppable
 	can_drop_card = droppable
 
-func on_ingredient_dropped(origin, card):
+func on_ingredient_dropped(origin, _card):
 	if origin != self:
 		return
 	check_completed()
@@ -102,15 +102,15 @@ func check_completed():
 		return
 	#values
 	for flavour in GlobalEnums.Flavour:
-		var sum = 0
+		var sum1 = 0
 		for i in current_cards:
-			sum += i.get_flavours()[GlobalEnums.Flavour[flavour]]
-		if sum < get_req_flavours()[GlobalEnums.Flavour[flavour]]:
+			sum1 += i.get_flavours()[GlobalEnums.Flavour[flavour]]
+		if sum1 < get_req_flavours()[GlobalEnums.Flavour[flavour]]:
 			return
-	var sum = 0
+	var sum2 = 0
 	for i in current_cards:
-		sum += i.committed_stats.nutrition
-	if sum < nutrition:
+		sum2 += i.committed_stats.nutrition
+	if sum2 < nutrition:
 		return
 	complete()
 

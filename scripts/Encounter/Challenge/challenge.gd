@@ -61,10 +61,11 @@ extends Control
 @onready var event_manager = get_tree().get_first_node_in_group("event_manager")
 @onready var item_pool = get_tree().get_first_node_in_group("ingredient_pool")
 @onready var ability_manager = get_tree().get_first_node_in_group("ability_manager")
-@onready var combination_manager = get_tree().get_first_node_in_group("combination_manager")
+@onready var combination_manager:CombinationManager = get_tree().get_first_node_in_group("combination_manager")
 @onready var dish_node = $Dish
 @onready var map_node = get_parent()
 @onready var ui = $UI
+@onready var dice_disp = $Dish/Dice_Display
 
 #SIGNAL CONNECTIONS
 
@@ -92,8 +93,8 @@ func start():
 	ability_manager.on_challenge_start(dish_node)
 
 func end():
-	
 	await ui.end_challenge_pressed
+	compare_dish(combination_manager.upgraded_dish)
 	map_node.end_encounter()
 	give_rewards()
 	queue_free()
@@ -171,12 +172,14 @@ func compare_dish(completed_dish):
 		#success
 
 func finish_dish():
-	dish_node.finish_dish()
+	dice_disp.finish_dish()
+	event_manager.dish_finish_animation_done()
 	await event_manager.on_dish_finish_anim_done
 	ui.toggle_result_screen(true)
 	combination_manager.start_combinations(dish_node)
-	compare_dish(combination_manager.upgraded_dish)
-
+	ui.update_flavours(combination_manager.upgraded_dish)
+	ui.update_nutrition(combination_manager.upgraded_dish.nutrition)
+	end()
 func reset_dish():
 	dish_node.destroy_all_ingredients()
 

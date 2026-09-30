@@ -27,7 +27,7 @@ var highlighted_dice: Array[RigidBody2D]
 func finish_dish():
 	for die in dice:
 		die.stop_movement()
-	event_manager.dish_finish_animation_done()
+		die.set_preview()
 
 func spawn_die(flavour:GlobalEnums.Flavour, value, card:Node):
 	#get point dropped inside static body or closest point if outside

@@ -44,7 +44,6 @@ var temp_highlighted:bool
 #Signals
 
 func start_move():
-	var rand_power = random.randf_range(random_power.x,random_power.y)
 	var rand_dir = Vector2(random.randf_range(-1,1),random.randf_range(-1,1))
 	linear_velocity = rand_dir * random_power
 

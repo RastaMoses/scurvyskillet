@@ -128,6 +128,7 @@ texture = SubResource("PlaceholderTexture2D_2kgow")
 [node name="ScrollContainer" type="ScrollContainer" parent="InventoryUI" unique_id=79906176 node_paths=PackedStringArray("horizontal_hint_left", "horizontal_hint_right")]
 custom_minimum_size = Vector2(1920, 304)
 custom_maximum_size = Vector2(1920, 304)
+clip_contents = false
 layout_mode = 0
 offset_top = 784.0
 offset_right = 1920.0

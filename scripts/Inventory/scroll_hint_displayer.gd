@@ -69,7 +69,7 @@ func _update_hints() -> void:
 	if can_scroll_h:
 		var h_scroll: HScrollBar = get_h_scroll_bar()
 		var at_left: bool = h_scroll.value <= h_scroll.min_value + 0.01
-		var at_right: bool = h_scroll.value >= (h_scroll.max_value - h_scroll.page) - 0.01
+		var at_right: bool = h_scroll.value >= h_scroll.max_value - 0.01
 		if horizontal_hint_left:
 			horizontal_hint_left.visible = not at_left
 		# Right hint: show when we can scroll right (i.e., NOT at right edge)
@@ -81,20 +81,13 @@ func _update_hints() -> void:
 		if horizontal_hint_right:
 			horizontal_hint_right.visible = false
 func _can_scroll_vertical() -> bool:
-	var content_height: float = 0.0
-	if get_child_count() > 0:
-		var child: Control = get_child(0) as Control
-		if child:
-			content_height = child.get_rect().size.y
-
+	if not grid_container:
+		return false
+	var content_height: float = grid_container.get_rect().size.y
 	return content_height > size.y
 
-
 func _can_scroll_horizontal() -> bool:
-	var content_width: float = 0.0
-	if get_child_count() > 0:
-		var child: Control = get_child(0) as Control
-		if child:
-			content_width = child.get_rect().size.x
-
+	if not grid_container:
+		return false
+	var content_width: float = grid_container.get_rect().size.x
 	return content_width > size.x

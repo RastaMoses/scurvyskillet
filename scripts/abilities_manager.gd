@@ -35,11 +35,11 @@ func _ready() -> void:
 
 #---------Ability Collection---------
 #region Abilties Collection
-func get_ability_by_name(name:String) -> Ability:
+func get_ability_by_name(abil_name:String) -> Ability:
 	for i in all_abilities:
-		if i.name == name:
+		if i.name == abil_name:
 			return i
-	printerr("Could not find ingredient with this name: " + name)
+	printerr("Could not find ingredient with this name: " + abil_name)
 	return null
 #endregion
 #------------Trigger Management-----------------------
@@ -174,7 +174,6 @@ func check_target_filter(ability, context_card) -> bool:
 		#rarity filter
 		if not ability.card_rarity_filter.is_empty():
 			var card_rarity = context_card.committed_stats.rarity  # ensure this exists
-			var has_all = true
 			if not ability.card_rarity_filter.has(card_rarity):
 				return false
 		#Ability filter (OR)

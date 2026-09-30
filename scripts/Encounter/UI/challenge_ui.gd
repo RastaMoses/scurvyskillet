@@ -64,7 +64,7 @@ func _ready() -> void:
 	result_end_button.pressed.connect(_on_end_button_pressed)
 	drop_area.mouse_exited.connect(_on_drop_area_mouse_exited)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if active_plates != current_nutrition and !plate_anim_active and current_nutrition < nutrition_plates.size():
 		animate_plates()
 
@@ -98,15 +98,9 @@ func toggle_mouse_filter(node:Control, value:bool):
 	else:
 		node.mouse_filter = MouseFilter.MOUSE_FILTER_IGNORE
 
-func add_combination_result_text(combination):
-	var new_text_box = result_text_combination_box.duplicate()
-	result_text_vbox.add_child(new_text_box)
-	var new_text = combination.name + " - " + combination.description
-	new_text_box.text = new_text
-
-func update_flavours(dish):
+func update_flavours(dish, force_show:bool = false):
 	sweet_text.text = str(dish.flavours[GlobalEnums.Flavour.SWEET])
-	if dish.flavours[GlobalEnums.Flavour.SWEET] == 0:
+	if dish.flavours[GlobalEnums.Flavour.SWEET] == 0 and not force_show:
 		sweet_text.visible = false
 		if !sweet_bg_moved:
 			sweet_bg.start_moving_to_destination(Vector2(sweet_bg.global_position.x + result_bg_move_x,
@@ -118,7 +112,7 @@ func update_flavours(dish):
 		sweet_bg_moved = false
 	
 	spicy_text.text = str(dish.flavours[GlobalEnums.Flavour.SPICY])
-	if dish.flavours[GlobalEnums.Flavour.SPICY] == 0:
+	if dish.flavours[GlobalEnums.Flavour.SPICY] == 0 and not force_show:
 		spicy_text.visible = false
 		if !spicy_bg_moved:
 			spicy_bg.start_moving_to_destination(Vector2(spicy_bg.global_position.x + result_bg_move_x,
@@ -130,7 +124,7 @@ func update_flavours(dish):
 		spicy_bg_moved = false
 	
 	hearty_text.text = str(dish.flavours[GlobalEnums.Flavour.HEARTY])
-	if dish.flavours[GlobalEnums.Flavour.HEARTY] == 0:
+	if dish.flavours[GlobalEnums.Flavour.HEARTY] == 0 and not force_show:
 		hearty_text.visible = false
 		if !hearty_bg_moved:
 			hearty_bg.start_moving_to_destination(Vector2(hearty_bg.global_position.x + result_bg_move_x,
@@ -142,7 +136,7 @@ func update_flavours(dish):
 		hearty_bg_moved = false
 	
 	fresh_text.text = str(dish.flavours[GlobalEnums.Flavour.FRESH])
-	if dish.flavours[GlobalEnums.Flavour.FRESH] == 0:
+	if dish.flavours[GlobalEnums.Flavour.FRESH] == 0 and not force_show:
 		fresh_text.visible = false
 		if !fresh_bg_moved:
 			fresh_bg.start_moving_to_destination(Vector2(fresh_bg.global_position.x + result_bg_move_x,
@@ -162,6 +156,7 @@ func update_nutrition(new_value: Variant) -> void:
 	else:
 		nutrition_shadow.visible = false
 		nutrition_text.visible = false
+
 func animate_plates():
 	plate_anim_active = true
 	var plate_diff = current_nutrition - active_plates
@@ -174,7 +169,14 @@ func animate_plates():
 		await get_tree().create_timer(1.0/plate_anim_speed).timeout
 		active_plates -= 1
 	plate_anim_active = false
+#region Result Screen
+func add_combination_result_text(combination):
+	var new_text_box = result_text_combination_box.duplicate()
+	result_text_vbox.add_child(new_text_box)
+	var new_text = combination.name + " - " + combination.description
+	new_text_box.text = new_text
 
+#endregion
 #region Button Inputs
 func _on_reset_button_pressed() -> void:
 	reset_dish_pressed.emit()

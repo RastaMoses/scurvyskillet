@@ -12,6 +12,7 @@ name = "Orange Cake"
 icon = ExtResource("3_73ogr")
 tags = Array[int]([5, 11, 14])
 rarity = 2
+description = "Dessert: No Ingredient can be used after this"
 nutrition = 1
 sweet = 2
 fresh = 1

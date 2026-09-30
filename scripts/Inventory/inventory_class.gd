@@ -322,12 +322,12 @@ func can_cover_countries(required_countries:Array[GlobalEnums.Country], card_poo
 #endregion
 #region Abilities
 func get_abilities_in_inventory(card_pool:Array[Card] = current_cards) -> Array[Ability]:
-	var abilities:Array[Ability]
+	var var_abilities:Array[Ability]
 	for card in card_pool:
 		for ability in card.committed_stats.abilities:
-			if not abilities.has(ability):
-				abilities.append(ability)
-	return abilities
+			if not var_abilities.has(ability):
+				var_abilities.append(ability)
+	return var_abilities
 
 func get_all_cards_with_ability(search_ability:Ability, card_pool:Array[Card] = current_cards) -> Array[Card]:
 	var ability_ingr:Array[Card]
@@ -338,9 +338,9 @@ func get_all_cards_with_ability(search_ability:Ability, card_pool:Array[Card] = 
 			ability_ingr.append(i)
 	return ability_ingr
 
-func get_cards_with_abilities(abilities:Array[Ability], card_pool:Array[Card] = current_cards) -> Array[Card]:
+func get_cards_with_abilities(var_abilities:Array[Ability], card_pool:Array[Card] = current_cards) -> Array[Card]:
 	var cards_with_abilities:Array[Card]
-	for ability in abilities:
+	for ability in var_abilities:
 		var ability_cards = get_all_cards_with_ability(ability, card_pool)
 		for card in ability_cards:
 			if cards_with_abilities.has(card):
@@ -381,21 +381,27 @@ func can_cover_abilities(required_abilities:Array[Ability], card_pool:Array[Card
 
 #endregion
 #region Flavours
-func get_greatest_flavour(flavours_pool) -> GlobalEnums.Flavour:
+func get_greatest_flavours(flavours_pool:Dictionary) -> Array[GlobalEnums.Flavour]:
 	var flavours_dup = flavours_pool.duplicate()
-	var max_index:int = 0
+	var max_index:Array[int] = [0]
 	for i in range(1, flavours_dup.size()):
-		if flavours_dup[i] > flavours_pool[max_index]:
-			max_index = i
-	return max_index
+		if flavours_dup[i] == flavours_pool[max_index[0]]:
+			if flavours_dup[i] > flavours_pool[max_index[0]]:
+				max_index.clear()
+			max_index.append(i)
+		
+	return max_index as Array[GlobalEnums.Flavour]
 
-func get_lowest_flavour(flavours_pool:Dictionary = get_flavours_sum(current_cards)) -> GlobalEnums.Flavour:
+func get_lowest_flavour(flavours_pool:Dictionary = get_flavours_sum(current_cards)) -> Array[GlobalEnums.Flavour]:
 	var flavours_dup = flavours_pool.duplicate()
-	var min_index:int = 0
+	var min_index:Array[int] = [0]
 	for i in range(1, flavours_dup.size()):
-		if flavours_dup[i] < flavours_pool[min_index]:
-			min_index = i
-	return min_index
+		if flavours_dup[i] == flavours_pool[min_index[0]]:
+			if flavours_dup[i] < flavours_pool[min_index[0]]:
+				min_index.clear()
+			min_index.append(i)
+		
+	return min_index as Array[GlobalEnums.Flavour]
 
 func get_flavours_sum(card_pool:Array[Card] = current_cards):
 	var flavour_sums:Array[int] = [0,0,0,0,0]

@@ -76,9 +76,9 @@ func get_random_ingredient(and_req:bool, tag:Array[GlobalEnums.Tags] = [], abili
 		printerr("No ingredient fitting the reqs was found")
 		return(null)
 	
-func get_ingredient_by_name(name:String) -> Ingredient:
+func get_ingredient_by_name(ing_name:String) -> Ingredient:
 	for i in all_ingredients:
-		if i.name == name:
+		if i.name == ing_name:
 			return i
-	printerr("Could not find ingredient with this name: " + name)
+	printerr("Could not find ingredient with this name: " + ing_name)
 	return null
