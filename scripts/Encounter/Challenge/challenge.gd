@@ -62,7 +62,7 @@ extends Control
 @onready var item_pool = get_tree().get_first_node_in_group("ingredient_pool")
 @onready var ability_manager = get_tree().get_first_node_in_group("ability_manager")
 @onready var combination_manager:CombinationManager = get_tree().get_first_node_in_group("combination_manager")
-@onready var dish_node = $Dish
+@onready var current_dish = $Dish
 @onready var map_node = get_parent()
 @onready var ui = $UI
 @onready var dice_disp = $Dish/Dice_Display
@@ -80,8 +80,10 @@ var reward_req_rarity:Array[GlobalEnums.Rarity]
 var reward_req_tag:Array[GlobalEnums.Tags]
 var reward_req_ability:Array[Ability]
 
+
+
 func _ready() -> void:
-	event_manager.large_view_toggled.connect(toggle_large_view)
+	
 	ui.finish_dish_pressed.connect(finish_dish)
 	ui.reset_dish_pressed.connect(reset_dish)
 #region Helper
@@ -89,15 +91,46 @@ func is_restricted_tag(tag):
 	return restricted_tags.has(tag)
 #endregion
 func start():
-	dish_node.start()
-	ability_manager.on_challenge_start(dish_node)
-
+	current_dish.start()
+	ability_manager.on_challenge_start(current_dish)
 func end():
 	await ui.end_challenge_pressed
 	compare_dish(combination_manager.upgraded_dish)
 	map_node.end_encounter()
 	give_rewards()
 	queue_free()
+func compare_dish(completed_dish):
+	if (completed_dish.nutrition < req_nutrition
+	or completed_dish.flavours[GlobalEnums.Flavour.SWEET] < req_sweet
+	or completed_dish.flavours[GlobalEnums.Flavour.SPICY] < req_spicy
+	or completed_dish.flavours[GlobalEnums.Flavour.HEARTY] < req_hearty
+	or completed_dish.flavours[GlobalEnums.Flavour.FRESH] < req_fresh
+	or completed_dish.get_tags_in_inventory().any(is_restricted_tag)): #check if restricted tag is used
+		if (completed_dish.nutrition < par_nutrition
+		or completed_dish.flavours[GlobalEnums.Flavour.SWEET] < par_sweet
+		or completed_dish.flavours[GlobalEnums.Flavour.SPICY] < par_spicy
+		or completed_dish.flavours[GlobalEnums.Flavour.HEARTY] < par_hearty
+		or completed_dish.flavours[GlobalEnums.Flavour.FRESH] < par_fresh
+		or completed_dish.get_tags_in_inventory().any(is_restricted_tag)): #check if restricted tag is used
+			#fail
+			on_failure()
+		else:
+			on_partial()
+			#partial
+			
+	else:
+		on_success()
+		#success
+func finish_dish():
+	dice_disp.finish_dish()
+	event_manager.dish_finish_animation_done()
+	await event_manager.on_dish_finish_anim_done
+	ui.toggle_result_screen(true)
+	combination_manager.start_combinations(current_dish)
+	ui.update_stats(combination_manager.upgraded_dish)
+	end()
+func reset_dish():
+	current_dish.destroy_all_ingredients()
 
 #region Results
 func give_rewards():
@@ -147,44 +180,6 @@ func on_failure():
 	end()
 	
 #endregion
-
-func compare_dish(completed_dish):
-	if (completed_dish.nutrition < req_nutrition
-	or completed_dish.flavours[GlobalEnums.Flavour.SWEET] < req_sweet
-	or completed_dish.flavours[GlobalEnums.Flavour.SPICY] < req_spicy
-	or completed_dish.flavours[GlobalEnums.Flavour.HEARTY] < req_hearty
-	or completed_dish.flavours[GlobalEnums.Flavour.FRESH] < req_fresh
-	or completed_dish.get_tags_in_inventory().any(is_restricted_tag)): #check if restricted tag is used
-		if (completed_dish.nutrition < par_nutrition
-		or completed_dish.flavours[GlobalEnums.Flavour.SWEET] < par_sweet
-		or completed_dish.flavours[GlobalEnums.Flavour.SPICY] < par_spicy
-		or completed_dish.flavours[GlobalEnums.Flavour.HEARTY] < par_hearty
-		or completed_dish.flavours[GlobalEnums.Flavour.FRESH] < par_fresh
-		or completed_dish.get_tags_in_inventory().any(is_restricted_tag)): #check if restricted tag is used
-			#fail
-			on_failure()
-		else:
-			on_partial()
-			#partial
-			
-	else:
-		on_success()
-		#success
-
-func finish_dish():
-	dice_disp.finish_dish()
-	event_manager.dish_finish_animation_done()
-	await event_manager.on_dish_finish_anim_done
-	ui.toggle_result_screen(true)
-	combination_manager.start_combinations(dish_node)
-	ui.update_flavours(combination_manager.upgraded_dish)
-	ui.update_nutrition(combination_manager.upgraded_dish.nutrition)
-	end()
-func reset_dish():
-	dish_node.destroy_all_ingredients()
-
 #region UI functions
-func toggle_large_view(value):
-	ui.toggle_disable_buttons(value)
 
 #endregion

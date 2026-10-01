@@ -12,6 +12,12 @@ tags = Array[int]([2, 4])
 rarity = 1
 description = "Eggspensive and delfishous"
 nutrition = 3
+flavours = Dictionary[int, int]({
+0: 1,
+1: 1,
+2: 0,
+3: 0
+})
 sweet = 1
 spicy = 1
 metadata/_custom_type_script = "uid://bqsibdi6kwplu"

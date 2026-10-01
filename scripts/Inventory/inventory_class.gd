@@ -124,7 +124,7 @@ func change_ingredient_uses(ingredient_card,amount):
 	if ingredient_card.stats.uses <= 0:
 		ingredient_card.queue_free()
 
-func check_can_drop(data):
+func check_can_drop(data) -> bool:
 	checking_drop.emit(self,data)
 	#check for requirements from signal
 	if can_drop_card == false:
@@ -408,6 +408,8 @@ func get_flavours_sum(card_pool:Array[Card] = current_cards):
 	for card in card_pool:
 		var card_flavours = card.get_flavours()
 		for flavour in GlobalEnums.Flavour:
+			if GlobalEnums.Flavour[flavour] == GlobalEnums.Flavour.NONE:
+				continue
 			flavour_sums[GlobalEnums.Flavour[flavour]] += card_flavours[GlobalEnums.Flavour[flavour]]
 	return flavour_sums
 #endregion

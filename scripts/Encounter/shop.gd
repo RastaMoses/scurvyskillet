@@ -3,23 +3,21 @@ extends Inventory
 #PARAMS
 #@export var specific_sell_items:Array[Resource]
 #@export var random_ingredient_amount:int = 1
-
-
 @export var buy_button_sample:PackedScene
 @export var rarity_prices:Array[int] = [1,2,3,5]
 @export var hidden_item_price:int = 1
 @export var morale_gain:int = 2
 @export var morale_price:int = 3
+@export_group("Nodes")
+@export var buy_buttons:Array[BuyButton]
+@export var shop_ui:ShopUI
+
+
 #CACHED COMPS
 @onready var map_node = get_parent()
-@onready var buy_container = $UI/BuyButtons
-@onready var buy_round_button = $UI/BuyRound/Button
-@onready var shop_ui = $UI
-
 
 #STATE
 var morale_sold_out = false
-var buy_buttons:Array[Node]
 var interactable = true
 
 func _ready() -> void:
@@ -27,16 +25,14 @@ func _ready() -> void:
 	init_inventory()
 	checking_drop.connect(on_checking_drop)
 	dropping_ingredient.connect(player_sell_ingredient)
-	buy_round_button.pressed.connect(buy_morale)
-	buy_buttons = buy_container.get_children()
-	for i in buy_buttons:
-		i.shop = self
+	for buy_button in buy_buttons:
+		buy_button.shop = self
 
 func player_sell_ingredient(origin,card):
 	if origin != self:
 		return
 	player_inventory.add_money(rarity_prices[card.stats.rarity])
-	check_buttons_enabled()
+	check_buy_buttons_available()
 
 func on_checking_drop(origin, data):
 	if origin != self:
@@ -44,7 +40,6 @@ func on_checking_drop(origin, data):
 	if !interactable:
 		can_drop_card = false
 		return
-	shop_ui.toggle_sell_highlight(true)
 
 func buy_card(buy_button):
 	if buy_button.sell_card != null:
@@ -52,17 +47,16 @@ func buy_card(buy_button):
 		destroy_ingredient(buy_button.sell_card)
 		player_inventory.add_money(-buy_button.price)
 	buy_button.sell_out()
-	check_buttons_enabled()
+	check_buy_buttons_available()
 
 func buy_morale():
 	player_inventory.add_morale(morale_gain)
 	player_inventory.add_money(-morale_price)
 	shop_ui.toggle_buy_round_foam(false)
-	buy_round_button.disabled = true
+	shop_ui.buy_round_button.toggle_disabled(true)
 	morale_sold_out = true
-	shop_ui.hide_buy_round_highlight()
 	
-func check_buttons_enabled():
+func check_buy_buttons_available():
 	for buy_button in buy_buttons:
 		if buy_button.sold_out:
 			return
@@ -74,7 +68,7 @@ func check_buttons_enabled():
 func populate_shop():
 	for i in buy_buttons:
 		i.populate()
-	check_buttons_enabled()
+	check_buy_buttons_available()
 
 func get_card_price(card):
 	return rarity_prices[card.stats.rarity]
@@ -88,10 +82,5 @@ func end():
 	queue_free()
 
 func toggle_large_view(value):
-	print("shop toggle interact")
 	interactable = !value
 	shop_ui.toggle_interactable()
-			
-
-func _on_leave_button_pressed() -> void:
-	end()

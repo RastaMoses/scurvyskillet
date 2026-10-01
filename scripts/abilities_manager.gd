@@ -398,7 +398,7 @@ func activate_effects(trigger, context_card):
 				current_dish.flavours[GlobalEnums.Flavour.HEARTY] *= ability.hearty_effect + multiplier
 				current_dish.flavours[GlobalEnums.Flavour.FRESH] *= ability.fresh_effect + multiplier
 				current_dish.nutrition *= ability.nutrition_effect + multiplier
-		if ability.equal_stats_to_flavour != GlobalEnums.Flavour.NONE:
+		if not ability.equal_stats_to_flavour  == GlobalEnums.Flavour.NONE:
 			var temp_stat:int = 0
 			match ability.equal_stats_to_flavour:
 				GlobalEnums.Flavour.SWEET:
@@ -456,10 +456,10 @@ func activate_effects(trigger, context_card):
 	# - morale/money changes via event_manager, etc
 	
 func apply_stat_effect(target_stats: Ingredient,ability: Ability,multiplier: int) -> void:
-	target_stats.sweet += ability.sweet_effect * multiplier
-	target_stats.spicy += ability.spicy_effect * multiplier
-	target_stats.hearty += ability.hearty_effect * multiplier
-	target_stats.fresh += ability.fresh_effect * multiplier
+	target_stats.flavours[GlobalEnums.Flavour.SWEET] += ability.sweet_effect * multiplier
+	target_stats.flavours[GlobalEnums.Flavour.SPICY] += ability.spicy_effect * multiplier
+	target_stats.flavours[GlobalEnums.Flavour.HEARTY] += ability.hearty_effect * multiplier
+	target_stats.flavours[GlobalEnums.Flavour.FRESH] += ability.fresh_effect * multiplier
 	target_stats.nutrition += ability.nutrition_effect * multiplier
 
 func get_ability_multiplier(ability, cards) -> int:

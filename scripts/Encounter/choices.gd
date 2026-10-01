@@ -22,6 +22,8 @@ extends Inventory
 @export var req_specific_ingredients:Array[Ingredient]
 @export var ingredient_amount:int
 @export var randomIngredients:int
+@export var req_flavours:Dictionary[GlobalEnums.Flavour, int] = {GlobalEnums.Flavour.SWEET : 0,
+GlobalEnums.Flavour.SPICY : 0, GlobalEnums.Flavour.HEARTY : 0, GlobalEnums.Flavour.FRESH : 0}
 @export var sweet:int
 @export var spicy:int
 @export var hearty:int
@@ -33,14 +35,9 @@ extends Inventory
 
 #CACHED COMPS
 
-@onready var drop_area = $DropArea
-@onready var drop_highlight = $UI/IngredientDrop/DropHighlight
-@onready var drop_ui = $UI/IngredientDrop
-@onready var ingredient_icon = $UI/IngredientDrop/IngredientIcon
+@onready var drop_area:DropArea = $DropArea
+@onready var ingredient_icon = $DropArea/IngredientIcon
 @onready var button = $Button
-@onready var button_highlight = $Button/Highlight
-@onready var button_text = $Button/RichTextLabel
-@onready var drop_area_text = $UI/IngredientDrop/RichTextLabel
 var decision_encounter
 
 var interactable = true
@@ -49,19 +46,29 @@ var interactable = true
 
 func _ready() -> void:
 	init_inventory()
-	button.pressed.connect(on_button_press)
-	button_text.text = text
-	drop_area_text.text = text
+	button.left_clicked.connect(on_button_press)
 	dropping_ingredient.connect(on_ingredient_dropped)
 	checking_drop.connect(on_checking_drop)
 
-func get_req_flavours() -> Array[int]:
-	var flavours = [0,0,0,0,0]
-	flavours[GlobalEnums.Flavour.SWEET] = sweet
-	flavours[GlobalEnums.Flavour.SPICY] = spicy
-	flavours[GlobalEnums.Flavour.HEARTY] = hearty
-	flavours[GlobalEnums.Flavour.FRESH] = fresh
-	return flavours
+#region Order
+func start():
+	button.set_text(text)
+	drop_area.set_text(text)
+	check_button_available()
+	
+func end():
+	if new_encounter == null:
+		decision_encounter.end()
+	queue_free()
+
+func complete():
+	give_rewards()
+	take_cost()
+	end()
+
+#endregion
+
+#region Inventory Signal
 
 func on_checking_drop(origin, card):
 	if origin != self:
@@ -81,7 +88,6 @@ func on_checking_drop(origin, card):
 		for i in req_rarity:
 			if !card.committed_stats.rarity.has(i):
 				droppable = false
-	drop_highlight.visible = droppable
 	can_drop_card = droppable
 
 func on_ingredient_dropped(origin, _card):
@@ -89,12 +95,8 @@ func on_ingredient_dropped(origin, _card):
 		return
 	check_completed()
 	
-
-func remove_random():
-	var rand_index = random.randi_range(0,player_inventory.current_cards.size()-1)
-	ingredient_icon.texture = player_inventory.current_cards[rand_index].get_icon_texture()
-	player_inventory.remove_ingredient(player_inventory.current_cards[rand_index])
-
+#endregion
+#region Checking
 func check_completed():
 	#if amount of ingredients or amount of flavour/nutrition is fullfilled
 	#amount
@@ -102,6 +104,8 @@ func check_completed():
 		return
 	#values
 	for flavour in GlobalEnums.Flavour:
+		if GlobalEnums.Flavour[flavour] == GlobalEnums.Flavour.NONE:
+			continue
 		var sum1 = 0
 		for i in current_cards:
 			sum1 += i.get_flavours()[GlobalEnums.Flavour[flavour]]
@@ -113,18 +117,13 @@ func check_completed():
 	if sum2 < nutrition:
 		return
 	complete()
+#endregion
+#region Getting
+func get_req_flavours() -> Dictionary[GlobalEnums.Flavour, int]:
+	return req_flavours
+#endregion
 
-func button_available():
-	if player_inventory.current_money < c_money or player_inventory.current_morale < c_morale:
-		disable_button()
-		return
-	if player_inventory.current_cards.size()<randomIngredients:
-		disable_button()
-		return
-	if drop_ingredients:
-		disable_button()
-		return
-	enable_button()
+#region Reward
 
 func give_rewards():
 	player_inventory.add_money(r_money)
@@ -138,6 +137,9 @@ func give_rewards():
 		
 		player_inventory.instantiate_card_and_add(i)
 
+#endregion
+#region Costs
+
 func take_cost():
 	player_inventory.add_money(-c_money)
 	player_inventory.add_morale(-c_morale)
@@ -146,55 +148,43 @@ func take_cost():
 	if new_encounter != null:
 		decision_encounter.load_new_encounter(new_encounter)
 
+func remove_random():
+	var rand_index = random.randi_range(0,player_inventory.current_cards.size()-1)
+	ingredient_icon.texture = player_inventory.current_cards[rand_index].get_icon_texture()
+	player_inventory.remove_ingredient(player_inventory.current_cards[rand_index])
+
+#endregion
+
+func check_button_available():
+	if player_inventory.current_money < c_money or player_inventory.current_morale < c_morale:
+		disable_button()
+		return
+	if player_inventory.current_cards.size()<randomIngredients:
+		disable_button()
+		return
+	if drop_ingredients:
+		disable_button()
+		drop_area.set_visible(true)
+		return
+	drop_area.set_visible(false)
+	enable_button()
+
 func on_button_press():
 	complete()
 
-func complete():
-	give_rewards()
-	take_cost()
-	end()
-
 func disable_button():
-	button.disabled = true
+	button.toggle_disabled(true)
 	if (drop_ingredients):
 		button.visible = false
 
 func enable_button():
 	button.visible = true
-	button.disabled = false
-
-func enable_drop_area():
-	drop_area.visible = drop_ingredients
-	drop_ui.visible = drop_ingredients
+	button.toggle_disabled(false)
 
 func toggle_interactable(value):
-	button_highlight.visible = false
-	drop_highlight.visible = false
 	if value:
 		interactable = true
-		button_available()
+		check_button_available()
 	else:
 		interactable = false
 		disable_button()
-
-func start():
-	button_available()
-	enable_drop_area()
-	
-func end():
-	if new_encounter == null:
-		decision_encounter.end()
-	queue_free()
-
-
-func _on_button_mouse_entered() -> void:
-	if interactable:
-		button_highlight.visible = true
-
-func _on_button_mouse_exited() -> void:
-	if interactable:
-		button_highlight.visible = false
-
-func _on_drop_area_mouse_exited() -> void:
-	if interactable:
-		drop_highlight.visible = false

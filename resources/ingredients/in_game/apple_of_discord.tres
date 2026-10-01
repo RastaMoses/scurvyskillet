@@ -15,6 +15,12 @@ rarity = 3
 description = "You cannot use this if you used other Fruit Ingredients
 You cannot use Fruit ingredients after this"
 nutrition = 3
+flavours = Dictionary[int, int]({
+0: 3,
+1: 0,
+2: 0,
+3: 3
+})
 sweet = 3
 fresh = 3
 abilities = Array[ExtResource("1_rihd2")]([ExtResource("2_8au0g"), ExtResource("3_4xsxy")])

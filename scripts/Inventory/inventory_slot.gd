@@ -13,6 +13,7 @@ extends Panel
 var item_visual
 var texture
 var uses_textures
+var flavours_display:Dictionary[GlobalEnums.Flavour, TextureRect]
 var hearty
 var fresh
 var spicy
@@ -46,10 +47,10 @@ func init_slot(ui_node = null) -> void:
 	item_visual = $ItemDisplay
 	texture = $ItemDisplay.texture
 	uses_textures = $ItemDisplay/Uses.get_children()
-	hearty = $ItemDisplay/Flavours/Hearty
-	fresh = $ItemDisplay/Flavours/Fresh
-	spicy = $ItemDisplay/Flavours/Spicy
-	sweet = $ItemDisplay/Flavours/Sweet
+	flavours_display[GlobalEnums.Flavour.HEARTY] = $ItemDisplay/Flavours/Hearty
+	flavours_display[GlobalEnums.Flavour.FRESH] = $ItemDisplay/Flavours/Fresh
+	flavours_display[GlobalEnums.Flavour.SPICY] = $ItemDisplay/Flavours/Spicy
+	flavours_display[GlobalEnums.Flavour.SWEET] = $ItemDisplay/Flavours/Sweet
 	nutrition_text = $ItemDisplay/Nutrition/NutritionText
 	empty_slot = $EmptySlot
 	rarity_textures = $ItemDisplay/Rarity.get_children()
@@ -135,61 +136,24 @@ func update_uses(value = uses):
 
 func update_flavours():
 	#flavours
-	if card.stats.hearty > 0:
-		hearty.visible = true
-		hearty.get_child(0).text = str(card.stats.hearty)
-		if card.stats.hearty != card.base_stats.hearty:
-			hearty.get_child(0).theme_type_variation = "altered"
+	var card_flavours:Dictionary[GlobalEnums.Flavour, int] = card.get_flavours()
+	var card_base_flavours:Dictionary[GlobalEnums.Flavour, int] = card.get_base_flavours()
+	for flavour in GlobalEnums.Flavour:
+		if GlobalEnums.Flavour[flavour] == GlobalEnums.Flavour.NONE:
+			continue
+		if card_flavours[GlobalEnums.Flavour[flavour]] > 0:
+			flavours_display[GlobalEnums.Flavour[flavour]].visible = true
+			flavours_display[GlobalEnums.Flavour[flavour]].get_child(0).text = str(card_flavours[GlobalEnums.Flavour[flavour]])
+			if card_flavours[GlobalEnums.Flavour[flavour]] != card_base_flavours[GlobalEnums.Flavour[flavour]]:
+				flavours_display[GlobalEnums.Flavour[flavour]].get_child(0).theme_type_variation = "altered"
+			else:
+				flavours_display[GlobalEnums.Flavour[flavour]].get_child(0).theme_type_variation = "hearty"
 		else:
-			hearty.get_child(0).theme_type_variation = "hearty"
-	else:
-		if card.stats.hearty != card.base_stats.hearty:
-			hearty.get_child(0).theme_type_variation = "altered"
-		else:
-			hearty.get_child(0).theme_type_variation = "hearty"
-			hearty.visible = false
-	
-	if card.stats.fresh > 0:
-		fresh.visible = true
-		fresh.get_child(0).text = str(card.stats.fresh)
-		if card.stats.fresh != card.base_stats.fresh:
-			fresh.get_child(0).theme_type_variation = "altered"
-		else:
-			fresh.get_child(0).theme_type_variation = "fresh"
-	else:
-		if card.stats.fresh != card.base_stats.fresh:
-			fresh.get_child(0).theme_type_variation = "altered"
-		else:
-			fresh.get_child(0).theme_type_variation = "fresh"
-			fresh.visible = false
-		
-	if card.stats.spicy > 0:
-		spicy.visible = true
-		spicy.get_child(0).text = str(card.stats.spicy)
-		if card.stats.spicy != card.base_stats.spicy:
-			spicy.get_child(0).theme_type_variation = "altered"
-		else:
-			spicy.get_child(0).theme_type_variation = "spicy"
-	else:
-		if card.stats.spicy != card.base_stats.spicy:
-			spicy.get_child(0).theme_type_variation = "altered"
-		else:
-			spicy.get_child(0).theme_type_variation = "spicy"
-			spicy.visible = false
-		
-	if card.stats.sweet > 0:
-		sweet.visible = true
-		sweet.get_child(0).text = str(card.stats.sweet)
-		if card.stats.sweet != card.base_stats.sweet:
-			sweet.get_child(0).theme_type_variation = "altered"
-		else:
-			sweet.get_child(0).theme_type_variation = "sweet"
-	else:
-		if card.stats.sweet != card.base_stats.sweet:
-			sweet.get_child(0).theme_type_variation = "altered"
-		else:
-			sweet.get_child(0).theme_type_variation = "sweet"
-			sweet.visible = false
+			if card_flavours[GlobalEnums.Flavour[flavour]] != card_base_flavours[GlobalEnums.Flavour[flavour]]:
+				flavours_display[GlobalEnums.Flavour[flavour]].get_child(0).theme_type_variation = "altered"
+			else:
+				flavours_display[GlobalEnums.Flavour[flavour]].get_child(0).theme_type_variation = "hearty"
+				flavours_display[GlobalEnums.Flavour[flavour]].visible = false
 	
 	#nutrition
 	nutrition_text.text = str(card.stats.nutrition)

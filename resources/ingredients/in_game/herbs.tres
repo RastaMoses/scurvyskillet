@@ -12,6 +12,12 @@ icon = ExtResource("3_ap53g")
 tags = Array[int]([13])
 rarity = 1
 description = "Seasoning: This can only be added once per dish"
+flavours = Dictionary[int, int]({
+0: 0,
+1: 0,
+2: 0,
+3: 3
+})
 fresh = 3
 abilities = Array[ExtResource("1_rlyk3")]([ExtResource("2_b8c1i")])
 metadata/_custom_type_script = "uid://bqsibdi6kwplu"

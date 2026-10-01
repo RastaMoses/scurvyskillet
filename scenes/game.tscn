@@ -66,12 +66,12 @@ offset_bottom = 792.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ButtonBG" type="Sprite2D" parent="LargeView" unique_id=531665051]
+[node name="ButtonBG" type="TextureRect" parent="LargeView" unique_id=582835321]
 modulate = Color(1, 1, 1, 0.35500002)
 z_index = -6
+layout_mode = 0
 scale = Vector2(8, 8)
 texture = ExtResource("4_bt5mj")
-centered = false
 script = ExtResource("5_e1j6l")
 
 [node name="Overworld" type="Node" parent="." unique_id=1021026839 groups=["map_loader"]]

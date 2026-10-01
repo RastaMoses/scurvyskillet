@@ -1,4 +1,4 @@
-extends Node2D
+extends TextureRect
 
 var fade_speed = -1
 var fade_active = false

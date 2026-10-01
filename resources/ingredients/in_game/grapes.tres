@@ -13,6 +13,12 @@ icon = ExtResource("4_2yqcv")
 tags = Array[int]([5])
 description = "Spoiling: Loses 1 Use after each Encounter"
 nutrition = 1
+flavours = Dictionary[int, int]({
+0: 2,
+1: 0,
+2: 0,
+3: 0
+})
 sweet = 2
 abilities = Array[ExtResource("1_sdgte")]([ExtResource("2_881u5"), ExtResource("3_awmm7")])
 metadata/_custom_type_script = "uid://bqsibdi6kwplu"

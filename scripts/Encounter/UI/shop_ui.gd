@@ -1,71 +1,42 @@
+class_name ShopUI
 extends Control
 
-@onready var buy_container = $BuyButtons
-@onready var buy_round_button = $BuyRound/Button
-@onready var buy_round_highlight = $BuyRound/HighlightSprite
-@onready var buy_round_foam = $BuyRound/FoamSprite
-@onready var sell_highlight = $SellBox/Highlight
-@onready var moral_price_text = $BuyRound/MoralePrice
-@onready var leave_button = $LeaveButton
-@onready var leave_button_hl = $LeaveButton/Highlight
-@onready var shop = get_parent()
+
+@export_group("UI Nodes")
+@export var drop_area:DropArea
+@export var buy_container:Control
+@export var buy_round_button:Control
+@export var buy_round_foam:Control
+@export var leave_button:Control
+@export var shop:Shop
 
 #STATE
 func _ready() -> void:
-	buy_round_button.mouse_entered.connect(show_buy_round_highlight)
-	buy_round_button.mouse_exited.connect(hide_buy_round_highlight)
-	moral_price_text.text = str(shop.morale_price)
+	buy_round_button.set_text(str(shop.morale_price))
+	leave_button.left_clicked.connect(leave_clicked)
+	buy_round_button.left_clicked.connect(buy_round_clicked)
 
 func toggle_buy_round_foam(value):
 	buy_round_foam.visible = value
 
-func show_buy_round_highlight():
-	if shop.morale_sold_out:
-		return
-	buy_round_highlight.visible = true
-func hide_buy_round_highlight():
-	buy_round_highlight.visible = false
-
-func toggle_sell_highlight(value):
-	if !shop.interactable:
-		sell_highlight.visible = false
-		return
-	sell_highlight.visible = value
-
-func toggle_leave_highlight(value):
-	leave_button_hl.visible = value
-
 func toggle_interactable():
-	print("shop ui toggle interactable")
 	var value = shop.interactable
-	buy_round_button.disabled = !value
-	leave_button.disabled = !value
 	if !value:
 		for i in shop.buy_buttons:
 			if i.hide_item:
 				for j in i.ui.slots:
 					j.large_view_button.mouse_filter = MouseFilter.MOUSE_FILTER_IGNORE
-		buy_round_button.mouse_filter = MouseFilter.MOUSE_FILTER_IGNORE
 	else:
 		for i in shop.buy_buttons:
 			if i.hide_item:
 				for j in i.ui.slots:
 					j.large_view_button.mouse_filter = MouseFilter.MOUSE_FILTER_STOP
-		buy_round_button.mouse_filter = MouseFilter.MOUSE_FILTER_STOP
-	toggle_sell_highlight(false)
-	hide_buy_round_highlight()
-	
+	drop_area.toggle_disabled(!value)
+	buy_round_button.toggle_disabled(!value)
+	leave_button.toggle_disabled(!value)
 
-func _on_drop_area_mouse_exited() -> void:
-	if shop.interactable:
-		toggle_sell_highlight(false)
+func leave_clicked():
+	shop.end()
 
-
-func _on_leave_button_mouse_entered() -> void:
-	if shop.interactable:
-		toggle_leave_highlight(true)
-
-
-func _on_leave_button_mouse_exited() -> void:
-	if shop.interactable:
-		toggle_leave_highlight(false)
+func buy_round_clicked():
+	shop.buy_morale()

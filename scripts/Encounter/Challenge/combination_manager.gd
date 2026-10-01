@@ -377,6 +377,8 @@ func activate_effects():
 				#Get second to last card
 				var second_last_card_flavours = dish.current_cards[dish.current_cards.size()-2].get_flavours()
 				for flavour in GlobalEnums.Flavour:
+					if GlobalEnums.Flavour[flavour] == GlobalEnums.Flavour.NONE:
+						continue
 					if second_last_card_flavours[GlobalEnums.Flavour[flavour]] > 0:
 						mult_flavours[GlobalEnums.Flavour[flavour]].append(1.3)
 			"Deep Fried":
@@ -402,6 +404,8 @@ func activate_effects():
 			"Scoville Hell":
 				mult_nutrition.append(0.5)
 				for flavour in GlobalEnums.Flavour:
+					if GlobalEnums.Flavour[flavour] == GlobalEnums.Flavour.NONE:
+						continue
 					if GlobalEnums.Flavour[flavour] == GlobalEnums.Flavour.SPICY:
 						mult_flavours[GlobalEnums.Flavour[flavour]].append(2.0)
 					else:
@@ -409,6 +413,8 @@ func activate_effects():
 			"Slop":
 				mult_nutrition.append(0.5)
 				for flavour in GlobalEnums.Flavour:
+					if GlobalEnums.Flavour[flavour] == GlobalEnums.Flavour.NONE:
+						continue
 					mult_flavours[GlobalEnums.Flavour[flavour]].append(0.5)
 			
 		#endregion
@@ -462,11 +468,12 @@ func activate_effects():
 		#endregion
 		#UI Combination
 		challenge.ui.add_combination_result_text(combination)
-		challenge.ui.update_flavours(upgraded_dish)
-		challenge.ui.update_nutrition(upgraded_dish.nutrition)
+		challenge.ui.update_stats(upgraded_dish)
 
 func apply_multipliers():
 	for flavour in GlobalEnums.Flavour:
+		if GlobalEnums.Flavour[flavour] == GlobalEnums.Flavour.NONE:
+			continue
 		var modified_flav:float = float(upgraded_dish.flavours[GlobalEnums.Flavour[flavour]])
 		for mult in mult_flavours[GlobalEnums.Flavour[flavour]]:
 			modified_flav = modified_flav * mult

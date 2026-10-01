@@ -13,6 +13,12 @@ tags = Array[int]([8, 9])
 rarity = 3
 description = "Can only play 'Meat' after playing this"
 nutrition = 3
+flavours = Dictionary[int, int]({
+0: 0,
+1: 0,
+2: 5,
+3: 0
+})
 hearty = 5
 abilities = Array[ExtResource("1_cqqoj")]([ExtResource("2_rpyyp")])
 metadata/_custom_type_script = "uid://bqsibdi6kwplu"

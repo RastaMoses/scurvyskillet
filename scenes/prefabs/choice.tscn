@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dys7xyagobtu6" path="res://sprites/interface/scenes/decision scene/scene_decision_button_crate.png" id="3_we2ti"]
 [ext_resource type="Theme" uid="uid://vdmasea6p0ex" path="res://themes/encounter/choice_button_text.tres" id="5_5ods4"]
 [ext_resource type="Texture2D" uid="uid://xr08dfjbvw6x" path="res://sprites/interface/scenes/decision scene/scene_decision_button_crate_outline.png" id="5_w532b"]
+[ext_resource type="Script" uid="uid://dht54sfjv7hkv" path="res://scripts/Encounter/UI/button_ui.gd" id="7_a17em"]
 
 [node name="choice" type="Control" unique_id=704699521]
 layout_mode = 3
@@ -20,68 +21,23 @@ random_ingredient_amount = 0
 card_prefab = ExtResource("2_jv3kl")
 can_stack_uses = false
 
-[node name="Button" type="Button" parent="." unique_id=1705189317]
+[node name="DropArea" type="Panel" parent="." unique_id=242936625 node_paths=PackedStringArray("parent_inventory", "highlight", "bg", "text_label")]
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -184.0
-offset_right = 400.0
-grow_vertical = 0
-flat = true
-icon_alignment = 1
-expand_icon = true
-
-[node name="BG" type="Sprite2D" parent="Button" unique_id=824428301]
-scale = Vector2(8, 8)
-texture = ExtResource("2_we2ti")
-centered = false
-
-[node name="Highlight" type="Sprite2D" parent="Button" unique_id=1342131952]
-visible = false
-position = Vector2(-8, -8)
-scale = Vector2(8, 8)
-texture = ExtResource("3_w532b")
-centered = false
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Button" unique_id=867693461]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.067
-anchor_top = 0.21200001
-anchor_right = 0.067
-anchor_bottom = 0.21200001
-offset_left = -0.80000114
-offset_top = -11.008003
-offset_right = 343.2
-offset_bottom = 124.992
-mouse_behavior_recursive = 1
-theme = ExtResource("5_5ods4")
-text = "RUN"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="UI" type="Control" parent="." unique_id=987613784]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
+offset_left = 16.0
 offset_top = -264.0
-offset_right = 360.0
+offset_right = 376.0
 grow_vertical = 0
-mouse_behavior_recursive = 1
+script = ExtResource("2_xd3pp")
+parent_inventory = NodePath("..")
+highlight = NodePath("DropHighlight")
+bg = NodePath("DropBG")
+text_label = NodePath("RichTextLabel")
 
-[node name="IngredientDrop" type="Control" parent="UI" unique_id=834940990]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -264.0
-offset_right = 360.0
-grow_vertical = 0
-mouse_behavior_recursive = 1
-
-[node name="IngredientIcon" type="TextureRect" parent="UI/IngredientDrop" unique_id=1861897201]
+[node name="IngredientIcon" type="TextureRect" parent="DropArea" unique_id=1861897201]
 custom_minimum_size = Vector2(192, 192)
 custom_maximum_size = Vector2(192, 192)
 layout_mode = 0
@@ -89,15 +45,18 @@ offset_left = 88.0
 offset_top = 16.0
 offset_right = 280.0
 offset_bottom = 208.0
+mouse_filter = 0
 mouse_behavior_recursive = 1
 
-[node name="DropBG" type="TextureRect" parent="UI/IngredientDrop" unique_id=98261640]
+[node name="DropBG" type="TextureRect" parent="DropArea" unique_id=98261640]
 layout_mode = 0
 offset_right = 360.0
 offset_bottom = 264.0
+mouse_filter = 0
+mouse_behavior_recursive = 1
 texture = ExtResource("3_we2ti")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/IngredientDrop" unique_id=1646626954]
+[node name="RichTextLabel" type="RichTextLabel" parent="DropArea" unique_id=1646626954]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.067
@@ -114,25 +73,80 @@ text = "Drop Here!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DropHighlight" type="Sprite2D" parent="UI/IngredientDrop" unique_id=643330784]
+[node name="DropHighlight" type="TextureRect" parent="DropArea" unique_id=1668815575]
 visible = false
-position = Vector2(-8, -8)
+layout_mode = 0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = -8.0
+offset_bottom = -8.0
 scale = Vector2(8, 8)
+mouse_filter = 0
+mouse_behavior_recursive = 1
 texture = ExtResource("5_w532b")
-centered = false
 
-[node name="DropArea" type="Panel" parent="." unique_id=242936625 node_paths=PackedStringArray("parent_inventory")]
-self_modulate = Color(1, 1, 1, 0)
+[node name="Button" type="Control" parent="." unique_id=1291494203 node_paths=PackedStringArray("highlight", "text_label", "button")]
+anchors_preset = 0
+offset_top = -56.0
+offset_right = 40.0
+offset_bottom = -16.0
+script = ExtResource("7_a17em")
+highlight = NodePath("Highlight")
+text_label = NodePath("RichTextLabel")
+button = NodePath("Button")
+
+[node name="Button" type="Button" parent="Button" unique_id=1705189317]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -264.0
-offset_right = 360.0
+offset_top = -224.0
+offset_right = 400.0
+offset_bottom = -40.0
 grow_vertical = 0
-script = ExtResource("2_xd3pp")
-parent_inventory = NodePath("..")
+mouse_behavior_recursive = 2
+flat = true
+icon_alignment = 1
+expand_icon = true
 
-[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
-[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
-[connection signal="mouse_exited" from="DropArea" to="." method="_on_drop_area_mouse_exited"]
+[node name="BG" type="TextureRect" parent="Button" unique_id=1813035075]
+layout_mode = 0
+offset_top = -184.0
+offset_bottom = -184.0
+scale = Vector2(8, 8)
+mouse_filter = 2
+mouse_behavior_recursive = 1
+texture = ExtResource("2_we2ti")
+
+[node name="Highlight" type="TextureRect" parent="Button" unique_id=689729356]
+visible = false
+layout_mode = 0
+offset_left = -8.0
+offset_top = -192.0
+offset_right = -8.0
+offset_bottom = -192.0
+scale = Vector2(8, 8)
+mouse_filter = 2
+mouse_behavior_recursive = 1
+texture = ExtResource("3_w532b")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Button" unique_id=867693461]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.067
+anchor_top = 0.21200001
+anchor_right = 0.067
+anchor_bottom = 0.21200001
+offset_left = 23.32
+offset_top = -164.48
+offset_right = 367.32
+offset_bottom = -28.48
+mouse_filter = 2
+mouse_behavior_recursive = 1
+theme = ExtResource("5_5ods4")
+text = "RUN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="mouse_entered" from="Button/Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Button/Button" to="." method="_on_button_mouse_exited"]

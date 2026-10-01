@@ -160,10 +160,11 @@ func sort_by_name(a, b):
 		return cmp < 0
 	return a.committed_stats.uses > b.committed_stats.uses
 
-func _on_rarity_pressed() -> void:
+func _on_rarity_button_left_clicked() -> void:
 	sort_inventory_by_rarity()
 
-func _on_alphabetically_pressed() -> void:
+
+func _on_alphabet_button_left_clicked() -> void:
 	sort_inventory_alphabetically()
 
 #endregion

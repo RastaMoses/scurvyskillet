@@ -27,12 +27,13 @@ func _ready() -> void:
 	player_inventory.card_start_drag.connect(on_start_drag)
 	player_inventory.card_stop_drag.connect(on_stop_drag)
 	for flavour in GlobalEnums.Flavour:
+		if GlobalEnums.Flavour[flavour] == GlobalEnums.Flavour.NONE:
+			continue
 		flavours[GlobalEnums.Flavour[flavour]] = 0
 		ability_flavours[GlobalEnums.Flavour[flavour]] = 0
 	
 func start():
-	challenge.ui.update_nutrition(nutrition)
-	challenge.ui.update_flavours(self)
+	challenge.ui.update_stats(self)
 
 func subtract_die_value_from_dish(die):
 	flavours[die.flavour] -= die.number
@@ -50,6 +51,8 @@ func recalculate_dish():
 		add_die_value_to_dish(die)
 	#add ability stats
 	for i in GlobalEnums.Flavour:
+		if GlobalEnums.Flavour[i] == GlobalEnums.Flavour.NONE:
+			continue
 		flavours[GlobalEnums.Flavour[i]] += ability_flavours[GlobalEnums.Flavour[i]]
 	nutrition += ability_nutrition
 	
@@ -87,8 +90,7 @@ func on_add_to_dish(origin,card):
 	roll_ingredient(card)
 	recalculate_dish()
 	#ui
-	challenge.ui.update_flavours(self)
-	challenge.ui.update_nutrition(nutrition)
+	challenge.ui.update_stats(self)
 
 func on_destroy_ingredient(origin,card:Node):
 	if origin != self:
@@ -107,8 +109,7 @@ func on_destroy_all_ingredients(origin):
 	for card in current_cards:
 		remove_card_from_dish(card)
 	#ui
-	challenge.ui.update_flavours(self)
-	challenge.ui.update_nutrition(nutrition)
+	challenge.ui.update_stats(self)
 func remove_card_from_dish(card):
 	#remove dice values
 	nutrition -= card.committed_stats.nutrition
@@ -119,8 +120,7 @@ func remove_card_from_dish(card):
 	
 	#ui
 	dice_disp.destroy_dice(card)
-	challenge.ui.update_nutrition(nutrition)
-	challenge.ui.update_flavours(self)
+	challenge.ui.update_stats(self)
 #endregion
 
 #region Dice
@@ -128,7 +128,9 @@ func remove_card_from_dish(card):
 func roll_ingredient(card:Node, dice_multiplier:int = 1):
 	abilities.on_dice_roll(card)
 	for flavour in GlobalEnums.Flavour:
-		if GlobalEnums.Flavour[flavour] != GlobalEnums.Flavour.NONE:
+		if GlobalEnums.Flavour[flavour] == GlobalEnums.Flavour.NONE:
+			continue
+		if GlobalEnums.Flavour[flavour]:
 			roll_dice(flavour,dice_multiplier * (card.get_flavours()[GlobalEnums.Flavour[flavour]]), card)
 
 func roll_dice(flavour,amount,card:Node):

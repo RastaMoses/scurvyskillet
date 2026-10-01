@@ -12,6 +12,12 @@ icon = ExtResource("2_s6yoc")
 tags = Array[int]([8, 9])
 rarity = 3
 description = "For every 4 Dice in the dish, gain +4 Nutrition"
+flavours = Dictionary[int, int]({
+0: 0,
+1: 0,
+2: 4,
+3: 0
+})
 hearty = 4
 abilities = Array[ExtResource("1_ywqdl")]([ExtResource("2_x5iy0")])
 metadata/_custom_type_script = "uid://bqsibdi6kwplu"

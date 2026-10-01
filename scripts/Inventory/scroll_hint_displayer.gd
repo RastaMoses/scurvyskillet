@@ -12,7 +12,6 @@ extends ScrollContainer
 func _ready() -> void:
 	# Disable built-in scroll hints
 	scroll_hint_mode = ScrollContainer.SCROLL_HINT_MODE_DISABLED
-
 	# Ensure hints start hidden
 	if vertical_hint:
 		vertical_hint.visible = false
@@ -69,7 +68,7 @@ func _update_hints() -> void:
 	if can_scroll_h:
 		var h_scroll: HScrollBar = get_h_scroll_bar()
 		var at_left: bool = h_scroll.value <= h_scroll.min_value + 0.01
-		var at_right: bool = h_scroll.value >= h_scroll.max_value - 0.01
+		var at_right: bool = h_scroll.value >= h_scroll.max_value - size.x - 0.01
 		if horizontal_hint_left:
 			horizontal_hint_left.visible = not at_left
 		# Right hint: show when we can scroll right (i.e., NOT at right edge)

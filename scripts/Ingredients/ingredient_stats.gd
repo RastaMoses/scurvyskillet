@@ -9,11 +9,8 @@ extends Resource
 @export_multiline() var description:String
 @export_group("Values")
 @export var nutrition:int
-@export_subgroup("Flavour")
-@export var sweet:int
-@export var spicy:int
-@export var hearty:int
-@export var fresh:int
+@export var flavours:Dictionary[GlobalEnums.Flavour, int] = {GlobalEnums.Flavour.SWEET : 0,
+GlobalEnums.Flavour.SPICY : 0, GlobalEnums.Flavour.HEARTY : 0, GlobalEnums.Flavour.FRESH : 0}
 
 #@export_subgroup("Immortal Ghoulash")
 #@export var ig_nutrition:int

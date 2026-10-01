@@ -14,6 +14,12 @@ tags = Array[int]([5, 11, 14])
 rarity = 2
 description = "Dessert: No Ingredient can be used after this"
 nutrition = 1
+flavours = Dictionary[int, int]({
+0: 2,
+1: 0,
+2: 0,
+3: 1
+})
 sweet = 2
 fresh = 1
 abilities = Array[ExtResource("1_votw3")]([ExtResource("2_hau8n"), ExtResource("3_0w3xm")])

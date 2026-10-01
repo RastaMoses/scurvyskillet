@@ -10,5 +10,11 @@ name = "Mackarel"
 icon = ExtResource("2_vmnf8")
 tags = Array[int]([4])
 nutrition = 1
+flavours = Dictionary[int, int]({
+0: 0,
+1: 0,
+2: 1,
+3: 0
+})
 hearty = 1
 metadata/_custom_type_script = "uid://bqsibdi6kwplu"

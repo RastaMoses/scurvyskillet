@@ -13,6 +13,12 @@ tags = Array[int]([1])
 rarity = 3
 description = "Reroll all dice ... Dis? Dsssss..."
 nutrition = 1
+flavours = Dictionary[int, int]({
+0: 1,
+1: 1,
+2: 1,
+3: 1
+})
 sweet = 1
 spicy = 1
 hearty = 1

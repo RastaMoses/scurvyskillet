@@ -13,6 +13,12 @@ tags = Array[int]([8, 9])
 rarity = 3
 description = " When you use this, gain 1 Phoenix Ashes"
 nutrition = 3
+flavours = Dictionary[int, int]({
+0: 0,
+1: 2,
+2: 2,
+3: 0
+})
 spicy = 2
 hearty = 2
 abilities = Array[ExtResource("1_lfo26")]([ExtResource("2_kfbkk")])

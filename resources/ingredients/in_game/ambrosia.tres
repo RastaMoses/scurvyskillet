@@ -13,6 +13,12 @@ tags = Array[int]([1])
 rarity = 3
 description = "Godlike Taste: Gain 3 Morale"
 nutrition = 1
+flavours = Dictionary[int, int]({
+0: 3,
+1: 0,
+2: 0,
+3: 0
+})
 sweet = 3
 abilities = Array[ExtResource("1_6mffx")]([ExtResource("2_8juhp")])
 metadata/_custom_type_script = "uid://bqsibdi6kwplu"

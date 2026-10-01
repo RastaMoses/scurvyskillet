@@ -11,5 +11,11 @@ icon = ExtResource("2_p2kqu")
 tags = Array[int]([14])
 description = "Even bees love it"
 nutrition = 1
+flavours = Dictionary[int, int]({
+0: 1,
+1: 0,
+2: 0,
+3: 0
+})
 sweet = 1
 metadata/_custom_type_script = "uid://bqsibdi6kwplu"

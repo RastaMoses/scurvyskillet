@@ -13,6 +13,12 @@ tags = Array[int]([7, 15])
 rarity = 3
 description = "Double the dishes Freshness"
 nutrition = 3
+flavours = Dictionary[int, int]({
+0: 1,
+1: 0,
+2: 0,
+3: 1
+})
 sweet = 1
 fresh = 1
 abilities = Array[ExtResource("1_fmfd2")]([ExtResource("2_6do56")])

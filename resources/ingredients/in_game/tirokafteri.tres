@@ -13,6 +13,12 @@ tags = Array[int]([0, 10, 12])
 rarity = 2
 description = "Respicing: Reroll all Spicy dice"
 nutrition = 2
+flavours = Dictionary[int, int]({
+0: 0,
+1: 1,
+2: 0,
+3: 0
+})
 spicy = 1
 abilities = Array[ExtResource("1_0p4me")]([ExtResource("2_haf8x")])
 metadata/_custom_type_script = "uid://bqsibdi6kwplu"
