@@ -120,10 +120,10 @@ func toggle_highlight_pan(value):
 
 func update_stats(dish):
 	if result_active:
-		result_stats_display.update_flavours(dish, true)
+		result_stats_display.update_flavours(dish.flavours, true)
 		result_stats_display.update_nutrition(dish.nutrition, true)
 	else:
-		dish_stats_display.update_flavours(dish, false)
+		dish_stats_display.update_flavours(dish.flavours, false)
 		dish_stats_display.update_nutrition(dish.nutrition, false)
 		if active_plates != dish.nutrition and !plate_anim_active and dish.nutrition < plates.size():
 			animate_plates(dish.nutrition)

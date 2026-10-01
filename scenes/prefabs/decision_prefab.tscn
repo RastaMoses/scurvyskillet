@@ -10,6 +10,7 @@
 [ext_resource type="Theme" uid="uid://bqlaftpa31pru" path="res://themes/encounter/enc_title.tres" id="7_spqi1"]
 
 [node name="DecisionPrefab" type="Control" unique_id=856639403 node_paths=PackedStringArray("choices")]
+custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 1

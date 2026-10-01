@@ -24,11 +24,7 @@ extends Inventory
 @export var randomIngredients:int
 @export var req_flavours:Dictionary[GlobalEnums.Flavour, int] = {GlobalEnums.Flavour.SWEET : 0,
 GlobalEnums.Flavour.SPICY : 0, GlobalEnums.Flavour.HEARTY : 0, GlobalEnums.Flavour.FRESH : 0}
-@export var sweet:int
-@export var spicy:int
-@export var hearty:int
-@export var fresh:int
-@export var nutrition:int
+@export var req_nutrition:int
 @export_subgroup("New Encounter")
 @export var new_encounter:PackedScene
 @export var new_encounter_type:GlobalEnums.EncounterType
@@ -38,6 +34,7 @@ GlobalEnums.Flavour.SPICY : 0, GlobalEnums.Flavour.HEARTY : 0, GlobalEnums.Flavo
 @onready var drop_area:DropArea = $DropArea
 @onready var ingredient_icon = $DropArea/IngredientIcon
 @onready var button = $Button
+@onready var stat_disp:StatsDisplayer = $StatsDisplayer
 var decision_encounter
 
 var interactable = true
@@ -54,6 +51,9 @@ func _ready() -> void:
 func start():
 	button.set_text(text)
 	drop_area.set_text(text)
+	check_completed()
+	if not drop_ingredients:
+		stat_disp.visible = false
 	check_button_available()
 	
 func end():
@@ -98,29 +98,33 @@ func on_ingredient_dropped(origin, _card):
 #endregion
 #region Checking
 func check_completed():
+	if not drop_ingredients:
+		return
 	#if amount of ingredients or amount of flavour/nutrition is fullfilled
 	#amount
+	var completed = true
 	if (current_cards.size() < ingredient_amount):
 		return
 	#values
+	var flavour_sums = get_flavours_sum()
+	var flavour_dif:Dictionary[GlobalEnums.Flavour, int]
 	for flavour in GlobalEnums.Flavour:
 		if GlobalEnums.Flavour[flavour] == GlobalEnums.Flavour.NONE:
 			continue
-		var sum1 = 0
-		for i in current_cards:
-			sum1 += i.get_flavours()[GlobalEnums.Flavour[flavour]]
-		if sum1 < get_req_flavours()[GlobalEnums.Flavour[flavour]]:
-			return
-	var sum2 = 0
+		flavour_dif[GlobalEnums.Flavour[flavour]] = req_flavours[GlobalEnums.Flavour[flavour]] - flavour_sums[GlobalEnums.Flavour[flavour]]
+		if flavour_sums[GlobalEnums.Flavour[flavour]] < req_flavours[GlobalEnums.Flavour[flavour]]:
+			completed = false
+	stat_disp.update_flavours(flavour_dif)
+	var sum_nutrition = 0
 	for i in current_cards:
-		sum2 += i.committed_stats.nutrition
-	if sum2 < nutrition:
-		return
-	complete()
+		sum_nutrition += i.committed_stats.nutrition
+	stat_disp.update_nutrition(req_nutrition - sum_nutrition)
+	if sum_nutrition < req_nutrition:
+		completed = false
+	if completed:
+		complete()
 #endregion
 #region Getting
-func get_req_flavours() -> Dictionary[GlobalEnums.Flavour, int]:
-	return req_flavours
 #endregion
 
 #region Reward

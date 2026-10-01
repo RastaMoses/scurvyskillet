@@ -9,6 +9,15 @@
 [ext_resource type="Theme" uid="uid://vdmasea6p0ex" path="res://themes/encounter/choice_button_text.tres" id="5_5ods4"]
 [ext_resource type="Texture2D" uid="uid://xr08dfjbvw6x" path="res://sprites/interface/scenes/decision scene/scene_decision_button_crate_outline.png" id="5_w532b"]
 [ext_resource type="Script" uid="uid://dht54sfjv7hkv" path="res://scripts/Encounter/UI/button_ui.gd" id="7_a17em"]
+[ext_resource type="Script" uid="uid://6liq01j5a6ev" path="res://scripts/Encounter/UI/stats_displayer.gd" id="10_1babh"]
+[ext_resource type="Texture2D" uid="uid://fh6x0jpwhyr7" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_flavor_fresh.png" id="10_ptq5c"]
+[ext_resource type="Theme" uid="uid://dfu5pdupo2wqr" path="res://themes/cards/small/flavour_text.tres" id="11_wwxsn"]
+[ext_resource type="Texture2D" uid="uid://banbfs6e11s6d" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_flavor_hearty.png" id="12_744mh"]
+[ext_resource type="Script" uid="uid://cd0ktcwpa3fkn" path="res://scripts/sprite_animator.gd" id="12_xtwat"]
+[ext_resource type="Texture2D" uid="uid://dleugyq8yv3ke" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_flavor_spicy.png" id="13_1babh"]
+[ext_resource type="Texture2D" uid="uid://frmxomtxddj4" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_flavor_sweet.png" id="14_xtwat"]
+[ext_resource type="Texture2D" uid="uid://tnxncq7yqfb2" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_nutrition.png" id="15_744mh"]
+[ext_resource type="Theme" uid="uid://djqywg2hbepia" path="res://themes/cards/small/nutrition_text.tres" id="16_1babh"]
 
 [node name="choice" type="Control" unique_id=704699521]
 layout_mode = 3
@@ -20,6 +29,142 @@ script = ExtResource("1_61j3v")
 random_ingredient_amount = 0
 card_prefab = ExtResource("2_jv3kl")
 can_stack_uses = false
+
+[node name="StatsDisplayer" type="Control" parent="." unique_id=218828265 node_paths=PackedStringArray("sweet_text", "spicy_text", "hearty_text", "fresh_text", "sweet_bg", "spicy_bg", "hearty_bg", "fresh_bg", "nutrition_text", "nutrition_bg")]
+layout_mode = 1
+anchors_preset = 0
+offset_left = -32.0
+offset_top = -368.0
+offset_right = 480.0
+offset_bottom = 400.0
+mouse_behavior_recursive = 1
+script = ExtResource("10_1babh")
+result_bg_move_x = 0
+result_bg_move_y = 100
+sweet_text = NodePath("Sweet/RichTextLabel")
+spicy_text = NodePath("Spicy/RichTextLabel")
+hearty_text = NodePath("Hearty/RichTextLabel")
+fresh_text = NodePath("Fresh/RichTextLabel")
+sweet_bg = NodePath("Sweet")
+spicy_bg = NodePath("Spicy")
+hearty_bg = NodePath("Hearty")
+fresh_bg = NodePath("Fresh")
+nutrition_text = NodePath("Nutrition/NutritionText")
+nutrition_bg = NodePath("Nutrition")
+
+[node name="Sweet" type="TextureRect" parent="StatsDisplayer" unique_id=1341881848]
+layout_mode = 0
+offset_left = -8.0
+offset_right = 504.0
+offset_bottom = 768.0
+mouse_behavior_recursive = 1
+texture = ExtResource("14_xtwat")
+script = ExtResource("12_xtwat")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="StatsDisplayer/Sweet" unique_id=377293947]
+layout_mode = 0
+offset_left = 294.0
+offset_top = 28.0
+offset_right = 374.0
+offset_bottom = 115.875
+theme = ExtResource("11_wwxsn")
+theme_type_variation = &"sweet"
+text = "1"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spicy" type="TextureRect" parent="StatsDisplayer" unique_id=552965113]
+layout_mode = 0
+offset_left = -8.0
+offset_right = 504.0
+offset_bottom = 768.0
+mouse_behavior_recursive = 1
+texture = ExtResource("13_1babh")
+script = ExtResource("12_xtwat")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="StatsDisplayer/Spicy" unique_id=711313597]
+layout_mode = 0
+offset_left = 214.0
+offset_top = 28.0
+offset_right = 294.0
+offset_bottom = 115.875
+theme = ExtResource("11_wwxsn")
+theme_type_variation = &"spicy"
+text = "1"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hearty" type="TextureRect" parent="StatsDisplayer" unique_id=1664144005]
+layout_mode = 0
+offset_left = -8.0
+offset_right = 504.0
+offset_bottom = 768.0
+mouse_behavior_recursive = 1
+texture = ExtResource("12_744mh")
+script = ExtResource("12_xtwat")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="StatsDisplayer/Hearty" unique_id=2029002624]
+layout_mode = 0
+offset_left = 135.0
+offset_top = 28.125
+offset_right = 215.0
+offset_bottom = 116.0
+theme = ExtResource("11_wwxsn")
+theme_type_variation = &"hearty"
+text = "2"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Fresh" type="TextureRect" parent="StatsDisplayer" unique_id=1630226345]
+layout_mode = 0
+offset_left = -8.0
+offset_right = 504.0
+offset_bottom = 768.0
+mouse_behavior_recursive = 1
+texture = ExtResource("10_ptq5c")
+script = ExtResource("12_xtwat")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="StatsDisplayer/Fresh" unique_id=142786001]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 28.125
+offset_right = 134.0
+offset_bottom = 116.0
+theme = ExtResource("11_wwxsn")
+theme_type_variation = &"fresh"
+text = "1"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Nutrition" type="TextureRect" parent="StatsDisplayer" unique_id=762511528]
+layout_mode = 0
+offset_left = 72.0
+offset_top = -152.0
+offset_right = 584.0
+offset_bottom = 616.0
+mouse_behavior_recursive = 1
+texture = ExtResource("15_744mh")
+
+[node name="NutritionText" type="RichTextLabel" parent="StatsDisplayer/Nutrition" unique_id=2033215983]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -246.0
+offset_top = 233.0
+offset_right = -166.0
+offset_bottom = 313.0
+grow_horizontal = 0
+theme = ExtResource("16_1babh")
+theme_type_variation = &"standard"
+text = "2"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="DropArea" type="Panel" parent="." unique_id=242936625 node_paths=PackedStringArray("parent_inventory", "highlight", "bg", "text_label")]
 self_modulate = Color(1, 1, 1, 0)

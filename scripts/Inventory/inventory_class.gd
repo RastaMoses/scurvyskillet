@@ -403,13 +403,14 @@ func get_lowest_flavour(flavours_pool:Dictionary = get_flavours_sum(current_card
 		
 	return min_index as Array[GlobalEnums.Flavour]
 
-func get_flavours_sum(card_pool:Array[Card] = current_cards):
-	var flavour_sums:Array[int] = [0,0,0,0,0]
-	for card in card_pool:
-		var card_flavours = card.get_flavours()
-		for flavour in GlobalEnums.Flavour:
-			if GlobalEnums.Flavour[flavour] == GlobalEnums.Flavour.NONE:
+func get_flavours_sum(card_pool:Array[Card] = current_cards) -> Dictionary[GlobalEnums.Flavour, int]:
+	var flavour_sums:Dictionary[GlobalEnums.Flavour, int]
+	for flavour in GlobalEnums.Flavour:
+		if GlobalEnums.Flavour[flavour] == GlobalEnums.Flavour.NONE:
 				continue
+		flavour_sums[GlobalEnums.Flavour[flavour]] = 0
+		for card in card_pool:
+			var card_flavours = card.get_flavours()
 			flavour_sums[GlobalEnums.Flavour[flavour]] += card_flavours[GlobalEnums.Flavour[flavour]]
 	return flavour_sums
 #endregion

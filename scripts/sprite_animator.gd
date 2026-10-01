@@ -54,7 +54,7 @@ func _process(delta: float) -> void:
 	if move_active:
 		time_moved += delta / move_duration
 		time_moved = clampf(time_moved,0.0,1.0)
-		global_position = lerp(global_position, move_destination, time_moved)
+		position = lerp(position, move_destination, time_moved)
 		if time_moved >= 1.0:
 			arrive_at_destination()
 		#visuals

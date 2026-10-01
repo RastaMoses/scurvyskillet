@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://c6wkwwpm73lha" path="res://scripts/Map/map_loader.gd" id="1_0tnpc"]
 [ext_resource type="Script" uid="uid://druhtq8d66o1m" path="res://scripts/game.gd" id="1_vtaks"]
 [ext_resource type="Script" uid="uid://br1cliqv0rfxo" path="res://scripts/Inventory/card_large_view.gd" id="2_5newe"]
-[ext_resource type="PackedScene" uid="uid://dunmta1nw4fux" path="res://scenes/maps/empty_map.tscn" id="2_vtaks"]
 [ext_resource type="PackedScene" uid="uid://7lxu211xbf4i" path="res://scenes/prefabs/player/inventory_ui_large_view.tscn" id="3_37s47"]
 [ext_resource type="Script" uid="uid://cx3kxlhcjwpki" path="res://scripts/event_manager.gd" id="3_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://d3easqv184mu1" path="res://scenes/maps/start_map.tscn" id="3_rysoc"]
@@ -74,10 +73,11 @@ scale = Vector2(8, 8)
 texture = ExtResource("4_bt5mj")
 script = ExtResource("5_e1j6l")
 
-[node name="Overworld" type="Node" parent="." unique_id=1021026839 groups=["map_loader"]]
+[node name="Overworld" type="Node2D" parent="." unique_id=1366679052 groups=["map_loader"]]
 script = ExtResource("1_0tnpc")
 maps_0 = Array[PackedScene]([ExtResource("3_rysoc")])
-maps_1 = Array[PackedScene]([ExtResource("2_vtaks")])
+maps_1 = Array[PackedScene]([ExtResource("3_rysoc")])
+maps_2 = Array[PackedScene]([ExtResource("3_rysoc")])
 
 [node name="EventManager" type="Node" parent="." unique_id=761654411 groups=["event_manager"]]
 script = ExtResource("3_kvpfn")
