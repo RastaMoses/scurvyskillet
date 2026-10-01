@@ -26,12 +26,18 @@
 [ext_resource type="Resource" uid="uid://ytpkfsy15x04" path="res://resources/ingredients/in_game/tsoureki.tres" id="23_suyxu"]
 [ext_resource type="Resource" uid="uid://bsboei8v6c4x5" path="res://resources/ingredients/in_game/skyllamari.tres" id="24_sgl2t"]
 
-[node name="game" type="Node2D" unique_id=1075341061]
+[node name="game" type="Control" unique_id=1438732069]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+mouse_behavior_recursive = 1
 script = ExtResource("1_vtaks")
 
 [node name="LargeView" type="Control" parent="." unique_id=1346607487 groups=["card_large_view"]]
 z_index = 10
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 0
 mouse_filter = 1
 mouse_behavior_recursive = 1
@@ -82,17 +88,27 @@ maps_2 = Array[PackedScene]([ExtResource("3_rysoc")])
 [node name="EventManager" type="Node" parent="." unique_id=761654411 groups=["event_manager"]]
 script = ExtResource("3_kvpfn")
 
-[node name="Player" type="Node" parent="." unique_id=1818132485]
-
-[node name="Abilities" type="Node" parent="Player" unique_id=121107139 groups=["ability_manager"]]
-script = ExtResource("4_dinhu")
+[node name="Player" type="Control" parent="." unique_id=1437577981]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
 
 [node name="Inventory" parent="Player" unique_id=421132193 groups=["player"] instance=ExtResource("5_kvuet")]
+layout_mode = 1
 current_money = 100
 current_morale = 5
 starting_ingredients = Array[ExtResource("7_ca42v")]([ExtResource("8_rysoc"), ExtResource("11_1kice"), ExtResource("12_5newe"), ExtResource("13_37s47"), ExtResource("14_bt5mj"), ExtResource("13_ir15t"), ExtResource("13_ir15t"), ExtResource("12_5newe"), ExtResource("14_ca42v"), ExtResource("20_bhx41"), ExtResource("21_qnb83"), ExtResource("21_qnb83"), ExtResource("22_sww3w"), ExtResource("23_suyxu"), ExtResource("24_sgl2t")])
 
+[node name="Abilities" type="Node" parent="Player" unique_id=121107139 groups=["ability_manager"]]
+script = ExtResource("4_dinhu")
+
 [node name="debug_mouse" parent="." unique_id=2141378264 instance=ExtResource("8_ca42v")]
+active = true
 
 [node name="IngredientPool" type="Node" parent="." unique_id=1772734839 groups=["ingredient_pool"]]
 script = ExtResource("9_rysoc")

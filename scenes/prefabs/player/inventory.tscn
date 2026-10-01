@@ -19,6 +19,26 @@
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_2kgow"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dndqy"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.7372549, 0.5058824, 0.42745098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3h3nv"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p47cp"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.7372549, 0.5058824, 0.42745098, 1)
+
 [node name="Inventory" type="Control" unique_id=2008002230 node_paths=PackedStringArray("morale_text", "money_text", "ui")]
 layout_mode = 3
 anchors_preset = 15
@@ -133,12 +153,12 @@ texture = SubResource("PlaceholderTexture2D_2kgow")
 [node name="ScrollContainer" type="ScrollContainer" parent="InventoryUI" unique_id=79906176 node_paths=PackedStringArray("horizontal_hint_left", "horizontal_hint_right")]
 clip_contents = false
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -304.0
-offset_right = 1920.0
-grow_vertical = 0
+offset_top = 776.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_behavior_recursive = 2
 theme = ExtResource("10_no1hy")
 horizontal_scroll_mode = 3
@@ -188,9 +208,12 @@ layout_mode = 2
 mouse_filter = 0
 
 [node name="Scrollbar Hints" type="Control" parent="InventoryUI" unique_id=331360101]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_behavior_recursive = 1
 
 [node name="Left" type="TextureRect" parent="InventoryUI/Scrollbar Hints" unique_id=1368702239]
@@ -220,41 +243,53 @@ move_x = -8
 move_wait_time = 0.6
 
 [node name="InventorySortButtons" type="Control" parent="InventoryUI" unique_id=1853448072]
-anchors_preset = 0
-offset_top = 488.0
-offset_right = 40.0
-offset_bottom = 528.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="RarityButton" type="Control" parent="InventoryUI/InventorySortButtons" unique_id=1830534730 node_paths=PackedStringArray("button")]
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_top = 544.0
+offset_right = 112.0
+offset_bottom = 640.0
 script = ExtResource("16_p47cp")
 button = NodePath("Button")
 
 [node name="Button" type="Button" parent="InventoryUI/InventorySortButtons/RarityButton" unique_id=1420800583]
-layout_mode = 0
-offset_top = 176.0
-offset_right = 112.0
-offset_bottom = 272.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_behavior_recursive = 2
-disabled = true
+theme_override_constants/h_separation = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_dndqy")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3h3nv")
 text = "RARITY"
 
 [node name="AlphabetButton" type="Control" parent="InventoryUI/InventorySortButtons" unique_id=747609692 node_paths=PackedStringArray("button")]
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_top = 656.0
+offset_right = 112.0
+offset_bottom = 752.0
 script = ExtResource("16_p47cp")
 button = NodePath("Button")
 
 [node name="Button" type="Button" parent="InventoryUI/InventorySortButtons/AlphabetButton" unique_id=534811674]
-layout_mode = 0
-offset_top = 64.0
-offset_right = 112.0
-offset_bottom = 160.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_behavior_recursive = 2
-disabled = true
+theme_override_constants/h_separation = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_p47cp")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3h3nv")
 text = "AZ"
 
 [connection signal="left_clicked" from="InventoryUI/InventorySortButtons/RarityButton" to="InventoryUI" method="_on_rarity_button_left_clicked"]

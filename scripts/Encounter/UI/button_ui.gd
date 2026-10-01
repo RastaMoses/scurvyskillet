@@ -5,6 +5,7 @@ extends Control
 @export var anti_highlight:Control
 @export var text_label:RichTextLabel
 @export var button:Button
+
 #Signals
 signal start_hover
 signal stop_hover
@@ -19,6 +20,13 @@ func _ready() -> void:
 	button.gui_input.connect(_gui_input)
 	button.mouse_entered.connect(_on_mouse_enter)
 	button.mouse_exited.connect(_on_mouse_exit)
+	
+	#Debug
+	#button.draw.connect(_on_button_draw)
+
+#Debug
+func _on_button_draw() -> void:
+	button.draw_rect(Rect2(Vector2.ZERO, button.size), Color.RED, false, 2.0)
 
 func _gui_input(event: InputEvent) -> void:
 	if button.disabled:
