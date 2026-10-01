@@ -147,12 +147,12 @@ func update_flavours():
 			if card_flavours[GlobalEnums.Flavour[flavour]] != card_base_flavours[GlobalEnums.Flavour[flavour]]:
 				flavours_display[GlobalEnums.Flavour[flavour]].get_child(0).theme_type_variation = "altered"
 			else:
-				flavours_display[GlobalEnums.Flavour[flavour]].get_child(0).theme_type_variation = "hearty"
+				flavours_display[GlobalEnums.Flavour[flavour]].get_child(0).theme_type_variation = "standard"
 		else:
 			if card_flavours[GlobalEnums.Flavour[flavour]] != card_base_flavours[GlobalEnums.Flavour[flavour]]:
 				flavours_display[GlobalEnums.Flavour[flavour]].get_child(0).theme_type_variation = "altered"
 			else:
-				flavours_display[GlobalEnums.Flavour[flavour]].get_child(0).theme_type_variation = "hearty"
+				flavours_display[GlobalEnums.Flavour[flavour]].get_child(0).theme_type_variation = "standard"
 				flavours_display[GlobalEnums.Flavour[flavour]].visible = false
 	
 	#nutrition
@@ -206,7 +206,6 @@ func _drop_data(_at_position: Vector2, data: Variant) -> void:
 		data.show()
 		data.update(data.card)
 	
-
 func _notification(what: int) -> void:
 	if editor_preview:
 		return

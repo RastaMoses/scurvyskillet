@@ -52,13 +52,20 @@
 [ext_resource type="Texture2D" uid="uid://dycqd48stbb8y" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_10.png" id="49_rgx8h"]
 [ext_resource type="Texture2D" uid="uid://ds0ditt6c3564" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_11.png" id="50_j0s5h"]
 [ext_resource type="Texture2D" uid="uid://dv3s7gtoqsgop" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_12.png" id="51_thvsx"]
+[ext_resource type="Texture2D" uid="uid://frmxomtxddj4" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_flavor_sweet.png" id="52_m7klv"]
 [ext_resource type="Texture2D" uid="uid://fk5rj2if2yya" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_13.png" id="52_vr4cn"]
 [ext_resource type="Texture2D" uid="uid://dc7adjl02458u" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_14.png" id="53_qgafy"]
+[ext_resource type="Theme" uid="uid://dfu5pdupo2wqr" path="res://themes/cards/small/flavour_text.tres" id="53_ro2u2"]
 [ext_resource type="Texture2D" uid="uid://tcv2odvxgx80" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_15.png" id="54_w18yr"]
+[ext_resource type="Texture2D" uid="uid://dleugyq8yv3ke" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_flavor_spicy.png" id="54_ypqpd"]
 [ext_resource type="Texture2D" uid="uid://cxp0vbkc8l8j8" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_16.png" id="55_j7lvq"]
+[ext_resource type="Texture2D" uid="uid://banbfs6e11s6d" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_flavor_hearty.png" id="55_t1n2v"]
 [ext_resource type="Texture2D" uid="uid://dp045es473oaa" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_17.png" id="56_rrl8g"]
+[ext_resource type="Texture2D" uid="uid://fh6x0jpwhyr7" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_flavor_fresh.png" id="56_tmb07"]
 [ext_resource type="Texture2D" uid="uid://cjcv7ro8pa1w3" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_18.png" id="57_0lyi6"]
+[ext_resource type="Texture2D" uid="uid://tnxncq7yqfb2" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_nutrition.png" id="57_xthvj"]
 [ext_resource type="Texture2D" uid="uid://bqy1xr15y1dfj" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_19.png" id="58_b21qk"]
+[ext_resource type="Script" uid="uid://dre88e31khyuv" path="res://scripts/Encounter/UI/combination_display.gd" id="58_ro2u2"]
 [ext_resource type="Texture2D" uid="uid://64syy6inf2k0" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_20.png" id="59_lxrxu"]
 [ext_resource type="Texture2D" uid="uid://jso4fb173d32" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_21.png" id="60_4ousx"]
 [ext_resource type="Texture2D" uid="uid://br06cxkesxqsc" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_22.png" id="61_fiswi"]
@@ -72,13 +79,23 @@
 
 [sub_resource type="Theme" id="Theme_5p3kb"]
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_omhyo"]
+color = Color(0.7058824, 0.6156863, 0.49411765, 1)
+grow_begin = -80.0
+grow_end = -80.0
+thickness = 4
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ro2u2"]
+color = Color(0.40784314, 0.2509804, 0.22352941, 1)
+thickness = 8
+
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_s7dlr"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ecqho"]
 friction = 0.03
 bounce = 1.1
 
-[node name="ChallengeSample2" type="Control" unique_id=993217827]
+[node name="ChallengeSample" type="Control" unique_id=993217827]
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 1
@@ -89,7 +106,7 @@ par_nutrition = 2
 s_specific_ingredients = Array[ExtResource("2_y21f8")]([ExtResource("3_6r88v")])
 s_random_ingredient_amount = 0
 
-[node name="UI" type="Control" parent="." unique_id=96621391]
+[node name="UI" type="Control" parent="." unique_id=96621391 node_paths=PackedStringArray("challenge", "result_stats_display", "result_toggle_panel_button", "result_end_button", "result_screen", "result_panel", "result_text_vbox", "result_text_combination_box", "dish_stats_display", "pan_highlight", "drop_area", "reset_button", "finish_dish_button", "plate_parent", "plates_shadow", "des_vbox", "inventory_display")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -99,6 +116,23 @@ grow_vertical = 2
 mouse_filter = 1
 mouse_behavior_recursive = 1
 script = ExtResource("2_hs7g2")
+challenge = NodePath("..")
+result_stats_display = NodePath("ResultScreen/ResultPanel/StatsDisplayer")
+result_toggle_panel_button = NodePath("ResultScreen/ToggleResultButton")
+result_end_button = NodePath("ResultScreen/ResultPanel/EndButton")
+result_screen = NodePath("ResultScreen")
+result_panel = NodePath("ResultScreen/ResultPanel")
+result_text_vbox = NodePath("ResultScreen/ResultPanel/ResultVbox/ScrollContainer/CombinationVBox")
+result_text_combination_box = NodePath("ResultScreen/ResultPanel/ResultVbox/ScrollContainer/CombinationVBox/CombinationDisplay")
+dish_stats_display = NodePath("Cooking/Stats")
+pan_highlight = NodePath("Cooking/Pan/highlight")
+drop_area = NodePath("Cooking/DropArea")
+reset_button = NodePath("Cooking/ResetButton")
+finish_dish_button = NodePath("Cooking/FinishButton")
+plate_parent = NodePath("Cooking/PlatesDisplay/plates")
+plates_shadow = NodePath("Cooking/PlatesDisplay/shadow")
+des_vbox = NodePath("description/ScrollContainer/VBoxContainer")
+inventory_display = NodePath("InventoryUI")
 
 [node name="BG" type="TextureRect" parent="UI" unique_id=428102425]
 layout_mode = 1
@@ -172,29 +206,21 @@ offset_bottom = 152.0
 mouse_behavior_recursive = 2
 text = "Dish Inv"
 
-[node name="Dish" type="Control" parent="UI" unique_id=817898650]
+[node name="Cooking" type="Control" parent="UI" unique_id=817898650]
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 2
 mouse_behavior_recursive = 1
 
-[node name="Finish" type="Control" parent="UI/Dish" unique_id=1106766389]
-z_index = 2
-anchors_preset = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
-mouse_filter = 1
-mouse_behavior_recursive = 1
-
-[node name="Pan" type="Control" parent="UI/Dish" unique_id=1516231476]
+[node name="Pan" type="Control" parent="UI/Cooking" unique_id=1516231476]
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 2
 mouse_behavior_recursive = 1
 
-[node name="fire" type="TextureRect" parent="UI/Dish/Pan" unique_id=1037339575]
+[node name="fire" type="TextureRect" parent="UI/Cooking/Pan" unique_id=1037339575]
 z_index = 1
 layout_mode = 0
 offset_right = 1920.0
@@ -203,7 +229,7 @@ mouse_filter = 2
 mouse_behavior_recursive = 1
 texture = ExtResource("27_1pkyc")
 
-[node name="texture" type="TextureRect" parent="UI/Dish/Pan" unique_id=1042688915]
+[node name="texture" type="TextureRect" parent="UI/Cooking/Pan" unique_id=1042688915]
 z_index = 2
 layout_mode = 0
 offset_right = 1920.0
@@ -212,14 +238,14 @@ mouse_filter = 2
 mouse_behavior_recursive = 1
 texture = ExtResource("28_fivfm")
 
-[node name="highlight" type="Sprite2D" parent="UI/Dish/Pan" unique_id=1126400856]
+[node name="highlight" type="TextureRect" parent="UI/Cooking/Pan" unique_id=1990844774]
 visible = false
 z_index = 1
+layout_mode = 0
 scale = Vector2(8, 8)
 texture = ExtResource("29_kwv47")
-centered = false
 
-[node name="Stats" type="Control" parent="UI/Dish" unique_id=406643778 node_paths=PackedStringArray("sweet_text", "spicy_text", "hearty_text", "fresh_text", "sweet_bg", "spicy_bg", "hearty_bg", "fresh_bg", "nutrition_text")]
+[node name="Stats" type="Control" parent="UI/Cooking" unique_id=406643778 node_paths=PackedStringArray("sweet_text", "spicy_text", "hearty_text", "fresh_text", "sweet_bg", "spicy_bg", "hearty_bg", "fresh_bg", "nutrition_text")]
 z_index = 4
 layout_mode = 1
 anchors_preset = 15
@@ -242,11 +268,11 @@ hearty_bg = NodePath("Hearty")
 fresh_bg = NodePath("Fresh")
 nutrition_text = NodePath("nutrition_text")
 
-[node name="Sweet" type="TextureRect" parent="UI/Dish/Stats" unique_id=1981192164]
+[node name="Sweet" type="TextureRect" parent="UI/Cooking/Stats" unique_id=1981192164]
 layout_mode = 0
-offset_left = 1784.0
+offset_left = 1792.0
 offset_top = 456.0
-offset_right = 1803.0
+offset_right = 1811.0
 offset_bottom = 465.0
 scale = Vector2(8, 8)
 mouse_filter = 2
@@ -254,11 +280,11 @@ mouse_behavior_recursive = 1
 texture = ExtResource("30_m7klv")
 script = ExtResource("31_ro2u2")
 
-[node name="Spicy" type="TextureRect" parent="UI/Dish/Stats" unique_id=186537052]
+[node name="Spicy" type="TextureRect" parent="UI/Cooking/Stats" unique_id=186537052]
 layout_mode = 0
-offset_left = 1784.0
+offset_left = 1792.0
 offset_top = 368.0
-offset_right = 1803.0
+offset_right = 1811.0
 offset_bottom = 377.0
 scale = Vector2(8, 8)
 mouse_filter = 2
@@ -266,11 +292,11 @@ mouse_behavior_recursive = 1
 texture = ExtResource("33_t1n2v")
 script = ExtResource("31_ro2u2")
 
-[node name="Hearty" type="TextureRect" parent="UI/Dish/Stats" unique_id=1394983020]
+[node name="Hearty" type="TextureRect" parent="UI/Cooking/Stats" unique_id=1394983020]
 layout_mode = 0
-offset_left = 1784.0
+offset_left = 1792.0
 offset_top = 280.0
-offset_right = 1803.0
+offset_right = 1811.0
 offset_bottom = 289.0
 scale = Vector2(8, 8)
 mouse_filter = 2
@@ -278,11 +304,11 @@ mouse_behavior_recursive = 1
 texture = ExtResource("34_tmb07")
 script = ExtResource("31_ro2u2")
 
-[node name="Fresh" type="TextureRect" parent="UI/Dish/Stats" unique_id=382793876]
+[node name="Fresh" type="TextureRect" parent="UI/Cooking/Stats" unique_id=382793876]
 layout_mode = 0
-offset_left = 1784.0
+offset_left = 1792.0
 offset_top = 192.0
-offset_right = 1803.0
+offset_right = 1811.0
 offset_bottom = 201.0
 scale = Vector2(8, 8)
 mouse_filter = 2
@@ -290,11 +316,11 @@ mouse_behavior_recursive = 1
 texture = ExtResource("35_xthvj")
 script = ExtResource("31_ro2u2")
 
-[node name="SweetText" type="RichTextLabel" parent="UI/Dish/Stats" unique_id=352183300]
+[node name="SweetText" type="RichTextLabel" parent="UI/Cooking/Stats" unique_id=352183300]
 layout_mode = 0
-offset_left = 1814.0
+offset_left = 1826.0
 offset_top = 460.0
-offset_right = 1902.0
+offset_right = 1914.0
 offset_bottom = 532.0
 mouse_filter = 2
 mouse_behavior_recursive = 1
@@ -305,11 +331,11 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SpicyText" type="RichTextLabel" parent="UI/Dish/Stats" unique_id=1187731099]
+[node name="SpicyText" type="RichTextLabel" parent="UI/Cooking/Stats" unique_id=1187731099]
 layout_mode = 0
-offset_left = 1814.0
+offset_left = 1826.0
 offset_top = 372.0
-offset_right = 1902.0
+offset_right = 1914.0
 offset_bottom = 444.0
 mouse_filter = 2
 mouse_behavior_recursive = 1
@@ -320,11 +346,11 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HeartyText" type="RichTextLabel" parent="UI/Dish/Stats" unique_id=468162168]
+[node name="HeartyText" type="RichTextLabel" parent="UI/Cooking/Stats" unique_id=468162168]
 layout_mode = 0
-offset_left = 1814.0
+offset_left = 1826.0
 offset_top = 284.0
-offset_right = 1902.0
+offset_right = 1914.0
 offset_bottom = 356.0
 mouse_filter = 2
 mouse_behavior_recursive = 1
@@ -335,11 +361,11 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="FreshText" type="RichTextLabel" parent="UI/Dish/Stats" unique_id=1240791199]
+[node name="FreshText" type="RichTextLabel" parent="UI/Cooking/Stats" unique_id=1240791199]
 layout_mode = 0
-offset_left = 1814.0
+offset_left = 1826.0
 offset_top = 196.0
-offset_right = 1902.0
+offset_right = 1914.0
 offset_bottom = 268.0
 mouse_filter = 2
 mouse_behavior_recursive = 1
@@ -350,13 +376,13 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="nutrition_text" type="RichTextLabel" parent="UI/Dish/Stats" unique_id=434235131]
+[node name="nutrition_text" type="RichTextLabel" parent="UI/Cooking/Stats" unique_id=434235131]
 z_index = 2
 custom_maximum_size = Vector2(171.52295, 96)
 layout_mode = 0
-offset_left = 652.0
+offset_left = 664.0
 offset_top = 367.0
-offset_right = 823.52295
+offset_right = 835.52295
 offset_bottom = 463.0
 mouse_filter = 1
 mouse_behavior_recursive = 1
@@ -372,28 +398,28 @@ maximum_font_size = 128
 minimum_font_size = 64
 padding = Vector2(0, 0)
 
-[node name="PlatesDisplay" type="Control" parent="UI/Dish" unique_id=108100769]
+[node name="PlatesDisplay" type="Control" parent="UI/Cooking" unique_id=108100769]
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 1
 mouse_behavior_recursive = 1
 
-[node name="shadow" type="TextureRect" parent="UI/Dish/PlatesDisplay" unique_id=387355561]
+[node name="shadow" type="TextureRect" parent="UI/Cooking/PlatesDisplay" unique_id=387355561]
 layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_behavior_recursive = 1
 texture = ExtResource("37_lx64j")
 
-[node name="plates" type="Control" parent="UI/Dish/PlatesDisplay" unique_id=683166593]
+[node name="plates" type="Control" parent="UI/Cooking/PlatesDisplay" unique_id=683166593]
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 2
 mouse_behavior_recursive = 1
 
-[node name="plate1" type="TextureRect" parent="UI/Dish/PlatesDisplay/plates" unique_id=1236609232]
+[node name="plate1" type="TextureRect" parent="UI/Cooking/PlatesDisplay/plates" unique_id=1236609232]
 visible = false
 layout_mode = 0
 offset_right = 1920.0
@@ -401,7 +427,7 @@ offset_bottom = 1080.0
 mouse_behavior_recursive = 1
 texture = ExtResource("40_nlbif")
 
-[node name="plate2" type="TextureRect" parent="UI/Dish/PlatesDisplay/plates" unique_id=1778575357]
+[node name="plate2" type="TextureRect" parent="UI/Cooking/PlatesDisplay/plates" unique_id=1778575357]
 visible = false
 layout_mode = 0
 offset_right = 1920.0
@@ -409,7 +435,7 @@ offset_bottom = 1080.0
 mouse_behavior_recursive = 1
 texture = ExtResource("41_hi441")
 
-[node name="plate3" type="TextureRect" parent="UI/Dish/PlatesDisplay/plates" unique_id=961816938]
+[node name="plate3" type="TextureRect" parent="UI/Cooking/PlatesDisplay/plates" unique_id=961816938]
 visible = false
 layout_mode = 0
 offset_right = 1920.0
@@ -417,7 +443,7 @@ offset_bottom = 1080.0
 mouse_behavior_recursive = 1
 texture = ExtResource("42_w2137")
 
-[node name="plate4" type="TextureRect" parent="UI/Dish/PlatesDisplay/plates" unique_id=1341237171]
+[node name="plate4" type="TextureRect" parent="UI/Cooking/PlatesDisplay/plates" unique_id=1341237171]
 visible = false
 layout_mode = 0
 offset_right = 1920.0
@@ -425,7 +451,7 @@ offset_bottom = 1080.0
 mouse_behavior_recursive = 1
 texture = ExtResource("43_i46yf")
 
-[node name="plate5" type="TextureRect" parent="UI/Dish/PlatesDisplay/plates" unique_id=1525068397]
+[node name="plate5" type="TextureRect" parent="UI/Cooking/PlatesDisplay/plates" unique_id=1525068397]
 visible = false
 layout_mode = 0
 offset_right = 1920.0
@@ -433,7 +459,7 @@ offset_bottom = 1080.0
 mouse_behavior_recursive = 1
 texture = ExtResource("44_i4lfb")
 
-[node name="plate6" type="TextureRect" parent="UI/Dish/PlatesDisplay/plates" unique_id=1706927210]
+[node name="plate6" type="TextureRect" parent="UI/Cooking/PlatesDisplay/plates" unique_id=1706927210]
 visible = false
 layout_mode = 0
 offset_right = 1920.0
@@ -441,7 +467,7 @@ offset_bottom = 1080.0
 mouse_behavior_recursive = 1
 texture = ExtResource("45_v2xnm")
 
-[node name="plate7" type="TextureRect" parent="UI/Dish/PlatesDisplay/plates" unique_id=430065961]
+[node name="plate7" type="TextureRect" parent="UI/Cooking/PlatesDisplay/plates" unique_id=430065961]
 visible = false
 layout_mode = 0
 offset_right = 1920.0
@@ -449,7 +475,7 @@ offset_bottom = 1080.0
 mouse_behavior_recursive = 1
 texture = ExtResource("46_jn8uc")
 
-[node name="plate8" type="TextureRect" parent="UI/Dish/PlatesDisplay/plates" unique_id=928467015]
+[node name="plate8" type="TextureRect" parent="UI/Cooking/PlatesDisplay/plates" unique_id=928467015]
 visible = false
 layout_mode = 0
 offset_right = 1920.0
@@ -457,7 +483,7 @@ offset_bottom = 1080.0
 mouse_behavior_recursive = 1
 texture = ExtResource("47_16wqt")
 
-[node name="plate9" type="TextureRect" parent="UI/Dish/PlatesDisplay/plates" unique_id=1785618226]
+[node name="plate9" type="TextureRect" parent="UI/Cooking/PlatesDisplay/plates" unique_id=1785618226]
 visible = false
 layout_mode = 0
 offset_right = 1920.0
@@ -465,7 +491,7 @@ offset_bottom = 1080.0
 mouse_behavior_recursive = 1
 texture = ExtResource("48_cguij")
 
-[node name="plate10" type="TextureRect" parent="UI/Dish/PlatesDisplay/plates" unique_id=1819404259]
+[node name="plate10" type="TextureRect" parent="UI/Cooking/PlatesDisplay/plates" unique_id=1819404259]
 visible = false
 layout_mode = 0
 offset_right = 1920.0
@@ -473,7 +499,7 @@ offset_bottom = 1080.0
 mouse_behavior_recursive = 1
 texture = ExtResource("49_rgx8h")
 
-[node name="plate11" type="TextureRect" parent="UI/Dish/PlatesDisplay/plates" unique_id=1521969908]
+[node name="plate11" type="TextureRect" parent="UI/Cooking/PlatesDisplay/plates" unique_id=1521969908]
 visible = false
 layout_mode = 0
 offset_right = 1920.0
@@ -481,7 +507,7 @@ offset_bottom = 1080.0
 mouse_behavior_recursive = 1
 texture = ExtResource("50_j0s5h")
 
-[node name="plate12" type="TextureRect" parent="UI/Dish/PlatesDisplay/plates" unique_id=1733467429]
+[node name="plate12" type="TextureRect" parent="UI/Cooking/PlatesDisplay/plates" unique_id=1733467429]
 visible = false
 layout_mode = 0
 offset_right = 1920.0
@@ -489,7 +515,7 @@ offset_bottom = 1080.0
 mouse_behavior_recursive = 1
 texture = ExtResource("51_thvsx")
 
-[node name="plate13" type="TextureRect" parent="UI/Dish/PlatesDisplay/plates" unique_id=1122322294]
+[node name="plate13" type="TextureRect" parent="UI/Cooking/PlatesDisplay/plates" unique_id=1122322294]
 visible = false
 layout_mode = 0
 offset_right = 1920.0
@@ -497,7 +523,7 @@ offset_bottom = 1080.0
 mouse_behavior_recursive = 1
 texture = ExtResource("52_vr4cn")
 
-[node name="plate14" type="TextureRect" parent="UI/Dish/PlatesDisplay/plates" unique_id=83138088]
+[node name="plate14" type="TextureRect" parent="UI/Cooking/PlatesDisplay/plates" unique_id=83138088]
 visible = false
 layout_mode = 0
 offset_right = 1920.0
@@ -505,7 +531,7 @@ offset_bottom = 1080.0
 mouse_behavior_recursive = 1
 texture = ExtResource("53_qgafy")
 
-[node name="plate15" type="TextureRect" parent="UI/Dish/PlatesDisplay/plates" unique_id=165553997]
+[node name="plate15" type="TextureRect" parent="UI/Cooking/PlatesDisplay/plates" unique_id=165553997]
 visible = false
 layout_mode = 0
 offset_right = 1920.0
@@ -513,7 +539,7 @@ offset_bottom = 1080.0
 mouse_behavior_recursive = 1
 texture = ExtResource("54_w18yr")
 
-[node name="plate16" type="TextureRect" parent="UI/Dish/PlatesDisplay/plates" unique_id=69887774]
+[node name="plate16" type="TextureRect" parent="UI/Cooking/PlatesDisplay/plates" unique_id=69887774]
 visible = false
 layout_mode = 0
 offset_right = 1920.0
@@ -521,7 +547,7 @@ offset_bottom = 1080.0
 mouse_behavior_recursive = 1
 texture = ExtResource("55_j7lvq")
 
-[node name="plate17" type="TextureRect" parent="UI/Dish/PlatesDisplay/plates" unique_id=493069959]
+[node name="plate17" type="TextureRect" parent="UI/Cooking/PlatesDisplay/plates" unique_id=493069959]
 visible = false
 layout_mode = 0
 offset_right = 1920.0
@@ -529,7 +555,7 @@ offset_bottom = 1080.0
 mouse_behavior_recursive = 1
 texture = ExtResource("56_rrl8g")
 
-[node name="plate18" type="TextureRect" parent="UI/Dish/PlatesDisplay/plates" unique_id=9312846]
+[node name="plate18" type="TextureRect" parent="UI/Cooking/PlatesDisplay/plates" unique_id=9312846]
 visible = false
 layout_mode = 0
 offset_right = 1920.0
@@ -537,7 +563,7 @@ offset_bottom = 1080.0
 mouse_behavior_recursive = 1
 texture = ExtResource("57_0lyi6")
 
-[node name="plate19" type="TextureRect" parent="UI/Dish/PlatesDisplay/plates" unique_id=1637109193]
+[node name="plate19" type="TextureRect" parent="UI/Cooking/PlatesDisplay/plates" unique_id=1637109193]
 visible = false
 layout_mode = 0
 offset_right = 1920.0
@@ -545,7 +571,7 @@ offset_bottom = 1080.0
 mouse_behavior_recursive = 1
 texture = ExtResource("58_b21qk")
 
-[node name="plate20" type="TextureRect" parent="UI/Dish/PlatesDisplay/plates" unique_id=1000498888]
+[node name="plate20" type="TextureRect" parent="UI/Cooking/PlatesDisplay/plates" unique_id=1000498888]
 visible = false
 layout_mode = 0
 offset_right = 1920.0
@@ -553,7 +579,7 @@ offset_bottom = 1080.0
 mouse_behavior_recursive = 1
 texture = ExtResource("59_lxrxu")
 
-[node name="plate21" type="TextureRect" parent="UI/Dish/PlatesDisplay/plates" unique_id=1013409676]
+[node name="plate21" type="TextureRect" parent="UI/Cooking/PlatesDisplay/plates" unique_id=1013409676]
 visible = false
 layout_mode = 0
 offset_right = 1920.0
@@ -561,7 +587,7 @@ offset_bottom = 1080.0
 mouse_behavior_recursive = 1
 texture = ExtResource("60_4ousx")
 
-[node name="plate22" type="TextureRect" parent="UI/Dish/PlatesDisplay/plates" unique_id=1517504319]
+[node name="plate22" type="TextureRect" parent="UI/Cooking/PlatesDisplay/plates" unique_id=1517504319]
 visible = false
 layout_mode = 0
 offset_right = 1920.0
@@ -569,7 +595,7 @@ offset_bottom = 1080.0
 mouse_behavior_recursive = 1
 texture = ExtResource("61_fiswi")
 
-[node name="ResetButton" type="Control" parent="UI/Dish" unique_id=506188444 node_paths=PackedStringArray("highlight", "button")]
+[node name="ResetButton" type="Control" parent="UI/Cooking" unique_id=506188444 node_paths=PackedStringArray("highlight", "button")]
 anchors_preset = 0
 offset_left = -64.0
 offset_top = -88.0
@@ -579,7 +605,7 @@ script = ExtResource("17_tcho6")
 highlight = NodePath("reset_bag_arrow")
 button = NodePath("ResetButton")
 
-[node name="ResetButton" type="Button" parent="UI/Dish/ResetButton" unique_id=7978580]
+[node name="ResetButton" type="Button" parent="UI/Cooking/ResetButton" unique_id=7978580]
 z_index = 3
 layout_mode = 0
 offset_left = 654.0
@@ -589,7 +615,7 @@ offset_bottom = 779.0
 mouse_behavior_recursive = 2
 flat = true
 
-[node name="reset_bag" type="TextureRect" parent="UI/Dish/ResetButton" unique_id=1374385542]
+[node name="reset_bag" type="TextureRect" parent="UI/Cooking/ResetButton" unique_id=1374385542]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -601,7 +627,7 @@ grow_vertical = 2
 mouse_behavior_recursive = 1
 texture = ExtResource("5_dmuak")
 
-[node name="reset_bag_arrow" type="TextureRect" parent="UI/Dish/ResetButton" unique_id=23805466]
+[node name="reset_bag_arrow" type="TextureRect" parent="UI/Cooking/ResetButton" unique_id=23805466]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -614,7 +640,7 @@ grow_vertical = 2
 mouse_behavior_recursive = 1
 texture = ExtResource("6_y21f8")
 
-[node name="FinishButton" type="Control" parent="UI/Dish" unique_id=1806716935 node_paths=PackedStringArray("highlight", "anti_highlight", "button")]
+[node name="FinishButton" type="Control" parent="UI/Cooking" unique_id=1806716935 node_paths=PackedStringArray("highlight", "anti_highlight", "button")]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -623,12 +649,12 @@ highlight = NodePath("Highlight")
 anti_highlight = NodePath("AntiHighlight")
 button = NodePath("button")
 
-[node name="BG" type="Control" parent="UI/Dish/FinishButton" unique_id=707670056]
+[node name="BG" type="Control" parent="UI/Cooking/FinishButton" unique_id=707670056]
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 
-[node name="ladle" type="TextureRect" parent="UI/Dish/FinishButton/BG" unique_id=109433895]
+[node name="ladle" type="TextureRect" parent="UI/Cooking/FinishButton/BG" unique_id=109433895]
 z_index = 2
 layout_mode = 0
 offset_top = 6.1035156e-05
@@ -638,7 +664,7 @@ offset_transform_enabled = true
 mouse_behavior_recursive = 1
 texture = ExtResource("7_6r88v")
 
-[node name="ladle_shadow" type="TextureRect" parent="UI/Dish/FinishButton/BG" unique_id=1878377346]
+[node name="ladle_shadow" type="TextureRect" parent="UI/Cooking/FinishButton/BG" unique_id=1878377346]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -648,12 +674,12 @@ grow_vertical = 2
 mouse_behavior_recursive = 1
 texture = ExtResource("8_ee2dl")
 
-[node name="Highlight" type="Control" parent="UI/Dish/FinishButton" unique_id=2041907713]
+[node name="Highlight" type="Control" parent="UI/Cooking/FinishButton" unique_id=2041907713]
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 
-[node name="highlight" type="TextureRect" parent="UI/Dish/FinishButton/Highlight" unique_id=1565297297]
+[node name="highlight" type="TextureRect" parent="UI/Cooking/FinishButton/Highlight" unique_id=1565297297]
 z_index = 2
 layout_mode = 1
 anchors_preset = 15
@@ -663,7 +689,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("11_x7qnw")
 
-[node name="ladle_hover" type="TextureRect" parent="UI/Dish/FinishButton/Highlight" unique_id=1943485844]
+[node name="ladle_hover" type="TextureRect" parent="UI/Cooking/FinishButton/Highlight" unique_id=1943485844]
 z_index = 2
 layout_mode = 1
 offset_left = 2648.0
@@ -674,12 +700,12 @@ rotation = -3.1415927
 mouse_behavior_recursive = 1
 texture = ExtResource("6_y21f8")
 
-[node name="AntiHighlight" type="Control" parent="UI/Dish/FinishButton" unique_id=2071624624]
+[node name="AntiHighlight" type="Control" parent="UI/Cooking/FinishButton" unique_id=2071624624]
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 
-[node name="button" type="Button" parent="UI/Dish/FinishButton" unique_id=967192702]
+[node name="button" type="Button" parent="UI/Cooking/FinishButton" unique_id=967192702]
 z_index = 4
 layout_mode = 0
 offset_left = 1777.1239
@@ -691,7 +717,7 @@ mouse_filter = 1
 mouse_behavior_recursive = 2
 flat = true
 
-[node name="DropArea" type="Panel" parent="UI/Dish" unique_id=2096391922 node_paths=PackedStringArray("parent_inventory")]
+[node name="DropArea" type="Panel" parent="UI/Cooking" unique_id=2096391922 node_paths=PackedStringArray("parent_inventory")]
 self_modulate = Color(1, 1, 1, 0)
 z_index = 100
 layout_mode = 0
@@ -704,7 +730,6 @@ script = ExtResource("62_smjam")
 parent_inventory = NodePath("../../../Dish")
 
 [node name="ResultScreen" type="Control" parent="UI" unique_id=1975332036]
-visible = false
 z_index = 4
 anchors_preset = 0
 offset_left = 864.0
@@ -722,6 +747,125 @@ offset_bottom = 632.0
 mouse_filter = 1
 mouse_behavior_recursive = 1
 
+[node name="StatsDisplayer" type="Control" parent="UI/ResultScreen/ResultPanel" unique_id=93431035 node_paths=PackedStringArray("sweet_text", "spicy_text", "hearty_text", "fresh_text", "sweet_bg", "spicy_bg", "hearty_bg", "fresh_bg", "nutrition_text", "nutrition_bg")]
+anchors_preset = 0
+offset_left = 40.0
+offset_top = -96.0
+offset_right = 664.0
+offset_bottom = 40.0
+mouse_behavior_recursive = 1
+script = ExtResource("18_85ex6")
+always_show = true
+result_bg_move_x = 0
+result_bg_move_y = 100
+sweet_text = NodePath("Sweet/RichTextLabel")
+spicy_text = NodePath("Spicy/RichTextLabel")
+hearty_text = NodePath("Hearty/RichTextLabel")
+fresh_text = NodePath("Fresh/RichTextLabel")
+sweet_bg = NodePath("Sweet")
+spicy_bg = NodePath("Spicy")
+hearty_bg = NodePath("Hearty")
+fresh_bg = NodePath("Fresh")
+nutrition_text = NodePath("../Nutrition/NutritionText")
+nutrition_bg = NodePath("../Nutrition")
+
+[node name="Fresh" type="TextureRect" parent="UI/ResultScreen/ResultPanel/StatsDisplayer" unique_id=901231847]
+layout_mode = 0
+offset_left = -112.0
+offset_right = 912.0
+offset_bottom = 768.0
+mouse_behavior_recursive = 1
+texture = ExtResource("56_tmb07")
+script = ExtResource("31_ro2u2")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/ResultScreen/ResultPanel/StatsDisplayer/Fresh" unique_id=1906092696]
+clip_contents = false
+layout_mode = 0
+offset_left = 112.0
+offset_top = 40.0
+offset_right = 256.0
+offset_bottom = 104.0
+theme = ExtResource("53_ro2u2")
+theme_type_variation = &"fresh"
+text = "100"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hearty" type="TextureRect" parent="UI/ResultScreen/ResultPanel/StatsDisplayer" unique_id=1218918873]
+layout_mode = 0
+offset_left = -112.0
+offset_right = 912.0
+offset_bottom = 768.0
+mouse_behavior_recursive = 1
+texture = ExtResource("55_t1n2v")
+script = ExtResource("31_ro2u2")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/ResultScreen/ResultPanel/StatsDisplayer/Hearty" unique_id=2133871789]
+layout_mode = 0
+offset_left = 272.0
+offset_top = 40.0
+offset_right = 416.0
+offset_bottom = 104.0
+theme = ExtResource("53_ro2u2")
+theme_type_variation = &"hearty"
+text = "200"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spicy" type="TextureRect" parent="UI/ResultScreen/ResultPanel/StatsDisplayer" unique_id=457158414]
+layout_mode = 0
+offset_left = -112.0
+offset_right = 912.0
+offset_bottom = 768.0
+mouse_behavior_recursive = 1
+texture = ExtResource("54_ypqpd")
+script = ExtResource("31_ro2u2")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/ResultScreen/ResultPanel/StatsDisplayer/Spicy" unique_id=1561175467]
+layout_mode = 0
+offset_left = 432.0
+offset_top = 40.0
+offset_right = 576.0
+offset_bottom = 104.0
+theme = ExtResource("53_ro2u2")
+theme_type_variation = &"spicy"
+text = "100"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sweet" type="TextureRect" parent="UI/ResultScreen/ResultPanel/StatsDisplayer" unique_id=587466519]
+layout_mode = 0
+offset_left = -112.0
+offset_right = 912.0
+offset_bottom = 768.0
+mouse_behavior_recursive = 1
+texture = ExtResource("52_m7klv")
+script = ExtResource("31_ro2u2")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/ResultScreen/ResultPanel/StatsDisplayer/Sweet" unique_id=1101934550]
+layout_mode = 0
+offset_left = 592.0
+offset_top = 40.0
+offset_right = 736.0
+offset_bottom = 104.0
+theme = ExtResource("53_ro2u2")
+theme_type_variation = &"sweet"
+text = "100"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="BG" type="TextureRect" parent="UI/ResultScreen/ResultPanel" unique_id=744282982]
 layout_mode = 0
 offset_left = -48.0
@@ -732,27 +876,44 @@ rotation = -1.5707964
 mouse_behavior_recursive = 1
 texture = ExtResource("4_x7qnw")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="UI/ResultScreen/ResultPanel" unique_id=280903245]
+[node name="Nutrition" type="TextureRect" parent="UI/ResultScreen/ResultPanel" unique_id=655548766]
+layout_mode = 0
+offset_left = -312.0
+offset_top = -240.0
+offset_right = 200.0
+offset_bottom = 528.0
+mouse_behavior_recursive = 1
+texture = ExtResource("57_xthvj")
+
+[node name="NutritionText" type="RichTextLabel" parent="UI/ResultScreen/ResultPanel/Nutrition" unique_id=1107515515]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -272.0
+offset_top = 233.0
+offset_right = -136.0
+offset_bottom = 313.0
+grow_horizontal = 0
+theme = ExtResource("38_vopdb")
+theme_type_variation = &"standard"
+text = "100"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResultVbox" type="VBoxContainer" parent="UI/ResultScreen/ResultPanel" unique_id=5729971]
 layout_mode = 0
 offset_left = 32.0
 offset_top = 56.0
 offset_right = 696.0
 offset_bottom = 520.0
-mouse_behavior_recursive = 2
-theme = SubResource("Theme_5p3kb")
-scroll_vertical_custom_step = 8.0
-horizontal_scroll_mode = 0
-vertical_scroll_mode = 3
-scroll_hint_mode = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/ResultScreen/ResultPanel/ScrollContainer" unique_id=5729971]
-layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_behavior_recursive = 1
 theme = ExtResource("7_ee2dl")
 
-[node name="title" type="RichTextLabel" parent="UI/ResultScreen/ResultPanel/ScrollContainer/VBoxContainer" unique_id=400063253]
+[node name="title" type="RichTextLabel" parent="UI/ResultScreen/ResultPanel/ResultVbox" unique_id=400063253]
 layout_mode = 2
 mouse_filter = 1
 mouse_behavior_recursive = 1
@@ -762,13 +923,56 @@ fit_content = true
 scroll_active = false
 horizontal_alignment = 1
 
-[node name="combination_text" type="RichTextLabel" parent="UI/ResultScreen/ResultPanel/ScrollContainer/VBoxContainer" unique_id=1302513355]
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/ResultScreen/ResultPanel/ResultVbox" unique_id=280903245]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_behavior_recursive = 2
+theme = SubResource("Theme_5p3kb")
+scroll_vertical_custom_step = 8.0
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+scroll_hint_mode = 1
+
+[node name="CombinationVBox" type="VBoxContainer" parent="UI/ResultScreen/ResultPanel/ResultVbox/ScrollContainer" unique_id=113157503]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_behavior_recursive = 1
+theme = ExtResource("7_ee2dl")
+
+[node name="CombinationDisplay" type="VSplitContainer" parent="UI/ResultScreen/ResultPanel/ResultVbox/ScrollContainer/CombinationVBox" unique_id=1196996037 node_paths=PackedStringArray("name_label", "description_label", "seperator")]
+visible = false
+layout_mode = 2
+split_offsets = PackedInt32Array(0, 16, 28)
+script = ExtResource("58_ro2u2")
+name_label = NodePath("NameLabel")
+description_label = NodePath("DescriptionLabel")
+seperator = NodePath("HSeparator")
+
+[node name="NameLabel" type="RichTextLabel" parent="UI/ResultScreen/ResultPanel/ResultVbox/ScrollContainer/CombinationVBox/CombinationDisplay" unique_id=1819473115]
 layout_mode = 2
 mouse_filter = 1
 mouse_behavior_recursive = 1
 theme = ExtResource("5_h6ing")
 fit_content = true
 scroll_active = false
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/ResultScreen/ResultPanel/ResultVbox/ScrollContainer/CombinationVBox/CombinationDisplay" unique_id=1732452546]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_omhyo")
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="UI/ResultScreen/ResultPanel/ResultVbox/ScrollContainer/CombinationVBox/CombinationDisplay" unique_id=2126935194]
+layout_mode = 2
+mouse_filter = 1
+mouse_behavior_recursive = 1
+theme = ExtResource("5_h6ing")
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator2" type="HSeparator" parent="UI/ResultScreen/ResultPanel/ResultVbox/ScrollContainer/CombinationVBox/CombinationDisplay" unique_id=949612484]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_ro2u2")
 
 [node name="EndButton" type="Control" parent="UI/ResultScreen/ResultPanel" unique_id=1842608368 node_paths=PackedStringArray("button")]
 anchors_preset = 0
@@ -788,139 +992,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_behavior_recursive = 2
 text = "End Challenge"
-
-[node name="Stats" type="Control" parent="UI/ResultScreen/ResultPanel" unique_id=577362815 node_paths=PackedStringArray("sweet_text", "spicy_text", "hearty_text", "fresh_text", "sweet_bg", "spicy_bg", "hearty_bg", "fresh_bg", "nutrition_text")]
-z_index = 4
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -856.0
-offset_top = -96.0
-offset_right = -856.0
-offset_bottom = -96.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-mouse_behavior_recursive = 1
-script = ExtResource("18_85ex6")
-sweet_text = NodePath("SweetText")
-spicy_text = NodePath("SpicyText")
-hearty_text = NodePath("HeartyText")
-fresh_text = NodePath("FreshText")
-sweet_bg = NodePath("Sweet")
-spicy_bg = NodePath("Spicy")
-hearty_bg = NodePath("Hearty")
-fresh_bg = NodePath("Fresh")
-nutrition_text = NodePath("../../../Dish/Stats/nutrition_text")
-
-[node name="Sweet" type="TextureRect" parent="UI/ResultScreen/ResultPanel/Stats" unique_id=844954729]
-layout_mode = 0
-offset_left = 1784.0
-offset_top = 456.0
-offset_right = 1803.0
-offset_bottom = 465.0
-scale = Vector2(8, 8)
-mouse_filter = 2
-mouse_behavior_recursive = 1
-texture = ExtResource("30_m7klv")
-script = ExtResource("31_ro2u2")
-
-[node name="Spicy" type="TextureRect" parent="UI/ResultScreen/ResultPanel/Stats" unique_id=473915759]
-layout_mode = 0
-offset_left = 1784.0
-offset_top = 368.0
-offset_right = 1803.0
-offset_bottom = 377.0
-scale = Vector2(8, 8)
-mouse_filter = 2
-mouse_behavior_recursive = 1
-texture = ExtResource("33_t1n2v")
-script = ExtResource("31_ro2u2")
-
-[node name="Hearty" type="TextureRect" parent="UI/ResultScreen/ResultPanel/Stats" unique_id=685343663]
-layout_mode = 0
-offset_left = 1784.0
-offset_top = 280.0
-offset_right = 1803.0
-offset_bottom = 289.0
-scale = Vector2(8, 8)
-mouse_filter = 2
-mouse_behavior_recursive = 1
-texture = ExtResource("34_tmb07")
-script = ExtResource("31_ro2u2")
-
-[node name="Fresh" type="TextureRect" parent="UI/ResultScreen/ResultPanel/Stats" unique_id=601968297]
-layout_mode = 0
-offset_left = 1784.0
-offset_top = 192.0
-offset_right = 1803.0
-offset_bottom = 201.0
-scale = Vector2(8, 8)
-mouse_filter = 2
-mouse_behavior_recursive = 1
-texture = ExtResource("35_xthvj")
-script = ExtResource("31_ro2u2")
-
-[node name="SweetText" type="RichTextLabel" parent="UI/ResultScreen/ResultPanel/Stats" unique_id=677096343]
-layout_mode = 0
-offset_left = 1814.0
-offset_top = 460.0
-offset_right = 1902.0
-offset_bottom = 532.0
-mouse_filter = 2
-mouse_behavior_recursive = 1
-theme = ExtResource("36_xwi65")
-theme_override_colors/font_shadow_color = Color(0.49411765, 0.39607844, 0.60784316, 1)
-text = "14"
-scroll_active = false
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="SpicyText" type="RichTextLabel" parent="UI/ResultScreen/ResultPanel/Stats" unique_id=1315181581]
-layout_mode = 0
-offset_left = 1814.0
-offset_top = 372.0
-offset_right = 1902.0
-offset_bottom = 444.0
-mouse_filter = 2
-mouse_behavior_recursive = 1
-theme = ExtResource("36_xwi65")
-theme_override_colors/font_shadow_color = Color(0.69803923, 0.21176471, 0.34117648, 1)
-text = "14"
-scroll_active = false
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HeartyText" type="RichTextLabel" parent="UI/ResultScreen/ResultPanel/Stats" unique_id=572017087]
-layout_mode = 0
-offset_left = 1814.0
-offset_top = 284.0
-offset_right = 1902.0
-offset_bottom = 356.0
-mouse_filter = 2
-mouse_behavior_recursive = 1
-theme = ExtResource("36_xwi65")
-theme_override_colors/font_shadow_color = Color(0.77254903, 0.47058824, 0.20784314, 1)
-text = "14"
-scroll_active = false
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="FreshText" type="RichTextLabel" parent="UI/ResultScreen/ResultPanel/Stats" unique_id=927832916]
-layout_mode = 0
-offset_left = 1814.0
-offset_top = 196.0
-offset_right = 1902.0
-offset_bottom = 268.0
-mouse_filter = 2
-mouse_behavior_recursive = 1
-theme = ExtResource("36_xwi65")
-theme_override_colors/font_shadow_color = Color(0.5803922, 0.6784314, 0.22352941, 1)
-text = "14"
-scroll_active = false
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="ToggleResultButton" type="Control" parent="UI/ResultScreen" unique_id=1874623669 node_paths=PackedStringArray("button")]
 layout_mode = 1
@@ -1128,10 +1199,10 @@ position = Vector2(1349, 420)
 script = ExtResource("25_xb3ol")
 
 [connection signal="pressed" from="UI/InvToggle" to="UI" method="_on_inv_toggle_pressed"]
-[connection signal="mouse_entered" from="UI/Dish/ResetButton/ResetButton" to="UI" method="_on_reset_button_mouse_entered"]
-[connection signal="mouse_exited" from="UI/Dish/ResetButton/ResetButton" to="UI" method="_on_reset_button_mouse_exited"]
-[connection signal="mouse_entered" from="UI/Dish/FinishButton/button" to="UI" method="_on_roll_dish_button_mouse_entered"]
-[connection signal="mouse_exited" from="UI/Dish/FinishButton/button" to="UI" method="_on_roll_dish_button_mouse_exited"]
-[connection signal="pressed" from="UI/Dish/FinishButton/button" to="." method="_on_roll_dish_pressed"]
+[connection signal="mouse_entered" from="UI/Cooking/ResetButton/ResetButton" to="UI" method="_on_reset_button_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Cooking/ResetButton/ResetButton" to="UI" method="_on_reset_button_mouse_exited"]
+[connection signal="mouse_entered" from="UI/Cooking/FinishButton/button" to="UI" method="_on_roll_dish_button_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Cooking/FinishButton/button" to="UI" method="_on_roll_dish_button_mouse_exited"]
+[connection signal="pressed" from="UI/Cooking/FinishButton/button" to="." method="_on_roll_dish_pressed"]
 [connection signal="pressed" from="UI/InventoryUI/InventorySortButtons/RarityButton/Button" to="UI/InventoryUI" method="_on_rarity_pressed"]
 [connection signal="pressed" from="UI/InventoryUI/InventorySortButtons/AlphabetButton/Button" to="UI/InventoryUI" method="_on_alphabetically_pressed"]

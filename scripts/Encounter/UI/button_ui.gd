@@ -1,3 +1,4 @@
+class_name ButtonUI
 extends Control
 @export_group("Display")
 @export var highlight:Control
@@ -14,6 +15,7 @@ signal right_clicked
 var mouse_hovering:bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	toggle_highlight(false)
 	button.gui_input.connect(_gui_input)
 	button.mouse_entered.connect(_on_mouse_enter)
 	button.mouse_exited.connect(_on_mouse_exit)

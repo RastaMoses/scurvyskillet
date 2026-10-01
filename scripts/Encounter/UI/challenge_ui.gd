@@ -1,31 +1,32 @@
 extends Control
-@export_subgroup("Flavour Display")
+@export_subgroup("Params")
 @export var plate_anim_speed:float = 1
+@export_group("Nodes")
+@export var challenge:Challenge
+@export_subgroup("Result Screen")
+@export var result_stats_display:StatsDisplayer
+@export var result_toggle_panel_button:ButtonUI
+@export var result_end_button:ButtonUI
+@export var result_screen:Control
+@export var result_panel:Control
+@export var result_text_vbox:VBoxContainer
+@export var result_text_combination_box:Control
+@export_subgroup("Dish")
+@export var dish_stats_display:StatsDisplayer
+@export var pan_highlight:Control
+@export var drop_area:DropArea
+@export var reset_button:ButtonUI
+@export var finish_dish_button:ButtonUI
+@export var plate_parent:Control
+@export var plates_shadow:Control
+@export_subgroup("Description")
+@export var des_vbox:VBoxContainer
+@export var inventory_display:InventoryUI
 
 #Onready
 @onready var event_manager = get_tree().get_first_node_in_group("event_manager")
-#Challenge
-@onready var challenge = get_parent()
+@onready var combination_manager:CombinationManager = get_tree().get_first_node_in_group("combination_manager")
 
-#Description
-@onready var des_vbox = $description/ScrollContainer/VBoxContainer
-@onready var inventory_display = $InventoryUI
-#Result Screen
-@onready var result_stats_display = $ResultScreen/ResultPanel/Stats
-@onready var result_end_button = $ResultScreen/ResultPanel/EndButton
-@onready var result_toggle_panel_button = $ResultScreen/ToggleResultButton
-@onready var result_screen = $ResultScreen
-@onready var result_panel = $ResultScreen/ResultPanel
-@onready var result_text_vbox = $ResultScreen/ResultPanel/ScrollContainer/VBoxContainer
-@onready var result_text_combination_box = $ResultScreen/ResultPanel/ScrollContainer/VBoxContainer/combination_text
-#Dish
-@onready var dish_stats_display = $Dish/Stats
-@onready var pan_highlight = $Dish/Pan/highlight
-@onready var drop_area = $Dish/DropArea
-@onready var reset_button = $Dish/ResetButton
-@onready var finish_dish_button = $Dish/FinishButton
-@onready var plates = $Dish/PlatesDisplay/plates.get_children()
-@onready var plates_shadow = $Dish/PlatesDisplay/shadow
 #Signals
 signal end_challenge_pressed
 signal finish_dish_pressed
@@ -36,16 +37,21 @@ var disabled:bool = false
 var result_active:bool = false
 var result_panel_shown:bool = false
 #plates
+var plates:Array
 var plate_anim_active = false
 var active_plates:int = 0
 
 func _ready() -> void:
+	plates = plate_parent.get_children()
 	event_manager.large_view_toggled.connect(toggle_large_view)
 	finish_dish_button.left_clicked.connect(_on_finish_dish_button_pressed)
 	reset_button.left_clicked.connect(_on_reset_button_pressed)
 	result_toggle_panel_button.left_clicked.connect(_on_toggle_result_panel_pressed)
 	result_end_button.left_clicked.connect(_on_end_button_pressed)
 	drop_area.mouse_exited.connect(_on_drop_area_mouse_exited)
+	
+	#Set Start UI
+	toggle_result_screen(false)
 
 #region Animations
 func animate_plates(nutrition):
@@ -69,9 +75,13 @@ func animate_plates(nutrition):
 #region Result Screen
 func add_combination_result_text(combination):
 	var new_text_box = result_text_combination_box.duplicate()
+	new_text_box.visible = true
 	result_text_vbox.add_child(new_text_box)
-	var new_text = combination.name + " - " + combination.description
-	new_text_box.text = new_text
+	new_text_box.name_label.text = combination.name
+	new_text_box.description_label.text = combination.description
+	result_stats_display.update_flavours(combination_manager.get_current_flavour_multiplier_sum(true))
+	result_stats_display.update_nutrition(combination_manager.get_current_nutrition_multiplier_sum(true))
+	
 
 func toggle_result_screen(value):
 	result_screen.visible = value
@@ -87,9 +97,9 @@ func toggle_result_panel(value):
 #endregion
 #region Button
 
-func toggle_disable_buttons(value):
+func toggle_disabled_buttons(value):
 	for i in [reset_button, finish_dish_button, result_toggle_panel_button, result_end_button, drop_area]:
-		i.toggle_disable(value)
+		i.toggle_disabled(value)
 
 func _on_reset_button_pressed() -> void:
 	reset_dish_pressed.emit()
@@ -119,18 +129,14 @@ func toggle_highlight_pan(value):
 	pan_highlight.visible = value
 
 func update_stats(dish):
-	if result_active:
-		result_stats_display.update_flavours(dish.flavours, true)
-		result_stats_display.update_nutrition(dish.nutrition, true)
-	else:
-		dish_stats_display.update_flavours(dish.flavours, false)
-		dish_stats_display.update_nutrition(dish.nutrition, false)
-		if active_plates != dish.nutrition and !plate_anim_active and dish.nutrition < plates.size():
-			animate_plates(dish.nutrition)
+	dish_stats_display.update_flavours(dish.flavours, false)
+	dish_stats_display.update_nutrition(dish.nutrition, false)
+	if active_plates != dish.nutrition and !plate_anim_active and dish.nutrition < plates.size():
+		animate_plates(dish.nutrition)
 #endregion
 #region Signals Received
 func toggle_large_view(value):
-	toggle_disable_buttons(value)
+	toggle_disabled_buttons(value)
 #endregion
 #region Helper
 

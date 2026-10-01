@@ -130,8 +130,7 @@ func roll_ingredient(card:Node, dice_multiplier:int = 1):
 	for flavour in GlobalEnums.Flavour:
 		if GlobalEnums.Flavour[flavour] == GlobalEnums.Flavour.NONE:
 			continue
-		if GlobalEnums.Flavour[flavour]:
-			roll_dice(flavour,dice_multiplier * (card.get_flavours()[GlobalEnums.Flavour[flavour]]), card)
+		roll_dice(flavour,dice_multiplier * (card.get_flavours()[GlobalEnums.Flavour[flavour]]), card)
 
 func roll_dice(flavour,amount,card:Node):
 	while amount > 0:

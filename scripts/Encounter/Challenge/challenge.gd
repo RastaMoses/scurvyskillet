@@ -127,7 +127,6 @@ func finish_dish():
 	await event_manager.on_dish_finish_anim_done
 	ui.toggle_result_screen(true)
 	combination_manager.start_combinations(current_dish)
-	ui.update_stats(combination_manager.upgraded_dish)
 	end()
 func reset_dish():
 	current_dish.destroy_all_ingredients()
@@ -179,7 +178,4 @@ func on_failure():
 	reward_req_ability = f_req_ability
 	end()
 	
-#endregion
-#region UI functions
-
 #endregion

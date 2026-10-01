@@ -1,6 +1,7 @@
 class_name StatsDisplayer
 extends Control
 @export_group("Params")
+@export var always_show:bool = false
 @export var result_bg_move_x:int = 80
 @export var result_bg_move_y:int = 0
 @export var result_bg_move_duration:float = 1.0
@@ -23,7 +24,8 @@ var spicy_bg_moved = false
 var hearty_bg_moved = false
 var fresh_bg_moved = false
 
-func update_flavours(flavours:Dictionary[GlobalEnums.Flavour, int], force_show:bool = false):
+func update_flavours(flavours:Dictionary[GlobalEnums.Flavour, int], force_show:bool = always_show):
+	print(flavours)
 	sweet_text.text = str(flavours[GlobalEnums.Flavour.SWEET])
 	if flavours[GlobalEnums.Flavour.SWEET] == 0 and not force_show:
 		sweet_text.visible = false
@@ -80,7 +82,7 @@ func update_flavours(flavours:Dictionary[GlobalEnums.Flavour, int], force_show:b
 		fresh_text.visible = true
 		fresh_bg_moved = false
 
-func update_nutrition(new_value: Variant, force_show:bool = false) -> void:
+func update_nutrition(new_value: Variant, force_show:bool = always_show) -> void:
 	nutrition_text.text = str(new_value)
 	if new_value <= 0 and not force_show:
 		if nutrition_bg != null:

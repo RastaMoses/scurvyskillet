@@ -48,10 +48,10 @@ func toggle_map_visible(value):
 
 func toggle_large_view(value):
 	if value:
-		toggle_disable_buttons(!value)
+		toggle_disabled_buttons(!value)
 	else:
 		set_available_encounters()
 
-func toggle_disable_buttons(value):
+func toggle_disabled_buttons(value):
 	for i in encounter_nodes:
 		i.toggle_button(value)

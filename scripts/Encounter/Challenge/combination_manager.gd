@@ -17,7 +17,8 @@ var active_combinations:Dictionary[Combination, Array]
 
 var all_cards_used:Array[Card]
 
-var mult_flavours:Array = [[1.0],[1.0],[1.0],[1.0],[1.0]]
+var mult_flavours:Dictionary[GlobalEnums.Flavour, Array]  = {GlobalEnums.Flavour.SWEET : [1.0],
+GlobalEnums.Flavour.SPICY : [1.0], GlobalEnums.Flavour.HEARTY : [1.0], GlobalEnums.Flavour.FRESH : [1.0]}
 var mult_nutrition:Array[float] = [1.0]
 
 # Called when the node enters the scene tree for the first time.
@@ -30,40 +31,17 @@ func _ready() -> void:
 		if ingr:
 			all_combinations.append(ingr)
 
-#region Helper
-func set_comb_active(c_name, cards = [[]]):
-	var combination = get_combination_by_name(c_name)
-	if combination == null:
-		return
-	active_combinations[combination] = cards
-	#Cards Used by combination
-	for cards_array:Array in cards:
-		for card in cards_array:
-			if not all_cards_used.has(card):
-				all_cards_used.append(card)
-
-func get_combination_by_name(c_name) -> Combination:
-	var comb:Combination
-	for i in all_combinations:
-		if i.name == c_name:
-			comb = i
-	if comb == null:
-		printerr("Couldnt find the combination named: " + c_name)
-		return null
-	else:
-		return comb
-
-
-func order_active_combinations():
-	#Sort the active combinations based on effec type and specific dependencies (addition before multiply)
-	return
-#endregion
-
 func start_combinations(new_dish:Dish):
 	dish = new_dish
 	check_combinations()
 	order_active_combinations()
-	activate_effects()
+	for combination in active_combinations:
+		activate_effects(combination)
+		#UI Combination
+		challenge.ui.add_combination_result_text(combination)
+		#Wait for animation end
+		await get_tree().create_timer(1).timeout
+	#Upgrade Dish
 	apply_multipliers()
 #region Requirements
 func check_combinations():
@@ -308,11 +286,9 @@ func check_combinations():
 	var based_cards:Dictionary[Card, int]
 	#Get combination amount card is used in (no duplicates per combination)
 	for combination in active_combinations:
-		print(str(combination.name) + " -  Array iterated")
 		var combination_cards:Array[Card]
 		for card_array:Array in active_combinations[combination]:
 			for card:Card in card_array:
-				print(card.committed_stats.name)
 				if not combination_cards.has(card):
 					if not based_cards.has(card):
 						based_cards[card] = 0
@@ -331,144 +307,139 @@ func check_combinations():
 	#endregion
 #endregion
 #region Effects
-func activate_effects():
+func activate_effects(combination):
 	upgraded_dish = dish.duplicate()
 	#activate based on effect type (if has debuff come last)
-	
-	
-	for combination in active_combinations:
-		match combination.name:
-		#region Buffs
-			"Quishe":
-				mult_nutrition.append(2.0)
-			"3-Course Meal":
-				mult_nutrition.append(1.5)
-				for flav in mult_flavours:
-					flav.append(1.5)
-			"Buttercob":
-				mult_nutrition.append(1.25)
-			"Dolmades":
-				mult_flavours[GlobalEnums.Flavour.HEARTY].append(1.5)
-			"Fine Dining":
-				for flavour in dish.get_greatest_flavours(dish.flavours):
-					mult_flavours[flavour].append(1.5)
-			"Fusion Kitchen":
-				for flavour in dish.get_greatest_flavours(dish.flavours):
-					mult_flavours[flavour].append(1.5)
-				for flavour in dish.get_lowest_flavours(dish.flavours):
-					mult_flavours[flavour].append(1.5)
-			"Pure":
-				for flavour in dish.get_greatest_flavours(dish.flavours):
-					for i in range(0,mult_flavours.size()):
-						if i != flavour:
-							mult_flavours[i].append(1.5)
-			"Salad":
-				mult_flavours[GlobalEnums.Flavour.FRESH].append(1.3)
-			"Sushi":
-				var sushi_mult:float
-				var unique_cards = []
-				for card_array in active_combinations[get_combination_by_name("Sushi")]:
-					for card in card_array:
-						if not unique_cards.has(card):
-							unique_cards.append(card)
-				sushi_mult = 1.0 + (float(unique_cards.size()) * 0.1)
-				mult_nutrition.append(sushi_mult)
-			"Topping":
-				#Get second to last card
-				var second_last_card_flavours = dish.current_cards[dish.current_cards.size()-2].get_flavours()
-				for flavour in GlobalEnums.Flavour:
-					if GlobalEnums.Flavour[flavour] == GlobalEnums.Flavour.NONE:
-						continue
-					if second_last_card_flavours[GlobalEnums.Flavour[flavour]] > 0:
-						mult_flavours[GlobalEnums.Flavour[flavour]].append(1.3)
-			"Deep Fried":
-				mult_flavours[GlobalEnums.Flavour.HEARTY].append(2.0)
-				mult_nutrition.append(2.0)
-				mult_flavours[GlobalEnums.Flavour.FRESH].append(0.5)
-				
-		#endregion
-		#region Debuffs
-			"Barely Cooked":
-				for flavour in mult_flavours:
-					flavour.append(0.5)
-				mult_nutrition.append(0.5)
-			"Dry":
-				mult_flavours[GlobalEnums.Flavour.FRESH].append(float(3.0/4.0))
-			"Lacking":
-				mult_nutrition.append(float(2.0/3.0))
-			"Overseasoned":
-				var spices = dish.get_all_cards_with_tag(GlobalEnums.Tags.SPICE)
-				var lowest_flav = dish.get_lowest_flavours(spices)
-				for flavour in lowest_flav:
-					mult_flavours[flavour].append(0.0)
-			"Scoville Hell":
-				mult_nutrition.append(0.5)
-				for flavour in GlobalEnums.Flavour:
-					if GlobalEnums.Flavour[flavour] == GlobalEnums.Flavour.NONE:
-						continue
-					if GlobalEnums.Flavour[flavour] == GlobalEnums.Flavour.SPICY:
-						mult_flavours[GlobalEnums.Flavour[flavour]].append(2.0)
-					else:
-						mult_flavours[GlobalEnums.Flavour[flavour]].append(0.75)
-			"Slop":
-				mult_nutrition.append(0.5)
-				for flavour in GlobalEnums.Flavour:
-					if GlobalEnums.Flavour[flavour] == GlobalEnums.Flavour.NONE:
-						continue
-					mult_flavours[GlobalEnums.Flavour[flavour]].append(0.5)
+	match combination.name:
+	#region Buffs
+		"Quishe":
+			mult_nutrition.append(2.0)
+		"3-Course Meal":
+			mult_nutrition.append(1.5)
+			for flav in mult_flavours:
+				mult_flavours[flav].append(1.5)
+		"Buttercob":
+			mult_nutrition.append(1.25)
+		"Dolmades":
+			mult_flavours[GlobalEnums.Flavour.HEARTY].append(1.5)
+		"Fine Dining":
+			for flavour in dish.get_greatest_flavours(dish.flavours):
+				mult_flavours[flavour].append(1.5)
+		"Fusion Kitchen":
+			for flavour in dish.get_greatest_flavours(dish.flavours):
+				mult_flavours[flavour].append(1.5)
+			for flavour in dish.get_lowest_flavours(dish.flavours):
+				mult_flavours[flavour].append(1.5)
+		"Pure":
+			for flavour in dish.get_greatest_flavours(dish.flavours):
+				for i in range(0,mult_flavours.size()):
+					if i != flavour:
+						mult_flavours[i].append(1.5)
+		"Salad":
+			mult_flavours[GlobalEnums.Flavour.FRESH].append(1.3)
+		"Sushi":
+			var sushi_mult:float
+			var unique_cards = []
+			for card_array in active_combinations[get_combination_by_name("Sushi")]:
+				for card in card_array:
+					if not unique_cards.has(card):
+						unique_cards.append(card)
+			sushi_mult = 1.0 + (float(unique_cards.size()) * 0.1)
+			mult_nutrition.append(sushi_mult)
+		"Topping":
+			#Get second to last card
+			var second_last_card_flavours = dish.current_cards[dish.current_cards.size()-2].get_flavours()
+			for flavour in GlobalEnums.Flavour:
+				if GlobalEnums.Flavour[flavour] == GlobalEnums.Flavour.NONE:
+					continue
+				if second_last_card_flavours[GlobalEnums.Flavour[flavour]] > 0:
+					mult_flavours[GlobalEnums.Flavour[flavour]].append(1.3)
+		"Deep Fried":
+			mult_flavours[GlobalEnums.Flavour.HEARTY].append(2.0)
+			mult_nutrition.append(2.0)
+			mult_flavours[GlobalEnums.Flavour.FRESH].append(0.5)
 			
-		#endregion
-		#region Player
-			"Admit Defeat":
-				player.add_morale(-1)
-			"Cheap":
-				player.add_money(+5)
-			"Salmonella":
-				player.add_morale(-1)
-			"Split Opinion":
-				player.add_morale(-1 * ceili(float(player.current_morale)/2.0))
-				player.add_money(player.current_money)
-			
-		#endregion
-		#region Create
-			"Chocolate":
-				var lowest:int = dish.get_all_cards_with_tag(GlobalEnums.Tags.DAIRY).size()
-				var sugar = dish.get_cards_of_ingredient(item_pool.get_ingredient_by_name("Sugar")).size()
-				var cacao = dish.get_cards_of_ingredient(item_pool.get_ingredient_by_name("Cacao")).size()
-				if lowest > sugar:
-					lowest = sugar
-				if lowest > cacao:
-					lowest = cacao
-				for i in lowest:
-					player.instantiate_card_and_add(item_pool.get_ingredient_by_name("Chocolate"))
-			"Jam":
-				for i in 2:
-					player.instantiate_card_and_add(item_pool.get_ingredient_by_name("Jam"))
-			"Mayan Hot Cocoa":
-				player.instantiate_card_and_add(item_pool.get_ingredient_by_name("Mayan Cocoa"))
-			"Reinheitsgebot":
-				for i in 3:
-					player.instantiate_card_and_add(item_pool.get_ingredient_by_name("Beer"))
-			"Rum":
-				player.instantiate_card_and_add(item_pool.get_ingredient_by_name("Rum"))
-			"Sourdough Rising":
-				player.instantiate_card_and_add(item_pool.get_random_ingredient(true, [GlobalEnums.Tags.PASTRY]))
-			"Based":
-				#Get Comb Card Tags
-				var comb_cards = all_combinations[get_combination_by_name("Based")]
-				var activation_tags:Array
-				for card_array in comb_cards:
-					for card in card_array:
-						for tag in card.committed_stats.tags:
-							if not activation_tags.has(tag):
-								activation_tags.append(tag)
-				for i in 2:
-					player.instantiate_card_and_add(item_pool.get_random_ingredient(true,
-					activation_tags, [], [GlobalEnums.Rarity.LEGENDARY]))
-		#endregion
-		#UI Combination
-		challenge.ui.add_combination_result_text(combination)
-		challenge.ui.update_stats(upgraded_dish)
+	#endregion
+	#region Debuffs
+		"Barely Cooked":
+			for flavour in mult_flavours:
+				mult_flavours[flavour].append(0.5)
+			mult_nutrition.append(0.5)
+		"Dry":
+			mult_flavours[GlobalEnums.Flavour.FRESH].append(float(3.0/4.0))
+		"Lacking":
+			mult_nutrition.append(float(2.0/3.0))
+		"Overseasoned":
+			var spices = dish.get_all_cards_with_tag(GlobalEnums.Tags.SPICE)
+			var lowest_flav = dish.get_lowest_flavours(spices)
+			for flavour in lowest_flav:
+				mult_flavours[flavour].append(0.0)
+		"Scoville Hell":
+			mult_nutrition.append(0.5)
+			for flavour in GlobalEnums.Flavour:
+				if GlobalEnums.Flavour[flavour] == GlobalEnums.Flavour.NONE:
+					continue
+				if GlobalEnums.Flavour[flavour] == GlobalEnums.Flavour.SPICY:
+					mult_flavours[GlobalEnums.Flavour[flavour]].append(2.0)
+				else:
+					mult_flavours[GlobalEnums.Flavour[flavour]].append(0.75)
+		"Slop":
+			mult_nutrition.append(0.5)
+			for flavour in GlobalEnums.Flavour:
+				if GlobalEnums.Flavour[flavour] == GlobalEnums.Flavour.NONE:
+					continue
+				mult_flavours[GlobalEnums.Flavour[flavour]].append(0.5)
+		
+	#endregion
+	#region Player
+		"Admit Defeat":
+			player.add_morale(-1)
+		"Cheap":
+			player.add_money(+5)
+		"Salmonella":
+			player.add_morale(-1)
+		"Split Opinion":
+			player.add_morale(-1 * ceili(float(player.current_morale)/2.0))
+			player.add_money(player.current_money)
+		
+	#endregion
+	#region Create
+		"Chocolate":
+			var lowest:int = dish.get_all_cards_with_tag(GlobalEnums.Tags.DAIRY).size()
+			var sugar = dish.get_cards_of_ingredient(item_pool.get_ingredient_by_name("Sugar")).size()
+			var cacao = dish.get_cards_of_ingredient(item_pool.get_ingredient_by_name("Cacao")).size()
+			if lowest > sugar:
+				lowest = sugar
+			if lowest > cacao:
+				lowest = cacao
+			for i in lowest:
+				player.instantiate_card_and_add(item_pool.get_ingredient_by_name("Chocolate"))
+		"Jam":
+			for i in 2:
+				player.instantiate_card_and_add(item_pool.get_ingredient_by_name("Jam"))
+		"Mayan Hot Cocoa":
+			player.instantiate_card_and_add(item_pool.get_ingredient_by_name("Mayan Cocoa"))
+		"Reinheitsgebot":
+			for i in 3:
+				player.instantiate_card_and_add(item_pool.get_ingredient_by_name("Beer"))
+		"Rum":
+			player.instantiate_card_and_add(item_pool.get_ingredient_by_name("Rum"))
+		"Sourdough Rising":
+			player.instantiate_card_and_add(item_pool.get_random_ingredient(true, [GlobalEnums.Tags.PASTRY]))
+		"Based":
+			#Get Comb Card Tags
+			var comb_cards = all_combinations[get_combination_by_name("Based")]
+			var activation_tags:Array
+			for card_array in comb_cards:
+				for card in card_array:
+					for tag in card.committed_stats.tags:
+						if not activation_tags.has(tag):
+							activation_tags.append(tag)
+			for i in 2:
+				player.instantiate_card_and_add(item_pool.get_random_ingredient(true,
+				activation_tags, [], [GlobalEnums.Rarity.LEGENDARY]))
+	#endregion
+	
 
 func apply_multipliers():
 	for flavour in GlobalEnums.Flavour:
@@ -485,4 +456,55 @@ func apply_multipliers():
 		#Here all single modifiers are applied (FOR animation relevant?)
 	upgraded_dish.nutrition = floori(modified)
 
+#endregion
+
+#region Helper
+func set_comb_active(c_name, cards = [[]]):
+	var combination = get_combination_by_name(c_name)
+	if combination == null:
+		return
+	active_combinations[combination] = cards
+	#Cards Used by combination
+	for cards_array:Array in cards:
+		for card in cards_array:
+			if not all_cards_used.has(card):
+				all_cards_used.append(card)
+
+func get_combination_by_name(c_name) -> Combination:
+	var comb:Combination
+	for i in all_combinations:
+		if i.name == c_name:
+			comb = i
+	if comb == null:
+		printerr("Couldnt find the combination named: " + c_name)
+		return null
+	else:
+		return comb
+
+func get_current_flavour_multiplier_sum(as_percent = false) ->Dictionary:
+	var mult_flavours_sum:Dictionary[GlobalEnums.Flavour, float]
+	var mult_flavours_sum_int:Dictionary[GlobalEnums.Flavour, int]
+	for flavour in GlobalEnums.Flavour:
+		if GlobalEnums.Flavour[flavour] == GlobalEnums.Flavour.NONE:
+			continue
+		var mult_sum:float
+		for mult in mult_flavours[GlobalEnums.Flavour[flavour]]:
+			mult_sum += mult
+		mult_flavours_sum[GlobalEnums.Flavour[flavour]] = mult_sum
+		mult_flavours_sum_int[GlobalEnums.Flavour[flavour]] = int(mult_sum * 100)
+	if as_percent:
+		return mult_flavours_sum_int
+	return mult_flavours_sum
+
+func get_current_nutrition_multiplier_sum(as_percent = false):
+	var mult_sum:float
+	for mult in mult_nutrition:
+		mult_sum += mult
+	if as_percent:
+		return int(mult_sum * 100)
+	return mult_sum
+
+func order_active_combinations():
+	#Sort the active combinations based on effec type and specific dependencies (addition before multiply)
+	return
 #endregion

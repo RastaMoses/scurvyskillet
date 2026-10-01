@@ -17,5 +17,4 @@ flavours = Dictionary[int, int]({
 2: 0,
 3: 0
 })
-sweet = 1
 metadata/_custom_type_script = "uid://bqsibdi6kwplu"
