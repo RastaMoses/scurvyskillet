@@ -1,3 +1,4 @@
+class_name CardSlot
 extends Panel
 #PARAMS
 @export var large_view:bool = false

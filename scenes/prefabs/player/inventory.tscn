@@ -54,7 +54,7 @@ money_text = NodePath("InventoryUI/topbar/money_text")
 card_prefab = ExtResource("2_inxy6")
 ui = NodePath("InventoryUI")
 
-[node name="InventoryUI" type="Control" parent="." unique_id=190865318 groups=["player_inventory_ui"]]
+[node name="InventoryUI" type="Control" parent="." unique_id=190865318 node_paths=PackedStringArray("inventory", "slots", "grid_container", "scroll_container") groups=["player_inventory_ui"]]
 z_index = 15
 z_as_relative = false
 layout_mode = 1
@@ -67,6 +67,10 @@ script = ExtResource("3_5ftxm")
 inventory_slot_scene = ExtResource("4_rw30e")
 min_slots = 8
 max_rows = 1
+inventory = NodePath("..")
+slots = [NodePath("ScrollContainer/GridContainer/InventoryUISlot"), NodePath("ScrollContainer/GridContainer/InventoryUISlot2"), NodePath("ScrollContainer/GridContainer/InventoryUISlot3"), NodePath("ScrollContainer/GridContainer/InventoryUISlot4"), NodePath("ScrollContainer/GridContainer/InventoryUISlot5"), NodePath("ScrollContainer/GridContainer/InventoryUISlot6"), NodePath("ScrollContainer/GridContainer/InventoryUISlot7"), NodePath("ScrollContainer/GridContainer/InventoryUISlot8")]
+grid_container = NodePath("ScrollContainer/GridContainer")
+scroll_container = NodePath("ScrollContainer")
 
 [node name="topbar" type="Control" parent="InventoryUI" unique_id=1235091762]
 z_index = 4

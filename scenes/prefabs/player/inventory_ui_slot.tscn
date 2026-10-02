@@ -22,6 +22,7 @@
 
 [node name="InventoryUISlot" type="Panel" unique_id=442831638]
 self_modulate = Color(1, 1, 1, 0)
+z_index = 1
 custom_minimum_size = Vector2(240, 280)
 clip_contents = true
 offset_right = 240.0

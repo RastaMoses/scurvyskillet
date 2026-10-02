@@ -10,7 +10,8 @@ extends Control
 @export var result_screen:Control
 @export var result_panel:Control
 @export var result_text_vbox:VBoxContainer
-@export var result_text_combination_box:Control
+@export var combination_display_scene:PackedScene
+@export var combination_inventory:Inventory
 @export_subgroup("Dish")
 @export var dish_stats_display:StatsDisplayer
 @export var pan_highlight:Control
@@ -34,6 +35,7 @@ signal reset_dish_pressed
 
 #State
 var disabled:bool = false
+	#Result Screen
 var result_active:bool = false
 var result_panel_shown:bool = false
 #plates
@@ -51,6 +53,7 @@ func _ready() -> void:
 	drop_area.mouse_exited.connect(_on_drop_area_mouse_exited)
 	
 	#Set Start UI
+	combination_inventory.init_inventory()
 	start_result_screen(false)
 
 #region Animations
@@ -73,16 +76,23 @@ func animate_plates(nutrition):
 
 #endregion
 #region Result Screen
-func add_combination_result(combination):
-	var new_text_box = result_text_combination_box.duplicate()
-	new_text_box.visible = true
-	result_text_vbox.add_child(new_text_box)
-	new_text_box.name_label.text = combination.name
-	new_text_box.description_label.text = combination.description
+func add_combination_result(combination, comb_cards_arrays):
+	var new_combination_display = combination_display_scene.instantiate()
+	result_text_vbox.add_child(new_combination_display)
+	new_combination_display.init_ui(combination, comb_cards_arrays)
+	new_combination_display.hover_start.connect(combination_mouse_hover_start)
+	new_combination_display.hover_stop.connect(combination_mouse_hover_stop)
+	#Update Flavour and Mult Display
 	result_stats_display.update_flavours(combination_manager.get_current_flavour_multiplier_sum(true))
 	result_stats_display.update_nutrition(combination_manager.get_current_nutrition_multiplier_sum(true))
 	dish_stats_display.update_flavours(combination_manager.upgraded_dish.flavours, true, true)
 	dish_stats_display.update_nutrition(combination_manager.upgraded_dish.nutrition, true, true)
+
+func set_combination_inventory(combination, card_arrays):
+	combination_inventory.destroy_all_ingredients()
+	for cards in card_arrays:
+		for card in cards:
+			combination_inventory.add_card(card)
 
 func start_result_screen(value):
 	result_screen.visible = value
@@ -105,6 +115,7 @@ func toggle_result_buttons(value):
 	for i in [result_toggle_panel_button, result_end_button]:
 		i.toggle_disabled(!value)
 		i.visible = value
+	
 #endregion
 #region Button
 
@@ -114,7 +125,6 @@ func toggle_disabled_buttons(value):
 
 func _on_reset_button_pressed() -> void:
 	reset_dish_pressed.emit()
-
 
 func _on_finish_dish_button_pressed() -> void:
 	finish_dish_pressed.emit()
@@ -128,6 +138,13 @@ func _on_end_button_pressed() -> void:
 func _on_toggle_result_panel_pressed() -> void:
 	toggle_result_panel(!result_panel_shown)
 
+func combination_mouse_hover_start(combination, card_arrays):
+	set_combination_inventory(combination, card_arrays)
+	combination_inventory.ui.open()
+	
+func combination_mouse_hover_stop():
+	combination_inventory.ui.close()
+	
 func _on_drop_area_mouse_exited() -> void:
 	toggle_highlight_pan(false)
 

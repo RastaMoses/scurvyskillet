@@ -5,7 +5,7 @@ extends Control
 @export var card_prefab:PackedScene
 var current_cards: Array[Card]
 @export var starting_ingredients: Array[Ingredient]
-@export var ui:Control
+@export var ui:InventoryUI
 @export var can_stack_uses:bool = true
 @export var can_drag_cards:bool = false
 
@@ -27,6 +27,8 @@ signal card_stop_drag(origin)
 #STATE
 var can_drop_card = true
 var dragging_card:Node = null
+
+#Multitab
 
 func init_inventory() -> void:
 	if ui != null:
@@ -89,6 +91,19 @@ func add_card(card):
 		current_cards = ui.get_slots_cards_list()
 	
 	return new_card
+
+func check_can_drop(data) -> bool:
+	checking_drop.emit(self,data)
+	#check for requirements from signal
+	if can_drop_card == false:
+		can_drop_card = true
+		return false
+	#check abilities
+	if abilities.on_try_add_ingredient_any_inventory(data) == false:
+		return false
+	
+	return true
+
 #endregion
 
 #region Inventory Funcitons
@@ -123,18 +138,6 @@ func change_ingredient_uses(ingredient_card,amount):
 	ingredient_card.stats.uses += amount
 	if ingredient_card.stats.uses <= 0:
 		ingredient_card.queue_free()
-
-func check_can_drop(data) -> bool:
-	checking_drop.emit(self,data)
-	#check for requirements from signal
-	if can_drop_card == false:
-		can_drop_card = true
-		return false
-	#check abilities
-	if abilities.on_try_add_ingredient_any_inventory(data) == false:
-		return false
-	
-	return true
 
 func set_card_drag(card):
 	dragging_card = card

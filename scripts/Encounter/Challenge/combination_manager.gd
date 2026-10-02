@@ -38,7 +38,7 @@ func start_combinations(new_dish:Dish):
 		activate_effects(combination)
 		apply_multipliers()
 		#UI Combination
-		challenge.ui.add_combination_result(combination)
+		challenge.ui.add_combination_result(combination, active_combinations[combination])
 		#Wait for animation end
 		await get_tree().create_timer(3).timeout
 	challenge.ui.combinations_done()
@@ -116,7 +116,8 @@ func check_combinations():
 	var smoothie_drink_cards = dish.get_all_cards_with_tag(GlobalEnums.Tags.DRINK)
 	if (dish.current_cards.size() > 1
 	and smoothie_fruit_cards.size() == smoothie_drink_cards.size()
-	and smoothie_fruit_cards.size() > 0):
+	and smoothie_fruit_cards.size() > 0
+	and dish.can_cover_tags([GlobalEnums.Tags.FRUIT, GlobalEnums.Tags.DRINK])):
 		set_comb_active("Smoothie", [smoothie_drink_cards, smoothie_fruit_cards])
 	
 	#Parfait

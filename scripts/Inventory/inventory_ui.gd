@@ -10,14 +10,15 @@ extends Control
 @export var horizontal = true
 @export var max_columns:int = 2
 
+@export_group("Nodes")
+@export var inventory:Inventory
+@export var slots:Array[CardSlot]
+@export var grid_container:GridContainer
+@export var scroll_container:ScrollContainer
+@export var bg:TextureRect
 
 #CACHED COMPS
-
 var event_manager
-var slots
-var inventory_container
-var grid_container
-
 var large_view
 
 
@@ -26,14 +27,10 @@ var data_bk
 var large_view_active = false
 
 var is_open = false
-var inventory
 
 func init_ui():
 	large_view = get_tree().get_first_node_in_group("card_large_view")
 	event_manager = get_tree().get_first_node_in_group("event_manager")
-	slots = $ScrollContainer/GridContainer.get_children()
-	inventory_container = $ScrollContainer
-	grid_container = $ScrollContainer/GridContainer
 	for i in slots:
 		i.init_slot(self)
 		i.large_view_clicked.connect(large_view.button_pressed)
@@ -79,7 +76,7 @@ func update_slots():
 	else:
 		grid_container.columns = max_columns
 		#Scrollbar
-	inventory_container._call_deferred_update_hints()
+	scroll_container._call_deferred_update_hints()
 
 #Drag and drop not outside window
 func _notification(what: int) -> void:
@@ -90,22 +87,26 @@ func _notification(what: int) -> void:
 			if data_bk:
 				data_bk.item_visual.show()
 				data_bk = null
-	
+
 func open():
-	inventory_container.visible = true
+	scroll_container.visible = true
 	is_open = true
 	large_view.reset_large_view()
 	update_slots()
-	
+	if bg:
+		bg.visible = true
+
 func close():
 	large_view.reset_large_view()
-	inventory_container.visible = false
+	scroll_container.visible = false
 	is_open = false
-
+	if bg:
+		bg.visible = false
 #region Large View
 
 #endregion
-
+#region Multitab
+#endregion
 #region Ability UI
 func card_dragged(card):
 	inventory.set_card_drag(card)
