@@ -6,8 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://oi2g7kkk006h" path="res://sprites/interface/scenes/worldmap scene/scene_worldmap_boat.png" id="4_2jk3u"]
 [ext_resource type="Script" uid="uid://dd6rhp5q4wtuh" path="res://scripts/Map/ship_mover.gd" id="4_evkri"]
 
-[node name="Map" type="Node2D" unique_id=1839841650 node_paths=PackedStringArray("encounter_nodes")]
+[node name="Map" type="Control" unique_id=678891768 node_paths=PackedStringArray("encounter_nodes")]
 y_sort_enabled = true
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_evkri")
 encounter_nodes = [NodePath("Encounter/0"), NodePath("Encounter/1"), NodePath("Encounter/2"), NodePath("Encounter/3")]
 
@@ -31,10 +33,12 @@ y_sort_enabled = true
 scale = Vector2(8, 8)
 texture = ExtResource("4_2jk3u")
 
-[node name="Encounter" type="Node2D" parent="." unique_id=1514431645]
+[node name="Encounter" type="Control" parent="." unique_id=780200162]
 y_sort_enabled = true
+anchors_preset = 0
 
 [node name="0" parent="Encounter" unique_id=986483625 instance=ExtResource("3_u6b3a")]
+layout_mode = 0
 offset_left = 160.0
 offset_top = 456.0
 offset_right = 160.0
@@ -42,6 +46,7 @@ offset_bottom = 456.0
 possible_encounters = Array[PackedScene]([])
 
 [node name="1" parent="Encounter" unique_id=1699582653 instance=ExtResource("3_u6b3a")]
+layout_mode = 0
 offset_left = 496.0
 offset_top = 304.0
 offset_right = 496.0
@@ -50,6 +55,7 @@ possible_encounters = Array[PackedScene]([])
 destinations = Array[int]([3])
 
 [node name="2" parent="Encounter" unique_id=386168653 instance=ExtResource("3_u6b3a")]
+layout_mode = 0
 offset_left = 528.0
 offset_top = 616.0
 offset_right = 528.0
@@ -58,6 +64,7 @@ possible_encounters = Array[PackedScene]([])
 destinations = Array[int]([3])
 
 [node name="3" parent="Encounter" unique_id=664957354 instance=ExtResource("3_u6b3a")]
+layout_mode = 0
 offset_left = 1000.0
 offset_top = 424.0
 offset_right = 1000.0

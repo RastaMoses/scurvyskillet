@@ -79,6 +79,10 @@
 [ext_resource type="Texture2D" uid="uid://bs2uq23jti7pu" path="res://sprites/interface/scenes/cooking scene/scene_cooking_dice_meaty.png" id="67_2bj75"]
 [ext_resource type="Texture2D" uid="uid://c6sve5qqxbut0" path="res://sprites/interface/scenes/cooking scene/scene_cooking_dice_fresh.png" id="68_sxkpw"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ecqho"]
+friction = 0.03
+bounce = 1.1
+
 [sub_resource type="Theme" id="Theme_5p3kb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ro2u2"]
@@ -87,10 +91,6 @@ content_margin_top = 0.0
 content_margin_right = 0.0
 content_margin_bottom = 0.0
 bg_color = Color(0.7372549, 0.5058824, 0.42745098, 1)
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ecqho"]
-friction = 0.03
-bounce = 1.1
 
 [node name="ChallengeSample" type="Control" unique_id=993217827 groups=["challenge"]]
 layout_mode = 3
@@ -102,6 +102,46 @@ req_nutrition = 4
 par_nutrition = 2
 s_specific_ingredients = Array[ExtResource("2_y21f8")]([ExtResource("3_6r88v")])
 s_random_ingredient_amount = 0
+
+[node name="Dish" type="Control" parent="." unique_id=497250350 node_paths=PackedStringArray("ui")]
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+mouse_behavior_recursive = 1
+script = ExtResource("24_tcho6")
+card_prefab = ExtResource("25_0rvbw")
+ui = NodePath("../UI/InventoryUI")
+can_stack_uses = false
+can_drag_cards = true
+
+[node name="Dice_Display" type="Node2D" parent="Dish" unique_id=2018810667]
+y_sort_enabled = true
+script = ExtResource("63_xitfq")
+die_scene = ExtResource("64_o5vi4")
+pulse_power = 30.0
+pulse_range = 300.0
+collision_delay = 0.4
+min_dist_to_edge = 30.0
+random_spawn_offset = 30.0
+sweet_sprite = ExtResource("65_vkg8j")
+spicy_sprite = ExtResource("66_mvvmk")
+hearty_sprite = ExtResource("67_2bj75")
+fresh_sprite = ExtResource("68_sxkpw")
+
+[node name="Pan" type="StaticBody2D" parent="Dish/Dice_Display" unique_id=1117849328]
+z_index = -1
+collision_mask = 2
+collision_priority = 100.0
+physics_material_override = SubResource("PhysicsMaterial_ecqho")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Dish/Dice_Display/Pan" unique_id=1471934749]
+position = Vector2(1347.7517, 432.40854)
+build_mode = 1
+polygon = PackedVector2Array(-229.75171, -153.40854, -159.75171, -174.40854, -94.75171, -189.40854, -14.751709, -193.40854, 54.24829, -190.40854, 136.24829, -182.40854, 209.24829, -159.40854, 274.2483, -126.40854, 332.2483, -85.40854, 363.2483, -40.40854, 385.2483, 7.591461, 378.2483, 60.59146, 355.2483, 121.59146, 316.2483, 150.59146, 264.2483, 184.59146, 119.24829, 229.59146, -91.75175, 231.59146, -192.75171, 212.59146, -283.75174, 175.59146, -346.7517, 114.59146, -380.7517, 64.59146, -377.7517, -1.4085388, -357.7517, -65.40854, -297.7517, -114.40854)
+
+[node name="center" type="Node2D" parent="Dish/Dice_Display/Pan" unique_id=383728228]
+position = Vector2(1349, 420)
 
 [node name="UI" type="Control" parent="." unique_id=96621391 node_paths=PackedStringArray("challenge", "result_stats_display", "result_toggle_panel_button", "result_end_button", "result_screen", "result_panel", "result_text_vbox", "combination_inventory", "dish_stats_display", "pan_highlight", "drop_area", "reset_button", "finish_dish_button", "plate_parent", "plates_shadow", "des_vbox", "inventory_display")]
 layout_mode = 1
@@ -645,6 +685,7 @@ mouse_behavior_recursive = 1
 texture = ExtResource("6_y21f8")
 
 [node name="FinishButton" type="Control" parent="UI/Cooking" unique_id=1806716935 node_paths=PackedStringArray("highlight", "anti_highlight", "button")]
+z_index = 2
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -735,6 +776,7 @@ script = ExtResource("62_smjam")
 parent_inventory = NodePath("../../../Dish")
 
 [node name="ResultScreen" type="Control" parent="UI" unique_id=1975332036]
+visible = false
 z_index = 4
 anchors_preset = 0
 offset_left = 856.0
@@ -1041,6 +1083,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_ro2u2")
 text = "Toggle"
 
 [node name="InventoryUI" type="Control" parent="UI" unique_id=460537099 node_paths=PackedStringArray("inventory", "slots", "grid_container", "scroll_container")]
+visible = false
 z_index = 15
 z_as_relative = false
 layout_mode = 1
@@ -1164,46 +1207,6 @@ offset_bottom = 160.0
 mouse_behavior_recursive = 2
 disabled = true
 text = "AZ"
-
-[node name="Dish" type="Control" parent="." unique_id=497250350 node_paths=PackedStringArray("ui")]
-anchors_preset = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
-mouse_filter = 2
-mouse_behavior_recursive = 1
-script = ExtResource("24_tcho6")
-card_prefab = ExtResource("25_0rvbw")
-ui = NodePath("../UI/InventoryUI")
-can_stack_uses = false
-can_drag_cards = true
-
-[node name="Dice_Display" type="Node2D" parent="Dish" unique_id=2018810667]
-y_sort_enabled = true
-script = ExtResource("63_xitfq")
-die_scene = ExtResource("64_o5vi4")
-pulse_power = 30.0
-pulse_range = 300.0
-collision_delay = 0.4
-min_dist_to_edge = 30.0
-random_spawn_offset = 30.0
-sweet_sprite = ExtResource("65_vkg8j")
-spicy_sprite = ExtResource("66_mvvmk")
-hearty_sprite = ExtResource("67_2bj75")
-fresh_sprite = ExtResource("68_sxkpw")
-
-[node name="Pan" type="StaticBody2D" parent="Dish/Dice_Display" unique_id=1117849328]
-z_index = -1
-collision_mask = 2
-collision_priority = 100.0
-physics_material_override = SubResource("PhysicsMaterial_ecqho")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Dish/Dice_Display/Pan" unique_id=1471934749]
-position = Vector2(1347.7517, 432.40854)
-build_mode = 1
-polygon = PackedVector2Array(-229.75171, -153.40854, -159.75171, -174.40854, -94.75171, -189.40854, -14.751709, -193.40854, 54.24829, -190.40854, 136.24829, -182.40854, 209.24829, -159.40854, 274.2483, -126.40854, 332.2483, -85.40854, 363.2483, -40.40854, 385.2483, 7.591461, 378.2483, 60.59146, 355.2483, 121.59146, 316.2483, 150.59146, 264.2483, 184.59146, 119.24829, 229.59146, -91.75175, 231.59146, -192.75171, 212.59146, -283.75174, 175.59146, -346.7517, 114.59146, -380.7517, 64.59146, -377.7517, -1.4085388, -357.7517, -65.40854, -297.7517, -114.40854)
-
-[node name="center" type="Node2D" parent="Dish/Dice_Display/Pan" unique_id=383728228]
-position = Vector2(1349, 420)
 
 [node name="CombinationManager" type="Node" parent="." unique_id=1302914162 groups=["combination_manager"]]
 script = ExtResource("25_xb3ol")

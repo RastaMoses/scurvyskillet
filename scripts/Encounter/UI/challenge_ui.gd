@@ -55,6 +55,7 @@ func _ready() -> void:
 	#Set Start UI
 	combination_inventory.init_inventory()
 	start_result_screen(false)
+	inventory_display.visible= false
 
 #region Animations
 func animate_plates(nutrition):
