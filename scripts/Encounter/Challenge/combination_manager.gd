@@ -11,7 +11,7 @@ extends Node
 
 #State
 var dish:Dish
-var upgraded_dish
+var upgraded_dish:Dish
 var all_combinations:Array[Combination]
 var active_combinations:Dictionary[Combination, Array]
 
@@ -27,22 +27,21 @@ func _ready() -> void:
 	var paths : PackedStringArray = ResourceLoader.list_directory(dir_path)
 	if paths == null: printerr("Could not get Combination folder")
 	for path in paths:
-		var ingr:Combination= ResourceLoader.load(dir_path + path) as Combination
-		if ingr:
-			all_combinations.append(ingr)
-
+		var comb:Combination= ResourceLoader.load(dir_path + path) as Combination
+		if comb:
+			all_combinations.append(comb)
 func start_combinations(new_dish:Dish):
 	dish = new_dish
 	check_combinations()
 	order_active_combinations()
 	for combination in active_combinations:
 		activate_effects(combination)
+		apply_multipliers()
 		#UI Combination
-		challenge.ui.add_combination_result_text(combination)
+		challenge.ui.add_combination_result(combination)
 		#Wait for animation end
-		await get_tree().create_timer(1).timeout
-	#Upgrade Dish
-	apply_multipliers()
+		await get_tree().create_timer(3).timeout
+	challenge.ui.combinations_done()
 #region Requirements
 func check_combinations():
 
@@ -262,7 +261,7 @@ func check_combinations():
 	#Topping
 	if (dish.current_cards.size() >= 2
 	and dish.current_cards.back().committed_stats.tags.has(GlobalEnums.Tags.SPICE)):
-		set_comb_active("Topping",[[dish.current_cards.back()][dish.current_cards[dish.current_cards.size()-2]]])
+		set_comb_active("Topping",[[dish.current_cards.back()],[dish.current_cards[dish.current_cards.size()-2]]])
 #endregion
 
 
@@ -324,17 +323,21 @@ func activate_effects(combination):
 			mult_flavours[GlobalEnums.Flavour.HEARTY].append(1.5)
 		"Fine Dining":
 			for flavour in dish.get_greatest_flavours(dish.flavours):
-				mult_flavours[flavour].append(1.5)
+				mult_flavours[flavour].append(2.5)
 		"Fusion Kitchen":
 			for flavour in dish.get_greatest_flavours(dish.flavours):
 				mult_flavours[flavour].append(1.5)
 			for flavour in dish.get_lowest_flavours(dish.flavours):
 				mult_flavours[flavour].append(1.5)
 		"Pure":
-			for flavour in dish.get_greatest_flavours(dish.flavours):
-				for i in range(0,mult_flavours.size()):
-					if i != flavour:
-						mult_flavours[i].append(1.5)
+			var pure_greatest_flavours = dish.get_greatest_flavours(dish.flavours)
+			for flavour in GlobalEnums.Flavour:
+				if GlobalEnums.Flavour[flavour] == GlobalEnums.Flavour.NONE:
+					continue
+				if pure_greatest_flavours.has(GlobalEnums.Flavour[flavour]):
+					continue
+				else:
+					mult_flavours[GlobalEnums.Flavour[flavour]].append(1.3)
 		"Salad":
 			mult_flavours[GlobalEnums.Flavour.FRESH].append(1.3)
 		"Sushi":
@@ -428,16 +431,18 @@ func activate_effects(combination):
 			player.instantiate_card_and_add(item_pool.get_random_ingredient(true, [GlobalEnums.Tags.PASTRY]))
 		"Based":
 			#Get Comb Card Tags
-			var comb_cards = all_combinations[get_combination_by_name("Based")]
-			var activation_tags:Array
+			var comb_cards = active_combinations[get_combination_by_name("Based")]
+			var activation_tags:Array[GlobalEnums.Tags]
 			for card_array in comb_cards:
 				for card in card_array:
 					for tag in card.committed_stats.tags:
 						if not activation_tags.has(tag):
 							activation_tags.append(tag)
 			for i in 2:
+				var empty:Array[Ability] = []
+				var rarity:Array[GlobalEnums.Rarity] = [GlobalEnums.Rarity.LEGENDARY]
 				player.instantiate_card_and_add(item_pool.get_random_ingredient(true,
-				activation_tags, [], [GlobalEnums.Rarity.LEGENDARY]))
+				activation_tags,empty,rarity))
 	#endregion
 	
 
@@ -445,16 +450,17 @@ func apply_multipliers():
 	for flavour in GlobalEnums.Flavour:
 		if GlobalEnums.Flavour[flavour] == GlobalEnums.Flavour.NONE:
 			continue
-		var modified_flav:float = float(upgraded_dish.flavours[GlobalEnums.Flavour[flavour]])
+		var modified_flav:float = float(dish.flavours[GlobalEnums.Flavour[flavour]])
 		for mult in mult_flavours[GlobalEnums.Flavour[flavour]]:
 			modified_flav = modified_flav * mult
 			#Here all single modifiers are applied (FOR animation relevant?)
 		upgraded_dish.flavours[GlobalEnums.Flavour[flavour]] = floori(modified_flav)
-	var modified:float = upgraded_dish.nutrition
+	var modified:float = float(dish.nutrition)
 	for mult in mult_nutrition:
 		modified = modified * mult
 		#Here all single modifiers are applied (FOR animation relevant?)
 	upgraded_dish.nutrition = floori(modified)
+	
 
 #endregion
 
@@ -487,9 +493,14 @@ func get_current_flavour_multiplier_sum(as_percent = false) ->Dictionary:
 	for flavour in GlobalEnums.Flavour:
 		if GlobalEnums.Flavour[flavour] == GlobalEnums.Flavour.NONE:
 			continue
-		var mult_sum:float
+		var mult_sum:float = 1.0
 		for mult in mult_flavours[GlobalEnums.Flavour[flavour]]:
-			mult_sum += mult
+			if mult > 1.0:
+				var temp = mult - 1.0
+				mult_sum = temp + mult_sum
+			else:
+				var temp = 1.0 - mult
+				mult_sum = mult_sum - temp
 		mult_flavours_sum[GlobalEnums.Flavour[flavour]] = mult_sum
 		mult_flavours_sum_int[GlobalEnums.Flavour[flavour]] = int(mult_sum * 100)
 	if as_percent:
@@ -497,9 +508,14 @@ func get_current_flavour_multiplier_sum(as_percent = false) ->Dictionary:
 	return mult_flavours_sum
 
 func get_current_nutrition_multiplier_sum(as_percent = false):
-	var mult_sum:float
+	var mult_sum:float = 1.0
 	for mult in mult_nutrition:
-		mult_sum += mult
+		if mult > 1.0:
+			var temp = mult - 1.0
+			mult_sum = temp + mult_sum
+		else:
+			var temp = 1.0 - mult
+			mult_sum = mult_sum - temp
 	if as_percent:
 		return int(mult_sum * 100)
 	return mult_sum

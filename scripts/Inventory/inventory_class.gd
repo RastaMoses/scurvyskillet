@@ -381,25 +381,28 @@ func can_cover_abilities(required_abilities:Array[Ability], card_pool:Array[Card
 
 #endregion
 #region Flavours
-func get_greatest_flavours(flavours_pool:Dictionary) -> Array[GlobalEnums.Flavour]:
+func get_greatest_flavours(flavours_pool:Dictionary = get_flavours_sum(current_cards)) -> Array[GlobalEnums.Flavour]:
 	var flavours_dup = flavours_pool.duplicate()
 	var max_index:Array[int] = [0]
-	for i in range(1, flavours_dup.size()):
-		if flavours_dup[i] == flavours_pool[max_index[0]]:
-			if flavours_dup[i] > flavours_pool[max_index[0]]:
+	for flavour in flavours_dup:
+		if flavour == max_index[0]:
+			continue
+		if flavours_dup[flavour] == flavours_pool[max_index[0]]:
+			if flavours_dup[flavour] > flavours_pool[max_index[0]]:
+				print(GlobalEnums.Flavour[flavour])
 				max_index.clear()
-			max_index.append(i)
+			max_index.append(flavour)
 		
 	return max_index as Array[GlobalEnums.Flavour]
 
-func get_lowest_flavour(flavours_pool:Dictionary = get_flavours_sum(current_cards)) -> Array[GlobalEnums.Flavour]:
+func get_lowest_flavour(flavours_pool:Dictionary[GlobalEnums.Flavour, int] = get_flavours_sum(current_cards)) -> Array[GlobalEnums.Flavour]:
 	var flavours_dup = flavours_pool.duplicate()
 	var min_index:Array[int] = [0]
-	for i in range(1, flavours_dup.size()):
-		if flavours_dup[i] == flavours_pool[min_index[0]]:
-			if flavours_dup[i] < flavours_pool[min_index[0]]:
+	for flavour in flavours_dup:
+		if flavours_dup[GlobalEnums[flavour]] == flavours_pool[min_index[0]]:
+			if flavours_dup[GlobalEnums[flavour]] < flavours_pool[min_index[0]]:
 				min_index.clear()
-			min_index.append(i)
+			min_index.append([GlobalEnums[flavour]])
 		
 	return min_index as Array[GlobalEnums.Flavour]
 

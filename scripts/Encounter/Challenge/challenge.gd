@@ -125,7 +125,7 @@ func finish_dish():
 	dice_disp.finish_dish()
 	event_manager.dish_finish_animation_done()
 	await event_manager.on_dish_finish_anim_done
-	ui.toggle_result_screen(true)
+	ui.start_result_screen(true)
 	combination_manager.start_combinations(current_dish)
 	end()
 func reset_dish():

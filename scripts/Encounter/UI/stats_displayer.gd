@@ -24,9 +24,12 @@ var spicy_bg_moved = false
 var hearty_bg_moved = false
 var fresh_bg_moved = false
 
-func update_flavours(flavours:Dictionary[GlobalEnums.Flavour, int], force_show:bool = always_show):
-	print(flavours)
+func update_flavours(flavours:Dictionary[GlobalEnums.Flavour, int], force_show:bool = always_show, altered_font_color:bool = false):
 	sweet_text.text = str(flavours[GlobalEnums.Flavour.SWEET])
+	if altered_font_color:
+		sweet_text.theme_type_variation = "altered"
+	else:
+		sweet_text.theme_type_variation = "standard"
 	if flavours[GlobalEnums.Flavour.SWEET] == 0 and not force_show:
 		sweet_text.visible = false
 		if !sweet_bg_moved:
@@ -41,6 +44,10 @@ func update_flavours(flavours:Dictionary[GlobalEnums.Flavour, int], force_show:b
 		sweet_bg_moved = false
 	
 	spicy_text.text = str(flavours[GlobalEnums.Flavour.SPICY])
+	if altered_font_color:
+		spicy_text.theme_type_variation = "altered"
+	else:
+		spicy_text.theme_type_variation = "standard"
 	if flavours[GlobalEnums.Flavour.SPICY] == 0 and not force_show:
 		spicy_text.visible = false
 		if !spicy_bg_moved:
@@ -55,6 +62,10 @@ func update_flavours(flavours:Dictionary[GlobalEnums.Flavour, int], force_show:b
 		spicy_bg_moved = false
 	
 	hearty_text.text = str(flavours[GlobalEnums.Flavour.HEARTY])
+	if altered_font_color:
+		hearty_text.theme_type_variation = "altered"
+	else:
+		hearty_text.theme_type_variation = "standard"
 	if flavours[GlobalEnums.Flavour.HEARTY] == 0 and not force_show:
 		hearty_text.visible = false
 		if !hearty_bg_moved:
@@ -69,6 +80,10 @@ func update_flavours(flavours:Dictionary[GlobalEnums.Flavour, int], force_show:b
 		hearty_bg_moved = false
 	
 	fresh_text.text = str(flavours[GlobalEnums.Flavour.FRESH])
+	if altered_font_color:
+		fresh_text.theme_type_variation = "altered"
+	else:
+		fresh_text.theme_type_variation = "standard"
 	if flavours[GlobalEnums.Flavour.FRESH] == 0 and not force_show:
 		fresh_text.visible = false
 		if !fresh_bg_moved:
@@ -82,8 +97,12 @@ func update_flavours(flavours:Dictionary[GlobalEnums.Flavour, int], force_show:b
 		fresh_text.visible = true
 		fresh_bg_moved = false
 
-func update_nutrition(new_value: Variant, force_show:bool = always_show) -> void:
+func update_nutrition(new_value: Variant, force_show:bool = always_show, altered_font_color:bool = false) -> void:
 	nutrition_text.text = str(new_value)
+	if altered_font_color:
+		nutrition_text.theme_type_variation = "altered"
+	else:
+		nutrition_text.theme_type_variation = "standard"
 	if new_value <= 0 and not force_show:
 		if nutrition_bg != null:
 			nutrition_bg.visible = false

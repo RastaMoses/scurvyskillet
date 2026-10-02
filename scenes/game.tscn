@@ -108,7 +108,6 @@ starting_ingredients = Array[ExtResource("7_ca42v")]([ExtResource("8_rysoc"), Ex
 script = ExtResource("4_dinhu")
 
 [node name="debug_mouse" parent="." unique_id=2141378264 instance=ExtResource("8_ca42v")]
-active = true
 
 [node name="IngredientPool" type="Node" parent="." unique_id=1772734839 groups=["ingredient_pool"]]
 script = ExtResource("9_rysoc")
