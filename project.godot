@@ -31,6 +31,7 @@ map_loader=""
 player_inventory_ui=""
 card_large_view=""
 combination_manager=""
+challenge=""
 
 [gui]
 

@@ -116,7 +116,8 @@ func check_combinations():
 	var smoothie_drink_cards = dish.get_all_cards_with_tag(GlobalEnums.Tags.DRINK)
 	if (dish.current_cards.size() > 1
 	and smoothie_fruit_cards.size() == smoothie_drink_cards.size()
-	and smoothie_fruit_cards.size() > 0):
+	and smoothie_fruit_cards.size() > 0
+	and dish.can_cover_tags([GlobalEnums.Tags.FRUIT, GlobalEnums.Tags.DRINK])):
 		set_comb_active("Smoothie", [smoothie_drink_cards, smoothie_fruit_cards])
 	
 	#Parfait

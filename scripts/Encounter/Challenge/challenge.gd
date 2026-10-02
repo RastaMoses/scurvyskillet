@@ -83,7 +83,6 @@ var reward_req_ability:Array[Ability]
 
 
 func _ready() -> void:
-	
 	ui.finish_dish_pressed.connect(finish_dish)
 	ui.reset_dish_pressed.connect(reset_dish)
 #region Helper

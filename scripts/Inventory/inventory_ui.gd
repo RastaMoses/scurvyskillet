@@ -15,6 +15,7 @@ extends Control
 @export var slots:Array[CardSlot]
 @export var grid_container:GridContainer
 @export var scroll_container:ScrollContainer
+@export var bg:TextureRect
 
 #CACHED COMPS
 var event_manager
@@ -92,12 +93,15 @@ func open():
 	is_open = true
 	large_view.reset_large_view()
 	update_slots()
+	if bg:
+		bg.visible = true
 
 func close():
 	large_view.reset_large_view()
 	scroll_container.visible = false
 	is_open = false
-
+	if bg:
+		bg.visible = false
 #region Large View
 
 #endregion

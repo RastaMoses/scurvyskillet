@@ -16,7 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://0gs45yeo06st" path="res://sprites/interface/scenes/cooking scene/scene_cooking_button_cook_outline.png" id="11_x7qnw"]
 [ext_resource type="Script" uid="uid://5ky5q3x7j70d" path="res://scripts/Inventory/inventory_ui.gd" id="15_xb3ol"]
 [ext_resource type="PackedScene" uid="uid://c4hu25tvp3kkd" path="res://scenes/prefabs/player/inventory_ui_slot.tscn" id="16_hpn60"]
-[ext_resource type="Texture2D" uid="uid://b0kgy70usnyx" path="res://sprites/interface/scenes/cooking scene/scene_cooking_inventory.png" id="17_k2bil"]
 [ext_resource type="Script" uid="uid://dht54sfjv7hkv" path="res://scripts/Encounter/UI/button_ui.gd" id="17_tcho6"]
 [ext_resource type="Theme" uid="uid://dwjm243i4x47a" path="res://themes/inventory/inv_scroll_container.tres" id="18_3ik1o"]
 [ext_resource type="Script" uid="uid://6liq01j5a6ev" path="res://scripts/Encounter/UI/stats_displayer.gd" id="18_85ex6"]
@@ -71,6 +70,7 @@
 [ext_resource type="Texture2D" uid="uid://jso4fb173d32" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_21.png" id="60_4ousx"]
 [ext_resource type="PackedScene" uid="uid://pvquwdoepdux" path="res://scenes/prefabs/combination_display.tscn" id="60_t1n2v"]
 [ext_resource type="Texture2D" uid="uid://br06cxkesxqsc" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_22.png" id="61_fiswi"]
+[ext_resource type="Script" uid="uid://bqmlqdvtq76bx" path="res://scripts/Inventory/inventory_class.gd" id="61_tmb07"]
 [ext_resource type="Script" uid="uid://v63vu2iilw13" path="res://scripts/Inventory/drop_area.gd" id="62_smjam"]
 [ext_resource type="Script" uid="uid://db3ak1ye8g3gv" path="res://scripts/Encounter/Challenge/dice_displayer.gd" id="63_xitfq"]
 [ext_resource type="PackedScene" uid="uid://cbec14v7l54xf" path="res://scenes/prefabs/die.tscn" id="64_o5vi4"]
@@ -88,13 +88,11 @@ content_margin_right = 0.0
 content_margin_bottom = 0.0
 bg_color = Color(0.7372549, 0.5058824, 0.42745098, 1)
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_s7dlr"]
-
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ecqho"]
 friction = 0.03
 bounce = 1.1
 
-[node name="ChallengeSample" type="Control" unique_id=993217827]
+[node name="ChallengeSample" type="Control" unique_id=993217827 groups=["challenge"]]
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 1
@@ -105,7 +103,7 @@ par_nutrition = 2
 s_specific_ingredients = Array[ExtResource("2_y21f8")]([ExtResource("3_6r88v")])
 s_random_ingredient_amount = 0
 
-[node name="UI" type="Control" parent="." unique_id=96621391 node_paths=PackedStringArray("challenge", "result_stats_display", "result_toggle_panel_button", "result_end_button", "result_screen", "result_panel", "result_text_vbox", "dish_stats_display", "pan_highlight", "drop_area", "reset_button", "finish_dish_button", "plate_parent", "plates_shadow", "des_vbox", "inventory_display")]
+[node name="UI" type="Control" parent="." unique_id=96621391 node_paths=PackedStringArray("challenge", "result_stats_display", "result_toggle_panel_button", "result_end_button", "result_screen", "result_panel", "result_text_vbox", "combination_inventory", "dish_stats_display", "pan_highlight", "drop_area", "reset_button", "finish_dish_button", "plate_parent", "plates_shadow", "des_vbox", "inventory_display")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -123,6 +121,7 @@ result_screen = NodePath("ResultScreen")
 result_panel = NodePath("ResultScreen/ResultPanel")
 result_text_vbox = NodePath("ResultScreen/ResultPanel/ResultVbox/ScrollContainer/CombVBox")
 combination_display_scene = ExtResource("60_t1n2v")
+combination_inventory = NodePath("ResultScreen/ResultPanel/CombinationInventory")
 dish_stats_display = NodePath("Cooking/Stats")
 pan_highlight = NodePath("Cooking/Pan/highlight")
 drop_area = NodePath("Cooking/DropArea")
@@ -739,9 +738,9 @@ parent_inventory = NodePath("../../../Dish")
 z_index = 4
 anchors_preset = 0
 offset_left = 856.0
-offset_top = 64.0
+offset_top = 56.0
 offset_right = 1568.0
-offset_bottom = 776.0
+offset_bottom = 768.0
 mouse_filter = 1
 mouse_behavior_recursive = 1
 
@@ -930,7 +929,6 @@ scroll_active = false
 horizontal_alignment = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/ResultScreen/ResultPanel/ResultVbox" unique_id=280903245]
-clip_contents = false
 layout_mode = 2
 size_flags_vertical = 3
 mouse_behavior_recursive = 2
@@ -944,6 +942,9 @@ scroll_hint_mode = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="CombinationDisplay" parent="UI/ResultScreen/ResultPanel/ResultVbox/ScrollContainer/CombVBox" unique_id=144962318 instance=ExtResource("60_t1n2v")]
+layout_mode = 2
 
 [node name="EndButton" type="Control" parent="UI/ResultScreen/ResultPanel" unique_id=1842608368 node_paths=PackedStringArray("button")]
 anchors_preset = 0
@@ -965,6 +966,54 @@ mouse_behavior_recursive = 2
 theme_override_constants/h_separation = 0
 theme_override_styles/normal = SubResource("StyleBoxFlat_ro2u2")
 text = "End Challenge"
+
+[node name="CombinationInventory" type="Control" parent="UI/ResultScreen/ResultPanel" unique_id=1191167613 node_paths=PackedStringArray("ui")]
+anchors_preset = 0
+script = ExtResource("61_tmb07")
+card_prefab = ExtResource("25_0rvbw")
+ui = NodePath("InventoryUI")
+can_drag_cards = true
+metadata/_custom_type_script = "uid://bqmlqdvtq76bx"
+
+[node name="InventoryUI" type="Control" parent="UI/ResultScreen/ResultPanel/CombinationInventory" unique_id=385918289 node_paths=PackedStringArray("inventory", "slots", "grid_container", "scroll_container")]
+propagate_maximum_size = true
+anchors_preset = 0
+offset_left = 752.0
+offset_top = -80.0
+offset_right = 992.0
+offset_bottom = 760.0
+script = ExtResource("15_xb3ol")
+inventory_slot_scene = ExtResource("16_hpn60")
+min_slots = 0
+horizontal = false
+max_columns = 1
+inventory = NodePath("..")
+slots = [NodePath("InvScrollContainer/GridContainer/InventoryUISlot")]
+grid_container = NodePath("InvScrollContainer/GridContainer")
+scroll_container = NodePath("InvScrollContainer")
+metadata/_custom_type_script = "uid://5ky5q3x7j70d"
+
+[node name="InvScrollContainer" type="ScrollContainer" parent="UI/ResultScreen/ResultPanel/CombinationInventory/InventoryUI" unique_id=1251769592]
+custom_maximum_size = Vector2(240, 840)
+layout_mode = 0
+offset_right = 240.0
+offset_bottom = 1400.0
+mouse_behavior_recursive = 2
+theme = ExtResource("18_3ik1o")
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 0
+script = ExtResource("19_2dco2")
+margin_top = 96.0
+margin_bottom = 88.0
+
+[node name="GridContainer" type="GridContainer" parent="UI/ResultScreen/ResultPanel/CombinationInventory/InventoryUI/InvScrollContainer" unique_id=513895908]
+propagate_maximum_size = false
+layout_mode = 2
+theme = ExtResource("20_4hcvv")
+
+[node name="InventoryUISlot" parent="UI/ResultScreen/ResultPanel/CombinationInventory/InventoryUI/InvScrollContainer/GridContainer" unique_id=442831638 instance=ExtResource("16_hpn60")]
+layout_mode = 2
+mouse_filter = 0
 
 [node name="ToggleResultButton" type="Control" parent="UI/ResultScreen" unique_id=1874623669 node_paths=PackedStringArray("button")]
 layout_mode = 1
@@ -991,7 +1040,7 @@ theme_override_constants/h_separation = 0
 theme_override_styles/normal = SubResource("StyleBoxFlat_ro2u2")
 text = "Toggle"
 
-[node name="InventoryUI" type="Control" parent="UI" unique_id=460537099 node_paths=PackedStringArray("inventory", "grid_container", "scroll_container")]
+[node name="InventoryUI" type="Control" parent="UI" unique_id=460537099 node_paths=PackedStringArray("inventory", "slots", "grid_container", "scroll_container")]
 z_index = 15
 z_as_relative = false
 layout_mode = 1
@@ -1002,30 +1051,13 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("15_xb3ol")
 inventory_slot_scene = ExtResource("16_hpn60")
-min_slots = 8
+min_slots = 0
 max_rows = 2
 horizontal = false
 inventory = NodePath("../../Dish")
+slots = [NodePath("ScrollContainer/GridContainer/InventoryUISlot"), NodePath("ScrollContainer/GridContainer/InventoryUISlot2"), NodePath("ScrollContainer/GridContainer/InventoryUISlot3")]
 grid_container = NodePath("ScrollContainer/GridContainer")
 scroll_container = NodePath("ScrollContainer")
-
-[node name="bg_bottom" type="TextureRect" parent="UI/InventoryUI" unique_id=588866398]
-z_index = -2
-layout_mode = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
-mouse_filter = 2
-texture = ExtResource("17_k2bil")
-
-[node name="bg_side" type="TextureRect" parent="UI/InventoryUI" unique_id=1347858231]
-visible = false
-layout_mode = 0
-offset_left = 1302.0
-offset_top = 172.0
-offset_right = 1893.0
-offset_bottom = 871.0
-mouse_filter = 2
-texture = SubResource("PlaceholderTexture2D_s7dlr")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/InventoryUI" unique_id=240135501 node_paths=PackedStringArray("horizontal_hint_left", "horizontal_hint_right")]
 custom_minimum_size = Vector2(480, 570)
@@ -1184,3 +1216,5 @@ script = ExtResource("25_xb3ol")
 [connection signal="pressed" from="UI/Cooking/FinishButton/button" to="." method="_on_roll_dish_pressed"]
 [connection signal="pressed" from="UI/InventoryUI/InventorySortButtons/RarityButton/Button" to="UI/InventoryUI" method="_on_rarity_pressed"]
 [connection signal="pressed" from="UI/InventoryUI/InventorySortButtons/AlphabetButton/Button" to="UI/InventoryUI" method="_on_alphabetically_pressed"]
+
+[editable path="UI/ResultScreen/ResultPanel/ResultVbox/ScrollContainer/CombVBox/CombinationDisplay"]
