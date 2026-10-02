@@ -10,7 +10,7 @@ extends Control
 @export var result_screen:Control
 @export var result_panel:Control
 @export var result_text_vbox:VBoxContainer
-@export var result_text_combination_box:Control
+@export var combination_display_scene:PackedScene
 @export_subgroup("Dish")
 @export var dish_stats_display:StatsDisplayer
 @export var pan_highlight:Control
@@ -73,12 +73,24 @@ func animate_plates(nutrition):
 
 #endregion
 #region Result Screen
-func add_combination_result(combination):
-	var new_text_box = result_text_combination_box.duplicate()
+func add_combination_result(combination, comb_cards_arrays):
+	var new_text_box = combination_display_scene.instantiate()
 	new_text_box.visible = true
 	result_text_vbox.add_child(new_text_box)
 	new_text_box.name_label.text = combination.name
 	new_text_box.description_label.text = combination.description
+	#Popoúlate enough inventories for tabs
+	for i in range(comb_cards_arrays.size()):
+		#If not enough inventories (multitab) create new inv
+		if new_text_box.inventories.size() < i+1:
+			var new_inv = new_text_box.inventories[0].duplicate()
+			new_text_box.add_child(new_inv)
+			new_text_box.inventories.append(new_inv)
+			new_inv.init_inventory()
+	#Add Cards used to Box Inv
+	for i in range(comb_cards_arrays.size()):
+		for card in comb_cards_arrays[i]:
+			new_text_box.inventories[i].add_card(card)
 	result_stats_display.update_flavours(combination_manager.get_current_flavour_multiplier_sum(true))
 	result_stats_display.update_nutrition(combination_manager.get_current_nutrition_multiplier_sum(true))
 	dish_stats_display.update_flavours(combination_manager.upgraded_dish.flavours, true, true)

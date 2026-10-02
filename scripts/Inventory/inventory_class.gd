@@ -5,7 +5,7 @@ extends Control
 @export var card_prefab:PackedScene
 var current_cards: Array[Card]
 @export var starting_ingredients: Array[Ingredient]
-@export var ui:Control
+@export var ui:InventoryUI
 @export var can_stack_uses:bool = true
 @export var can_drag_cards:bool = false
 

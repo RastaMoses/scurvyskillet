@@ -67,9 +67,9 @@
 [ext_resource type="Texture2D" uid="uid://cjcv7ro8pa1w3" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_18.png" id="57_0lyi6"]
 [ext_resource type="Texture2D" uid="uid://tnxncq7yqfb2" path="res://sprites/interface/ingredient cards/large view/ingredient_card_large_nutrition.png" id="57_xthvj"]
 [ext_resource type="Texture2D" uid="uid://bqy1xr15y1dfj" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_19.png" id="58_b21qk"]
-[ext_resource type="Script" uid="uid://dre88e31khyuv" path="res://scripts/Encounter/UI/combination_display.gd" id="58_ro2u2"]
 [ext_resource type="Texture2D" uid="uid://64syy6inf2k0" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_20.png" id="59_lxrxu"]
 [ext_resource type="Texture2D" uid="uid://jso4fb173d32" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_21.png" id="60_4ousx"]
+[ext_resource type="PackedScene" uid="uid://pvquwdoepdux" path="res://scenes/prefabs/combination_display.tscn" id="60_t1n2v"]
 [ext_resource type="Texture2D" uid="uid://br06cxkesxqsc" path="res://sprites/interface/scenes/cooking scene/scene_cooking_nutrition_plate_22.png" id="61_fiswi"]
 [ext_resource type="Script" uid="uid://v63vu2iilw13" path="res://scripts/Inventory/drop_area.gd" id="62_smjam"]
 [ext_resource type="Script" uid="uid://db3ak1ye8g3gv" path="res://scripts/Encounter/Challenge/dice_displayer.gd" id="63_xitfq"]
@@ -88,16 +88,6 @@ content_margin_right = 0.0
 content_margin_bottom = 0.0
 bg_color = Color(0.7372549, 0.5058824, 0.42745098, 1)
 
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_omhyo"]
-color = Color(0.7058824, 0.6156863, 0.49411765, 1)
-grow_begin = -80.0
-grow_end = -80.0
-thickness = 4
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_ro2u2"]
-color = Color(0.40784314, 0.2509804, 0.22352941, 1)
-thickness = 8
-
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_s7dlr"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ecqho"]
@@ -115,7 +105,7 @@ par_nutrition = 2
 s_specific_ingredients = Array[ExtResource("2_y21f8")]([ExtResource("3_6r88v")])
 s_random_ingredient_amount = 0
 
-[node name="UI" type="Control" parent="." unique_id=96621391 node_paths=PackedStringArray("challenge", "result_stats_display", "result_toggle_panel_button", "result_end_button", "result_screen", "result_panel", "result_text_vbox", "result_text_combination_box", "dish_stats_display", "pan_highlight", "drop_area", "reset_button", "finish_dish_button", "plate_parent", "plates_shadow", "des_vbox", "inventory_display")]
+[node name="UI" type="Control" parent="." unique_id=96621391 node_paths=PackedStringArray("challenge", "result_stats_display", "result_toggle_panel_button", "result_end_button", "result_screen", "result_panel", "result_text_vbox", "dish_stats_display", "pan_highlight", "drop_area", "reset_button", "finish_dish_button", "plate_parent", "plates_shadow", "des_vbox", "inventory_display")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -131,8 +121,8 @@ result_toggle_panel_button = NodePath("ResultScreen/ToggleResultButton")
 result_end_button = NodePath("ResultScreen/ResultPanel/EndButton")
 result_screen = NodePath("ResultScreen")
 result_panel = NodePath("ResultScreen/ResultPanel")
-result_text_vbox = NodePath("ResultScreen/ResultPanel/ResultVbox/ScrollContainer/CombinationVBox")
-result_text_combination_box = NodePath("ResultScreen/ResultPanel/ResultVbox/ScrollContainer/CombinationVBox/CombinationDisplay")
+result_text_vbox = NodePath("ResultScreen/ResultPanel/ResultVbox/ScrollContainer/CombVBox")
+combination_display_scene = ExtResource("60_t1n2v")
 dish_stats_display = NodePath("Cooking/Stats")
 pan_highlight = NodePath("Cooking/Pan/highlight")
 drop_area = NodePath("Cooking/DropArea")
@@ -748,10 +738,10 @@ parent_inventory = NodePath("../../../Dish")
 [node name="ResultScreen" type="Control" parent="UI" unique_id=1975332036]
 z_index = 4
 anchors_preset = 0
-offset_left = 864.0
-offset_top = 48.0
-offset_right = 1576.0
-offset_bottom = 760.0
+offset_left = 856.0
+offset_top = 64.0
+offset_right = 1568.0
+offset_bottom = 776.0
 mouse_filter = 1
 mouse_behavior_recursive = 1
 
@@ -940,6 +930,7 @@ scroll_active = false
 horizontal_alignment = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/ResultScreen/ResultPanel/ResultVbox" unique_id=280903245]
+clip_contents = false
 layout_mode = 2
 size_flags_vertical = 3
 mouse_behavior_recursive = 2
@@ -949,46 +940,10 @@ horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 scroll_hint_mode = 1
 
-[node name="CombinationVBox" type="VBoxContainer" parent="UI/ResultScreen/ResultPanel/ResultVbox/ScrollContainer" unique_id=113157503]
+[node name="CombVBox" type="VBoxContainer" parent="UI/ResultScreen/ResultPanel/ResultVbox/ScrollContainer" unique_id=1069181594]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-mouse_behavior_recursive = 1
-theme = ExtResource("7_ee2dl")
-
-[node name="CombinationDisplay" type="VSplitContainer" parent="UI/ResultScreen/ResultPanel/ResultVbox/ScrollContainer/CombinationVBox" unique_id=1196996037 node_paths=PackedStringArray("name_label", "description_label", "seperator")]
-visible = false
-layout_mode = 2
-split_offsets = PackedInt32Array(0, 16, 28)
-script = ExtResource("58_ro2u2")
-name_label = NodePath("NameLabel")
-description_label = NodePath("DescriptionLabel")
-seperator = NodePath("HSeparator")
-
-[node name="NameLabel" type="RichTextLabel" parent="UI/ResultScreen/ResultPanel/ResultVbox/ScrollContainer/CombinationVBox/CombinationDisplay" unique_id=1819473115]
-layout_mode = 2
-mouse_filter = 1
-mouse_behavior_recursive = 1
-theme = ExtResource("5_h6ing")
-fit_content = true
-scroll_active = false
-horizontal_alignment = 1
-
-[node name="HSeparator" type="HSeparator" parent="UI/ResultScreen/ResultPanel/ResultVbox/ScrollContainer/CombinationVBox/CombinationDisplay" unique_id=1732452546]
-layout_mode = 2
-theme_override_styles/separator = SubResource("StyleBoxLine_omhyo")
-
-[node name="DescriptionLabel" type="RichTextLabel" parent="UI/ResultScreen/ResultPanel/ResultVbox/ScrollContainer/CombinationVBox/CombinationDisplay" unique_id=2126935194]
-layout_mode = 2
-mouse_filter = 1
-mouse_behavior_recursive = 1
-theme = ExtResource("5_h6ing")
-fit_content = true
-scroll_active = false
-
-[node name="HSeparator2" type="HSeparator" parent="UI/ResultScreen/ResultPanel/ResultVbox/ScrollContainer/CombinationVBox/CombinationDisplay" unique_id=949612484]
-layout_mode = 2
-theme_override_styles/separator = SubResource("StyleBoxLine_ro2u2")
 
 [node name="EndButton" type="Control" parent="UI/ResultScreen/ResultPanel" unique_id=1842608368 node_paths=PackedStringArray("button")]
 anchors_preset = 0
@@ -1036,7 +991,7 @@ theme_override_constants/h_separation = 0
 theme_override_styles/normal = SubResource("StyleBoxFlat_ro2u2")
 text = "Toggle"
 
-[node name="InventoryUI" type="Control" parent="UI" unique_id=460537099]
+[node name="InventoryUI" type="Control" parent="UI" unique_id=460537099 node_paths=PackedStringArray("inventory", "grid_container", "scroll_container")]
 z_index = 15
 z_as_relative = false
 layout_mode = 1
@@ -1050,6 +1005,9 @@ inventory_slot_scene = ExtResource("16_hpn60")
 min_slots = 8
 max_rows = 2
 horizontal = false
+inventory = NodePath("../../Dish")
+grid_container = NodePath("ScrollContainer/GridContainer")
+scroll_container = NodePath("ScrollContainer")
 
 [node name="bg_bottom" type="TextureRect" parent="UI/InventoryUI" unique_id=588866398]
 z_index = -2
@@ -1094,7 +1052,7 @@ mouse_behavior_recursive = 2
 theme = ExtResource("20_4hcvv")
 columns = 2
 
-[node name="InventoryUISlot" parent="UI/InventoryUI/ScrollContainer/GridContainer" unique_id=442831638 instance=ExtResource("16_hpn60")]
+[node name="InventoryUISlot" parent="UI/InventoryUI/ScrollContainer/GridContainer" unique_id=1561951557 instance=ExtResource("16_hpn60")]
 layout_mode = 2
 
 [node name="InventoryUISlot2" parent="UI/InventoryUI/ScrollContainer/GridContainer" unique_id=207692839 instance=ExtResource("16_hpn60")]

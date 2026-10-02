@@ -38,7 +38,7 @@ func start_combinations(new_dish:Dish):
 		activate_effects(combination)
 		apply_multipliers()
 		#UI Combination
-		challenge.ui.add_combination_result(combination)
+		challenge.ui.add_combination_result(combination, active_combinations[combination])
 		#Wait for animation end
 		await get_tree().create_timer(3).timeout
 	challenge.ui.combinations_done()

@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://pvquwdoepdux"]
+
+[ext_resource type="Script" uid="uid://dre88e31khyuv" path="res://scripts/Encounter/UI/combination_display.gd" id="1_6qs0p"]
+[ext_resource type="Script" uid="uid://bqmlqdvtq76bx" path="res://scripts/Inventory/inventory_class.gd" id="2_kje3l"]
+[ext_resource type="PackedScene" uid="uid://p1ug5ylfd5re" path="res://scenes/prefabs/card_prefab.tscn" id="3_7ad4q"]
+[ext_resource type="Script" uid="uid://5ky5q3x7j70d" path="res://scripts/Inventory/inventory_ui.gd" id="4_86je4"]
+[ext_resource type="PackedScene" uid="uid://c4hu25tvp3kkd" path="res://scenes/prefabs/player/inventory_ui_slot.tscn" id="5_dn4bg"]
+[ext_resource type="Theme" uid="uid://dwjm243i4x47a" path="res://themes/inventory/inv_scroll_container.tres" id="6_3e3vm"]
+[ext_resource type="Script" uid="uid://bg58rkwvnuhi5" path="res://scripts/Inventory/scroll_hint_displayer.gd" id="7_c160x"]
+[ext_resource type="Theme" uid="uid://fa4mmtcwb3a5" path="res://themes/inventory/inv_grid_container.tres" id="8_x8y0p"]
+[ext_resource type="Theme" uid="uid://1jb5jgyixo85" path="res://themes/encounter/enc_description.tres" id="9_642in"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_omhyo"]
+color = Color(0.7058824, 0.6156863, 0.49411765, 1)
+grow_begin = -80.0
+grow_end = -80.0
+thickness = 4
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ro2u2"]
+color = Color(0.40784314, 0.2509804, 0.22352941, 1)
+thickness = 8
+
+[node name="CombinationDisplay" type="VBoxContainer" unique_id=144962318 node_paths=PackedStringArray("name_label", "description_label", "seperator", "inventories")]
+size_flags_horizontal = 3
+script = ExtResource("1_6qs0p")
+name_label = NodePath("NameLabel")
+description_label = NodePath("DescriptionLabel")
+seperator = NodePath("HSeparator")
+inventories = [NodePath("Inventory")]
+
+[node name="Inventory" type="Control" parent="." unique_id=1369871560 node_paths=PackedStringArray("ui")]
+layout_mode = 2
+script = ExtResource("2_kje3l")
+card_prefab = ExtResource("3_7ad4q")
+ui = NodePath("InventoryUI")
+can_stack_uses = false
+can_drag_cards = true
+metadata/_custom_type_script = "uid://bqmlqdvtq76bx"
+
+[node name="InventoryUI" type="Control" parent="Inventory" unique_id=779914646 node_paths=PackedStringArray("inventory", "slots", "grid_container", "scroll_container")]
+anchors_preset = 0
+offset_left = 712.0
+offset_top = -88.0
+offset_right = 953.0
+offset_bottom = 192.0
+script = ExtResource("4_86je4")
+inventory_slot_scene = ExtResource("5_dn4bg")
+min_slots = 0
+max_rows = 1
+horizontal = false
+max_columns = 1
+inventory = NodePath("..")
+slots = [NodePath("InvScrollContainer/GridContainer/InventoryUISlot")]
+grid_container = NodePath("InvScrollContainer/GridContainer")
+scroll_container = NodePath("InvScrollContainer")
+metadata/_custom_type_script = "uid://5ky5q3x7j70d"
+
+[node name="InvScrollContainer" type="ScrollContainer" parent="Inventory/InventoryUI" unique_id=1845696155]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_behavior_recursive = 2
+theme = ExtResource("6_3e3vm")
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 0
+script = ExtResource("7_c160x")
+margin_top = 96.0
+margin_bottom = 88.0
+
+[node name="GridContainer" type="GridContainer" parent="Inventory/InventoryUI/InvScrollContainer" unique_id=1253453767]
+propagate_maximum_size = false
+layout_mode = 2
+theme = ExtResource("8_x8y0p")
+
+[node name="InventoryUISlot" parent="Inventory/InventoryUI/InvScrollContainer/GridContainer" unique_id=442831638 instance=ExtResource("5_dn4bg")]
+layout_mode = 2
+mouse_filter = 0
+
+[node name="NameLabel" type="RichTextLabel" parent="." unique_id=1619168356]
+layout_mode = 2
+mouse_filter = 1
+mouse_behavior_recursive = 1
+theme = ExtResource("9_642in")
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="." unique_id=651499994]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_omhyo")
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="." unique_id=1963048642]
+layout_mode = 2
+mouse_filter = 1
+mouse_behavior_recursive = 1
+theme = ExtResource("9_642in")
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator2" type="HSeparator" parent="." unique_id=2138192364]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_ro2u2")

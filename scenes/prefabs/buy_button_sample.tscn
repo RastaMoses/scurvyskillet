@@ -70,7 +70,7 @@ text = "1"
 scroll_active = false
 horizontal_alignment = 1
 
-[node name="InventoryUI" type="Control" parent="ItemVisuals" unique_id=441944375]
+[node name="InventoryUI" type="Control" parent="ItemVisuals" unique_id=441944375 node_paths=PackedStringArray("inventory", "slots", "grid_container", "scroll_container")]
 z_index = 1
 z_as_relative = false
 layout_mode = 3
@@ -85,6 +85,10 @@ mouse_filter = 2
 script = ExtResource("8_f3jxs")
 inventory_slot_scene = ExtResource("5_jp23l")
 min_slots = 8
+inventory = NodePath("../..")
+slots = [NodePath("ScrollContainer/GridContainer/InventoryUISlot")]
+grid_container = NodePath("ScrollContainer/GridContainer")
+scroll_container = NodePath("ScrollContainer")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="ItemVisuals/InventoryUI" unique_id=1354631701 node_paths=PackedStringArray("horizontal_hint_left", "horizontal_hint_right")]
 layout_mode = 0
