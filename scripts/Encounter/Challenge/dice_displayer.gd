@@ -66,7 +66,6 @@ func spawn_die(flavour:GlobalEnums.Flavour, value, card:Node):
 	#set sprite based on flavour
 	match flavour:
 		GlobalEnums.Flavour.SWEET:
-			print("Set Seet die flav")
 			new_die.change_sprite(sweet_sprite)
 		GlobalEnums.Flavour.SPICY:
 			new_die.change_sprite(spicy_sprite)

@@ -389,7 +389,6 @@ func get_greatest_flavours(flavours_pool:Dictionary = get_flavours_sum(current_c
 			continue
 		if flavours_dup[flavour] == flavours_pool[max_index[0]]:
 			if flavours_dup[flavour] > flavours_pool[max_index[0]]:
-				print(GlobalEnums.Flavour[flavour])
 				max_index.clear()
 			max_index.append(flavour)
 		
