@@ -33,6 +33,7 @@ player_inventory_ui=""
 card_large_view=""
 combination_manager=""
 challenge=""
+reward_screen=""
 
 [gui]
 

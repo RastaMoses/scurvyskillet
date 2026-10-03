@@ -1,6 +1,5 @@
 class_name Challenge
 extends Control
-
 #PARAMS
 @export_category("Requirements")
 @export_group("Success")
@@ -17,10 +16,10 @@ extends Control
 @export var par_fresh:int
 @export_group("Tag Restrictions")
 @export var restricted_tags: Array[GlobalEnums.Tags]
-
-
 @export_category("Results")
 @export_group("Success")
+@export var success_title:String = "VICTORY"
+@export_multiline() var success_description:String
 @export var success_morale: int
 @export var success_money: int
 @export_subgroup("Ingredients")
@@ -33,6 +32,8 @@ extends Control
 @export var s_req_ability:Array[Ability]
 
 @export_group("Partial")
+@export var partial_title:String = "PARTIAL VICTORY"
+@export_multiline() var partial_description:String
 @export var partial_morale: int
 @export var partial_money: int
 @export_subgroup("Ingredients")
@@ -45,6 +46,8 @@ extends Control
 @export var p_req_ability:Array[Ability]
 
 @export_group("Failure")
+@export var failure_title:String = "DEFEAT"
+@export_multiline() var failure_description:String
 @export var failure_morale: int
 @export var failure_money: int
 @export_subgroup("Ingredients")
@@ -58,6 +61,7 @@ extends Control
 
 #CACHED COMPS
 @onready var player_inventory = get_tree().get_first_node_in_group("player")
+@onready var reward_screen = get_tree().get_first_node_in_group("reward_screen")
 @onready var event_manager = get_tree().get_first_node_in_group("event_manager")
 @onready var item_pool = get_tree().get_first_node_in_group("ingredient_pool")
 @onready var ability_manager = get_tree().get_first_node_in_group("ability_manager")
@@ -71,6 +75,8 @@ extends Control
 
 
 #STATE
+var reward_title
+var reward_description
 var reward_money:int
 var reward_morale:int
 var reward_specific_ingredients:Array[Ingredient]
@@ -95,9 +101,10 @@ func start():
 func end():
 	await ui.end_challenge_pressed
 	compare_dish(combination_manager.upgraded_dish)
-	map_node.end_encounter()
 	give_rewards()
-	queue_free()
+	map_node.end_encounter()
+	
+	
 func compare_dish(completed_dish):
 	if (completed_dish.nutrition < req_nutrition
 	or completed_dish.flavours[GlobalEnums.Flavour.SWEET] < req_sweet
@@ -132,17 +139,18 @@ func reset_dish():
 
 #region Results
 func give_rewards():
-	player_inventory.add_money(reward_money)
-	player_inventory.add_morale(reward_morale)
+	var ingredient_rewards:Array[Ingredient]
 	if reward_random_ingredient_amount > 0:
 		var index = reward_random_ingredient_amount
 		while index > 0:
-			player_inventory.instantiate_card_and_add(item_pool.get_random_ingredient(reward_and_req,reward_req_tag,reward_req_ability,reward_req_rarity))
+			ingredient_rewards.append(item_pool.get_random_ingredient(reward_and_req,reward_req_tag,reward_req_ability,reward_req_rarity))
 			index -= 1
 	for i in reward_specific_ingredients:
-		player_inventory.instantiate_card_and_add(i)
-
+		ingredient_rewards.append(i)
+	reward_screen.start(reward_title, reward_description, reward_money, reward_morale, ingredient_rewards)
 func on_success():
+	reward_title = success_title
+	reward_description = success_description
 	reward_money = success_money
 	reward_morale = success_morale
 	reward_specific_ingredients = s_specific_ingredients
@@ -155,6 +163,8 @@ func on_success():
 	end()
 
 func on_partial():
+	reward_title = partial_title
+	reward_description = partial_description
 	reward_money = partial_money
 	reward_morale = partial_morale
 	reward_specific_ingredients = p_specific_ingredients
@@ -167,6 +177,8 @@ func on_partial():
 	end()
 
 func on_failure():
+	reward_title = failure_title
+	reward_description = failure_description
 	reward_money = failure_money
 	reward_morale = failure_morale
 	reward_specific_ingredients = f_specific_ingredients

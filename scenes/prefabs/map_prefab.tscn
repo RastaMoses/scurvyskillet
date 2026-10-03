@@ -5,6 +5,35 @@
 [ext_resource type="PackedScene" uid="uid://d3m0xjawxe0cp" path="res://scenes/prefabs/encounter.tscn" id="3_u6b3a"]
 [ext_resource type="Texture2D" uid="uid://oi2g7kkk006h" path="res://sprites/interface/scenes/worldmap scene/scene_worldmap_boat.png" id="4_2jk3u"]
 [ext_resource type="Script" uid="uid://dd6rhp5q4wtuh" path="res://scripts/Map/ship_mover.gd" id="4_evkri"]
+[ext_resource type="Script" uid="uid://5ky5q3x7j70d" path="res://scripts/Inventory/inventory_ui.gd" id="6_4xiau"]
+[ext_resource type="Script" uid="uid://bpwobmfvw2k0m" path="res://scripts/Encounter/UI/reward_screen.gd" id="6_pyrjn"]
+[ext_resource type="Texture2D" uid="uid://cquwgd0b3fqta" path="res://sprites/interface/general/text frame/text_frame.png" id="7_77jy1"]
+[ext_resource type="PackedScene" uid="uid://p1ug5ylfd5re" path="res://scenes/prefabs/card_prefab.tscn" id="7_fyw7r"]
+[ext_resource type="PackedScene" uid="uid://c4hu25tvp3kkd" path="res://scenes/prefabs/player/inventory_ui_slot.tscn" id="7_pyrjn"]
+[ext_resource type="Theme" uid="uid://bqlaftpa31pru" path="res://themes/encounter/enc_title.tres" id="7_rsaxv"]
+[ext_resource type="Theme" uid="uid://1jb5jgyixo85" path="res://themes/encounter/enc_description.tres" id="8_8nsas"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="8_e7fgg"]
+[ext_resource type="Theme" uid="uid://dwjm243i4x47a" path="res://themes/inventory/inv_scroll_container.tres" id="8_ksicn"]
+[ext_resource type="Resource" uid="uid://xr2mxu8h5d0r" path="res://resources/ingredients/in_game/ambrosia.tres" id="9_gwc4b"]
+[ext_resource type="Script" uid="uid://bg58rkwvnuhi5" path="res://scripts/Inventory/inventory_scrollbar.gd" id="9_wnh0u"]
+[ext_resource type="Resource" uid="uid://j1a6xd1rwb4" path="res://resources/ingredients/in_game/apple_of_discord.tres" id="10_2r72j"]
+[ext_resource type="Theme" uid="uid://fa4mmtcwb3a5" path="res://themes/inventory/inv_grid_container.tres" id="10_t1o2y"]
+[ext_resource type="Resource" uid="uid://c366pnymwc305" path="res://resources/ingredients/in_game/balsamico.tres" id="11_by7u2"]
+[ext_resource type="Texture2D" uid="uid://lp3c3q5qpcwl" path="res://sprites/interface/general/inventory/inventory_scroll_reverse.png" id="11_rsaxv"]
+[ext_resource type="Script" uid="uid://bog5ewji0yscq" path="res://scripts/Inventory/scroll_hint.gd" id="12_8nsas"]
+[ext_resource type="Resource" uid="uid://c346t8m6fjtct" path="res://resources/ingredients/in_game/bones.tres" id="12_e77vd"]
+[ext_resource type="Texture2D" uid="uid://cf52o6mnno7i5" path="res://sprites/ingredients/ingredient_apple_of_discord.png" id="12_ksicn"]
+[ext_resource type="Texture2D" uid="uid://bjjx1b7lsoh1g" path="res://sprites/interface/general/inventory/inventory_scroll_hint.png.png" id="13_77jy1"]
+[ext_resource type="Theme" uid="uid://dcisii1tqsjlr" path="res://themes/shop/price_text.tres" id="13_wnh0u"]
+[ext_resource type="Script" uid="uid://dht54sfjv7hkv" path="res://scripts/Encounter/UI/button_ui.gd" id="14_fyw7r"]
+[ext_resource type="Texture2D" uid="uid://b0r4siiiea0pk" path="res://sprites/ingredients/ingredient_Gyros.png" id="14_t1o2y"]
+[ext_resource type="Texture2D" uid="uid://htglfgdlhdys" path="res://sprites/interface/scenes/decision scene/scene_decision_button_sign.png" id="23_7tmnw"]
+[ext_resource type="Texture2D" uid="uid://cti37gpvslw0y" path="res://sprites/interface/scenes/decision scene/scene_decision_button_sign_outline.png" id="24_fsfgn"]
+[ext_resource type="Theme" uid="uid://vdmasea6p0ex" path="res://themes/encounter/choice_button_text.tres" id="25_e7fgg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t1o2y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rsaxv"]
 
 [node name="Map" type="Control" unique_id=678891768 node_paths=PackedStringArray("encounter_nodes")]
 y_sort_enabled = true
@@ -70,3 +99,263 @@ offset_top = 424.0
 offset_right = 1000.0
 offset_bottom = 424.0
 possible_encounters = Array[PackedScene]([])
+
+[node name="RewardScreen" type="Control" parent="." unique_id=50086245 node_paths=PackedStringArray("grid_container", "title_label", "description_label", "close_button", "money_slot", "money_text", "morale_slot", "morale_text", "ui") groups=["reward_screen"]]
+z_index = 1
+anchors_preset = 0
+offset_left = 312.0
+offset_top = -88.0
+offset_right = 1544.0
+offset_bottom = 744.0
+mouse_filter = 1
+mouse_behavior_recursive = 2
+script = ExtResource("6_pyrjn")
+grid_container = NodePath("InventoryUI/ScrollContainer/GridContainer")
+title_label = NodePath("TitleLabel")
+description_label = NodePath("DescriptionLabel")
+close_button = NodePath("EndButton")
+money_slot = NodePath("InventoryUI/ScrollContainer/GridContainer/MoneySlot")
+money_text = NodePath("InventoryUI/ScrollContainer/GridContainer/MoneySlot/money_label")
+morale_slot = NodePath("InventoryUI/ScrollContainer/GridContainer/MoraleSlot")
+morale_text = NodePath("InventoryUI/ScrollContainer/GridContainer/MoraleSlot/morale_label")
+card_prefab = ExtResource("7_fyw7r")
+starting_ingredients = Array[ExtResource("8_e7fgg")]([ExtResource("9_gwc4b"), ExtResource("9_gwc4b"), ExtResource("9_gwc4b"), ExtResource("9_gwc4b"), ExtResource("9_gwc4b"), ExtResource("10_2r72j"), ExtResource("11_by7u2"), ExtResource("12_e77vd")])
+ui = NodePath("InventoryUI")
+
+[node name="BG" type="TextureRect" parent="RewardScreen" unique_id=983968493]
+layout_mode = 0
+offset_left = 1256.0
+offset_top = -88.0
+offset_right = 4136.0
+offset_bottom = 1532.0
+rotation = 1.5707964
+mouse_filter = 2
+mouse_behavior_recursive = 1
+texture = ExtResource("7_77jy1")
+
+[node name="TitleLabel" type="RichTextLabel" parent="RewardScreen" unique_id=1085973463]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 112.0
+offset_right = 1152.0
+offset_bottom = 184.0
+mouse_filter = 2
+mouse_behavior_recursive = 1
+theme = ExtResource("7_rsaxv")
+text = "VICTORY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="RewardScreen" unique_id=2018247086]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 176.0
+offset_right = 1152.0
+offset_bottom = 448.0
+mouse_filter = 2
+mouse_behavior_recursive = 1
+theme = ExtResource("8_8nsas")
+text = "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\""
+horizontal_alignment = 1
+
+[node name="InventoryUI" type="Control" parent="RewardScreen" unique_id=1393106335 node_paths=PackedStringArray("inventory", "slots", "grid_container", "scroll_container")]
+z_index = 15
+z_as_relative = false
+anchors_preset = 0
+offset_left = 128.0
+offset_top = 400.0
+offset_right = 1160.0
+offset_bottom = 680.0
+script = ExtResource("6_4xiau")
+inventory_slot_scene = ExtResource("7_pyrjn")
+min_slots = 0
+max_rows = 1
+inventory = NodePath("..")
+slots = [NodePath("ScrollContainer/GridContainer/InventoryUISlot"), NodePath("ScrollContainer/GridContainer/InventoryUISlot2"), NodePath("ScrollContainer/GridContainer/InventoryUISlot3")]
+grid_container = NodePath("ScrollContainer/GridContainer")
+scroll_container = NodePath("ScrollContainer")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="RewardScreen/InventoryUI" unique_id=1638612545 node_paths=PackedStringArray("horizontal_hint_left", "horizontal_hint_right")]
+custom_minimum_size = Vector2(960, 280)
+custom_maximum_size = Vector2(960, 280)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 36.0
+offset_right = -36.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_behavior_recursive = 2
+theme = ExtResource("8_ksicn")
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 0
+script = ExtResource("9_wnh0u")
+horizontal_hint_left = NodePath("../Scrollbar Hints/Left")
+horizontal_hint_right = NodePath("../Scrollbar Hints/Right")
+margin_top = 96.0
+margin_bottom = 88.0
+
+[node name="GridContainer" type="GridContainer" parent="RewardScreen/InventoryUI/ScrollContainer" unique_id=1021059595]
+propagate_maximum_size = false
+layout_mode = 2
+mouse_behavior_recursive = 2
+theme = ExtResource("10_t1o2y")
+columns = 5
+
+[node name="MoneySlot" type="Panel" parent="RewardScreen/InventoryUI/ScrollContainer/GridContainer" unique_id=936518201]
+custom_minimum_size = Vector2(240, 280)
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxEmpty_t1o2y")
+
+[node name="Icon" type="TextureRect" parent="RewardScreen/InventoryUI/ScrollContainer/GridContainer/MoneySlot" unique_id=1373637467]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 32.0
+offset_right = 216.0
+offset_bottom = 224.0
+texture = ExtResource("12_ksicn")
+
+[node name="money_label" type="RichTextLabel" parent="RewardScreen/InventoryUI/ScrollContainer/GridContainer/MoneySlot" unique_id=1993292672]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 120.0
+offset_right = 192.0
+offset_bottom = 200.0
+theme = ExtResource("13_wnh0u")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "+3"
+
+[node name="MoraleSlot" type="Panel" parent="RewardScreen/InventoryUI/ScrollContainer/GridContainer" unique_id=1873357308]
+custom_minimum_size = Vector2(240, 280)
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxEmpty_rsaxv")
+
+[node name="Icon" type="TextureRect" parent="RewardScreen/InventoryUI/ScrollContainer/GridContainer/MoraleSlot" unique_id=361864360]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 40.0
+offset_right = 216.0
+offset_bottom = 232.0
+texture = ExtResource("14_t1o2y")
+
+[node name="morale_label" type="RichTextLabel" parent="RewardScreen/InventoryUI/ScrollContainer/GridContainer/MoraleSlot" unique_id=1744888407]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 120.0
+offset_right = 192.0
+offset_bottom = 200.0
+theme = ExtResource("13_wnh0u")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "+3"
+
+[node name="InventoryUISlot" parent="RewardScreen/InventoryUI/ScrollContainer/GridContainer" unique_id=442831638 instance=ExtResource("7_pyrjn")]
+layout_mode = 2
+
+[node name="InventoryUISlot2" parent="RewardScreen/InventoryUI/ScrollContainer/GridContainer" unique_id=1518271938 instance=ExtResource("7_pyrjn")]
+layout_mode = 2
+
+[node name="InventoryUISlot3" parent="RewardScreen/InventoryUI/ScrollContainer/GridContainer" unique_id=1911044635 instance=ExtResource("7_pyrjn")]
+layout_mode = 2
+
+[node name="Scrollbar Hints" type="Control" parent="RewardScreen/InventoryUI" unique_id=1876029456]
+z_index = 1
+anchors_preset = 0
+offset_left = -128.0
+offset_top = -448.0
+offset_right = -88.0
+offset_bottom = -408.0
+mouse_behavior_recursive = 1
+
+[node name="Left" type="TextureRect" parent="RewardScreen/InventoryUI/Scrollbar Hints" unique_id=2090753799]
+custom_minimum_size = Vector2(80, 120)
+custom_maximum_size = Vector2(80, 120)
+layout_mode = 0
+offset_left = 128.0
+offset_top = 528.0
+offset_right = 208.0
+offset_bottom = 648.0
+mouse_behavior_recursive = 2
+texture = ExtResource("11_rsaxv")
+script = ExtResource("12_8nsas")
+move_wait_time = 0.6
+
+[node name="Right" type="TextureRect" parent="RewardScreen/InventoryUI/Scrollbar Hints" unique_id=2105662862]
+custom_minimum_size = Vector2(80, 120)
+custom_maximum_size = Vector2(80, 120)
+layout_mode = 0
+offset_left = 1080.0
+offset_top = 528.0
+offset_right = 1160.0
+offset_bottom = 648.0
+mouse_behavior_recursive = 2
+texture = ExtResource("13_77jy1")
+script = ExtResource("12_8nsas")
+move_x = -8
+move_wait_time = 0.6
+
+[node name="EndButton" type="Control" parent="RewardScreen" unique_id=268852269 node_paths=PackedStringArray("highlight", "text_label", "button")]
+anchors_preset = 0
+offset_left = 432.0
+offset_top = 880.0
+offset_right = 472.0
+offset_bottom = 920.0
+script = ExtResource("14_fyw7r")
+highlight = NodePath("Highlight")
+text_label = NodePath("RichTextLabel")
+button = NodePath("Button")
+
+[node name="Button" type="Button" parent="RewardScreen/EndButton" unique_id=1565275244]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -224.0
+offset_right = 400.0
+offset_bottom = -40.0
+grow_vertical = 0
+mouse_behavior_recursive = 2
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="BG" type="TextureRect" parent="RewardScreen/EndButton" unique_id=310095570]
+layout_mode = 0
+offset_top = -184.0
+offset_bottom = -184.0
+scale = Vector2(8, 8)
+mouse_filter = 2
+mouse_behavior_recursive = 1
+texture = ExtResource("23_7tmnw")
+
+[node name="Highlight" type="TextureRect" parent="RewardScreen/EndButton" unique_id=1817247079]
+visible = false
+layout_mode = 0
+offset_left = -8.0
+offset_top = -192.0
+offset_right = -8.0
+offset_bottom = -192.0
+scale = Vector2(8, 8)
+mouse_filter = 2
+mouse_behavior_recursive = 1
+texture = ExtResource("24_fsfgn")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="RewardScreen/EndButton" unique_id=965020572]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.067
+anchor_top = 0.21200001
+anchor_right = 0.067
+anchor_bottom = 0.21200001
+offset_left = 23.32
+offset_top = -164.48
+offset_right = 367.32
+offset_bottom = -28.48
+mouse_filter = 2
+mouse_behavior_recursive = 1
+theme = ExtResource("25_e7fgg")
+text = "FINISH"
+horizontal_alignment = 1
+vertical_alignment = 1

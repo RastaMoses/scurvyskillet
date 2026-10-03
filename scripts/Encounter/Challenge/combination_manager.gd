@@ -40,7 +40,7 @@ func start_combinations(new_dish:Dish):
 		#UI Combination
 		challenge.ui.add_combination_result(combination, active_combinations[combination])
 		#Wait for animation end
-		await get_tree().create_timer(3).timeout
+		await get_tree().create_timer(1).timeout
 	challenge.ui.combinations_done()
 #region Requirements
 func check_combinations():

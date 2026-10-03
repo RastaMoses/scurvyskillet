@@ -36,7 +36,7 @@ mouse_behavior_recursive = 1
 script = ExtResource("1_vtaks")
 
 [node name="LargeView" type="Control" parent="." unique_id=1346607487 groups=["card_large_view"]]
-z_index = 10
+z_index = 11
 layout_mode = 1
 anchors_preset = 0
 mouse_filter = 1
@@ -109,7 +109,6 @@ starting_ingredients = Array[ExtResource("7_ca42v")]([ExtResource("8_rysoc"), Ex
 script = ExtResource("4_dinhu")
 
 [node name="debug_mouse" parent="." unique_id=2141378264 instance=ExtResource("8_ca42v")]
-active = true
 
 [node name="IngredientPool" type="Node" parent="." unique_id=1772734839 groups=["ingredient_pool"]]
 script = ExtResource("9_rysoc")

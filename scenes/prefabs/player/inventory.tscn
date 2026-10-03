@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://b0kgy70usnyx" path="res://sprites/interface/scenes/cooking scene/scene_cooking_inventory.png" id="9_k8k7k"]
 [ext_resource type="Theme" uid="uid://dwjm243i4x47a" path="res://themes/inventory/inv_scroll_container.tres" id="10_no1hy"]
 [ext_resource type="Theme" uid="uid://fa4mmtcwb3a5" path="res://themes/inventory/inv_grid_container.tres" id="11_lc8fr"]
-[ext_resource type="Script" uid="uid://bg58rkwvnuhi5" path="res://scripts/Inventory/scroll_hint_displayer.gd" id="14_p47cp"]
+[ext_resource type="Script" uid="uid://bg58rkwvnuhi5" path="res://scripts/Inventory/inventory_scrollbar.gd" id="14_p47cp"]
 [ext_resource type="Texture2D" uid="uid://lp3c3q5qpcwl" path="res://sprites/interface/general/inventory/inventory_scroll_reverse.png" id="16_dndqy"]
 [ext_resource type="Script" uid="uid://dht54sfjv7hkv" path="res://scripts/Encounter/UI/button_ui.gd" id="16_p47cp"]
 [ext_resource type="Script" uid="uid://bog5ewji0yscq" path="res://scripts/Inventory/scroll_hint.gd" id="17_3h3nv"]
@@ -53,6 +53,7 @@ morale_text = NodePath("InventoryUI/topbar/morale_text")
 money_text = NodePath("InventoryUI/topbar/money_text")
 card_prefab = ExtResource("2_inxy6")
 ui = NodePath("InventoryUI")
+can_drag_cards = true
 
 [node name="InventoryUI" type="Control" parent="." unique_id=190865318 node_paths=PackedStringArray("inventory", "slots", "grid_container", "scroll_container") groups=["player_inventory_ui"]]
 z_index = 15
@@ -68,7 +69,7 @@ inventory_slot_scene = ExtResource("4_rw30e")
 min_slots = 8
 max_rows = 1
 inventory = NodePath("..")
-slots = [NodePath("ScrollContainer/GridContainer/InventoryUISlot"), NodePath("ScrollContainer/GridContainer/InventoryUISlot2"), NodePath("ScrollContainer/GridContainer/InventoryUISlot3"), NodePath("ScrollContainer/GridContainer/InventoryUISlot4"), NodePath("ScrollContainer/GridContainer/InventoryUISlot5"), NodePath("ScrollContainer/GridContainer/InventoryUISlot6"), NodePath("ScrollContainer/GridContainer/InventoryUISlot7"), NodePath("ScrollContainer/GridContainer/InventoryUISlot8")]
+slots = [NodePath("ScrollContainer/GridContainer/InventoryUISlot"), NodePath("ScrollContainer/GridContainer/InventoryUISlot2"), NodePath("ScrollContainer/GridContainer/InventoryUISlot3"), NodePath("ScrollContainer/GridContainer/InventoryUISlot4"), NodePath("ScrollContainer/GridContainer/InventoryUISlot5"), NodePath("ScrollContainer/GridContainer/InventoryUISlot6"), NodePath("ScrollContainer/GridContainer/InventoryUISlot7"), NodePath("ScrollContainer/GridContainer/InventoryUISlot8"), NodePath("ScrollContainer/GridContainer/InventoryUISlot9")]
 grid_container = NodePath("ScrollContainer/GridContainer")
 scroll_container = NodePath("ScrollContainer")
 
@@ -155,7 +156,7 @@ mouse_filter = 2
 texture = SubResource("PlaceholderTexture2D_2kgow")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="InventoryUI" unique_id=79906176 node_paths=PackedStringArray("horizontal_hint_left", "horizontal_hint_right")]
-clip_contents = false
+custom_maximum_size = Vector2(1920, 304)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -177,7 +178,7 @@ margin_bottom = 88.0
 propagate_maximum_size = false
 layout_mode = 2
 theme = ExtResource("11_lc8fr")
-columns = 8
+columns = 9
 
 [node name="InventoryUISlot" parent="InventoryUI/ScrollContainer/GridContainer" unique_id=442831638 instance=ExtResource("4_rw30e")]
 layout_mode = 2
@@ -211,7 +212,12 @@ mouse_filter = 0
 layout_mode = 2
 mouse_filter = 0
 
+[node name="InventoryUISlot9" parent="InventoryUI/ScrollContainer/GridContainer" unique_id=1722021680 instance=ExtResource("4_rw30e")]
+layout_mode = 2
+mouse_filter = 0
+
 [node name="Scrollbar Hints" type="Control" parent="InventoryUI" unique_id=331360101]
+z_index = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -247,6 +253,7 @@ move_x = -8
 move_wait_time = 0.6
 
 [node name="InventorySortButtons" type="Control" parent="InventoryUI" unique_id=1853448072]
+z_index = 2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

@@ -67,16 +67,19 @@ func update_slots():
 				slots_to_remove += 1
 			else:
 				slots[i].update(null)
-		slots[i].showcase = inventory.can_drag_cards
+		slots[i].showcase = !inventory.can_drag_cards
 	remove_slots(slots_to_remove)
 	#if bottom adjust column amount
+	adjust_grid_columns()
+		#Scrollbar
+	scroll_container._call_deferred_update_hints()
+
+func adjust_grid_columns():
 	if (horizontal):
-		var new_columns = ceili(float(slots.size())/float(max_rows))
+		var new_columns = ceili(float(grid_container.get_children().size())/float(max_rows))
 		grid_container.columns = new_columns
 	else:
 		grid_container.columns = max_columns
-		#Scrollbar
-	scroll_container._call_deferred_update_hints()
 
 #Drag and drop not outside window
 func _notification(what: int) -> void:
@@ -105,8 +108,7 @@ func close():
 #region Large View
 
 #endregion
-#region Multitab
-#endregion
+
 #region Ability UI
 func card_dragged(card):
 	inventory.set_card_drag(card)

@@ -9,9 +9,11 @@ extends Control
 @export var result_end_button:ButtonUI
 @export var result_screen:Control
 @export var result_panel:Control
-@export var result_text_vbox:VBoxContainer
+@export var combination_vbox:VBoxContainer
+@export var combination_display_scroll:ScrollContainer
 @export var combination_display_scene:PackedScene
 @export var combination_inventory:Inventory
+@export var combination_inventory_scroll:InventoryScrollbar
 @export_subgroup("Dish")
 @export var dish_stats_display:StatsDisplayer
 @export var pan_highlight:Control
@@ -51,6 +53,7 @@ func _ready() -> void:
 	result_toggle_panel_button.left_clicked.connect(_on_toggle_result_panel_pressed)
 	result_end_button.left_clicked.connect(_on_end_button_pressed)
 	drop_area.mouse_exited.connect(_on_drop_area_mouse_exited)
+	combination_display_scroll.get_v_scroll_bar().changed.connect(scroll_bar_auto_bottom)
 	
 	#Set Start UI
 	combination_inventory.init_inventory()
@@ -79,7 +82,7 @@ func animate_plates(nutrition):
 #region Result Screen
 func add_combination_result(combination, comb_cards_arrays):
 	var new_combination_display = combination_display_scene.instantiate()
-	result_text_vbox.add_child(new_combination_display)
+	combination_vbox.add_child(new_combination_display)
 	new_combination_display.init_ui(combination, comb_cards_arrays)
 	new_combination_display.hover_start.connect(combination_mouse_hover_start)
 	new_combination_display.hover_stop.connect(combination_mouse_hover_stop)
@@ -116,7 +119,9 @@ func toggle_result_buttons(value):
 	for i in [result_toggle_panel_button, result_end_button]:
 		i.toggle_disabled(!value)
 		i.visible = value
-	
+
+func scroll_bar_auto_bottom():
+	combination_display_scroll.scroll_vertical = combination_display_scroll.get_v_scroll_bar().max_value
 #endregion
 #region Button
 
@@ -142,9 +147,11 @@ func _on_toggle_result_panel_pressed() -> void:
 func combination_mouse_hover_start(combination, card_arrays):
 	set_combination_inventory(combination, card_arrays)
 	combination_inventory.ui.open()
+	combination_inventory_scroll.toggle_autoscroll(true)
 	
 func combination_mouse_hover_stop():
 	combination_inventory.ui.close()
+	combination_inventory_scroll.toggle_autoscroll(false)
 	
 func _on_drop_area_mouse_exited() -> void:
 	toggle_highlight_pan(false)
