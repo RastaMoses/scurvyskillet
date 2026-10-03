@@ -1,6 +1,7 @@
 class_name StatsDisplayer
 extends Control
 @export_group("Params")
+@export var percent:bool = false
 @export var always_show:bool = false
 @export var result_bg_move_x:int = 80
 @export var result_bg_move_y:int = 0
@@ -26,6 +27,8 @@ var fresh_bg_moved = false
 
 func update_flavours(flavours:Dictionary[GlobalEnums.Flavour, int], force_show:bool = always_show, altered_font_color:bool = false):
 	sweet_text.text = str(flavours[GlobalEnums.Flavour.SWEET])
+	if percent:
+		sweet_text.text += "%"
 	if altered_font_color:
 		sweet_text.theme_type_variation = "altered"
 	else:
@@ -44,6 +47,8 @@ func update_flavours(flavours:Dictionary[GlobalEnums.Flavour, int], force_show:b
 		sweet_bg_moved = false
 	
 	spicy_text.text = str(flavours[GlobalEnums.Flavour.SPICY])
+	if percent:
+		spicy_text.text += "%"
 	if altered_font_color:
 		spicy_text.theme_type_variation = "altered"
 	else:
@@ -62,6 +67,8 @@ func update_flavours(flavours:Dictionary[GlobalEnums.Flavour, int], force_show:b
 		spicy_bg_moved = false
 	
 	hearty_text.text = str(flavours[GlobalEnums.Flavour.HEARTY])
+	if percent:
+		hearty_text.text += "%"
 	if altered_font_color:
 		hearty_text.theme_type_variation = "altered"
 	else:
@@ -80,6 +87,8 @@ func update_flavours(flavours:Dictionary[GlobalEnums.Flavour, int], force_show:b
 		hearty_bg_moved = false
 	
 	fresh_text.text = str(flavours[GlobalEnums.Flavour.FRESH])
+	if percent:
+		fresh_text.text += "%"
 	if altered_font_color:
 		fresh_text.theme_type_variation = "altered"
 	else:
@@ -99,6 +108,8 @@ func update_flavours(flavours:Dictionary[GlobalEnums.Flavour, int], force_show:b
 
 func update_nutrition(new_value: Variant, force_show:bool = always_show, altered_font_color:bool = false) -> void:
 	nutrition_text.text = str(new_value)
+	if percent:
+		nutrition_text.text += "%"
 	if altered_font_color:
 		nutrition_text.theme_type_variation = "altered"
 	else:

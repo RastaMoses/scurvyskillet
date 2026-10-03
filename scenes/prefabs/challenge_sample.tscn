@@ -423,13 +423,12 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="nutrition_text" type="RichTextLabel" parent="UI/Cooking/Stats" unique_id=434235131]
-z_index = 2
 custom_maximum_size = Vector2(171.52295, 96)
 layout_mode = 0
-offset_left = 664.0
-offset_top = 367.0
-offset_right = 835.52295
-offset_bottom = 463.0
+offset_left = 648.0
+offset_top = 344.0
+offset_right = 819.52295
+offset_bottom = 440.0
 mouse_filter = 1
 mouse_behavior_recursive = 1
 theme = ExtResource("38_vopdb")
@@ -781,9 +780,9 @@ parent_inventory = NodePath("../../../Dish")
 [node name="ResultScreen" type="Control" parent="UI" unique_id=1975332036]
 z_index = 4
 anchors_preset = 0
-offset_left = 856.0
+offset_left = 840.0
 offset_top = 56.0
-offset_right = 1568.0
+offset_right = 1552.0
 offset_bottom = 768.0
 mouse_filter = 1
 mouse_behavior_recursive = 1
@@ -804,6 +803,7 @@ offset_right = 664.0
 offset_bottom = 40.0
 mouse_behavior_recursive = 1
 script = ExtResource("18_85ex6")
+percent = true
 always_show = true
 result_bg_move_x = 0
 result_bg_move_y = 100
@@ -820,8 +820,8 @@ nutrition_bg = NodePath("../Nutrition")
 
 [node name="Fresh" type="TextureRect" parent="UI/ResultScreen/ResultPanel/StatsDisplayer" unique_id=901231847]
 layout_mode = 0
-offset_left = -112.0
-offset_right = 912.0
+offset_left = -120.0
+offset_right = 904.0
 offset_bottom = 768.0
 mouse_behavior_recursive = 1
 texture = ExtResource("56_tmb07")
@@ -830,13 +830,13 @@ script = ExtResource("31_ro2u2")
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/ResultScreen/ResultPanel/StatsDisplayer/Fresh" unique_id=1906092696]
 clip_contents = false
 layout_mode = 0
-offset_left = 112.0
+offset_left = 96.0
 offset_top = 40.0
-offset_right = 256.0
+offset_right = 280.0
 offset_bottom = 104.0
 theme = ExtResource("22_tmb07")
 theme_type_variation = &"standard"
-text = "100"
+text = "100%"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
@@ -845,8 +845,8 @@ vertical_alignment = 1
 
 [node name="Hearty" type="TextureRect" parent="UI/ResultScreen/ResultPanel/StatsDisplayer" unique_id=1218918873]
 layout_mode = 0
-offset_left = -112.0
-offset_right = 912.0
+offset_left = -96.0
+offset_right = 928.0
 offset_bottom = 768.0
 mouse_behavior_recursive = 1
 texture = ExtResource("55_t1n2v")
@@ -854,13 +854,13 @@ script = ExtResource("31_ro2u2")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/ResultScreen/ResultPanel/StatsDisplayer/Hearty" unique_id=2133871789]
 layout_mode = 0
-offset_left = 272.0
+offset_left = 256.0
 offset_top = 40.0
-offset_right = 416.0
+offset_right = 440.0
 offset_bottom = 104.0
 theme = ExtResource("21_tmb07")
 theme_type_variation = &"standard"
-text = "200"
+text = "200%"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
@@ -869,8 +869,8 @@ vertical_alignment = 1
 
 [node name="Spicy" type="TextureRect" parent="UI/ResultScreen/ResultPanel/StatsDisplayer" unique_id=457158414]
 layout_mode = 0
-offset_left = -112.0
-offset_right = 912.0
+offset_left = -72.0
+offset_right = 952.0
 offset_bottom = 768.0
 mouse_behavior_recursive = 1
 texture = ExtResource("54_ypqpd")
@@ -878,13 +878,13 @@ script = ExtResource("31_ro2u2")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/ResultScreen/ResultPanel/StatsDisplayer/Spicy" unique_id=1561175467]
 layout_mode = 0
-offset_left = 432.0
+offset_left = 416.0
 offset_top = 40.0
-offset_right = 576.0
+offset_right = 600.0
 offset_bottom = 104.0
 theme = ExtResource("20_t1n2v")
 theme_type_variation = &"standard"
-text = "100"
+text = "100%"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
@@ -893,8 +893,8 @@ vertical_alignment = 1
 
 [node name="Sweet" type="TextureRect" parent="UI/ResultScreen/ResultPanel/StatsDisplayer" unique_id=587466519]
 layout_mode = 0
-offset_left = -112.0
-offset_right = 912.0
+offset_left = -48.0
+offset_right = 976.0
 offset_bottom = 768.0
 mouse_behavior_recursive = 1
 texture = ExtResource("52_m7klv")
@@ -902,13 +902,13 @@ script = ExtResource("31_ro2u2")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/ResultScreen/ResultPanel/StatsDisplayer/Sweet" unique_id=1101934550]
 layout_mode = 0
-offset_left = 592.0
+offset_left = 576.0
 offset_top = 40.0
-offset_right = 736.0
+offset_right = 760.0
 offset_bottom = 104.0
 theme = ExtResource("19_ypqpd")
 theme_type_variation = &"standard"
-text = "100"
+text = "100%"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
@@ -927,10 +927,10 @@ texture = ExtResource("4_x7qnw")
 
 [node name="Nutrition" type="TextureRect" parent="UI/ResultScreen/ResultPanel" unique_id=655548766]
 layout_mode = 0
-offset_left = -312.0
-offset_top = -240.0
-offset_right = 200.0
-offset_bottom = 528.0
+offset_left = -480.0
+offset_top = -352.0
+offset_right = 288.0
+offset_bottom = 800.0
 mouse_behavior_recursive = 1
 texture = ExtResource("57_xthvj")
 
@@ -939,14 +939,14 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -272.0
-offset_top = 233.0
-offset_right = -136.0
-offset_bottom = 313.0
+offset_left = -392.0
+offset_top = 368.0
+offset_right = -208.0
+offset_bottom = 448.0
 grow_horizontal = 0
 theme = ExtResource("38_vopdb")
 theme_type_variation = &"standard"
-text = "100"
+text = "100%"
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -1076,8 +1076,9 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -40.0
+offset_top = 48.0
 offset_right = 40.0
-offset_bottom = 56.0
+offset_bottom = 104.0
 grow_horizontal = 0
 script = ExtResource("17_tcho6")
 button = NodePath("Button")
