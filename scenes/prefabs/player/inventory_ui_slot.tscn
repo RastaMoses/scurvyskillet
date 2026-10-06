@@ -20,7 +20,7 @@
 [ext_resource type="Theme" uid="uid://djqywg2hbepia" path="res://themes/cards/small/nutrition_text.tres" id="18_or6lv"]
 [ext_resource type="Theme" uid="uid://cmqt2mhsmdfp7" path="res://themes/cards/small/flavour_text_sweet.tres" id="19_x2fnd"]
 
-[node name="InventoryUISlot" type="Panel" unique_id=442831638]
+[node name="InventoryUISlot" type="Panel" unique_id=442831638 node_paths=PackedStringArray("icon_bg_negative")]
 self_modulate = Color(1, 1, 1, 0)
 z_index = 1
 custom_minimum_size = Vector2(240, 280)
@@ -30,6 +30,7 @@ offset_bottom = 280.0
 mouse_filter = 1
 mouse_behavior_recursive = 2
 script = ExtResource("1_80hv5")
+icon_bg_negative = NodePath("ItemDisplay/bg_icon_red")
 
 [node name="EmptySlot" type="TextureRect" parent="." unique_id=961373681]
 self_modulate = Color(1, 1, 1, 0)
@@ -47,6 +48,16 @@ offset_bottom = 296.0
 mouse_behavior_recursive = 1
 
 [node name="bg_icon" type="TextureRect" parent="ItemDisplay" unique_id=1200108444]
+z_index = -1
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 304.0
+mouse_behavior_recursive = 1
+texture = ExtResource("2_x2fnd")
+
+[node name="bg_icon_red" type="TextureRect" parent="ItemDisplay" unique_id=1176931241]
+visible = false
+modulate = Color(0.7647059, 0.23529412, 0.2509804, 1)
 z_index = -1
 layout_mode = 0
 offset_right = 256.0

@@ -10,6 +10,7 @@ extends Node
 @onready var event_manager = get_tree().get_first_node_in_group("event_manager")
 
 #STATE
+var current_encounter:MapEncounter
 
 func _ready() -> void:
 	for i in encounter_nodes:

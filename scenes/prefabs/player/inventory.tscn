@@ -69,7 +69,7 @@ inventory_slot_scene = ExtResource("4_rw30e")
 min_slots = 8
 max_rows = 1
 inventory = NodePath("..")
-slots = [NodePath("ScrollContainer/GridContainer/InventoryUISlot"), NodePath("ScrollContainer/GridContainer/InventoryUISlot2"), NodePath("ScrollContainer/GridContainer/InventoryUISlot3"), NodePath("ScrollContainer/GridContainer/InventoryUISlot4"), NodePath("ScrollContainer/GridContainer/InventoryUISlot5"), NodePath("ScrollContainer/GridContainer/InventoryUISlot6"), NodePath("ScrollContainer/GridContainer/InventoryUISlot7"), NodePath("ScrollContainer/GridContainer/InventoryUISlot8"), NodePath("ScrollContainer/GridContainer/InventoryUISlot9")]
+slots = [NodePath("ScrollContainer/GridContainer/InventoryUISlot"), NodePath("ScrollContainer/GridContainer/InventoryUISlot2")]
 grid_container = NodePath("ScrollContainer/GridContainer")
 scroll_container = NodePath("ScrollContainer")
 
@@ -188,34 +188,6 @@ mouse_filter = 0
 layout_mode = 2
 mouse_filter = 0
 
-[node name="InventoryUISlot3" parent="InventoryUI/ScrollContainer/GridContainer" unique_id=1840363840 instance=ExtResource("4_rw30e")]
-layout_mode = 2
-mouse_filter = 0
-
-[node name="InventoryUISlot4" parent="InventoryUI/ScrollContainer/GridContainer" unique_id=660806607 instance=ExtResource("4_rw30e")]
-layout_mode = 2
-mouse_filter = 0
-
-[node name="InventoryUISlot5" parent="InventoryUI/ScrollContainer/GridContainer" unique_id=1790947940 instance=ExtResource("4_rw30e")]
-layout_mode = 2
-mouse_filter = 0
-
-[node name="InventoryUISlot6" parent="InventoryUI/ScrollContainer/GridContainer" unique_id=358400740 instance=ExtResource("4_rw30e")]
-layout_mode = 2
-mouse_filter = 0
-
-[node name="InventoryUISlot7" parent="InventoryUI/ScrollContainer/GridContainer" unique_id=843676205 instance=ExtResource("4_rw30e")]
-layout_mode = 2
-mouse_filter = 0
-
-[node name="InventoryUISlot8" parent="InventoryUI/ScrollContainer/GridContainer" unique_id=1170623601 instance=ExtResource("4_rw30e")]
-layout_mode = 2
-mouse_filter = 0
-
-[node name="InventoryUISlot9" parent="InventoryUI/ScrollContainer/GridContainer" unique_id=1722021680 instance=ExtResource("4_rw30e")]
-layout_mode = 2
-mouse_filter = 0
-
 [node name="Scrollbar Hints" type="Control" parent="InventoryUI" unique_id=331360101]
 z_index = 1
 layout_mode = 1
@@ -224,6 +196,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 mouse_behavior_recursive = 1
 
 [node name="Left" type="TextureRect" parent="InventoryUI/Scrollbar Hints" unique_id=1368702239]
@@ -233,6 +206,7 @@ layout_mode = 0
 offset_top = 872.0
 offset_right = 80.0
 offset_bottom = 992.0
+mouse_filter = 2
 mouse_behavior_recursive = 2
 texture = ExtResource("16_dndqy")
 script = ExtResource("17_3h3nv")
@@ -246,6 +220,7 @@ offset_left = 1840.0
 offset_top = 872.0
 offset_right = 1920.0
 offset_bottom = 992.0
+mouse_filter = 2
 mouse_behavior_recursive = 2
 texture = ExtResource("17_dndqy")
 script = ExtResource("17_3h3nv")
@@ -255,17 +230,22 @@ move_wait_time = 0.6
 [node name="InventorySortButtons" type="Control" parent="InventoryUI" unique_id=1853448072]
 z_index = 2
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = -112.0
+offset_top = -528.0
+offset_right = -112.0
+offset_bottom = -528.0
+grow_horizontal = 0
+grow_vertical = 0
 
 [node name="RarityButton" type="Control" parent="InventoryUI/InventorySortButtons" unique_id=1830534730 node_paths=PackedStringArray("button")]
 anchors_preset = 0
-offset_top = 544.0
 offset_right = 112.0
-offset_bottom = 640.0
+offset_bottom = 96.0
 script = ExtResource("16_p47cp")
 button = NodePath("Button")
 
@@ -284,9 +264,9 @@ text = "RARITY"
 
 [node name="AlphabetButton" type="Control" parent="InventoryUI/InventorySortButtons" unique_id=747609692 node_paths=PackedStringArray("button")]
 anchors_preset = 0
-offset_top = 656.0
+offset_top = 112.0
 offset_right = 112.0
-offset_bottom = 752.0
+offset_bottom = 208.0
 script = ExtResource("16_p47cp")
 button = NodePath("Button")
 

@@ -34,6 +34,7 @@ card_large_view=""
 combination_manager=""
 challenge=""
 reward_screen=""
+map=""
 
 [gui]
 

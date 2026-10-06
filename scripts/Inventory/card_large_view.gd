@@ -4,6 +4,7 @@ extends Control
 @onready var slot = $InventoryUILarge
 @onready var bg = $ButtonBG
 @export var bg_fade_speed = 1
+@export var slot_positions:Array[Vector2]
 var ui
 
 var large_view_active:bool = false
@@ -66,3 +67,6 @@ func reset_large_view():
 	if (large_view_active):
 		toggle_large_view(null)
 	large_view_active = false
+
+func set_slot_position(value):
+	slot.position = slot_positions[value]

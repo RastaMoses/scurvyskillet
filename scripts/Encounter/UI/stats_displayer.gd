@@ -7,104 +7,38 @@ extends Control
 @export var result_bg_move_y:int = 0
 @export var result_bg_move_duration:float = 1.0
 @export_group("Nodes")
-@export var sweet_text:RichTextLabel
-@export var spicy_text:RichTextLabel
-@export var hearty_text:RichTextLabel
-@export var fresh_text:RichTextLabel
-
-@export var sweet_bg:TextureRect
-@export var spicy_bg:TextureRect
-@export var hearty_bg:TextureRect
-@export var fresh_bg:TextureRect
+@export var flavours_texts:Dictionary[GlobalEnums.Flavour, RichTextLabel]
+@export var flavours_bgs:Dictionary[GlobalEnums.Flavour, TextureRect]
 
 @export var nutrition_text:RichTextLabel
 @export var nutrition_bg:TextureRect
 
-var sweet_bg_moved = false
-var spicy_bg_moved = false
-var hearty_bg_moved = false
-var fresh_bg_moved = false
+var flavour_bg_moved:Dictionary[GlobalEnums.Flavour, bool] = {GlobalEnums.Flavour.SWEET: false, GlobalEnums.Flavour.SPICY: false,GlobalEnums.Flavour.HEARTY: false,GlobalEnums.Flavour.FRESH: false}
 
 func update_flavours(flavours:Dictionary[GlobalEnums.Flavour, int], force_show:bool = always_show, altered_font_color:bool = false):
-	sweet_text.text = str(flavours[GlobalEnums.Flavour.SWEET])
-	if percent:
-		sweet_text.text += "%"
-	if altered_font_color:
-		sweet_text.theme_type_variation = "altered"
-	else:
-		sweet_text.theme_type_variation = "standard"
-	if flavours[GlobalEnums.Flavour.SWEET] == 0 and not force_show:
-		sweet_text.visible = false
-		if !sweet_bg_moved:
-			if sweet_bg != null:
-				sweet_bg.start_moving_to_destination(Vector2(sweet_bg.global_position.x + result_bg_move_x,
-				sweet_bg.global_position.y + result_bg_move_y),result_bg_move_duration)
-			sweet_bg_moved = true
-	else:
-		if sweet_bg != null:
-			sweet_bg.start_moving_to_destination(sweet_bg.start_location, result_bg_move_duration)
-		sweet_text.visible = true
-		sweet_bg_moved = false
+	for flavour in GlobalEnums.Flavour:
+		if GlobalEnums.Flavour[flavour] == GlobalEnums.Flavour.NONE:
+			continue
 	
-	spicy_text.text = str(flavours[GlobalEnums.Flavour.SPICY])
-	if percent:
-		spicy_text.text += "%"
-	if altered_font_color:
-		spicy_text.theme_type_variation = "altered"
-	else:
-		spicy_text.theme_type_variation = "standard"
-	if flavours[GlobalEnums.Flavour.SPICY] == 0 and not force_show:
-		spicy_text.visible = false
-		if !spicy_bg_moved:
-			if spicy_bg != null:
-				spicy_bg.start_moving_to_destination(Vector2(spicy_bg.global_position.x + result_bg_move_x,
-				spicy_bg.global_position.y + result_bg_move_y),result_bg_move_duration)
-			spicy_bg_moved = true
-	else:
-		if spicy_bg != null:
-			spicy_bg.start_moving_to_destination(spicy_bg.start_location, result_bg_move_duration)
-		spicy_text.visible = true
-		spicy_bg_moved = false
-	
-	hearty_text.text = str(flavours[GlobalEnums.Flavour.HEARTY])
-	if percent:
-		hearty_text.text += "%"
-	if altered_font_color:
-		hearty_text.theme_type_variation = "altered"
-	else:
-		hearty_text.theme_type_variation = "standard"
-	if flavours[GlobalEnums.Flavour.HEARTY] == 0 and not force_show:
-		hearty_text.visible = false
-		if !hearty_bg_moved:
-			if hearty_bg != null:
-				hearty_bg.start_moving_to_destination(Vector2(hearty_bg.global_position.x + result_bg_move_x,
-				hearty_bg.global_position.y + result_bg_move_y),result_bg_move_duration)
-			hearty_bg_moved = true
-	else:
-		if hearty_bg != null:
-			hearty_bg.start_moving_to_destination(hearty_bg.start_location, result_bg_move_duration)
-		hearty_text.visible = true
-		hearty_bg_moved = false
-	
-	fresh_text.text = str(flavours[GlobalEnums.Flavour.FRESH])
-	if percent:
-		fresh_text.text += "%"
-	if altered_font_color:
-		fresh_text.theme_type_variation = "altered"
-	else:
-		fresh_text.theme_type_variation = "standard"
-	if flavours[GlobalEnums.Flavour.FRESH] == 0 and not force_show:
-		fresh_text.visible = false
-		if !fresh_bg_moved:
-			if fresh_bg != null:
-				fresh_bg.start_moving_to_destination(Vector2(fresh_bg.global_position.x + result_bg_move_x,
-				fresh_bg.global_position.y + result_bg_move_y),result_bg_move_duration)
-			fresh_bg_moved = true
-	else:
-		if hearty_bg != null:
-			fresh_bg.start_moving_to_destination(fresh_bg.start_location, result_bg_move_duration)
-		fresh_text.visible = true
-		fresh_bg_moved = false
+		flavours_texts[GlobalEnums.Flavour[flavour]].text = str(flavours[GlobalEnums.Flavour[flavour]])
+		if percent:
+			flavours_texts[GlobalEnums.Flavour[flavour]].text += "%"
+		if altered_font_color:
+			flavours_texts[GlobalEnums.Flavour[flavour]].theme_type_variation = "altered"
+		else:
+			flavours_texts[GlobalEnums.Flavour[flavour]].theme_type_variation = "standard"
+		if flavours[GlobalEnums.Flavour[flavour]] == 0 and not force_show:
+			flavours_texts[GlobalEnums.Flavour[flavour]].visible = false
+			if !flavour_bg_moved[GlobalEnums.Flavour[flavour]]:
+				if flavours_bgs[GlobalEnums.Flavour[flavour]] != null:
+					flavours_bgs[GlobalEnums.Flavour[flavour]].start_moving_to_destination(Vector2(flavours_bgs[GlobalEnums.Flavour[flavour]].position.x + result_bg_move_x,
+					flavours_bgs[GlobalEnums.Flavour[flavour]].position.y + result_bg_move_y),result_bg_move_duration)
+				flavour_bg_moved[GlobalEnums.Flavour[flavour]] = true
+		else:
+			if flavours_bgs[GlobalEnums.Flavour[flavour]] != null:
+				flavours_bgs[GlobalEnums.Flavour[flavour]].start_moving_to_destination(flavours_bgs[GlobalEnums.Flavour[flavour]].start_location, result_bg_move_duration)
+			flavours_texts[GlobalEnums.Flavour[flavour]].visible = true
+			flavour_bg_moved[GlobalEnums.Flavour[flavour]] = false
 
 func update_nutrition(new_value: Variant, force_show:bool = always_show, altered_font_color:bool = false) -> void:
 	nutrition_text.text = str(new_value)

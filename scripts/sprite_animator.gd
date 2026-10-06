@@ -1,5 +1,7 @@
 extends TextureRect
 
+@export var pixel_snap = true
+
 var fade_speed = -1
 var fade_active = false
 var max_fade = 0.35
@@ -35,7 +37,7 @@ func start_moving_to_destination(destination, duration):
 
 func move_to_last_position(duration = 0):
 	if duration == 0:
-		global_position = start_location
+		position = start_location
 	else:
 		time_moved = 0
 		move_duration = duration
@@ -58,10 +60,11 @@ func _process(delta: float) -> void:
 		if time_moved >= 1.0:
 			arrive_at_destination()
 		#visuals
-		var raw_position: Vector2 = global_position 
-		# Snap to multiples of your chosen pixel size
-		global_position = Vector2(
-			round(raw_position.x / 8) * 8,
-			round(raw_position.y / 8) * 8
-		)
+		if pixel_snap:
+			var raw_position: Vector2 = global_position 
+			# Snap to multiples of your chosen pixel size
+			global_position = Vector2(
+				round(raw_position.x / 8) * 8,
+				round(raw_position.y / 8) * 8
+			)
 	
