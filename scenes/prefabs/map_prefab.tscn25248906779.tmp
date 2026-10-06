@@ -100,7 +100,6 @@ offset_bottom = 744.0
 mouse_behavior_recursive = 1
 mouse_force_pass_scroll_events = false
 script = ExtResource("6_pyrjn")
-reward_slot = ExtResource("16_7tmnw")
 grid_container = NodePath("InventoryUI/ScrollContainer/GridContainer")
 title_label = NodePath("TitleLabel")
 description_label = NodePath("DescriptionLabel")

@@ -10,6 +10,7 @@ extends Panel
 @export var clickable:bool = true
 @export var buy_item = false
 @export var icon_bg_negative:TextureRect
+@export var icon_bg_combination:TextureRect
 
 #CACHED COMPS
 var item_visual
@@ -35,8 +36,8 @@ var large_view_button
 signal large_view_clicked(card_data, right_mouse)
 signal dragged(card_data)
 signal stop_drag(card_data)
-signal button_mouse_entered
-signal button_mouse_exited
+signal button_mouse_entered(slot)
+signal button_mouse_exited(slot)
 signal slot_clicked(event)
 
 #STATE
@@ -85,6 +86,8 @@ func toggle_only_icon(value):
 			i.visible = true
 func toggle_icon_bg_negative(value):
 	icon_bg_negative.visible = value
+func toggle_icon_bg_combination(value):
+	icon_bg_combination.visible = value
 func toggle_visuals(value):
 	if !value:
 		for i in item_visual.get_children():

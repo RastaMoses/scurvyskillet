@@ -65,6 +65,16 @@ offset_bottom = 304.0
 mouse_behavior_recursive = 1
 texture = ExtResource("2_x2fnd")
 
+[node name="bg_icon_comb_highlight" type="TextureRect" parent="ItemDisplay" unique_id=1013629660]
+visible = false
+modulate = Color(0.88235295, 0.65882355, 0.27058825, 1)
+z_index = -1
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 304.0
+mouse_behavior_recursive = 1
+texture = ExtResource("2_x2fnd")
+
 [node name="item_icon" type="TextureRect" parent="ItemDisplay" unique_id=1095232349]
 z_index = -1
 custom_minimum_size = Vector2(192, 192)

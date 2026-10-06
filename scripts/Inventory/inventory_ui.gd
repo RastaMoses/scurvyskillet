@@ -179,8 +179,7 @@ func update_slots():
 		#Scrollbar
 	scroll_container._call_deferred_update_hints()
 
-func set_slot_negative(card, value):
-	var slot = get_card_slot(card)
+func set_slot_negative(slot, value):
 	slot.toggle_icon_bg_negative(value)
 	if value == true:
 		negative_slots.append(slot)

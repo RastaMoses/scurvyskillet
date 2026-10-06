@@ -61,7 +61,7 @@ extends Control
 
 #CACHED COMPS
 @onready var player_inventory = get_tree().get_first_node_in_group("player")
-@onready var reward_screen = get_tree().get_first_node_in_group("reward_screen")
+@onready var reward_screen:RewardScreen = get_tree().get_first_node_in_group("reward_screen")
 @onready var event_manager = get_tree().get_first_node_in_group("event_manager")
 @onready var item_pool = get_tree().get_first_node_in_group("ingredient_pool")
 @onready var ability_manager = get_tree().get_first_node_in_group("ability_manager")
@@ -85,6 +85,10 @@ var reward_and_req:bool
 var reward_req_rarity:Array[GlobalEnums.Rarity]
 var reward_req_tag:Array[GlobalEnums.Tags]
 var reward_req_ability:Array[Ability]
+
+var combination_reward_ingredients:Dictionary[Combination, Array]
+var combination_money_reward:Array[int]
+var combination_morale_reward:Array[int]
 
 
 
@@ -147,7 +151,11 @@ func give_rewards():
 			index -= 1
 	for i in reward_specific_ingredients:
 		ingredient_rewards.append(i)
-	reward_screen.start(reward_title, reward_description, reward_money, reward_morale, ingredient_rewards)
+	reward_screen.start(reward_title, reward_description, reward_money, reward_morale,
+	 ingredient_rewards,[], combination_manager.reward_ingredients, 
+	combination_manager.reward_random_removed_cards,combination_manager.money_rewards, 
+	combination_manager.morale_rewards)
+
 func on_success():
 	reward_title = success_title
 	reward_description = success_description

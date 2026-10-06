@@ -110,14 +110,14 @@ func set_clickable(value):
 func toggle_item_icon(value):
 	item_visuals.visible = value
 
-func _on_button_mouse_entered() -> void:
+func _on_button_mouse_entered(_slot) -> void:
 	if !can_buy:
 		return
 	if !shop.interactable and hide_item:
 		return
 	button_highlight.visible = true
 
-func _on_button_mouse_exited() -> void:
+func _on_button_mouse_exited(_slot) -> void:
 	button_highlight.visible = false
 
 func slot_clicked(event):

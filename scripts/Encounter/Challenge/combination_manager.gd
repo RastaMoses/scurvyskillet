@@ -14,6 +14,10 @@ var dish:Dish
 var upgraded_dish:Dish
 var all_combinations:Array[Combination]
 var active_combinations:Dictionary[Combination, Array]
+var reward_ingredients:Dictionary[Combination, Array]
+var money_rewards:Dictionary[Combination, int]
+var morale_rewards:Dictionary[Combination, int]
+var reward_random_removed_cards:Dictionary[Combination, Array]
 
 var all_cards_used:Array[Card]
 
@@ -397,14 +401,14 @@ func activate_effects(combination):
 	#endregion
 	#region Player
 		"Admit Defeat":
-			player.add_morale(-1)
+			add_morale(-1, combination)
 		"Cheap":
-			player.add_money(+5)
+			add_money(+5, combination)
 		"Salmonella":
-			player.add_morale(-1)
+			add_morale(-1, combination)
 		"Split Opinion":
-			player.add_morale(-1 * ceili(float(player.current_morale)/2.0))
-			player.add_money(player.current_money)
+			add_morale(-1 * ceili(float(player.current_morale)/2.0), combination)
+			add_money(player.current_money, combination)
 		
 	#endregion
 	#region Create
@@ -417,19 +421,19 @@ func activate_effects(combination):
 			if lowest > cacao:
 				lowest = cacao
 			for i in lowest:
-				player.instantiate_card_and_add(item_pool.get_ingredient_by_name("Chocolate"))
+				add_ingredients_to_player([item_pool.get_ingredient_by_name("Chocolate")], combination)
 		"Jam":
 			for i in 2:
-				player.instantiate_card_and_add(item_pool.get_ingredient_by_name("Jam"))
+				add_ingredients_to_player([item_pool.get_ingredient_by_name("Jam")], combination)
 		"Mayan Hot Cocoa":
-			player.instantiate_card_and_add(item_pool.get_ingredient_by_name("Mayan Cocoa"))
+			add_ingredients_to_player([item_pool.get_ingredient_by_name("Mayan Cocoa")], combination)
 		"Reinheitsgebot":
 			for i in 3:
-				player.instantiate_card_and_add(item_pool.get_ingredient_by_name("Beer"))
+				add_ingredients_to_player([item_pool.get_ingredient_by_name("Beer")], combination)
 		"Rum":
-			player.instantiate_card_and_add(item_pool.get_ingredient_by_name("Rum"))
+			add_ingredients_to_player([item_pool.get_ingredient_by_name("Rum")], combination)
 		"Sourdough Rising":
-			player.instantiate_card_and_add(item_pool.get_random_ingredient(true, [GlobalEnums.Tags.PASTRY]))
+			add_ingredients_to_player([item_pool.get_random_ingredient(true, [GlobalEnums.Tags.PASTRY])], combination)
 		"Based":
 			#Get Comb Card Tags
 			var comb_cards = active_combinations[get_combination_by_name("Based")]
@@ -442,8 +446,8 @@ func activate_effects(combination):
 			for i in 2:
 				var empty:Array[Ability] = []
 				var rarity:Array[GlobalEnums.Rarity] = [GlobalEnums.Rarity.LEGENDARY]
-				player.instantiate_card_and_add(item_pool.get_random_ingredient(true,
-				activation_tags,empty,rarity))
+				add_ingredients_to_player([item_pool.get_random_ingredient(true,
+				activation_tags,empty,rarity)], combination)
 	#endregion
 	
 
@@ -524,4 +528,13 @@ func get_current_nutrition_multiplier_sum(as_percent = false):
 func order_active_combinations():
 	#Sort the active combinations based on effec type and specific dependencies (addition before multiply)
 	return
+
+func add_ingredients_to_player(ingredients:Array[Ingredient], combination:Combination):
+	reward_ingredients[combination] = ingredients
+func remove_random_from_player(cards:Array[Card], combination:Combination):
+	reward_random_removed_cards[combination] = cards
+func add_money(amount:int, combination:Combination):
+	money_rewards[combination] = amount
+func add_morale(amount:int, combination:Combination):
+	morale_rewards[combination] = amount
 #endregion

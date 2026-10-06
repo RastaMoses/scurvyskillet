@@ -69,7 +69,7 @@ func complete():
 	
 	set_rewards()
 	var reward_screen:RewardScreen = get_tree().get_first_node_in_group("reward_screen")
-	reward_screen.start(title,description,reward_money,reward_morale,add_ingredients,remove_cards,new_encounter)
+	reward_screen.start(title,description,reward_money,reward_morale,add_ingredients,remove_cards,{},{},{},{},new_encounter)
 	end()
 
 #endregion

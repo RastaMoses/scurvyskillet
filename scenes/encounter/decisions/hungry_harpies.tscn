@@ -57,5 +57,4 @@ req_flavours = Dictionary[int, int]({
 title = "FLED"
 description = "You try to outpace them, but to no avail. They snatch up one of the deckhands before retreating from their hunt."
 button_text = "RUN"
-random_ingredient_amount = 8
 c_morale = -1
