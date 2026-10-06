@@ -9,6 +9,7 @@ extends Panel
 @export var drag_pos_offset:Vector2 = Vector2(96,96)
 @export var clickable:bool = true
 @export var buy_item = false
+@export var icon_bg_negative:TextureRect
 
 #CACHED COMPS
 var item_visual
@@ -67,21 +68,12 @@ func init_slot(ui_node = null) -> void:
 	if !clickable:
 		large_view_button.visible = false
 
-func _on_button_gui_input(event: InputEvent) -> void:
-	if !clickable:
+
+func _process(_delta: float) -> void:
+	if !dragging_preview:
 		return
-	if event is InputEventMouseButton and event.pressed:
-		match event.button_index:
-			MOUSE_BUTTON_LEFT:
-				if buy_item:
-					slot_clicked.emit(event)
-				# left button clicked
-				if large_view_clickable:
-					large_view_clicked.emit(card, false)
-			MOUSE_BUTTON_RIGHT:
-				# right button clicked
-				if large_view_clickable:
-					large_view_clicked.emit(card, true)
+	var new_pos = get_global_mouse_position() - drag_pos_offset
+	global_position = (new_pos / pixel_multiple).round() * pixel_multiple
 
 func toggle_only_icon(value):
 	if value:
@@ -91,7 +83,8 @@ func toggle_only_icon(value):
 	else:
 		for i in item_visual.get_children():
 			i.visible = true
-
+func toggle_icon_bg_negative(value):
+	icon_bg_negative.visible = value
 func toggle_visuals(value):
 	if !value:
 		for i in item_visual.get_children():
@@ -100,6 +93,7 @@ func toggle_visuals(value):
 		for i in item_visual.get_children():
 			i.visible = true
 func update(item):
+	#Reset Altered Visuals
 	if !item:
 		item_visual.visible = false
 		card = null
@@ -134,7 +128,6 @@ func update_uses(value = uses):
 			i.visible = false
 	for i in card.stats.uses:
 			uses_textures[i].visible = true
-
 func update_flavours():
 	#flavours
 	var card_flavours:Dictionary[GlobalEnums.Flavour, int] = card.get_flavours()
@@ -170,6 +163,7 @@ func update_flavours():
 		else:
 			rarity_textures[i].visible = false
 
+#region Dragging
 func _get_drag_data(_at_position: Vector2) -> Variant:
 	if not card:
 		return
@@ -222,16 +216,25 @@ func stopped_drag():
 			dragging = false
 			update(card)
 
-func _process(_delta: float) -> void:
-	if !dragging_preview:
+#endregion
+
+#region Button
+
+func _on_button_gui_input(event: InputEvent) -> void:
+	if !clickable:
 		return
-	var new_pos = get_global_mouse_position() - drag_pos_offset
-	global_position = (new_pos / pixel_multiple).round() * pixel_multiple
-
-
-func get_tag_name(state: GlobalEnums.Tags) -> String:
-	var enum_name := str(GlobalEnums.Tags.find_key(state)).to_lower()
-	return enum_name.left(1).to_upper() + enum_name.substr(1)
+	if event is InputEventMouseButton and event.pressed:
+		match event.button_index:
+			MOUSE_BUTTON_LEFT:
+				if buy_item:
+					slot_clicked.emit(event)
+				# left button clicked
+				if large_view_clickable:
+					large_view_clicked.emit(card, false)
+			MOUSE_BUTTON_RIGHT:
+				# right button clicked
+				if large_view_clickable:
+					large_view_clicked.emit(card, true)
 
 
 func _on_large_view_button_mouse_entered() -> void:
@@ -240,3 +243,11 @@ func _on_large_view_button_mouse_entered() -> void:
 
 func _on_large_view_button_mouse_exited() -> void:
 	button_mouse_exited.emit()
+
+#endregion
+
+#region Helper
+func get_tag_name(state: GlobalEnums.Tags) -> String:
+	var enum_name := str(GlobalEnums.Tags.find_key(state)).to_lower()
+	return enum_name.left(1).to_upper() + enum_name.substr(1)
+#endregion

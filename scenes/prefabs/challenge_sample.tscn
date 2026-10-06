@@ -291,7 +291,7 @@ layout_mode = 0
 scale = Vector2(8, 8)
 texture = ExtResource("29_kwv47")
 
-[node name="Stats" type="Control" parent="UI/Cooking" unique_id=406643778 node_paths=PackedStringArray("sweet_text", "spicy_text", "hearty_text", "fresh_text", "sweet_bg", "spicy_bg", "hearty_bg", "fresh_bg", "nutrition_text")]
+[node name="Stats" type="Control" parent="UI/Cooking" unique_id=406643778 node_paths=PackedStringArray("flavours_texts", "flavours_bgs", "nutrition_text")]
 z_index = 4
 layout_mode = 1
 anchors_preset = 15
@@ -304,14 +304,18 @@ grow_vertical = 2
 mouse_filter = 2
 mouse_behavior_recursive = 1
 script = ExtResource("18_85ex6")
-sweet_text = NodePath("SweetText")
-spicy_text = NodePath("SpicyText")
-hearty_text = NodePath("HeartyText")
-fresh_text = NodePath("FreshText")
-sweet_bg = NodePath("Sweet")
-spicy_bg = NodePath("Spicy")
-hearty_bg = NodePath("Hearty")
-fresh_bg = NodePath("Fresh")
+flavours_texts = {
+0: NodePath("SweetText"),
+1: NodePath("SpicyText"),
+2: NodePath("HeartyText"),
+3: NodePath("FreshText")
+}
+flavours_bgs = {
+0: NodePath("Sweet"),
+1: NodePath("Spicy"),
+2: NodePath("Hearty"),
+3: NodePath("Fresh")
+}
 nutrition_text = NodePath("nutrition_text")
 
 [node name="Sweet" type="TextureRect" parent="UI/Cooking/Stats" unique_id=1981192164]
@@ -795,7 +799,7 @@ offset_bottom = 632.0
 mouse_filter = 1
 mouse_behavior_recursive = 1
 
-[node name="StatsDisplayer" type="Control" parent="UI/ResultScreen/ResultPanel" unique_id=93431035 node_paths=PackedStringArray("sweet_text", "spicy_text", "hearty_text", "fresh_text", "sweet_bg", "spicy_bg", "hearty_bg", "fresh_bg", "nutrition_text", "nutrition_bg")]
+[node name="StatsDisplayer" type="Control" parent="UI/ResultScreen/ResultPanel" unique_id=93431035 node_paths=PackedStringArray("flavours_texts", "flavours_bgs", "nutrition_text", "nutrition_bg")]
 anchors_preset = 0
 offset_left = 40.0
 offset_top = -96.0
@@ -807,14 +811,18 @@ percent = true
 always_show = true
 result_bg_move_x = 0
 result_bg_move_y = 100
-sweet_text = NodePath("Sweet/RichTextLabel")
-spicy_text = NodePath("Spicy/RichTextLabel")
-hearty_text = NodePath("Hearty/RichTextLabel")
-fresh_text = NodePath("Fresh/RichTextLabel")
-sweet_bg = NodePath("Sweet")
-spicy_bg = NodePath("Spicy")
-hearty_bg = NodePath("Hearty")
-fresh_bg = NodePath("Fresh")
+flavours_texts = {
+0: NodePath("Sweet/RichTextLabel"),
+1: NodePath("Spicy/RichTextLabel"),
+2: NodePath("Hearty/RichTextLabel"),
+3: NodePath("Fresh/RichTextLabel")
+}
+flavours_bgs = {
+0: NodePath("Sweet"),
+1: NodePath("Spicy"),
+2: NodePath("Hearty"),
+3: NodePath("Fresh")
+}
 nutrition_text = NodePath("../Nutrition/NutritionText")
 nutrition_bg = NodePath("../Nutrition")
 
@@ -1056,6 +1064,8 @@ auto_scroll_speed = 40.0
 propagate_maximum_size = false
 layout_mode = 2
 offset_transform_visual_only = false
+mouse_filter = 2
+mouse_behavior_recursive = 1
 theme = ExtResource("20_4hcvv")
 
 [node name="InventoryUISlot" parent="UI/ResultScreen/ResultPanel/CombinationInventory/InventoryUI/InvScrollContainer/GridContainer" unique_id=442831638 instance=ExtResource("16_hpn60")]
@@ -1063,10 +1073,6 @@ layout_mode = 2
 mouse_filter = 0
 
 [node name="InventoryUISlot2" parent="UI/ResultScreen/ResultPanel/CombinationInventory/InventoryUI/InvScrollContainer/GridContainer" unique_id=1099736725 instance=ExtResource("16_hpn60")]
-layout_mode = 2
-mouse_filter = 0
-
-[node name="InventoryUISlot3" parent="UI/ResultScreen/ResultPanel/CombinationInventory/InventoryUI/InvScrollContainer/GridContainer" unique_id=45598838 instance=ExtResource("16_hpn60")]
 layout_mode = 2
 mouse_filter = 0
 
@@ -1135,8 +1141,6 @@ horizontal_hint_right = NodePath("../Scrollbar Hints/Right")
 [node name="GridContainer" type="GridContainer" parent="UI/InventoryUI/ScrollContainer" unique_id=482735856]
 propagate_maximum_size = false
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 mouse_behavior_recursive = 2
 theme = ExtResource("20_4hcvv")
 columns = 2

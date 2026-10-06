@@ -36,12 +36,13 @@ mouse_behavior_recursive = 1
 script = ExtResource("1_vtaks")
 
 [node name="LargeView" type="Control" parent="." unique_id=1346607487 groups=["card_large_view"]]
-z_index = 11
+z_index = 12
 layout_mode = 1
 anchors_preset = 0
 mouse_filter = 1
 mouse_behavior_recursive = 1
 script = ExtResource("2_5newe")
+slot_positions = Array[Vector2]([Vector2(704, 24), Vector2(16, 16)])
 
 [node name="Button" type="Button" parent="LargeView" unique_id=616697310]
 custom_minimum_size = Vector2(1920, 780)
@@ -57,19 +58,13 @@ mouse_behavior_recursive = 2
 flat = true
 
 [node name="InventoryUILarge" parent="LargeView" unique_id=442831638 instance=ExtResource("3_37s47")]
+z_index = 10
 clip_contents = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+layout_mode = 0
 offset_left = 704.0
 offset_top = 24.0
 offset_right = 1216.0
 offset_bottom = 792.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="ButtonBG" type="TextureRect" parent="LargeView" unique_id=582835321]
 modulate = Color(1, 1, 1, 0.35500002)
@@ -81,6 +76,7 @@ script = ExtResource("5_e1j6l")
 
 [node name="Overworld" type="Control" parent="." unique_id=1173695820 groups=["map_loader"]]
 anchors_preset = 0
+mouse_filter = 1
 script = ExtResource("1_0tnpc")
 maps_0 = Array[PackedScene]([ExtResource("3_rysoc")])
 maps_1 = Array[PackedScene]([ExtResource("3_rysoc")])
@@ -109,6 +105,7 @@ starting_ingredients = Array[ExtResource("7_ca42v")]([ExtResource("8_rysoc"), Ex
 script = ExtResource("4_dinhu")
 
 [node name="debug_mouse" parent="." unique_id=2141378264 instance=ExtResource("8_ca42v")]
+active = true
 
 [node name="IngredientPool" type="Node" parent="." unique_id=1772734839 groups=["ingredient_pool"]]
 script = ExtResource("9_rysoc")

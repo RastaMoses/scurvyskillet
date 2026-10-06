@@ -25,7 +25,7 @@ var large_view
 #STATE
 var data_bk
 var large_view_active = false
-
+var negative_slots:Array[CardSlot]
 var is_open = false
 
 func init_ui():
@@ -37,46 +37,13 @@ func init_ui():
 		i.dragged.connect(card_dragged)
 		i.stop_drag.connect(card_drag_ended)
 
-func add_slot():
-	var temp = inventory_slot_scene.instantiate()
-	grid_container.add_child(temp)
-	slots.append(temp)
-	temp.init_slot(self)
-	temp.large_view_clicked.connect(large_view.button_pressed)
-	temp.dragged.connect(card_dragged)
-	temp.stop_drag.connect(card_drag_ended)
-
-func remove_slots(amount):
-	var i = 0
-	while i < amount:
-		i += 1
-		slots.back().queue_free()
-		slots.remove_at(-1)
-
-func update_slots():
-	#check slot amount
-	var slots_to_remove = 0
-	while inventory.current_cards.size() > slots.size():
-		add_slot()
-	for i in range(slots.size()):
-		#update slots with items
-		if (inventory.current_cards.size() > i):
-			slots[i].update(inventory.current_cards[i])
-		else:
-			if i > min_slots - 1:
-				slots_to_remove += 1
-			else:
-				slots[i].update(null)
-		slots[i].showcase = !inventory.can_drag_cards
-	remove_slots(slots_to_remove)
-	#if bottom adjust column amount
-	adjust_grid_columns()
-		#Scrollbar
-	scroll_container._call_deferred_update_hints()
-
 func adjust_grid_columns():
 	if (horizontal):
-		var new_columns = ceili(float(grid_container.get_children().size())/float(max_rows))
+		var grid_container_active_children:int = 0
+		for i in grid_container.get_children():
+			if i.visible:
+				grid_container_active_children += 1
+		var new_columns = ceili(float(grid_container_active_children)/float(max_rows))
 		grid_container.columns = new_columns
 	else:
 		grid_container.columns = max_columns
@@ -170,4 +137,67 @@ func _on_rarity_button_left_clicked() -> void:
 func _on_alphabet_button_left_clicked() -> void:
 	sort_inventory_alphabetically()
 
+#endregion
+
+#region Slots
+
+func add_slot():
+	var temp = inventory_slot_scene.instantiate()
+	grid_container.add_child(temp)
+	slots.append(temp)
+	temp.init_slot(self)
+	temp.large_view_clicked.connect(large_view.button_pressed)
+	temp.dragged.connect(card_dragged)
+	temp.stop_drag.connect(card_drag_ended)
+
+func remove_slots(amount):
+	var i = 0
+	while i < amount:
+		i += 1
+		slots.back().queue_free()
+		slots.remove_at(-1)
+
+func update_slots():
+	#check slot amount
+	var slots_to_remove = 0
+	while inventory.current_cards.size() > slots.size():
+		add_slot()
+	for i in range(slots.size()):
+		#update slots with items
+		if (inventory.current_cards.size() > i):
+			slots[i].update(inventory.current_cards[i])
+		else:
+			if i > min_slots - 1:
+				slots_to_remove += 1
+			else:
+				slots[i].update(null)
+		slots[i].showcase = !inventory.can_drag_cards
+	remove_slots(slots_to_remove)
+	
+	#if bottom adjust column amount
+	adjust_grid_columns()
+		#Scrollbar
+	scroll_container._call_deferred_update_hints()
+
+func set_slot_negative(card, value):
+	var slot = get_card_slot(card)
+	slot.toggle_icon_bg_negative(value)
+	if value == true:
+		negative_slots.append(slot)
+	else:
+		negative_slots.erase(slot)
+
+func set_all_slots_negative(value):
+	for slot in slots:
+		slot.toggle_icon_bg_negative(value)
+		if value == true:
+			negative_slots.append(slot)
+		else:
+			negative_slots.erase(slot)
+func get_card_slot(card):
+	for slot in slots:
+		if slot.card == card:
+			return slot
+	printerr("Slot for Card: " + str(card.name) + " not found.")
+	return null
 #endregion

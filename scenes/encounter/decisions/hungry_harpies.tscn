@@ -28,9 +28,10 @@ Or just take the L."
 text = "Hungry Harpies"
 
 [node name="choice1" parent="Choices" parent_id_path=PackedInt32Array(504841176) index="0" unique_id=704699521]
-text = "Befriend"
-r_money = 2
-r_morale = 2
+title = "LOVELY"
+description = "You made them very happy and they leave you with some shiny things."
+button_text = "Befriend Them"
+r_money = 3
 drop_ingredients = true
 req_flavours = Dictionary[int, int]({
 0: 4,
@@ -40,8 +41,9 @@ req_flavours = Dictionary[int, int]({
 })
 
 [node name="choice2" parent="Choices" parent_id_path=PackedInt32Array(504841176) index="1" unique_id=669889480]
-text = "Scare Them"
-r_morale = 2
+title = "SUCCESS"
+description = "You rubbed yourself in a spicy stench, instantly deterring the hungry foes. On your way out, you collect some eggs from the lower rock edges."
+button_text = "Deter Them"
 specific_ingredients = Array[ExtResource("2_ted6c")]([ExtResource("3_sirl3"), ExtResource("3_sirl3")])
 drop_ingredients = true
 req_flavours = Dictionary[int, int]({
@@ -52,5 +54,8 @@ req_flavours = Dictionary[int, int]({
 })
 
 [node name="choice3" parent="Choices" parent_id_path=PackedInt32Array(504841176) index="2" unique_id=474290282]
-text = "Get Ambushed"
-c_morale = 1
+title = "FLED"
+description = "You try to outpace them, but to no avail. They snatch up one of the deckhands before retreating from their hunt."
+button_text = "RUN"
+random_ingredient_amount = 8
+c_morale = -1

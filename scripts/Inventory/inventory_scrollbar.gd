@@ -41,7 +41,6 @@ func _ready() -> void:
 		scroll_active = true
 
 func _process(delta: float) -> void:
-	
 	#AutoScroll
 	if not scroll_active or visible == false or auto_scroll_speed == 0:
 		return

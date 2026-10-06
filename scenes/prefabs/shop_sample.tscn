@@ -326,7 +326,7 @@ mouse_filter = 2
 mouse_behavior_recursive = 1
 texture = ExtResource("14_5mvn1")
 
-[node name="InventoryUI" type="Control" parent="." unique_id=1866160268]
+[node name="InventoryUI" type="Control" parent="." unique_id=1866160268 node_paths=PackedStringArray("inventory", "slots", "grid_container", "scroll_container")]
 visible = false
 z_index = 15
 z_as_relative = false
@@ -343,6 +343,10 @@ grow_vertical = 2
 script = ExtResource("17_ev3ab")
 inventory_slot_scene = ExtResource("18_o7aay")
 min_slots = 8
+inventory = NodePath("..")
+slots = [NodePath("ScrollContainer/GridContainer/InventoryUISlot"), NodePath("ScrollContainer/GridContainer/InventoryUISlot2")]
+grid_container = NodePath("ScrollContainer/GridContainer")
+scroll_container = NodePath("ScrollContainer")
 
 [node name="bg_bottom" type="TextureRect" parent="InventoryUI" unique_id=1752599872]
 visible = false

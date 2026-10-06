@@ -67,6 +67,7 @@ func end_encounter():
 func activate_encounter():
 	event_manager.encounter_start()
 	load_encounter(encounter)
+	map.current_encounter = self
 	map.toggle_map_visible(false)
 	
 func load_encounter(data):
