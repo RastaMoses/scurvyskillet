@@ -27,7 +27,6 @@ var encounter_obj:Node
 
 func randomize_encounter():
 	var rand = random.randi_range(0,possible_encounters.size()-1)
-	
 	set_encounter(possible_encounters[rand])
 
 func set_encounter(encounter_scene):
@@ -72,7 +71,7 @@ func activate_encounter():
 	
 func load_encounter(data):
 	encounter = data
-	if encounter_obj != null:
+	if encounter_obj != null and not encounter_obj.is_queued_for_deletion():
 		encounter_obj.queue_free()
 	encounter_obj = encounter.instantiate()
 	add_child(encounter_obj)
@@ -82,6 +81,8 @@ func load_encounter(data):
 	show_button(false)
 	player_ship.toggle_ship_visible(false)
 
+
+#UI
 func toggle_button(value):
 	button.disabled = !value
 	if value:

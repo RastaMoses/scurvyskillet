@@ -241,11 +241,11 @@ func _on_button_gui_input(event: InputEvent) -> void:
 
 
 func _on_large_view_button_mouse_entered() -> void:
-	button_mouse_entered.emit()
+	button_mouse_entered.emit(self)
 
 
 func _on_large_view_button_mouse_exited() -> void:
-	button_mouse_exited.emit()
+	button_mouse_exited.emit(self)
 
 #endregion
 

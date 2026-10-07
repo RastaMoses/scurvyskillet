@@ -28,11 +28,9 @@ func toggle_bg():
 			bg_island.visible = true
 
 func end():
-	get_parent().end_encounter()
+	for i in choices:
+		i.toggle_interactable(false)
 	queue_free()
-
-func load_new_encounter(encounter):
-	get_parent().load_encounter(encounter)
 
 func toggle_large_view(value):
 	for i in choices:

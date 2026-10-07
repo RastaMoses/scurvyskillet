@@ -8,6 +8,10 @@ extends Inventory
 @export var hidden_item_price:int = 1
 @export var morale_gain:int = 2
 @export var morale_price:int = 3
+@export_group("Next Encounter")
+@export var next_encounter:PackedScene
+@export var reward_title:String
+@export var reward_description:String
 @export_group("Nodes")
 @export var buy_buttons:Array[BuyButton]
 @export var shop_ui:ShopUI
@@ -78,8 +82,14 @@ func start():
 	populate_shop()
 
 func end():
-	map_node.end_encounter()
+	interactable = false
+	shop_ui.toggle_interactable()
 	queue_free()
+	if next_encounter != null:
+		var reward_screen:RewardScreen = get_tree().get_first_node_in_group("reward_screen")
+		reward_screen.start(reward_title, reward_description, 0, 0,[],[], {}, {},{}, {}, next_encounter)
+	else:
+		map_node.end_encounter()
 
 func toggle_large_view(value):
 	interactable = !value

@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://dvt2qhtg38515"]
+
+[ext_resource type="PackedScene" uid="uid://hr6aybbol4hn" path="res://scenes/prefabs/challenge_sample.tscn" id="1_c52mn"]
+[ext_resource type="PackedScene" uid="uid://c765vqmc304v7" path="res://scenes/encounter/shops/sweet_ogre_shop.tscn" id="2_304c0"]
+
+[node name="SweetOgreChallenge" unique_id=993217827 instance=ExtResource("1_c52mn")]
+req_nutrition = 12
+req_flavours = Dictionary[int, int]({
+0: 25,
+1: 0,
+2: 8,
+3: 0
+})
+par_nutrition = 6
+par_flavours = Dictionary[int, int]({
+0: 15,
+1: 0,
+2: 0,
+3: 0
+})
+success_title = "OGRE HAPPY"
+success_description = "With your present in hand you return to the ogre. It jumps up and points at the dish grunting: \"Buy!\" What happens next is too fast for you to intervene. The ogre throws a bunch of coins in your general direction before swiping the food out of your hands. After watching them gobble it down, they offer you to buy from them, throwing in some freebies for the great meal."
+success_money = 5
+s_next_encounter = ExtResource("2_304c0")
+s_random_ingredient_amount = 2
+s_and_req = true
+s_req_rarity = Array[int]([0, 1, 2])
+s_req_tag = Array[int]([14])
+partial_description = "The ogre has not noticed the dish you had lain out in front of them. After approaching it again it grunts: \"No buy - You buy.\" Pointing first at your unimpressive dish, then at its own stock of paper bundles."
+p_next_encounter = ExtResource("2_304c0")
+failure_title = "YOU NO BUY"
+failure_description = "Upon entering the cave again with your preperations and slowly laying it on the groud in view of the ogre, it immediatly stops what it's doing. A stern look engraves itself on their bulbous visage, as if you had just insulted their whole kin. \"YOU NO BUY\" comes from the slowly rising figure. You understand, this is the time to leave before it gets more dangerously angry."
+
+[node name="RequirementStats" parent="UI/Description" parent_id_path=PackedInt32Array(1896810604) index="1" unique_id=1949780260 node_paths=PackedStringArray("flavours_texts", "flavours_bgs")]
+flavours_texts = {
+0: NodePath("SweetText"),
+1: NodePath("SpicyText"),
+2: NodePath("HeartyText"),
+3: NodePath("FreshText")
+}
+flavours_bgs = {
+0: NodePath("Sweet"),
+1: NodePath("Spicy"),
+2: NodePath("Hearty"),
+3: NodePath("Fresh")
+}
+
+[node name="title" parent="UI/Description/ScrollContainer/VBoxContainer" parent_id_path=PackedInt32Array(749325280) index="0" unique_id=118090035]
+text = "SWEET OGRE"
+
+[node name="text" parent="UI/Description/ScrollContainer/VBoxContainer" parent_id_path=PackedInt32Array(749325280) index="1" unique_id=189440853]
+text = "You try to copy the smell of the area in your dish, hoping the creature would like it. It is also probably for the best if it is a larger portion, going by its size."
+
+[node name="Stats" parent="UI/Cooking" parent_id_path=PackedInt32Array(817898650) index="1" unique_id=406643778 node_paths=PackedStringArray("flavours_texts", "flavours_bgs")]
+flavours_texts = {
+0: NodePath("SweetText"),
+1: NodePath("SpicyText"),
+2: NodePath("HeartyText"),
+3: NodePath("FreshText")
+}
+flavours_bgs = {
+0: NodePath("Sweet"),
+1: NodePath("Spicy"),
+2: NodePath("Hearty"),
+3: NodePath("Fresh")
+}
+
+[node name="StatsDisplayer" parent="UI/ResultScreen/ResultPanel" parent_id_path=PackedInt32Array(1352390679) index="0" unique_id=93431035 node_paths=PackedStringArray("flavours_texts", "flavours_bgs")]
+flavours_texts = {
+0: NodePath("Sweet/RichTextLabel"),
+1: NodePath("Spicy/RichTextLabel"),
+2: NodePath("Hearty/RichTextLabel"),
+3: NodePath("Fresh/RichTextLabel")
+}
+flavours_bgs = {
+0: NodePath("Sweet"),
+1: NodePath("Spicy"),
+2: NodePath("Hearty"),
+3: NodePath("Fresh")
+}
+
+[editable path="UI/ResultScreen/ResultPanel/ResultVbox/ScrollContainer/CombVBox/CombinationDisplay"]

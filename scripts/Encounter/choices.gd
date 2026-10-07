@@ -60,9 +60,7 @@ func start():
 	check_button_available()
 	
 func end():
-	if new_encounter == null:
-		decision_encounter.end()
-	queue_free()
+	decision_encounter.end()
 
 func complete():
 	#update reward screen

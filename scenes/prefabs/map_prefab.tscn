@@ -6,20 +6,21 @@
 [ext_resource type="Texture2D" uid="uid://oi2g7kkk006h" path="res://sprites/interface/scenes/worldmap scene/scene_worldmap_boat.png" id="4_2jk3u"]
 [ext_resource type="Script" uid="uid://dd6rhp5q4wtuh" path="res://scripts/Map/ship_mover.gd" id="4_evkri"]
 [ext_resource type="Script" uid="uid://5ky5q3x7j70d" path="res://scripts/Inventory/inventory_ui.gd" id="6_4xiau"]
-[ext_resource type="Script" uid="uid://bpwobmfvw2k0m" path="res://scripts/Encounter/UI/reward_screen.gd" id="6_pyrjn"]
+[ext_resource type="Script" uid="uid://bpwobmfvw2k0m" path="res://scripts/Map/reward_screen.gd" id="6_pyrjn"]
 [ext_resource type="Texture2D" uid="uid://cquwgd0b3fqta" path="res://sprites/interface/general/text frame/text_frame.png" id="7_77jy1"]
 [ext_resource type="PackedScene" uid="uid://p1ug5ylfd5re" path="res://scenes/prefabs/card_prefab.tscn" id="7_fyw7r"]
 [ext_resource type="PackedScene" uid="uid://c4hu25tvp3kkd" path="res://scenes/prefabs/player/inventory_ui_slot.tscn" id="7_pyrjn"]
 [ext_resource type="Theme" uid="uid://bqlaftpa31pru" path="res://themes/encounter/enc_title.tres" id="7_rsaxv"]
 [ext_resource type="Theme" uid="uid://1jb5jgyixo85" path="res://themes/encounter/enc_description.tres" id="8_8nsas"]
 [ext_resource type="Theme" uid="uid://dwjm243i4x47a" path="res://themes/inventory/inv_scroll_container.tres" id="8_ksicn"]
+[ext_resource type="Texture2D" uid="uid://c8u21kjpsqt38" path="res://sprites/interface/scenes/shop scene/scene_shop_background.png" id="9_m3s4x"]
 [ext_resource type="Script" uid="uid://bg58rkwvnuhi5" path="res://scripts/Inventory/inventory_scrollbar.gd" id="9_wnh0u"]
 [ext_resource type="Theme" uid="uid://fa4mmtcwb3a5" path="res://themes/inventory/inv_grid_container.tres" id="10_t1o2y"]
 [ext_resource type="Texture2D" uid="uid://lp3c3q5qpcwl" path="res://sprites/interface/general/inventory/inventory_scroll_reverse.png" id="11_rsaxv"]
 [ext_resource type="Script" uid="uid://bog5ewji0yscq" path="res://scripts/Inventory/scroll_hint.gd" id="12_8nsas"]
 [ext_resource type="Texture2D" uid="uid://bjjx1b7lsoh1g" path="res://sprites/interface/general/inventory/inventory_scroll_hint.png.png" id="13_77jy1"]
 [ext_resource type="Script" uid="uid://dht54sfjv7hkv" path="res://scripts/Encounter/UI/button_ui.gd" id="14_fyw7r"]
-[ext_resource type="PackedScene" uid="uid://cdw7hbkfud23p" path="res://scenes/prefabs/reward_slot.tscn" id="16_7tmnw"]
+[ext_resource type="PackedScene" uid="uid://cdw7hbkfud23p" path="res://scenes/prefabs/player/reward_slot.tscn" id="16_7tmnw"]
 [ext_resource type="Texture2D" uid="uid://htglfgdlhdys" path="res://sprites/interface/scenes/decision scene/scene_decision_button_sign.png" id="23_7tmnw"]
 [ext_resource type="Texture2D" uid="uid://cti37gpvslw0y" path="res://sprites/interface/scenes/decision scene/scene_decision_button_sign_outline.png" id="24_fsfgn"]
 [ext_resource type="Theme" uid="uid://vdmasea6p0ex" path="res://themes/encounter/choice_button_text.tres" id="25_e7fgg"]
@@ -91,7 +92,7 @@ offset_bottom = 424.0
 possible_encounters = Array[PackedScene]([])
 
 [node name="RewardScreen" type="Control" parent="." unique_id=50086245 node_paths=PackedStringArray("grid_container", "title_label", "description_label", "close_button", "ui") groups=["reward_screen"]]
-z_index = 1
+z_index = 5
 anchors_preset = 0
 offset_left = 312.0
 offset_top = -88.0
@@ -108,10 +109,21 @@ close_button = NodePath("EndButton")
 card_prefab = ExtResource("7_fyw7r")
 ui = NodePath("InventoryUI")
 
+[node name="NextEncounterBG" type="TextureRect" parent="RewardScreen" unique_id=195456631]
+layout_mode = 0
+offset_left = 1736.0
+offset_top = 56.0
+offset_right = 5576.0
+offset_bottom = 2216.0
+rotation = 1.5707964
+mouse_filter = 2
+mouse_behavior_recursive = 1
+texture = ExtResource("9_m3s4x")
+
 [node name="BG" type="TextureRect" parent="RewardScreen" unique_id=983968493]
 layout_mode = 0
 offset_left = 1256.0
-offset_top = -88.0
+offset_top = -87.999985
 offset_right = 4136.0
 offset_bottom = 1532.0
 rotation = 1.5707964
@@ -163,11 +175,10 @@ grid_container = NodePath("ScrollContainer/GridContainer")
 scroll_container = NodePath("ScrollContainer")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="RewardScreen/InventoryUI" unique_id=1638612545 node_paths=PackedStringArray("horizontal_hint_left", "horizontal_hint_right")]
-custom_minimum_size = Vector2(960, 280)
 custom_maximum_size = Vector2(960, 280)
 layout_mode = 0
 offset_left = 32.0
-offset_right = 992.0
+offset_right = 32.0
 offset_bottom = 280.0
 mouse_behavior_recursive = 2
 theme = ExtResource("8_ksicn")
@@ -182,8 +193,6 @@ margin_bottom = 88.0
 [node name="GridContainer" type="GridContainer" parent="RewardScreen/InventoryUI/ScrollContainer" unique_id=1021059595]
 propagate_maximum_size = false
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 theme = ExtResource("10_t1o2y")
 columns = 5
 

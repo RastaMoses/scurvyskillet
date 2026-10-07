@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://c765vqmc304v7"]
+
+[ext_resource type="PackedScene" uid="uid://dppkgemxlgehl" path="res://scenes/prefabs/shop_sample.tscn" id="1_lubkb"]
+[ext_resource type="Resource" uid="uid://cy6coj560k6y0" path="res://resources/ingredients/in_game/sugar.tres" id="2_ps2et"]
+
+[node name="SweetOgreShop" unique_id=1111686658 instance=ExtResource("1_lubkb")]
+
+[node name="buy_button_sample" parent="UI/BuyButtons" parent_id_path=PackedInt32Array(1400584695) index="0" unique_id=1219771888]
+specific_item = ExtResource("2_ps2et")
+
+[node name="buy_button_sample2" parent="UI/BuyButtons" parent_id_path=PackedInt32Array(1400584695) index="1" unique_id=1258386772]
+specific_item = ExtResource("2_ps2et")
+
+[node name="buy_button_sample3" parent="UI/BuyButtons" parent_id_path=PackedInt32Array(1400584695) index="2" unique_id=1765024236]
+req_tag = Array[int]([14])
+
+[node name="buy_button_sample4" parent="UI/BuyButtons" parent_id_path=PackedInt32Array(1400584695) index="3" unique_id=470567196]
+req_tag = Array[int]([14])
+
+[node name="buy_button_sample5" parent="UI/BuyButtons" parent_id_path=PackedInt32Array(1400584695) index="4" unique_id=1286263616]
+req_tag = Array[int]([14])
+
+[node name="buy_button_sample6" parent="UI/BuyButtons" parent_id_path=PackedInt32Array(1400584695) index="5" unique_id=1978801332]
+req_tag = Array[int]([14])
+
+[node name="buy_button_sample7" parent="UI/BuyButtons" parent_id_path=PackedInt32Array(1400584695) index="6" unique_id=1226313322]
+req_tag = Array[int]([14])
+
+[node name="buy_button_sample8" parent="UI/BuyButtons" parent_id_path=PackedInt32Array(1400584695) index="7" unique_id=172646036]
+req_tag = Array[int]([14])

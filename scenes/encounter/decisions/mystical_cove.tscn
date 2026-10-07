@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://ch2b3g8a584y1"]
+
+[ext_resource type="PackedScene" uid="uid://benw6bt2l0ot" path="res://scenes/prefabs/decision_prefab.tscn" id="1_66i8e"]
+[ext_resource type="PackedScene" uid="uid://dgh6mcjjxuo4t" path="res://scenes/encounter/decisions/mystical_cove_cave.tscn" id="2_qo02a"]
+
+[node name="MysticalCove" unique_id=856639403 node_paths=PackedStringArray("choices") instance=ExtResource("1_66i8e")]
+choices = [NodePath("Choices/choice1"), NodePath("Choices/choice2")]
+
+[node name="text" parent="description" parent_id_path=PackedInt32Array(747135996) index="1" unique_id=670048361]
+text = "You cross by a dark cavern looming under an islands cliff surrounded hard to navigate rock formations. There is a lot of life in the safety of the cove, a pretty good place to catch more ingredients. Glancing over the cave mouth a glimmer catches your eye and a faint waft of something sweet is on the air...
+
+"
+
+[node name="title" parent="description" parent_id_path=PackedInt32Array(747135996) index="2" unique_id=1975928171]
+text = "MYSTICAL COVE"
+
+[node name="choice1" parent="Choices" parent_id_path=PackedInt32Array(504841176) index="0" unique_id=704699521]
+title = "CRYSTAL CAVE"
+description = "As you navigate your vessel closer to the rock opening, the darkness within is cut by bright reflections of white crystals zig-zagging along the cave mouth. You surpress your amazement enough to ready the small off-ship expedition."
+button_text = "Move Closer"
+new_encounter = ExtResource("2_qo02a")
+
+[node name="choice2" parent="Choices" parent_id_path=PackedInt32Array(504841176) index="1" unique_id=669889480]
+title = "GREAT CATCH"
+description = "Surprisingly you catch both sweet- and saltwater fish here, all of them fat and barely putting up a fight."
+button_text = "FISH"
+random_ingredient_amount = 3
+req_rarity = Array[int]([1, 2])
+req_tags = Array[int]([4])
+
+[node name="choice3" parent="Choices" parent_id_path=PackedInt32Array(504841176) index="2" unique_id=474290282]
+visible = false

@@ -3,6 +3,8 @@ extends Control
 @export var plate_anim_speed:float = 1
 @export_group("Nodes")
 @export var challenge:Challenge
+@export_subgroup("Description")
+@export var required_stats:StatsDisplayer
 @export_subgroup("Result Screen")
 @export var result_stats_display:StatsDisplayer
 @export var result_toggle_panel_button:ButtonUI
@@ -57,9 +59,16 @@ func _ready() -> void:
 	
 	#Set Start UI
 	combination_inventory.init_inventory()
-	start_result_screen(false)
+	toggle_result_screen(false)
 	inventory_display.visible= false
-
+#region Challenge
+func update_requirement_stats(dish:Dish = challenge.current_dish):
+	required_stats.update_flavours(challenge.req_flavours,true)
+	required_stats.update_nutrition(challenge.req_nutrition,true)
+	for flavour in challenge.req_flavours:
+		if challenge.req_flavours[flavour] <= dish.flavours[flavour]:
+			required_stats.update_single_flavour(flavour, challenge.req_flavours[flavour],true, true)
+#endregion
 #region Animations
 func animate_plates(nutrition):
 	plate_anim_active = true
@@ -91,18 +100,18 @@ func add_combination_result(combination, comb_cards_arrays):
 	result_stats_display.update_nutrition(combination_manager.get_current_nutrition_multiplier_sum(true))
 	dish_stats_display.update_flavours(combination_manager.upgraded_dish.flavours, true, true)
 	dish_stats_display.update_nutrition(combination_manager.upgraded_dish.nutrition, true, true)
-
+	update_requirement_stats(combination_manager.upgraded_dish)
 func set_combination_inventory(combination, card_arrays):
 	combination_inventory.destroy_all_ingredients()
 	for cards in card_arrays:
 		for card in cards:
 			combination_inventory.add_card(card)
 
-func start_result_screen(value):
+func toggle_result_screen(value):
 	result_screen.visible = value
 	result_active = value
 	toggle_result_panel(value)
-	toggle_result_buttons(false)
+	toggle_result_buttons(not value)
 	toggle_mouse_filter(drop_area, not value)
 	toggle_mouse_filter(reset_button, not value)
 	toggle_mouse_filter(finish_dish_button, not value)
@@ -111,9 +120,9 @@ func toggle_result_panel(value):
 	result_panel.visible = value
 	result_panel_shown = value
 	if value == true:
-		update_stats(combination_manager.upgraded_dish, true, true)
+		update_dish_stats(combination_manager.upgraded_dish, true, true)
 	else:
-		update_stats(combination_manager.dish, false, false)
+		update_dish_stats(combination_manager.dish, false, false)
 
 func toggle_result_buttons(value):
 	for i in [result_toggle_panel_button, result_end_button]:
@@ -139,6 +148,9 @@ func _on_inv_toggle_pressed() -> void:
 	inventory_display.visible = !inventory_display.visible
 
 func _on_end_button_pressed() -> void:
+	toggle_disabled_buttons(true)
+	toggle_result_screen(false)
+	inventory_display.close()
 	end_challenge_pressed.emit()
 
 func _on_toggle_result_panel_pressed() -> void:
@@ -161,7 +173,7 @@ func _on_drop_area_mouse_exited() -> void:
 func toggle_highlight_pan(value):
 	pan_highlight.visible = value
 
-func update_stats(dish, force_show = false, altered_font_color = false):
+func update_dish_stats(dish, force_show = false, altered_font_color = false):
 	if dish != null:
 		dish_stats_display.update_flavours(dish.flavours, force_show, altered_font_color)
 		dish_stats_display.update_nutrition(dish.nutrition, force_show, altered_font_color)

@@ -90,6 +90,7 @@ layout_mode = 1
 offset_right = 60.0
 offset_bottom = 43.0
 scale = Vector2(8, 8)
+mouse_filter = 2
 texture = ExtResource("6_vspyj")
 
 [node name="FoamSprite" type="TextureRect" parent="UI/BuyRoundButton/Mugs" unique_id=2116487095]
@@ -97,6 +98,7 @@ layout_mode = 1
 offset_right = 60.0
 offset_bottom = 43.0
 scale = Vector2(8, 8)
+mouse_filter = 2
 texture = ExtResource("7_mc0oa")
 
 [node name="ButtonSprite" type="TextureRect" parent="UI/BuyRoundButton" unique_id=2070436826]
@@ -104,6 +106,7 @@ layout_mode = 1
 offset_right = 52.0
 offset_bottom = 25.0
 scale = Vector2(8, 8)
+mouse_filter = 2
 texture = ExtResource("8_wqlga")
 
 [node name="IconSprite" type="TextureRect" parent="UI/BuyRoundButton" unique_id=514471005]
@@ -113,6 +116,7 @@ offset_top = 48.0
 offset_right = 238.0
 offset_bottom = 58.0
 scale = Vector2(8, 8)
+mouse_filter = 2
 texture = ExtResource("10_rre8l")
 
 [node name="HighlightSprite" type="TextureRect" parent="UI/BuyRoundButton" unique_id=559750653]
@@ -121,6 +125,7 @@ layout_mode = 1
 offset_right = 52.0
 offset_bottom = 25.0
 scale = Vector2(8, 8)
+mouse_filter = 2
 texture = ExtResource("9_rre8l")
 
 [node name="Button" type="Button" parent="UI/BuyRoundButton" unique_id=794597332]
@@ -239,6 +244,7 @@ offset_right = 1128.0
 offset_bottom = 687.0
 rotation = 3.1415927
 scale = Vector2(8, 8)
+mouse_filter = 2
 texture = ExtResource("12_5mvn1")
 flip_v = true
 
@@ -249,6 +255,7 @@ offset_top = 1184.0001
 offset_right = 2472.0
 offset_bottom = 1184.0001
 scale = Vector2(8, 8)
+mouse_filter = 2
 
 [node name="DropArea" type="Panel" parent="UI" unique_id=1158684583 node_paths=PackedStringArray("parent_inventory", "highlight", "bg", "text_label")]
 self_modulate = Color(1, 1, 1, 0)

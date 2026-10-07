@@ -33,7 +33,7 @@ func _ready() -> void:
 		ability_flavours[GlobalEnums.Flavour[flavour]] = 0
 	
 func start():
-	challenge.ui.update_stats(self)
+	challenge.ui.update_dish_stats(self)
 
 func subtract_die_value_from_dish(die):
 	flavours[die.flavour] -= die.number
@@ -90,7 +90,8 @@ func on_add_to_dish(origin,card):
 	roll_ingredient(card)
 	recalculate_dish()
 	#ui
-	challenge.ui.update_stats(self)
+	challenge.ui.update_dish_stats(self)
+	challenge.ui.update_requirement_stats(self)
 
 func on_destroy_ingredient(origin,card:Node):
 	if origin != self:
@@ -109,7 +110,8 @@ func on_destroy_all_ingredients(origin):
 	for card in current_cards:
 		remove_card_from_dish(card)
 	#ui
-	challenge.ui.update_stats(self)
+	challenge.ui.update_dish_stats(self)
+	challenge.ui.update_requirement_stats(self)
 func remove_card_from_dish(card):
 	#remove dice values
 	nutrition -= card.committed_stats.nutrition
@@ -120,7 +122,8 @@ func remove_card_from_dish(card):
 	
 	#ui
 	dice_disp.destroy_dice(card)
-	challenge.ui.update_stats(self)
+	challenge.ui.update_dish_stats(self)
+	challenge.ui.update_requirement_stats(self)
 #endregion
 
 #region Dice

@@ -314,6 +314,9 @@ func check_combinations():
 func activate_effects(combination):
 	upgraded_dish = dish.duplicate()
 	#activate based on effect type (if has debuff come last)
+	
+	#DEBUGGING
+	print(combination.name + " is active in dish")
 	match combination.name:
 	#region Buffs
 		"Quishe":

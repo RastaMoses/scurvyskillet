@@ -124,7 +124,9 @@ func end_rewards():
 	give_rewards()
 	toggle_open(false)
 	if next_encounter != null:
-		map_loader.current_map.current_encounter.load_new_encounter(next_encounter)
+		map_loader.current_map.current_encounter.load_encounter(next_encounter)
+	else:
+		map_loader.current_map.current_encounter.end_encounter()
 
 func toggle_disable_buttons(value):
 	close_button.toggle_disabled(value)

@@ -44,6 +44,8 @@ func adjust_grid_columns():
 			if i.visible:
 				grid_container_active_children += 1
 		var new_columns = ceili(float(grid_container_active_children)/float(max_rows))
+		if new_columns <= 0:
+			new_columns = 1
 		grid_container.columns = new_columns
 	else:
 		grid_container.columns = max_columns
@@ -194,6 +196,9 @@ func set_all_slots_negative(value):
 		else:
 			negative_slots.erase(slot)
 func get_card_slot(card):
+	if card == null:
+		printerr("Card is null , cant find slot")
+		return null
 	for slot in slots:
 		if slot.card == card:
 			return slot

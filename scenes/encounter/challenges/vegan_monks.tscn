@@ -5,11 +5,14 @@
 [ext_resource type="Resource" uid="uid://d24ccsx0kj3u1" path="res://resources/ingredients/in_game/red_wine.tres" id="3_j5p5i"]
 
 [node name="ChallengeSample2" unique_id=993217827 instance=ExtResource("1_hclfp")]
-req_nutrition = 10
-req_hearty = 4
-req_fresh = 10
+req_nutrition = 14
+req_flavours = Dictionary[int, int]({
+0: 0,
+1: 0,
+2: 10,
+3: 20
+})
 par_nutrition = 7
-par_fresh = 5
 restricted_tags = Array[int]([4, 8, 0, 2])
 success_morale = 2
 s_specific_ingredients = Array[ExtResource("2_3pv5k")]([ExtResource("3_j5p5i"), ExtResource("3_j5p5i"), ExtResource("3_j5p5i")])
@@ -22,8 +25,52 @@ p_req_rarity = Array[int]([0])
 p_req_tag = Array[int]([15, 5])
 failure_morale = -2
 
-[node name="title" parent="UI/description/ScrollContainer/VBoxContainer" parent_id_path=PackedInt32Array(749325280) index="0" unique_id=118090035]
+[node name="RequirementStats" parent="UI/Description" parent_id_path=PackedInt32Array(1896810604) index="1" unique_id=1949780260 node_paths=PackedStringArray("flavours_texts", "flavours_bgs")]
+flavours_texts = {
+0: NodePath("SweetText"),
+1: NodePath("SpicyText"),
+2: NodePath("HeartyText"),
+3: NodePath("FreshText")
+}
+flavours_bgs = {
+0: NodePath("Sweet"),
+1: NodePath("Spicy"),
+2: NodePath("Hearty"),
+3: NodePath("Fresh")
+}
+
+[node name="title" parent="UI/Description/ScrollContainer/VBoxContainer" parent_id_path=PackedInt32Array(749325280) index="0" unique_id=118090035]
 text = "Vegan Monks need Food!"
 
-[node name="text" parent="UI/description/ScrollContainer/VBoxContainer" parent_id_path=PackedInt32Array(749325280) index="1" unique_id=189440853]
+[node name="text" parent="UI/Description/ScrollContainer/VBoxContainer" parent_id_path=PackedInt32Array(749325280) index="1" unique_id=189440853]
 text = "They will not eat any meat or fish."
+
+[node name="Stats" parent="UI/Cooking" parent_id_path=PackedInt32Array(817898650) index="1" unique_id=406643778 node_paths=PackedStringArray("flavours_texts", "flavours_bgs")]
+flavours_texts = {
+0: NodePath("SweetText"),
+1: NodePath("SpicyText"),
+2: NodePath("HeartyText"),
+3: NodePath("FreshText")
+}
+flavours_bgs = {
+0: NodePath("Sweet"),
+1: NodePath("Spicy"),
+2: NodePath("Hearty"),
+3: NodePath("Fresh")
+}
+
+[node name="StatsDisplayer" parent="UI/ResultScreen/ResultPanel" parent_id_path=PackedInt32Array(1352390679) index="0" unique_id=93431035 node_paths=PackedStringArray("flavours_texts", "flavours_bgs")]
+flavours_texts = {
+0: NodePath("Sweet/RichTextLabel"),
+1: NodePath("Spicy/RichTextLabel"),
+2: NodePath("Hearty/RichTextLabel"),
+3: NodePath("Fresh/RichTextLabel")
+}
+flavours_bgs = {
+0: NodePath("Sweet"),
+1: NodePath("Spicy"),
+2: NodePath("Hearty"),
+3: NodePath("Fresh")
+}
+
+[editable path="UI/ResultScreen/ResultPanel/ResultVbox/ScrollContainer/CombVBox/CombinationDisplay"]

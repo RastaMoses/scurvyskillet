@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://dgh6mcjjxuo4t"]
+
+[ext_resource type="PackedScene" uid="uid://benw6bt2l0ot" path="res://scenes/prefabs/decision_prefab.tscn" id="1_yjva3"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_uyjbx"]
+[ext_resource type="Resource" uid="uid://cy6coj560k6y0" path="res://resources/ingredients/in_game/sugar.tres" id="3_5wban"]
+[ext_resource type="PackedScene" uid="uid://c765vqmc304v7" path="res://scenes/encounter/shops/sweet_ogre_shop.tscn" id="4_5wban"]
+[ext_resource type="PackedScene" uid="uid://dvt2qhtg38515" path="res://scenes/encounter/challenges/sweet_ogre_challenge.tscn" id="5_fn3uf"]
+
+[node name="MysticalCoveCave" unique_id=856639403 instance=ExtResource("1_yjva3")]
+
+[node name="text" parent="description" parent_id_path=PackedInt32Array(747135996) index="1" unique_id=670048361]
+text = "The dark mouth opens into a conch shaped cavern glittering with crystaline perplection. Among glassy stalactites which breaking on touch, you encounter a burly shape chewing crystals and spewing them into a pot whilest hastily stirring with a board plank.
+While you observe longer, it pours out the molten concoction and starts folding it over and over, before kneeding it into small chunks which are packed up in bundles of paper."
+
+[node name="title" parent="description" parent_id_path=PackedInt32Array(747135996) index="2" unique_id=1975928171]
+text = "MYSTICAL CAVE"
+
+[node name="choice1" parent="Choices" parent_id_path=PackedInt32Array(504841176) index="0" unique_id=704699521]
+title = "SWEET TREASURES"
+description = "You leave the creature alone, instead scouring the cave for anything of value. Breaking off some crystals reveal they are pure Sugar, so you make sure to take all you can carry."
+button_text = "Sneak Away And Search The Rest Of The Cave"
+specific_ingredients = Array[ExtResource("2_uyjbx")]([ExtResource("3_5wban"), ExtResource("3_5wban"), ExtResource("3_5wban"), ExtResource("3_5wban")])
+
+[node name="choice2" parent="Choices" parent_id_path=PackedInt32Array(504841176) index="1" unique_id=669889480]
+title = "UNSUSPECTED SHOP"
+description = "With a simple: \"Greetings.\", you move out of the shadows, offering some sweet treats.
+The figure looks up and through a full mouth mumbles: \"You want buy?\", gesturing to the packets on the floor..."
+button_text = "ENGAGE PEACEFULLY"
+drop_ingredients = true
+req_flavours = Dictionary[int, int]({
+0: 2,
+1: 0,
+2: 0,
+3: 0
+})
+new_encounter = ExtResource("4_5wban")
+
+[node name="choice3" parent="Choices" parent_id_path=PackedInt32Array(504841176) index="2" unique_id=474290282]
+title = "COOK FOR THE CREATURE"
+description = "It seems the best approach should be to introduce yourselves with a present.
+Something Sweet and Fishy ought to make them happy, you put on your apron and do your thing"
+button_text = "WOO THEM WITH A DISH"
+new_encounter = ExtResource("5_fn3uf")

@@ -56,3 +56,26 @@ func update_nutrition(new_value: Variant, force_show:bool = always_show, altered
 		if nutrition_bg != null:
 			nutrition_bg.visible = true
 		nutrition_text.visible = true
+
+func update_single_flavour(flavour:GlobalEnums.Flavour, value:int, force_show:bool = always_show, altered_font_color:bool = false):
+	if flavour == GlobalEnums.Flavour.NONE:
+		return
+	flavours_texts[flavour].text = str(value)
+	if percent:
+		flavours_texts[flavour].text += "%"
+	if altered_font_color:
+		flavours_texts[flavour].theme_type_variation = "altered"
+	else:
+		flavours_texts[flavour].theme_type_variation = "standard"
+	if value == 0 and not force_show:
+		flavours_texts[flavour].visible = false
+		if !flavour_bg_moved[flavour]:
+			if flavours_bgs[flavour] != null:
+				flavours_bgs[flavour].start_moving_to_destination(Vector2(flavours_bgs[flavour].position.x + result_bg_move_x,
+				flavours_bgs[flavour].position.y + result_bg_move_y),result_bg_move_duration)
+			flavour_bg_moved[flavour] = true
+	else:
+		if flavours_bgs[flavour] != null:
+			flavours_bgs[flavour].start_moving_to_destination(flavours_bgs[flavour].start_location, result_bg_move_duration)
+		flavours_texts[flavour].visible = true
+		flavour_bg_moved[flavour] = false

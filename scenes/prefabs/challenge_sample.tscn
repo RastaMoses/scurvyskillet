@@ -2,8 +2,6 @@
 
 [ext_resource type="Script" uid="uid://bbkxauiekl5ry" path="res://scripts/Encounter/Challenge/challenge.gd" id="1_glswj"]
 [ext_resource type="Script" uid="uid://clhhe0hu1tyj0" path="res://scripts/Encounter/UI/challenge_ui.gd" id="2_hs7g2"]
-[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_y21f8"]
-[ext_resource type="Resource" uid="uid://cudhcbra3g05f" path="res://resources/ingredients/in_game/grapes.tres" id="3_6r88v"]
 [ext_resource type="Texture2D" uid="uid://baee01pvcv84d" path="res://sprites/interface/scenes/cooking scene/scene_cooking_background.png" id="3_h6ing"]
 [ext_resource type="Texture2D" uid="uid://cquwgd0b3fqta" path="res://sprites/interface/general/text frame/text_frame.png" id="4_x7qnw"]
 [ext_resource type="Texture2D" uid="uid://b7stpf242kutc" path="res://sprites/interface/scenes/cooking scene/scene_cooking_button_reset.png" id="5_dmuak"]
@@ -83,6 +81,8 @@
 friction = 0.03
 bounce = 1.1
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_omhyo"]
+
 [sub_resource type="Theme" id="Theme_5p3kb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ro2u2"]
@@ -100,8 +100,9 @@ mouse_behavior_recursive = 1
 script = ExtResource("1_glswj")
 req_nutrition = 4
 par_nutrition = 2
-s_specific_ingredients = Array[ExtResource("2_y21f8")]([ExtResource("3_6r88v")])
 s_random_ingredient_amount = 0
+p_random_ingredient_amount = 0
+f_random_ingredient_amount = 0
 
 [node name="Dish" type="Control" parent="." unique_id=497250350 node_paths=PackedStringArray("ui")]
 anchors_preset = 0
@@ -142,7 +143,7 @@ polygon = PackedVector2Array(-229.75171, -153.40854, -159.75171, -174.40854, -94
 [node name="center" type="Node2D" parent="Dish/Dice_Display/Pan" unique_id=383728228]
 position = Vector2(1349, 420)
 
-[node name="UI" type="Control" parent="." unique_id=96621391 node_paths=PackedStringArray("challenge", "result_stats_display", "result_toggle_panel_button", "result_end_button", "result_screen", "result_panel", "combination_vbox", "combination_display_scroll", "combination_inventory", "combination_inventory_scroll", "dish_stats_display", "pan_highlight", "drop_area", "reset_button", "finish_dish_button", "plate_parent", "plates_shadow", "des_vbox", "inventory_display")]
+[node name="UI" type="Control" parent="." unique_id=96621391 node_paths=PackedStringArray("challenge", "required_stats", "result_stats_display", "result_toggle_panel_button", "result_end_button", "result_screen", "result_panel", "combination_vbox", "combination_display_scroll", "combination_inventory", "combination_inventory_scroll", "dish_stats_display", "pan_highlight", "drop_area", "reset_button", "finish_dish_button", "plate_parent", "plates_shadow", "des_vbox", "inventory_display")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -153,6 +154,7 @@ mouse_filter = 1
 mouse_behavior_recursive = 1
 script = ExtResource("2_hs7g2")
 challenge = NodePath("..")
+required_stats = NodePath("Description/RequirementStats")
 result_stats_display = NodePath("ResultScreen/ResultPanel/StatsDisplayer")
 result_toggle_panel_button = NodePath("ResultScreen/ToggleResultButton")
 result_end_button = NodePath("ResultScreen/ResultPanel/EndButton")
@@ -170,7 +172,7 @@ reset_button = NodePath("Cooking/ResetButton")
 finish_dish_button = NodePath("Cooking/FinishButton")
 plate_parent = NodePath("Cooking/PlatesDisplay/plates")
 plates_shadow = NodePath("Cooking/PlatesDisplay/shadow")
-des_vbox = NodePath("description/ScrollContainer/VBoxContainer")
+des_vbox = NodePath("Description/ScrollContainer/VBoxContainer")
 inventory_display = NodePath("InventoryUI")
 
 [node name="BG" type="TextureRect" parent="UI" unique_id=428102425]
@@ -180,7 +182,7 @@ offset_bottom = 1080.0
 mouse_behavior_recursive = 1
 texture = ExtResource("3_h6ing")
 
-[node name="description" type="Control" parent="UI" unique_id=1896810604]
+[node name="Description" type="Control" parent="UI" unique_id=1896810604]
 z_index = 1
 layout_mode = 1
 anchors_preset = 0
@@ -189,7 +191,7 @@ offset_bottom = 800.0
 mouse_filter = 1
 mouse_behavior_recursive = 1
 
-[node name="bg" type="TextureRect" parent="UI/description" unique_id=1963961486]
+[node name="bg" type="TextureRect" parent="UI/Description" unique_id=1963961486]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -201,7 +203,172 @@ mouse_behavior_recursive = 1
 texture = ExtResource("4_x7qnw")
 stretch_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="UI/description" unique_id=1085043928]
+[node name="RequirementStats" type="Panel" parent="UI/Description" unique_id=1949780260 node_paths=PackedStringArray("flavours_texts", "flavours_bgs", "nutrition_text", "nutrition_bg")]
+z_index = 4
+custom_minimum_size = Vector2(472, 152)
+layout_mode = 0
+offset_left = 72.0
+offset_top = 656.0
+offset_right = 544.0
+offset_bottom = 808.0
+mouse_filter = 2
+mouse_behavior_recursive = 1
+theme_override_styles/panel = SubResource("StyleBoxEmpty_omhyo")
+script = ExtResource("18_85ex6")
+always_show = true
+flavours_texts = {
+0: NodePath("SweetText"),
+1: NodePath("SpicyText"),
+2: NodePath("HeartyText"),
+3: NodePath("FreshText")
+}
+flavours_bgs = {
+0: NodePath("Sweet"),
+1: NodePath("Spicy"),
+2: NodePath("Hearty"),
+3: NodePath("Fresh")
+}
+nutrition_text = NodePath("nutrition_text")
+nutrition_bg = NodePath("Nutrition")
+
+[node name="Sweet" type="TextureRect" parent="UI/Description/RequirementStats" unique_id=776438502]
+layout_mode = 0
+offset_left = 392.0
+offset_top = 40.0
+offset_right = 506.0
+offset_bottom = 128.0
+rotation = 1.5707964
+mouse_filter = 2
+mouse_behavior_recursive = 1
+texture = ExtResource("30_m7klv")
+script = ExtResource("31_ro2u2")
+
+[node name="Spicy" type="TextureRect" parent="UI/Description/RequirementStats" unique_id=1494580487]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 40.0
+offset_right = 402.0
+offset_bottom = 128.0
+rotation = 1.5707964
+mouse_filter = 2
+mouse_behavior_recursive = 1
+texture = ExtResource("33_t1n2v")
+script = ExtResource("31_ro2u2")
+
+[node name="Hearty" type="TextureRect" parent="UI/Description/RequirementStats" unique_id=1084734256]
+layout_mode = 0
+offset_left = 184.0
+offset_top = 40.0
+offset_right = 298.0
+offset_bottom = 128.0
+rotation = 1.5707964
+mouse_filter = 2
+mouse_behavior_recursive = 1
+texture = ExtResource("34_tmb07")
+script = ExtResource("31_ro2u2")
+
+[node name="Fresh" type="TextureRect" parent="UI/Description/RequirementStats" unique_id=540699028]
+layout_mode = 0
+offset_left = 80.000015
+offset_top = 40.0
+offset_right = 194.0
+offset_bottom = 128.0
+rotation = 1.5707964
+mouse_filter = 2
+mouse_behavior_recursive = 1
+texture = ExtResource("35_xthvj")
+script = ExtResource("31_ro2u2")
+
+[node name="Nutrition" type="TextureRect" parent="UI/Description/RequirementStats" unique_id=1204055500]
+layout_mode = 0
+offset_left = 144.0
+offset_top = -184.0
+offset_right = 656.0
+offset_bottom = 584.0
+mouse_behavior_recursive = 1
+texture = ExtResource("57_xthvj")
+
+[node name="SweetText" type="RichTextLabel" parent="UI/Description/RequirementStats" unique_id=422599224]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 64.0
+offset_right = 400.0
+offset_bottom = 128.0
+mouse_filter = 2
+mouse_behavior_recursive = 1
+theme = ExtResource("19_ypqpd")
+theme_type_variation = &"standard"
+text = "14"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpicyText" type="RichTextLabel" parent="UI/Description/RequirementStats" unique_id=932843709]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 64.0
+offset_right = 296.0
+offset_bottom = 128.0
+mouse_filter = 2
+mouse_behavior_recursive = 1
+theme = ExtResource("20_t1n2v")
+theme_type_variation = &"standard"
+text = "14"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HeartyText" type="RichTextLabel" parent="UI/Description/RequirementStats" unique_id=1072251706]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 64.0
+offset_right = 192.0
+offset_bottom = 128.0
+mouse_filter = 2
+mouse_behavior_recursive = 1
+theme = ExtResource("21_tmb07")
+theme_type_variation = &"standard"
+text = "14"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FreshText" type="RichTextLabel" parent="UI/Description/RequirementStats" unique_id=1609507439]
+layout_mode = 0
+offset_left = -16.0
+offset_top = 64.0
+offset_right = 88.0
+offset_bottom = 128.0
+mouse_filter = 2
+mouse_behavior_recursive = 1
+theme = ExtResource("22_tmb07")
+theme_type_variation = &"standard"
+text = "14"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="nutrition_text" type="RichTextLabel" parent="UI/Description/RequirementStats" unique_id=1634445291]
+custom_maximum_size = Vector2(171.52295, 96)
+layout_mode = 0
+offset_left = 368.0
+offset_top = 40.0
+offset_right = 539.52295
+offset_bottom = 136.0
+mouse_filter = 1
+mouse_behavior_recursive = 1
+theme = ExtResource("38_vopdb")
+theme_type_variation = &"standard"
+text = "12"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("39_anfg1")
+maximum_font_size = 128
+minimum_font_size = 64
+padding = Vector2(0, 0)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/Description" unique_id=1085043928]
 layout_mode = 0
 offset_left = 72.0
 offset_top = 80.0
@@ -213,7 +380,7 @@ horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 scroll_hint_mode = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/description/ScrollContainer" unique_id=749325280]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Description/ScrollContainer" unique_id=749325280]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -221,7 +388,7 @@ mouse_filter = 2
 mouse_behavior_recursive = 1
 theme = ExtResource("7_ee2dl")
 
-[node name="title" type="RichTextLabel" parent="UI/description/ScrollContainer/VBoxContainer" unique_id=118090035]
+[node name="title" type="RichTextLabel" parent="UI/Description/ScrollContainer/VBoxContainer" unique_id=118090035]
 layout_mode = 2
 mouse_filter = 2
 mouse_behavior_recursive = 1
@@ -231,13 +398,12 @@ fit_content = true
 scroll_active = false
 horizontal_alignment = 1
 
-[node name="text" type="RichTextLabel" parent="UI/description/ScrollContainer/VBoxContainer" unique_id=189440853]
+[node name="text" type="RichTextLabel" parent="UI/Description/ScrollContainer/VBoxContainer" unique_id=189440853]
 layout_mode = 2
-size_flags_vertical = 3
 mouse_filter = 2
 mouse_behavior_recursive = 1
 theme = ExtResource("5_h6ing")
-text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do "
 fit_content = true
 scroll_active = false
 

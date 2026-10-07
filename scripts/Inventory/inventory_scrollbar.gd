@@ -34,6 +34,8 @@ func _ready() -> void:
 	minimum_size_changed.connect(_on_size_changed)
 	child_entered_tree.connect(_on_child_tree_changed)
 	child_exiting_tree.connect(_on_child_tree_changed)
+	grid_container.resized.connect(_update_scroll_size)
+	_update_scroll_size()
 	# Initial update
 	_call_deferred_update_hints()
 	
@@ -57,6 +59,9 @@ func _process(delta: float) -> void:
 	if wrap_around:
 		_wrap_horizontal(h_scroll)
 		_wrap_vertical(v_scroll)
+
+func _update_scroll_size() -> void:
+	custom_minimum_size = grid_container.get_combined_minimum_size()
 
 func _on_size_changed() -> void:
 	_call_deferred_update_hints()
