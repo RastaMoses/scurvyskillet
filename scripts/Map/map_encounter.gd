@@ -59,7 +59,8 @@ func end_encounter():
 	toggle_button(false)
 	show_button(true)
 	ability_manager.on_encounter_end()
-	encounter_obj.queue_free()
+	if encounter_obj != null and not encounter_obj.is_queued_for_deletion():
+		encounter_obj.queue_free()
 	player_ship.toggle_ship_visible(true)
 	
 	

@@ -25,8 +25,9 @@ func _drop_data(_at_position: Vector2, data: Variant) -> void:
 
 func toggle_disabled(value:bool):
 	disabled = value
-	toggle_highlight(!value)
 	toggle_mouse_filter(!value)
+	if value:
+		toggle_highlight(!value)
 
 func toggle_visible(value):
 	toggle_disabled(!value)
