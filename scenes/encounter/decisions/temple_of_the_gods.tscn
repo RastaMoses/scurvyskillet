@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://bw8jcu3d26dd4"]
+
+[ext_resource type="PackedScene" uid="uid://benw6bt2l0ot" path="res://scenes/prefabs/decision_prefab.tscn" id="1_ghrvg"]
+[ext_resource type="PackedScene" uid="uid://b7krmoqmpsl0u" path="res://scenes/encounter/challenges/vegan_monks.tscn" id="2_dvnvr"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_wb8jj"]
+[ext_resource type="Resource" uid="uid://cudhcbra3g05f" path="res://resources/ingredients/in_game/grapes.tres" id="4_wb8jj"]
+
+[node name="DecisionSample" unique_id=856639403 instance=ExtResource("1_ghrvg")]
+
+[node name="BGWater" parent="." index="0" unique_id=414026879]
+texture = null
+
+[node name="BGLand" parent="." index="1" unique_id=247136280]
+visible = true
+
+[node name="art" parent="." index="2" unique_id=1781471364]
+visible = false
+
+[node name="text" parent="description" parent_id_path=PackedInt32Array(747135996) index="1" unique_id=670048361]
+text = "On the islands overhangs, you spot a small temple surrounded by dense wine fields. After docking the monks invite you in for some supper."
+
+[node name="title" parent="description" parent_id_path=PackedInt32Array(747135996) index="2" unique_id=1975928171]
+text = "Temple Of The Gods"
+
+[node name="choice1" parent="Choices" parent_id_path=PackedInt32Array(504841176) index="0" unique_id=704699521]
+title = "COOKING CHALLENGE"
+button_text = "COOK FOR THEM"
+new_encounter = ExtResource("2_dvnvr")
+
+[node name="choice2" parent="Choices" parent_id_path=PackedInt32Array(504841176) index="1" unique_id=669889480]
+title = "RESTING"
+description = "You let your crew rest and enjoy some wine."
+button_text = "REST"
+r_morale = 1
+
+[node name="choice3" parent="Choices" parent_id_path=PackedInt32Array(504841176) index="2" unique_id=474290282]
+title = "STEALING FROM THE TEMPLE"
+description = "Under the cover of night you sneak through the fields, collecting all the grapes you can. Upon taking off with your plunder a heavy storm comes up. You lose one mate to the gods anger."
+button_text = "RAID THE FIELDS"
+specific_ingredients = Array[ExtResource("2_wb8jj")]([ExtResource("4_wb8jj"), ExtResource("4_wb8jj"), ExtResource("4_wb8jj"), ExtResource("4_wb8jj"), ExtResource("4_wb8jj"), ExtResource("4_wb8jj")])
+c_morale = -1

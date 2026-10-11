@@ -53,6 +53,13 @@ position = Vector2(8, -24)
 scale = Vector2(8, 8)
 texture = ExtResource("4_nbxj8")
 
+[node name="IconDisabled" type="Sprite2D" parent="Visuals" unique_id=235233261]
+visible = false
+modulate = Color(0.3, 0.3, 0.3, 0.58431375)
+position = Vector2(8, -24)
+scale = Vector2(8, 8)
+texture = ExtResource("4_nbxj8")
+
 [node name="ShipDockingPoints" type="Node2D" parent="." unique_id=18352013]
 
 [node name="Node2D" type="Node2D" parent="ShipDockingPoints" unique_id=806811630]

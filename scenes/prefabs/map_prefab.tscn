@@ -92,6 +92,7 @@ offset_bottom = 424.0
 possible_encounters = Array[PackedScene]([])
 
 [node name="RewardScreen" type="Control" parent="." unique_id=50086245 node_paths=PackedStringArray("grid_container", "title_label", "description_label", "close_button", "bg", "ui") groups=["reward_screen"]]
+visible = false
 z_index = 5
 anchors_preset = 0
 offset_left = 312.0

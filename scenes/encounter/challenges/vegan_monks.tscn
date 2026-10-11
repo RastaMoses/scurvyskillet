@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://hr6aybbol4hn" path="res://scenes/prefabs/challenge_sample.tscn" id="1_hclfp"]
 [ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_3pv5k"]
 [ext_resource type="Resource" uid="uid://d24ccsx0kj3u1" path="res://resources/ingredients/in_game/red_wine.tres" id="3_j5p5i"]
+[ext_resource type="Resource" uid="uid://j1a6xd1rwb4" path="res://resources/ingredients/in_game/apple_of_discord.tres" id="4_j5p5i"]
 
 [node name="ChallengeSample2" unique_id=993217827 instance=ExtResource("1_hclfp")]
 req_nutrition = 14
@@ -17,19 +18,24 @@ par_flavours = Dictionary[int, int]({
 0: 0,
 1: 0,
 2: 0,
-3: 20
+3: 16
 })
-restricted_tags = Array[int]([4, 8, 0, 2])
-success_morale = 2
-s_specific_ingredients = Array[ExtResource("2_3pv5k")]([ExtResource("3_j5p5i"), ExtResource("3_j5p5i"), ExtResource("3_j5p5i")])
-s_random_ingredient_amount = 1
+restricted_tags = Array[int]([4, 8, 0, 2, 9])
+success_description = "The monks get on their knees, praying and praising your cooking. A great honor in this house of the gods. They shower you in blessings for your future travels and bottles of their best. Once you return to your ship you find a strange package filled ith a divine smell."
+success_morale = 1
+s_specific_ingredients = Array[ExtResource("2_3pv5k")]([ExtResource("3_j5p5i"), ExtResource("3_j5p5i"), ExtResource("3_j5p5i"), ExtResource("4_j5p5i")])
+s_random_ingredient_amount = 3
 s_and_req = true
 s_req_rarity = Array[int]([0, 1])
 s_req_tag = Array[int]([15, 5])
+partial_description = "Unimpressed but humble as always, the monks accept you into their halls to feast and afterwards hand you a crate of their house wine and some provisions as a quaint thanks."
+p_specific_ingredients = Array[ExtResource("2_3pv5k")]([ExtResource("3_j5p5i"), ExtResource("3_j5p5i")])
+p_random_ingredient_amount = 3
 p_and_req = true
 p_req_rarity = Array[int]([0])
 p_req_tag = Array[int]([15, 5])
-failure_morale = -2
+failure_description = "Turning red as soon as they see your insult of a dish, they slam the door in your face. And you can feel an eery chill coming over the land. The gods are not pleased, and neither is your crew, who were looking forward to enjoying the monks wine."
+failure_morale = -1
 
 [node name="RequirementStats" parent="UI/Description" parent_id_path=PackedInt32Array(1896810604) index="1" unique_id=1949780260 node_paths=PackedStringArray("flavours_texts", "flavours_bgs")]
 flavours_texts = {
@@ -46,10 +52,10 @@ flavours_bgs = {
 }
 
 [node name="title" parent="UI/Description/ScrollContainer/VBoxContainer" parent_id_path=PackedInt32Array(749325280) index="0" unique_id=118090035]
-text = "Vegan Monks need Food!"
+text = "Vegan Monks"
 
 [node name="text" parent="UI/Description/ScrollContainer/VBoxContainer" parent_id_path=PackedInt32Array(749325280) index="1" unique_id=189440853]
-text = "They will not eat any meat or fish."
+text = "Cooking for them seems like it should not be too hard. I just have to make sure I do not use any non-vegan ingredients..."
 
 [node name="Stats" parent="UI/Cooking" parent_id_path=PackedInt32Array(817898650) index="1" unique_id=406643778 node_paths=PackedStringArray("flavours_texts", "flavours_bgs")]
 flavours_texts = {
@@ -78,17 +84,5 @@ flavours_bgs = {
 2: NodePath("Hearty"),
 3: NodePath("Fresh")
 }
-
-[node name="CombinationInventory" parent="UI/ResultScreen/ResultPanel" parent_id_path=PackedInt32Array(1352390679) index="5" unique_id=1191167613]
-starting_ingredients = null
-can_drag_cards = null
-
-[node name="InventoryUI" parent="UI/ResultScreen/ResultPanel/CombinationInventory" index="0" unique_id=385918289]
-highlight_newly_added = null
-max_rows = null
-
-[node name="InventoryUI" parent="UI" parent_id_path=PackedInt32Array(96621391) index="5" unique_id=460537099]
-highlight_newly_added = null
-max_columns = null
 
 [editable path="UI/ResultScreen/ResultPanel/ResultVbox/ScrollContainer/CombVBox/CombinationDisplay"]

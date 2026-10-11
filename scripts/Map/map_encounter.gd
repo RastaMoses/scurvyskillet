@@ -12,6 +12,7 @@ extends Control
 @onready var visuals = $Visuals
 @onready var button = $Visuals/Button
 @onready var icon = $Visuals/Icon
+@onready var disabled_icon = $Visuals/IconDisabled
 @onready var bg_ocean = $Visuals/BG/Water
 @onready var bg_island = $Visuals/BG/Island
 @onready var event_manager = get_tree().get_first_node_in_group("event_manager")
@@ -87,8 +88,10 @@ func load_encounter(data):
 func toggle_button(value):
 	button.disabled = !value
 	if value:
+		disabled_icon.visible = false
 		button.mouse_filter = MouseFilter.MOUSE_FILTER_STOP
 	else:
+		disabled_icon.visible = true
 		button.mouse_filter = MouseFilter.MOUSE_FILTER_IGNORE
 
 func show_button(value):
