@@ -121,7 +121,7 @@ func _on_button_mouse_exited(_slot) -> void:
 	button_highlight.visible = false
 
 func slot_clicked(event):
-	if !shop.interactable:
+	if !shop.interactable and !large_view.hover_large_view:
 		return
 	if !can_buy:
 		return

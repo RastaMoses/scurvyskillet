@@ -11,6 +11,7 @@ var current_cards: Array[Card]
 
 @export var highlight_newly_added:bool = false
 #CACHED COMPS
+@onready var large_view = get_tree().get_first_node_in_group("card_large_view")
 @onready var abilities = get_tree().get_first_node_in_group("ability_manager")
 @onready var player_inventory = get_tree().get_first_node_in_group("player")
 @onready var event_manager = get_tree().get_first_node_in_group("event_manager")

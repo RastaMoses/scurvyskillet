@@ -9,7 +9,6 @@ extends Inventory
 @export_group("UI")
 @export var morale_text:RichTextLabel
 @export var money_text:RichTextLabel
-@onready var large_view = get_tree().get_first_node_in_group("card_large_view")
 
 func _ready() -> void:
 	large_view.init_large_view(ui)

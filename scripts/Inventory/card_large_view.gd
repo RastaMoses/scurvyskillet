@@ -72,6 +72,8 @@ func set_slot_position(value):
 	slot.position = slot_positions[value]
 
 func on_start_hover(slot):
+	if not slot.large_view_clickable:
+		return
 	hovering = true
 	hover_card = slot.card
 	await get_tree().create_timer(hover_large_view_time).timeout
@@ -79,6 +81,8 @@ func on_start_hover(slot):
 		toggle_large_view(hover_card, true)
 		hover_large_view = true
 func on_stop_hover(slot):
+	if not slot.large_view_clickable:
+		return
 	hovering = false
 	if hover_large_view:
 		hover_large_view = false

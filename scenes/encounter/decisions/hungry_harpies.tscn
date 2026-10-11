@@ -48,7 +48,7 @@ specific_ingredients = Array[ExtResource("2_ted6c")]([ExtResource("3_sirl3"), Ex
 drop_ingredients = true
 req_flavours = Dictionary[int, int]({
 0: 0,
-1: 4,
+1: 2,
 2: 0,
 3: 0
 })

@@ -70,10 +70,14 @@ func set_inventory_display():
 		var new_slot = reward_slot.instantiate()
 		grid_container.add_child(new_slot)
 		new_slot.set_money(reward_money)
+		if reward_money < 0:
+				new_slot.toggle_icon_bg_negative(true)
 	if reward_morale > 0 or reward_morale < 0:
 		var new_slot = reward_slot.instantiate()
 		grid_container.add_child(new_slot)
-		new_slot.set_morale(reward_money)
+		new_slot.set_morale(reward_morale)
+		if reward_morale < 0:
+				new_slot.toggle_icon_bg_negative(true)
 	
 	if combination_moneys.size() > 0:
 		for combination in combination_moneys:

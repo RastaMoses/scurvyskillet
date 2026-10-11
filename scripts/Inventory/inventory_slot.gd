@@ -231,6 +231,7 @@ func _on_button_gui_input(event: InputEvent) -> void:
 	if !clickable:
 		return
 	if event is InputEventMouseButton and event.pressed:
+		print("clicked")
 		match event.button_index:
 			MOUSE_BUTTON_LEFT:
 				if buy_item:
