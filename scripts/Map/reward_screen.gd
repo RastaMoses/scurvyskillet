@@ -6,6 +6,7 @@ extends Inventory
 @export var title_label:RichTextLabel
 @export var description_label:RichTextLabel
 @export var close_button:ButtonUI
+@export var bg:TextureRect
 
 var reward_money = 0
 var reward_morale = 0
@@ -50,6 +51,11 @@ new_encounter = null):
 	title_label.text = title
 	description_label.text = description
 	next_encounter = new_encounter
+	if next_encounter == null:
+		bg.visible = false
+		map_loader.current_map.toggle_map_visible(true)
+	else:
+		bg.visible = true
 	#Set Display
 	set_inventory_display()
 	toggle_open(true)

@@ -42,6 +42,7 @@ func set_available_encounters():
 
 func toggle_map_visible(value):
 	map_bg.visible = value
+	ship.toggle_ship_visible(value)
 	for i in encounter_nodes:
 		if i != encounter_nodes[ship.current_pos]:
 			i.toggle_visuals(value)
