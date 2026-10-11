@@ -25,6 +25,8 @@ func populate_map():
 		if (i != null):
 			i.randomize_encounter()
 		temp += 1
+	#Start first encounter
+	encounter_nodes[0].activate_encounter()
 
 func set_available_encounters():
 	for i in encounter_nodes.size():

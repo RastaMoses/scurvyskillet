@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://ba551enoahsdm"]
+
+[ext_resource type="PackedScene" uid="uid://benw6bt2l0ot" path="res://scenes/prefabs/decision_prefab.tscn" id="1_owme7"]
+[ext_resource type="Script" uid="uid://bqsibdi6kwplu" path="res://scripts/Ingredients/ingredient_stats.gd" id="2_amjoa"]
+[ext_resource type="Resource" uid="uid://5537hmviyge6" path="res://resources/ingredients/in_game/dryad_salad.tres" id="3_825oa"]
+[ext_resource type="Resource" uid="uid://btpvxmpobyxj1" path="res://resources/ingredients/in_game/chicken_egg.tres" id="3_b8yv4"]
+[ext_resource type="Resource" uid="uid://c1hcbphjqcdj5" path="res://resources/ingredients/in_game/lettuce.tres" id="4_2cxuq"]
+[ext_resource type="Resource" uid="uid://df44km22pjob" path="res://resources/ingredients/in_game/olives.tres" id="5_kdpmm"]
+[ext_resource type="Resource" uid="uid://dim8b7x5br3sn" path="res://resources/ingredients/in_game/olive_oil.tres" id="6_xg8pw"]
+[ext_resource type="Resource" uid="uid://xl1hhjkkb3sk" path="res://resources/ingredients/in_game/gryphomelette.tres" id="8_kdpmm"]
+[ext_resource type="Resource" uid="uid://vxb3w03xoo14" path="res://resources/ingredients/in_game/hippocamp_cutlets.tres" id="9_xg8pw"]
+[ext_resource type="Resource" uid="uid://dp5e4ra716qhy" path="res://resources/ingredients/in_game/fresh_milk.tres" id="10_7fa2o"]
+[ext_resource type="Resource" uid="uid://bwfsyos2cf6ij" path="res://resources/ingredients/in_game/caviar.tres" id="11_hxwwf"]
+
+[node name="DecisionSample" unique_id=856639403 instance=ExtResource("1_owme7")]
+
+[node name="BGWater" parent="." index="0" unique_id=414026879]
+texture = null
+
+[node name="BGLand" parent="." index="1" unique_id=247136280]
+visible = true
+
+[node name="art" parent="." index="2" unique_id=1781471364]
+visible = false
+
+[node name="text" parent="description" parent_id_path=PackedInt32Array(747135996) index="1" unique_id=670048361]
+text = "As you set off on your journey to explore the seas and cuisines of the world, you must choose some starting ingredients to aid you on your journey."
+
+[node name="title" parent="description" parent_id_path=PackedInt32Array(747135996) index="2" unique_id=1975928171]
+text = "Starting Ingredients"
+
+[node name="choice1" parent="Choices" parent_id_path=PackedInt32Array(504841176) index="0" unique_id=704699521]
+title = "VEGAN"
+description = "You chose a mix of cheaper Vegetables, Fruit and Grains.
+
+You also gain some starting money."
+button_text = "VEGAN"
+r_money = 5
+specific_ingredients = Array[ExtResource("2_amjoa")]([ExtResource("3_825oa"), ExtResource("4_2cxuq"), ExtResource("5_kdpmm"), ExtResource("6_xg8pw")])
+random_ingredient_amount = 8
+and_req = true
+req_rarity = Array[int]([0, 1, 2])
+req_tags = Array[int]([5, 6, 7, 15])
+
+[node name="choice2" parent="Choices" parent_id_path=PackedInt32Array(504841176) index="1" unique_id=669889480]
+title = "MEATY"
+description = "A wide selection of Meats, Fish and anything else you can scrounge up."
+button_text = "MEATY"
+specific_ingredients = Array[ExtResource("2_amjoa")]([ExtResource("3_b8yv4"), ExtResource("8_kdpmm"), ExtResource("9_xg8pw"), ExtResource("10_7fa2o"), ExtResource("11_hxwwf")])
+random_ingredient_amount = 6
+and_req = true
+req_rarity = Array[int]([0, 1, 2])
+req_tags = Array[int]([2, 4, 8, 16])
+
+[node name="choice3" parent="Choices" parent_id_path=PackedInt32Array(504841176) index="2" unique_id=474290282]
+title = "QUANTITY"
+description = "You have a random assortment of lower rarity Ingredients. But you have less morale."
+button_text = "QUANTITY OVER QUALITY"
+r_money = 7
+random_ingredient_amount = 18
+and_req = true
+req_rarity = Array[int]([0, 1])
+c_morale = -1
