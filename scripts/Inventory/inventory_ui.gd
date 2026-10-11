@@ -32,10 +32,7 @@ func init_ui():
 	large_view = get_tree().get_first_node_in_group("card_large_view")
 	event_manager = get_tree().get_first_node_in_group("event_manager")
 	for i in slots:
-		i.init_slot(self)
-		i.large_view_clicked.connect(large_view.button_pressed)
-		i.dragged.connect(card_dragged)
-		i.stop_drag.connect(card_drag_ended)
+		init_slot(i)
 
 func adjust_grid_columns():
 	if (horizontal):
@@ -140,15 +137,18 @@ func _on_alphabet_button_left_clicked() -> void:
 #endregion
 
 #region Slots
-
+func init_slot(slot):
+	slot.init_slot(self)
+	slot.large_view_clicked.connect(large_view.button_pressed)
+	slot.dragged.connect(card_dragged)
+	slot.stop_drag.connect(card_drag_ended)
+	slot.button_mouse_entered.connect(large_view.on_start_hover)
+	slot.button_mouse_exited.connect(large_view.on_stop_hover)
 func add_slot():
 	var temp = inventory_slot_scene.instantiate()
 	grid_container.add_child(temp)
 	slots.append(temp)
-	temp.init_slot(self)
-	temp.large_view_clicked.connect(large_view.button_pressed)
-	temp.dragged.connect(card_dragged)
-	temp.stop_drag.connect(card_drag_ended)
+	init_slot(temp)
 
 func remove_slots(amount):
 	var i = 0

@@ -56,10 +56,6 @@ new_encounter = null):
 	
 
 func toggle_open(value):
-	if value:
-		large_card.set_slot_position(1)
-	else:
-		large_card.set_slot_position(0)
 	self.visible = value
 	close_button.toggle_disabled(!value)
 
