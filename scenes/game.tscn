@@ -24,7 +24,14 @@
 [ext_resource type="Resource" uid="uid://ml7hmdoqdh1i" path="res://resources/ingredients/in_game/bread.tres" id="21_qnb83"]
 [ext_resource type="Resource" uid="uid://cw25o02wmlgwb" path="res://resources/ingredients/in_game/trojan_salami.tres" id="22_sww3w"]
 [ext_resource type="Resource" uid="uid://ytpkfsy15x04" path="res://resources/ingredients/in_game/tsoureki.tres" id="23_suyxu"]
+[ext_resource type="Resource" uid="uid://dp5e4ra716qhy" path="res://resources/ingredients/in_game/fresh_milk.tres" id="23_wljb1"]
 [ext_resource type="Resource" uid="uid://bsboei8v6c4x5" path="res://resources/ingredients/in_game/skyllamari.tres" id="24_sgl2t"]
+[ext_resource type="Resource" uid="uid://cd02p072r033n" path="res://resources/ingredients/in_game/gyros.tres" id="24_v2yb1"]
+[ext_resource type="Resource" uid="uid://tcyaxddaav1x" path="res://resources/ingredients/in_game/mackarel.tres" id="25_js0lu"]
+[ext_resource type="Resource" uid="uid://oodkw7u3usv" path="res://resources/ingredients/in_game/pesto.tres" id="26_gxtfn"]
+[ext_resource type="Resource" uid="uid://bsq6dbwyuhhhm" path="res://resources/ingredients/in_game/smoked_siren.tres" id="27_twgab"]
+[ext_resource type="Resource" uid="uid://vququse4xxl0" path="res://resources/ingredients/in_game/toursi.tres" id="28_02fa5"]
+[ext_resource type="Resource" uid="uid://ci42d1wd7pd7t" path="res://resources/ingredients/in_game/salt.tres" id="29_nepv3"]
 
 [node name="game" type="Control" unique_id=1438732069]
 layout_mode = 3
@@ -99,7 +106,7 @@ mouse_behavior_recursive = 1
 layout_mode = 1
 current_money = 100
 current_morale = 5
-starting_ingredients = Array[ExtResource("7_ca42v")]([ExtResource("8_rysoc"), ExtResource("11_1kice"), ExtResource("12_5newe"), ExtResource("13_37s47"), ExtResource("14_bt5mj"), ExtResource("13_ir15t"), ExtResource("13_ir15t"), ExtResource("12_5newe"), ExtResource("14_ca42v"), ExtResource("20_bhx41"), ExtResource("21_qnb83"), ExtResource("21_qnb83"), ExtResource("22_sww3w"), ExtResource("23_suyxu"), ExtResource("24_sgl2t")])
+starting_ingredients = Array[ExtResource("7_ca42v")]([ExtResource("8_rysoc"), ExtResource("11_1kice"), ExtResource("12_5newe"), ExtResource("13_37s47"), ExtResource("14_bt5mj"), ExtResource("13_ir15t"), ExtResource("13_ir15t"), ExtResource("12_5newe"), ExtResource("14_ca42v"), ExtResource("20_bhx41"), ExtResource("21_qnb83"), ExtResource("21_qnb83"), ExtResource("22_sww3w"), ExtResource("23_suyxu"), ExtResource("24_sgl2t"), ExtResource("23_wljb1"), ExtResource("24_v2yb1"), ExtResource("25_js0lu"), ExtResource("14_ca42v"), ExtResource("26_gxtfn"), ExtResource("27_twgab"), ExtResource("28_02fa5"), ExtResource("11_1kice"), ExtResource("29_nepv3"), ExtResource("26_gxtfn")])
 
 [node name="Abilities" type="Node" parent="Player" unique_id=121107139 groups=["ability_manager"]]
 script = ExtResource("4_dinhu")

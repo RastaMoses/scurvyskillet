@@ -45,6 +45,8 @@ var card
 var dragging = false
 var dragging_preview = false
 var ui:InventoryUI
+var new_added_highlight:bool = false
+
 func init_slot(ui_node = null) -> void:
 	ui = ui_node
 	item_visual = $ItemDisplay
@@ -165,7 +167,9 @@ func update_flavours():
 			rarity_textures[i].visible = true
 		else:
 			rarity_textures[i].visible = false
-
+func toggle_new_added_highlight(value):
+	icon_bg_combination.visible = value
+	new_added_highlight = value
 #region Dragging
 func _get_drag_data(_at_position: Vector2) -> Variant:
 	if not card:
@@ -245,6 +249,8 @@ func _on_large_view_button_mouse_entered() -> void:
 
 
 func _on_large_view_button_mouse_exited() -> void:
+	if new_added_highlight:
+		toggle_new_added_highlight(false)
 	button_mouse_exited.emit(self)
 
 #endregion

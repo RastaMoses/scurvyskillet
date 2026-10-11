@@ -74,9 +74,7 @@ func close():
 	is_open = false
 	if bg:
 		bg.visible = false
-#region Large View
 
-#endregion
 
 #region Ability UI
 func card_dragged(card):
@@ -187,7 +185,6 @@ func set_slot_negative(slot, value):
 		negative_slots.append(slot)
 	else:
 		negative_slots.erase(slot)
-
 func set_all_slots_negative(value):
 	for slot in slots:
 		slot.toggle_icon_bg_negative(value)
@@ -204,4 +201,5 @@ func get_card_slot(card):
 			return slot
 	printerr("Slot for Card: " + str(card.name) + " not found.")
 	return null
+
 #endregion

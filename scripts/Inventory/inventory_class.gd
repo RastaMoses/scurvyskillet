@@ -9,6 +9,7 @@ var current_cards: Array[Card]
 @export var can_stack_uses:bool = true
 @export var can_drag_cards:bool = false
 
+@export var highlight_newly_added:bool = false
 #CACHED COMPS
 @onready var abilities = get_tree().get_first_node_in_group("ability_manager")
 @onready var player_inventory = get_tree().get_first_node_in_group("player")
@@ -80,16 +81,19 @@ func add_card(card):
 	var new_card:Node = card_prefab.instantiate()
 	add_child(new_card)
 	new_card.set_stats(card.stats, card.base_stats)
+	on_add_card.emit(self,new_card)
 	#Check if ingredient is already in inventory
 	if new_card.committed_stats.unlimited_uses:
 		current_cards.append(new_card)
 	else:
-		distribute_uses(new_card)
-	on_add_card.emit(self,new_card)
+		new_card = distribute_uses(new_card)
 	if ui != null:
 		ui.update_slots()
 		current_cards = ui.get_slots_cards_list()
-	
+		
+	if highlight_newly_added:
+		var new_card_slot = ui.get_card_slot(new_card)
+		new_card_slot.toggle_new_added_highlight(true)
 	return new_card
 
 func check_can_drop(data) -> bool:
@@ -130,9 +134,10 @@ func distribute_uses(card):
 				change_ingredient_uses(i, 1)
 				change_ingredient_uses(card, -1)
 			if card.stats.uses == 0 or card == null or card.is_queued_for_deletion():
-				return
+				return i
 				
 	current_cards.append(card)
+	return card
 
 func change_ingredient_uses(ingredient_card,amount):
 	ingredient_card.stats.uses += amount

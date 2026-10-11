@@ -25,6 +25,7 @@ title = "GREAT CATCH"
 description = "Surprisingly you catch both sweet- and saltwater fish here, all of them fat and barely putting up a fight."
 button_text = "FISH"
 random_ingredient_amount = 3
+and_req = true
 req_rarity = Array[int]([1, 2])
 req_tags = Array[int]([4])
 

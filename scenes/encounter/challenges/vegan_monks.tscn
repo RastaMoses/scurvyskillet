@@ -12,7 +12,13 @@ req_flavours = Dictionary[int, int]({
 2: 10,
 3: 20
 })
-par_nutrition = 7
+par_nutrition = 10
+par_flavours = Dictionary[int, int]({
+0: 0,
+1: 0,
+2: 0,
+3: 20
+})
 restricted_tags = Array[int]([4, 8, 0, 2])
 success_morale = 2
 s_specific_ingredients = Array[ExtResource("2_3pv5k")]([ExtResource("3_j5p5i"), ExtResource("3_j5p5i"), ExtResource("3_j5p5i")])
@@ -72,5 +78,17 @@ flavours_bgs = {
 2: NodePath("Hearty"),
 3: NodePath("Fresh")
 }
+
+[node name="CombinationInventory" parent="UI/ResultScreen/ResultPanel" parent_id_path=PackedInt32Array(1352390679) index="5" unique_id=1191167613]
+starting_ingredients = null
+can_drag_cards = null
+
+[node name="InventoryUI" parent="UI/ResultScreen/ResultPanel/CombinationInventory" index="0" unique_id=385918289]
+highlight_newly_added = null
+max_rows = null
+
+[node name="InventoryUI" parent="UI" parent_id_path=PackedInt32Array(96621391) index="5" unique_id=460537099]
+highlight_newly_added = null
+max_columns = null
 
 [editable path="UI/ResultScreen/ResultPanel/ResultVbox/ScrollContainer/CombVBox/CombinationDisplay"]

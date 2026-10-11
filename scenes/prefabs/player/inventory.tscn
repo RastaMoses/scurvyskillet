@@ -54,6 +54,7 @@ money_text = NodePath("InventoryUI/topbar/money_text")
 card_prefab = ExtResource("2_inxy6")
 ui = NodePath("InventoryUI")
 can_drag_cards = true
+highlight_newly_added = true
 
 [node name="InventoryUI" type="Control" parent="." unique_id=190865318 node_paths=PackedStringArray("inventory", "slots", "grid_container", "scroll_container") groups=["player_inventory_ui"]]
 z_index = 15

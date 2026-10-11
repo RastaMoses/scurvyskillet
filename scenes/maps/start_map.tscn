@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cdk3g4xkwsfqy" path="res://scenes/encounter/decisions/hungry_harpies.tscn" id="3_shbf5"]
 [ext_resource type="PackedScene" uid="uid://0asi546041v" path="res://scenes/encounter/shops/fish_monger.tscn" id="4_fg40y"]
 [ext_resource type="PackedScene" uid="uid://ch2b3g8a584y1" path="res://scenes/encounter/decisions/mystical_cove.tscn" id="4_jo18d"]
+[ext_resource type="PackedScene" uid="uid://dvt2qhtg38515" path="res://scenes/encounter/challenges/sweet_ogre_challenge.tscn" id="7_6hf4q"]
 
 [node name="Map" unique_id=1839841650 node_paths=PackedStringArray("encounter_nodes") instance=ExtResource("1_5vbx6")]
 encounter_nodes = [NodePath("Encounter/0"), NodePath("Encounter/1"), NodePath("Encounter/2"), NodePath("Encounter/3"), NodePath("Encounter/4"), NodePath("Encounter/5"), NodePath("Encounter/6"), NodePath("Encounter/7"), NodePath("Encounter/8")]
@@ -34,6 +35,7 @@ offset_left = 1207.0
 offset_top = 225.0
 offset_right = 1207.0
 offset_bottom = 225.0
+possible_encounters = Array[PackedScene]([ExtResource("7_6hf4q")])
 
 [node name="5" parent="Encounter" parent_id_path=PackedInt32Array(780200162) index="5" unique_id=2306135 instance=ExtResource("2_p6csh")]
 layout_mode = 0
@@ -41,6 +43,7 @@ offset_left = 1272.0
 offset_top = 725.0
 offset_right = 1272.0
 offset_bottom = 725.0
+possible_encounters = Array[PackedScene]([ExtResource("3_shbf5")])
 
 [node name="6" parent="Encounter" parent_id_path=PackedInt32Array(780200162) index="6" unique_id=1695874700 instance=ExtResource("2_p6csh")]
 layout_mode = 0
